@@ -1,8 +1,8 @@
 {
   "app": {
-    "js": "/assets/build/app.js"
+    "js": "/assets/build/app.cff3cea2487f2d19bb86.js"
   },
   "vendor": {
-    "js": "/assets/build/vendor.js"
+    "js": "/assets/build/vendor.cff3cea2487f2d19bb86.js"
   }
 }
