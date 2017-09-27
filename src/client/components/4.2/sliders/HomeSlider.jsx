@@ -40,7 +40,7 @@ export default class HomeSlider extends Component
                 } else if (currentIndex == totalIndex - 1) {
                     currentIndex = 0
                 } else {
-                    currentIndex++
+                    currentIndex++ 
                 }
 
                 return toggle()
