@@ -1,4 +1,7 @@
 # Kompetisi Indonesia Web
+Indonesian Competition Platform
+
+[![ki repo](https://pbs.twimg.com/media/DKtmk3jVwAIXmSt.jpg:large)](https://kompetisi.id)
 
 ## Contributing
 
