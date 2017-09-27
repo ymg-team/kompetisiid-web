@@ -1,5 +1,18 @@
 import React, {Component} from 'react'
 
+const data = [
+    {
+        image: '/assets/4.2/img/slider/slider-1.png',
+        title: 'Ikuti Kompetisinya dan Menangkan Hadiahnya',
+        text: 'Temukan dan ikuti beragam kompetisi sesuai dengan minat kamu, dan berjuanglah untuk menjadi pemenang dan dapatkan hadiahnya.'
+    },
+    {
+        image: '/assets/4.2/img/slider/slider-2.png',
+        title: 'Kamu Seorang Penyelenggara Kompetisi',
+        text: 'Pasang kompetisi disini untuk meramaikan kompetisi yang kamu adakan dan mempermudah peserta mengikuti kompetisi tersebut.'
+    }
+]
+
 export default class HomeSlider extends Component
 {
     componentDidMount()
@@ -65,21 +78,26 @@ export default class HomeSlider extends Component
         return(
             <div className='col-md-12 slider'>
                 <div className='slider-buttons'>
-                    <a className='btn-nav btn-nav--left' id='btn-slider--prev' href='javascript:;'><i className='fa fa-angle-left' /></a><a className='btn-nav btn-nav--right' id='btn-slider--next' href='javascript:;'><i className='fa fa-angle-right' /></a>
+                    <a className='btn-nav btn-nav--left' id='btn-slider--prev' href='javascript:;'><i className='fa fa-angle-left' /></a>
+                    <a className='btn-nav btn-nav--right' id='btn-slider--next' href='javascript:;'><i className='fa fa-angle-right' /></a>
                 </div>
                 <div className='slider-container'>
-                    <div className='slider--item' style={{backgroundImage: 'url("/assets/4.2/img/slider/slider-1.png")', visibility: 'visible', opacity: 1}}>
-                        <div className='slider--item--text'>
-                            <h2>Ikuti Kompetisinya dan Menangkan Hadiahnya</h2>
-                            <p>Temukan dan ikuti beragam kompetisi sesuai dengan minat kamu, dan berjuanglah untuk menjadi pemenang dan dapatkan hadiahnya.</p>
-                        </div>
-                    </div>
-                    <div className='slider--item' style={{backgroundImage: 'url("/assets/4.2/img/slider/slider-1.png")', marginTop: '-700px'}}>
-                        <div className='slider--item--text'>
-                            <h2>Kamu Seorang Penyelenggara Kompetisi</h2>
-                            <p>Pasang kompetisi disini untuk meramaikan kompetisi yang kamu adakan dan mempermudah peserta mengikuti kompetisi tersebut.</p>
-                        </div>
-                    </div>
+                    {
+                        data.map((n, key) => {
+                            const style = {
+                                backgroundImage:`url(${n.image})`,
+                                visibility: key == 0 ? 'visible' : 'hidden', 
+                                opacity: key == 0 ? 1 : 0,
+                                marginTop: key == 0 ? '0' : '-700px'
+                                }
+                            return <div key={key} className='slider--item' style={style}>
+                                <div className='slider--item--text'>
+                                    <h2>{n.title}</h2>
+                                    <p>{n.text}</p>
+                                </div>
+                            </div>
+                        })
+                    }                   
                 </div>
             </div>
         )
