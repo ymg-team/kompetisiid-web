@@ -62,8 +62,7 @@ class Home extends Component
     const {kompetisi, berita} = this.props
     return(
       <div>
-        <Helmet 
-        />
+        <Helmet />
         <Slider />
         {/*main competition*/}
         {

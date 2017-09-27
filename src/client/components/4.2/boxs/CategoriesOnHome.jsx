@@ -9,7 +9,8 @@ export default class CategoriesOnHome extends Component
     {
         super(props)
         this.state = {
-            active: 0
+            active: 0,
+            categories: props.categories
         }
     }
 
@@ -31,9 +32,10 @@ export default class CategoriesOnHome extends Component
 
     render()
     {
-        const {categories, kompetisi} = this.props
-        const {active} = this.state
+        const {kompetisi} = this.props
+        const {active, categories} = this.state
         const Filter = `home_category_${active}`
+        console.log(kompetisi.data[Filter])
         return(
             <div className='col-md-12' style={{borderBottom: '1px solid #969696'}}>
                 <div className='container'>
