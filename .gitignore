@@ -178,3 +178,4 @@ fabric.properties
 
 dist-server
 assets/build
+src/config/webpack-assets.json
