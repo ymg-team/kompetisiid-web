@@ -45,7 +45,7 @@
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-helmet": "^5.2.0",
-    "react-redux": "4.4.5",
+    "react-redux": "^5.0.6",
     "react-router": "2.8.1",
     "redux": "3.6.0",
     "redux-thunk": "2.1.0",

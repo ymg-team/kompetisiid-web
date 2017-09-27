@@ -1,15 +1,12 @@
 import React from 'react'
-import Helmet from 'react-helmet'
+import ReactHelmet from 'react-helmet'
 import {toCamelCase} from 'string-manager'
 
-export default (props) => {
+const Helmet = (props) => {
     let {title, description, url, image, type, script, link} = props
-    if(!title) title = 'Ada hadiah setiap hari'
-    if(!description) description = 'Kompetisi platform untuk warga Indonesia'
-    if(!image) image = 'http://kompetisi.id/assets/icons/icon-128x128.png'
 
     return(
-        <Helmet
+        <ReactHelmet
             title={toCamelCase(title) + ' - Kompetisi Indonesia'}
             meta={[
                 {'name': 'description', 'content': description},
@@ -29,3 +26,11 @@ export default (props) => {
         />
     )
 }
+
+Helmet.defaultProps = {
+    title: 'Ada hadiah setiap hari',
+    description: 'Kompetisi platform untuk warga Indonesia',
+    image: 'http://kompetisi.id/assets/icons/icon-128x128.png'
+}
+
+export default Helmet

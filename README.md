@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/idmore/kompetisiid-web.svg?branch=master)](https://travis-ci.org/idmore/kompetisiid-web)
+
 # Kompetisi Indonesia Web
 Indonesian Competition Platform
 
