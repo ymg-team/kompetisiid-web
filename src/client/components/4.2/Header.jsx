@@ -46,30 +46,28 @@ class Header extends Component
                 <div style={{top: q ? '-50px' : '0px'}} className='nav-header'>
                     <a id='btn-menu' href='javascript:;'> <span className='fa fa-bars' /></a>
                     <div className='nav-left'>
-                    <a className='only-mobile' href='javascript:;' id='btn-show-nav'>
-                        <i className='fa fa-bars' />
-                    </a>
-                    <ul className='top-menu' id='top-menu'>
-                        <a style={{float:'right'}} id='btn-hide-nav' className=' btn-close-nav only-mobile' href='javascript:;'>
-                            <i className='fa fa-close' />
+                        <a className='only-mobile' href='javascript:;' id='btn-show-nav'>
+                            <i className='fa fa-bars' />
                         </a>
-                        <li>
-                            <Link to='/browse'>jelajah</Link>
-                        </li>
-                        <li>
-                            <Link to='/add'>pasang</Link>
-                        </li>
-                        <li>
-                            <Link to='/news'>berita</Link>
-                        </li>
-                        {/*
-                            session && session.meta && session.meta.code == 201 ? 
-                            null : 
-                            <li className='only-mobile'>
-                                <Link to='/login'>login</Link>
+                        <ul className='top-menu' id='top-menu'>
+                            <a style={{position:'absolute', top: '0.5em', right: '0.5em'}} id='btn-hide-nav' className=' btn-close-nav only-mobile fa fa-close' href='javascript:;' />
+                            <li>
+                                <Link onClick={() => toggleNavTop()} to='/browse'>jelajah</Link>
                             </li>
-                        */}
-                    </ul>
+                            <li>
+                                <Link onClick={() => toggleNavTop()} to='/add'>pasang</Link>
+                            </li>
+                            <li>
+                                <Link onClick={() => toggleNavTop()} to='/news'>berita</Link>
+                            </li>
+                            {/*
+                                session && session.meta && session.meta.code == 201 ? 
+                                null : 
+                                <li className='only-mobile'>
+                                    <Link to='/login'>login</Link>
+                                </li>
+                            */}
+                        </ul>
                     </div>
                     <div className='logo'>
                         <Link to='/'><img src='/assets/4.2/img/icon-128x128.png' /></Link>

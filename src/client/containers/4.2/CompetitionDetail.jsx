@@ -84,7 +84,7 @@ class CompetitionDetail extends Component
             title: toCamelCase(`${tab[this.props.route.active_tab  - 1].name + ' ' || ''}${detail[encid].data.title}`),
             description: detail[encid].data.sort,
             image: detail[encid].data.poster.original,
-            url: `http://kompetisiindonesia.com/competition/${detail[encid].data.id_kompetisi}/regulations/${detail[encid].data.nospace_title}`,
+            url: `http://kompetisi.id/competition/${detail[encid].data.id_kompetisi}/regulations/${detail[encid].data.nospace_title}`,
             script: []
       }
 
