@@ -35,7 +35,6 @@ export default class CategoriesOnHome extends Component
         const {kompetisi} = this.props
         const {active, categories} = this.state
         const Filter = `home_category_${active}`
-        console.log(kompetisi.data[Filter])
         return(
             <div className='col-md-12' style={{borderBottom: '1px solid #969696'}}>
                 <div className='container'>

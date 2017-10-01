@@ -24,7 +24,7 @@ class CompetitionIframe extends Component
         if(kompetisi.detail[encid] && kompetisi.detail[encid].meta && kompetisi.detail[encid].meta.code == 200)
         {
             state = {
-                is_redirect: !isHttps(kompetisi.detail[encid].data[iframe_type])
+                is_redirect: true
             }
         }
         
