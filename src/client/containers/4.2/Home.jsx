@@ -81,13 +81,14 @@ class Home extends Component
             <div className='row'>
               <div className='subtitle-more'>
                 <h2 className='menu-title'>Kompetisi Populer</h2>
-                <Link to={'/jelajah'} className='btn btn-white btn-sm'>Jelajah kompetisi</Link>
+                <Link to={'/browse'} className='btn btn-white btn-sm'>Jelajah kompetisi</Link>
               </div>              
             </div>
           </div>
           <CompetitionBox 
             subtitle={false}
             size='small' 
+            total={4}
             {...kompetisi.data['home_popular']} />
         </div>
         {/*end of popular competitions*/}
@@ -98,7 +99,7 @@ class Home extends Component
             <div className='row'>
               <div className='subtitle-more'>
                 <h2 className='menu-title'>Kompetisi Terbaru</h2>
-                <Link to={'/jelajah'} className='btn btn-white btn-sm'>Jelajah kompetisi</Link>
+                <Link to={'/browse'} className='btn btn-white btn-sm'>Jelajah kompetisi</Link>
               </div>
             </div>
           </div>
@@ -114,7 +115,7 @@ class Home extends Component
             <div className='row'>
               <div className='subtitle-more'>
                 <h2 className='menu-title'>Berita Terbaru</h2>
-                <Link to={'/jelajah'} className='btn btn-white btn-sm'>semua berita</Link>
+                <Link to={'/news'} className='btn btn-white btn-sm'>semua berita</Link>
               </div>
             </div>
           </div>

@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import Card from '../cards/NewsListCard'
-import Loader from '../loaders/DefaultLoader'
+import Loader from '../loaders/NewsLoader'
 import {Link} from 'react-router'
 
 export default class NewsBox extends Component 
