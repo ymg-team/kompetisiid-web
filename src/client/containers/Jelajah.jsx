@@ -123,8 +123,8 @@ class Jelajah extends React.Component
                     meta={[
                         {'name': 'description', 'content': description},
                         {'property': 'og:title', 'content': title},
-                        {'property': 'og:url', 'content': 'http://kompetisiindonesia.com/jelajah'},
-                        {'property': 'og:image', 'content': 'http://kompetisiindonesia.com/assets/images/wide-red-logo.png'},
+                        {'property': 'og:url', 'content': 'http://kompetisi.id/browse'},
+                        {'property': 'og:image', 'content': 'http://kompetisi.id/assets/images/wide-red-logo.png'},
                         {'property': 'og:description', 'content': description},
                         {'property': 'og:type', 'content': 'article'},
                     ]}

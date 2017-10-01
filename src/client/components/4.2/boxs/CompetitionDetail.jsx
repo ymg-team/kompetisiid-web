@@ -38,9 +38,9 @@ export default class CompetitionDetailBox extends Component
                         <div className='row competition-detail--meta'>
                             <div className='col-md-6 align-center poster'>
                                 <img alt={data.title} className='poster' src={data.poster.original} />
-                                <div className='only-mobile m-30' />
                             </div>
                             <div className='col-md-6 count'>
+                                <div className='only-mobile m-30' />
                                 {/* competition status */}
                                 <div style={{marginBottom:'20px'}}>
                                     {
@@ -110,11 +110,11 @@ export default class CompetitionDetailBox extends Component
 const addCalendar = {
     google: (n, url) => {
         const d = n.deadline_at.split(' ')
-        return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=deadline ${n.title}&dates=${d[0].replace(/-/g,'')}T000000Z/${d[0].replace(/-/g,'')}T240000Z&details=${n.sort+'\n'+n.hadiah}&location=http://kompetisiindonesia.com/competition/${n.id_kompetisi}/regulations/${n.nospace_title}&sf=true&output=xml#eventpage_6`
+        return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=deadline ${n.title}&dates=${d[0].replace(/-/g,'')}T000000Z/${d[0].replace(/-/g,'')}T240000Z&details=${n.sort+'\n'+n.hadiah}&location=http://kompetisi.id/competition/${n.id_kompetisi}/regulations/${n.nospace_title}&sf=true&output=xml#eventpage_6`
     },
     yahoo: (n, url) => {
         const d = n.deadline_at.split(' ')
-        return `https://calendar.yahoo.com/?v=60&view=d&type=20&title=deadline ${n.title}&st=${d[0].replace(/-/g,'')}T000000Z&dur=0600&desc=${n.sort + '\n'+ n.hadiah}&in_loc=http://kompetisiindonesia.com/competition/${n.id_kompetisi}/regulations/${n.nospace_title}`
+        return `https://calendar.yahoo.com/?v=60&view=d&type=20&title=deadline ${n.title}&st=${d[0].replace(/-/g,'')}T000000Z&dur=0600&desc=${n.sort + '\n'+ n.hadiah}&in_loc=http://kompetisi.id/competition/${n.id_kompetisi}/regulations/${n.nospace_title}`
     },
     microsoft: () => {
         console.log('added to microsoft');

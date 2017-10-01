@@ -1,6 +1,6 @@
 import React from 'react'
 import Card from '../../../components/4.2/cards/CompetitionListCard'
-import Loader from '../loaders/DefaultLoader'
+import Loader from '../loaders/CompetitionLoader'
 import {Link} from 'react-router'
 
 function generateList(size, n)
@@ -38,7 +38,7 @@ const CompetitionBox = (props) => {
                     : null                            
                 }
               </div>   
-              { is_loading || !meta ? <Loader /> : null }
+              { is_loading || !meta ? <Loader size={props.size} total={props.total} /> : null }
               <div className='row m-10' />                
             </div>
           </div>

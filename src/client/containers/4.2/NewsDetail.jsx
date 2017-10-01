@@ -110,7 +110,7 @@ export default class NewsDetail extends Component
             helmetdata = {
                 title: 'Berita tidak ditemukan',
                 description: 'Berita tidak ditemukan',
-                url: `http://kompetisiindonesia.com`
+                url: `http://kompetisi.id`
             }
         }
         
@@ -212,8 +212,8 @@ function generateJsonld(n, url)
         "author": {
             "@type": "Person",
             "name": "${n.author.username}",
-            "image": "http://kompetisiindonesia.com/assets/4.2/img/default-avatar.jpg",
-            "url": "http://kompetisiindonesia.com/${n.author.username}",
+            "image": "http://kompetisi.id/assets/4.2/img/default-avatar.jpg",
+            "url": "http://kompetisi.id/${n.author.username}",
             "sameAs": [
                 ""
             ],
