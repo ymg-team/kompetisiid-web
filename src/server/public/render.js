@@ -119,7 +119,6 @@ function getScript(state)
     <script type="text/javascript" src="/assets/4.2/js/script-min.js?v=${version.JS_VERSION}"></script>
     <script src="${ webpackAssets.vendor.js }"></script>
     <script src="${ webpackAssets.app.js }"></script>
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
     ${process.env.NODE_ENV === 'production' ? getTrackingScript() : ''}
     `
 }
