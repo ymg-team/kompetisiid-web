@@ -17659,7 +17659,7 @@ var _routes2 = _interopRequireDefault(_routes);
 
 var _reactRedux = __webpack_require__(11);
 
-var _store = __webpack_require__(502);
+var _store = __webpack_require__(503);
 
 var _store2 = _interopRequireDefault(_store);
 
@@ -17835,31 +17835,31 @@ var _kompetisi = __webpack_require__(461);
 
 var _kompetisi2 = _interopRequireDefault(_kompetisi);
 
-var _account = __webpack_require__(476);
+var _account = __webpack_require__(477);
 
 var _account2 = _interopRequireDefault(_account);
 
-var _pasang = __webpack_require__(477);
+var _pasang = __webpack_require__(478);
 
 var _pasang2 = _interopRequireDefault(_pasang);
 
-var _profile = __webpack_require__(481);
+var _profile = __webpack_require__(482);
 
 var _profile2 = _interopRequireDefault(_profile);
 
-var _dashboard = __webpack_require__(484);
+var _dashboard = __webpack_require__(485);
 
 var _dashboard2 = _interopRequireDefault(_dashboard);
 
-var _careers = __webpack_require__(489);
+var _careers = __webpack_require__(490);
 
 var _careers2 = _interopRequireDefault(_careers);
 
-var _Login = __webpack_require__(491);
+var _Login = __webpack_require__(492);
 
 var _Login2 = _interopRequireDefault(_Login);
 
-var _Home = __webpack_require__(494);
+var _Home = __webpack_require__(495);
 
 var _Home2 = _interopRequireDefault(_Home);
 
@@ -17867,15 +17867,15 @@ var _Error = __webpack_require__(90);
 
 var _Error2 = _interopRequireDefault(_Error);
 
-var _Home3 = __webpack_require__(498);
+var _Home3 = __webpack_require__(499);
 
 var _Home4 = _interopRequireDefault(_Home3);
 
-var _Error3 = __webpack_require__(499);
+var _Error3 = __webpack_require__(500);
 
 var _Error4 = _interopRequireDefault(_Error3);
 
-var _Dashboard = __webpack_require__(500);
+var _Dashboard = __webpack_require__(501);
 
 var _Dashboard2 = _interopRequireDefault(_Dashboard);
 
@@ -26615,7 +26615,7 @@ var _CompetitionDetail = __webpack_require__(462);
 
 var _CompetitionDetail2 = _interopRequireDefault(_CompetitionDetail);
 
-var _CompetitionIframe = __webpack_require__(473);
+var _CompetitionIframe = __webpack_require__(474);
 
 var _CompetitionIframe2 = _interopRequireDefault(_CompetitionIframe);
 
@@ -26746,33 +26746,33 @@ var _CompetitionBox = __webpack_require__(92);
 
 var _CompetitionBox2 = _interopRequireDefault(_CompetitionBox);
 
-var _Regulations = __webpack_require__(465);
+var _Regulations = __webpack_require__(466);
 
 var _Regulations2 = _interopRequireDefault(_Regulations);
 
-var _Prizes = __webpack_require__(467);
+var _Prizes = __webpack_require__(468);
 
 var _Prizes2 = _interopRequireDefault(_Prizes);
 
-var _Announcements = __webpack_require__(468);
+var _Announcements = __webpack_require__(469);
 
 var _Announcements2 = _interopRequireDefault(_Announcements);
 
-var _Contacts = __webpack_require__(469);
+var _Contacts = __webpack_require__(470);
 
 var _Contacts2 = _interopRequireDefault(_Contacts);
 
-var _Share = __webpack_require__(470);
+var _Share = __webpack_require__(471);
 
 var _Share2 = _interopRequireDefault(_Share);
 
-var _Discussions = __webpack_require__(471);
+var _Discussions = __webpack_require__(472);
 
 var _Discussions2 = _interopRequireDefault(_Discussions);
 
 var _reactRouter = __webpack_require__(5);
 
-var _NextPrev = __webpack_require__(472);
+var _NextPrev = __webpack_require__(473);
 
 var _NextPrev2 = _interopRequireDefault(_NextPrev);
 
@@ -27273,6 +27273,12 @@ var _reactRouter = __webpack_require__(5);
 
 var _LinkGenerator = __webpack_require__(93);
 
+var _DomEvents = __webpack_require__(465);
+
+var _copyToClipboard = __webpack_require__(524);
+
+var _copyToClipboard2 = _interopRequireDefault(_copyToClipboard);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -27281,8 +27287,8 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var CompetitionDetailBox = function (_Component) {
-    _inherits(CompetitionDetailBox, _Component);
+var CompetitionDetailBox = function (_React$Component) {
+    _inherits(CompetitionDetailBox, _React$Component);
 
     function CompetitionDetailBox() {
         _classCallCheck(this, CompetitionDetailBox);
@@ -27291,15 +27297,11 @@ var CompetitionDetailBox = function (_Component) {
     }
 
     _createClass(CompetitionDetailBox, [{
-        key: 'componentWillUnmount',
-        value: function componentWillUnmount() {
-            fullalert('close');
-        }
-    }, {
         key: 'render',
         value: function render() {
             var data = this.props.data;
 
+            var link_competition = 'https://kompetisi.id/competition/' + data.id_kompetisi + '/regulations/' + data.nospace_title;
             return _react2.default.createElement(
                 'div',
                 { id: 'competition-detail', className: 'row no-margin p-50-0' },
@@ -27450,7 +27452,18 @@ var CompetitionDetailBox = function (_Component) {
                                                 null,
                                                 _react2.default.createElement(
                                                     'a',
-                                                    { target: '_blank', href: 'https://docs.google.com/forms/d/e/1FAIpQLSdmsHkJdGctVkWYFhhLC10YYVbtNIi5IF8X0mbdd2DjS-N1eQ/viewform?entry.559533126=https://kompetisi.id/competition/' + data.id_kompetisi + '/regulations/' + data.nospace_title },
+                                                    { className: 'scopy-button', onClick: function onClick() {
+                                                            return handleCopyLink(link_competition);
+                                                        }, target: '_blank', href: 'javascript:;' },
+                                                    'Copy Link'
+                                                )
+                                            ),
+                                            _react2.default.createElement(
+                                                'li',
+                                                null,
+                                                _react2.default.createElement(
+                                                    'a',
+                                                    { target: '_blank', href: 'https://docs.google.com/forms/d/e/1FAIpQLSdmsHkJdGctVkWYFhhLC10YYVbtNIi5IF8X0mbdd2DjS-N1eQ/viewform?entry.559533126=' + link_competition },
                                                     'Laporkan Kompetisi'
                                                 )
                                             )
@@ -27487,7 +27500,7 @@ var CompetitionDetailBox = function (_Component) {
                         _react2.default.createElement(
                             'a',
                             { onClick: function onClick() {
-                                    return fullalert('warning', 'untuk sekarang, kalender jenis ini belum tersedia');
+                                    return fullalert('warning', 'untuk sekarang, kalender Microsoft untuk saat ini belum tersedia');
                                 }, href: 'javascript:;' },
                             _react2.default.createElement('img', { style: { 'width': 'inherit' }, src: '/assets/4.2/img/microsoft-calendar-icon.fullwidth.png' })
                         )
@@ -27498,10 +27511,7 @@ var CompetitionDetailBox = function (_Component) {
     }]);
 
     return CompetitionDetailBox;
-}(_react.Component);
-
-exports.default = CompetitionDetailBox;
-
+}(_react2.default.Component);
 
 var addCalendar = {
     google: function google(n, url) {
@@ -27512,13 +27522,49 @@ var addCalendar = {
         var d = n.deadline_at.split(' ');
         return 'https://calendar.yahoo.com/?v=60&view=d&type=20&title=deadline ' + n.title + '&st=' + d[0].replace(/-/g, '') + 'T000000Z&dur=0600&desc=' + (n.sort + '\n' + n.hadiah) + '&in_loc=http://kompetisi.id/competition/' + n.id_kompetisi + '/regulations/' + n.nospace_title;
     },
-    microsoft: function microsoft() {
-        console.log('added to microsoft');
-    }
+    microsoft: function microsoft() {}
 };
+
+// function to handle copy link
+function handleCopyLink(link) {
+    // trigger to click body
+    (0, _DomEvents.eventFire)(document.getElementsByTagName('body')[0], 'click');
+    // copy
+    (0, _copyToClipboard2.default)(link);
+    // alert if link has copied
+    fullalert('success', 'Link telah berhasil di copy.');
+}
+
+exports.default = CompetitionDetailBox;
 
 /***/ }),
 /* 465 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.eventFire = eventFire;
+exports.copyText = copyText;
+// event to fire to valid DOM
+function eventFire(el, evType) {
+    if (el.fireEvent) {
+        el.fireEvent('on' + eventType);
+    } else {
+        var evObj = document.createEvent('Event');
+        evObj.initEvent(evType, true, false);
+        el.dispatchEvent(evObj);
+    }
+}
+
+// copy to clipboard
+function copyText(str) {}
+
+/***/ }),
+/* 466 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -27532,7 +27578,7 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _CompetitionTags = __webpack_require__(466);
+var _CompetitionTags = __webpack_require__(467);
 
 var _CompetitionTags2 = _interopRequireDefault(_CompetitionTags);
 
@@ -27572,7 +27618,7 @@ var Regulations = function Regulations(props) {
 exports.default = Regulations;
 
 /***/ }),
-/* 466 */
+/* 467 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -27611,7 +27657,7 @@ var CompetitionTags = function CompetitionTags(props) {
 exports.default = CompetitionTags;
 
 /***/ }),
-/* 467 */
+/* 468 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -27649,7 +27695,7 @@ var Prizes = function Prizes(props) {
 exports.default = Prizes;
 
 /***/ }),
-/* 468 */
+/* 469 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -27706,7 +27752,7 @@ var Announcements = function Announcements(props) {
 exports.default = Announcements;
 
 /***/ }),
-/* 469 */
+/* 470 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -27760,7 +27806,7 @@ var Contacts = function Contacts(props) {
 exports.default = Contacts;
 
 /***/ }),
-/* 470 */
+/* 471 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -27925,7 +27971,7 @@ var Share = function (_Component) {
 exports.default = Share;
 
 /***/ }),
-/* 471 */
+/* 472 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28003,7 +28049,7 @@ var Discussions = function (_Component) {
 exports.default = Discussions;
 
 /***/ }),
-/* 472 */
+/* 473 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28083,7 +28129,7 @@ var NextPrev = function NextPrev(props) {
 exports.default = NextPrev;
 
 /***/ }),
-/* 473 */
+/* 474 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28099,11 +28145,11 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _Iframe = __webpack_require__(474);
+var _Iframe = __webpack_require__(475);
 
 var _Iframe2 = _interopRequireDefault(_Iframe);
 
-var _Redirect = __webpack_require__(475);
+var _Redirect = __webpack_require__(476);
 
 var _Redirect2 = _interopRequireDefault(_Redirect);
 
@@ -28194,7 +28240,7 @@ function mapDispatchToProps(dispatch) {
 exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(CompetitionIframe);
 
 /***/ }),
-/* 474 */
+/* 475 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28221,7 +28267,7 @@ var Iframe = function Iframe(props) {
 exports.default = Iframe;
 
 /***/ }),
-/* 475 */
+/* 476 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28313,7 +28359,7 @@ var Redirect = function (_Component) {
 exports.default = Redirect;
 
 /***/ }),
-/* 476 */
+/* 477 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28343,7 +28389,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = {};
 
 /***/ }),
-/* 477 */
+/* 478 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28357,7 +28403,7 @@ var _AddCompetition = __webpack_require__(270);
 
 var _AddCompetition2 = _interopRequireDefault(_AddCompetition);
 
-var _SendCompetition = __webpack_require__(478);
+var _SendCompetition = __webpack_require__(479);
 
 var _SendCompetition2 = _interopRequireDefault(_SendCompetition);
 
@@ -28382,7 +28428,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 478 */
+/* 479 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28410,7 +28456,7 @@ var _InputText = __webpack_require__(271);
 
 var _InputText2 = _interopRequireDefault(_InputText);
 
-var _InputFile = __webpack_require__(479);
+var _InputFile = __webpack_require__(480);
 
 var _InputFile2 = _interopRequireDefault(_InputFile);
 
@@ -28418,7 +28464,7 @@ var _Button = __webpack_require__(272);
 
 var _Button2 = _interopRequireDefault(_Button);
 
-var _actions = __webpack_require__(480);
+var _actions = __webpack_require__(481);
 
 var _Validator = __webpack_require__(45);
 
@@ -28669,7 +28715,7 @@ function mapDispatchToProps(dispatch) {
 module.exports = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(AddCompetitionFast);
 
 /***/ }),
-/* 479 */
+/* 480 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28784,7 +28830,7 @@ InputFile.defaultProps = {
 };
 
 /***/ }),
-/* 480 */
+/* 481 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28816,7 +28862,7 @@ function submitCepat(params) {
 }
 
 /***/ }),
-/* 481 */
+/* 482 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28826,7 +28872,7 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _UserProfile = __webpack_require__(482);
+var _UserProfile = __webpack_require__(483);
 
 var _UserProfile2 = _interopRequireDefault(_UserProfile);
 
@@ -28840,7 +28886,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 482 */
+/* 483 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -28856,7 +28902,7 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _TabProfile = __webpack_require__(483);
+var _TabProfile = __webpack_require__(484);
 
 var _TabProfile2 = _interopRequireDefault(_TabProfile);
 
@@ -29033,7 +29079,7 @@ function mapDispatchToProps(dispatch) {
 exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(UserProfile);
 
 /***/ }),
-/* 483 */
+/* 484 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -29163,7 +29209,7 @@ var TabProfile = function TabProfile(props) {
 exports.default = TabProfile;
 
 /***/ }),
-/* 484 */
+/* 485 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -29173,7 +29219,7 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _CompetitionList = __webpack_require__(485);
+var _CompetitionList = __webpack_require__(486);
 
 var _CompetitionList2 = _interopRequireDefault(_CompetitionList);
 
@@ -29203,7 +29249,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 485 */
+/* 486 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -29215,15 +29261,15 @@ var _react = __webpack_require__(1);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _HeaderDashboard = __webpack_require__(486);
+var _HeaderDashboard = __webpack_require__(487);
 
 var _HeaderDashboard2 = _interopRequireDefault(_HeaderDashboard);
 
-var _Tab = __webpack_require__(487);
+var _Tab = __webpack_require__(488);
 
 var _Tab2 = _interopRequireDefault(_Tab);
 
-var _CompetitionListCard = __webpack_require__(488);
+var _CompetitionListCard = __webpack_require__(489);
 
 var _CompetitionListCard2 = _interopRequireDefault(_CompetitionListCard);
 
@@ -29429,7 +29475,7 @@ function mapDispatchToProps(dispatch) {
 module.exports = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(MyCompetition);
 
 /***/ }),
-/* 486 */
+/* 487 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -29463,7 +29509,7 @@ exports.default = function (props) {
 };
 
 /***/ }),
-/* 487 */
+/* 488 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -29507,7 +29553,7 @@ var Tab = function Tab(props) {
 };
 
 /***/ }),
-/* 488 */
+/* 489 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -29715,7 +29761,7 @@ var CompetitionListCard = function (_Component) {
 exports.default = CompetitionListCard;
 
 /***/ }),
-/* 489 */
+/* 490 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -29725,7 +29771,7 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _Careers = __webpack_require__(490);
+var _Careers = __webpack_require__(491);
 
 var _Careers2 = _interopRequireDefault(_Careers);
 
@@ -29746,7 +29792,7 @@ exports.default = {
 };
 
 /***/ }),
-/* 490 */
+/* 491 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -30166,7 +30212,7 @@ var Careers = function Careers() {
 exports.default = Careers;
 
 /***/ }),
-/* 491 */
+/* 492 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -30198,11 +30244,11 @@ var _Helmet = __webpack_require__(14);
 
 var _Helmet2 = _interopRequireDefault(_Helmet);
 
-var _AuthFacebook = __webpack_require__(492);
+var _AuthFacebook = __webpack_require__(493);
 
 var _AuthFacebook2 = _interopRequireDefault(_AuthFacebook);
 
-var _AuthGoogle = __webpack_require__(493);
+var _AuthGoogle = __webpack_require__(494);
 
 var _AuthGoogle2 = _interopRequireDefault(_AuthGoogle);
 
@@ -30494,7 +30540,7 @@ function mapDispatchToProps(dispatch) {
 exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(Login);
 
 /***/ }),
-/* 492 */
+/* 493 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -30544,7 +30590,7 @@ var AuthGoogle = function (_Component) {
 exports.default = AuthGoogle;
 
 /***/ }),
-/* 493 */
+/* 494 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -30594,7 +30640,7 @@ var AuthGoogle = function (_Component) {
 exports.default = AuthGoogle;
 
 /***/ }),
-/* 494 */
+/* 495 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -30616,7 +30662,7 @@ var _CompetitionBox = __webpack_require__(92);
 
 var _CompetitionBox2 = _interopRequireDefault(_CompetitionBox);
 
-var _MediapartnerBox = __webpack_require__(495);
+var _MediapartnerBox = __webpack_require__(496);
 
 var _MediapartnerBox2 = _interopRequireDefault(_MediapartnerBox);
 
@@ -30624,11 +30670,11 @@ var _NewsBox = __webpack_require__(87);
 
 var _NewsBox2 = _interopRequireDefault(_NewsBox);
 
-var _CategoriesOnHome = __webpack_require__(496);
+var _CategoriesOnHome = __webpack_require__(497);
 
 var _CategoriesOnHome2 = _interopRequireDefault(_CategoriesOnHome);
 
-var _HomeSlider = __webpack_require__(497);
+var _HomeSlider = __webpack_require__(498);
 
 var _HomeSlider2 = _interopRequireDefault(_HomeSlider);
 
@@ -30838,7 +30884,7 @@ function mapDispatchToProps(dispatch) {
 exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(Home);
 
 /***/ }),
-/* 495 */
+/* 496 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -31014,7 +31060,7 @@ var MediapartnerBox = function (_Component) {
 exports.default = MediapartnerBox;
 
 /***/ }),
-/* 496 */
+/* 497 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -31293,7 +31339,7 @@ var CategoriesOnHome = function (_Component) {
 exports.default = CategoriesOnHome;
 
 /***/ }),
-/* 497 */
+/* 498 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -31454,7 +31500,7 @@ var HomeSlider = function (_Component) {
 exports.default = HomeSlider;
 
 /***/ }),
-/* 498 */
+/* 499 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -31538,7 +31584,7 @@ var LayoutHome = function (_Component) {
 exports.default = LayoutHome;
 
 /***/ }),
-/* 499 */
+/* 500 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -31589,7 +31635,7 @@ var Error = function (_Component) {
 exports.default = Error;
 
 /***/ }),
-/* 500 */
+/* 501 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -31613,7 +31659,7 @@ var _Header = __webpack_require__(274);
 
 var _Header2 = _interopRequireDefault(_Header);
 
-var _SidebarDashboard = __webpack_require__(501);
+var _SidebarDashboard = __webpack_require__(502);
 
 var _SidebarDashboard2 = _interopRequireDefault(_SidebarDashboard);
 
@@ -31690,7 +31736,7 @@ var Dashboard = function (_Component) {
 exports.default = Dashboard;
 
 /***/ }),
-/* 501 */
+/* 502 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -31836,7 +31882,7 @@ var SidebarDashboard = function SidebarDashboard() {
 exports.default = SidebarDashboard;
 
 /***/ }),
-/* 502 */
+/* 503 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -31856,23 +31902,23 @@ var _api = __webpack_require__(37);
 
 var _api2 = _interopRequireDefault(_api);
 
-var _reduxLogger = __webpack_require__(503);
+var _reduxLogger = __webpack_require__(504);
 
 var _reduxLogger2 = _interopRequireDefault(_reduxLogger);
 
-var _reducer = __webpack_require__(504);
+var _reducer = __webpack_require__(505);
 
 var _reducer2 = _interopRequireDefault(_reducer);
 
-var _reducer3 = __webpack_require__(505);
+var _reducer3 = __webpack_require__(506);
 
 var _reducer4 = _interopRequireDefault(_reducer3);
 
-var _reducer5 = __webpack_require__(506);
+var _reducer5 = __webpack_require__(507);
 
 var _reducer6 = _interopRequireDefault(_reducer5);
 
-var _reducer7 = __webpack_require__(507);
+var _reducer7 = __webpack_require__(508);
 
 var _reducer8 = _interopRequireDefault(_reducer7);
 
@@ -31899,7 +31945,7 @@ var preloadedState = typeof window != 'undefined' ? window.__data__ : {};
 exports.default = (0, _redux.createStore)(Reducers, preloadedState, Middlewares);
 
 /***/ }),
-/* 503 */
+/* 504 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -32145,7 +32191,7 @@ function createLogger() {
 module.exports = createLogger;
 
 /***/ }),
-/* 504 */
+/* 505 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -32332,7 +32378,7 @@ var reducer = (0, _redux.combineReducers)({
 exports.default = reducer;
 
 /***/ }),
-/* 505 */
+/* 506 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -32423,7 +32469,7 @@ var reducer = (0, _redux.combineReducers)({
 exports.default = reducer;
 
 /***/ }),
-/* 506 */
+/* 507 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -32490,7 +32536,7 @@ var reducer = (0, _redux.combineReducers)({
 exports.default = reducer;
 
 /***/ }),
-/* 507 */
+/* 508 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -32634,6 +32680,157 @@ var reducer = (0, _redux.combineReducers)({
     email_verification: email_verification
 });
 exports.default = reducer;
+
+/***/ }),
+/* 509 */,
+/* 510 */,
+/* 511 */,
+/* 512 */,
+/* 513 */,
+/* 514 */,
+/* 515 */,
+/* 516 */,
+/* 517 */,
+/* 518 */,
+/* 519 */,
+/* 520 */,
+/* 521 */,
+/* 522 */,
+/* 523 */,
+/* 524 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var deselectCurrent = __webpack_require__(525);
+
+var defaultMessage = 'Copy to clipboard: #{key}, Enter';
+
+function format(message) {
+  var copyKey = (/mac os x/i.test(navigator.userAgent) ? '⌘' : 'Ctrl') + '+C';
+  return message.replace(/#{\s*key\s*}/g, copyKey);
+}
+
+function copy(text, options) {
+  var debug,
+      message,
+      reselectPrevious,
+      range,
+      selection,
+      mark,
+      success = false;
+  if (!options) {
+    options = {};
+  }
+  debug = options.debug || false;
+  try {
+    reselectPrevious = deselectCurrent();
+
+    range = document.createRange();
+    selection = document.getSelection();
+
+    mark = document.createElement('span');
+    mark.textContent = text;
+    // reset user styles for span element
+    mark.style.all = 'unset';
+    // prevents scrolling to the end of the page
+    mark.style.position = 'fixed';
+    mark.style.top = 0;
+    mark.style.clip = 'rect(0, 0, 0, 0)';
+    // used to preserve spaces and line breaks
+    mark.style.whiteSpace = 'pre';
+    // do not inherit user-select (it may be `none`)
+    mark.style.webkitUserSelect = 'text';
+    mark.style.MozUserSelect = 'text';
+    mark.style.msUserSelect = 'text';
+    mark.style.userSelect = 'text';
+
+    document.body.appendChild(mark);
+
+    range.selectNode(mark);
+    selection.addRange(range);
+
+    var successful = document.execCommand('copy');
+    if (!successful) {
+      throw new Error('copy command was unsuccessful');
+    }
+    success = true;
+  } catch (err) {
+    debug && console.error('unable to copy using execCommand: ', err);
+    debug && console.warn('trying IE specific stuff');
+    try {
+      window.clipboardData.setData('text', text);
+      success = true;
+    } catch (err) {
+      debug && console.error('unable to copy using clipboardData: ', err);
+      debug && console.error('falling back to prompt');
+      message = format('message' in options ? options.message : defaultMessage);
+      window.prompt(message, text);
+    }
+  } finally {
+    if (selection) {
+      if (typeof selection.removeRange == 'function') {
+        selection.removeRange(range);
+      } else {
+        selection.removeAllRanges();
+      }
+    }
+
+    if (mark) {
+      document.body.removeChild(mark);
+    }
+    reselectPrevious();
+  }
+
+  return success;
+}
+
+module.exports = copy;
+
+/***/ }),
+/* 525 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = function () {
+  var selection = document.getSelection();
+  if (!selection.rangeCount) {
+    return function () {};
+  }
+  var active = document.activeElement;
+
+  var ranges = [];
+  for (var i = 0; i < selection.rangeCount; i++) {
+    ranges.push(selection.getRangeAt(i));
+  }
+
+  switch (active.tagName.toUpperCase()) {// .toUpperCase handles XHTML
+    case 'INPUT':
+    case 'TEXTAREA':
+      active.blur();
+      break;
+
+    default:
+      active = null;
+      break;
+  }
+
+  selection.removeAllRanges();
+  return function () {
+    selection.type === 'Caret' && selection.removeAllRanges();
+
+    if (!selection.rangeCount) {
+      ranges.forEach(function (range) {
+        selection.addRange(range);
+      });
+    }
+
+    active && active.focus();
+  };
+};
 
 /***/ })
 ],[277]);
