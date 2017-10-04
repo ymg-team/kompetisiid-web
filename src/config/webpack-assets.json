@@ -1,8 +1,0 @@
-{
-  "app": {
-    "js": "/assets/build/app.js"
-  },
-  "vendor": {
-    "js": "/assets/build/vendor.js"
-  }
-}

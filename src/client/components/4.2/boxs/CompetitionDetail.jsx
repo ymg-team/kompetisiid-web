@@ -1,21 +1,18 @@
-import React, {Component} from 'react'
+import React from 'react'
 import {Link} from 'react-router'
 import {openInNewTab} from '../../../helpers/LinkGenerator'
+import {eventFire} from '../../../helpers/DomEvents'
+import copy from 'copy-to-clipboard';
 
-export default class CompetitionDetailBox extends Component 
-{
-    componentWillUnmount()
-    {
-        fullalert('close')
-    }
-
+class CompetitionDetailBox extends React.Component {
     render()
     {
         const {data} = this.props
+        const link_competition = `https://kompetisi.id/competition/${data.id_kompetisi}/regulations/${data.nospace_title}`
         return(
             <div id='competition-detail' className='row no-margin p-50-0'>
                 <div className='col-md-12'>
-                  <div className='container'>
+                    <div className='container'>
                     <div className='competition-author'>
                             <Link to={`/${data.author.username}`} title={`ke profil ${data.author.username}`}>
                                 <img style={{float:'left',marginRight:'10px'}} src='/assets/4.2/img/default-avatar.jpg' />
@@ -76,7 +73,8 @@ export default class CompetitionDetailBox extends Component
                                     <a className='fa fa-ellipsis-v btn btn-gray dropdown-button' data-target='action-competition' />
                                     <div className='dropdown-items' id='action-competition'>
                                     <ul>
-                                        <li><a target='_blank' href={`https://docs.google.com/forms/d/e/1FAIpQLSdmsHkJdGctVkWYFhhLC10YYVbtNIi5IF8X0mbdd2DjS-N1eQ/viewform?entry.559533126=https://kompetisi.id/competition/${data.id_kompetisi}/regulations/${data.nospace_title}`}>Laporkan Kompetisi</a></li>
+                                        <li><a className='scopy-button' onClick={() => handleCopyLink(link_competition)} target='_blank' href='javascript:;'>Copy Link</a></li>
+                                        <li><a target='_blank' href={`https://docs.google.com/forms/d/e/1FAIpQLSdmsHkJdGctVkWYFhhLC10YYVbtNIi5IF8X0mbdd2DjS-N1eQ/viewform?entry.559533126=${link_competition}`}>Laporkan Kompetisi</a></li>
                                     </ul>
                                     </div>
                                 </div>
@@ -92,13 +90,13 @@ export default class CompetitionDetailBox extends Component
                         <a className='btn btn-white btn-close-modal btn-sm fa fa-close' href='javascript:;' />
                         <hr />
                         <a target='_blank' href={addCalendar.google(data)}>
-                          <img style={{'width': 'inherit'}} src='/assets/4.2/img/google-calendar-icon.fullwidth.png' />
+                            <img style={{'width': 'inherit'}} src='/assets/4.2/img/google-calendar-icon.fullwidth.png' />
                         </a>
                         <a target='_blank' href={addCalendar.yahoo(data)}>
-                          <img style={{'width': 'inherit'}} src='/assets/4.2/img/yahoo-calendar-icon.fullwidth.png' />
+                            <img style={{'width': 'inherit'}} src='/assets/4.2/img/yahoo-calendar-icon.fullwidth.png' />
                         </a>
-                        <a onClick={() => fullalert('warning', 'untuk sekarang, kalender jenis ini belum tersedia')} href='javascript:;'>
-                          <img style={{'width': 'inherit'}} src='/assets/4.2/img/microsoft-calendar-icon.fullwidth.png' />
+                        <a onClick={() => fullalert('warning', 'untuk sekarang, kalender Microsoft untuk saat ini belum tersedia')} href='javascript:;'>
+                            <img style={{'width': 'inherit'}} src='/assets/4.2/img/microsoft-calendar-icon.fullwidth.png' />
                         </a>
                     </div>
                 </div>
@@ -117,6 +115,19 @@ const addCalendar = {
         return `https://calendar.yahoo.com/?v=60&view=d&type=20&title=deadline ${n.title}&st=${d[0].replace(/-/g,'')}T000000Z&dur=0600&desc=${n.sort + '\n'+ n.hadiah}&in_loc=http://kompetisi.id/competition/${n.id_kompetisi}/regulations/${n.nospace_title}`
     },
     microsoft: () => {
-        console.log('added to microsoft');
+        
     }
 }
+
+// function to handle copy link
+function handleCopyLink(link)
+{
+    // trigger to click body
+    eventFire(document.getElementsByTagName('body')[0], 'click') 
+    // copy
+    copy(link)
+    // alert if link has copied
+    fullalert('success', 'Link telah berhasil di copy.')
+}
+
+export default CompetitionDetailBox

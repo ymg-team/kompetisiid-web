@@ -177,5 +177,5 @@ fabric.properties
 # End of https://www.gitignore.io/api/node,linux,macos,webstorm,visualstudiocode
 
 dist-server
-assets/build
+public/build
 src/config/webpack-assets.json
