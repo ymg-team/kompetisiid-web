@@ -1,7 +1,7 @@
 const webpack  = require('webpack')
 const Path = require('path')
 const AssetsPlugin = require('assets-webpack-plugin')
-const BUILD_DIR = '../assets/build/'
+const BUILD_DIR = '../public/build/'
 
 module.exports = {
   entry: {
@@ -12,7 +12,7 @@ module.exports = {
   output: {
       path: Path.resolve(__dirname, BUILD_DIR),
       filename: process.env.NODE_ENV == 'production' ? '[name].[hash].js' : '[name].js',
-      publicPath: '/assets/build/'
+      publicPath: '/build/'
   },
 
   plugins: [
