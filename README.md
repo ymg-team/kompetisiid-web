@@ -7,6 +7,17 @@ Indonesian Competition Platform
 
 ## Contributing
 
+## Env 
+```
+NODE_ENV = development
+DEBUG = app:*
+API_HOST = http://api-host
+MEDIA_HOST = http://media-host
+FRONT_HOST = http://localhost:1470
+FIREBASE_SERVER_KEY = key
+KI_PORT = 1470
+```
+
 ### Using Docker
 
 **Recuirements**
@@ -54,16 +65,9 @@ npm run test
 
 ## Staging or Release
 
-### Local
-
-- First build in local using command
-    ```
-    npm run prod:build
-    ```
-- Push and Merge to `upstream/master`
-
-### Live (Vultr)
-
 - Pull from master
-- unzip and replace `assets.zip` and `dist-server.zip`
-- restart pm2 daemon
+- run 
+    ```
+    yarn prod:build
+    ```
+- restart pm2 process

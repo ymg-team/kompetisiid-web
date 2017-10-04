@@ -85,7 +85,7 @@ function renderFullPage(head, html, state)
                 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <meta property="fb:app_id" content="1419514554927551" />
-                <meta property="fb:admins" content="mr.yussan" />
+                <meta property="fb:admins" content="xyussanx" />
                 <meta property="fb:pages" content="309615952470901" />
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <meta name="google-signin-client_id" content="362573543654-djkou7th41pu964e7qs32ggogn1rbah6.apps.googleusercontent.com">
@@ -96,8 +96,8 @@ function renderFullPage(head, html, state)
                 <link href="/assets/4.2/lib/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet">
                 <link href="https://fonts.googleapis.com/css?family=Muli" rel="stylesheet">
                 <link rel="icon" href="/assets/icons/icon-128x128.png" />
-                <link rel="manifest" href="/assets/manifest.json" />
-                <link rel="search" type="application/opensearchdescription+xml" href="/assets/opensearch.xml" title="Cari Kompetisi"/>
+                <link rel="manifest" href="/manifest.json" />
+                <link rel="search" type="application/opensearchdescription+xml" href="/opensearch.xml" title="Cari Kompetisi"/>
             </head>
             <body>
                 <div id="root">${html}</div>
@@ -113,13 +113,23 @@ function renderFullPage(head, html, state)
 function getScript(state)
 {
     return `
+    <script>
+        if('serviceWorker' in navigator)
+        {
+            navigator.serviceWorker.register('/service-worker.js')
+                .then(function(registration){
+                    console.log(registration);
+                }).catch(function(err){
+                    console.log('ServiceWorker registration is failed', err);
+                });
+        }
+    </script>  
     <script type="text/javascript">window.__data__ = ${JSON.stringify(state)}</script>
     <script type="text/javascript" src="https:////connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8&appId=1419514554927551" async defer></script>
     <script type="text/javascript" src="https://apis.google.com/js/platform.js" async defer></script>
     <script type="text/javascript" src="/assets/4.2/js/script-min.js?v=${version.JS_VERSION}"></script>
     <script src="${ webpackAssets.vendor.js }"></script>
     <script src="${ webpackAssets.app.js }"></script>
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
     ${process.env.NODE_ENV === 'production' ? getTrackingScript() : ''}
     `
 }

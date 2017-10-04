@@ -98,7 +98,7 @@ class Kompetisi extends React.Component
                 title: `${tab[this.props.route.active_tab] || ''}${detail[encid].data.title}`,
                 description: detail[encid].data.sort,
                 image: detail[encid].data.poster.original,
-                url: `http://kompetisiindonesia.com/kompetisi/detail/${detail[encid].data.id_kompetisi}/${detail[encid].data.nospace_title}`
+                url: `http://kompetisi.id/competition/${detail[encid].data.id_kompetisi}/regulations/${detail[encid].data.nospace_title}`
             }
         }else
         {
