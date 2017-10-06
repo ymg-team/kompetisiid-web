@@ -35,7 +35,12 @@ const CompetitionListCard = (props) => {
               {n.is_mediapartner ? <span title='KI berlaku sebagai media partner di kompetisi ini' className='label label-blue'>Media Partner</span> : null}
               {n.is_support ? <span title='kompetisi ini bisa diikuti melelui KI' className='label label-blue'>Support</span> : null}
               {is_berakhir ? <span title='kompetisi ini telah berakhir' className='label label-red'>Berakhir</span> : null}
-              {n.sisadeadline == 'berakhir' && n.sisapengumuman != 'berakhir' ? <span title='kompetisi ini telah berakhir' className='label label-orange'>Menunggu pengumuman pemenang</span> : null}
+              {n.sisadeadline == 'berakhir' && n.sisapengumuman != 'berakhir' ? 
+                <span title='kompetisi ini telah berakhir' className='label label-orange'>
+                  <i className='fa fa-flag' />
+                  {' '}
+                  Sedang berlangsung
+                </span> : null}
             </div>
             <div className='meta'>
               <p><strong>{n.total_hadiah}</strong><span className='text-muted'>&nbsp;total hadiah</span></p>
@@ -43,13 +48,13 @@ const CompetitionListCard = (props) => {
                   n.sisadeadline == 'berakhir' && n.sisapengumuman == 'berakhir' ? 
                     <p><strong>Kompetisi telah berakhir</strong></p> : 
                     n.sisadeadline == 'berakhir' && n.sisapengumuman != 'berakhir' ?
-                      <p><strong>{n.sisapengumuman} lagi</strong> <span className='text-muted'>pengumuman pemenang</span></p> : 
-                      <p><strong>{n.sisadeadline} lagi</strong> <span className='text-muted'>deadline pendaftaran</span></p>
+                      <p><strong>{n.sisapengumuman} lagi</strong> <span className='text-muted'>Pengumuman pemenang</span></p> : 
+                      <p><strong>{n.sisadeadline} lagi</strong> <span className='text-muted'>Deadline pendaftaran</span></p>
               }
             </div>
           </div>
         </div>
-      </div>        
+      </div> 
     )
 }
 
