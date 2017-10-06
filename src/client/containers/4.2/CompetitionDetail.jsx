@@ -73,13 +73,12 @@ class CompetitionDetail extends Component
     const {encid} = this.state
     const {detail,related,pengumuman} = this.props.kompetisi
     const {active_tab} = this.props.route
-    let NextPrevProps = {}  
+    let NextPrevProps = {}, helmetdata = {}  
 
     // generate helmet data 
-    let helmetdata = {}
     if(detail[encid] && detail[encid].meta && parseInt(detail[encid].meta.code) === 200)
     {
-       setTimeout(() => {if(typeof window != 'undefined'){handleScrollNav()}}, 3000)
+       setTimeout(() => {if(typeof window != 'undefined'){handleScrollNav()}}, 2000)
        helmetdata = {
             title: toCamelCase(`${tab[this.props.route.active_tab  - 1].name + ' ' || ''}${detail[encid].data.title}`),
             description: detail[encid].data.sort,
@@ -129,9 +128,7 @@ class CompetitionDetail extends Component
                   data={detail[encid].data} />
                 <Tab 
                   active={this.props.route.active_tab} 
-                  id={detail[encid].data.id_kompetisi}
-                  title={detail[encid].data.nospace_title}
-                  linkJoin={detail[encid].data.ikuti}
+                  data={detail[encid].data}
                   />
                 <div className='col-md-12'>
                   <div className='container'>
