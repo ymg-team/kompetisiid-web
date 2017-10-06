@@ -46,7 +46,7 @@ class CompetitionDetailBox extends React.Component {
                                             <i className='fa fa-check' /> Kompetisi telah berakhir
                                         </span>
                                         : data.sisadeadline == 'berakhir' && data.sisapengumuman != 'berakhir' ?
-                                        <span className='label label-orange label-lg'>
+                                        <span title={`Pengumuan pemenang dalam ${data.sisapengumuman}`} className='label label-orange label-lg'>
                                             <i className='fa fa-flag' /> Kompetisi sedang berlangsung
                                         </span> : 
                                         <span className='label label-gray label-lg'>
