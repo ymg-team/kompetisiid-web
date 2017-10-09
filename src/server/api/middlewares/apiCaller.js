@@ -12,11 +12,11 @@ export default function(req, res)
 
     params.resType = resType
     // log
-    debugApiReq(`${method.toUpperCase()} ${url} at ${new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '')}`)
+    debugApiReq(`${method.toUpperCase()} ${process.env.API_HOST + url} at ${new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '')}`)
     return requestAPIV2(method, url, params).then(response => {
 
         // log 
-        debugApiRes(`${method.toUpperCase()} ${url} response status ${response.statusCode} at ${new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '')}`)
+        debugApiRes(`${method.toUpperCase()} ${process.env.API_HOST + url} response status ${response.statusCode} at ${new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '')}`)
         if(nextaction) nextaction(result)
         if(resType === 'json') res.json(response.body)
         if(resType === 'text') res.end(response.body)

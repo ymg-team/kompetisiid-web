@@ -1,7 +1,7 @@
 const webpack  = require('webpack')
 const Path = require('path')
 const AssetsPlugin = require('assets-webpack-plugin')
-const BUILD_DIR = '../public/build/'
+const BUILD_DIR = '../dist-client'
 
 module.exports = {
   entry: {
