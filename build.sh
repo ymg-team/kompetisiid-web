@@ -1,0 +1,1 @@
+pm2 stop kindo && yarn prod:build && pm2 start kindo
