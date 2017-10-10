@@ -73,9 +73,9 @@ class Categories extends Component
                     title='Kategori Kompetisi'
                     desc='Ikuti kompetisi-kompetisi berdasarkan kategori dan minat kamu'
                 />
-                <div className='col-md-12'><div className='m-30'></div></div>
+                <div className='col-md-12'><div className='m-30' /></div>
                 {this.props.categories.meta ? this.generateList() : <Loader />}
-                <div className='col-md-12'><div className='m-30'></div></div>
+                <div className='col-md-12'><div className='m-30' /></div>
             </div>
         )
     }
