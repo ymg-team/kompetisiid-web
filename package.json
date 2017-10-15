@@ -15,7 +15,9 @@
     "prod:build-client": "NODE_ENV=production webpack --progress",
     "prod:build-server": "NODE_ENV=production babel src -d dist-server --ignore '**/*_test.js' --copy-files",
     "prod:build": "rimraf dist-server && rimraf dist-client && npm run prod:build-client && npm run prod:build-server",
-    "zip": "rimraf dist-server.zip && rimraf assets.zip && bestzip dist-server.zip dist-server && bestzip dist-client.zip dist-client"
+    "zip": "rimraf dist-server.zip && rimraf assets.zip && bestzip dist-server.zip dist-server && bestzip dist-client.zip dist-client",
+    "release": "standard-version",
+    "release:beta": "standard-version -p beta"
   },
   "repository": {
     "type": "git",
@@ -72,6 +74,7 @@
     "nodemon": "^1.12.0",
     "redux-logger": "2.6.1",
     "rimraf": "^2.6.1",
+    "standard-version": "^4.2.0",
     "webpack": "^3.6.0"
   }
 }

@@ -1,11 +1,10 @@
-[![Build Status](https://travis-ci.org/idmore/kompetisiid-web.svg?branch=master)](https://travis-ci.org/idmore/kompetisiid-web)
+[![Build Status](https://travis-ci.org/idmore/kompetisiid-web.svg?branch=master)](https://travis-ci.org/idmore/kompetisiid-web) [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 
 # Kompetisi Indonesia Web
-Indonesian Competition Platform
+Indonesian Competition Platform [https://kompetisi.id](https://kompetisi.id)
 
 [![ki repo](https://pbs.twimg.com/media/DKtmk3jVwAIXmSt.jpg:large)](https://kompetisi.id)
 
-## Contributing
 
 ## Env 
 ```
