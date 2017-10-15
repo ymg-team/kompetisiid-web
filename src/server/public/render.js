@@ -73,6 +73,8 @@ module.exports = App.use((req, res) => {
 
 function renderFullPage(head, html, state)
 {
+    // <link href="/assets/4.2/css/style.css?v=${version.CSS_VERSION}" rel="stylesheet">
+    // <script type="text/javascript" src="/assets/4.2/js/script-min.js?v=${version.JS_VERSION}"></script>
     return `
         <!DOCTYPE html>
         <html lang="id-id">
@@ -92,7 +94,7 @@ function renderFullPage(head, html, state)
                 <meta name="google-site-verification" content="pUksy8ewwm4bzRVqaTQXKmWfRFZc9_L0iuESNDg7190" />
                 <meta property="fb:app_id" content="1419514554927551">
                 <meta property="fb:admins" content="100000359263988">
-                <link href="/assets/4.2/css/style.css?v=${version.CSS_VERSION}" rel="stylesheet">
+                <link href="https://d33wubrfki0l68.cloudfront.net/bundles/bf8f3056db2faef1b6689a08130044818eefc58d.css" rel="stylesheet">
                 <link href="/assets/4.2/lib/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet">
                 <link href="https://fonts.googleapis.com/css?family=Muli" rel="stylesheet">
                 <link rel="icon" href="/assets/icons/icon-128x128.png" />
@@ -127,7 +129,7 @@ function getScript(state)
     <script type="text/javascript">window.__data__ = ${JSON.stringify(state)}</script>
     <script type="text/javascript" src="https:////connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8&appId=1419514554927551" async defer></script>
     <script type="text/javascript" src="https://apis.google.com/js/platform.js" async defer></script>
-    <script type="text/javascript" src="/assets/4.2/js/script-min.js?v=${version.JS_VERSION}"></script>
+    <script type="text/javascript" src="https://d33wubrfki0l68.cloudfront.net/js/89ab2d780125b7a9d3b5c5b0f8aca8b03ad69933/js/script-min.js"></script>
     <script src="${ webpackAssets.vendor.js }"></script>
     <script src="${ webpackAssets.app.js }"></script>
     ${process.env.NODE_ENV === 'production' ? getTrackingScript() : ''}

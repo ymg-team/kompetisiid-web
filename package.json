@@ -9,7 +9,7 @@
     "build": "yarn dev:build-client",
     "test": "jest",
     "test:watch": "jest --watch",
-    "dev:server": "NODE_ENV=development nodemon --watch src/ --watch assets/ --exec 'node -r dotenv/config -r babel-register' ./src/server",
+    "dev:server": "NODE_ENV=development nodemon --watch src/ --watch public/ --exec 'node -r dotenv/config -r babel-register' ./src/server",
     "prod:server": "NODE_ENV=production API_HOST=https://api.kompetisi.id FRONT_HOST=http://localhost:1470 node ./dist-server/server",
     "dev:build-client": "NODE_ENV=development webpack --watch --progress",
     "prod:build-client": "NODE_ENV=production webpack --progress",
@@ -21,7 +21,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://gitlab.com/idmore/kompetisiindonesia-next.git"
+    "url": "git+https://github.com/idmore/kompetisiid-web.git"
   },
   "keywords": [
     "kompetisi",
@@ -30,9 +30,9 @@
   "author": "yussan",
   "license": "ISC",
   "bugs": {
-    "url": "https://gitlab.com/idmore/kompetisiindonesia-next/issues"
+    "url": "https://github.com/idmore/kompetisiid-web/issues"
   },
-  "homepage": "https://gitlab.com/idmore/kompetisiindonesia-next#README",
+  "homepage": "https://github.com/idmore/kompetisiid-web#README",
   "dependencies": {
     "bluebird": "3.4.6",
     "compression": "1.6.2",
