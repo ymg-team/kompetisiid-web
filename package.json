@@ -1,8 +1,8 @@
 {
   "name": "kompetisi-indonesia",
-  "version": "4.1.0",
+  "version": "4.1.1-beta.0",
   "description": "platform untuk mengikuti dan berbagi kompetisi",
-  "main": "index.js",
+  "main": "dist-server/server/index.js",
   "scripts": {
     "start": "yarn dev:server",
     "prepublish": "yarn prod:build-client",
