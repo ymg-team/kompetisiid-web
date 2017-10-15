@@ -5,16 +5,16 @@
   "main": "index.js",
   "scripts": {
     "start": "yarn dev:server",
-    "prepublish": "yarn prod:build-client",
+    "prepublish": "yarn prod:build",
     "build": "yarn dev:build-client",
     "test": "jest",
     "test:watch": "jest --watch",
     "dev:server": "NODE_ENV=development nodemon --watch src/ --watch public/ --exec 'node -r dotenv/config -r babel-register' ./src/server",
+    "prod:build": "rimraf dist-server && rimraf dist-client && npm run prod:build-client && npm run prod:build-server",
     "prod:server": "NODE_ENV=production API_HOST=https://api.kompetisi.id FRONT_HOST=http://localhost:1470 node ./dist-server/server",
     "dev:build-client": "NODE_ENV=development webpack --watch --progress",
     "prod:build-client": "NODE_ENV=production webpack --progress",
     "prod:build-server": "NODE_ENV=production babel src -d dist-server --ignore '**/*_test.js' --copy-files",
-    "prod:build": "rimraf dist-server && rimraf dist-client && npm run prod:build-client && npm run prod:build-server",
     "zip": "rimraf dist-server.zip && rimraf assets.zip && bestzip dist-server.zip dist-server && bestzip dist-client.zip dist-client"
   },
   "repository": {
