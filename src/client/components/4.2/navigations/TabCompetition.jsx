@@ -5,7 +5,6 @@ import BtnJoin from '../buttons/BtnJoin'
 const TabCompetition = (props) => {
   const n_pengumuman = props.data && props.data.dataPengumuman ? JSON.parse(props.data.dataPengumuman).length : 0
   const n_kontak = props.data && props.data.kontak ? JSON.parse(props.data.kontak).length : 0
-  console.log(n_pengumuman)
   return <div id='container-competition-tab' className='row no-margin container-competition-tab'>
     <div className='col-md-12'>
       <div className='container'>

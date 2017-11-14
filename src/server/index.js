@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 import App from './app'
 import Cluster from 'cluster'
 const Port = process.env.KI_PORT || 1470

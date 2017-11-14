@@ -14,7 +14,6 @@ class EmailVerify extends Component
     componentDidMount()
     {
         const {token} = this.props.location.query
-        console.log(token)
         this.props.dispatch(emailVerification(token))
     }
 

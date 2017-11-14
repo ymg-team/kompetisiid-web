@@ -6,7 +6,7 @@
   "scripts": {
     "start": "yarn dev:server",
     "prepublish": "yarn prod:build",
-    "build": "yarn dev:build-client",
+    "webpack": "yarn dev:build-client",
     "test": "jest",
     "test:watch": "jest --watch",
     "postinstall": "yarn prod:build",

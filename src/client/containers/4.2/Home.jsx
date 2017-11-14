@@ -5,6 +5,7 @@ import NewsBox from '../../components/4.2/boxs/NewsBox'
 import HomeCategoriesBox from '../../components/4.2/boxs/CategoriesOnHome'
 import Slider from '../../components/4.2/sliders/HomeSlider'
 import Helmet from '../../components/Helmet'
+import GA from '../../components/4.2/GoogleAdsense'
 import {Link} from 'react-router'
 
 import {getStorage, setStorage} from '../../../store/helpers/LocalStorage'
@@ -92,6 +93,10 @@ class Home extends Component
             {...kompetisi.data['home_popular']} />
         </div>
         {/*end of popular competitions*/}
+
+        {/* google adsense */}
+        <GA />
+        {/* end of google adsense */}
 
         {/*latest competitions*/}
         <div className='col-md-12'>

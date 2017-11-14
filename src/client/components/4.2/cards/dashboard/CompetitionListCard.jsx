@@ -11,7 +11,6 @@ export default class CompetitionListCard extends Component
     render()
     {
         const {n} = this.props 
-        console.log(n)
         return (
             <div className='competition-items'>
                 <div className='item'>

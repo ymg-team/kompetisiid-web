@@ -3,9 +3,9 @@ import path from 'path'
 import cookieParser from 'cookie-parser'
 import cookieSession from 'cookie-session'
 
-import AppPublic from './public'
 import AppApi from './api'
 import AppFeed from './feed'
+import AppRender from './render'
 
 import compression from 'compression'
 
@@ -59,7 +59,8 @@ App.use('/assets', express.static(path.resolve(`${__dirname}/../../public/assets
 // app routes
 App.use('/api', AppApi)
 App.use('/feed', AppFeed)
-App.use('/', checkAuth, AppPublic)
+App.use('/assets', express.static(path.resolve(__dirname, '../../assets/')))
+App.get('*', AppRender)
 
 function checkAuth(req, res, next)
 {
@@ -67,4 +68,4 @@ function checkAuth(req, res, next)
     next()
 }
 
-module.exports = App
+export default App

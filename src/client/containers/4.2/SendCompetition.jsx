@@ -53,7 +53,6 @@ class AddCompetitionFast extends Component
             return fullalert('error', 'Google Recaptcha belum valid')
         }else //start submit
         {
-            console.log('submit data...')
             return this.props.dispatch(submitCepat({
                 link: this.state.input_link,
                 nama: this.state.input_title,
