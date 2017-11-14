@@ -1,1 +1,1 @@
-pm2 stop kindo && yarn prod:build && pm2 start kindo
+rm -rf dist-client && rm -rf dist-server && unzip dist-server.zip && unzip dist-client.zip

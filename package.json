@@ -16,7 +16,7 @@
     "dev:build-client": "NODE_ENV=development webpack --watch --progress",
     "prod:build-client": "NODE_ENV=production webpack --progress",
     "prod:build-server": "NODE_ENV=production babel src -d dist-server --ignore '**/*_test.js' --copy-files",
-    "zip": "rimraf dist-server.zip && rimraf assets.zip && bestzip dist-server.zip dist-server && bestzip dist-client.zip dist-client",
+    "zip": "rimraf dist-server.zip && rimraf dist-client.zip && bestzip dist-server.zip dist-server && bestzip dist-client.zip dist-client",
     "release": "standard-version",
     "release:beta": "standard-version -p beta"
   },
