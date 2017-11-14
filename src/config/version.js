@@ -1,6 +1,6 @@
 const version = {
-    JS_VERSION : '4.2.21',
-    CSS_VERSION : '4.2.18',
+    JS_VERSION : '4.2.22',
+    CSS_VERSION : '4.2.19',
     ASSETS_VERSION: '4.2'
 }
 
