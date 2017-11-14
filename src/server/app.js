@@ -59,7 +59,6 @@ App.use('/assets', express.static(path.resolve(`${__dirname}/../../public/assets
 // app routes
 App.use('/api', AppApi)
 App.use('/feed', AppFeed)
-App.use('/assets', express.static(path.resolve(__dirname, '../../assets/')))
 App.get('*', AppRender)
 
 function checkAuth(req, res, next)
