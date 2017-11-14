@@ -95,7 +95,7 @@ class Home extends Component
         {/*end of popular competitions*/}
 
         {/* google adsense */}
-        <GA />
+        <GA type='leaderboard' />
         {/* end of google adsense */}
 
         {/*latest competitions*/}

@@ -12,9 +12,9 @@ export default class GoogleAdsense extends PureComponent
     {
         switch(this.props.type)
         {
-            case LeaderBoard:
+            case 'leaderboard':
                 return <LeaderBoard />
-            case Responsive:
+            case 'reponsive':
             default: 
                 return <Responsive />
         }
