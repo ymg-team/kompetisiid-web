@@ -15,67 +15,89 @@ const data = [
 
 export default class HomeSlider extends Component
 {
+    constructor()
+    {
+        super()
+        this.state = {
+            marginTopSlider: '-500'
+        }
+    }
+
+    handleResizeSlider()
+    {
+        this.setState({
+            marginTopSlider: -1 * document.querySelector('.slider-container').offsetHeight
+        })
+    }
+
+    componentWillUnmount()
+    {
+        window.removeEventListener('resize', (e) => this.handleResizeSlider)
+    }
+
     componentDidMount()
     {
+        window.addEventListener('resize', (e) => this.handleResizeSlider)
+        this.setState({
+            marginTopSlider: -1 * document.querySelector('.slider-container').offsetHeight
+        })
+
         // init slidder
-        (function() {
-            let currentIndex = 0
-            const SliderItemEl = document.getElementsByClassName('slider--item')
-            const BtnPrevEl = document.getElementById('btn-slider--prev')
-            const BtnNextEl = document.getElementById('btn-slider--next')
-            const totalIndex = SliderItemEl.length
+        let currentIndex = 0
+        const SliderItemEl = document.getElementsByClassName('slider--item')
+        const BtnPrevEl = document.getElementById('btn-slider--prev')
+        const BtnNextEl = document.getElementById('btn-slider--next')
+        const totalIndex = SliderItemEl.length
 
-            // event listener
-            BtnPrevEl.addEventListener('click', prev)
-            BtnNextEl.addEventListener('click', cycle)
+        // event listener
+        BtnPrevEl.addEventListener('click', prev)
+        BtnNextEl.addEventListener('click', cycle)
 
-            //interval 
-            let autoSlide = setInterval(cycle, 10000)
+        //interval 
+        let autoSlide = setInterval(cycle, 10000)
 
-            function cycle() {
-                clearInterval(autoSlide)
-                autoSlide = setInterval(cycle, 10000)
-                if (currentIndex == 0) {
-                    currentIndex++
-                } else if (currentIndex == totalIndex - 1) {
-                    currentIndex = 0
-                } else {
-                    currentIndex++ 
-                }
-
-                return toggle()
+        function cycle() {
+            clearInterval(autoSlide)
+            autoSlide = setInterval(cycle, 10000)
+            if (currentIndex == 0) {
+                currentIndex++
+            } else if (currentIndex == totalIndex - 1) {
+                currentIndex = 0
+            } else {
+                currentIndex++ 
             }
 
-            function prev() {
-                clearInterval(autoSlide)
-                autoSlide = setInterval(cycle, 10000)
-                if (currentIndex == 0) {
-                    currentIndex = totalIndex - 1
-                } else if (currentIndex == totalIndex - 1) {
-                    currentIndex = totalIndex - 2
-                } else {
-                    currentIndex--
-                }
+            return toggle()
+        }
 
-                return toggle()
+        function prev() {
+            clearInterval(autoSlide)
+            autoSlide = setInterval(cycle, 10000)
+            if (currentIndex == 0) {
+                currentIndex = totalIndex - 1
+            } else if (currentIndex == totalIndex - 1) {
+                currentIndex = totalIndex - 2
+            } else {
+                currentIndex--
             }
 
-            function toggle() {
-                Object.keys(SliderItemEl).map((n, key) => {
-                    let visibility = 'hidden'
-                    let opacity = 0
-                    if (key == currentIndex) visibility = 'visible'
-                    if (key == currentIndex) opacity = 1
-                    SliderItemEl[key].style.visibility = visibility
-                    SliderItemEl[key].style.opacity = opacity
-                })
-            }
-        })()
+            return toggle()
+        }
+
+        function toggle() {
+            Object.keys(SliderItemEl).map((n, key) => {
+                let visibility = 'hidden'
+                let opacity = 0
+                if (key == currentIndex) visibility = 'visible'
+                if (key == currentIndex) opacity = 1
+                SliderItemEl[key].style.visibility = visibility
+                SliderItemEl[key].style.opacity = opacity
+            })
+        }
     }
 
     render()
     {
-        const marginTopSlider = typeof window != 'undefined' ? -1 * document.querySelector('.slider-container').offsetHeight : -500
         return(
             <div className='col-md-12 slider'>
                 <div className='slider-buttons'>
@@ -89,7 +111,7 @@ export default class HomeSlider extends Component
                                 backgroundImage:`url(${n.image})`,
                                 visibility: key == 0 ? 'visible' : 'hidden', 
                                 opacity: key == 0 ? 1 : 0,
-                                marginTop: key == 0 ? '0' : marginTopSlider+'px'
+                                marginTop: key == 0 ? '0' : this.state.marginTopSlider+'px'
                                 }
                             return <div key={key} className='slider--item' style={style}>
                                 <div className='slider--item--text'>

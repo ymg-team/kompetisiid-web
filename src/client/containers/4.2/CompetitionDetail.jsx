@@ -154,58 +154,66 @@ class CompetitionDetail extends Component
                             </div>
                           : null}
                         {/*end of alert*/}
-                        <div className="m-20" />
+                        <div className='m-20' />
                         <div className='row'>
-                          <div className={'col-md-8'}>
+                          <div className={active_tab == 1 ? 'col-md-8' : 'col-md-12'}>
                             {
                               (() => {
                                 switch(active_tab)
                                 {
                                   case 1:
                                     return <Regulations
-                                      encid={encid}
-                                      nospace_title={detail[encid].data.nospace_title} 
-                                      sumber={detail[encid].data.sumber}
-                                      tags={detail[encid].data.tags.split(',')}
-                                      html={detail[encid].data.konten} 
-                                    />
+                                            encid={encid}
+                                            nospace_title={detail[encid].data.nospace_title} 
+                                            sumber={detail[encid].data.sumber}
+                                            tags={detail[encid].data.tags.split(',')}
+                                            html={detail[encid].data.konten}/>
                                   case 2:
-                                    return <Prizes html={detail[encid].data.hadiah} />
+                                    return <Prizes 
+                                            html={detail[encid].data.hadiah} />
                                   case 3:
-                                    return <Announcements data={JSON.parse(detail[encid].data.dataPengumuman)} />
+                                    return <Announcements 
+                                            data={JSON.parse(detail[encid].data.dataPengumuman)} />
                                   case 4:
-                                    return <Discussions link={helmetdata.url} />
+                                    return <Discussions 
+                                            link={helmetdata.url} />
                                   case 5:
-                                    return <Contacts data={JSON.parse(detail[encid].data.kontak)} />
+                                    return <Contacts 
+                                            data={JSON.parse(detail[encid].data.kontak)} />
                                   case 6:
                                     return <Share
-                                      title={detail[encid].data.title}
-                                      desc={detail[encid].data.sort}
-                                      link={helmetdata.url}
-                                    />
+                                            title={detail[encid].data.title}
+                                            desc={detail[encid].data.sort}
+                                            link={helmetdata.url}/>
                                   default:
                                     return null
                                 }
                               })()
                             }                          
                           </div>
-                          <div className='col-md-4'>
-                            <div className="competition-detail--meta">
-                              <progress value={30} max={100} />
-                              <h3 className='total-prize'>
-                                <strong>{detail[encid].data.total_hadiah}</strong>
-                                <small className='text-muted'>total hadiah</small>
-                              </h3>
-                              <h3 className='total-view'>{detail[encid].data.views}<small className='text-muted'>kunjungan</small></h3>
-                              <h3 className='total-view'>{detail[encid].data.sisadeadline}<small className='text-muted'>{`deadline (${detail[encid].data.deadline})`}</small></h3>
-                              <h3 className='total-view'>{detail[encid].data.sisapengumuman}<small className='text-muted'>{`pengumuman (${detail[encid].data.pengumuman})`}</small></h3>
-                            </div>  
-                            <hr/>
-                            <h4 className='text-muted'>Kompetisi ini bersifat</h4>
-                            {detail[encid].data.is_garansi ? <span title='kompetisi sudah diverifikasi keberadaannya oleh kru KI' className="label label-gray">Garansi</span> : null }
-                            {detail[encid].data.is_mediapartner ? <span title='KI berlaku sebagai media partner di kompetisi ini' className="label label-gray">Media Partner</span> : null}
-                            {detail[encid].data.is_support ? <span title='kompetisi ini bisa diikuti melelui KI' className="label label-gray">Support</span> : null}                     
-                          </div>
+                          {/* show sidebar info */}
+                          {
+                            active_tab == 1 ?
+                              <div className='col-md-4'>
+                                <div className="competition-detail--meta">
+                                  <progress value={30} max={100} />
+                                  <h3 className='total-prize'>
+                                    <strong>{detail[encid].data.total_hadiah}</strong>
+                                    <small className='text-muted'>total hadiah</small>
+                                  </h3>
+                                  <h3 className='total-view'>{detail[encid].data.views}<small className='text-muted'>kunjungan</small></h3>
+                                  <h3 className='total-view'>{detail[encid].data.sisadeadline}<small className='text-muted'>{`deadline (${detail[encid].data.deadline})`}</small></h3>
+                                  <h3 className='total-view'>{detail[encid].data.sisapengumuman}<small className='text-muted'>{`pengumuman (${detail[encid].data.pengumuman})`}</small></h3>
+                                </div>  
+                                <hr/>
+                                <h4 className='text-muted'>Kompetisi ini bersifat</h4>
+                                {detail[encid].data.is_garansi ? <span title='kompetisi sudah diverifikasi keberadaannya oleh kru KI' className="label label-gray">Garansi</span> : null }
+                                {detail[encid].data.is_mediapartner ? <span title='KI berlaku sebagai media partner di kompetisi ini' className="label label-gray">Media Partner</span> : null}
+                                {detail[encid].data.is_support ? <span title='kompetisi ini bisa diikuti melelui KI' className="label label-gray">Support</span> : null}                     
+                              </div>
+                            : null
+                          }
+                          {/* end of show sidebar info */}
                         </div>
                       </div>
                     </div>

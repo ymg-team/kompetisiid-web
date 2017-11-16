@@ -94,10 +94,6 @@ class Home extends Component
         </div>
         {/*end of popular competitions*/}
 
-        {/* google adsense */}
-        <GA type='leaderboard' />
-        {/* end of google adsense */}
-
         {/*latest competitions*/}
         <div className='col-md-12'>
           <div className='container'>
