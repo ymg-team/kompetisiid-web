@@ -75,6 +75,7 @@ export default class HomeSlider extends Component
 
     render()
     {
+        const marginTopSlider = typeof window != 'undefined' ? -1 * document.querySelector('.slider-container').offsetHeight : -500
         return(
             <div className='col-md-12 slider'>
                 <div className='slider-buttons'>
@@ -88,7 +89,7 @@ export default class HomeSlider extends Component
                                 backgroundImage:`url(${n.image})`,
                                 visibility: key == 0 ? 'visible' : 'hidden', 
                                 opacity: key == 0 ? 1 : 0,
-                                marginTop: key == 0 ? '0' : '-700px'
+                                marginTop: key == 0 ? '0' : marginTopSlider+'px'
                                 }
                             return <div key={key} className='slider--item' style={style}>
                                 <div className='slider--item--text'>

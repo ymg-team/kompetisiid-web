@@ -94,7 +94,7 @@ function renderFullPage(head, html, state)
                 <meta name="google-site-verification" content="pUksy8ewwm4bzRVqaTQXKmWfRFZc9_L0iuESNDg7190" />
                 <meta property="fb:app_id" content="1419514554927551">
                 <meta property="fb:admins" content="100000359263988">
-                <link href="https://d33wubrfki0l68.cloudfront.net/bundles/bf8f3056db2faef1b6689a08130044818eefc58d.css" rel="stylesheet">
+                <link href="/assets/4.2/css/style.css" rel="stylesheet">
                 <link href="/assets/4.2/lib/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet">
                 <link href="https://fonts.googleapis.com/css?family=Muli" rel="stylesheet">
                 <link rel="icon" href="/assets/icons/icon-128x128.png" />
