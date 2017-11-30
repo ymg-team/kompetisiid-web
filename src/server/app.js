@@ -49,12 +49,12 @@ App.use((req, res, next) => {
 })
 
 // static files
+App.use('/assets', express.static(path.resolve(`${__dirname}/../../public/assets`), staticOptions()))
+App.use('/build', express.static(path.resolve(`${__dirname}/../../dist-client`), staticOptions()))
 App.use('/robot.txt', express.static(__dirname + '/../../public/robot.txt'))
 App.use('/opensearch.xml', express.static(__dirname + '/../../public/opensearch.xml'))
 App.use('/manifest.json', express.static(__dirname + '/../../public/manifest.json'))
 App.use('/service-worker.js', express.static(__dirname + '/../../public/service-worker.js'))
-App.use('/build', express.static(path.resolve(`${__dirname}/../../dist-client`), staticOptions()))
-App.use('/assets', express.static(path.resolve(`${__dirname}/../../public/assets`), staticOptions()))
 
 // app routes
 App.use('/api', AppApi)
