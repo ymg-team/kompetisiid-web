@@ -114,18 +114,18 @@ function renderFullPage(head, html, state)
 // initial script
 function getScript(state)
 {
+    // <script>
+    //     if('serviceWorker' in navigator)
+    //     {
+    //         navigator.serviceWorker.register('/service-worker.js')
+    //             .then(function(registration){
+    //                 console.log(registration);
+    //             }).catch(function(err){
+    //                 console.log('ServiceWorker registration is failed', err);
+    //             });
+    //     }
+    // </script>  
     return `
-    <script>
-        if('serviceWorker' in navigator)
-        {
-            navigator.serviceWorker.register('/service-worker.js')
-                .then(function(registration){
-                    console.log(registration);
-                }).catch(function(err){
-                    console.log('ServiceWorker registration is failed', err);
-                });
-        }
-    </script>  
     <script type="text/javascript">window.__data__ = ${JSON.stringify(state)}</script>
     <script type="text/javascript" src="https:////connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8&appId=1419514554927551" async defer></script>
     <script type="text/javascript" src="https://apis.google.com/js/platform.js" async defer></script>
