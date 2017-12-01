@@ -49,6 +49,7 @@ App.use((req, res, next) => {
 })
 
 // static files
+App.use('/static', express.static(path.resolve(`${__dirname}/../../public/assets`), staticOptions()))
 App.use('/assets', express.static(path.resolve(`${__dirname}/../../public/assets`), staticOptions()))
 App.use('/build', express.static(path.resolve(`${__dirname}/../../dist-client`), staticOptions()))
 App.use('/robot.txt', express.static(__dirname + '/../../public/robot.txt'))
