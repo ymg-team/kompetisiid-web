@@ -118,6 +118,19 @@ export function getFavoritedTags(params = {})
     }
 }
 
+export function  getStats()
+{
+    return {
+        [CALL_API]: {
+            url: '/api/stats',
+            method: 'get',
+            typeWaiting: REQUEST_DATA,
+            typeSuccess: RECEIVE_DATA,
+            target: 'stats',
+        }
+    }
+}
+
 function receiveJelajah(filter, json = null)
 {
     let type, target

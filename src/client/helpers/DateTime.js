@@ -70,3 +70,8 @@ export function strToCal(str)
 {
     return Moment(str).format('YYYYMMDD') + 'T000000Z'
 }
+
+export function today(format = 'Do MMM YY')
+{
+    return Moment().format(format)
+}

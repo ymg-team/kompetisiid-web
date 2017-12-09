@@ -163,7 +163,27 @@ function tags(state = {}, action)
     return state
 }
 
+function stats(state={}, action)
+{
+    if(action.target === 'stats')
+    {
+        switch(action.type)
+        {
+            case REQUEST_DATA :
+                return Object.assign({}, state, {is_loading: true})
+
+            case RECEIVE_DATA :
+                return Object.assign({}, state, {is_loading: false}, action.json)
+
+            default:
+                return state
+        }
+    }
+
+    return state
+}
+
 const reducer = combineReducers({
-    data, related, detail, categories, pengumuman, tags
+    data, related, detail, categories, pengumuman, tags, stats
 })
 export default reducer

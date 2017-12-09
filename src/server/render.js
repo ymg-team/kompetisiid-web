@@ -94,12 +94,28 @@ function renderFullPage(head, html, state)
                 <meta name="google-site-verification" content="pUksy8ewwm4bzRVqaTQXKmWfRFZc9_L0iuESNDg7190" />
                 <meta property="fb:app_id" content="1419514554927551">
                 <meta property="fb:admins" content="100000359263988">
-                <link href="/assets/4.2/css/style.css" rel="stylesheet">
+                <link href="/assets/4.2/css/style.css?v=${version.CSS_VERSION}" rel="stylesheet">
                 <link href="/assets/4.2/lib/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet">
                 <link href="https://fonts.googleapis.com/css?family=Muli" rel="stylesheet">
                 <link rel="icon" href="/assets/icons/icon-128x128.png" />
                 <link rel="manifest" href="/manifest.json" />
                 <link rel="search" type="application/opensearchdescription+xml" href="/opensearch.xml" title="Cari Kompetisi"/>
+                <style>
+                .card-enter {
+                    opacity: 0.01;
+                }
+                .card-enter.example-enter-active {
+                    opacity: 1;
+                transition: opacity 500ms ease-in;
+                }
+                .card-leave {
+                    opacity: 1;
+                }
+                .card-leave.example-leave-active {
+                    opacity: 0.01;
+                    transition: opacity 300ms ease-in;
+                }
+                </style>
             </head>
             <body>
                 <div id="root">${html}</div>

@@ -1,1 +1,0 @@
-rm -rf dist-client -rf dist-server && unzip dist-server.zip && unzip dist-client.zip

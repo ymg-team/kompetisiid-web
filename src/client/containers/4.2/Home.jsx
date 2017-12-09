@@ -3,13 +3,15 @@ import CompetitionBox from '../../components/4.2/boxs/CompetitionBox'
 import MediapartnerBox from '../../components/4.2/boxs/MediapartnerBox'
 import NewsBox from '../../components/4.2/boxs/NewsBox'
 import HomeCategoriesBox from '../../components/4.2/boxs/CategoriesOnHome'
-import Slider from '../../components/4.2/sliders/HomeSlider'
 import Helmet from '../../components/Helmet'
 import GA from '../../components/4.2/GoogleAdsense'
 import {Link} from 'react-router'
+import StatsCount from '../../components/4.2/cards/HomeCount'
+import Slider from '../../components/4.2/sliders/HomeSlider'
+import Categories from '../../components/4.2/cards/HomeCategories'
 
 import {getStorage, setStorage} from '../../../store/helpers/LocalStorage'
-import {fetchJelajah, getFavoritedTags, getCategories, setCategories} from '../../../store/kompetisi/actions'
+import {fetchJelajah, getFavoritedTags, getCategories, setCategories, getStats} from '../../../store/kompetisi/actions'
 import {fetchBerita} from '../../../store/berita/actions'
 import {connect} from 'react-redux'
 
@@ -22,15 +24,13 @@ class Home extends Component
     const getMediaPartnerC = store.dispatch(fetchJelajah({limit:4,mediapartner:1}, 'home_mediapartner'))
     const getPopularC = store.dispatch(fetchJelajah({limit:4, popular: 1}, 'home_popular'))
     const getB = store.dispatch(fetchBerita({limit:6}, 'home_latest'))
+    const getS = store.dispatch(getStats())
     
-    return Promise.all([getMediaPartnerC, getLatestC,getPopularC, getB]);
+    return Promise.all([getMediaPartnerC, getLatestC,getPopularC, getB, getS]);
   }
 
   componentDidMount()
   {
-    // request data
-    // this.props.dispatch(getFavoritedTags())
-
     if(!this.props.kompetisi.data.home_latest)
       this.props.dispatch(fetchJelajah({limit:6}, 'home_latest'))
 
@@ -44,6 +44,7 @@ class Home extends Component
       this.props.dispatch(fetchBerita({limit:6}, 'home_latest'))
     
     this.reqCategories()
+    this.props.dispatch(getStats())
   }
 
   reqCategories()
@@ -64,18 +65,10 @@ class Home extends Component
     return(
       <div>
         <Helmet />
-        <Slider />
-        {/*main competition*/}
-        {
-          kompetisi.categories && kompetisi.categories.meta ? 
-          <HomeCategoriesBox 
-            kompetisi={kompetisi}
-            fetchJelajah={(params, filter) => this.props.dispatch(fetchJelajah(params, filter))}
-            categories={kompetisi.categories} />
-          : null
-        }
-        {/*end of main competition*/}
-
+        <StatsCount {...kompetisi.stats} />
+        {/* popular competitions slider */}
+        <Slider {...kompetisi.data['home_popular']} />
+        <Categories {...kompetisi.categories} />
         {/*popular competitions*/}
         <div className='col-md-12'>
           <div className='container'>

@@ -4,5 +4,6 @@
         "production": {
         "presets": []
         }
-    }
+    },
+    "plugins": ["transform-class-properties"]
 }
