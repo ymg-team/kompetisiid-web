@@ -1,6 +1,6 @@
 {
   "name": "kompetisi-indonesia",
-  "version": "4.2.3-beta.1",
+  "version": "4.3.0",
   "description": "platform untuk mengikuti dan berbagi kompetisi",
   "main": "dist-server/server/index.js",
   "scripts": {

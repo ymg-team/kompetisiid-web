@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="4.3.0"></a>
+# [4.3.0](https://github.com/idmore/kompetisiid-web/compare/v4.2.3-beta.1...v4.3.0) (2017-12-09)
+
+
+### Bug Fixes
+
+* **slider:** fix slider height ([27720bf](https://github.com/idmore/kompetisiid-web/commit/27720bf))
+
+
+### Features
+
+* **homepage:** added new slider - stats - categories home design ([6007b02](https://github.com/idmore/kompetisiid-web/commit/6007b02))
+
+
+
 <a name="4.2.3-beta.1"></a>
 ## [4.2.3-beta.1](https://github.com/idmore/kompetisiid-web/compare/v4.2.3-beta.0...v4.2.3-beta.1) (2017-10-15)
 
