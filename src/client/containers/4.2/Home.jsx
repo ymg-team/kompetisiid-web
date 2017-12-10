@@ -20,7 +20,7 @@ class Home extends Component
   static fetchData({store})
   {
     // load latest competitions
-    const getLatestC = store.dispatch(fetchJelajah({limit:6}, 'home_latest'))
+    const getLatestC = store.dispatch(fetchJelajah({limit:9}, 'home_latest'))
     const getMediaPartnerC = store.dispatch(fetchJelajah({limit:4,mediapartner:1}, 'home_mediapartner'))
     const getPopularC = store.dispatch(fetchJelajah({limit:4, popular: 1}, 'home_popular'))
     const getB = store.dispatch(fetchBerita({limit:6}, 'home_latest'))
@@ -32,7 +32,7 @@ class Home extends Component
   componentDidMount()
   {
     if(!this.props.kompetisi.data.home_latest)
-      this.props.dispatch(fetchJelajah({limit:6}, 'home_latest'))
+      this.props.dispatch(fetchJelajah({limit:9}, 'home_latest'))
 
     if(!this.props.kompetisi.data.home_popular)
       this.props.dispatch(fetchJelajah({limit:4,popular:1}, 'home_popular'))
@@ -69,24 +69,6 @@ class Home extends Component
         {/* popular competitions slider */}
         <Slider {...kompetisi.data['home_popular']} />
         <Categories {...kompetisi.categories} />
-        {/*popular competitions*/}
-        <div className='col-md-12'>
-          <div className='container'>
-            <div className='row'>
-              <div className='subtitle-more'>
-                <h2 className='menu-title'>Kompetisi Populer</h2>
-                <Link to={'/browse'} className='btn btn-white btn-sm'>Jelajah kompetisi</Link>
-              </div>              
-            </div>
-          </div>
-          <CompetitionBox 
-            subtitle={false}
-            size='small' 
-            total={4}
-            {...kompetisi.data['home_popular']} />
-        </div>
-        {/*end of popular competitions*/}
-
         {/*latest competitions*/}
         <div className='col-md-12'>
           <div className='container'>
