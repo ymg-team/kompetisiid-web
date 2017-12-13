@@ -213,7 +213,7 @@ class CompetitionDetail extends Component
                                 <br/>
                                 <br/>
                                 {/* show you */}
-                                <a target='_blank' href='https://goo.gl/syeJGF'>
+                                <a target='_blank' href='https://vip.bitcoin.co.id/ref/xyussanx/1'>
                                   <img style={{maxWidth: '100%'}} src='https://s3.amazonaws.com/bitcoin.co.id/banner/250x250.jpg' alt='Yuk berdagang Bitcoin dan dapatkan keuntungan jutaan rupiah' />
                                 </a>
                               </div>
