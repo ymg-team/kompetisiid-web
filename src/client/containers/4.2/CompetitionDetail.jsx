@@ -136,21 +136,21 @@ class CompetitionDetail extends Component
                       <div className='col-md-10 col-md-push-1'>
                         {/*alert*/}
                         {!detail[encid].data.is_mediapartner && !detail[encid].data.is_support ? 
-                          <div style={{marginTop:0}} className="alert alert-warning">
+                          <div style={{marginTop:0}} className='alert alert-warning'>
                             <strong>Perhatian&nbsp;</strong>
                             Di kompetisi ini, <strong>Kompetisi Indonesia </strong>hanya berlaku sebagai media publikasi. Jika ada pertanyaan lebih lanjut mengenai kompetisi ini silahkan sampaikan langsung ke kontak yang tersedia tab kontak.
                           </div>
                         : null}
                         {detail[encid].data.is_mediapartner && !detail[encid].data.is_support ? 
-                          <div style={{marginTop:0}} className="alert alert-blue">
+                          <div style={{marginTop:0}} className='alert alert-blue'>
                             <strong>Perhatian&nbsp;</strong>
                             Di kompetisi ini, <strong>Kompetisi Indonesia </strong>berlaku sebagai media partner, jika ada pertanyaan lebih lanjut mengenai kompetisi ini, bisa ditanyakan langsung ke penyelenggara atau melalui tab diskusi.
                           </div>
                         : null}
                         {detail[encid].data.is_support ? 
-                            <div style={{marginTop:0}} className="alert alert-blue">
+                            <div style={{marginTop:0}} className='alert alert-blue'>
                               <strong>Perhatian&nbsp;</strong>
-                              Kompetisi ini bisa diikuti langsung di <strong>Kompetisi Indonesia</strong>, silahkan login dan klik tombol "ikuti kompetisi".
+                              Kompetisi ini bisa diikuti langsung di <strong>Kompetisi Indonesia</strong>, silahkan login dan klik tombol 'ikuti kompetisi'.
                             </div>
                           : null}
                         {/*end of alert*/}
@@ -195,7 +195,7 @@ class CompetitionDetail extends Component
                           {
                             active_tab == 1 ?
                               <div className='col-md-4'>
-                                <div className="competition-detail--meta">
+                                <div className='competition-detail--meta'>
                                   <progress value={30} max={100} />
                                   <h3 className='total-prize'>
                                     <strong>{detail[encid].data.total_hadiah}</strong>
@@ -207,9 +207,15 @@ class CompetitionDetail extends Component
                                 </div>  
                                 <hr/>
                                 <h4 className='text-muted'>Kompetisi ini bersifat</h4>
-                                {detail[encid].data.is_garansi ? <span title='kompetisi sudah diverifikasi keberadaannya oleh kru KI' className="label label-gray">Garansi</span> : null }
-                                {detail[encid].data.is_mediapartner ? <span title='KI berlaku sebagai media partner di kompetisi ini' className="label label-gray">Media Partner</span> : null}
-                                {detail[encid].data.is_support ? <span title='kompetisi ini bisa diikuti melelui KI' className="label label-gray">Support</span> : null}                     
+                                {detail[encid].data.is_garansi ? <span title='kompetisi sudah diverifikasi keberadaannya oleh kru KI' className='label label-gray'>Garansi</span> : null }
+                                {detail[encid].data.is_mediapartner ? <span title='KI berlaku sebagai media partner di kompetisi ini' className='label label-gray'>Media Partner</span> : null}
+                                {detail[encid].data.is_support ? <span title='kompetisi ini bisa diikuti melelui KI' className='label label-gray'>Support</span> : null}                     
+                                <br/>
+                                <br/>
+                                {/* show you */}
+                                <a target='_blank' href='https://goo.gl/syeJGF'>
+                                  <img style={{maxWidth: '100%'}} src='https://s3.amazonaws.com/bitcoin.co.id/banner/250x250.jpg' alt='Yuk berdagang Bitcoin dan dapatkan keuntungan jutaan rupiah' />
+                                </a>
                               </div>
                             : null
                           }
@@ -234,7 +240,7 @@ class CompetitionDetail extends Component
                 }
               </div> 
               : <ErrorCard {...detail[encid].meta} />
-          :<div className="fullheight"><Loader /></div>   
+          :<div className='fullheight'><Loader /></div>   
         }        
       </div>
     )
@@ -246,34 +252,34 @@ function generateJsonld(n, url)
   const start_date = n.created_at.split(' ')
   const end_date = n.deadline_at.split(' ')
   return `{
-    "@context": "http://schema.org",
-    "@type": "Event",
-    "name": "${n.title.replace(/\"/g, '')}",
-    "description": "${n.sort.replace(/\"/g, '')}",
-    "startDate": "${start_date[0]}T${start_date[1]}.000Z",
-    "endDate": "${end_date[0]}T${end_date[1]}.000Z",
-    "url": "${url}",
-    "sameAs": "${n.sumber}",
-    "image": {
-        "@type": "ImageObject",
-        "url": "${n.poster.original}",
-        "height": "500",
-        "width": "500"
+    '@context': 'http://schema.org',
+    '@type': 'Event',
+    'name': '${n.title.replace(/\'/g, '')}',
+    'description': '${n.sort.replace(/\'/g, '')}',
+    'startDate': '${start_date[0]}T${start_date[1]}.000Z',
+    'endDate': '${end_date[0]}T${end_date[1]}.000Z',
+    'url': '${url}',
+    'sameAs': '${n.sumber}',
+    'image': {
+        '@type': 'ImageObject',
+        'url': '${n.poster.original}',
+        'height': '500',
+        'width': '500'
     },
-    "organizer": {
-      "@type": "Organization",
-      "name": "${n.penyelenggara}",
-      "logo": {
-          "@type": "ImageObject",
-          "url": "https://scontent-sin6-1.xx.fbcdn.net/v/t1.0-9/21529_1680281178877316_3989323526762937427_n.png?oh=30d4cacd082cb9b7bffbd9abf01c1cb0&oe=5A01639C",
-          "height": "500",
-          "width": "500"
+    'organizer': {
+      '@type': 'Organization',
+      'name': '${n.penyelenggara}',
+      'logo': {
+          '@type': 'ImageObject',
+          'url': 'https://scontent-sin6-1.xx.fbcdn.net/v/t1.0-9/21529_1680281178877316_3989323526762937427_n.png?oh=30d4cacd082cb9b7bffbd9abf01c1cb0&oe=5A01639C',
+          'height': '500',
+          'width': '500'
       }
     },
-    "location": {
-      "@type": "Place",
-      "name": "Indonesia",
-      "address": "Indonesia"
+    'location': {
+      '@type': 'Place',
+      'name': 'Indonesia',
+      'address': 'Indonesia'
     }
   }`
 }
