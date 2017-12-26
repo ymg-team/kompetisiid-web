@@ -4,9 +4,10 @@ import Helmet from '../../components/Helmet'
 import CompetitionBox from '../../components/4.2/boxs/CompetitionBox'
 
 import * as KompetisiActions from '../../../store/kompetisi/actions'
-import {getStorage, setStorage} from '../../../store/helpers/LocalStorage'
-import {connect} from 'react-redux'
-import {bindActionCreators} from 'redux'
+import { getStorage, setStorage } from '../../../store/helpers/LocalStorage'
+import { queryToObj } from 'string-manager'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 
 let handleScroll
 
@@ -93,19 +94,28 @@ class BrowseCompetition extends Component
     const {tag, username, main_kat, sub_kat, q} = this.state
     const {data, categories} = this.props.kompetisi
     const filter = generateFilter(this.state)
-    let title= 'Jelajah - Kompetisi Indonesia'
+    const query = queryToObj(this.props.location.search.replace('?', '')) || {}
+    console.log(query)
+
+    let title= 'Jelajah - Kompetisi.id'
     let description = 'Jelajahi kompetisi dari berbagai macam kategori di Kompetisi Indonesia'
     
     //jelajah kompetisi by tag
     if(tag) {
-        title = `Jelajah - Tag : ${tag}`
+        title = `Jelajah Tag "${tag}" - kompetisi.id`
         description = `Jelajahi kompetisi berdasarkan tag ${tag}`
     }
 
     //jelajah kompetisi by username
     if(username) {
-        title = `Kompetisi dipasang oleh ${username}`
+        title = `Kompetisi dipasang oleh "${username}" - kompetisi.id`
         description = `Jelajahi kompetisi yang dipasang oleh ${username}`
+    }
+
+    if(query.mediapartner == 1)
+    {
+        title = `Kompetisi Media Partner di - Kompetisi.id`
+        description = `Jelajahi kompetisi yang menjadikan Kompetisi.id sebagai media partner`
     }
 
     return(
@@ -127,6 +137,7 @@ class BrowseCompetition extends Component
           <div className='container'>
             <div className='row no-margin'>
               <h1> Jelajah 
+                {query.mediapartner == 1 ? ' Media Partner' : ''}
                 {' '}
                 <a href='javascript:;' onClick={() => modal('open', 'select-main-kat')}>
                   {parseInt(main_kat) >= 0 ? categories.data[main_kat].main_kat : 'Semua kategori'}
