@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="4.3.3"></a>
+## [4.3.3](https://github.com/idmore/kompetisiid-web/compare/v4.3.2...v4.3.3) (2017-12-28)
+
+
+### Bug Fixes
+
+* **browse competition:** jelajah media partner ([98144f1](https://github.com/idmore/kompetisiid-web/commit/98144f1)), closes [#5](https://github.com/idmore/kompetisiid-web/issues/5)
+* **categories list:** set and get from local storage ([8bb1b54](https://github.com/idmore/kompetisiid-web/commit/8bb1b54))
+
+
+
 <a name="4.3.2"></a>
 ## [4.3.2](https://github.com/idmore/kompetisiid-web/compare/v4.3.1...v4.3.2) (2017-12-13)
 
