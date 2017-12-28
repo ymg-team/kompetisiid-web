@@ -2,17 +2,15 @@ import React, {Component} from 'react'
 import CompetitionBox from '../../components/4.2/boxs/CompetitionBox'
 import MediapartnerBox from '../../components/4.2/boxs/MediapartnerBox'
 import NewsBox from '../../components/4.2/boxs/NewsBox'
-import HomeCategoriesBox from '../../components/4.2/boxs/CategoriesOnHome'
 import Helmet from '../../components/Helmet'
-import GA from '../../components/4.2/GoogleAdsense'
-import {Link} from 'react-router'
+import { Link } from 'react-router'
 import StatsCount from '../../components/4.2/cards/HomeCount'
 import Slider from '../../components/4.2/sliders/HomeSlider'
 import Categories from '../../components/4.2/cards/HomeCategories'
 
-import {getStorage, setStorage} from '../../../store/helpers/LocalStorage'
-import {fetchJelajah, getFavoritedTags, getCategories, setCategories, getStats} from '../../../store/kompetisi/actions'
-import {fetchBerita} from '../../../store/berita/actions'
+import { getStorage, setStorage } from '../../../store/helpers/LocalStorage'
+import { fetchJelajah, getFavoritedTags, getCategories, setCategories, getStats } from '../../../store/kompetisi/actions'
+import { fetchBerita } from '../../../store/berita/actions'
 import {connect} from 'react-redux'
 
 class Home extends Component 
@@ -47,6 +45,15 @@ class Home extends Component
     this.props.dispatch(getStats())
   }
 
+  componentWillReceiveProps(np)
+  {
+      if(np.kompetisi.categories.meta && np.kompetisi.categories.meta.code == 200)
+      {
+          // save categories to local storage
+          setStorage('categories', JSON.stringify(np.kompetisi.categories))
+      }
+  }
+
   reqCategories()
   {
     const Categories = getStorage('categories')
@@ -65,10 +72,15 @@ class Home extends Component
     return(
       <div>
         <Helmet />
+        {/*competition stats  */}
         <StatsCount {...kompetisi.stats} />
+
         {/* popular competitions slider */}
         <Slider {...kompetisi.data['home_popular']} />
+
+        {/*categories  */}
         <Categories {...kompetisi.categories} />
+
         {/*latest competitions*/}
         <div className='col-md-12'>
           <div className='container'>

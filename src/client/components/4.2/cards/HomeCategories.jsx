@@ -1,5 +1,5 @@
-import React, {PureComponent} from 'react'
-import {Link} from 'react-router'
+import React, { PureComponent } from 'react'
+import { Link } from 'react-router'
 
 export default class HomeCategories extends PureComponent
 {
@@ -11,16 +11,16 @@ export default class HomeCategories extends PureComponent
     render()
     {
         return(
-            <div className="col-md-12" style={{borderTop: '1px solid gray', borderBottom: '1px solid gray', padding: '3em 0'}}>
-                <div className="container"> 
-                <div className="col md-12"> 
-                    <div className="header-content"> 
+            <div className='col-md-12' style={{borderTop: '1px solid gray', borderBottom: '1px solid gray', padding: '3em 0'}}>
+                <div className='container'> 
+                <div className='col md-12'> 
+                    <div className='header-content'> 
                     <h2>Kategori </h2>
-                    <h3>Berikut beberapa kateogri kompetisi yang bisa diikuti disini.</h3>
+                    <h3>Berikut beberapa ketegori kompetisi yang bisa diikuti disini.</h3>
                     </div>
                 </div>
-                <div className="col-md-12"> 
-                    <div className="row">
+                <div className='col-md-12' style={{wordBreak: 'break-all'}}>
+                    <div className='row'>
                         {
                             this.props.meta && this.props.meta.code == 200 ?
                                 this.props.data.map((n, key) => (
@@ -30,7 +30,7 @@ export default class HomeCategories extends PureComponent
                         }
                     <br/>
                     <br/>
-                    <Link className="btn btn-bordergray" to='/categories'>LIHAT SEMUA KATEGORI -&gt; </Link></div>
+                    <Link className='btn btn-bordergray' to='/categories'>LIHAT SEMUA KATEGORI -&gt; </Link></div>
                 </div>
                 </div>
             </div>
