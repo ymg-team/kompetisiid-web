@@ -5,7 +5,7 @@ export default class GoogleAdsense extends PureComponent
     componentDidMount()
     {
         console.log('render ga...')
-        if(window) (window.adsbygoogle = window.adsbygoogle || []).push({});
+        if(window) (window.adsbygoogle = window.adsbygoogle || []).push({})
     }
 
     render()

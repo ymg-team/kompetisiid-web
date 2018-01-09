@@ -24,7 +24,7 @@ class Home extends Component
     const getB = store.dispatch(fetchBerita({limit:6}, 'home_latest'))
     const getS = store.dispatch(getStats())
     
-    return Promise.all([getMediaPartnerC, getLatestC,getPopularC, getB, getS]);
+    return Promise.all([getMediaPartnerC, getLatestC,getPopularC, getB, getS])
   }
 
   componentDidMount()
