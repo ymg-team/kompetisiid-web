@@ -7,6 +7,7 @@
     "start": "yarn dev:server",
     "prepublish": "yarn prod:build",
     "webpack": "yarn dev:build-client",
+    "lint": "eslint src",
     "test": "jest",
     "test:watch": "jest --watch",
     "postinstall": "yarn prod:build",
@@ -20,7 +21,7 @@
     "release": "standard-version",
     "release:beta": "standard-version -p beta"
   },
-  "pre-commit": "eslint --ignore-path .gitignore",
+  "pre-commit": "lint",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/idmore/kompetisiid-web.git"
@@ -36,6 +37,7 @@
   },
   "homepage": "https://github.com/idmore/kompetisiid-web#README",
   "dependencies": {
+    "babel-eslint": "^8.2.1",
     "bluebird": "3.4.6",
     "compression": "1.6.2",
     "cookie-parser": "1.4.3",
