@@ -27,7 +27,7 @@ export function httpException(code, message='', abort = false)
                   message: message ? message : 'forbidden access',
                   code: 403
                 }
-            };
+            }
         case 500 :
         default :
             return {
@@ -35,6 +35,6 @@ export function httpException(code, message='', abort = false)
                 message: message ? message : 'internal server error',
                 code
               }
-            };
+            }
     }
 }

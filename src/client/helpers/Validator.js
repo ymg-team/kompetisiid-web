@@ -10,7 +10,7 @@ export default {
 
     validate(props)
     {
-        let message = '', is_valid = true, result;
+        let message = '', is_valid = true, result
 
         //is number
         if(props.type === 'number' && !Number.isInteger(parseInt(props.value)))
@@ -70,10 +70,10 @@ export default {
 
     validateFile(props)
     {
-        let message = '', is_valid = true, result;
+        let message = '', is_valid = true, result
 
         //default max size 2MB
-        let max = props.max ? props.max : 2000000;
+        let max = props.max ? props.max : 2000000
 
         //max upload file size
         if (props.file.size > max) {
@@ -113,7 +113,7 @@ export default {
             this.formdata.find(m => {
                 if(m.name === n)
                 {
-                    state['validate_'+n] = m;
+                    state['validate_'+n] = m
                 }
             })
         })

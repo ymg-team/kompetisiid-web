@@ -7,7 +7,7 @@
     "start": "yarn dev:server",
     "prepublish": "yarn prod:build",
     "webpack": "yarn dev:build-client",
-    "lint": "eslint src",
+    "lint": "eslint src --ext .js --ext .jsx",
     "test": "jest",
     "test:watch": "jest --watch",
     "postinstall": "yarn prod:build",

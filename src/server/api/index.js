@@ -2,7 +2,7 @@ import express from 'express'
 
 const router = express.Router()
 
-router.use('/', require('./routes'));
+router.use('/', require('./routes'))
 router.use('*', (req, res) => {
   res.json({
     meta: {

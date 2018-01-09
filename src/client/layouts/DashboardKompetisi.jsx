@@ -33,6 +33,6 @@ export default class DashboardKompetisi extends Component
                 
             </div>
 
-        )
+        );
     }
 }
