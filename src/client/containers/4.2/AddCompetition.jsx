@@ -4,7 +4,7 @@ import Subheader from '../../components/4.2/Subheader'
 import Helmet from '../../components/Helmet'
 
 export const title = 'Pasang Kompetisi'
-export const desc = 'Apakah kamu adalah penyelenggara kompetisi? jika iya, kamu bisa menggunakan fitur ini untuk mempulikasi kompetisimu di KompetisiIndonesia. Ada 2 cara untuk pasang kompetisi, yaitu "Pasang Cepat" dan "Pasang Komplit" untuk saat ini hanya "Pasang Cepat" yang bisa kamu coba.'
+export const desc = 'Apakah kamu adalah penyelenggara kompetisi? jika iya, kamu bisa menggunakan fitur ini untuk mempulikasi kompetisimu di KompetisiIndonesia. Ada 2 cara untuk pasang kompetisi, yaitu "Kirim Kompetisi" dan "Pasang Kompetisi" untuk saat ini hanya "Kirim Kompetisi" yang bisa kamu coba.'
 
 export default class AddCompetition extends Component 
 {
@@ -42,7 +42,7 @@ export default class AddCompetition extends Component
                                     <div className="col-md-6 align-center">
                                         <h2>Pasang Sendiri</h2>
                                         <p className="text-muted">Login dan pasang sendiri kompetisimu melalui dashboard member. Kamu akan lebih mudah memanage kompetisi lainnya, diskusi dan memberikan pengumuman kepada para pengunjung. </p>
-                                        <a href='javascript:;' onClick={() => {fullalert('warning', 'Maaf untuk saat ini, fitur ini belum tersedia')}} className="btn btn-white" title="klik untuk pasang cepat">Klik untuk pasang kompetisi</a>
+                                        <a href='javascript:;' onClick={() => {fullalert('warning', 'Login terlebih dahulu untuk menggunakan fitur ini')}} className="btn btn-white" title="klik untuk pasang cepat">Klik untuk pasang kompetisi</a>
                                     </div>
                                 </div>
                             </div>

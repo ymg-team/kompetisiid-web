@@ -19,7 +19,7 @@ export default class HomeCategories extends PureComponent
                     <h3>Berikut beberapa ketegori kompetisi yang bisa diikuti disini.</h3>
                     </div>
                 </div>
-                <div className='col-md-12' style={{wordBreak: 'break-all'}}>
+                <div className='col-md-12' style={{wordBreak: 'break-word'}}>
                     <div className='row'>
                         {
                             this.props.meta && this.props.meta.code == 200 ?
