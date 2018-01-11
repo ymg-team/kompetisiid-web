@@ -10,13 +10,13 @@ import Announcements from '../../components/4.2/competition-detail/Announcements
 import Contacts from '../../components/4.2/competition-detail/Contacts'
 import Share from '../../components/4.2/competition-detail/Share'
 import Discussions from '../../components/4.2/competition-detail/Discussions'
-import {Link} from 'react-router'
+import { Link } from 'react-router'
 import NextPrev from '../../components/4.2/navigations/NextPrev'
 import ErrorCard from '../../components/4.2/cards/ErrorCard'
 
-import {toCamelCase} from 'string-manager'
-import {getDetail, getRelated} from '../../../store/kompetisi/actions'
-import {connect} from 'react-redux'
+import { toCamelCase } from 'string-manager'
+import { getDetail, getRelated } from '../../../store/kompetisi/actions'
+import { connect } from 'react-redux'
 
 class CompetitionDetail extends Component 
 {
@@ -38,6 +38,8 @@ class CompetitionDetail extends Component
       this.setState({encid: np.params.encid})
       if(this.props.params.encid != np.params.encid)
       {
+        if(window != undefined) 
+          window.scrollTo(0,0)
         this.reqData(np)
         this.reqRelatedCompetitions(np)
       } 
@@ -58,14 +60,15 @@ class CompetitionDetail extends Component
   reqData(props)
   {
     const {encid} = props.params
-    if(props.route.name != 'competition_regulation')  window.scrollTo(0,0)
+    if(props.route.name != 'competition_regulation') window.scrollTo(0,0)
     if(!props.kompetisi.detail[encid]) this.props.dispatch(getDetail(encid))
   }
 
   reqRelatedCompetitions(props)
   {
     const {encid} = props.params
-    if(!props.kompetisi.data[`related_${encid}`]) this.props.dispatch(getRelated(encid, `related_${encid}`))
+    if(!props.kompetisi.data[`related_${encid}`]) 
+      this.props.dispatch(getRelated(encid, `related_${encid}`))
   }
 
   render()
