@@ -95,26 +95,35 @@ class BrowseCompetition extends Component
     const {data, categories} = this.props.kompetisi
     const filter = generateFilter(this.state)
     const query = queryToObj(this.props.location.search.replace('?', '')) || {}
-    console.log(query)
 
-    let title= 'Jelajah - Kompetisi.id'
+    let title= 'Jelajah Kompetisi'
     let description = 'Jelajahi kompetisi dari berbagai macam kategori di Kompetisi Indonesia'
     
+    // jelajah kompetisi by kategori
+    if(main_kat) {
+        title += ` di Kategori "${categories.data[main_kat].main_kat}"`
+    }
+
+    // jelajah kompetisi by sub kategori
+    if(sub_kat) {
+        title += ` Subkategori "${categories.data[main_kat].subkat[sub_kat].sub_kat}"`
+    }
+ 
     //jelajah kompetisi by tag
     if(tag) {
-        title = `Jelajah Tag "${tag}" - kompetisi.id`
+        title += ` dengan Tag "${tag}"`
         description = `Jelajahi kompetisi berdasarkan tag ${tag}`
     }
 
     //jelajah kompetisi by username
     if(username) {
-        title = `Kompetisi dipasang oleh "${username}" - kompetisi.id`
-        description = `Jelajahi kompetisi yang dipasang oleh ${username}`
+        title += ` Dipasang oleh "${username}"`
+        description = `Jelajahi kompetisi yang dipasang oleh "${username}"`
     }
 
     if(query.mediapartner == 1)
     {
-        title = `Kompetisi Media Partner di - Kompetisi.id`
+        title += ` Media Partner`
         description = `Jelajahi kompetisi yang menjadikan Kompetisi.id sebagai media partner`
     }
 
@@ -182,7 +191,17 @@ class BrowseCompetition extends Component
               {
                 categories.meta && categories.meta.code == 200 ?
                   <ul className='vertical-menu list-categories'>
-                    <li><a href='javascript:;' onClick={() => this.setState({main_kat: ''}, () => {modal('close', 'select-main-kat')})} className='text-muted'>semua kategori</a></li>
+                    <li>
+                        <a 
+                            href='javascript:;' 
+                            onClick={() => this.setState({main_kat: ''}, () => {
+                                modal('close', 'select-main-kat')
+                                this.context.router.push('/browse')
+                            })} 
+                            className='text-muted'>
+                            semua kategori
+                        </a>
+                    </li>
                     {categories.data.map((n, key) => {
                       return <li key={key}>
                         <a 

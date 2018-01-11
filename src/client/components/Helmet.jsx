@@ -7,11 +7,11 @@ const Helmet = (props) => {
 
     return(
         <ReactHelmet
-            title={toCamelCase(title) + ' - Kompetisi Indonesia'}
+            title={toCamelCase(title) + ' - Kompetisi.id'}
             meta={[
                 {'name': 'description', 'content': description},
                 {'property': 'og:type', 'content': type || 'article'},
-                {'property': 'og:title', 'content': toCamelCase(title) + ' - Kompetisi Indonesia'},
+                {'property': 'og:title', 'content': toCamelCase(title) + ' - Kompetisi.id'},
                 {'property': 'og:url', 'content': url},
                 {'property': 'og:image', 'content': image},
                 {'property': 'og:description', 'content': description},
@@ -29,7 +29,7 @@ const Helmet = (props) => {
 
 Helmet.defaultProps = {
     title: 'Ada hadiah setiap hari',
-    description: 'Kompetisi platform untuk warga Indonesia',
+    description: 'Platform Kompetisi online untuk warga Indonesia',
     image: 'http://kompetisi.id/assets/icons/icon-128x128.png'
 }
 
