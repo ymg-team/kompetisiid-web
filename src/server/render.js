@@ -4,9 +4,9 @@
 import express from 'express'
 import React from 'react'
 import ReactDOMServer from 'react-dom/server'
-import {RouterContext, match} from 'react-router'
-import {createLocation} from 'history/LocationUtils'
-import {createMemoryHistory} from 'history'
+import { RouterContext, match } from 'react-router'
+import { createLocation } from 'history/LocationUtils'
+import { createMemoryHistory } from 'history'
 import routes from '../client/routes'
 import version from '../config/version'
 import store from '../config/store'
@@ -149,16 +149,13 @@ function getScript(state)
     <script src="${ webpackAssets.vendor.js }"></script>
     <script src="${ webpackAssets.app.js }"></script>
     ${process.env.NODE_ENV === 'production' ? getTrackingScript() : ''}
-    ${getAdsenseScript()}
     `
 }
 
 // adsense script
 function getAdsenseScript()
 {
-    return `
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    `
+    return ``
 }
 
 // tracking script

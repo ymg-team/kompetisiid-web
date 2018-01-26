@@ -20,7 +20,7 @@ if(process.env.NODE_ENV === 'production')
 
 App.use(cookieParser())
 App.use(cookieSession({
-	secret: 'kindoyasds6&^USdgsudsiuGs6d6',
+	secret: process.env.APP_KEY,
 	name: 'ki_session',
 	maxAge: 12 * 30 * 24 * 60 * 60 * 1000
 }))
@@ -41,7 +41,7 @@ const staticOptions = function()
 
 // global midleware
 App.use((req, res, next) => {
-    if(!req.session.token) req.session.token = 'ki-324892374skljfhlsiudfh&6'
+    if(!req.session.token) req.session.token = process.env.APP_KEY
     // log
     const debugReq = require('debug')('app:req')
     debugReq(`${req.method} ${req.originalUrl} at ${new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '')}`)
