@@ -78,23 +78,31 @@ class CompetitionDetail extends Component
     const {active_tab} = this.props.route
     let NextPrevProps = {}, helmetdata = {}  
 
+    // default helmet data
+    helmetdata = {
+      script: [
+        // addthis script
+        {type: 'text/javascript', src: '//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5a6acf36d357ea08#async=1'}
+      ]
+    }
+
     // generate helmet data 
     if(detail[encid] && detail[encid].meta && parseInt(detail[encid].meta.code) === 200)
     {
-       setTimeout(() => {if(typeof window != 'undefined'){handleScrollNav()}}, 2000)
-       helmetdata = {
-            title: toCamelCase(`${tab[this.props.route.active_tab  - 1].name + ' ' || ''}${detail[encid].data.title}`),
-            description: detail[encid].data.sort,
-            image: detail[encid].data.poster.original,
-            url: `http://kompetisi.id/competition/${detail[encid].data.id_kompetisi}/regulations/${detail[encid].data.nospace_title}`,
-            script: []
-      }
-
+      setTimeout(() => {if(typeof window != 'undefined'){handleScrollNav()}}, 2000)
+      helmetdata = Object.assign(helmetdata, {
+        title: toCamelCase(`${tab[this.props.route.active_tab  - 1].name + ' ' || ''}${detail[encid].data.title}`),
+        description: detail[encid].data.sort,
+        image: detail[encid].data.poster.original,
+        url: `http://kompetisi.id/competition/${detail[encid].data.id_kompetisi}/regulations/${detail[encid].data.nospace_title}`
+      })
+            
       // add jsonld
       helmetdata.script.push({
-          type: 'application/ld+json',
-          innerHTML: generateJsonld(detail[encid].data, helmetdata.url)
+        type: 'application/ld+json',
+        innerHTML: generateJsonld(detail[encid].data, helmetdata.url)
       })
+      
 
       // nextprev props 
       if(Object.keys(detail[encid].data.next).length > 0)
@@ -112,12 +120,6 @@ class CompetitionDetail extends Component
           link: `/competition/${detail[encid].data.prev.id_kompetisi}/regulations/${detail[encid].data.prev.nospace_title}`
         }
       }
-    }else
-    {
-        helmetdata = {
-            title: 'kompetisi tidak ditemukan',
-            description: 'kompetisi tidak ditemukan'
-        }
     }
     
     return(
