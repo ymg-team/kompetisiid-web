@@ -10,7 +10,7 @@ const Regulations = (props) => {
             <hr />
             <article dangerouslySetInnerHTML={{__html: html}} />
             <br />
-            <a href={`/competition/${encid}/source/${nospace_title}`} target='_blank'>kunjungi website kompetisi</a>
+            <a target='_blank' href={`/competition/${encid}/source/${nospace_title}`}>kunjungi website kompetisi</a>
             <hr />
             <Tags tags={props.tags} />
         </div>
