@@ -11,7 +11,6 @@ import {connect} from 'react-redux'
 import {datetimeToRelativeTime} from '../../helpers/DateTime'
 import {truncate} from 'string-manager'
 
-
 export default class NewsDetail extends Component
 {
     static fetchData({params, store})
@@ -22,8 +21,9 @@ export default class NewsDetail extends Component
     componentDidMount()
     {
         window.scrollTo(0,0)
-        this.generateFbComment()
         this.reqData(this.props)
+        this.resetDisquss(this.props)
+        
     }
 
     componentWillReceiveProps(np)
@@ -31,30 +31,35 @@ export default class NewsDetail extends Component
         const {encid} = np.params
         if((encid != this.props.params.encid) || np.berita.detail[encid].meta)
         {
+            window.scrollTo(0,0)
             setTimeout(() => {
-                this.generateFbComment()
+                this.resetDisquss(np)
             }, 200)
         }
         this.reqData(np)
     }
 
-    generateFbComment()
+    resetDisquss(props)
     {
-        if(window && window.FB)
-        {
-            console.log('reload facebook api')
-            FB.XFBML.parse()
-        }
+        const url = `${process.env.FRONT_HOST}/news/${props.params.encid}/${props.params.title}`
+        // disquss reset
+        DISQUS.reset({
+            reload: true,
+            config: function () {  
+                this.page.identifier = url 
+                this.page.url = url
+            }
+        })
     }
 
     reqData(props)
     {
-        const {encid} = props.params
+        const { encid } = props.params
         if(!this.props.berita.detail[encid])
         {
             this.props.dispatch(BeritaActions.fetchBeritaDetail(encid))
         }
-        if(!this.props.berita.data[`related_${encid}`])
+        if(!this.props.berita.data[`related_${ encid }`])
         {
             this.props.dispatch(BeritaActions.relatedBerita(encid))
         }
@@ -69,8 +74,7 @@ export default class NewsDetail extends Component
                 return <span key={key}>
                         <a
                             className='btn btn-white'
-                            href={`/news/tag/${n}`}
-                        >
+                            href={`/news/tag/${n}`}>
                         {n}
                         </a>
                     {' '}
@@ -83,35 +87,32 @@ export default class NewsDetail extends Component
 
     render()
     {
-        const {encid} = this.props.params
+        const {encid, title} = this.props.params
         const {detail, data}  = this.props.berita
-        let helmetdata = {}
+        let helmetdata = {
+            title: 'Berita Kompetisi.id',
+            description: 'Berita dari Kompetisi.id',
+            url: `${process.env.FRONT_HOST}/news/${encid}/${title}`,
+            script: [
+                // disquss
+                {type: 'text/javascript', src: 'https://kompetisiindonesia.disqus.com/embed.js', 'data-timestamp': +new Date()},
+            ]
+        }
 
         if(detail[encid] && detail[encid].meta && detail[encid].meta.code === 200 )
         {
-            helmetdata = {
+            helmetdata = Object.assign(helmetdata, {
                 title: detail[encid].data.title,
                 description: detail[encid].data.contenttext,
                 url: `https://kompetisi.id/news/${detail[encid].data.id}/${detail[encid].data.nospace_title}`,
                 image: detail[encid].data.image.original,
-                script: [],
-                link: [
-                    {rel:'canonical', href:`https://kompetisi.id/news/${detail[encid].data.id}/${detail[encid].data.nospace_title}`}
-                ]
-            }
+            }) 
 
             //add jsonld
             helmetdata.script.push({
                 type: 'application/ld+json',
                 innerHTML: generateJsonld(detail[encid].data, helmetdata.url)
             })
-        }else
-        {
-            helmetdata = {
-                title: 'Berita tidak ditemukan',
-                description: 'Berita tidak ditemukan',
-                url: `http://kompetisi.id`
-            }
         }
         
         return(
@@ -177,9 +178,7 @@ export default class NewsDetail extends Component
                                          {...data[`related_${encid}`]}
                                     />
                                     <div className='col-md-6 col-md-push-3 col-md-pull-3'>
-                                        <div className='row comments' id='comments'>
-                                            <div className='fb-comments' data-width='100%' data-href={helmetdata.url} data-numpost='7' />
-                                        </div>
+                                        <div style={{paddingBottom:'50px'}} className='row comments' id='disqus_thread' />
                                     </div>
                                 </div>
                             </div>

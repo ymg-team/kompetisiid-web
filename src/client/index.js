@@ -16,4 +16,4 @@ const App = () => (
     </Provider>
 )
 
-ReactDOM.render(<App />, document.getElementById('root'))
+ReactDOM.render(<App title="Judul" />, document.getElementById('root'))
