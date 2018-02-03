@@ -81,6 +81,8 @@ class CompetitionDetail extends Component
     // default helmet data
     helmetdata = {
       script: [
+        // disquss
+        {type: 'text/javascript', src: 'https://kompetisiindonesia.disqus.com/embed.js', 'data-timestamp': +new Date()},
         // addthis script
         {type: 'text/javascript', src: '//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5a6acf36d357ea08#async=1'}
       ]
@@ -94,7 +96,7 @@ class CompetitionDetail extends Component
         title: toCamelCase(`${tab[this.props.route.active_tab  - 1].name + ' ' || ''}${detail[encid].data.title}`),
         description: detail[encid].data.sort,
         image: detail[encid].data.poster.original,
-        url: `http://kompetisi.id/competition/${detail[encid].data.id_kompetisi}/regulations/${detail[encid].data.nospace_title}`
+        url: `${process.env.FRONT_HOST}/competition/${detail[encid].data.id_kompetisi}/regulations/${detail[encid].data.nospace_title}`
       })
             
       // add jsonld

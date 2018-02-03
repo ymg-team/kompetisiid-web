@@ -1,11 +1,10 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import Card from '../cards/NewsListCard'
 import Loader from '../loaders/NewsLoader'
-import {Link} from 'react-router'
+import { Link } from 'react-router'
 
 export default class NewsBox extends Component 
 {
-
     generateList(n)
     {
         return n.map((n, key) => {

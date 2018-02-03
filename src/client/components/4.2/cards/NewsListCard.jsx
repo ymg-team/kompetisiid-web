@@ -5,17 +5,17 @@ const NewsListCard = (props) => {
     const {n} = props
     const target = `/news/${n.id}/${n.nospace_title}`
     return(
-        <div className="col-md-4">
-            <div className="card-competition no-border">
+        <div className='col-md-4'>
+            <div className='card-competition no-border'>
                 <Link to={target}>
-                    <div className="card-competition--poster">
+                    <div className='card-competition--poster'>
                         <img src={n.image ? n.image.small : `/assets/4.2/img/slider/slider-2.png`} />
                     </div>
                 </Link>
-                <div className="card-competition--inside">
+                <div className='card-competition--inside'>
                     <Link to={target}>
                         <h3>{n.title}</h3>
-                        <small className="text-muted">{n.created_at}</small>
+                        <small className='text-muted'>{n.created_at}</small>
                     </Link>
                     <br />
                     <small>
@@ -24,8 +24,8 @@ const NewsListCard = (props) => {
                         <Link to={`/${n.username}`}>{n.username}</Link>
                     </small>
                         <br />
-                    <a className="muted" href="#">
-                        <img className="avatar" src={`/assets/4.2/img/default-avatar.jpg`} />
+                    <a className='muted' href='#'>
+                        <img className='avatar' src={`/assets/4.2/img/default-avatar.jpg`} />
                     </a>
                 </div>
             </div>
