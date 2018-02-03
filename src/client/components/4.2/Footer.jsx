@@ -40,9 +40,9 @@ const Footer = () => (
                         <small className='footer-copyright-text'>&copy; 2017 - now by Kompetisi Indonesia<br />DIY, Indonesia</small></div>
                     <div className='col-md-6'>
                     <ul className='horizontal-menu pull-right social-media'>
-                        <li><a href='https://facebook.com/kompetisiindo' target='_blank'><i className='fa fa-facebook' /></a></li>
-                        <li><a href='https://twitter.com/kompetisiindo' target='_blank'><i className='fa fa-twitter' /></a></li>
-                        <li><a href='https://instagram.com/kompetisiindo' target='_blank'><i className='fa fa-instagram' /></a></li>
+                        <li><a href='https://facebook.com/kompetisiid' target='_blank'><i className='fa fa-facebook' /></a></li>
+                        <li><a href='https://twitter.com/_kompetisiid' target='_blank'><i className='fa fa-twitter' /></a></li>
+                        <li><a href='https://instagram.com/kompetisiid' target='_blank'><i className='fa fa-instagram' /></a></li>
                         <li><a href='/feed' target='_blank'><i className='fa fa-rss' /></a></li>
                     </ul>
                     </div>
