@@ -13,6 +13,7 @@ import Discussions from '../../components/4.2/competition-detail/Discussions'
 import { Link } from 'react-router'
 import NextPrev from '../../components/4.2/navigations/NextPrev'
 import ErrorCard from '../../components/4.2/cards/ErrorCard'
+import Host from '../../../config/host'
 
 import { toCamelCase } from 'string-manager'
 import { getDetail, getRelated } from '../../../store/kompetisi/actions'
@@ -96,7 +97,7 @@ class CompetitionDetail extends Component
         title: toCamelCase(`${tab[this.props.route.active_tab  - 1].name + ' ' || ''}${detail[encid].data.title}`),
         description: detail[encid].data.sort,
         image: detail[encid].data.poster.original,
-        url: `${process.env.FRONT_HOST}/competition/${detail[encid].data.id_kompetisi}/regulations/${detail[encid].data.nospace_title}`
+        url: `${Host[process.env.NODE_ENV].front}/competition/${detail[encid].data.id_kompetisi}/regulations/${detail[encid].data.nospace_title}`
       })
             
       // add jsonld

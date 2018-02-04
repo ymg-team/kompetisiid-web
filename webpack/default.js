@@ -27,8 +27,7 @@ module.exports = {
     }),
     new webpack.DefinePlugin({
         'process.env': {
-            NODE_ENV: JSON.stringify(process.env.NODE_ENV || 'development'),
-            FRONT_HOST: JSON.stringify(process.env.FRONT_HOST || 'kompetisi.id')
+            NODE_ENV: JSON.stringify(process.env.NODE_ENV || 'development')
         } 
     }),
 ],

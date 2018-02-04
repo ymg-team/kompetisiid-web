@@ -2,6 +2,7 @@ import request from 'request'
 import { httpException } from '../../store/helpers/Exceptions'
 import * as Url from './url'
 import fs from 'fs'
+import Host from '../../config/host'
 
 /**
  * function to get data from API
@@ -27,7 +28,7 @@ export function requestAPI(method='GET', endpoint='', params={}, callback)
     //set options
     var options = {
         method: method,
-        uri: process.env.API_HOST+endpoint,
+        uri: Host[process.env.NODE_ENV].api+endpoint,
         timeout: 60000,
         headers: {
             token,
@@ -99,7 +100,7 @@ export function requestAPIV2(method='GET', endpoint='', params={})
     //set options
     var options = {
         method: method,
-        uri: process.env.API_HOST+endpoint,
+        uri: Host[process.env.NODE_ENV].api+endpoint,
         timeout: 60000,
         headers: {
             token,

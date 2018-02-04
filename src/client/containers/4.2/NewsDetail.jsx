@@ -6,6 +6,7 @@ import Author from '../../components/4.2/cards/NewsAuthorCard'
 import NewsBox from '../../components/4.2/boxs/NewsBox'
 import Loader from '../../components/4.2/loaders/DefaultLoader'
 import ErrorCard from '../../components/4.2/cards/ErrorCard'
+import Host from '../../../config/host'
 
 import {connect} from 'react-redux'
 import {datetimeToRelativeTime} from '../../helpers/DateTime'
@@ -41,7 +42,7 @@ export default class NewsDetail extends Component
 
     resetDisquss(props)
     {
-        const url = `${process.env.FRONT_HOST}/news/${props.params.encid}/${props.params.title}`
+        const url = `${Host[process.env.NODE_ENV].front}/news/${props.params.encid}/${props.params.title}`
         // disquss reset
         DISQUS.reset({
             reload: true,
@@ -92,7 +93,7 @@ export default class NewsDetail extends Component
         let helmetdata = {
             title: 'Berita Kompetisi.id',
             description: 'Berita dari Kompetisi.id',
-            url: `${process.env.FRONT_HOST}/news/${encid}/${title}`,
+            url: `${Host[process.env.NODE_ENV].front}/news/${encid}/${title}`,
             script: [
                 // disquss
                 {type: 'text/javascript', src: 'https://kompetisiindonesia.disqus.com/embed.js', 'data-timestamp': +new Date()},
