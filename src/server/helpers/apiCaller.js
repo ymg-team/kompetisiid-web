@@ -6,6 +6,10 @@ import Host from '../../config/host'
 import Https from 'https'
 
 const API_HOST = Host[process.env.NODE_ENV].api
+// generate agent
+const agent = new Https.Agent({
+    rejectUnauthorized: false
+})
 
 /**
  * function to get data from API
@@ -27,11 +31,6 @@ export function requestAPI(method='GET', endpoint='', params={}, callback)
         endpoint = `${endpoint}?${Url.serialize(params.query)}`
         delete params.query
     }
-
-    // generate agent
-    const agent = new Https.Agent({
-        rejectUnauthorized: false
-    })
 
     //set options
     var options = {
@@ -112,6 +111,7 @@ export function requestAPIV2(method='GET', endpoint='', params={})
         method: method,
         uri: Host[process.env.NODE_ENV].api+endpoint,
         timeout: 60000,
+        agent,
         headers: {
             token,
             // 'Content-Type' : 'json',
