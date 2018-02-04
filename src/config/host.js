@@ -5,7 +5,8 @@ export default {
     api: process.env.API_HOST || 'https://api.ki.local'
   },
   production: {
-    production: 'https://kompetisi.id',
+    // front: 'https://ki.local',
+    front: 'https://kompetisi.id',
     media: 'https://media.kompetisi.id',
     api: 'https://api.kompetisi.id'
   }
