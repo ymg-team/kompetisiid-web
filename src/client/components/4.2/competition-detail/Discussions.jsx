@@ -18,15 +18,21 @@ export default class Discussions extends Component
 
     componentDidMount()
     {
-        console.log(this.props.link)
-        // disquss render
-        DISQUS.reset({
-            reload: true,
-            config: function () {  
-                this.page.identifier = this.props.link  
-                this.page.url = this.props.link
-            }
-        })
+        setTimeout(() => {
+            this.resetDisqus()
+        }, 1000)
+    }
+
+    resetDisqus()
+    {
+        if(window.DISQUS)
+            DISQUS.reset({
+                reload: true,
+                config: function () {  
+                    this.page.identifier = this.props.link  
+                    this.page.url = this.props.link
+                }
+            })
     }
 
     render()

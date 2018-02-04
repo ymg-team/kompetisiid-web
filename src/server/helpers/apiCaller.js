@@ -30,9 +30,6 @@ export function requestAPI(method='GET', endpoint='', params={}, callback)
 
     // generate agent
     const agent = new Https.Agent({
-        host: API_HOST,
-        port: 443,
-        path: '/',
         rejectUnauthorized: false
     })
 

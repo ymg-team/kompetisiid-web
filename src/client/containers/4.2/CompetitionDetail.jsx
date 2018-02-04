@@ -15,6 +15,7 @@ import NextPrev from '../../components/4.2/navigations/NextPrev'
 import ErrorCard from '../../components/4.2/cards/ErrorCard'
 import Host from '../../../config/host'
 
+import { pushScript } from '../../helpers/DomEvents'
 import { toCamelCase } from 'string-manager'
 import { getDetail, getRelated } from '../../../store/kompetisi/actions'
 import { connect } from 'react-redux'
@@ -33,6 +34,14 @@ class CompetitionDetail extends Component
           encid: this.props.params.encid
       }
   }
+  
+  componentDidMount()
+  {
+    if(this.props.route.active_tab == 1) window.scrollTo(0,0)
+    this.reqData(this.props)
+    this.reqRelatedCompetitions(this.props)
+    pushScript('https://kompetisiindonesia.disqus.com/embed.js')
+  }
 
   componentWillReceiveProps(np)
   {
@@ -44,13 +53,6 @@ class CompetitionDetail extends Component
         this.reqData(np)
         this.reqRelatedCompetitions(np)
       } 
-  }
-
-  componentDidMount()
-  {
-    if(this.props.route.active_tab == 1) window.scrollTo(0,0)
-    this.reqData(this.props)
-    this.reqRelatedCompetitions(this.props)
   }
 
   componentWillUnmount()
@@ -74,18 +76,18 @@ class CompetitionDetail extends Component
 
   render()
   {
-    const {encid} = this.state
-    const {detail,related,pengumuman} = this.props.kompetisi
-    const {active_tab} = this.props.route
+    const { encid } = this.state
+    const { detail,related,pengumuman } = this.props.kompetisi
+    const { active_tab } = this.props.route
     let NextPrevProps = {}, helmetdata = {}  
 
     // default helmet data
     helmetdata = {
       script: [
         // disquss
-        {type: 'text/javascript', src: 'https://kompetisiindonesia.disqus.com/embed.js', 'data-timestamp': +new Date()},
+        // {type: 'text/javascript', src: 'https://kompetisiindonesia.disqus.com/embed.js', 'data-timestamp': +new Date()},
         // addthis script
-        {type: 'text/javascript', src: '//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5a6acf36d357ea08#async=1'}
+        // {type: 'text/javascript', src: '//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5a6acf36d357ea08#async=1'}
       ]
     }
 

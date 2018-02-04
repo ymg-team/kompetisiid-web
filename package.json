@@ -4,7 +4,7 @@
   "description": "platform untuk mengikuti dan berbagi kompetisi",
   "main": "dist-server/server/index.js",
   "scripts": {
-    "start": "npm run dev:server",
+    "start": "npm run server:dev",
     "prepublish": "npm run prod:build",
     "build:watch": "NODE_ENV=development webpack --watch --progress",
     "build:prod": "rimraf dist-server && rimraf dist-client && npm run build-client:prod && npm run build-server:prod && npm run zip",
