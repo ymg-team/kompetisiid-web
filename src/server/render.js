@@ -48,7 +48,7 @@ module.exports = App.use((req, res) => {
                 )
             }catch(e)
             {
-                console.error(e)
+                console.error('error rendering :', e)
                 return res.status(500).send('error rendering')
             }
             

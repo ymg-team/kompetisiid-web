@@ -6,8 +6,8 @@ export default {
   },
   production: {
     // front: 'https://ki.local',
-    front: 'http://kompetisi.id',
+    front: 'https://kompetisi.id',
     media: 'https://media.kompetisi.id',
-    api: 'http://api.kompetisi.id'
+    api: 'https://api.kompetisi.id'
   }
 }
