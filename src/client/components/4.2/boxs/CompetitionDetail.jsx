@@ -1,7 +1,7 @@
 import React from 'react'
-import {Link} from 'react-router'
-import {openInNewTab} from '../../../helpers/LinkGenerator'
-import {eventFire} from '../../../helpers/DomEvents'
+import { Link } from 'react-router'
+import { openInNewTab } from '../../../helpers/LinkGenerator'
+import { eventFire } from '../../../helpers/DomEvents'
 import copy from 'copy-to-clipboard'
 import BtnJoin from '../buttons/BtnJoin'
 

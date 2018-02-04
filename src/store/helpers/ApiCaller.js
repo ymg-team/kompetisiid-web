@@ -1,5 +1,5 @@
 import superagent from 'superagent'
-import {httpException} from './Exceptions'
+import { httpException } from './Exceptions'
 
 export function requestApi(method, path, params = {}, callback)
 {

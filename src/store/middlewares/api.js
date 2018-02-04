@@ -2,7 +2,8 @@
  * Created by yussan on 27/10/16.
  */
 import Promise from 'bluebird'
-import {requestApi} from '../helpers/ApiCaller'
+import { requestApi } from '../helpers/ApiCaller'
+import Host from '../../config/host'
 
 export const CALL_API = Symbol('CALL_API')
 
@@ -26,8 +27,7 @@ export default store => next => action => {
             })
         }
         //completing request
-        const FRONT_HOST = process.env.FRONT_HOST ? process.env.FRONT_HOST : ''
-        requestApi(method, FRONT_HOST+url, params, json => {
+        requestApi(method, Host[process.env.NODE_ENV].front+url, params, json => {
             // if(method.toLowerCase() === 'post') openNotif(json)
 
             next({

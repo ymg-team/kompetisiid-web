@@ -6,10 +6,12 @@ import Author from '../../components/4.2/cards/NewsAuthorCard'
 import NewsBox from '../../components/4.2/boxs/NewsBox'
 import Loader from '../../components/4.2/loaders/DefaultLoader'
 import ErrorCard from '../../components/4.2/cards/ErrorCard'
+import Host from '../../../config/host'
 
-import {connect} from 'react-redux'
-import {datetimeToRelativeTime} from '../../helpers/DateTime'
-import {truncate} from 'string-manager'
+import { pushScript } from '../../helpers/DomEvents'
+import { connect } from 'react-redux'
+import { datetimeToRelativeTime } from '../../helpers/DateTime'
+import { truncate } from 'string-manager'
 
 export default class NewsDetail extends Component
 {
@@ -21,35 +23,33 @@ export default class NewsDetail extends Component
     componentDidMount()
     {
         window.scrollTo(0,0)
+        pushScript('https://kompetisiindonesia.disqus.com/embed.js')
         this.reqData(this.props)
-        this.resetDisquss(this.props)
-        
     }
 
     componentWillReceiveProps(np)
     {
-        const {encid} = np.params
+        const { encid } = np.params
         if((encid != this.props.params.encid) || np.berita.detail[encid].meta)
         {
             window.scrollTo(0,0)
-            setTimeout(() => {
-                this.resetDisquss(np)
-            }, 200)
+            this.resetDisquss(np)
         }
         this.reqData(np)
     }
 
     resetDisquss(props)
     {
-        const url = `${process.env.FRONT_HOST}/news/${props.params.encid}/${props.params.title}`
-        // disquss reset
-        DISQUS.reset({
-            reload: true,
-            config: function () {  
-                this.page.identifier = url 
-                this.page.url = url
-            }
-        })
+        const url = `${Host[process.env.NODE_ENV].front}/news/${props.params.encid}/${props.params.title}`
+        // disquss reset after 1000ms
+        if(window.DISQUS)
+            DISQUS.reset({
+                reload: true,
+                config: function () {  
+                    this.page.identifier = url 
+                    this.page.url = url
+                }
+            })
     }
 
     reqData(props)
@@ -92,10 +92,10 @@ export default class NewsDetail extends Component
         let helmetdata = {
             title: 'Berita Kompetisi.id',
             description: 'Berita dari Kompetisi.id',
-            url: `${process.env.FRONT_HOST}/news/${encid}/${title}`,
+            url: `${Host[process.env.NODE_ENV].front}/news/${encid}/${title}`,
             script: [
                 // disquss
-                {type: 'text/javascript', src: 'https://kompetisiindonesia.disqus.com/embed.js', 'data-timestamp': +new Date()},
+                // {type: 'text/javascript', src: 'https://kompetisiindonesia.disqus.com/embed.js', 'data-timestamp': +new Date()},
             ]
         }
 
@@ -177,15 +177,17 @@ export default class NewsDetail extends Component
                                     <NewsBox 
                                          {...data[`related_${encid}`]}
                                     />
-                                    <div className='col-md-6 col-md-push-3 col-md-pull-3'>
-                                        <div style={{paddingBottom:'50px'}} className='row comments' id='disqus_thread' />
-                                    </div>
                                 </div>
                             </div>
                         : <ErrorCard {...detail[encid].meta} />
                     : <div className="fullheight"><Loader /></div>               
                 }     
-                { detail[encid] && detail[encid].meta && detail[encid].is_loading ? <Loader /> : null }           
+                { detail[encid] && detail[encid].meta && detail[encid].is_loading ? <Loader /> : null }    
+                {/* comment section */}
+                <div className='col-md-6 col-md-push-3 col-md-pull-3'>
+                    <div style={{padding:'50px 0'}} className='row comments' id='disqus_thread' />
+                </div>
+                {/* end of comment section */}
             </div>
         )
     }
