@@ -3,6 +3,9 @@ import { httpException } from '../../store/helpers/Exceptions'
 import * as Url from './url'
 import fs from 'fs'
 import Host from '../../config/host'
+import Https from 'https'
+
+const API_HOST = Host[process.env.NODE_ENV].api
 
 /**
  * function to get data from API
@@ -25,11 +28,21 @@ export function requestAPI(method='GET', endpoint='', params={}, callback)
         delete params.query
     }
 
+    // generate agent
+    const agent = new Https.Agent({
+        host: API_HOST,
+        port: 443,
+        path: '/',
+        rejectUnauthorized: false
+    })
+
     //set options
     var options = {
         method: method,
-        uri: Host[process.env.NODE_ENV].api+endpoint,
+        uri: API_HOST+endpoint,
         timeout: 60000,
+        // resolved from : https://stackoverflow.com/questions/20433287/node-js-request-cert-has-expired#answer-29397100
+        agent,
         headers: {
             token,
             'Content-Type' : 'json',
