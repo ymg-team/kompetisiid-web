@@ -77,7 +77,9 @@ export function requestAPI(method='GET', endpoint='', params={}, callback)
                 return callback(httpException(500))
             } else //success
             {
-                return callback(JSON.parse(body))
+                if(params.resType === 'json')
+                    return callback(JSON.parse(body))
+                callback(httpException(500, 'error response : json not valid'))
             }
         })
     } catch(err) {
@@ -151,7 +153,8 @@ export function requestAPIV2(method='GET', endpoint='', params={})
                     return resolve(httpException(500))
                 } else //success
                 {
-                    if(params.resType === 'json') return resolve({body: JSON.parse(body), statusCode: response.statusCode})
+                    if(params.resType === 'json') 
+                        return resolve({body: JSON.parse(body), statusCode: response.statusCode})
                     return resolve({body, statusCode: response.statusCode})
                 }
             })
