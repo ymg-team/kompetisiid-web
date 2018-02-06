@@ -71,6 +71,8 @@ export function requestAPI(method='GET', endpoint='', params={}, callback)
     //start request
     try {
         request( options , function(error, response, body){ 
+            console.log('response from api: ',body)
+            
             if(error)
             {
                 console.log('error endpoint :' + endpoint, error)
@@ -150,6 +152,8 @@ export function requestAPIV2(method='GET', endpoint='', params={})
     return new Promise((resolve, reject) => {
         try {
             request( options , function(error, response, body){
+                console.log('response from api: ',body)
+
                 if(error)
                 {
                     console.log('error endpoint :' + endpoint + error)
