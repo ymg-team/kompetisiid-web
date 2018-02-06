@@ -23,10 +23,10 @@ import { connect } from 'react-redux'
 class CompetitionDetail extends Component 
 {
 
-  static fetchData({params, store})
-  {
-    return store.dispatch(getDetail(params.encid))
-  }
+  // static fetchData({params, store})
+  // {
+  //   return store.dispatch(getDetail(params.encid))
+  // }
 
   constructor(props){
       super(props)
