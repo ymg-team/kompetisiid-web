@@ -71,11 +71,11 @@ export function requestAPI(method='GET', endpoint='', params={}, callback)
     //start request
     try {
         request( options , function(error, response, body){ 
-            console.log(`response from ${options.url}: `,body)
+            console.log(`response from ${options.uri}: `,body)
 
             if(error)
             {
-                console.log('error endpoint :' + endpoint, error)
+                console.error('error endpoint :' + endpoint, error)
                 return callback(httpException(500))
             } else //success
             {
@@ -116,7 +116,7 @@ export function requestAPIV2(method='GET', endpoint='', params={})
     //set options
     var options = {
         method: method,
-        uri: Host[process.env.NODE_ENV].api+endpoint,
+        uri: API_HOST.api+endpoint,
         timeout: 60000,
         agent,
         headers: {
@@ -152,11 +152,11 @@ export function requestAPIV2(method='GET', endpoint='', params={})
     return new Promise((resolve, reject) => {
         try {
             request( options , function(error, response, body){
-                console.log('response from api: ',body)
+                console.log(`response from ${options.uri}: `,body)
 
                 if(error)
                 {
-                    console.log(`response from ${options.url}: `,body)
+                    console.error('error endpoint :' + endpoint, error)
                     return resolve(httpException(500))
                 } else //success
                 {
