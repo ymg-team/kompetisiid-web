@@ -7,7 +7,7 @@ import Https from 'https'
 
 const API_HOST = Host[process.env.NODE_ENV].api
 // generate agent
-const agent = new Https.Agent({
+const agentOptions = new Https.Agent({
     rejectUnauthorized: false
 })
 
@@ -33,14 +33,15 @@ export function requestAPI(method='GET', endpoint='', params={}, callback)
     }
 
     //set options
-    var options = {
+    const options = {
         method: method,
         uri: API_HOST+endpoint,
         timeout: 60000,
         // resolved from : https://stackoverflow.com/questions/20433287/node-js-request-cert-has-expired#answer-29397100
-        agent,
+        agentOptions,
         headers: {
             token,
+            'User-Agent': 'request',
             'Content-Type' : 'json',
         },
     }
@@ -71,13 +72,20 @@ export function requestAPI(method='GET', endpoint='', params={}, callback)
     //start request
     try {
         request( options , function(error, response, body){ 
+            // console.log(`response from ${options.uri}: `)
+
             if(error)
             {
-                console.log('error endpoint :' + endpoint, error)
+                console.error('error endpoint :' + endpoint, error)
                 return callback(httpException(500))
             } else //success
             {
-                return callback(JSON.parse(body))
+                const json = isJSON(body)
+                if(json) {
+                    return callback(json)
+                } else {
+                    return callback(httpException(500, 'error response : json not valid'))
+                }
             }
         })
     } catch(err) {
@@ -107,13 +115,14 @@ export function requestAPIV2(method='GET', endpoint='', params={})
     }
 
     //set options
-    var options = {
+    const options = {
         method: method,
-        uri: Host[process.env.NODE_ENV].api+endpoint,
+        uri: API_HOST+endpoint,
         timeout: 60000,
-        agent,
+        agentOptions,
         headers: {
             token,
+            'User-Agent': 'request'
             // 'Content-Type' : 'json',
         },
     }
@@ -145,13 +154,20 @@ export function requestAPIV2(method='GET', endpoint='', params={})
     return new Promise((resolve, reject) => {
         try {
             request( options , function(error, response, body){
+                // console.log(`response from ${options.uri}: `)
+
                 if(error)
                 {
-                    console.log('error endpoint :' + endpoint + error)
+                    console.error('error endpoint :' + endpoint, error)
                     return resolve(httpException(500))
                 } else //success
                 {
-                    if(params.resType === 'json') return resolve({body: JSON.parse(body), statusCode: response.statusCode})
+                    if(params.resType === 'json') {
+                        const json = isJSON(body)
+                        if(json)
+                            return resolve({body:json, statusCode: response.statusCode})
+                    }
+                        
                     return resolve({body, statusCode: response.statusCode})
                 }
             })
@@ -159,4 +175,18 @@ export function requestAPIV2(method='GET', endpoint='', params={})
             return resolve(httpException(500, 'error endpoint :' +endpoint+ ' ,'+ err.message+', '+err.stack))
         }
     })
+}
+
+
+function isJSON(str) {
+    if(typeof str !== 'string') {
+        return false
+    } else {
+        try {
+            const json = JSON.parse(str)
+            return json
+        } catch (e) {
+            return false
+        }
+    }
 }
