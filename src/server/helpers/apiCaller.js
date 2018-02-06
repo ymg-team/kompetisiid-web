@@ -71,8 +71,8 @@ export function requestAPI(method='GET', endpoint='', params={}, callback)
     //start request
     try {
         request( options , function(error, response, body){ 
-            console.log('response from api: ',body)
-            
+            console.log(`response from ${options.url}: `,body)
+
             if(error)
             {
                 console.log('error endpoint :' + endpoint, error)
@@ -156,7 +156,7 @@ export function requestAPIV2(method='GET', endpoint='', params={})
 
                 if(error)
                 {
-                    console.log('error endpoint :' + endpoint + error)
+                    console.log(`response from ${options.url}: `,body)
                     return resolve(httpException(500))
                 } else //success
                 {
