@@ -6,7 +6,7 @@
   "scripts": {
     "start": "npm run server:dev",
     "prepublish": "npm run prod:build",
-    "build:watch": "NODE_ENV=development webpack --watch --progress",
+    "build:watch": "NODE_ENV=production webpack --watch --progress",
     "build:prod": "rimraf dist-server && rimraf dist-client && npm run build-client:prod && npm run build-server:prod && npm run zip",
     "lint": "eslint src --ext .js --ext .jsx",
     "test": "jest",
