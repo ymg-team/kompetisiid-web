@@ -77,9 +77,12 @@ export function requestAPI(method='GET', endpoint='', params={}, callback)
                 return callback(httpException(500))
             } else //success
             {
-                if(params.resType === 'json')
-                    return callback(JSON.parse(body))
-                callback(httpException(500, 'error response : json not valid'))
+                const json = isJSON(body)
+                if(json) {
+                    return callback(json)
+                } else {
+                    return callback(httpException(500, 'error response : json not valid'))
+                }
             }
         })
     } catch(err) {
@@ -153,8 +156,12 @@ export function requestAPIV2(method='GET', endpoint='', params={})
                     return resolve(httpException(500))
                 } else //success
                 {
-                    if(params.resType === 'json') 
-                        return resolve({body: JSON.parse(body), statusCode: response.statusCode})
+                    if(params.resType === 'json') {
+                        const json = isJSON(body)
+                        if(json)
+                            return resolve({body:json, statusCode: response.statusCode})
+                    }
+                        
                     return resolve({body, statusCode: response.statusCode})
                 }
             })
@@ -162,4 +169,18 @@ export function requestAPIV2(method='GET', endpoint='', params={})
             return resolve(httpException(500, 'error endpoint :' +endpoint+ ' ,'+ err.message+', '+err.stack))
         }
     })
+}
+
+
+function isJSON(str) {
+    if(typeof str !== 'string') {
+        return false
+    } else {
+        try {
+            const json = JSON.parse(str)
+            return json
+        } catch (e) {
+            return false
+        }
+    }
 }
