@@ -13,13 +13,13 @@ let handleScroll
 
 class BrowseCompetition extends Component 
 {
-//   static fetchData({store, params, query})
-//   {
-//       const State = generateState(query, params)
-//       const Filter = generateFilter(State)
-//       const Params = generateParams(State)
-//       return store.dispatch(KompetisiActions.fetchJelajah(Params, Filter))
-//   }
+  static fetchData({store, params, query})
+  {
+      const State = generateState(query, params)
+      const Filter = generateFilter(State)
+      const Params = generateParams(State)
+      return store.dispatch(KompetisiActions.fetchJelajah(Params, Filter))
+  }
 
   constructor(props)
   {

@@ -15,17 +15,17 @@ import {connect} from 'react-redux'
 
 class Home extends Component 
 {
-  // static fetchData({store})
-  // {
-  //   // load latest competitions
-  //   const getLatestC = store.dispatch(fetchJelajah({limit:9}, 'home_latest'))
-  //   const getMediaPartnerC = store.dispatch(fetchJelajah({limit:4,mediapartner:1}, 'home_mediapartner'))
-  //   const getPopularC = store.dispatch(fetchJelajah({limit:4, popular: 1}, 'home_popular'))
-  //   const getB = store.dispatch(fetchBerita({limit:6}, 'home_latest'))
-  //   const getS = store.dispatch(getStats())
+  static fetchData({store})
+  {
+    // load latest competitions
+    const getLatestC = store.dispatch(fetchJelajah({limit:9}, 'home_latest'))
+    const getMediaPartnerC = store.dispatch(fetchJelajah({limit:4,mediapartner:1}, 'home_mediapartner'))
+    const getPopularC = store.dispatch(fetchJelajah({limit:4, popular: 1}, 'home_popular'))
+    const getB = store.dispatch(fetchBerita({limit:6}, 'home_latest'))
+    const getS = store.dispatch(getStats())
     
-  //   return Promise.all([getMediaPartnerC, getLatestC,getPopularC, getB, getS])
-  // }
+    return Promise.all([getMediaPartnerC, getLatestC,getPopularC, getB, getS])
+  }
 
   componentDidMount()
   {
