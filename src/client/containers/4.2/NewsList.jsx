@@ -1,14 +1,15 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import Helmet from '../../components/Helmet'
 import Subheader from '../../components/4.2/Subheader'
 import Newsbox from '../../components/4.2/boxs/NewsBox'
 
-import {fetchBerita, fetchBeritaMore} from '../../../store/berita/actions'
+import { fetchBerita, fetchBeritaMore } from '../../../store/berita/actions'
 import {connect} from 'react-redux'
+import { style, duration } from '../../components/Transtition'
+import Transition from 'react-transition-group/Transition'
 
 const Filter = 'list'
 const Limit = 6
-let handleScroll
 
 class NewsList extends Component 
 {
@@ -17,8 +18,19 @@ class NewsList extends Component
         return store.dispatch(fetchBerita({limit:Limit}, Filter))
     }
 
+    constructor(props)
+    {
+        super(props)
+        this.state = {
+            ready: false
+        }
+    }
+
     componentDidMount()
     {
+        setTimeout(() => {
+            this.setState({ready: true})
+        }, 10)
         this.reqData()
         window.scrollTo(0,0)
         const _this = this
@@ -32,7 +44,7 @@ class NewsList extends Component
 
     handleScroll()
     {
-        if(document.getElementById('news-container'))
+        if(document.getElementById('list-news'))
         {
             const ContainerHeight = document.getElementById('news-container').offsetHeight
             if(window.pageYOffset >= ContainerHeight - 600) this.reqMore()
@@ -62,19 +74,23 @@ class NewsList extends Component
     render()
     {
         return(
-            <div>
-                <Helmet 
-                    title="Berita - Kompetisi Indonesia"
-                    description="Temukan berita seputar kompetisi di Indonesia"
-                />
-                <Subheader 
-                    title='Berita kompetisi'
-                    desc='Berita seputar kompetisi di Indonesia dan Internasional'
-                />
-                <Newsbox 
-                    {...this.props.berita.data[Filter]}
-                />
-            </div>
+            <Transition in={this.state.ready} timeout={duration}>
+                {(state) => (
+                    <div id='list-news' style={Object.assign({}, style.fade.default, style.fade[state])}>
+                        <Helmet 
+                            title="Berita - Kompetisi Indonesia"
+                            description="Temukan berita seputar kompetisi di Indonesia"
+                        />
+                        <Subheader 
+                            title='Berita kompetisi'
+                            desc='Berita seputar kompetisi di Indonesia dan Internasional'
+                        />
+                        <Newsbox 
+                            {...this.props.berita.data[Filter]}
+                        />
+                    </div>
+                )}
+            </Transition>
         )
     }
 }
