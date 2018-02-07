@@ -12,10 +12,10 @@ let handleScroll
 
 class NewsList extends Component 
 {
-    // static fetchData({store})
-    // {
-    //     return store.dispatch(fetchBerita({limit:Limit}, Filter))
-    // }
+    static fetchData({store})
+    {
+        return store.dispatch(fetchBerita({limit:Limit}, Filter))
+    }
 
     componentDidMount()
     {
