@@ -9,8 +9,6 @@ import { queryToObj } from 'string-manager'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
-let handleScroll
-
 class BrowseCompetition extends Component 
 {
   static fetchData({store, params, query})
@@ -52,12 +50,14 @@ class BrowseCompetition extends Component
 
   componentWillUnmount()
   {
-    window.removeEventListener('scroll', (e) => this.handleScroll(e), true)
+    console.log('remove scroll listener')
+    window.removeEventListener('scroll', this.handleScroll)
+    // window.onscroll = null
   }
 
   handleScroll(e)
   {
-    if(document.getElementById('competition-container'))
+    if(document.getElementById('browse-container'))
     {
         const ContainerHeight = document.getElementById('competition-container').offsetHeight
         if(window.pageYOffset >= ContainerHeight - 600) this.reqMore()
@@ -128,7 +128,7 @@ class BrowseCompetition extends Component
     }
 
     return(
-      <div>
+      <div id='browse-container'>
         <Helmet
             title={title}
             meta={[

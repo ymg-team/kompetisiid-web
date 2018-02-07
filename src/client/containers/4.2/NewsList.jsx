@@ -1,14 +1,13 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import Helmet from '../../components/Helmet'
 import Subheader from '../../components/4.2/Subheader'
 import Newsbox from '../../components/4.2/boxs/NewsBox'
 
-import {fetchBerita, fetchBeritaMore} from '../../../store/berita/actions'
+import { fetchBerita, fetchBeritaMore } from '../../../store/berita/actions'
 import {connect} from 'react-redux'
 
 const Filter = 'list'
 const Limit = 6
-let handleScroll
 
 class NewsList extends Component 
 {
@@ -32,7 +31,7 @@ class NewsList extends Component
 
     handleScroll()
     {
-        if(document.getElementById('news-container'))
+        if(document.getElementById('list-news'))
         {
             const ContainerHeight = document.getElementById('news-container').offsetHeight
             if(window.pageYOffset >= ContainerHeight - 600) this.reqMore()
@@ -62,7 +61,7 @@ class NewsList extends Component
     render()
     {
         return(
-            <div>
+            <div id='list-news'>
                 <Helmet 
                     title="Berita - Kompetisi Indonesia"
                     description="Temukan berita seputar kompetisi di Indonesia"
