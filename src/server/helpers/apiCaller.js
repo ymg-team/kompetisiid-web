@@ -7,7 +7,7 @@ import Https from 'https'
 
 const API_HOST = Host[process.env.NODE_ENV].api
 // generate agent
-const agent = new Https.Agent({
+const agentOptions = new Https.Agent({
     rejectUnauthorized: false
 })
 
@@ -38,9 +38,10 @@ export function requestAPI(method='GET', endpoint='', params={}, callback)
         uri: API_HOST+endpoint,
         timeout: 60000,
         // resolved from : https://stackoverflow.com/questions/20433287/node-js-request-cert-has-expired#answer-29397100
-        agent,
+        agentOptions,
         headers: {
             token,
+            'User-Agent': 'request',
             'Content-Type' : 'json',
         },
     }
@@ -118,9 +119,10 @@ export function requestAPIV2(method='GET', endpoint='', params={})
         method: method,
         uri: API_HOST+endpoint,
         timeout: 60000,
-        agent,
+        agentOptions,
         headers: {
             token,
+            'User-Agent': 'request'
             // 'Content-Type' : 'json',
         },
     }
