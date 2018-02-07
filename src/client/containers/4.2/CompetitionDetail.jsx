@@ -19,6 +19,8 @@ import { pushScript } from '../../helpers/DomEvents'
 import { toCamelCase } from 'string-manager'
 import { getDetail, getRelated } from '../../../store/kompetisi/actions'
 import { connect } from 'react-redux'
+import { style, duration } from '../../components/Transtition'
+import Transition from 'react-transition-group/Transition'
 
 class CompetitionDetail extends Component 
 {
@@ -31,12 +33,16 @@ class CompetitionDetail extends Component
   constructor(props){
       super(props)
       this.state = {
+          ready: false,
           encid: this.props.params.encid
       }
   }
   
   componentDidMount()
   {
+    setTimeout(() => {
+        this.setState({ready: true})
+    }, 10)
     if(this.props.route.active_tab == 1) window.scrollTo(0,0)
     this.reqData(this.props)
     this.reqRelatedCompetitions(this.props)
@@ -79,17 +85,7 @@ class CompetitionDetail extends Component
     const { encid } = this.state
     const { detail,related,pengumuman } = this.props.kompetisi
     const { active_tab } = this.props.route
-    let NextPrevProps = {}, helmetdata = {}  
-
-    // default helmet data
-    helmetdata = {
-      script: [
-        // disquss
-        // {type: 'text/javascript', src: 'https://kompetisiindonesia.disqus.com/embed.js', 'data-timestamp': +new Date()},
-        // addthis script
-        // {type: 'text/javascript', src: '//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5a6acf36d357ea08#async=1'}
-      ]
-    }
+    let NextPrevProps = {}, helmetdata = {script: []}  
 
     // generate helmet data 
     if(detail[encid] && detail[encid].meta && parseInt(detail[encid].meta.code) === 200)
@@ -108,7 +104,6 @@ class CompetitionDetail extends Component
         innerHTML: generateJsonld(detail[encid].data, helmetdata.url)
       })
       
-
       // nextprev props 
       if(Object.keys(detail[encid].data.next).length > 0)
       {
@@ -128,131 +123,135 @@ class CompetitionDetail extends Component
     }
     
     return(
-      <div>
-        <Helmet {...helmetdata} />
-        {
-          detail[encid] && detail[encid].meta  ?
-              detail[encid].meta.code == 200 ?
-              <div className='competition-detail'>
-                <CompetitionDetailBox 
-                  data={detail[encid].data} />
-                <Tab 
-                  active={this.props.route.active_tab} 
-                  data={detail[encid].data}
-                  />
-                <div className='col-md-12'>
-                  <div className='container'>
-                    <div className='row competition-detail--content'>
-                      <div className='col-md-10 col-md-push-1'>
-                        {/*alert*/}
-                        {!detail[encid].data.is_mediapartner && !detail[encid].data.is_support ? 
-                          <div style={{marginTop:0}} className='alert alert-warning'>
-                            <strong>Perhatian&nbsp;</strong>
-                            Di kompetisi ini, <strong>Kompetisi Indonesia </strong>hanya berlaku sebagai media publikasi. Jika ada pertanyaan lebih lanjut mengenai kompetisi ini silahkan sampaikan langsung ke kontak yang tersedia tab kontak.
-                          </div>
-                        : null}
-                        {detail[encid].data.is_mediapartner && !detail[encid].data.is_support ? 
-                          <div style={{marginTop:0}} className='alert alert-blue'>
-                            <strong>Perhatian&nbsp;</strong>
-                            Di kompetisi ini, <strong>Kompetisi Indonesia </strong>berlaku sebagai media partner, jika ada pertanyaan lebih lanjut mengenai kompetisi ini, bisa ditanyakan langsung ke penyelenggara atau melalui tab diskusi.
-                          </div>
-                        : null}
-                        {detail[encid].data.is_support ? 
-                            <div style={{marginTop:0}} className='alert alert-blue'>
-                              <strong>Perhatian&nbsp;</strong>
-                              Kompetisi ini bisa diikuti langsung di <strong>Kompetisi Indonesia</strong>, silahkan login dan klik tombol 'ikuti kompetisi'.
-                            </div>
-                          : null}
-                        {/*end of alert*/}
-                        <div className='m-20' />
-                        <div className='row'>
-                          <div className={active_tab == 1 ? 'col-md-8' : 'col-md-12'}>
-                            {
-                              (() => {
-                                switch(active_tab)
+      <Transition in={this.state.ready} timeout={duration}>
+          {(state) => (
+            <div style={Object.assign({}, style.fade.default, style.fade[state])}>
+              <Helmet {...helmetdata} />
+              {
+                detail[encid] && detail[encid].meta  ?
+                    detail[encid].meta.code == 200 ?
+                    <div className='competition-detail'>
+                      <CompetitionDetailBox 
+                        data={detail[encid].data} />
+                      <Tab 
+                        active={this.props.route.active_tab} 
+                        data={detail[encid].data}
+                        />
+                      <div className='col-md-12'>
+                        <div className='container'>
+                          <div className='row competition-detail--content'>
+                            <div className='col-md-10 col-md-push-1'>
+                              {/*alert*/}
+                              {!detail[encid].data.is_mediapartner && !detail[encid].data.is_support ? 
+                                <div style={{marginTop:0}} className='alert alert-warning'>
+                                  <strong>Perhatian&nbsp;</strong>
+                                  Di kompetisi ini, <strong>Kompetisi Indonesia </strong>hanya berlaku sebagai media publikasi. Jika ada pertanyaan lebih lanjut mengenai kompetisi ini silahkan sampaikan langsung ke kontak yang tersedia tab kontak.
+                                </div>
+                              : null}
+                              {detail[encid].data.is_mediapartner && !detail[encid].data.is_support ? 
+                                <div style={{marginTop:0}} className='alert alert-blue'>
+                                  <strong>Perhatian&nbsp;</strong>
+                                  Di kompetisi ini, <strong>Kompetisi Indonesia </strong>berlaku sebagai media partner, jika ada pertanyaan lebih lanjut mengenai kompetisi ini, bisa ditanyakan langsung ke penyelenggara atau melalui tab diskusi.
+                                </div>
+                              : null}
+                              {detail[encid].data.is_support ? 
+                                  <div style={{marginTop:0}} className='alert alert-blue'>
+                                    <strong>Perhatian&nbsp;</strong>
+                                    Kompetisi ini bisa diikuti langsung di <strong>Kompetisi Indonesia</strong>, silahkan login dan klik tombol 'ikuti kompetisi'.
+                                  </div>
+                                : null}
+                              {/*end of alert*/}
+                              <div className='m-20' />
+                              <div className='row'>
+                                <div className={active_tab == 1 ? 'col-md-8' : 'col-md-12'}>
+                                  {
+                                    (() => {
+                                      switch(active_tab)
+                                      {
+                                        case 1:
+                                          return <Regulations
+                                                  encid={encid}
+                                                  nospace_title={detail[encid].data.nospace_title} 
+                                                  sumber={detail[encid].data.sumber}
+                                                  tags={detail[encid].data.tags.split(',')}
+                                                  html={detail[encid].data.konten}/>
+                                        case 2:
+                                          return <Prizes 
+                                                  html={detail[encid].data.hadiah} />
+                                        case 3:
+                                          return <Announcements 
+                                                  data={JSON.parse(detail[encid].data.dataPengumuman)} />
+                                        case 4:
+                                          return <Discussions 
+                                                  link={helmetdata.url} />
+                                        case 5:
+                                          return <Contacts 
+                                                  data={JSON.parse(detail[encid].data.kontak)} />
+                                        case 6:
+                                          return <Share
+                                                  title={detail[encid].data.title}
+                                                  desc={detail[encid].data.sort}
+                                                  link={helmetdata.url}/>
+                                        default:
+                                          return null
+                                      }
+                                    })()
+                                  }                          
+                                </div>
+                                {/* show sidebar info */}
                                 {
-                                  case 1:
-                                    return <Regulations
-                                            encid={encid}
-                                            nospace_title={detail[encid].data.nospace_title} 
-                                            sumber={detail[encid].data.sumber}
-                                            tags={detail[encid].data.tags.split(',')}
-                                            html={detail[encid].data.konten}/>
-                                  case 2:
-                                    return <Prizes 
-                                            html={detail[encid].data.hadiah} />
-                                  case 3:
-                                    return <Announcements 
-                                            data={JSON.parse(detail[encid].data.dataPengumuman)} />
-                                  case 4:
-                                    return <Discussions 
-                                            link={helmetdata.url} />
-                                  case 5:
-                                    return <Contacts 
-                                            data={JSON.parse(detail[encid].data.kontak)} />
-                                  case 6:
-                                    return <Share
-                                            title={detail[encid].data.title}
-                                            desc={detail[encid].data.sort}
-                                            link={helmetdata.url}/>
-                                  default:
-                                    return null
+                                  active_tab == 1 ?
+                                    <div className='col-md-4'>
+                                      <div className='competition-detail--meta'>
+                                        <progress value={30} max={100} />
+                                        <h3 className='total-prize'>
+                                          <strong>{detail[encid].data.total_hadiah}</strong>
+                                          <small className='text-muted'>total hadiah</small>
+                                        </h3>
+                                        <h3 className='total-view'>{detail[encid].data.views}<small className='text-muted'>kunjungan</small></h3>
+                                        <h3 className='total-view'>{detail[encid].data.sisadeadline}<small className='text-muted'>{`deadline (${detail[encid].data.deadline})`}</small></h3>
+                                        <h3 className='total-view'>{detail[encid].data.sisapengumuman}<small className='text-muted'>{`pengumuman (${detail[encid].data.pengumuman})`}</small></h3>
+                                      </div>  
+                                      <hr/>
+                                      <h4 className='text-muted'>Kompetisi ini bersifat</h4>
+                                      {detail[encid].data.is_garansi ? <span title='kompetisi sudah diverifikasi keberadaannya oleh kru KI' className='label label-gray'>Garansi</span> : null }
+                                      {detail[encid].data.is_mediapartner ? <span title='KI berlaku sebagai media partner di kompetisi ini' className='label label-gray'>Media Partner</span> : null}
+                                      {detail[encid].data.is_support ? <span title='kompetisi ini bisa diikuti melelui KI' className='label label-gray'>Support</span> : null}                     
+                                      <br/>
+                                      <br/>
+                                      {/* show you */}
+                                      <a target='_blank' href='https://vip.bitcoin.co.id/ref/xyussanx/1'>
+                                        <img style={{maxWidth: '100%'}} src='https://s3.amazonaws.com/bitcoin.co.id/banner/250x250.jpg' alt='Yuk berdagang Bitcoin dan dapatkan keuntungan jutaan rupiah' />
+                                      </a>
+                                    </div>
+                                  : null
                                 }
-                              })()
-                            }                          
-                          </div>
-                          {/* show sidebar info */}
-                          {
-                            active_tab == 1 ?
-                              <div className='col-md-4'>
-                                <div className='competition-detail--meta'>
-                                  <progress value={30} max={100} />
-                                  <h3 className='total-prize'>
-                                    <strong>{detail[encid].data.total_hadiah}</strong>
-                                    <small className='text-muted'>total hadiah</small>
-                                  </h3>
-                                  <h3 className='total-view'>{detail[encid].data.views}<small className='text-muted'>kunjungan</small></h3>
-                                  <h3 className='total-view'>{detail[encid].data.sisadeadline}<small className='text-muted'>{`deadline (${detail[encid].data.deadline})`}</small></h3>
-                                  <h3 className='total-view'>{detail[encid].data.sisapengumuman}<small className='text-muted'>{`pengumuman (${detail[encid].data.pengumuman})`}</small></h3>
-                                </div>  
-                                <hr/>
-                                <h4 className='text-muted'>Kompetisi ini bersifat</h4>
-                                {detail[encid].data.is_garansi ? <span title='kompetisi sudah diverifikasi keberadaannya oleh kru KI' className='label label-gray'>Garansi</span> : null }
-                                {detail[encid].data.is_mediapartner ? <span title='KI berlaku sebagai media partner di kompetisi ini' className='label label-gray'>Media Partner</span> : null}
-                                {detail[encid].data.is_support ? <span title='kompetisi ini bisa diikuti melelui KI' className='label label-gray'>Support</span> : null}                     
-                                <br/>
-                                <br/>
-                                {/* show you */}
-                                <a target='_blank' href='https://vip.bitcoin.co.id/ref/xyussanx/1'>
-                                  <img style={{maxWidth: '100%'}} src='https://s3.amazonaws.com/bitcoin.co.id/banner/250x250.jpg' alt='Yuk berdagang Bitcoin dan dapatkan keuntungan jutaan rupiah' />
-                                </a>
+                                {/* end of show sidebar info */}
                               </div>
-                            : null
-                          }
-                          {/* end of show sidebar info */}
+                            </div>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </div>
-                </div>
-
-                {/*next prev*/}
-                <NextPrev {...NextPrevProps} />
-
-                {/*related competitions*/}
-                {
-                  related[`related_${encid}`] && related[`related_${encid}`].meta && related[`related_${encid}`].meta.code == 200 ?
-                    <div className='col-md-12 bg-gray-soft'>
-                      <div className='m-20 row' />
-                      <CompetitionListBox subtitle={false} size='small' {...related[`related_${encid}`]} />
-                    </div>
-                  : null 
-                }
-              </div> 
-              : <ErrorCard {...detail[encid].meta} />
-          :<div className='fullheight'><Loader /></div>   
-        }        
-      </div>
+      
+                      {/*next prev*/}
+                      <NextPrev {...NextPrevProps} />
+      
+                      {/*related competitions*/}
+                      {
+                        related[`related_${encid}`] && related[`related_${encid}`].meta && related[`related_${encid}`].meta.code == 200 ?
+                          <div className='col-md-12 bg-gray-soft'>
+                            <div className='m-20 row' />
+                            <CompetitionListBox subtitle={false} size='small' {...related[`related_${encid}`]} />
+                          </div>
+                        : null 
+                      }
+                    </div> 
+                    : <ErrorCard {...detail[encid].meta} />
+                :<div className='fullheight'><Loader /></div>   
+              }        
+            </div>
+          )}
+      </Transition>
     )
   }
 }
