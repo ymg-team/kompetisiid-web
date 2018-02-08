@@ -7,4 +7,4 @@ rm -rf dist-client -rf dist-server && unzip dist-server.zip && unzip dist-client
 echo "restart pm2..."
 pm2 restart ki
 
-echo "deploy finished..."
+echo "deploy finished and SITE IS LIVE..."
