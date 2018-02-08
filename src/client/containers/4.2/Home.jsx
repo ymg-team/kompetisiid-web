@@ -29,20 +29,8 @@ class Home extends Component
     return Promise.all([getMediaPartnerC, getLatestC,getPopularC, getB, getS])
   }
 
-  constructor(props)
-  {
-    super(props)
-    this.state = {
-      ready: false
-    }
-  }
-
   componentDidMount()
   {
-    setTimeout(() => {
-      this.setState({ready: true})
-    }, 10)
-
     if(!this.props.kompetisi.data.home_latest)
       this.props.dispatch(fetchJelajah({limit:9}, 'home_latest'))
 
@@ -84,59 +72,55 @@ class Home extends Component
   {
     const {kompetisi, berita} = this.props
     return(
-      <Transition in={this.state.ready} timeout={duration}>
-        {(state) => (
-          <div style={Object.assign({}, style.fade.default, style.fade[state])}>
-            <Helmet />
-            {/*competition stats  */}
-            <StatsCount {...kompetisi.stats} />
+      <div>
+        <Helmet />
+        {/*competition stats  */}
+        <StatsCount {...kompetisi.stats} />
 
-            {/* popular competitions slider */}
-            <Slider {...kompetisi.data['home_popular']} />
+        {/* popular competitions slider */}
+        <Slider {...kompetisi.data['home_popular']} />
 
-            {/*categories  */}
-            <Categories {...kompetisi.categories} />
+        {/*categories  */}
+        <Categories {...kompetisi.categories} />
 
-            {/*latest competitions*/}
-            <div className='col-md-12'>
-              <div className='container'>
-                <div className='row'>
-                  <div className='subtitle-more'>
-                    <h2 className='menu-title'>Kompetisi Terbaru</h2>
-                    <Link to={'/browse'} className='btn btn-white btn-sm'>Jelajah kompetisi</Link>
-                  </div>
-                </div>
+        {/*latest competitions*/}
+        <div className='col-md-12'>
+          <div className='container'>
+            <div className='row'>
+              <div className='subtitle-more'>
+                <h2 className='menu-title'>Kompetisi Terbaru</h2>
+                <Link to={'/browse'} className='btn btn-white btn-sm'>Jelajah kompetisi</Link>
               </div>
-              <CompetitionBox 
-                subtitle={false}
-                {...kompetisi.data['home_latest']} />
             </div>
-            {/*end of latest competitions*/}
-
-            {/*news*/}
-            <div className='col-md-12'>
-              <div className='container'>
-                <div className='row'>
-                  <div className='subtitle-more'>
-                    <h2 className='menu-title'>Berita Terbaru</h2>
-                    <Link to={'/news'} className='btn btn-white btn-sm'>semua berita</Link>
-                  </div>
-                </div>
-              </div>
-              <NewsBox 
-                subtitle={false}
-                {...berita.data['home_latest']} />
-            </div>
-            {/*end of news*/}
-
-            {/*media partners*/}
-            <MediapartnerBox
-              {...kompetisi.data['home_mediapartner']}
-            />
-            {/*end of media partners*/}
           </div>
-        )}
-      </Transition>
+          <CompetitionBox 
+            subtitle={false}
+            {...kompetisi.data['home_latest']} />
+        </div>
+        {/*end of latest competitions*/}
+
+        {/*news*/}
+        <div className='col-md-12'>
+          <div className='container'>
+            <div className='row'>
+              <div className='subtitle-more'>
+                <h2 className='menu-title'>Berita Terbaru</h2>
+                <Link to={'/news'} className='btn btn-white btn-sm'>semua berita</Link>
+              </div>
+            </div>
+          </div>
+          <NewsBox 
+            subtitle={false}
+            {...berita.data['home_latest']} />
+        </div>
+        {/*end of news*/}
+
+        {/*media partners*/}
+        <MediapartnerBox
+          {...kompetisi.data['home_mediapartner']}
+        />
+        {/*end of media partners*/}
+      </div>
     )
   }
 }
