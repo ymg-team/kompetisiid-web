@@ -12,8 +12,6 @@ import { pushScript } from '../../helpers/DomEvents'
 import { connect } from 'react-redux'
 import { datetimeToRelativeTime } from '../../helpers/DateTime'
 import { truncate } from 'string-manager'
-import { style, duration } from '../../components/Transtition'
-import Transition from 'react-transition-group/Transition'
 
 export default class NewsDetail extends Component
 {
@@ -22,19 +20,8 @@ export default class NewsDetail extends Component
         return store.dispatch(BeritaActions.fetchBeritaDetail(params.encid))
     }
 
-    constructor(props)
-    {
-        super(props)
-        this.state = {
-            ready: false
-        }
-    }
-
     componentDidMount()
     {
-        setTimeout(() => {
-            this.setState({ready: true})
-        }, 10)
         window.scrollTo(0,0)
         pushScript('https://kompetisiindonesia.disqus.com/embed.js')
         this.reqData(this.props)
@@ -126,83 +113,79 @@ export default class NewsDetail extends Component
         }
         
         return(
-            <Transition in={this.state.ready} timeout={duration}>
-                {(state) => (
-                    <div style={Object.assign({}, style.fade.default, style.fade[state])}>
-                        <Helmet {...helmetdata} />
-                        {
-                            (detail[encid] && detail[encid].meta) ?
-                                parseInt(detail[encid].meta.code) === 200 ?
-                                    <div>
-                                        <div className='col-md-6 col-md-push-3 col-md-pull-3'>
-                                            <div className='row'>
-                                                <div className='col-md-12'>
-                                                    <div className='news-detail'>
-                                                        <Author data={detail[encid].data.author} />
-                                                        <div className='content'>
-                                                        <article>
-                                                            <h1>{detail[encid].data.title}</h1>
-                                                            <p className='meta text-muted'>
-                                                                <span className='meta--item'>
-                                                                    <i className='fa fa-calendar-o' />
-                                                                    {' '} 
-                                                                    {datetimeToRelativeTime(detail[encid].data.created_at)}
-                                                                </span>
-                                                                <span className='meta--item'>
-                                                                    <a href='javascript:;' title='komentar' onClick={() => {document.getElementById('comments').scrollIntoView({behavior:'smooth'})}}>
-                                                                        <i className='fa fa-comment-o' />
-                                                                        {' '}
-                                                                        <span className='fb-comments-count' data-href={helmetdata.url}>0</span>
-                                                                    </a>
-                                                            </span>
-                                                            </p>
-                                                        </article>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+            <div>
+                <Helmet {...helmetdata} />
+                {
+                    (detail[encid] && detail[encid].meta) ?
+                        parseInt(detail[encid].meta.code) === 200 ?
+                            <div>
+                                <div className='col-md-6 col-md-push-3 col-md-pull-3'>
+                                    <div className='row'>
                                         <div className='col-md-12'>
-                                            <div className='row'>
-                                                <div className='news-detail'>
-                                                    <div className='image'>
-                                                        <figure><img src={detail[encid].data.image.original} /></figure>
-                                                    </div>
+                                            <div className='news-detail'>
+                                                <Author data={detail[encid].data.author} />
+                                                <div className='content'>
+                                                <article>
+                                                    <h1>{detail[encid].data.title}</h1>
+                                                    <p className='meta text-muted'>
+                                                        <span className='meta--item'>
+                                                            <i className='fa fa-calendar-o' />
+                                                            {' '} 
+                                                            {datetimeToRelativeTime(detail[encid].data.created_at)}
+                                                        </span>
+                                                        <span className='meta--item'>
+                                                            <a href='javascript:;' title='komentar' onClick={() => {document.getElementById('comments').scrollIntoView({behavior:'smooth'})}}>
+                                                                <i className='fa fa-comment-o' />
+                                                                {' '}
+                                                                <span className='fb-comments-count' data-href={helmetdata.url}>0</span>
+                                                            </a>
+                                                    </span>
+                                                    </p>
+                                                </article>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div className='col-md-6 col-md-push-3 col-md-pull-3'>
-                                            <div className='row'>
-                                                <div className='col-md-12'>
-                                                    <div className='news-detail'>
-                                                        <article className='content'>
-                                                            <p dangerouslySetInnerHTML={{__html: detail[encid].data.content}} />
-                                                            <div style={{margin: '1em 0'}}>
-                                                                {this.generateTags(detail[encid].data.tags)}
-                                                            </div>
-                                                        </article>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className='col-md-12 bg-gray-soft'>
-                                            <NewsBox 
-                                                {...data[`related_${encid}`]}
-                                            />
                                         </div>
                                     </div>
-                                : <ErrorCard {...detail[encid].meta} />
-                            : <div className="fullheight"><Loader /></div>               
-                        }     
-                        { detail[encid] && detail[encid].meta && detail[encid].is_loading ? <Loader /> : null }    
-                        {/* comment section */}
-                        <div className='col-md-6 col-md-push-3 col-md-pull-3'>
-                            <div style={{padding:'50px 0'}} className='row comments' id='disqus_thread' />
-                        </div>
-                        {/* end of comment section */}
-                    </div>
-                )}
-            </Transition>
+                                </div>
+                                <div className='col-md-12'>
+                                    <div className='row'>
+                                        <div className='news-detail'>
+                                            <div className='image'>
+                                                <figure><img src={detail[encid].data.image.original} /></figure>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className='col-md-6 col-md-push-3 col-md-pull-3'>
+                                    <div className='row'>
+                                        <div className='col-md-12'>
+                                            <div className='news-detail'>
+                                                <article className='content'>
+                                                    <p dangerouslySetInnerHTML={{__html: detail[encid].data.content}} />
+                                                    <div style={{margin: '1em 0'}}>
+                                                        {this.generateTags(detail[encid].data.tags)}
+                                                    </div>
+                                                </article>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className='col-md-12 bg-gray-soft'>
+                                    <NewsBox 
+                                        {...data[`related_${encid}`]}
+                                    />
+                                </div>
+                            </div>
+                        : <ErrorCard {...detail[encid].meta} />
+                    : <div className="fullheight"><Loader /></div>               
+                }     
+                { detail[encid] && detail[encid].meta && detail[encid].is_loading ? <Loader /> : null }    
+                {/* comment section */}
+                <div className='col-md-6 col-md-push-3 col-md-pull-3'>
+                    <div style={{padding:'50px 0'}} className='row comments' id='disqus_thread' />
+                </div>
+                {/* end of comment section */}
+            </div>
         )
     }
 }
