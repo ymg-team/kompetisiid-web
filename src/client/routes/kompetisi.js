@@ -104,6 +104,11 @@ export default {
                     path: ':encid/join(/:title)',
                     iframe_type: 'ikuti',
                     component: CompetitionIframe
+                },
+                {
+                    path: ':encid',
+                    active_tab: 1,
+                    component: Competition
                 }
             ]
         }
