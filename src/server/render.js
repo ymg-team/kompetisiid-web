@@ -150,7 +150,7 @@ function getScript(state)
     return `
     <script type="text/javascript">window.__data__=${ JSON.stringify(state) }</script>
     <script src="${ webpackAssets.vendor.js }"></script>
-    <script src="${ webpackAssets.app.js }" async defer></script>
+    <script src="${ webpackAssets.app.js }" defer></script>
     ${process.env.NODE_ENV === 'production' ? getTrackingScript() : ''}
     `
 }

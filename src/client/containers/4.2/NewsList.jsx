@@ -4,7 +4,7 @@ import Subheader from '../../components/4.2/Subheader'
 import Newsbox from '../../components/4.2/boxs/NewsBox'
 
 import { fetchBerita, fetchBeritaMore } from '../../../store/berita/actions'
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
 
 const Filter = 'list'
 const Limit = 6

@@ -1,21 +1,7 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 
 export default class Discussions extends Component 
 {
-    // componentDidMount()
-    // {
-    //     this.generateFbComment()
-    // }
-
-    // generateFbComment()
-    // {
-    //     if(window && window.FB)
-    //     {
-    //         console.log('reload facebook api')
-    //         FB.XFBML.parse()
-    //     }
-    // }
-
     componentDidMount()
     {
         setTimeout(() => {
@@ -43,9 +29,6 @@ export default class Discussions extends Component
                 <p className="text-muted">Untuk mendapatkan info lebih lanjut, mari sampaikan melalui menu diskusi ini. Diskusi bisa dijawab oleh peserta lain atau bahkan penyelenggara kompetisi sendiri.</p>
                 <hr />
                 <div id="disqus_thread" />
-                {/* <div className='row comments' id='comments'>
-                    <div className='fb-comments' data-width='100%' data-href={this.props.link} data-numpost='7' />
-                </div> */}
             </div>
         )
     }

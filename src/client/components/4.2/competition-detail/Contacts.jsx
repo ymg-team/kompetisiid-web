@@ -1,5 +1,5 @@
 import React from 'react'
-import {generateLink} from '../../../helpers/LinkGenerator'
+import { generateLink } from '../../../helpers/LinkGenerator'
 
 const Type = [
     {icon:''},
