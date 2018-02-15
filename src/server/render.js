@@ -94,13 +94,16 @@ function renderFullPage(head, html, state)
                 <meta name="google-site-verification" content="pUksy8ewwm4bzRVqaTQXKmWfRFZc9_L0iuESNDg7190" />
                 <meta property="fb:app_id" content="1419514554927551">
                 <meta property="fb:admins" content="100000359263988">
-                <link href="/assets/4.2/css/style.css?v=${version.CSS_VERSION}" rel="stylesheet">
-                <link href="/assets/4.2/lib/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet">
-                <link href="https://fonts.googleapis.com/css?family=Muli" rel="stylesheet">
+                
+                <link href="/assets/4.2/css/style.css?v=${version.CSS_VERSION}" rel="stylesheet" />
+                <link href="/assets/4.2/lib/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+                <link href="https://fonts.googleapis.com/css?family=Muli" rel="stylesheet" />
+                
                 <link rel="icon" href="/assets/icons/icon-128x128.png" />
                 <link rel="manifest" href="/manifest.json" />
                 <link rel="search" type="application/opensearchdescription+xml" href="/opensearch.xml" title="Cari Kompetisi"/>
                 <style>
+                // transition
                 .card-enter {
                     opacity: 0.01;
                 }
@@ -141,13 +144,13 @@ function getScript(state)
     //             });
     //     }
     // </script>  
+    //<script type="text/javascript" src="https://d33wubrfki0l68.cloudfront.net/js/89ab2d780125b7a9d3b5c5b0f8aca8b03ad69933/js/script-min.js"></script>
+    // <script type="text/javascript" src="https:////connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8&appId=1419514554927551" async defer></script>
+    // <script type="text/javascript" src="https://apis.google.com/js/platform.js" async defer></script>
     return `
-    <script type="text/javascript">window.__data__ = ${JSON.stringify(state)}</script>
-    <script type="text/javascript" src="https:////connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8&appId=1419514554927551" async defer></script>
-    <script type="text/javascript" src="https://apis.google.com/js/platform.js" async defer></script>
-    <script type="text/javascript" src="https://d33wubrfki0l68.cloudfront.net/js/89ab2d780125b7a9d3b5c5b0f8aca8b03ad69933/js/script-min.js"></script>
+    <script type="text/javascript">window.__data__=${ JSON.stringify(state) }</script>
     <script src="${ webpackAssets.vendor.js }"></script>
-    <script src="${ webpackAssets.app.js }"></script>
+    <script src="${ webpackAssets.app.js }" async defer></script>
     ${process.env.NODE_ENV === 'production' ? getTrackingScript() : ''}
     `
 }
@@ -163,7 +166,7 @@ function getTrackingScript()
 {
     return `
     <!-- Histats.com  START  (aync)-->
-    <script type="text/javascript">var _Hasync= _Hasync|| [];
+    <script type="text/javascript" async defer>var _Hasync= _Hasync|| [];
     _Hasync.push(['Histats.start', '1,2475171,4,0,0,0,00010000']);
     _Hasync.push(['Histats.fasi', '1']);
     _Hasync.push(['Histats.track_hits', '']);
@@ -172,11 +175,10 @@ function getTrackingScript()
     hs.src = ('//s10.histats.com/js15_as.js');
     (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(hs);
     })();</script>
-    <noscript><a href="/" target="_blank"><img  src="//sstatic1.histats.com/0.gif?2475171&101" alt="web stats" border="0"></a></noscript>
     <!-- Histats.com  END  -->    
 
     <!-- Ganal -->
-    <script>
+    <script type="text/javascript" async defer>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
     (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
     m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
