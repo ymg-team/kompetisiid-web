@@ -1,4 +1,4 @@
-echo "update code from gitlab..."
+echo "update code from gitlab branch master..."
 git pull origin master
 
 echo "rebuild app..."
