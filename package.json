@@ -1,13 +1,13 @@
 {
   "name": "kompetisi-indonesia",
-  "version": "4.3.4",
+  "version": "4.4.0-beta.0",
   "description": "platform untuk mengikuti dan berbagi kompetisi",
   "main": "dist-server/server/index.js",
   "scripts": {
     "start": "npm run server:dev",
     "prepublish": "npm run build:prod",
     "build:watch": "NODE_ENV=development webpack --watch --progress",
-    "build:prod": "rimraf dist-server && rimraf dist-client && npm run build-client:prod && npm run build-server:prod && npm run zip",
+    "build:prod": "rimraf dist-server && rimraf dist-client && npm run build-client:prod && npm run build-server:prod",
     "lint": "eslint src --ext .js --ext .jsx",
     "test": "jest",
     "test:watch": "jest --watch",

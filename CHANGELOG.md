@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="4.4.0-beta.0"></a>
+# 4.4.0-beta.0 (2018-02-08)
+
+
+### Bug Fixes
+
+* **browse competition:** jelajah media partner ([98144f1](https://github.com/idmore/kompetisiid-web/commit/98144f1)), closes [#5](https://github.com/idmore/kompetisiid-web/issues/5)
+* **categories list:** set and get from local storage ([8bb1b54](https://github.com/idmore/kompetisiid-web/commit/8bb1b54))
+* **competition detail:** scroll back to 0,0 after clik related post ([f340bd4](https://github.com/idmore/kompetisiid-web/commit/f340bd4)), closes [#2](https://github.com/idmore/kompetisiid-web/issues/2)
+* **json-ld:** fixing error on json-ld ([ea73a56](https://github.com/idmore/kompetisiid-web/commit/ea73a56)), closes [#4](https://github.com/idmore/kompetisiid-web/issues/4)
+* **pasang:** update pasang subeader ([ddae124](https://github.com/idmore/kompetisiid-web/commit/ddae124)), closes [#1](https://github.com/idmore/kompetisiid-web/issues/1)
+* **slider:** fix slider height ([27720bf](https://github.com/idmore/kompetisiid-web/commit/27720bf))
+* **title:** title for seo friendly ([46d50eb](https://github.com/idmore/kompetisiid-web/commit/46d50eb)), closes [#6](https://github.com/idmore/kompetisiid-web/issues/6) [#6](https://github.com/idmore/kompetisiid-web/issues/6)
+
+
+### Features
+
+* **homepage:** added new slider - stats - categories home design ([6007b02](https://github.com/idmore/kompetisiid-web/commit/6007b02))
+
+
+
 <a name="4.3.4"></a>
 ## [4.3.4](https://github.com/idmore/kompetisiid-web/compare/v4.3.3...v4.3.4) (2018-01-11)
 

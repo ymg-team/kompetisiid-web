@@ -1,4 +1,4 @@
-export const duration = 200
+export const duration = 300
 export const style = {
   fade: {
     default: {
