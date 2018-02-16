@@ -79,17 +79,7 @@ class CompetitionDetail extends Component
     const { encid } = this.state
     const { detail,related,pengumuman } = this.props.kompetisi
     const { active_tab } = this.props.route
-    let NextPrevProps = {}, helmetdata = {}  
-
-    // default helmet data
-    helmetdata = {
-      script: [
-        // disquss
-        // {type: 'text/javascript', src: 'https://kompetisiindonesia.disqus.com/embed.js', 'data-timestamp': +new Date()},
-        // addthis script
-        // {type: 'text/javascript', src: '//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5a6acf36d357ea08#async=1'}
-      ]
-    }
+    let NextPrevProps = {}, helmetdata = {script: []}  
 
     // generate helmet data 
     if(detail[encid] && detail[encid].meta && parseInt(detail[encid].meta.code) === 200)
@@ -108,7 +98,6 @@ class CompetitionDetail extends Component
         innerHTML: generateJsonld(detail[encid].data, helmetdata.url)
       })
       
-
       // nextprev props 
       if(Object.keys(detail[encid].data.next).length > 0)
       {

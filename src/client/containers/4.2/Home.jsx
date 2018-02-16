@@ -1,4 +1,4 @@
-import React, {Component} from 'react' 
+import React, { Component } from 'react' 
 import CompetitionBox from '../../components/4.2/boxs/CompetitionBox'
 import MediapartnerBox from '../../components/4.2/boxs/MediapartnerBox'
 import NewsBox from '../../components/4.2/boxs/NewsBox'
@@ -11,7 +11,9 @@ import Categories from '../../components/4.2/cards/HomeCategories'
 import { getStorage, setStorage } from '../../../store/helpers/LocalStorage'
 import { fetchJelajah, getFavoritedTags, getCategories, setCategories, getStats } from '../../../store/kompetisi/actions'
 import { fetchBerita } from '../../../store/berita/actions'
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
+import { style, duration } from '../../components/Transtition'
+import Transition from 'react-transition-group/Transition'
 
 class Home extends Component 
 {
@@ -116,9 +118,8 @@ class Home extends Component
         {/*media partners*/}
         <MediapartnerBox
           {...kompetisi.data['home_mediapartner']}
-         />
+        />
         {/*end of media partners*/}
-
       </div>
     )
   }

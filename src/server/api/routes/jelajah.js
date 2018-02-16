@@ -4,6 +4,6 @@ import apiCaller from '../middlewares/apiCaller'
 const router = express.Router()
 
 router.get('/', controller.getJelajah, apiCaller)
-router.get('/kategori', controller.getCategories)
+router.get('/kategori', controller.getCategories, apiCaller)
 
 module.exports = router

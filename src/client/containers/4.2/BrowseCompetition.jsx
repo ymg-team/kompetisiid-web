@@ -8,8 +8,8 @@ import { getStorage, setStorage } from '../../../store/helpers/LocalStorage'
 import { queryToObj } from 'string-manager'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-
-let handleScroll
+import { style, duration } from '../../components/Transtition'
+import Transition from 'react-transition-group/Transition'
 
 class BrowseCompetition extends Component 
 {
@@ -52,12 +52,14 @@ class BrowseCompetition extends Component
 
   componentWillUnmount()
   {
-    window.removeEventListener('scroll', (e) => this.handleScroll(e), true)
+    console.log('remove scroll listener')
+    window.removeEventListener('scroll', this.handleScroll)
+    // window.onscroll = null
   }
 
   handleScroll(e)
   {
-    if(document.getElementById('competition-container'))
+    if(document.getElementById('browse-container'))
     {
         const ContainerHeight = document.getElementById('competition-container').offsetHeight
         if(window.pageYOffset >= ContainerHeight - 600) this.reqMore()
@@ -128,124 +130,124 @@ class BrowseCompetition extends Component
     }
 
     return(
-      <div>
-        <Helmet
-            title={title}
-            meta={[
-                {'name': 'description', 'content': description},
-                {'property': 'og:title', 'content': title},
-                {'property': 'og:url', 'content': 'http://kompetisi.id/browse'},
-                {'property': 'og:image', 'content': 'http://kompetisi.id/assets/images/wide-red-logo.png'},
-                {'property': 'og:description', 'content': description},
-                {'property': 'og:type', 'content': 'article'},
-            ]}
-        />
+        <div id='browse-container'>
+            <Helmet
+                title={title}
+                meta={[
+                    {'name': 'description', 'content': description},
+                    {'property': 'og:title', 'content': title},
+                    {'property': 'og:url', 'content': 'http://kompetisi.id/browse'},
+                    {'property': 'og:image', 'content': 'http://kompetisi.id/assets/images/wide-red-logo.png'},
+                    {'property': 'og:description', 'content': description},
+                    {'property': 'og:type', 'content': 'article'},
+                ]}
+            />
 
-        {/*filter*/}
-        <div className='col-md-12 filter-jelajah'>
-          <div className='container'>
-            <div className='row no-margin'>
-              <h1> Jelajah 
-                {query.mediapartner == 1 ? ' Media Partner' : ''}
-                {' '}
-                <a href='javascript:;' onClick={() => modal('open', 'select-main-kat')}>
-                  {parseInt(main_kat) >= 0 ? categories.data[main_kat].main_kat : 'Semua kategori'}
-                  <i className='fa fa-angle-down' />
-                </a>
-                {
-                  parseInt(main_kat) >= 0 ?
-                    <span>
-                      {' '}dan{' '}
-                      <a href='javascript:;' onClick={() => modal('open', 'select-sub-kat')}>
-                        {parseInt(sub_kat) >= 0 ? categories.data[main_kat].subkat[sub_kat].sub_kat : 'Semua subkategori'}
-                        <i className='fa fa-angle-down' />
-                      </a>
-                    </span>
-                  : null
-                }       
-              </h1>
-            </div>
-            <div className='row no-margin'>
-              <h1>
-                Sort by <a href='javascript:;'>Terbaru<i className='fa fa-angle-down' /></a>
-                { tag ? ` Tag "${tag}"` : ''}    
-                {q ? ` Pencarian "${q}"` : ''}    
-              </h1></div>
-            <div className='row no-margin'>
-              <p className='text-muted'>Gunakan filter ini untuk menemukan kompetisi yang sesuai dengan minat kamu</p>
-            </div>
-          </div>
-        </div>
-        {/*end of filter*/}
-
-        {/*content*/}
-        <CompetitionBox subtitle={true}  {...data[filter]} />
-        {/*end of content*/}
-
-        {/*modal*/}
-        <div>
-          <div className='modal' id='select-main-kat'>
+            {/*filter*/}
+            <div className='col-md-12 filter-jelajah'>
             <div className='container'>
-              <h2 className='modal-title'>Pilih Kategori dibawah ini</h2><a className='btn btn-white btn-close-modal btn-sm fa fa-close' />
-              <hr />
-              {
-                categories.meta && categories.meta.code == 200 ?
-                  <ul className='vertical-menu list-categories'>
-                    <li>
-                        <a 
-                            href='javascript:;' 
-                            onClick={() => this.setState({main_kat: ''}, () => {
-                                modal('close', 'select-main-kat')
-                                this.context.router.push('/browse')
-                            })} 
-                            className='text-muted'>
-                            semua kategori
-                        </a>
-                    </li>
-                    {categories.data.map((n, key) => {
-                      return <li key={key}>
-                        <a 
-                          href='javascript:;' 
-                          onClick={() => {
-                              modal('close', 'select-main-kat')
-                              this.context.router.push(`/browse/${n.main_kat}`)
-                          }} 
-                          className='text-muted'>{n.main_kat}</a>
-                      </li>
-                    })}                    
-                  </ul>
-                : 'loading...'
-              }             
-            </div>
-          </div>
-          <div className='modal' id='select-sub-kat'>
-            <div className='container'>
-              <h2 className='modal-title'>Pilih sub kategori dibawah ini</h2><a className='btn btn-white btn-close-modal btn-sm'><i className='fa fa-close' /></a>
-              <hr />
-              <ul className='vertical-menu list-categories'>
-                <li><a href='javascript:;' onClick={() => this.setState({sub_kat: ''}, () => {modal('close', 'select-sub-kat')})} className='text-muted'>Semua subkategori</a></li>
-                {
+                <div className='row no-margin'>
+                <h1> Jelajah 
+                    {query.mediapartner == 1 ? ' Media Partner' : ''}
+                    {' '}
+                    <a href='javascript:;' onClick={() => modal('open', 'select-main-kat')}>
+                    {parseInt(main_kat) >= 0 ? categories.data[main_kat].main_kat : 'Semua kategori'}
+                    <i className='fa fa-angle-down' />
+                    </a>
+                    {
                     parseInt(main_kat) >= 0 ?
-                        categories.data[main_kat].subkat.map((n, key) => {
-                            return  <li key={key}>
+                        <span>
+                        {' '}dan{' '}
+                        <a href='javascript:;' onClick={() => modal('open', 'select-sub-kat')}>
+                            {parseInt(sub_kat) >= 0 ? categories.data[main_kat].subkat[sub_kat].sub_kat : 'Semua subkategori'}
+                            <i className='fa fa-angle-down' />
+                        </a>
+                        </span>
+                    : null
+                    }       
+                </h1>
+                </div>
+                <div className='row no-margin'>
+                <h1>
+                    Sort by <a href='javascript:;'>Terbaru<i className='fa fa-angle-down' /></a>
+                    { tag ? ` Tag "${tag}"` : ''}    
+                    {q ? ` Pencarian "${q}"` : ''}    
+                </h1></div>
+                <div className='row no-margin'>
+                <p className='text-muted'>Gunakan filter ini untuk menemukan kompetisi yang sesuai dengan minat kamu</p>
+                </div>
+            </div>
+            </div>
+            {/*end of filter*/}
+
+            {/*content*/}
+            <CompetitionBox subtitle={true}  {...data[filter]} />
+            {/*end of content*/}
+
+            {/*modal*/}
+            <div>
+            <div className='modal' id='select-main-kat'>
+                <div className='container'>
+                <h2 className='modal-title'>Pilih Kategori dibawah ini</h2><a className='btn btn-white btn-close-modal btn-sm fa fa-close' />
+                <hr />
+                {
+                    categories.meta && categories.meta.code == 200 ?
+                    <ul className='vertical-menu list-categories'>
+                        <li>
+                            <a 
+                                href='javascript:;' 
+                                onClick={() => this.setState({main_kat: ''}, () => {
+                                    modal('close', 'select-main-kat')
+                                    this.context.router.push('/browse')
+                                })} 
+                                className='text-muted'>
+                                semua kategori
+                            </a>
+                        </li>
+                        {categories.data.map((n, key) => {
+                        return <li key={key}>
                             <a 
                             href='javascript:;' 
                             onClick={() => {
-                                modal('close', 'select-sub-kat')
-                                this.context.router.push(`/browse/${categories.data[main_kat].main_kat}/${n.sub_kat}`)
-                            }}
-                            className='text-muted'>{n.sub_kat}</a>
+                                modal('close', 'select-main-kat')
+                                this.context.router.push(`/browse/${n.main_kat}`)
+                            }} 
+                            className='text-muted'>{n.main_kat}</a>
                         </li>
-                        })
-                    : null                    
-                }
-              </ul>
+                        })}                    
+                    </ul>
+                    : 'loading...'
+                }             
+                </div>
             </div>
-          </div>
-        </div>
-        {/*end of modal*/}
+            <div className='modal' id='select-sub-kat'>
+                <div className='container'>
+                <h2 className='modal-title'>Pilih sub kategori dibawah ini</h2><a className='btn btn-white btn-close-modal btn-sm'><i className='fa fa-close' /></a>
+                <hr />
+                <ul className='vertical-menu list-categories'>
+                    <li><a href='javascript:;' onClick={() => this.setState({sub_kat: ''}, () => {modal('close', 'select-sub-kat')})} className='text-muted'>Semua subkategori</a></li>
+                    {
+                        parseInt(main_kat) >= 0 ?
+                            categories.data[main_kat].subkat.map((n, key) => {
+                                return  <li key={key}>
+                                <a 
+                                href='javascript:;' 
+                                onClick={() => {
+                                    modal('close', 'select-sub-kat')
+                                    this.context.router.push(`/browse/${categories.data[main_kat].main_kat}/${n.sub_kat}`)
+                                }}
+                                className='text-muted'>{n.sub_kat}</a>
+                            </li>
+                            })
+                        : null                    
+                    }
+                </ul>
+                </div>
+            </div>
+            </div>
+            {/*end of modal*/}
 
-      </div>
+        </div>
     )
   }
 }

@@ -1,5 +1,3 @@
-import * as repo from '../repositories/kompetisi'
-
 /***
  * function to get kompetisi list
  * @method GET
@@ -35,22 +33,28 @@ export function getJelajah(req, res, next)
  *  @method GET
  *  @params (string) encid on url
  */
-export function getRelated(req, res)
+export function getRelated(req, res, next)
 {
-    repo.getRelated(req.params.id, response => {
-        return res.json(response)
-    })
+    req.reqdata = {
+        method: 'get',
+        url: `/kompetisi/related/${req.params.id}`
+    }
+
+    next()
 }
 
 /**
  * function to get all categories available
  * @method GET
  */
-export function getCategories(req, res)
+export function getCategories(req, res, next)
 {
-    repo.getCategories(response => {
-        return res.json(response)
-    })
+    req.reqdata = {
+        method: 'get',
+        url: '/kategori/kategori'
+    }
+
+    next()
 }
 
 /**
@@ -58,21 +62,27 @@ export function getCategories(req, res)
  * @method GET
  * @param (string) encoded id
  */
-export function getDetail(req, res)
+export function getDetail(req, res, next)
 {
-    repo.getDetail(req.params.id, response => {
-        return res.json(response)
-    })
+    req.reqdata = {
+        method: 'get',
+        url: `/kompetisi/data/${req.params.id}`
+    }
+
+    next()
 }
 
 /**
  * function to get favorited tag
  */
-export function getFavoritedtag(req, res)
+export function getFavoritedtag(req, res, next)
 {
-    repo.getFavoritedtag({}, response => {
-        return res.json(response)
-    })
+    req.reqdata = {
+        method: 'get',
+        url: '/kompetisi/favoritedtags'
+    }
+
+    next()
 }
 
 /**
@@ -80,9 +90,12 @@ export function getFavoritedtag(req, res)
  * @method GET
  * @param (string) encoded id
  */
-export function getPengumuman(req, res)
+export function getPengumuman(req, res, next)
 {
-    repo.getPengumuman(req.params.id, response => {
-        return res.json(response)
-    })
+    req.reqdata = {
+        method: 'get',
+        url: `/kompetisi/pengumuman/${req.params.id}`
+    }
+
+    next()
 }

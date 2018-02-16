@@ -93,10 +93,7 @@ export default class NewsDetail extends Component
             title: 'Berita Kompetisi.id',
             description: 'Berita dari Kompetisi.id',
             url: `${Host[process.env.NODE_ENV].front}/news/${encid}/${title}`,
-            script: [
-                // disquss
-                // {type: 'text/javascript', src: 'https://kompetisiindonesia.disqus.com/embed.js', 'data-timestamp': +new Date()},
-            ]
+            script: []
         }
 
         if(detail[encid] && detail[encid].meta && detail[encid].meta.code === 200 )
@@ -175,7 +172,7 @@ export default class NewsDetail extends Component
                                 </div>
                                 <div className='col-md-12 bg-gray-soft'>
                                     <NewsBox 
-                                         {...data[`related_${encid}`]}
+                                        {...data[`related_${encid}`]}
                                     />
                                 </div>
                             </div>

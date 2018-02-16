@@ -27,7 +27,7 @@ export default store => next => action => {
             })
         }
         //completing request
-        requestApi(method, Host[process.env.NODE_ENV].front+url, params, json => {
+        requestApi(method, typeof window != 'undefined' ? url : Host[process.env.NODE_ENV].front + url, params, json => {
             // if(method.toLowerCase() === 'post') openNotif(json)
 
             next({

@@ -8,7 +8,7 @@ const BUILD_DIR = '../dist-client'
 module.exports = {
   entry: {
       app: ['./src/client/index.js'],
-      vendor: ['react','react-dom','react-router','redux','react-redux','superagent','redux-thunk','history']
+      vendor: ['react','react-dom','react-router','redux','react-redux','superagent','redux-thunk','history', 'react-transition-group']
   },
 
   output: {

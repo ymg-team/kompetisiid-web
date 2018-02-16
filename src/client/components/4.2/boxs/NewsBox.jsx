@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import Card from '../cards/NewsListCard'
 import Loader from '../loaders/NewsLoader'
+import Transition from 'react-transition-group/Transition'
+import { duration, style } from '../../Transtition'
 import { Link } from 'react-router'
 
 export default class NewsBox extends Component 
@@ -31,13 +33,19 @@ export default class NewsBox extends Component
                     </div>
                     <div className='row m-10' />
                     <div className='row'>
-                        {
-                            meta && meta.code ?
-                                !data ? 
-                                    <p className='text-muted'>{meta.message}</p>
-                                : this.generateList(data)
-                            : null                            
-                        }
+                        <Transition in={data && data.length > 0} timeout={duration}>
+                            {(state) => (
+                                <div style={Object.assign({}, style.fade.default, style.fade[state])}>
+                                {
+                                    meta && meta.code ?
+                                        !data ? 
+                                            <p className='text-muted'>{meta.message}</p>
+                                        : this.generateList(data)
+                                    : null                            
+                                }
+                             </div> 
+                            )}
+                        </Transition>
                     </div>
                     { is_loading || !meta ? <Loader /> : null }
                     <div className='row m-10' />
