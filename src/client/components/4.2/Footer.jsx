@@ -37,7 +37,7 @@ const Footer = () => (
                 <div className='row vertical-center'>
                     <div className='col-md-6 footer-copyright'>
                         <img className='footer-copyright-logo' src='/assets/4.2/img/icon-128x128.png' title='kompetisi indonesia icon' />
-                        <small className='footer-copyright-text'>&copy; 2017 - now by Kompetisi Indonesia<br />DIY, Indonesia</small></div>
+                        <small className='footer-copyright-text'>&copy; 2013 - { (new Date()).getFullYear() } - now by Kompetisi Indonesia<br />DIY, Indonesia</small></div>
                     <div className='col-md-6'>
                     <ul className='horizontal-menu pull-right social-media'>
                         <li><a href='https://facebook.com/kompetisiid' target='_blank'><i className='fa fa-facebook' /></a></li>
