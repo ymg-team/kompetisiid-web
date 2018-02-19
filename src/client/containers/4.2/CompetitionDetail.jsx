@@ -22,7 +22,6 @@ import { connect } from 'react-redux'
 
 class CompetitionDetail extends Component 
 {
-
   static fetchData({params, store})
   {
     return store.dispatch(getDetail(params.encid))
@@ -165,7 +164,7 @@ class CompetitionDetail extends Component
                                             encid={encid}
                                             nospace_title={detail[encid].data.nospace_title} 
                                             sumber={detail[encid].data.sumber}
-                                            tags={detail[encid].data.tags.split(',')}
+                                            tags={detail[encid].data.tags ? detail[encid].data.tags.split(',') : []}
                                             html={detail[encid].data.konten}/>
                                   case 2:
                                     return <Prizes 
