@@ -31,7 +31,7 @@ const CompetitionBox = (props) => {
                   : null
               }
               {subtitle ? <div className='row m-10' /> : null}
-                <Transition in={data && data.length > 0} timeout={duration}>
+                <Transition in={meta && meta.code > 0} timeout={duration}>
                     {(state) => (
                         <div className='row' style={Object.assign({}, style.fade.default, style.fade[state])}>
                         {
@@ -45,6 +45,7 @@ const CompetitionBox = (props) => {
                         </div> 
                     )}
                 </Transition>
+                
               { is_loading || !meta ? <Loader size={props.size} total={props.total} /> : null }
               <div className='row m-10' />                
             </div>
