@@ -188,7 +188,10 @@ class BrowseCompetition extends Component
             <div>
             <div className='modal' id='select-main-kat'>
                 <div className='container'>
-                <h2 className='modal-title'>Pilih Kategori dibawah ini</h2><a className='btn btn-white btn-close-modal btn-sm fa fa-close' />
+                <div className='modal-title'>
+                    Pilih Kategori dibawah ini
+                    <a className='btn btn-white btn-close-modal btn-sm fa fa-close' />
+                </div>
                 <hr />
                 {
                     categories.meta && categories.meta.code == 200 ?
@@ -222,7 +225,10 @@ class BrowseCompetition extends Component
             </div>
             <div className='modal' id='select-sub-kat'>
                 <div className='container'>
-                <h2 className='modal-title'>Pilih sub kategori dibawah ini</h2><a className='btn btn-white btn-close-modal btn-sm'><i className='fa fa-close' /></a>
+                <div className='modal-title'>
+                    Pilih sub kategori dibawah ini
+                    <a className='btn btn-white btn-close-modal btn-sm fa fa-close' />
+                </div>
                 <hr />
                 <ul className='vertical-menu list-categories'>
                     <li><a href='javascript:;' onClick={() => this.setState({sub_kat: ''}, () => {modal('close', 'select-sub-kat')})} className='text-muted'>Semua subkategori</a></li>
