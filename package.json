@@ -4,7 +4,7 @@
   "description": "platform untuk mengikuti dan berbagi kompetisi",
   "main": "dist-server/server/index.js",
   "scripts": {
-    "start": "npm run server:dev",
+    "start": "npm run server:watch",
     "prepublish": "npm run build:prod",
     "webpack:watch": "NODE_ENV=development webpack --watch --progress",
     "lint": "eslint src --ext .js --ext .jsx",
