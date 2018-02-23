@@ -171,7 +171,7 @@ class CompetitionDetail extends Component
                                             html={detail[encid].data.hadiah} />
                                   case 3:
                                     return <Announcements 
-                                            data={JSON.parse(detail[encid].data.dataPengumuman)} />
+                                            data={detail[encid].data.dataPengumuman != '' ? JSON.parse(detail[encid].data.dataPengumuman): {}} />
                                   case 4:
                                     return <Discussions 
                                             link={helmetdata.url} />
