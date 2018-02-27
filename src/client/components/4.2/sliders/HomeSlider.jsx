@@ -1,6 +1,6 @@
-import React, {PureComponent} from 'react'
-import {truncate} from 'string-manager'
-import {Link} from 'react-router'
+import React, { PureComponent } from 'react'
+import { truncate } from 'string-manager'
+import { Link } from 'react-router'
 import Transition from 'react-addons-css-transition-group'
 
 export default class HomeSlider extends PureComponent
@@ -32,7 +32,7 @@ export default class HomeSlider extends PureComponent
 
     render()
     {
-        const {data, meta} = this.props
+        const { data, meta } = this.props
         if(meta.code)
         {
             if(meta.code == 200)
@@ -72,13 +72,9 @@ export default class HomeSlider extends PureComponent
     }
 }
 
-const CardPreview = props => {
-    return <Transition
-        component='span'
-        transitionName='card'
-        transitionEnterTimeout={500}
-        transitionLeave={false}>
-            <div className='col-sm-6 home-slider-left'> 
+const CardPreview = (props) => {
+    return <div>
+        <div className='col-sm-6 home-slider-left'> 
             <h2>{props.title}</h2>
             <h3>Penyelenggara {props.penyelenggara}<br />Total Hadiah Senilai {props.total_hadiah}<br />Deadline {props.sisadeadline}</h3>
             <p style={{marginBottom: '1.5em'}}>{truncate(props.sort, 300, '...')}</p>
@@ -87,10 +83,10 @@ const CardPreview = props => {
             <div className='col-sm-6 home-slider-right'> 
                 <div className='home-slider-poster' style={{backgroundImage: `url(${props.poster.original})`}} />
             </div>
-    </Transition>
+    </div>
 }
 
-const CardSelector = props => {
+const CardSelector = (props) => {
     return <div className={`col-sm-6 col-md-3 home-slider-item ${props.is_active ? 'active' : ''}`}>
         <a href='javascript:;' onClick={() => props.handleClick()}>
             {props.title}
