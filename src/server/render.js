@@ -148,9 +148,9 @@ function getScript(state)
     // <script type="text/javascript" src="https://apis.google.com/js/platform.js" async defer></script>
     return `
     <script type="text/javascript">window.__data__=${ JSON.stringify(state) }</script>
-    <script type="text/javascript" src="/assets/4.2/js/script-min.js?v=${version.JS_VERSION}" defer></script>
+    <script type="text/javascript" src="/assets/4.2/js/script-min.js?v=${version.JS_VERSION}"></script>
     <script src="${ webpackAssets.vendor.js }"></script>
-    <script src="${ webpackAssets.app.js }" defer></script>
+    <script src="${ webpackAssets.app.js }"></script>
     ${process.env.NODE_ENV === 'production' ? getTrackingScript() : ''}
     `
 }
