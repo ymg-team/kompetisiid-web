@@ -1,6 +1,6 @@
-import React,{Component} from 'react'
+import React from 'react'
 
-const SidebarDashboard = () => (
+export default () => (
     <div className='col-md-2'>
         <div className='dashboard-sidebar'>
         <ul>
@@ -18,5 +18,3 @@ const SidebarDashboard = () => (
         </div>
     </div>
 )
-
-export default SidebarDashboard

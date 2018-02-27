@@ -1,9 +1,7 @@
 import React from 'react'
 
-const Iframe = (props) => (
+export default (props) => (
     <div className='row competition-iframe'>
         <iframe src={props.src} />
     </div>
 )
-
-export default Iframe

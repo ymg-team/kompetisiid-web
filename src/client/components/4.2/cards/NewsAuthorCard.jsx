@@ -1,7 +1,7 @@
 import React from 'react'
-import {Link} from 'react-router'
+import { Link } from 'react-router'
 
-const NewsAuthorCard = (props) => (
+export default (props) => (
     <div className="author">
         <Link to={`/${props.data.username}`}>
             <img className="avatar" src="/assets/4.2/img/default-avatar.jpg" />
@@ -11,5 +11,3 @@ const NewsAuthorCard = (props) => (
         <span className="text-muted">{props.data.moto}</span>
     </div>
 )
-
-export default NewsAuthorCard

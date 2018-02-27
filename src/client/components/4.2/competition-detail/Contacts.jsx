@@ -14,7 +14,7 @@ const Type = [
     {icon:'fa fa-phone'}
 ]
 
-const Contacts = (props) => (
+export default (props) => (
     <div>
         <h2>Kontak kompetisi</h2>
         <p className="text-muted">Ada pertanyaan atau ingin info lebih lanjut langsung dari penyelenggara, silahkan sampaikan melalui  kontak dibawah ini.</p>
@@ -36,5 +36,3 @@ const Contacts = (props) => (
         : <p>kontak tidak tersedia</p>}
     </div>
 )
-
-export default Contacts
