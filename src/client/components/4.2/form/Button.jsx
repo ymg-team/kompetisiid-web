@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {validator, validationSeter, validationChecker} from './Validator'
+import { validator, validationSeter, validationChecker } from './Validator'
 
 export default class Button extends Component 
 {

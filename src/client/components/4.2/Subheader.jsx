@@ -1,6 +1,6 @@
 import React from 'react'
 
-const SubHeader = (props) => (
+export default (props) => (
     <div style={{textAlign: props.text_center ? 'center' : 'left'}} className='col-md-12 filter-jelajah'>
         <div className='container'>
             <div className='row no-margin'>
@@ -10,5 +10,3 @@ const SubHeader = (props) => (
         </div>
     </div>
 )
-
-export default SubHeader

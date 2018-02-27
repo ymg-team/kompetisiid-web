@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Announcements = (props) => (
+export default (props) => (
     <div>
         <h2>Pengumuman kompetisi</h2>
         <p className="text-muted">Berisi pengumuman jika terjadi perubahan peraturan, detail hadiah, atau hal penting lainnya pada kompetisi ini.</p>
@@ -21,5 +21,3 @@ const Announcements = (props) => (
         }
     </div>
 )
-
-export default Announcements

@@ -1,5 +1,5 @@
 import React from 'react'
-import {Link} from 'react-router'
+import { Link } from 'react-router'
 
 const LabelEnd = () => (
   <div style={{'position':'absolute','background':'#e64b3b','top':'85px','margin':'0 auto','padding':'10px','color':'#FFF','opacity':'1','left':'-25%','marginLeft':'50%','fontWeight':'bold','textTransform':'uppercase','letterSpacing':'1.1px',zIndex:1}}>

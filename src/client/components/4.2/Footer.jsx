@@ -1,7 +1,7 @@
 import React from 'react'
-import {Link} from 'react-router'
+import { Link } from 'react-router'
 
-const Footer = () => (
+export default () => (
     <span>    
         <div className='col-md-12 footer'>
             <footer>
@@ -57,5 +57,3 @@ const Footer = () => (
         </div>
     </span>
 )
-
-export default Footer
