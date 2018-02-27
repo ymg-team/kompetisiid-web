@@ -6,21 +6,16 @@
   "scripts": {
     "start": "npm run server:dev",
     "prepublish": "npm run build:prod",
-    
     "build:watch": "NODE_ENV=development webpack --watch --progress",
     "build:prod": "rimraf dist-server && rimraf dist-client && npm run build-client:prod && npm run build-server:prod",
-    
     "lint": "eslint src --ext .js --ext .jsx",
     "test": "jest",
     "test:watch": "jest --watch",
-    "postinstall": "yarn build:prod",
-    
     "server:dev": "NODE_ENV=development nodemon --watch src/ --watch dist-client/ --watch public/ --exec 'node -r dotenv/config -r babel-register' ./src/server",
     "server:prod-test": "NODE_ENV=production nodemon --exec 'node -r dotenv/config' ./dist-server/server",
     "build-client:prod": "NODE_ENV=production webpack --progress",
     "build-server:prod": "NODE_ENV=production babel src -d dist-server --ignore '**/*_test.js' --copy-files",
     "zip": "rimraf dist-server.zip && rimraf dist-client.zip && bestzip dist-server.zip dist-server && bestzip dist-client.zip dist-client",
-    
     "release": "standard-version",
     "release:beta": "standard-version -p beta"
   },
@@ -88,6 +83,8 @@
     "redux-logger": "2.6.1",
     "rimraf": "^2.6.1",
     "standard-version": "^4.2.0",
-    "webpack": "^3.6.0"
+    "webpack": "^3.6.0",
+    "preact": "^8.2.7",
+    "preact-compat": "^3.18.0"
   }
 }
