@@ -1,7 +1,7 @@
 import React from 'react'
-import {Link} from 'react-router'
+import { Link } from 'react-router'
 
-const NextPrev = (props) => {
+export default (props) => {
     const {next, prev} = props
     return <div className="col-md-12">
         <div className="container">
@@ -35,5 +35,3 @@ const NextPrev = (props) => {
         </div>
     </div>
 }
-
-export default NextPrev

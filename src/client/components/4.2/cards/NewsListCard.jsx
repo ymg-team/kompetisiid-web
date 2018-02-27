@@ -1,7 +1,7 @@
 import React from 'react'
-import {Link} from 'react-router'
+import { Link } from 'react-router'
 
-const NewsListCard = (props) => {
+export default (props) => {
     const {n} = props
     const target = `/news/${n.id}/${n.nospace_title}`
     return(
@@ -32,5 +32,3 @@ const NewsListCard = (props) => {
         </div>
     )
 }
-
-export default NewsListCard

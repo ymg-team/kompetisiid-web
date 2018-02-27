@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactHelmet from 'react-helmet'
-import {toCamelCase} from 'string-manager'
+import { toCamelCase } from 'string-manager'
 
 const Helmet = (props) => {
     let {title, description, url, image, type, script, link} = props

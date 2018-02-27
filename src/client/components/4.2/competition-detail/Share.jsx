@@ -1,6 +1,6 @@
-import React, {Component} from 'react'
+import React, {PureComponent} from 'react'
 
-export default class Share extends Component 
+export default class Share extends PureComponent 
 {
     render()
     {

@@ -1,6 +1,6 @@
 import React from 'react'
 
-const TabProfile = (props) => {
+export default (props) => {
     return  (
         <div className='col-md-12'>
             <div className='container'>
@@ -22,5 +22,3 @@ const TabProfile = (props) => {
         </div>
     )
 }
-
-export default TabProfile

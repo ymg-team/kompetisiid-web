@@ -1,7 +1,7 @@
 import React from 'react'
 import Tags from '../buttons/CompetitionTags'
 
-const Regulations = (props) => {
+export default (props) => {
     const {html, encid, nospace_title} = props
     return(
         <div>
@@ -16,5 +16,3 @@ const Regulations = (props) => {
         </div>
     )
 }
-
-export default Regulations
