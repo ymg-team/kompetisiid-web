@@ -44,10 +44,12 @@ class Header extends Component
         return(
             <nav>
                 <div style={{top: q ? '-50px' : '0px'}} className='nav-header'>
-                    <a id='btn-menu' href='javascript:;'> <span className='fa fa-bars' /></a>
+                    <a id='btn-menu' href='javascript:;'> 
+                        <span className='fa fa-bars' />
+                    </a>
                     <div className='nav-left'>
                         <a className='only-mobile' href='javascript:;' id='btn-show-nav'>
-                            <i className='fa fa-bars' />
+                            <img src="/assets/4.2/img/icon-128x128.png" style={{width:'40px'}} />
                         </a>
                         <ul className='top-menu' id='top-menu'>
                             <a style={{position:'absolute', top: '0.5em', right: '0.5em'}} id='btn-hide-nav' className=' btn-close-nav only-mobile fa fa-close' href='javascript:;' />
@@ -69,7 +71,7 @@ class Header extends Component
                             */}
                         </ul>
                     </div>
-                    <div className='logo'>
+                    <div className='logo hide-mobile'>
                         <Link to='/'><img src='/assets/4.2/img/icon-128x128.png' /></Link>
                     </div>
                     <div className='nav-right'>
