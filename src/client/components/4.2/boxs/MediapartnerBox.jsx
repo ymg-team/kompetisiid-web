@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {Link} from 'react-router'
+import { Link } from 'react-router-dom'
 import {truncate} from 'string-manager'
 import Loader from '../loaders/DefaultLoader'
 
@@ -8,14 +8,14 @@ export default class MediapartnerBox extends Component
 
   generateList()
   {
-    const {data} = this.props
+    const { data } = this.props
     return data.map((n, key) => {
       return (
-        <div key={key} className='row'>
+        <div key={ key } className='row'>
           <div className='col-md-12'>
             <div className='card-mediapartner'>
               <div className='thumbnails'>
-                <img src={n.poster.small} />
+                <img src={ n.poster.small } />
               </div>
               <div className='details'>
                 <span className='categories'>
@@ -23,9 +23,9 @@ export default class MediapartnerBox extends Component
                   <a className='muted' href='#'>{n.subkategori}</a>
                 </span>
                 <Link to={`/competition/${n.id_kompetisi}/regulations/${n.nospace_title}`}>
-                  <h3>{n.title}</h3>
+                  <h3>{ n.title }</h3>
                 </Link>
-                <small>Dipasang <Link href={`/${n.author.username}`}>{n.author.username}</Link></small>
+                <small>Dipasang <Link to={`/${n.author.username}`}>{n.author.username}</Link></small>
                 <br/>
                 <span>
                   {truncate(n.sort, 300, '...')}

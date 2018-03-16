@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router'
+import { Link } from 'react-router-dom'
 import { openInNewTab } from '../../../helpers/LinkGenerator'
 import { eventFire } from '../../../helpers/DomEvents'
 import copy from 'copy-to-clipboard'

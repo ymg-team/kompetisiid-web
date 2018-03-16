@@ -10,7 +10,7 @@ import Announcements from '../../components/4.2/competition-detail/Announcements
 import Contacts from '../../components/4.2/competition-detail/Contacts'
 import Share from '../../components/4.2/competition-detail/Share'
 import Discussions from '../../components/4.2/competition-detail/Discussions'
-import { Link } from 'react-router'
+import { Link } from 'react-router-dom'
 import NextPrev from '../../components/4.2/navigations/NextPrev'
 import ErrorCard from '../../components/4.2/cards/ErrorCard'
 import Host from '../../../config/host'

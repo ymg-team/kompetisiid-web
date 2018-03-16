@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {Link} from 'react-router'
+import { Link } from 'react-router-dom'
 import * as BeritaActions from '../../../store/berita/actions'
 import Helmet from '../../components/Helmet'
 import Author from '../../components/4.2/cards/NewsAuthorCard'
@@ -29,8 +29,8 @@ export default class NewsDetail extends Component
 
     componentWillReceiveProps(np)
     {
-        const { encid } = np.params
-        if((encid != this.props.params.encid) || np.berita.detail[encid].meta)
+        const { encid } = np.match.params
+        if((encid != this.props.match.params.encid) || np.berita.detail[encid].meta)
         {
             window.scrollTo(0,0)
             this.resetDisquss(np)
@@ -40,7 +40,7 @@ export default class NewsDetail extends Component
 
     resetDisquss(props)
     {
-        const url = `${Host[process.env.NODE_ENV].front}/news/${props.params.encid}/${props.params.title}`
+        const url = `${Host[process.env.NODE_ENV].front}/news/${props.match.params.encid}/${props.match.params.title}`
         // disquss reset after 1000ms
         if(window.DISQUS)
             DISQUS.reset({
@@ -54,7 +54,7 @@ export default class NewsDetail extends Component
 
     reqData(props)
     {
-        const { encid } = props.params
+        const { encid } = props.match.params
         if(!this.props.berita.detail[encid])
         {
             this.props.dispatch(BeritaActions.fetchBeritaDetail(encid))
@@ -87,8 +87,8 @@ export default class NewsDetail extends Component
 
     render()
     {
-        const {encid, title} = this.props.params
-        const {detail, data}  = this.props.berita
+        const { encid, title } = this.props.match.params
+        const { detail, data }  = this.props.berita
         let helmetdata = {
             title: 'Berita Kompetisi.id',
             description: 'Berita dari Kompetisi.id',

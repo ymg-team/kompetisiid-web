@@ -4,7 +4,7 @@ import Subheader from '../../components/4.2/Subheader'
 import Loader from '../../components/4.2/loaders/DefaultLoader'
 import {setCategories, getCategories} from '../../../store/kompetisi/actions'
 import {connect} from 'react-redux'
-import {Link} from 'react-router'
+import { Link } from 'react-router-dom'
 import {getStorage, setStorage} from '../../../store/helpers/LocalStorage'
 
 class Categories extends Component 

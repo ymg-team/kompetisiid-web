@@ -4,7 +4,7 @@
 import React, {Component} from 'react'
 import Input from '../components/form/Input'
 import Helmet from 'react-helmet'
-import {Link} from 'react-router'
+import { Link } from 'react-router-dom'
 import Validator from '../helpers/Validator'
 import Text from '../components/LoginText'
 
