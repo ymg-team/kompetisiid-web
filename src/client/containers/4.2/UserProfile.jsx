@@ -25,7 +25,7 @@ class UserProfile extends Component
 
     reqData(props)
     {
-        const {username} = props.params
+        const {username} = props.match.params
         if(!this.props.profile[username])
         {
             const {dispatch} = props 
@@ -36,8 +36,8 @@ class UserProfile extends Component
 
     render()
     {
-        const {profile} = this.props
-        const {username} = this.props.params
+        const { profile } = this.props
+        const { username } = this.props.match.params
         let helmetdata = {}
 
         if(profile[username] && profile[username].meta)

@@ -24,7 +24,7 @@ class Login extends Component
 
     handleLogin()
     {
-        const {username, password} = this.state
+        const { username, password } = this.state
         this.setState({
             onprogress: true
         }, () => {
@@ -63,8 +63,8 @@ class Login extends Component
 
     render()
     {
-        const {username, password, onprogress} = this.state
-        const {profile, login} = this.props 
+        const { username, password, onprogress } = this.state
+        const { profile, login } = this.props 
         const is_userfound = profile[username] && profile[username].meta && profile[username].meta.code == 200
         
         //generate alert

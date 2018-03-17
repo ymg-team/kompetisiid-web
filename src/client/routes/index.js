@@ -10,7 +10,7 @@ import Browse from './browse'
 import Competition from './competition'
 import Account from './account'
 import Add from './add'
-import Profile from './profile'
+import User from './user'
 import Dashboard from './dashboard'
 import Careers from './careers'
 
@@ -42,6 +42,7 @@ export default [
                     Competition,
                     Add,
                     Categories,
+                    User,
                     {
                         path: '*',
                         error_code: 404,

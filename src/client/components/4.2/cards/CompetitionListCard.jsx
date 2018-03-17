@@ -28,7 +28,7 @@ const CompetitionListCard = (props) => {
             </Link>
             <span>dipasang</span>
             {' '}
-            <Link className='muted' to={`/${n.author.username}`}>{n.author.username}</Link>
+            <Link className='muted' to={`/user/${n.author.username}`}>{n.author.username}</Link>
             <progress value={setProgressBar(n.deadline_at)} max={100} />
             <div className='types'> 
               {n.is_garansi ? <span title='kompetisi sudah diverifikasi keberadaannya oleh kru KI' className='label label-green'>Garansi</span> : null }

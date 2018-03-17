@@ -25,7 +25,7 @@ export default class MediapartnerBox extends Component
                 <Link to={`/competition/${n.id_kompetisi}/regulations/${n.nospace_title}`}>
                   <h3>{ n.title }</h3>
                 </Link>
-                <small>Dipasang <Link to={`/${n.author.username}`}>{n.author.username}</Link></small>
+                <small>Dipasang <Link to={`/user/${n.author.username}`}>{n.author.username}</Link></small>
                 <br/>
                 <span>
                   {truncate(n.sort, 300, '...')}

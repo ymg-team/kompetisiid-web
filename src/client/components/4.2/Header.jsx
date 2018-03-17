@@ -88,7 +88,7 @@ class Header extends Component
                                         </a>
                                         <div className='dropdown-items' id='avatar-menu'>
                                             <ul>
-                                                <li><Link to={`/${session.data.username}`}>Profil saya</Link></li>
+                                                <li><Link to={`/user/${session.data.username}`}>Profil saya</Link></li>
                                                 <li><Link to={`/dashboard/competition/live`}>Dashboard</Link></li>
                                                 <li><Link to='/settings'>Setelan</Link></li>
                                                 <li><a href='javascript:;' onClick={() => this.handleLogout()}>Logout</a></li>

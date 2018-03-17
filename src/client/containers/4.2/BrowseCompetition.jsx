@@ -24,7 +24,7 @@ class BrowseCompetition extends Component
   constructor(props)
   {
       super(props)
-      this.state = generateState(this.props.location.search ? queryToObj(this.props.location.search) : {}, this.props.match.params)
+      this.state = generateState(this.props.location.search ? queryToObj(this.props.location.search.replace('?', '')) : {}, this.props.match.params)
   }
 
   componentDidMount()
@@ -45,7 +45,7 @@ class BrowseCompetition extends Component
 
   componentWillReceiveProps(np)
   {
-    this.setState(Object.assign(generateState(np.location.search ? queryToObj(np.location.search) : {}, np.match.params), setCategories(np, this.state)), () => {
+    this.setState(Object.assign(generateState(np.location.search ? queryToObj(np.location.search.replace('?','')) : {}, np.match.params), setCategories(np, this.state)), () => {
         this.reqData()
     })
   }
@@ -93,8 +93,8 @@ class BrowseCompetition extends Component
 
   render()
   {
-    const {tag, username, main_kat, sub_kat, q} = this.state
-    const {data, categories} = this.props.kompetisi
+    const { tag, username, main_kat, sub_kat, q } = this.state
+    const { data, categories } = this.props.kompetisi
     const filter = generateFilter(this.state)
     const query = queryToObj(this.props.location.search.replace('?', '')) || {}
 
