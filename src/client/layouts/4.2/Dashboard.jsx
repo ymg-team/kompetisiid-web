@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import Footer from '../../components/4.2/Footer'
 import Header from '../../components/4.2/Header'
 import Sidebar from '../../components/4.2/navigations/SidebarDashboard'
-import {Link} from 'react-router'
+import { Link } from 'react-router-dom'
 
 export default class Dashboard extends Component 
 {

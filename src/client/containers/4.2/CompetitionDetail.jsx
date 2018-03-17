@@ -10,7 +10,7 @@ import Announcements from '../../components/4.2/competition-detail/Announcements
 import Contacts from '../../components/4.2/competition-detail/Contacts'
 import Share from '../../components/4.2/competition-detail/Share'
 import Discussions from '../../components/4.2/competition-detail/Discussions'
-import { Link } from 'react-router'
+import { Link } from 'react-router-dom'
 import NextPrev from '../../components/4.2/navigations/NextPrev'
 import ErrorCard from '../../components/4.2/cards/ErrorCard'
 import Host from '../../../config/host'
@@ -30,7 +30,7 @@ class CompetitionDetail extends Component
   constructor(props){
       super(props)
       this.state = {
-          encid: this.props.params.encid
+          encid: this.props.match.params.encid
       }
   }
   
@@ -44,8 +44,8 @@ class CompetitionDetail extends Component
 
   componentWillReceiveProps(np)
   {
-      this.setState({encid: np.params.encid})
-      if(this.props.params.encid != np.params.encid)
+      this.setState({encid: np.match.params.encid})
+      if(this.props.match.params.encid != np.match.params.encid)
       {
         if(window != undefined) 
           window.scrollTo(0,0)
@@ -61,16 +61,16 @@ class CompetitionDetail extends Component
 
   reqData(props)
   {
-    const {encid} = props.params
+    const { encid } = props.match.params
     if(props.route.name != 'competition_regulation') window.scrollTo(0,0)
     if(!props.kompetisi.detail[encid]) this.props.dispatch(getDetail(encid))
   }
 
   reqRelatedCompetitions(props)
   {
-    const {encid} = props.params
-    if(!props.kompetisi.data[`related_${encid}`]) 
-      this.props.dispatch(getRelated(encid, `related_${encid}`))
+    const { encid } = props.match.params
+    if(!props.kompetisi.data[`related_${ encid }`]) 
+      this.props.dispatch(getRelated(encid, `related_${ encid }`))
   }
 
   render()

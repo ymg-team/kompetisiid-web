@@ -8,7 +8,7 @@ const BUILD_DIR = '../dist-client'
 module.exports = {
   entry: {
       app: ['./src/client/index.js'],
-      vendor: ['react','react-router','react-helmet','redux','react-redux','superagent','redux-thunk','history','react-transition-group']
+      vendor: ['react','react-router','react-router-dom','react-router-config','react-helmet','redux','react-redux','superagent','redux-thunk','react-transition-group']
   },
 
   output: {
@@ -34,10 +34,10 @@ module.exports = {
 
   resolve: {
     extensions: ['.js', '.jsx'],
-    alias: {
-        "react": "preact-compat",
-        "react-dom": "preact-compat"
-    }
+    // alias: {
+    //     "react": "preact-compat",
+    //     "react-dom": "preact-compat"
+    // }
   },
 
   module: {

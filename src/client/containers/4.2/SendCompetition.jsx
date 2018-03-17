@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {Link} from 'react-router'
+import { Link } from 'react-router-dom'
 import Subheader from '../../components/4.2/Subheader'
 import Helmet from '../../components/Helmet'
 import {title, desc} from './AddCompetition'

@@ -3,7 +3,7 @@ import Card from '../../../components/4.2/cards/CompetitionListCard'
 import Loader from '../loaders/CompetitionLoader'
 import Transition from 'react-transition-group/Transition'
 import { duration, style } from '../../Transtition'
-import { Link } from 'react-router'
+import { Link } from 'react-router-dom'
 
 function generateList(size, n)
 {

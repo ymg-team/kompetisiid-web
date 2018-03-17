@@ -1,81 +1,105 @@
 /**
+ * بِسْمِ اللهِ الرَّحْمنِ الرَّحِيمِ
  * Created by yussan on 06/10/16.
- *  الرَّحْمَنِالرَّحِيم اللَّهِ بِسْمِ
  */
 
-import Berita from './berita'
+//  routes
+import News from './berita'
 import Categories from './categories'
-import Jelajah from './jelajah'
-import Kompetisi from './kompetisi'
+import Browse from './browse'
+import Competition from './competition'
 import Account from './account'
-import Pasang from './pasang'
-import Profile from './profile'
+import Add from './add'
+import User from './user'
 import Dashboard from './dashboard'
 import Careers from './careers'
+
+// containers
 import Login from '../containers/4.2/Login'
-
-
 import Home from '../containers/4.2/Home'
 import Error from '../containers/4.2/Error'
 
+// layouts
+import LayoutRoot from '../layouts/4.2/Root'
 import LayoutHome from '../layouts/4.2/Home'
 import LayoutError from '../layouts/4.2/Error'
 import LayoutDashboard from '../layouts/4.2/Dashboard'
 
-export default {
-    path: '/',
-    childRoutes: [
-        {
-            component: LayoutError,
-            childRoutes: [
-                {
-                    path: 'dashboard',
-                    error_code: 404,
-                    error_msg: 'Halaman yang anda kunjungi tidak ditemukan',
-                    component: Error
-                }
-            ]
-        },
-        {
-            component: LayoutError,
-            childRoutes: [
-                {
-                    path: 'login',
-                    component: Login
-                }
-            ]
-        },
-        {
-            component: LayoutDashboard,
-            childRoutes: [
-                Dashboard
-            ]  
-        },
-        {
-            component: LayoutHome,
-            indexRoute: {
-                isRed: true,
-                component: Home
-            },
-            childRoutes: [
-                Berita,
-                Categories,
-                Jelajah,
-                Kompetisi,
-                Account,
-                Pasang,
-                Careers,
-                Profile
-            ]
-        },
-        {
-            path: '*',
-            component: LayoutError,
-            indexRoute: {
-                error_code: 404,
-                error_msg: 'Halaman yang anda kunjungi tidak ditemukan',
-                component: Error
+export default [
+    {
+        component: LayoutRoot,
+        routes: [
+            {
+                component: LayoutHome,
+                routes: [
+                    {
+                        path: '/',
+                        exact: true,
+                        component: Home
+                    },
+                    News,
+                    Browse,
+                    Competition,
+                    Add,
+                    Categories,
+                    User,
+                    {
+                        path: '*',
+                        error_code: 404,
+                        error_msg: 'Halaman yang anda kunjungi tidak ditemukan',
+                        component: Error
+                    }, 
+                ]
             }
-        }           
-    ]
-}
+        ]
+    }
+]
+
+// const old_routes =  {
+//     path: '/',
+//     childRoutes: [
+//         {
+//             component: LayoutError,
+//             childRoutes: [
+//                 {
+//                     path: 'dashboard',
+//                     error_code: 404,
+//                     error_msg: 'Halaman yang anda kunjungi tidak ditemukan',
+//                     component: Error
+//                 }
+//             ]
+//         },
+//         {
+//             component: LayoutError,
+//             childRoutes: [
+//                 {
+//                     path: 'login',
+//                     component: Login
+//                 }
+//             ]
+//         },
+//         {
+//             component: LayoutDashboard,
+//             childRoutes: [
+//                 Dashboard
+//             ]  
+//         },
+//         {
+//             component: LayoutHome,
+//             indexRoute: {
+//                 isRed: true,
+//                 component: Home
+//             },
+//             childRoutes: [
+//                 Berita,
+//                 Categories,
+//                 Jelajah,
+//                 Kompetisi,
+//                 Account,
+//                 Pasang,
+//                 Careers,
+//                 Profile
+//             ]
+//         }, 
+//     ]
+// }

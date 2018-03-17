@@ -1,8 +1,8 @@
-import React, {Component} from 'react'
-import {Link} from 'react-router'
+import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 
-import {connect} from 'react-redux'
-import {logout} from '../../../store/user/actions'
+import { connect } from 'react-redux'
+import { logout } from '../../../store/user/actions'
 
 class Header extends Component 
 {
@@ -22,7 +22,7 @@ class Header extends Component
 
     componentWillReceiveProps(np)
     {
-        const {logout} = np
+        const { logout } = np
         if(logout.meta)
         {
             if(logout.meta.code === 201)
@@ -40,10 +40,10 @@ class Header extends Component
 
     render()
     {
-        const {q,session} = this.props
+        const { q,session } = this.props
         return(
             <nav>
-                <div style={{top: q ? '-50px' : '0px'}} className='nav-header'>
+                <div style={{ top: q ? '-50px' : '0px' }} className='nav-header'>
                     <a id='btn-menu' href='javascript:;'> 
                         <span className='fa fa-bars' />
                     </a>
@@ -88,7 +88,7 @@ class Header extends Component
                                         </a>
                                         <div className='dropdown-items' id='avatar-menu'>
                                             <ul>
-                                                <li><Link to={`/${session.data.username}`}>Profil saya</Link></li>
+                                                <li><Link to={`/user/${session.data.username}`}>Profil saya</Link></li>
                                                 <li><Link to={`/dashboard/competition/live`}>Dashboard</Link></li>
                                                 <li><Link to='/settings'>Setelan</Link></li>
                                                 <li><a href='javascript:;' onClick={() => this.handleLogout()}>Logout</a></li>

@@ -24,7 +24,7 @@ class BrowseCompetition extends Component
   constructor(props)
   {
       super(props)
-      this.state = generateState(this.props.location.query, this.props.params)
+      this.state = generateState(this.props.location.search ? queryToObj(this.props.location.search.replace('?', '')) : {}, this.props.match.params)
   }
 
   componentDidMount()
@@ -45,7 +45,7 @@ class BrowseCompetition extends Component
 
   componentWillReceiveProps(np)
   {
-    this.setState(Object.assign(generateState(np.location.query, np.params), setCategories(np, this.state)), () => {
+    this.setState(Object.assign(generateState(np.location.search ? queryToObj(np.location.search.replace('?','')) : {}, np.match.params), setCategories(np, this.state)), () => {
         this.reqData()
     })
   }
@@ -93,8 +93,8 @@ class BrowseCompetition extends Component
 
   render()
   {
-    const {tag, username, main_kat, sub_kat, q} = this.state
-    const {data, categories} = this.props.kompetisi
+    const { tag, username, main_kat, sub_kat, q } = this.state
+    const { data, categories } = this.props.kompetisi
     const filter = generateFilter(this.state)
     const query = queryToObj(this.props.location.search.replace('?', '')) || {}
 
@@ -201,7 +201,7 @@ class BrowseCompetition extends Component
                                 href='javascript:;' 
                                 onClick={() => this.setState({main_kat: ''}, () => {
                                     modal('close', 'select-main-kat')
-                                    this.context.router.push('/browse')
+                                    this.props.history.push('/browse')
                                 })} 
                                 className='text-muted'>
                                 semua kategori
@@ -213,7 +213,7 @@ class BrowseCompetition extends Component
                             href='javascript:;' 
                             onClick={() => {
                                 modal('close', 'select-main-kat')
-                                this.context.router.push(`/browse/${n.main_kat}`)
+                                this.props.history.push(`/browse/${n.main_kat}`)
                             }} 
                             className='text-muted'>{n.main_kat}</a>
                         </li>
@@ -231,7 +231,15 @@ class BrowseCompetition extends Component
                 </div>
                 <hr />
                 <ul className='vertical-menu list-categories'>
-                    <li><a href='javascript:;' onClick={() => this.setState({sub_kat: ''}, () => {modal('close', 'select-sub-kat')})} className='text-muted'>Semua subkategori</a></li>
+                    <li>
+                        <a href='javascript:;' 
+                            onClick={() => this.setState({sub_kat: ''}, () => {
+                                modal('close', 'select-sub-kat')
+                                this.props.history.push(`/browse/${categories.data[main_kat].main_kat}`)
+                            })} 
+                            className='text-muted'>Semua subkategori
+                        </a>
+                    </li>
                     {
                         parseInt(main_kat) >= 0 ?
                             categories.data[main_kat].subkat.map((n, key) => {
@@ -240,7 +248,7 @@ class BrowseCompetition extends Component
                                 href='javascript:;' 
                                 onClick={() => {
                                     modal('close', 'select-sub-kat')
-                                    this.context.router.push(`/browse/${categories.data[main_kat].main_kat}/${n.sub_kat}`)
+                                    this.props.history.push(`/browse/${categories.data[main_kat].main_kat}/${n.sub_kat}`)
                                 }}
                                 className='text-muted'>{n.sub_kat}</a>
                             </li>
@@ -258,25 +266,25 @@ class BrowseCompetition extends Component
   }
 }
 
-function setCategories(props, state)
+function setCategories(props = {}, state = {})
 {
     let main_kat, sub_kat
     if(props.kompetisi.categories.meta)
     {
-        if(props.params.mainkat)
+        if(props.match.params.mainkat)
         {
             props.kompetisi.categories.data.map((n, key) => {
-                if(n.main_kat === props.params.mainkat) main_kat = key
+                if(n.main_kat === props.match.params.mainkat) main_kat = key
             })
         }else 
         {
             main_kat = ''
         }
 
-        if(props.params.subkat && props.kompetisi.categories.data[main_kat].subkat )
+        if(props.match.params.subkat && props.kompetisi.categories.data[main_kat].subkat )
         {
             props.kompetisi.categories.data[main_kat].subkat.map((n, key) => {
-                if(n.sub_kat === props.params.subkat) sub_kat = key
+                if(n.sub_kat === props.match.params.subkat) sub_kat = key
             })
         }else 
         {
@@ -289,10 +297,10 @@ function setCategories(props, state)
     }
 }
 
-function generateState(query, params)
+function generateState(query = {}, params = {})
 {
-    const {tag, username} = params
-    const {mediapartner, berakhir, garansi, q} = query
+    const { tag, username } = params
+    const { mediapartner, berakhir, garansi, q } = query
 
     return {
         main_kat: '',
@@ -306,13 +314,13 @@ function generateState(query, params)
     }
 }
 
-function generateParams(n, props = null)
+function generateParams(n = {}, props = null)
 {
-    const {main_kat, sub_kat, is_mediapartner, is_berakhir, q, tag, username, is_garansi} = n
+    const { main_kat, sub_kat, is_mediapartner, is_berakhir, q, tag, username, is_garansi } = n
     let Params = {}
     if(props)
     {
-        const {categories} = props.kompetisi
+        const { categories } = props.kompetisi
         if(parseInt(main_kat) >= 0) Params.mainkat = categories.data[main_kat].main_kat
         if(parseInt(sub_kat) >= 0) Params.subkat = categories.data[main_kat].subkat[sub_kat].sub_kat
     }
@@ -327,14 +335,14 @@ function generateParams(n, props = null)
     return Params
 }
 
-function generateFilter(n)
+function generateFilter(n = {})
 {
-    const {main_kat, sub_kat, is_mediapartner, is_berakhir, q, tag, is_garansi} = n
+    const { main_kat, sub_kat, is_mediapartner, is_berakhir, q, tag, is_garansi } = n
     let Filter = 'jelajah'
-    if(parseInt(main_kat) >= 0) Filter = `${Filter}_${main_kat}`
-    if(parseInt(sub_kat) >= 0) Filter = `${Filter}_${sub_kat}`
-    if(q != '') Filter = `${Filter}_${q}`
-    if(tag != '') Filter = `${Filter}_${tag}`
+    if(parseInt(main_kat) >= 0) Filter += `_${main_kat}`
+    if(parseInt(sub_kat) >= 0) Filter += `_${sub_kat}`
+    if(q != '') Filter += `_${q}`
+    if(tag != '') Filter += `_${tag}`
     Filter = `${Filter}_${is_mediapartner}_${is_berakhir}_${is_garansi}`
 
     return Filter
@@ -355,10 +363,6 @@ function mapDispatchToProps(dispatch)
         actions: bindActionCreators(Object.assign({}, KompetisiActions), dispatch),
         dispatch
     }
-}
-
-BrowseCompetition.contextTypes = {
-    router: PropTypes.func.isRequired
 }
 
 export default connect(

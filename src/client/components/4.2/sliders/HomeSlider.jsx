@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react'
 import { truncate } from 'string-manager'
-import { Link } from 'react-router'
+import { Link } from 'react-router-dom'
 import Transition from 'react-addons-css-transition-group'
 
 export default class HomeSlider extends PureComponent
