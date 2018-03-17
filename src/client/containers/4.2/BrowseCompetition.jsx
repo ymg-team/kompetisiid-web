@@ -45,7 +45,7 @@ class BrowseCompetition extends Component
 
   componentWillReceiveProps(np)
   {
-    this.setState(Object.assign(generateState(np.location.search ? queryToObj(np.location.search) : {}, np.params), setCategories(np, this.state)), () => {
+    this.setState(Object.assign(generateState(np.location.search ? queryToObj(np.location.search) : {}, np.match.params), setCategories(np, this.state)), () => {
         this.reqData()
     })
   }
@@ -364,10 +364,6 @@ function mapDispatchToProps(dispatch)
         dispatch
     }
 }
-
-// BrowseCompetition.contextTypes = {
-//     router: PropTypes.func.isRequired
-// }
 
 export default connect(
     mapStateToProps,

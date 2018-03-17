@@ -7,9 +7,9 @@
 import News from './berita'
 import Categories from './categories'
 import Browse from './browse'
-import Kompetisi from './kompetisi'
+import Competition from './competition'
 import Account from './account'
-import Pasang from './pasang'
+import Add from './add'
 import Profile from './profile'
 import Dashboard from './dashboard'
 import Careers from './careers'
@@ -39,6 +39,8 @@ export default [
                     },
                     News,
                     Browse,
+                    Competition,
+                    Add,
                     {
                         path: '*',
                         error_code: 404,
