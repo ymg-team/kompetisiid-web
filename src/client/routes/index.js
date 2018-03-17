@@ -41,6 +41,7 @@ export default [
                     Browse,
                     Competition,
                     Add,
+                    Categories,
                     {
                         path: '*',
                         error_code: 404,
