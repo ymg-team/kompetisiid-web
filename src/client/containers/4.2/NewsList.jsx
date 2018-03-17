@@ -13,7 +13,7 @@ class NewsList extends Component
 {
     static fetchData({store})
     {
-        return store.dispatch(fetchBerita({limit:Limit}, Filter))
+        return store.dispatch(fetchBerita({ limit: Limit }, Filter))
     }
 
     constructor(props)
@@ -98,7 +98,7 @@ function mapDispatchToProps(dispatch)
     }
 }
 
-module.exports = connect(
+export default connect(
     mapStateToProps,
     mapDispatchToProps
 )(NewsList)

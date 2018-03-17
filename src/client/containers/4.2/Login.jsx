@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import Input from '../../components/4.2/form/InputText'
 import Button from '../../components/4.2/form/Button'
 import {validate} from '../../components/4.2/form/Validator'
-import {Link} from 'react-router'
+import { Link } from 'react-router-dom'
 import Helmet from '../../components/Helmet'
 import AuthFacebook from '../../components/4.2/buttons/AuthFacebook'
 import AuthGoogle from '../../components/4.2/buttons/AuthGoogle'
@@ -24,7 +24,7 @@ class Login extends Component
 
     handleLogin()
     {
-        const {username, password} = this.state
+        const { username, password } = this.state
         this.setState({
             onprogress: true
         }, () => {
@@ -63,8 +63,8 @@ class Login extends Component
 
     render()
     {
-        const {username, password, onprogress} = this.state
-        const {profile, login} = this.props 
+        const { username, password, onprogress } = this.state
+        const { profile, login } = this.props 
         const is_userfound = profile[username] && profile[username].meta && profile[username].meta.code == 200
         
         //generate alert

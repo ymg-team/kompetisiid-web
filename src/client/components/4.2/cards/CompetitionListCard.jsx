@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router'
+import { Link } from 'react-router-dom'
 
 const LabelEnd = () => (
   <div style={{'position':'absolute','background':'#e64b3b','top':'85px','margin':'0 auto','padding':'10px','color':'#FFF','opacity':'1','left':'-25%','marginLeft':'50%','fontWeight':'bold','textTransform':'uppercase','letterSpacing':'1.1px',zIndex:1}}>
@@ -28,7 +28,7 @@ const CompetitionListCard = (props) => {
             </Link>
             <span>dipasang</span>
             {' '}
-            <Link className='muted' to={`/${n.author.username}`}>{n.author.username}</Link>
+            <Link className='muted' to={`/user/${n.author.username}`}>{n.author.username}</Link>
             <progress value={setProgressBar(n.deadline_at)} max={100} />
             <div className='types'> 
               {n.is_garansi ? <span title='kompetisi sudah diverifikasi keberadaannya oleh kru KI' className='label label-green'>Garansi</span> : null }

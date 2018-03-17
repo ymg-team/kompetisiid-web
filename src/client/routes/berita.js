@@ -1,57 +1,32 @@
 import NewsDetail from '../containers/4.2/NewsDetail'
 import NewsList from '../containers/4.2/NewsList'
-
 import Error from '../containers/4.2/Error'
 
+import EmptyLayout from '../layouts/4.2/Empty'
+
 export default {
-    childRoutes: [
+    path: '/news',
+    component: EmptyLayout,
+    routes: [
         {
-            path: 'news',
-            indexRoute: {
-                component: NewsList
-            },
-            childRoutes: [
-                {
-                    path: 'tag',
-                    error_code: 404,
-                    error_msg: 'Halaman yang anda kunjungi tidak ditemukan',
-                    component: Error
-                },
-                {
-                    path: 'tag/:tag',
-                    component: NewsList
-                },
-                {
-                    path: ':encid(/:title)',
-                    component: NewsDetail
-                }
-            ]
+            path: '/news',
+            exact: true,
+            component: NewsList
         },
         {
-            path: 'berita',
-            indexRoute: {
-                component: NewsList
-            },
-            childRoutes: [
-                {
-                    path: 'tag',
-                    error_code: 404,
-                    error_msg: 'Halaman yang anda kunjungi tidak ditemukan',
-                    component: Error
-                },
-                {
-                    path: 'tag/:tag',
-                    component: NewsList
-                },
-                {
-                    path: 'baca/:encid(/:title)',
-                    component: NewsDetail
-                },
-                {
-                    path: ':encid(/:title)',
-                    component: NewsDetail
-                }
-            ]
+            path: '/news/tag',
+            exact: true, 
+            component: Error
+        },
+        {
+            path: '/news/tag/:tag',
+            exact: true, 
+            component: NewsList
+        },
+        {
+            path: '/news/:encid/:title',
+            exact: true,
+            component: NewsDetail
         }
     ]
 }

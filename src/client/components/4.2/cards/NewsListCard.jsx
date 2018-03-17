@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router'
+import { Link } from 'react-router-dom'
 
 export default (props) => {
     const {n} = props
@@ -21,7 +21,7 @@ export default (props) => {
                     <small>
                         diposting oleh
                         {' '}
-                        <Link to={`/${n.username}`}>{n.username}</Link>
+                        <Link to={`/user/${n.username}`}>{n.username}</Link>
                     </small>
                         <br />
                     <a className='muted' href='#'>

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router'
+import { Link } from 'react-router-dom'
 import { openInNewTab } from '../../../helpers/LinkGenerator'
 import { eventFire } from '../../../helpers/DomEvents'
 import copy from 'copy-to-clipboard'
@@ -13,11 +13,11 @@ const CompetitionDetailBox = (props) => {
             <div className='col-md-12'>
                 <div className='container'>
                 <div className='competition-author'>
-                        <Link to={`/${data.author.username}`} title={`ke profil ${data.author.username}`}>
+                        <Link to={`/user/${data.author.username}`} title={`ke profil ${data.author.username}`}>
                             <img style={{float:'left',marginRight:'10px'}} src='/assets/4.2/img/default-avatar.jpg' />
                         </Link>
                         <p>
-                            dipasang oleh <Link className='text-muted' to={`/${data.author.username}`}>{data.author.username}</Link>
+                            dipasang oleh <Link className='text-muted' to={`/user/${data.author.username}`}>{data.author.username}</Link>
                             <br />
                             <small className='text-muted'>{data.created_in} di
                                 {' '}

@@ -18,9 +18,9 @@ class CompetitionIframe extends Component
     {
         super(props)
         let state = {}
-        const {encid} = props.params
-        const {iframe_type} = props.route
-        const {kompetisi} = props
+        const { encid } = props.match.params
+        const { iframe_type } = props.route
+        const { kompetisi } = props
         if(kompetisi.detail[encid] && kompetisi.detail[encid].meta && kompetisi.detail[encid].meta.code == 200)
         {
             state = {
@@ -33,10 +33,10 @@ class CompetitionIframe extends Component
 
     render()
     {
-        const {encid} = this.props.params
-        const {iframe_type} = this.props.route
-        const {is_redirect} = this.state
-        const {kompetisi} = this.props
+        const { encid } = this.props.match.params
+        const { iframe_type } = this.props.route
+        const { is_redirect } = this.state
+        const { kompetisi } = this.props
         return(
             <div>
                 {typeof(is_redirect) != 'undefined' ?
@@ -51,7 +51,7 @@ class CompetitionIframe extends Component
 
 function mapStateToProps(state)
 {
-    const {Kompetisi} = state
+    const { Kompetisi } = state
     return {
         kompetisi: Kompetisi
     }

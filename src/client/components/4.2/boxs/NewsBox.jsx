@@ -3,7 +3,7 @@ import Card from '../cards/NewsListCard'
 import Loader from '../loaders/NewsLoader'
 import Transition from 'react-transition-group/Transition'
 import { duration, style } from '../../Transtition'
-import { Link } from 'react-router'
+import { Link } from 'react-router-dom'
 
 export default class NewsBox extends Component 
 {
