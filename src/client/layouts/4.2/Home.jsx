@@ -24,16 +24,25 @@ export default class LayoutHome extends Component
     render()
     {
         const { q } = this.state
-        return(
-            <div>
-                <Header 
-                    q= { q } 
-                    setState={( obj ) => this.setState( obj )}
-                    />
-                { renderRoutes(this.props.route.routes) }    
-                <Footer />
-                <div id='fullalert' />
-            </div>
-        )
+        return [
+            <Header 
+                q= { q } 
+                setState={( obj ) => this.setState( obj )}
+                />,
+            renderRoutes(this.props.route.routes),
+            <Footer />,
+            <div id='fullalert' />
+        ]
+        // return(
+        //     <div>
+        //         <Header 
+        //             q= { q } 
+        //             setState={( obj ) => this.setState( obj )}
+        //             />
+        //         { renderRoutes(this.props.route.routes) }    
+        //         <Footer />
+                
+        //     </div>
+        // )
     }
 }
