@@ -31,6 +31,8 @@ class Home extends Component
 
   componentDidMount()
   {
+    window.scroll(0, 0)
+
     if(!this.props.kompetisi.data.home_latest)
       this.props.dispatch(fetchJelajah({limit:9}, 'home_latest'))
 
@@ -127,7 +129,7 @@ class Home extends Component
 
 function mapStateToProps(state)
 {
-    const {Kompetisi, Berita} = state
+    const { Kompetisi, Berita } = state
     return {
         kompetisi: Kompetisi,
         berita: Berita

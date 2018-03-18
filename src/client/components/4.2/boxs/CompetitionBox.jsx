@@ -25,7 +25,7 @@ const CompetitionBox = (props) => {
                   meta && meta.code == 200 && subtitle ?
                       <span style={{display: 'table'}}>
                           <br />
-                          menampilkan <strong> {data.length}&nbsp;</strong>dari&nbsp;<strong>beberapa&nbsp;</strong>kompetisi
+                          menampilkan <strong> {data.length}</strong> dari <strong>beberapa</strong>kompetisi
                           <br />
                       </span>
                   : null
