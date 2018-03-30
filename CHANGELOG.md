@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="4.4.0-beta.1"></a>
+# [4.4.0-beta.1](https://github.com/idmore/kompetisiid-web/compare/v4.3.4...v4.4.0-beta.1) (2018-03-17)
+
+
+### Bug Fixes
+
+* **api response:** message on search and no data found ([d66a768](https://github.com/idmore/kompetisiid-web/commit/d66a768)), closes [#31](https://github.com/idmore/kompetisiid-web/issues/31)
+* **assets:** failed load app-min.js ([0a10d47](https://github.com/idmore/kompetisiid-web/commit/0a10d47)), closes [#24](https://github.com/idmore/kompetisiid-web/issues/24)
+* **bot crawler:** solved url errors ([3e68a7f](https://github.com/idmore/kompetisiid-web/commit/3e68a7f)), closes [#37](https://github.com/idmore/kompetisiid-web/issues/37)
+* **design:** navbar on mobile ([1bc8586](https://github.com/idmore/kompetisiid-web/commit/1bc8586))
+* **footer:** dinamic copyright year ([0ea1652](https://github.com/idmore/kompetisiid-web/commit/0ea1652)), closes [#27](https://github.com/idmore/kompetisiid-web/issues/27)
+
+
+
 <a name="4.4.0-beta.0"></a>
 # 4.4.0-beta.0 (2018-02-08)
 

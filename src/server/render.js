@@ -99,6 +99,7 @@ export default (req, res) => {
             )
         } catch(err) {
             // if react not valid
+            console.log('error render', err)
             html = 'something wrong'
         }
 
