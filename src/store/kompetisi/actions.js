@@ -2,12 +2,13 @@ import {requestApi} from '../helpers/ApiCaller'
 import {POST_DATA, RECEIVE_DATA, RECEIVE_MORE_DATA, DELETE_DATA, REQUEST_DATA} from '../consts'
 import {serialize} from '../../server/helpers/url'
 import {CALL_API} from '../middlewares/api'
+import sealMiddleware from '../../client/helpers/seal'
 
 export const RECEIVE_CATEGORIES = 'RECEIVE_CATEGORIES'
 
 export function fetchJelajah(params, filter)
 {
-    const url = '/api/jelajah'
+    const url = `/api/jelajah/${sealMiddleware.generateSeal()}`
     return {
         [CALL_API] : {
             typeSuccess: RECEIVE_DATA,
@@ -30,7 +31,7 @@ export function getRelated(id, filter)
             method: 'get',
             filter,
             target: 'kompetisi_related',
-            url: `/api/kompetisi/related/${id}`
+            url: `/api/kompetisi/related/${id}/${sealMiddleware.generateSeal()}`
         }
     }
 }
@@ -57,20 +58,20 @@ export function setCategories(json)
         }
 }
 
-export function getJelajah(params, filter)
-{
-    return dispatch => {
-        dispatch(receiveJelajah(filter))
-        requestApi('get', `/api/jelajah?${serialize(params)}`, params, res => {
-            dispatch(receiveJelajah(filter, res))
-        })
-    }
-}
+// export function getJelajah(params, filter)
+// {
+//     return dispatch => {
+//         dispatch(receiveJelajah(filter))
+//         requestApi('get', `/api/jelajah?${serialize(params)}`, params, res => {
+//             dispatch(receiveJelajah(filter, res))
+//         })
+//     }
+// }
 
 export function getJelajahMore(params, filter) {
     return dispatch => {
         dispatch(receiveJelajahMore(filter))
-        requestApi('get', `/api/jelajah?${serialize(params)}`, params, res => {
+        requestApi('get', `/api/jelajah/${sealMiddleware.generateSeal()}?${serialize(params)}`, params, res => {
             dispatch(receiveJelajahMore(filter, res))
         })
     }
@@ -80,7 +81,7 @@ export function getDetail(id)
 {
     return {
         [CALL_API] : {
-            url: `/api/kompetisi/${id}`,
+            url: `/api/kompetisi/${id}/${sealMiddleware.generateSeal()}`,
             method: 'get',
             typeWaiting: REQUEST_DATA,
             typeSuccess: RECEIVE_DATA,
@@ -94,7 +95,7 @@ export function getPengumuman(id)
 {
     return {
         [CALL_API] : {
-            url: `/api/kompetisi/pengumuman/${id}`,
+            url: `/api/kompetisi/pengumuman/${id}/${sealMiddleware.generateSeal()}`,
             method: 'get',
             typeWaiting: REQUEST_DATA,
             typeSuccess: RECEIVE_DATA,
@@ -108,7 +109,7 @@ export function getFavoritedTags(params = {})
 {
     return {
         [CALL_API] : {
-            url: '/api/kompetisi/favoritedtags',
+            url: `/api/kompetisi/favoritedtags/${sealMiddleware.generateSeal()}`,
             method: 'get',
             typeWaiting: REQUEST_DATA,
             typeSuccess: RECEIVE_DATA,
@@ -122,7 +123,7 @@ export function  getStats()
 {
     return {
         [CALL_API]: {
-            url: '/api/stats',
+            url: `/api/stats/${sealMiddleware.generateSeal()}`,
             method: 'get',
             typeWaiting: REQUEST_DATA,
             typeSuccess: RECEIVE_DATA,

@@ -6,13 +6,14 @@
 import {serialize} from '../../server/helpers/url'
 import {CALL_API} from '../middlewares/api'
 import {RECEIVE_DATA, RECEIVE_MORE_DATA, REQUEST_DATA} from '../consts'
+import sealMiddleware from '../../client/helpers/seal'
 
 export function fetchBeritaDetail(id)
 {
     return {
         [CALL_API] : {
             method: 'get',
-            url : `/api/news/${id}`,
+            url : `/api/news/${id}/${sealMiddleware.generateSeal()}`,
             target: 'berita_detail',
             typeWaiting: REQUEST_DATA,
             typeSuccess: RECEIVE_DATA,
@@ -26,7 +27,7 @@ export function fetchBerita(params = {}, filter)
     return {
         [CALL_API] : {
             method: 'get',
-            url: `/api/news?${serialize(params)}`,
+            url: `/api/news/${sealMiddleware.generateSeal()}?${serialize(params)}`,
             target: 'berita_list',
             filter,
             typeSuccess: RECEIVE_DATA,
@@ -40,7 +41,7 @@ export function fetchBeritaMore(params = {}, filter)
     return {
         [CALL_API] : {
             method: 'get',
-            url: `/api/news?${serialize(params)}`,
+            url: `/api/news/${sealMiddleware.generateSeal()}?${serialize(params)}/${serialize(params)}`,
             target: 'berita_list',
             filter,
             typeSuccess: RECEIVE_MORE_DATA,
@@ -54,7 +55,7 @@ export function relatedBerita(encid)
     return {
         [CALL_API] : {
             method: 'get',
-            url: `/api/news/related/${encid}`,
+            url: `/api/news/related/${encid}/${sealMiddleware.generateSeal()}`,
             target: 'berita_list',
             filter: `related_${encid}`,
             typeSuccess: RECEIVE_DATA,
