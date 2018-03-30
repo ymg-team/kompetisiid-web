@@ -6739,9 +6739,9 @@ sax@^1.2.1:
   version "1.2.4"
   resolved "https://registry.yarnpkg.com/sax/-/sax-1.2.4.tgz#2816234e2378bddc4e5354fab5caa895df7100d9"
 
-seal-middleware@^0.0.2:
-  version "0.0.2"
-  resolved "https://registry.yarnpkg.com/seal-middleware/-/seal-middleware-0.0.2.tgz#4ae5eec00a9b8704b486c742c65a27297c0d0ccd"
+seal-middleware@^0.0.4:
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/seal-middleware/-/seal-middleware-0.0.4.tgz#0372cc16e4e80e8d0a81602294be1f9c90cfab34"
 
 semver-diff@^2.0.0:
   version "2.1.0"
