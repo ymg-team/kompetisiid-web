@@ -13,6 +13,7 @@ module.exports = {
 
   output: {
       path: Path.resolve(__dirname, BUILD_DIR),
+      chunkFilename: '[name].[chunkhash].js',
       filename: process.env.NODE_ENV == 'production' ? '[name].[hash].js' : '[name].js',
       publicPath: '/build/'
   },

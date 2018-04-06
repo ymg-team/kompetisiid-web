@@ -3,6 +3,8 @@
  * Created by yussan on 06/10/16.
  */
 
+import React from 'react'
+
 //  routes
 import News from './berita'
 import Categories from './categories'

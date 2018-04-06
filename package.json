@@ -87,6 +87,7 @@
     "pre-commit": "^1.2.2",
     "preact": "^8.2.7",
     "preact-compat": "^3.18.0",
+    "react-loadable": "^5.3.1",
     "redux-logger": "2.6.1",
     "rimraf": "^2.6.1",
     "sass-loader": "^6.0.7",
