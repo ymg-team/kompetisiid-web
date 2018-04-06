@@ -1,15 +1,12 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import Routes from './routes'
-import {Provider} from 'react-redux'
+import { Provider } from 'react-redux'
 import { BrowserRouter } from 'react-router-dom'
 import { renderRoutes } from 'react-router-config'
+import '!style-loader!css-loader!./index.css'
 
 import store from '../config/store'
-
-// browserHistory.listen((location) => {
-//     if(window.ga) window.ga('send', 'pageview', location.pathname)
-// })
 
 const App = () => (
     <BrowserRouter> 

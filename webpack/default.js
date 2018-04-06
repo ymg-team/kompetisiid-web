@@ -34,7 +34,7 @@ module.exports = {
 ],
 
   resolve: {
-    extensions: ['.js', '.jsx'],
+    extensions: ['.js', '.jsx', '.css'],
     // alias: {
     //     "react": "preact-compat",
     //     "react-dom": "preact-compat"
@@ -45,11 +45,11 @@ module.exports = {
       rules: [
           {
               test: /\.(js|jsx)$/,
-              use: [
-                {
-                  loader: 'babel-loader'
-                }
-              ]             
+              use: ['babel-loader']             
+          },
+          {
+            test: /\.css$/,
+            use: ['css-loader', 'style-loader']
           }
       ]
   }
