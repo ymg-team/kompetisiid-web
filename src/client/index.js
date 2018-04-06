@@ -4,7 +4,7 @@ import Routes from './routes'
 import { Provider } from 'react-redux'
 import { BrowserRouter } from 'react-router-dom'
 import { renderRoutes } from 'react-router-config'
-import '!style-loader!css-loader!./index.css'
+import './sass/index.sass'
 
 import store from '../config/store'
 
@@ -16,4 +16,4 @@ const App = () => (
     </BrowserRouter>  
 )
 
-ReactDOM.hydrate(<App title="Judul" />, document.getElementById('root'))
+ReactDOM.hydrate(<App />, document.getElementById('root'))

@@ -34,7 +34,7 @@ module.exports = {
 ],
 
   resolve: {
-    extensions: ['.js', '.jsx', '.css'],
+    extensions: ['.js', '.jsx', '.css', '.sass'],
     // alias: {
     //     "react": "preact-compat",
     //     "react-dom": "preact-compat"
@@ -48,8 +48,14 @@ module.exports = {
               use: ['babel-loader']             
           },
           {
-            test: /\.css$/,
-            use: ['css-loader', 'style-loader']
+            test: /\.sass$/,
+            use: [{
+                loader: "style-loader" // creates style nodes from JS strings
+            }, {
+                loader: "css-loader" // translates CSS into CommonJS
+            }, {
+                loader: "sass-loader" // compiles Sass to CSS
+            }]
           }
       ]
   }
