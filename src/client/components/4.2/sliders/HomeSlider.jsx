@@ -3,6 +3,8 @@ import { truncate } from 'string-manager'
 import { Link } from 'react-router-dom'
 import Transition from 'react-addons-css-transition-group'
 
+if(typeof window != 'undefined') require('./slider.sass')
+
 export default class HomeSlider extends PureComponent
 {
     static defaultProps = {

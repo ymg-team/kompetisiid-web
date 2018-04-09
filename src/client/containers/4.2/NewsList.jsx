@@ -11,10 +11,10 @@ const Limit = 6
 
 class NewsList extends Component 
 {
-    static fetchData({store})
-    {
-        return store.dispatch(fetchBerita({ limit: Limit }, Filter))
-    }
+    // static fetchData({store})
+    // {
+    //     return store.dispatch(fetchBerita({ limit: Limit }, Filter))
+    // }
 
     constructor(props)
     {

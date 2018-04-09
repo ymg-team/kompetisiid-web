@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-if(typeof window != 'undefined') require('../../sass/partials/footer.sass')
+if(typeof window != 'undefined') require('./Footer.sass')
         
 export default () => (
     <span>    
