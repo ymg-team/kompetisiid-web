@@ -1,6 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
+if(typeof window != 'undefined') require('./Footer.sass')
+        
 export default () => (
     <span>    
         <div className='col-md-12 footer'>

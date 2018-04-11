@@ -13,6 +13,7 @@ module.exports = {
 
   output: {
       path: Path.resolve(__dirname, BUILD_DIR),
+      chunkFilename: '[name].[chunkhash].js',
       filename: process.env.NODE_ENV == 'production' ? '[name].[hash].js' : '[name].js',
       publicPath: '/build/'
   },
@@ -34,22 +35,45 @@ module.exports = {
 ],
 
   resolve: {
-    extensions: ['.js', '.jsx'],
-    // alias: {
-    //     "react": "preact-compat",
-    //     "react-dom": "preact-compat"
-    // }
+    extensions: ['.js', '.jsx', '.css', '.sass'],
+    alias: {
+        "react": "preact-compat",
+        "react-dom": "preact-compat"
+    }
   },
 
   module: {
       rules: [
           {
               test: /\.(js|jsx)$/,
-              use: [
+              use: ['babel-loader']             
+          },
+          {
+            test: /\.sass$/,
+            use: [
                 {
-                  loader: 'babel-loader'
+                    loader: "style-loader"
+                }, {
+                    loader: "css-loader", options: {
+                        sourceMap: true
+                    }
+                }, {
+                    loader: "sass-loader", options: {
+                        sourceMap: true
+                    }
                 }
-              ]             
+            ]
+          },
+          {
+            test: /\.css$/,
+            use: [
+                {
+                    loader: "css-loader" // translates CSS into CommonJS
+                },
+                {
+                    loader: "style-loader" // creates style nodes from JS strings
+                }
+            ]
           }
       ]
   }

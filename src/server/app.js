@@ -43,8 +43,8 @@ const staticOptions = function()
 App.use((req, res, next) => {
     if(!req.session.token) req.session.token = process.env.APP_KEY
     // log
-    const debugReq = require('debug')('app:req')
-    debugReq(`${req.method} ${req.originalUrl} at ${new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '')}`)
+    // const debugReq = require('debug')('app:req')
+    // debugReq(`${req.method} ${req.originalUrl} at ${new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '')}`)
     next()
 })
 

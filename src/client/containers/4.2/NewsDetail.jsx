@@ -15,10 +15,10 @@ import { truncate } from 'string-manager'
 
 export default class NewsDetail extends Component
 {
-    static fetchData({params, store})
-    {
-        return store.dispatch(BeritaActions.fetchBeritaDetail(params.encid))
-    }
+    // static fetchData({params, store})
+    // {
+    //     return store.dispatch(BeritaActions.fetchBeritaDetail(params.encid))
+    // }
 
     componentDidMount()
     {

@@ -1,0 +1,24 @@
+@mixin mobile-nav()
+    nav
+        .nav-header 
+            .nav-left
+                ul.top-menu
+                    z-index: 10
+                    position: fixed
+                    background-color: #fff
+                    height: 100vh
+                    top: 0
+                    left: -50%
+                    width: 50%
+                    li 
+                        width: 100%
+                        display: block
+                        padding: 0.8em 1em
+                        border-bottom: 1px solid lightgray
+            
+            .nav-right 
+                width: calc(60% - 5px)
+
+    .filter-jelajah
+        padding: 1em
+        font-size: .5em

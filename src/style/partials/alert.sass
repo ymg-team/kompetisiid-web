@@ -1,0 +1,49 @@
+@import constants
+
+.alert 
+    display: block 
+    padding: 10px
+    &.alert-error 
+        background-color: $color-red-alert
+        color: $color-white-main
+        border: 1px solid $color-red-alert-border
+    &.alert-warning 
+        background-color: $color-yellow-alert
+        color: $color-yellow-dark
+        border: 1px solid $color-yellow-alert-border
+    &.alert-green 
+        background-color: $color-green-alert
+        color: $color-white-main
+        border: 1px solid $color-green-alert-border
+    &.alert-blue 
+        background-color: $color-blue-main
+        color: $color-white-main
+        border: 1px solid $color-blue-dark
+    
+.fullalert 
+    display: block 
+    position: fixed
+    top: 20px
+    width: 400px
+    left: 50%
+    margin-left: -200px
+    z-index: 20 
+    padding: 10px
+    text-align: center
+    background-color: $color-gray-verysoft 
+    border-top: 1px solid $color-gray-soft
+    color: $color-gray-medium 
+    font-weight: bold
+    cursor: pointer
+    &.fullalert-error 
+        background-color: $color-red-alert
+        border-top: 1px solid $color-red-alert-border
+        color: $color-white-main
+    &.fullalert-warning
+        background-color: $color-yellow-alert
+        border-top: 1px solid $color-yellow-alert-border
+        color: $color-yellow-dark
+    &.fullalert-success
+        background-color: $color-green-alert
+        border-top: 1px solid $color-green-alert-border
+        color: $color-white-main

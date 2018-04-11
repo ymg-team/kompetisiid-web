@@ -1,0 +1,43 @@
+@import _mixins
+@import 'responsive/navigations' 
+@import 'responsive/competition' 
+@import 'responsive/careers'
+@import 'responsive/home'
+
+@media only screen and (max-width: 543px)
+    @include mobile-slider
+    @include mobile-stats
+    @include mobile-nav
+    @include mobile-competition-sub-header
+    @include small-careers-item
+    .only-mobile
+        display: block !important
+    .hide-mobile
+        display: none !important
+    .card-mediapartner
+        .thumbnails, .details
+            @include fullWidth
+        .details 
+            padding: 10px 0
+    .container-competition-tab
+        overflow: auto
+        #btn-join 
+            display: none
+@media only screen and (min-width: 544px) and (max-width: 767px)
+    @include mobile-nav
+    @include small-careers-item
+    // @include mobile-competition-sub-header
+    .only-mobile
+        display: block !important
+    .hide-mobile
+        display: none !important
+    .card-mediapartner
+        .thumbnails, .details
+            @include fullWidth
+        .details 
+            padding: 10px 0
+    .container-competition-tab
+        overflow: auto
+        #btn-join 
+            display: none
+// @media only screen and (min-width: 992px) and (max-width: 1200px)
