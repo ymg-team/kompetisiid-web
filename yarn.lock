@@ -7448,7 +7448,7 @@ sane@^2.0.0:
 
 sass-graph@^2.2.4:
   version "2.2.4"
-  resolved "https://registry.yarnpkg.com/sass-graph/-/sass-graph-2.2.4.tgz#13fbd63cd1caf0908b9fd93476ad43a51d1e0b49"
+  resolved "https://registry.yarnpkg.com/style-graph/-/style-graph-2.2.4.tgz#13fbd63cd1caf0908b9fd93476ad43a51d1e0b49"
   dependencies:
     glob "^7.0.0"
     lodash "^4.0.0"
@@ -7457,7 +7457,7 @@ sass-graph@^2.2.4:
 
 sass-loader@^6.0.7:
   version "6.0.7"
-  resolved "https://registry.yarnpkg.com/sass-loader/-/sass-loader-6.0.7.tgz#dd2fdb3e7eeff4a53f35ba6ac408715488353d00"
+  resolved "https://registry.yarnpkg.com/style-loader/-/style-loader-6.0.7.tgz#dd2fdb3e7eeff4a53f35ba6ac408715488353d00"
   dependencies:
     clone-deep "^2.0.1"
     loader-utils "^1.0.1"

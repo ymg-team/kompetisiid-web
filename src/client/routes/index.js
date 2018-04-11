@@ -18,7 +18,7 @@ import Careers from './careers'
 
 // containers
 import Login from '../containers/4.2/Login'
-import Home from '../containers/4.2/Home'
+import Home from '../containers/home/index'
 import Error from '../containers/4.2/Error'
 
 // layouts

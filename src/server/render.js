@@ -48,8 +48,9 @@ export default (req, res) => {
                 <meta name="google-site-verification" content="pUksy8ewwm4bzRVqaTQXKmWfRFZc9_L0iuESNDg7190" />
                 <meta property="fb:app_id" content="1419514554927551">
                 <meta property="fb:admins" content="100000359263988">
-                <link href="https://fonts.googleapis.com/css?family=Muli" rel="stylesheet" />
-                <link href="/assets/4.2/lib/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+                <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Muli" />
+                <link rel="stylesheet" href="/assets/4.2/lib/font-awesome-4.7.0/css/font-awesome.min.css" />
+                <link rel="stylesheet" href="/assets/4.2/css/grid.css" />
                 <link rel="icon" href="/assets/icons/icon-128x128.png" />
                 <link rel="manifest" href="/manifest.json" />
                 <link rel="search" type="application/opensearchdescription+xml" href="/opensearch.xml" title="Cari Kompetisi"/>

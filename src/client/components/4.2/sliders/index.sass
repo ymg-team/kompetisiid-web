@@ -1,4 +1,37 @@
-@import ../../../sass/partials/constants
+@import ../../../../style/partials/constants
+
+// slider
+.home-slider
+    padding: 3em 0
+    font-size: 1.2em
+    color: $color-gray-soft
+    .home-slider-left 
+        line-height: 1.2 
+        h2,h3 
+            font-weight: bold
+            margin: 0
+            color: $color-gray-main
+        h2 
+            line-height: 1
+            font-size: 4em
+        h3
+            font-size: 1.2em
+            margin: .5em 0
+    .home-slider-poster
+        height: 450px
+        background-size: cover
+    .home-slider-navigation
+        margin-top: 2em 
+    .home-slider-item 
+        border-top: 2px solid $color-gray-soft
+        padding: 1em .5em
+        a 
+            text-decoration: none 
+        &.active
+            border-top: 1px solid $color-white-main
+        &:hover     
+            cursor: pointer
+// end of slider
 
 .slider
     height: calc(100vh - 61px)

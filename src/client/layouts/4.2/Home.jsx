@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import { renderRoutes } from 'react-router-config'
 import { queryToObj } from 'string-manager'
 
-export default class LayoutHome extends Component 
+class LayoutHome extends Component 
 {
     constructor(props)
     {
@@ -35,3 +35,5 @@ export default class LayoutHome extends Component
         </div>
     }
 }
+
+export default LayoutHome
