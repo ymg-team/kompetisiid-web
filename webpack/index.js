@@ -6,6 +6,7 @@ const AssetsPlugin = require('assets-webpack-plugin')
 const BUILD_DIR = '../dist-client'
 
 module.exports = {
+
   entry: {
       app: ['./src/client/index.js'],
       vendor: ['react','react-router','react-router-dom','react-router-config','react-helmet','redux','react-redux','superagent','redux-thunk','react-transition-group']
