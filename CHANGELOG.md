@@ -2,31 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-<a name="4.4.1-beta.0"></a>
-## [4.4.1-beta.0](https://github.com/idmore/kompetisiid-web/compare/v4.4.0-beta.2...v4.4.1-beta.0) (2018-04-11)
-
-
-
-<a name="4.4.0"></a>
-# [4.4.0](https://github.com/idmore/kompetisiid-web/compare/v4.4.0-beta.1...v4.4.0) (2018-03-30)
-
-
-
-<a name="4.4.0"></a>
-# [4.4.0](https://github.com/idmore/kompetisiid-web/compare/v4.4.0-beta.1...v4.4.0) (2018-03-30)
-=======
 <a name="4.4.0-beta.2"></a>
 # [4.4.0-beta.2](https://github.com/idmore/kompetisiid-web/compare/v4.4.0-beta.1...v4.4.0-beta.2) (2018-04-11)
->>>>>>> develop
 
 
 ### Features
 
 * **api security:** implements seal-middleware ([c463d93](https://github.com/idmore/kompetisiid-web/commit/c463d93))
-<<<<<<< HEAD
-=======
 * **css module:** initial css as module ([df34aab](https://github.com/idmore/kompetisiid-web/commit/df34aab))
->>>>>>> develop
 
 
 
