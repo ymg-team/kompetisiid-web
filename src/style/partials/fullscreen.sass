@@ -1,0 +1,73 @@
+@import constants
+
+section.error, section.login
+    color: $color-white-main
+    padding: 0
+    margin: 0
+    min-height: 100vh
+    display: flex 
+    align-items: center 
+    justify-content: center
+    padding: 0 10px
+
+section.error
+    background: $color-red-alert
+
+    .error-box
+        text-align: center
+        .error__code 
+            h1 
+                margin: 0
+                padding: 0
+                font-size: 10rem
+        .error__message
+            margin: 0
+            padding: 0
+            font-size: 2rem
+            font-weight: strong
+        .error__navigation 
+            a 
+                color: $color-white-main
+                margin-left: 10px
+
+section.login 
+
+    background: #191515
+
+    .login-box
+        max-width: 100%
+        width: 400px
+        color: #fff
+        a 
+            color: #fff
+        .login-box__title 
+            text-align: center
+            h1 
+                small 
+                     font-size: 20px
+            img.icon 
+                width: 64px
+                margin: 1em
+        .login-box__content
+            background-color: rgba(255, 255, 255, 0.18)
+            padding: 10px 40px
+            .login-box__content__auth
+                a 
+                    padding: 5px
+                img
+                    width: calc(50% - 10px)
+            .login-box__content__avatar
+                text-align: center
+                img 
+                    width: 90px
+                    border-radius: 45px
+                    border: 5px solid #FFFFFF
+                    margin: 20px 0
+            
+
+        .login-box__footer
+            small 
+                a
+                    text-transform: capitalize
+                    margin-right: 5px
+    

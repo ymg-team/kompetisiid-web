@@ -1,5 +1,5 @@
-<!-- [![Build Status](https://travis-ci.org/idmore/kompetisiid-web.svg?branch=master)](https://travis-ci.org/idmore/kompetisiid-web)  -->
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
+[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 
 # Kompetisi Indonesia Web
 Indonesian Competition Platform [https://kompetisi.id](https://kompetisi.id)

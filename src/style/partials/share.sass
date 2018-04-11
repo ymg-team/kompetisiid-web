@@ -1,0 +1,36 @@
+@import constants
+
+.share
+  &:hover
+    background: $color-gray-verysoft !important
+    color: $color-gray-medium !important
+  &.share-facebook
+    background: $color-facebook
+  &.share-twitter
+    background: $color-twitter
+  &.share-linkedin
+    background: $color-linkedin
+  &.share-googleplus
+    background: $color-googleplus
+  &.share-sebangsa
+    background: $color-sebangsa
+  &:hover 
+    color: $color-white-main
+  text-decoration: none
+  // width: 200px
+  padding: 5px 20px
+  display: inline-block
+  margin: 5px 10px 5px 0
+  color: $color-white-main
+  strong
+    display: block
+  .share__icon 
+    width: 20px
+    height: 100%
+    float: left
+    display: block
+  .share__count 
+    width: calc(100% - 20px)
+    height: 100%
+    float: left
+    display: block

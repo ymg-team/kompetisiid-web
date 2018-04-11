@@ -3,6 +3,8 @@
  * Created by yussan on 06/10/16.
  */
 
+import React from 'react'
+
 //  routes
 import News from './berita'
 import Categories from './categories'
@@ -16,7 +18,7 @@ import Careers from './careers'
 
 // containers
 import Login from '../containers/4.2/Login'
-import Home from '../containers/4.2/Home'
+import Home from '../containers/home/index'
 import Error from '../containers/4.2/Error'
 
 // layouts

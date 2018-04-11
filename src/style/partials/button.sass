@@ -1,0 +1,61 @@
+@import constants
+
+.btn
+    &:focus
+        text-decoration: none
+    &:hover 
+        text-decoration: none
+    font-weight: bold
+    padding: 10px 20px
+    border-radius: 2px
+    font-size: 15px
+    text-decoration: none
+    cursor: pointer
+    text-align: center
+    display: inline-block
+    margin: 0.1em
+    &.btn-gray 
+        border: 1px solid $color-gray-soft
+        background-color: $color-gray-verysoft
+        color: $color-gray-main
+        &:hover
+            background-color: $color-gray-verysoft
+    &.btn-bordergray 
+        border: 2px solid $color-gray-main
+        background-color: transparent
+        color: $color-gray-main
+        &:hover
+            background-color: $color-gray-verysoft
+    &.btn-borderwhite 
+        border: 2px solid $color-white-main
+        background-color: transparent
+        color: $color-white-main
+        &:hover
+            background-color: $color-white-main
+            color: $color-gray-main
+    &.btn-white 
+        border: 1px solid $color-gray-soft
+        background-color: $color-white-main
+        color: $color-gray-main
+        &:hover
+            background-color: $color-gray-verysoft
+    &.btn-green 
+        border: 1px solid $color-green-dark
+        background-color: $color-green-main
+        color: $color-white-main
+        &:hover
+            background-color: $color-green-dark
+    &.btn-black
+        border: 1px solid $color-black-dark
+        background-color: $color-black-dark
+        color: $color-white-main
+        &:hover
+            background-color: $color-black-medium
+            color: $color-white-main
+.btn-sm
+    padding: 5px 10px
+    font-size: 12px
+
+.btn-fullwidth
+    width: 100%
+    display: block    

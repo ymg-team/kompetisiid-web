@@ -1,0 +1,85 @@
+@import constants
+
+.categories
+    text-transform: uppercase
+    font-size: 0.7em
+    letter-spacing: 0.15em
+    font-weight: bold
+// default competition cards
+.card-competition
+    border: 1px solid $color-gray-verysoft
+    box-shadow: 1px 4px 4px $color-gray-verysoft
+    margin-bottom: 30px
+    background-color: $color-white-main
+    .card-competition--inside
+        padding: 20px
+        h3 
+            margin: 10px 0 0
+            height: 4.1em
+            overflow: hidden
+        progress 
+            width: 100%
+            margin: 20px 0
+            height: 5px
+            &[value]
+                -webkit-appearance: none
+                appearance: none
+                &::-webkit-progress-value
+                    background-color: $color-green-dark
+                &::-webkit-progress-bar
+                    background-color: #eee
+                    border-radius: 2px
+        .types 
+            min-height: 2em
+        .meta > p 
+            margin: 0
+    .card-competition--poster
+        height: 200px
+        overflow: hidden
+        background-color: #f4f4f4
+        img
+            max-width: 100%
+
+// media partner competition 
+.card-mediapartner
+    display: table
+    float: inherit
+    border-top: 1px solid $color-gray-verysoft
+    padding: 30px 0
+    width: 100%
+    .thumbnails 
+        float: left
+        width: 200px
+        overflow: hidden
+        height: 150px
+        img 
+            width: 100%
+    .details 
+        padding: 0 10px
+        float: left
+        width: calc(100% - 200px)
+        h3 
+            margin: 10px 0 0
+    .buttons 
+        float: right
+        width: 100px
+        .btn 
+            display: flex
+// error card
+.container
+    &.error 
+        background: $color-white-main
+        display: block
+        padding: 10px
+        text-align: center
+        margin: 2em auto
+        line-height: 1.1
+        color: $color-gray-medium
+        h1 
+            font-size: 5em
+            margin: .1em 0
+        p 
+            line-height: 1.3em
+            
+
+

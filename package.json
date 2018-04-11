@@ -1,6 +1,10 @@
 {
   "name": "kompetisi-indonesia",
+<<<<<<< HEAD
   "version": "4.4.0",
+=======
+  "version": "4.4.0-beta.2",
+>>>>>>> develop
   "description": "platform untuk mengikuti dan berbagi kompetisi",
   "main": "dist-server/server/index.js",
   "scripts": {
@@ -12,7 +16,11 @@
     "test:watch": "jest --watch",
     "server:watch": "NODE_ENV=development nodemon --watch src/ --watch dist-client/ --watch public/ --exec 'node -r dotenv/config -r babel-register' ./src/server",
     "server:prod-test": "NODE_ENV=production nodemon --exec 'node -r dotenv/config' ./dist-server/server",
+<<<<<<< HEAD
     "build-client:prod": "rimraf dist-client && NODE_ENV=production APP_KEY=\"ki-324892374skljfhlsiudfh&6\" webpack --progress",
+=======
+    "build-client:prod": "rimraf dist-client && NODE_ENV=production APP_KEY='ki-324892374skljfhlsiudfh&6' webpack --progress",
+>>>>>>> develop
     "build-server:prod": "rimraf dist-server && NODE_ENV=production babel src -d dist-server --ignore '**/*_test.js' --copy-files",
     "release": "standard-version",
     "release:beta": "standard-version -p beta"
@@ -55,11 +63,15 @@
     "react-router": "^4.2.0",
     "react-router-config": "^1.0.0-beta.4",
     "react-router-dom": "^4.2.2",
-    "react-transition-group": "^2.2.1",
+    "react-transition-group": "^2.3.0",
     "redux": "3.6.0",
     "redux-thunk": "2.1.0",
     "request": "2.75.0",
+<<<<<<< HEAD
     "seal-middleware": "^0.0.4",
+=======
+    "seal-middleware": "^0.1.0",
+>>>>>>> develop
     "string-manager": "^1.1.1",
     "superagent": "2.3.0",
     "xml": "1.0.1"
@@ -76,18 +88,27 @@
     "babel-register": "6.14.0",
     "babili": "0.0.12",
     "concurrently": "^3.5.1",
+    "css-loader": "^0.28.11",
     "dotenv": "2.0.0",
     "eslint": "^4.15.0",
     "eslint-plugin-react": "^7.5.1",
     "express-debug": "^1.1.1",
     "jest": "^21.2.1",
+    "node-sass": "^4.8.3",
     "nodemon": "^1.12.0",
     "pre-commit": "^1.2.2",
     "preact": "^8.2.7",
     "preact-compat": "^3.18.0",
+    "react-loadable": "^5.3.1",
     "redux-logger": "2.6.1",
+<<<<<<< HEAD
     "rimraf": "^2.6.2",
+=======
+    "rimraf": "^2.6.1",
+    "sass-loader": "^6.0.7",
+>>>>>>> develop
     "standard-version": "^4.2.0",
+    "style-loader": "^0.20.3",
     "webpack": "^3.6.0"
   }
 }
