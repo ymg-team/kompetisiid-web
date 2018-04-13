@@ -20,8 +20,6 @@ import {
 import { fetchBerita } from "../../../store/berita/actions"
 import { connect } from "react-redux"
 
-if(typeof window != 'undefined') require('./index.sass')
-
 class Index extends Component {
   // static fetchData({store})
   // {
