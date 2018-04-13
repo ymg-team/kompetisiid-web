@@ -3,7 +3,6 @@
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
 <a name="4.4.0-beta.3"></a>
-<<<<<<< HEAD
 # [4.4.0-beta.3](https://github.com/idmore/kompetisiid-web/compare/v4.4.0-beta.2...v4.4.0-beta.3) (2018-04-11)
 
 
@@ -15,9 +14,6 @@ All notable changes to this project will be documented in this file. See [standa
 
 <a name="4.4.0"></a>
 # [4.4.0](https://github.com/idmore/kompetisiid-web/compare/v4.4.0-beta.1...v4.4.0) (2018-03-30)
-=======
-# [4.4.0-beta.3](https://github.com/idmore/kompetisiid-web/compare/v4.4.0-beta.2...v4.4.0-beta.3) (2018-04-13)
->>>>>>> develop
 
 
 
