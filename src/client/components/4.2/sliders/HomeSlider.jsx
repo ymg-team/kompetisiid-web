@@ -2,8 +2,6 @@ import React, { PureComponent } from 'react'
 import { truncate } from 'string-manager'
 import { Link } from 'react-router-dom'
 
-if(typeof window != 'undefined') require('./index.sass')
-
 export default class HomeSlider extends PureComponent
 {
     static defaultProps = {
