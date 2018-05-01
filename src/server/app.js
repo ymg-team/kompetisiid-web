@@ -1,6 +1,5 @@
 import express from 'express'
 import path from 'path'
-import cookieParser from 'cookie-parser'
 import cookieSession from 'cookie-session'
 
 import AppApi from './api'
@@ -18,10 +17,9 @@ if(process.env.NODE_ENV === 'production')
     App.use(compression())
 }
 
-App.use(cookieParser())
 App.use(cookieSession({
-	secret: process.env.APP_KEY,
-	name: 'ki_session',
+	secret: [process.env.APP_KEY, 'kompetisid'],
+	name: 'kompetisi-id',
 	maxAge: 12 * 30 * 24 * 60 * 60 * 1000
 }))
 
@@ -30,7 +28,7 @@ const staticOptions = function()
     if(process.env.NODE_ENV == 'production')
     {
         return {
-            maxAge: 172800000,
+            maxAge: 12 * 30 * 24 * 60 * 60 * 1000,
             etag: false,
         }
     }else 

@@ -1,11 +1,13 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import styled from 'styled-components'
+import { Fullscreen } from '../../components/Fullscreen'
 
 export default (props) => {
     const { error_code, error_msg } = props.route
 
     return (
-        <section className='error'>
+        <Fullscreen className='error'>
             <div className='error-box'>
                 <div className='error__code'>
                     <h1>{error_code || 500}</h1></div>
@@ -17,6 +19,6 @@ export default (props) => {
                     <Link to='/news'>Berita</Link>
                 </div>
             </div>
-        </section>
+        </Fullscreen>
     )
 }

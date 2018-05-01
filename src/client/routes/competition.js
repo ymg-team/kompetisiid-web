@@ -53,12 +53,14 @@ export default {
             path: '/competition/:encid/source/:title',
             exact: true,
             iframe_type: 'sumber',
+            fullscreen: true,
             component: CompetitionIframe
         },
         {
             path: '/competition/:encid/join/:title',
             exact: true,
             iframe_type: 'ikuti',
+            fullscreen: true,
             component: CompetitionIframe
         }
     ]

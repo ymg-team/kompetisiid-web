@@ -48,7 +48,6 @@ export default class NewsBox extends Component
                         </Transition>
                     </div>
                     { is_loading || !meta ? <Loader /> : null }
-                    <div className='row m-10' />
                 </div>
             </div>
         )
