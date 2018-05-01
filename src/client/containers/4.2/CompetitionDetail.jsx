@@ -34,7 +34,7 @@ class CompetitionDetail extends Component {
   }
 
   componentDidMount() {
-    if (this.props.route.active_tab == 1) window.scrollTo(0, 0)
+    if (this.props.route.active_tab === 1) window.scrollTo(0, 0)
     this.reqData(this.props)
     this.reqRelatedCompetitions(this.props)
     pushScript('https://kompetisiindonesia.disqus.com/embed.js')
@@ -55,7 +55,6 @@ class CompetitionDetail extends Component {
 
   reqData(props) {
     const { encid } = props.match.params
-    if (props.route.name != 'competition_regulation') window.scrollTo(0, 0)
     if (!props.kompetisi.detail[encid]) this.props.dispatch(getDetail(encid))
   }
 

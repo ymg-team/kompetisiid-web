@@ -36,7 +36,7 @@ export function removeById(id, state, action)
  * @param (string) key
  * @param (object) json, object from superagent response
  */
-export function updateByKey(id, state, callback)
+export function updateByKey(id, state, selector)
 {
     Object.keys(state).map(n => {
         if(state[n].result)
@@ -44,7 +44,7 @@ export function updateByKey(id, state, callback)
             state[n].result.map((m, key) => {
                 if(m.id  === id)
                 {
-                    state[n].result[key] = callback(m)
+                    state[n].result[key] = selector(m)
                 }
             })
         }

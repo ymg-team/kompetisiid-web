@@ -28,33 +28,40 @@ import LayoutError from '../layouts/4.2/Error'
 import LayoutDashboard from '../layouts/4.2/Dashboard'
 
 export default [
-    {
-        component: LayoutRoot,
+  {
+    component: LayoutRoot,
+    routes: [
+      {
+        component: LayoutHome,
         routes: [
-            {
-                component: LayoutHome,
-                routes: [
-                    {
-                        path: '/',
-                        exact: true,
-                        component: Home
-                    },
-                    News,
-                    Browse,
-                    Competition,
-                    Add,
-                    Categories,
-                    User,
-                    {
-                        path: '*',
-                        error_code: 404,
-                        error_msg: 'Halaman yang anda kunjungi tidak ditemukan',
-                        component: Error
-                    }, 
-                ]
-            }
+          {
+            path: '/',
+            exact: true,
+            component: Home
+          },
+          News,
+          Browse,
+          Competition,
+          Add,
+          Categories,
+          User,
+          {
+            path: '/login',
+            fullscreen: true,
+            exact: true,
+            component: Login
+          },
+          {
+            fullscreen: true,
+            path: '*',
+            error_code: 404,
+            error_msg: 'Halaman yang anda kunjungi tidak ditemukan',
+            component: Error
+          }
         ]
-    }
+      }
+    ]
+  }
 ]
 
 // const old_routes =  {
@@ -84,7 +91,7 @@ export default [
 //             component: LayoutDashboard,
 //             childRoutes: [
 //                 Dashboard
-//             ]  
+//             ]
 //         },
 //         {
 //             component: LayoutHome,
@@ -102,6 +109,6 @@ export default [
 //                 Careers,
 //                 Profile
 //             ]
-//         }, 
+//         },
 //     ]
 // }
