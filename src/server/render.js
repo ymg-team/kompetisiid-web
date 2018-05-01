@@ -12,31 +12,36 @@ import version from '../config/version'
 import store from '../config/store'
 import Helmet from 'react-helmet'
 import webpackAssets from '../config/webpack-assets'
+import { ServerStyleSheet, StyleSheetManager } from 'styled-components'
+
+// ref: https://www.styled-components.com/docs/advanced#server-side-rendering
+const sheet = new ServerStyleSheet()
 
 // news render handler
 export default (req, res) => {
-    let html, context = {}
-  
-    // dettect static function fetchData in container target
-    const promises = (matchRoutes(routes, req.url)).map(({ route, match }) => {
-        let fetchData = route.component.fetchData
-        return fetchData instanceof Function ? 
-            fetchData({store, params: match.params, query: req.query}) : 
-            Promise.resolve()
-    })
+  let html,
+    context = {}
 
-    // function to get string of html
-    // <link href="/assets/4.2/css/style.css?v=${ version.CSS_VERSION }" rel="stylesheet" />
-    function renderHtml(body = '', state = {}) {
-        const head = Helmet.rewind()
-        return (`
+  // dettect static function fetchData in container target
+  const promises = matchRoutes(routes, req.url).map(({ route, match }) => {
+    let fetchData = route.component.fetchData
+    return fetchData instanceof Function
+      ? fetchData({ store, params: match.params, query: req.query })
+      : Promise.resolve()
+  })
+
+  // function to get string of html
+  // <link href="/assets/4.2/css/style.css?v=${ version.CSS_VERSION }" rel="stylesheet" />
+  function renderHtml(body = '', state = {}) {
+    const head = Helmet.rewind()
+    return `
         <!DOCTYPE html>
         <html lang="id-id">
             <head>
-                ${ head.title.toString() }
-                ${ head.meta.toString() }
-                ${ head.style.toString() }
-                ${ head.link.toString() }
+                ${head.title.toString()}
+                ${head.meta.toString()}
+                ${head.style.toString()}
+                ${head.link.toString()}
                 <meta charset="utf-8" />
                 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -48,7 +53,7 @@ export default (req, res) => {
                 <meta name="google-site-verification" content="pUksy8ewwm4bzRVqaTQXKmWfRFZc9_L0iuESNDg7190" />
                 <meta property="fb:app_id" content="1419514554927551">
                 <meta property="fb:admins" content="100000359263988">
-                <link rel="stylesheet" href="${ webpackAssets.style.css }">
+                <link rel="stylesheet" href="${webpackAssets.style.css}">
                 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Muli" />
                 <link rel="stylesheet" href="/assets/4.2/lib/font-awesome-4.7.0/css/font-awesome.min.css" />
                 <link rel="icon" href="/assets/icons/icon-128x128.png" />
@@ -73,81 +78,79 @@ export default (req, res) => {
                 </style>
             </head>
             <body>
-                <div id="root">${ body }</div>
+                <div id="root">${body}</div>
                 <div id="fb-root"></div>
-                ${ head.script.toString() }
-                ${ getScript(state) }
+                ${head.script.toString()}
+                ${getScript(state)}
             </body>
         </html>
-        `).replace(/\s\s+/g, '')
+        `.replace(/\s\s+/g, '')
+  }
+
+  // return function as promise
+  return Promise.all(promises).then(() => {
+    // return string html as responsed using react-dom-server
+    try {
+      // if react component valid
+      html = ReactDOMServer.renderToString(
+        <StyleSheetManager sheet={sheet.instance}>
+          <StaticRouter location={req.originalUrl} context={context}>
+            <Provider store={store}>{renderRoutes(routes)}</Provider>
+          </StaticRouter>
+        </StyleSheetManager>
+      )
+    } catch (err) {
+      // if react not valid
+      console.log('error render', err)
+      html = 'something wrong'
     }
 
-    // return function as promise
-    return Promise.all(promises).then(() => {
-        // return string html as responsed using react-dom-server
-        try {
-            // if react component valid
-            html = ReactDOMServer.renderToString(
-                <StaticRouter
-                    location={ req.originalUrl }
-                    context={ context }>
-                    <Provider store={ store }>
-                        { renderRoutes(routes) }
-                    </Provider>
-                </StaticRouter>
-            )
-        } catch(err) {
-            // if react not valid
-            console.log('error render', err)
-            html = 'something wrong'
-        }
-
-        // res end
-        if(context.url) {
-            res.status(500).send('something wrong')
-        } else {
-            let state = store.getState()
-            res.send(renderHtml(html, state))
-        }
-    })
-
+    // res end
+    if (context.url) {
+      res.status(500).send('something wrong')
+    } else {
+      let state = store.getState()
+      res.send(renderHtml(html, state))
+    }
+  })
 }
 
 // initial script
-function getScript(state)
-{
-    // <script>
-    //     if('serviceWorker' in navigator)
-    //     {
-    //         navigator.serviceWorker.register('/service-worker.js')
-    //             .then(function(registration){
-    //                 console.log(registration);
-    //             }).catch(function(err){
-    //                 console.log('ServiceWorker registration is failed', err);
-    //             });
-    //     }
-    // </script>  
-    // <script type="text/javascript" src="https:////connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8&appId=1419514554927551" async defer></script>
-    // <script type="text/javascript" src="https://apis.google.com/js/platform.js" async defer></script>
-    return `
-    <script type="text/javascript">window.__data__=${ JSON.stringify(state) }</script>
-    <script type="text/javascript" src="/assets/4.2/js/script-min.js?v=${version.JS_VERSION}"></script>
-    <script src="${ webpackAssets.vendor.js }"></script>
-    <script src="${ webpackAssets.app.js }"></script>
+function getScript(state) {
+  // <script>
+  //     if('serviceWorker' in navigator)
+  //     {
+  //         navigator.serviceWorker.register('/service-worker.js')
+  //             .then(function(registration){
+  //                 console.log(registration);
+  //             }).catch(function(err){
+  //                 console.log('ServiceWorker registration is failed', err);
+  //             });
+  //     }
+  // </script>
+  // <script type="text/javascript" src="https:////connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8&appId=1419514554927551" async defer></script>
+  // <script type="text/javascript" src="https://apis.google.com/js/platform.js" async defer></script>
+  return `
+    <script type="text/javascript">window.__data__=${JSON.stringify(
+      state
+    )}</script>
+    <script type="text/javascript" src="/assets/4.2/js/script-min.js?v=${
+      version.JS_VERSION
+    }"></script>
+    <script src="${webpackAssets.vendor.js}"></script>
+    <script src="${webpackAssets.app.js}"></script>
     ${process.env.NODE_ENV === 'production' ? getTrackingScript() : ''}
     `
 }
 
 // adsense script
-function getAdsenseScript()
-{
-    return ``
+function getAdsenseScript() {
+  return ``
 }
 
 // tracking script
-function getTrackingScript()
-{
-    return `
+function getTrackingScript() {
+  return `
     <!-- Ganal -->
     <script type="text/javascript" async defer>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

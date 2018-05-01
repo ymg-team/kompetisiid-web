@@ -1,9 +1,30 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import Styled from 'styled-components'
+import * as Color from '../styles/colors'
 
-export default () => (
-  <span>
-    <div className="col-md-12 footer">
+const Footer = Styled.div`
+`
+const FooterTop = Styled.div`
+background-color: ${Color.BlackDark}
+color: ${Color.GrayVerySoft}
+padding: 10px
+`
+
+const FooterBottom = Styled.div`
+background: #000000
+color: #FFF
+text-align: right
+font-weight: bold
+padding: 5.5px
+img {
+  width: 20px
+}
+`
+
+export default props => (
+  <Footer>
+    <FooterTop className="col-md-12 footer">
       <footer>
         <div className="container">
           <div className="row">
@@ -112,8 +133,8 @@ export default () => (
           </div>
         </div>
       </footer>
-    </div>
-    <div className="col-md-12 poweredby">
+    </FooterTop>
+    <FooterBottom className="col-md-12 poweredby">
       <div className="container">
         <div className="row">
           <div className="col-md-12">
@@ -127,6 +148,6 @@ export default () => (
           </div>
         </div>
       </div>
-    </div>
-  </span>
+    </FooterBottom>
+  </Footer>
 )

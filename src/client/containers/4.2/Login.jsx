@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom'
 import Helmet from '../../components/Helmet'
 import AuthFacebook from '../../components/4.2/buttons/AuthFacebook'
 import AuthGoogle from '../../components/4.2/buttons/AuthGoogle'
+import { Fullscreen } from '../../components/Fullscreen'
 
 import { profile, login } from '../../../store/user/actions'
 import { connect } from 'react-redux'
@@ -75,7 +76,7 @@ class Login extends Component {
       }
     }
     return (
-      <section className='login'>
+      <Fullscreen className='login'>
         <Helmet
           title='Masuk - Kompetisi Indonesia'
           description='input username dan password kamu untuk mendapat akses lebih di Kompetisi Indonesia'
@@ -153,14 +154,14 @@ class Login extends Component {
               <a target='_blank' href='https://goo.gl/forms/kMGGZQXJCjoyKThj1'>Kontak</a>
             </small>
             <small>
-              <Link to='#'>Privacy</Link>
+              <Link to='/'>Privacy</Link>
             </small>
             <small>
-              <Link href='/news/TXpVPQ/About'>About</Link>
+              <Link to='/news/TXpVPQ/About'>About</Link>
             </small>
           </div>
         </div>
-      </section>
+      </Fullscreen>
     )
   }
 }
