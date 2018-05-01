@@ -2,6 +2,35 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="4.5.0"></a>
+# 4.5.0 (2018-04-14)
+
+
+### Bug Fixes
+
+* **api response:** message on search and no data found ([d66a768](https://github.com/idmore/kompetisiid-web/commit/d66a768)), closes [#31](https://github.com/idmore/kompetisiid-web/issues/31)
+* **assets:** failed load app-min.js ([0a10d47](https://github.com/idmore/kompetisiid-web/commit/0a10d47)), closes [#24](https://github.com/idmore/kompetisiid-web/issues/24)
+* **bot crawler:** solved url errors ([3e68a7f](https://github.com/idmore/kompetisiid-web/commit/3e68a7f)), closes [#37](https://github.com/idmore/kompetisiid-web/issues/37)
+* **browse competition:** jelajah media partner ([98144f1](https://github.com/idmore/kompetisiid-web/commit/98144f1)), closes [#5](https://github.com/idmore/kompetisiid-web/issues/5)
+* **categories list:** set and get from local storage ([8bb1b54](https://github.com/idmore/kompetisiid-web/commit/8bb1b54))
+* **competition detail:** scroll back to 0,0 after clik related post ([f340bd4](https://github.com/idmore/kompetisiid-web/commit/f340bd4)), closes [#2](https://github.com/idmore/kompetisiid-web/issues/2)
+* **design:** navbar on mobile ([1bc8586](https://github.com/idmore/kompetisiid-web/commit/1bc8586))
+* **footer:** dinamic copyright year ([0ea1652](https://github.com/idmore/kompetisiid-web/commit/0ea1652)), closes [#27](https://github.com/idmore/kompetisiid-web/issues/27)
+* **json-ld:** fixing error on json-ld ([ea73a56](https://github.com/idmore/kompetisiid-web/commit/ea73a56)), closes [#4](https://github.com/idmore/kompetisiid-web/issues/4)
+* **pasang:** update pasang subeader ([ddae124](https://github.com/idmore/kompetisiid-web/commit/ddae124)), closes [#1](https://github.com/idmore/kompetisiid-web/issues/1)
+* **slider:** fix slider height ([27720bf](https://github.com/idmore/kompetisiid-web/commit/27720bf))
+* **title:** title for seo friendly ([46d50eb](https://github.com/idmore/kompetisiid-web/commit/46d50eb)), closes [#6](https://github.com/idmore/kompetisiid-web/issues/6) [#6](https://github.com/idmore/kompetisiid-web/issues/6)
+
+
+### Features
+
+* **api security:** implements seal-middleware ([c463d93](https://github.com/idmore/kompetisiid-web/commit/c463d93))
+* **css module:** initial css as module ([df34aab](https://github.com/idmore/kompetisiid-web/commit/df34aab))
+* **homepage:** added new slider - stats - categories home design ([6007b02](https://github.com/idmore/kompetisiid-web/commit/6007b02))
+* **ready for deply:** test build ([d5b70ab](https://github.com/idmore/kompetisiid-web/commit/d5b70ab))
+
+
+
 <a name="4.4.1-beta.0"></a>
 ## [4.4.1-beta.0](https://github.com/idmore/kompetisiid-web/compare/v4.4.0-beta.4...v4.4.1-beta.0) (2018-04-14)
 
