@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import { Link } from 'react-router-dom'
-import Subheader from '../../components/4.2/Subheader'
+import Subheader from '../../components/Subheader'
 import Helmet from '../../components/Helmet'
 
 export const title = 'Pasang Kompetisi'

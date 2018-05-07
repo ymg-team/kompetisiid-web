@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import Styled from 'styled-components'
-import * as Color from '../styles/colors'
+import * as Color from './styles/colors'
 
 const Footer = Styled.div`
 `
