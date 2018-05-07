@@ -46,7 +46,7 @@ export default class MediapartnerBox extends Component
         <div className='col-md-12'>
           <div className='col-md-8 col-md-push-2 col-lg-6 col-lg-push-3'>
             <div className='row'>
-              <div className='media-partner'>
+              <div className='media-partner align-center'>
                 <h2 className='big-text'>Media Partner KI</h2>
                 <span>KI juga ikut berperan sebagai media partner berbagai kompetisi di Indonesia. </span>
               </div>

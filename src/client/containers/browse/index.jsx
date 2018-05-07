@@ -1,16 +1,14 @@
 import React, { Component } from "react"
-import PropTypes from "prop-types"
 import Helmet from "../../components/Helmet"
-import CompetitionBox from "../../components/4.2/boxs/CompetitionBox"
-
-import * as KompetisiActions from "../../../store/kompetisi/actions"
+import CompetitionBox from "../../components/boxs/CompetitionBox"
+import * as KompetisiActions from "../competition/actions"
 import { getStorage, setStorage } from "../../../store/helpers/LocalStorage"
 import { queryToObj } from "string-manager"
 import { connect } from "react-redux"
 import { bindActionCreators } from "redux"
-import { style, duration } from "../../components/Transtition"
+import { topLoading } from "../../components/preloaders"
 
-class BrowseCompetition extends Component {
+class Index extends Component {
 //   static fetchData({ store, params, query }) {
 //     const State = generateState(query, params)
 //     const Filter = generateFilter(State)
@@ -78,6 +76,7 @@ class BrowseCompetition extends Component {
     const Filter = generateFilter(this.state)
     const Params = generateParams(this.state, this.props)
     if (!this.props.kompetisi.data[Filter]) {
+      topLoading(true)
       this.props.dispatch(KompetisiActions.fetchJelajah(Params, Filter))
     }
   }
@@ -133,9 +132,14 @@ class BrowseCompetition extends Component {
       description = `Jelajahi kompetisi yang dipasang oleh "${username}"`
     }
 
+    // jelajah media partner
     if (query.mediapartner == 1) {
       title += ` Media Partner`
       description = `Jelajahi kompetisi yang menjadikan Kompetisi.id sebagai media partner`
+    }
+
+    if(typeof window !== "undefined" && data[filter] && data[filter].meta) {
+      topLoading(false)
     }
 
     return (
@@ -425,4 +429,4 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(BrowseCompetition)
+export default connect(mapStateToProps, mapDispatchToProps)(Index)

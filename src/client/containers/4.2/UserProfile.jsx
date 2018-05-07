@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import UserStats from '../../components/4.2/navigations/TabProfile'
+import UserStats from '../../components/navigations/TabProfile'
 import Helmet from '../../components/Helmet'
 
 import {profile} from '../../../store/user/actions'

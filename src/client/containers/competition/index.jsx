@@ -1,26 +1,23 @@
 import React, { Component } from 'react'
-import Tab, { tab } from '../../components/4.2/navigations/TabCompetition'
+import Tab, { tab } from '../../components/navigations/TabCompetition'
 import Helmet from '../../components/Helmet'
-import Loader from '../../components/4.2/loaders/DefaultLoader'
-import CompetitionDetailBox from '../../components/4.2/boxs/CompetitionDetail'
-import CompetitionListBox from '../../components/4.2/boxs/CompetitionBox'
-import Regulations from '../../components/4.2/competition-detail/Regulations'
-import Prizes from '../../components/4.2/competition-detail/Prizes'
-import Announcements from '../../components/4.2/competition-detail/Announcements'
-import Contacts from '../../components/4.2/competition-detail/Contacts'
-import Share from '../../components/4.2/competition-detail/Share'
-import Discussions from '../../components/4.2/competition-detail/Discussions'
-import { Link } from 'react-router-dom'
-import NextPrev from '../../components/4.2/navigations/NextPrev'
-import ErrorCard from '../../components/4.2/cards/ErrorCard'
+import Loader from '../../components/loaders/DefaultLoader'
+import CompetitionDetailBox from '../../components/boxs/CompetitionDetail'
+import CompetitionListBox from '../../components/boxs/CompetitionBox'
+import Regulations from '../../components/competition-detail/Regulations'
+import Prizes from '../../components/competition-detail/Prizes'
+import Announcements from '../../components/competition-detail/Announcements'
+import Contacts from '../../components/competition-detail/Contacts'
+import Share from '../../components/competition-detail/Share'
+import Discussions from '../../components/competition-detail/Discussions'
+import NextPrev from '../../components/navigations/NextPrev'
+import ErrorCard from '../../components/cards/ErrorCard'
 import Host from '../../../config/host'
 
-import { pushScript } from '../../helpers/DomEvents'
 import { toCamelCase } from 'string-manager'
-import { getDetail, getRelated } from '../../../store/kompetisi/actions'
 import { connect } from 'react-redux'
 
-class CompetitionDetail extends Component {
+class Index extends Component {
   // static fetchData({params, store})
   // {
   //   return store.dispatch(getDetail(params.encid))
@@ -31,37 +28,6 @@ class CompetitionDetail extends Component {
     this.state = {
       encid: this.props.match.params.encid
     }
-  }
-
-  componentDidMount() {
-    if (this.props.route.active_tab === 1) window.scrollTo(0, 0)
-    this.reqData(this.props)
-    this.reqRelatedCompetitions(this.props)
-    pushScript('https://kompetisiindonesia.disqus.com/embed.js')
-  }
-
-  componentWillReceiveProps(np) {
-    this.setState({ encid: np.match.params.encid })
-    if (this.props.match.params.encid != np.match.params.encid) {
-      if (window != undefined) window.scrollTo(0, 0)
-      this.reqData(np)
-      this.reqRelatedCompetitions(np)
-    }
-  }
-
-  componentWillUnmount() {
-    window.onscroll = null
-  }
-
-  reqData(props) {
-    const { encid } = props.match.params
-    if (!props.kompetisi.detail[encid]) this.props.dispatch(getDetail(encid))
-  }
-
-  reqRelatedCompetitions(props) {
-    const { encid } = props.match.params
-    if (!props.kompetisi.data[`related_${encid}`])
-      this.props.dispatch(getRelated(encid, `related_${encid}`))
   }
 
   render() {
@@ -401,6 +367,7 @@ function handleScrollNav() {
   }
 }
 
+
 function mapStateToProps(state) {
   const { Kompetisi } = state
   return {
@@ -414,4 +381,5 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CompetitionDetail)
+export default connect(mapStateToProps, mapDispatchToProps)(Index)
+

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import Footer from '../../components/4.2/Footer'
-import Header from '../../components/4.2/Header'
+import Footer from '../../components/Footer'
+import Header from '../../components/headers/Header'
 import { Link } from 'react-router-dom'
 import { renderRoutes, matchRoutes } from 'react-router-config'
 import { queryToObj } from 'string-manager'

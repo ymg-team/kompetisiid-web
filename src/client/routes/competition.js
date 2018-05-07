@@ -1,69 +1,73 @@
-import Competition from '../containers/4.2/CompetitionDetail'
+import Competition from '../containers/competition/index'
 import CompetitionIframe from '../containers/4.2/CompetitionIframe'
-
-import EmptyLayout from '../layouts/4.2/Empty'
+import CompetitionLayout from "../containers/competition/Layout"
 
 export default {
-    path: '/competition',
-    component: EmptyLayout,
-    routes: [
-        {
-            path: '/competition/:encid',
-            exact: true,
-            active_tab: 1,
-            component: Competition
-        },
-        {
-            path: '/competition/:encid/regulations/:title',
-            exact: true,
-            active_tab: 1,
-            component: Competition
-        },
-        {
-            path: '/competition/:encid/prizes/:title',
-            exact: true,
-            active_tab: 2,
-            component: Competition
-        },
-        {
-            path: '/competition/:encid/annoucements/:title',
-            exact: true,
-            active_tab: 3,
-            component: Competition
-        },
-        {
-            path: '/competition/:encid/discussions/:title',
-            exact: true,
-            active_tab: 4,
-            component: Competition
-        },
-        {
-            path: '/competition/:encid/contacts/:title',
-            exact: true,
-            active_tab: 5,
-            component: Competition
-        },
-        {
-            path: '/competition/:encid/share/:title',
-            exact: true,
-            active_tab: 6,
-            component: Competition
-        },
-        {
-            path: '/competition/:encid/source/:title',
-            exact: true,
-            iframe_type: 'sumber',
-            fullscreen: true,
-            component: CompetitionIframe
-        },
-        {
-            path: '/competition/:encid/join/:title',
-            exact: true,
-            iframe_type: 'ikuti',
-            fullscreen: true,
-            component: CompetitionIframe
-        }
-    ]
+  path: '/competition/:encid',
+  component: CompetitionLayout,
+  routes: [
+    {
+      path: '/competition/:encid',
+      exact: true,
+      active_tab: 1,
+      component: Competition
+    },
+    {
+      path: '/competition/:encid/regulations/:title',
+      exact: true,
+      active_tab: 1,
+      component: Competition
+    },
+    {
+      path: '/competition/:encid/prizes/:title',
+      exact: true,
+      active_tab: 2,
+      component: Competition
+    },
+    {
+      path: '/competition/:encid/annoucements/:title',
+      exact: true,
+      active_tab: 3,
+      component: Competition
+    },
+    {
+      path: '/competition/:encid/discussions/:title',
+      exact: true,
+      active_tab: 4,
+      component: Competition
+    },
+    {
+      path: '/competition/:encid/contacts/:title',
+      exact: true,
+      active_tab: 5,
+      component: Competition
+    },
+    {
+      path: '/competition/:encid/share/:title',
+      exact: true,
+      active_tab: 6,
+      component: Competition
+    },
+    {
+      path: '/competition/:encid/source/:title',
+      exact: true,
+      iframe_type: 'sumber',
+      fullscreen: true,
+      component: CompetitionIframe
+    },
+    {
+      path: '/competition/:encid/join/:title',
+      exact: true,
+      iframe_type: 'ikuti',
+      fullscreen: true,
+      component: CompetitionIframe
+    },
+    {
+      path:'/competition/:encid/*',
+      exact: true,
+      not_found: true
+    }
+  ]
 }
 
 // const old_routes = {
