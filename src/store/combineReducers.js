@@ -1,7 +1,7 @@
 /**
  * Created by yussan on 02/10/16.
  */
-import Kompetisi from './kompetisi/reducer'
+import Kompetisi from '../client/containers/competition/reducer'
 import Berita from './berita/reducer'
 import Pasang from './pasang/reducer'
 import User from './user/reducer'

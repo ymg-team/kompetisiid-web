@@ -1,6 +1,6 @@
 import React from 'react'
 import Helmet from '../../components/Helmet'
-import Subheader from '../../components/4.2/Subheader'
+import Subheader from '../../components/Subheader'
 
 const Careers = () => (
     <div>

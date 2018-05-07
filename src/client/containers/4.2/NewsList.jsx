@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Helmet from '../../components/Helmet'
-import Subheader from '../../components/4.2/Subheader'
-import Newsbox from '../../components/4.2/boxs/NewsBox'
+import Subheader from '../../components/Subheader'
+import Newsbox from '../../components/boxs/NewsBox'
 
 import { fetchBerita, fetchBeritaMore } from '../../../store/berita/actions'
 import { connect } from 'react-redux'

@@ -1,14 +1,14 @@
 import React, {Component} from 'react'
 import { Link } from 'react-router-dom'
-import Subheader from '../../components/4.2/Subheader'
+import Subheader from '../../components/Subheader'
 import Helmet from '../../components/Helmet'
 import {title, desc} from './AddCompetition'
-import InputText from '../../components/4.2/form/InputText'
-import InputFile from '../../components/4.2/form/InputFile'
-import Button from '../../components/4.2/form/Button'
+import InputText from '../../components/form/InputText'
+import InputFile from '../../components/form/InputFile'
+import Button from '../../components/form/Button'
 
 import {submitCepat} from '../../../store/pasang/actions'
-import {validator, validationSeter, validationChecker} from '../../components/4.2/form/Validator'
+import {validator, validationSeter, validationChecker} from '../../components/form/Validator'
 import {connect} from 'react-redux'
 
 let RecaptchaContainer

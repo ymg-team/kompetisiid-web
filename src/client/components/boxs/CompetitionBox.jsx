@@ -1,9 +1,8 @@
 import React from 'react'
-import Card from '../../../components/4.2/cards/CompetitionListCard'
-import Loader from '../loaders/CompetitionLoader'
+import Card from '../cards/CompetitionListCard'
+import Loader from '../preloaders/CompetitionCardLoader'
 import Transition from 'react-transition-group/Transition'
-import { duration, style } from '../../Transtition'
-import { Link } from 'react-router-dom'
+import { duration, style } from '../Transtition'
 
 function generateList(size, n)
 {
@@ -25,7 +24,7 @@ const CompetitionBox = (props) => {
                   meta && meta.code == 200 && subtitle ?
                       <span style={{display: 'table'}}>
                           <br />
-                          menampilkan <strong> {data.length}</strong> dari <strong>beberapa</strong>kompetisi
+                          menampilkan <strong> {data.length}</strong> dari <strong>beberapa</strong> kompetisi
                           <br />
                       </span>
                   : null

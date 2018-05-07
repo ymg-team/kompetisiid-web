@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
-import Iframe from '../../components/4.2/Iframe'
-import Redirect from '../../components/4.2/Redirect'
-import Loader from '../../components/4.2/loaders/DefaultLoader'
+import Iframe from '../../components/Iframe'
+import Redirect from '../../components/Redirect'
+import Loader from '../../components/loaders/DefaultLoader'
 
-import { getDetail } from '../../../store/kompetisi/actions'
+import { getDetail } from '../competition/actions'
 import { connect } from 'react-redux'
 import { isHttps } from '../../helpers/LinkGenerator'
 
