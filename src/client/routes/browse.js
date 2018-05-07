@@ -1,4 +1,4 @@
-import Browse from '../containers/4.2/BrowseCompetition'
+import Browse from '../containers/browse/index'
 import Error from '../containers/4.2/Error'
 
 import EmptyLayout from '../layouts/4.2/Empty'

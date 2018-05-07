@@ -78,7 +78,7 @@ class Header extends Component {
           </div>
           <div className="logo hide-mobile">
             <Link className='stage' to="/">
-              <img className='spinner' src="/assets/4.2/img/icon-128x128.png" />
+              <img id="ki-logo" src="/assets/4.2/img/icon-128x128.png" />
             </Link>
           </div>
           <div className="nav-right">

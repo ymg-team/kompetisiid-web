@@ -1,11 +1,11 @@
 import React, {Component} from 'react'
-import HeaderDashboard from '../../../components/4.2/cards/HeaderDashboard'
-import Tab from '../../../components/4.2/navigations/Tab'
-import CompetitionCard from '../../../components/4.2/cards/dashboard/CompetitionListCard'
-import Loader from '../../../components/4.2/loaders/DefaultLoader'
+import HeaderDashboard from '../../../components/cards/HeaderDashboard'
+import Tab from '../../../components/navigations/Tab'
+import CompetitionCard from '../../../components/cards/dashboard/CompetitionListCard'
+import Loader from '../../../components/loaders/DefaultLoader'
 import Helmet from '../../../components/Helmet'
 
-import {fetchJelajah} from '../../../../store/kompetisi/actions'
+import {fetchJelajah} from '../../competition/actions'
 import {connect} from 'react-redux'
 
 let Filter, Params

@@ -1,164 +1,166 @@
 @import constants
 
 .loader
-    width: 100px
-    margin: 0 auto
-    background-color: $color-gray-verysoft
-    border-radius: 10px
-    padding: 10px
-    text-align: center
-    img 
-        width: 50px
+  width: 100px
+  margin: 0 auto
+  background-color: $color-gray-verysoft
+  border-radius: 10px
+  padding: 10px
+  text-align: center
+  img
+    width: 50px
+
+.animated-background
+  animation-duration: 0.7s
+  animation-fill-mode: forwards
+  animation-iteration-count: infinite
+  animation-name: placeHolderShimmer
+  animation-timing-function: linear
+  background: $color-gray-soft
+  background: linear-gradient(to right, #eeeeee 8%, #dddddd 18%, #eeeeee 33%)
+  background-size: 800px 104px
+  position: relative
+  .background-masker
+    background: $color-white-main
+    position: absolute
 
 // card loader
 .competition-loader, .news-loader
-    background: $color-white-main
-    margin-bottom: 30px
-    background-color: $color-white-main
-    .animated-background 
-        animation-duration: 0.7s
-        animation-fill-mode: forwards
-        animation-iteration-count: infinite
-        animation-name: placeHolderShimmer
-        animation-timing-function: linear
-        background: $color-gray-soft
-        background: linear-gradient(to right, #eeeeee 8%, #dddddd 18%, #eeeeee 33%)
-        background-size: 800px 104px
-        position: relative
-        .background-masker
-            background: $color-white-main
-            position: absolute
+  background: $color-white-main
+  margin-bottom: 30px
+  background-color: $color-white-main
+
 // news loader
 .news-loader
-    .animated-background 
-        height: 25em
-        .background-masker-1
-            top: 13em
-            height: 1.8em
-            width: 100%
-        .background-masker-1-1
-            top: 14.8em
-            left: 0
-            height: 3em
-            width: 2em
-        .background-masker-1-2
-            top: 14.8em
-            right: 0
-            height: 3em
-            width: 2em
-        .background-masker-2
-            top: 17.8em
-            height: 2em
-            width: 100%
-        .background-masker-2-1
-            top: 19.8em
-            left: 0
-            height: 2em
-            width: 2em
-        .background-masker-2-2
-            top: 19.8em
-            right: 0
-            height: 2em
-            width: 12em
-        .background-masker-3
-            top: 21em
-            height: 1em
-            width: 100%
-        .background-masker-3-1
-            top: 22em
-            left: 0
-            height: 3em
-            width: 2em
-        .background-masker-3-2
-            top: 22em
-            right: 0
-            height: 3em
-            width: calc(100% - 5em)
+  .animated-background
+    height: 25em
+    .background-masker-1
+      top: 13em
+      height: 1.8em
+      width: 100%
+    .background-masker-1-1
+      top: 14.8em
+      left: 0
+      height: 3em
+      width: 2em
+    .background-masker-1-2
+      top: 14.8em
+      right: 0
+      height: 3em
+      width: 2em
+    .background-masker-2
+      top: 17.8em
+      height: 2em
+      width: 100%
+    .background-masker-2-1
+      top: 19.8em
+      left: 0
+      height: 2em
+      width: 2em
+    .background-masker-2-2
+      top: 19.8em
+      right: 0
+      height: 2em
+      width: 12em
+    .background-masker-3
+      top: 21em
+      height: 1em
+      width: 100%
+    .background-masker-3-1
+      top: 22em
+      left: 0
+      height: 3em
+      width: 2em
+    .background-masker-3-2
+      top: 22em
+      right: 0
+      height: 3em
+      width: calc(100% - 5em)
 
 // competition loader
-.competition-loader 
-    border: 1px solid $color-gray-verysoft
-    box-shadow: 1px 4px 4px $color-gray-verysoft
-    .animated-background 
-        height: 28em
-        .background-masker-1
-            top: 13em
-            height: 1.8em
-            width: 100%
-        .background-masker-1-1
-            top: 14.8em
-            left: 0
-            height: 3em
-            width: 2em
-        .background-masker-1-2
-            top: 14.8em
-            right: 0
-            height: 3em
-            width: 2em
-        .background-masker-2
-            top: 17.8em
-            height: 2em
-            width: 100%
-        .background-masker-2-1
-            top: 19.8em
-            left: 0
-            height: 1em
-            width: 2em
-        .background-masker-2-2
-            top: 19.8em
-            left: 8em
-            height: 1em
-            width: calc(100% - 2em - 6em)
-        .background-masker-5
-            top: 20.8em
-            height: 2em
-            width: 100%
-        .background-masker-5-1
-            top: 22.8em
-            height: .8em
-            width: 2em
-            left: 0
-        .background-masker-5-2
-            top: 22.8em
-            height: .8em
-            width: 2em
-            right: 0
-        .background-masker-6-1
-            top: 25.6em
-            height: 2em
-            width: 2em
-            left: 0
-        .background-masker-6-2
-            top: 25.6em
-            height: 2em
-            width: 4em
-            right: 0
-        .background-masker-6-3
-            top: 25.6em
-            height: 2em
-            width: 2em
-            left: calc((100% - 4em)/4)
-        .background-masker-6-4
-            top: 25.6em
-            height: 2em
-            width: 2em
-            left: calc((100% - 4em)/2)
-        .background-masker-6-5
-            top: 25.6em
-            height: 2em
-            width: 2em
-            left: calc(100% - 9)
-        .background-masker-6
-            top: 23.6em
-            height: 2em
-            width: 100%
-        .background-masker-7
-            bottom: 0
-            height: 1em
-            width: 100%
+.competition-loader
+  border: 1px solid $color-gray-verysoft
+  box-shadow: 1px 4px 4px $color-gray-verysoft
+  .animated-background
+    height: 28em
+    .background-masker-1
+      top: 13em
+      height: 1.8em
+      width: 100%
+    .background-masker-1-1
+      top: 14.8em
+      left: 0
+      height: 3em
+      width: 2em
+    .background-masker-1-2
+      top: 14.8em
+      right: 0
+      height: 3em
+      width: 2em
+    .background-masker-2
+      top: 17.8em
+      height: 2em
+      width: 100%
+    .background-masker-2-1
+      top: 19.8em
+      left: 0
+      height: 1em
+      width: 2em
+    .background-masker-2-2
+      top: 19.8em
+      left: 8em
+      height: 1em
+      width: calc(100% - 2em - 6em)
+    .background-masker-5
+      top: 20.8em
+      height: 2em
+      width: 100%
+    .background-masker-5-1
+      top: 22.8em
+      height: .8em
+      width: 2em
+      left: 0
+    .background-masker-5-2
+      top: 22.8em
+      height: .8em
+      width: 2em
+      right: 0
+    .background-masker-6-1
+      top: 25.6em
+      height: 2em
+      width: 2em
+      left: 0
+    .background-masker-6-2
+      top: 25.6em
+      height: 2em
+      width: 4em
+      right: 0
+    .background-masker-6-3
+      top: 25.6em
+      height: 2em
+      width: 2em
+      left: calc((100% - 4em) / 4)
+    .background-masker-6-4
+      top: 25.6em
+      height: 2em
+      width: 2em
+      left: calc((100% - 4em) / 2)
+    .background-masker-6-5
+      top: 25.6em
+      height: 2em
+      width: 2em
+      left: calc(100% - 9)
+    .background-masker-6
+      top: 23.6em
+      height: 2em
+      width: 100%
+    .background-masker-7
+      bottom: 0
+      height: 1em
+      width: 100%
 
 @keyframes placeHolderShimmer
-    0%
-        background-position: -468px 0
-    100%
-        background-position: 468px 0
+  0%
+    background-position: -468px 0
+  100%
+    background-position: 468px 0

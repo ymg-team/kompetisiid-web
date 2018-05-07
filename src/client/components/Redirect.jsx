@@ -1,5 +1,5 @@
 import React from 'react'
-import { Fullscreen } from '../Fullscreen'
+import { Fullscreen } from './Fullscreen'
 
 export default props => {
   const { url } = props

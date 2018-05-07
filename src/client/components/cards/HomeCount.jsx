@@ -1,5 +1,5 @@
 import React from 'react'
-import { today } from '../../../helpers/DateTime'
+import { today } from '../../helpers/DateTime'
 
 export default (props) => {
     if(props.data)
