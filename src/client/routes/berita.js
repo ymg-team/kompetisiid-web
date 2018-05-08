@@ -1,4 +1,4 @@
-import NewsDetail from '../containers/4.2/NewsDetail'
+import Index from '../containers/news/index'
 import NewsList from '../containers/4.2/NewsList'
 import Error from '../containers/4.2/Error'
 
@@ -26,7 +26,7 @@ export default {
         {
             path: '/news/:encid/:title',
             exact: true,
-            component: NewsDetail
+            component: Index
         }
     ]
 }

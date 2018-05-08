@@ -54,7 +54,6 @@ export default (req, res) => {
                 <meta property="fb:app_id" content="1419514554927551">
                 <meta property="fb:admins" content="100000359263988">
                 <link rel="stylesheet" href="${webpackAssets.style.css}">
-                <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Muli" />
                 <link rel="stylesheet" href="/assets/4.2/lib/font-awesome-4.7.0/css/font-awesome.min.css" />
                 <link rel="icon" href="/assets/icons/icon-128x128.png" />
                 <link rel="manifest" href="/manifest.json" />
