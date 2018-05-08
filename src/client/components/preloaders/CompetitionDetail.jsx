@@ -45,7 +45,7 @@ const Preloader = Styled.div`
     }
     
     .background-masker-competition-3 {
-      height: 10px;
+      height: 1a0px;
       top: 125px;
       width: 100%;
     }

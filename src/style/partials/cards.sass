@@ -7,13 +7,19 @@
     font-weight: bold
 // default competition cards
 .card-competition
-    border: 1px solid $color-gray-verysoft
-    box-shadow: 1px 4px 4px $color-gray-verysoft
+    &:hover
+      cursor: pointer
+      border: 1px solid $color-white-main
+      box-shadow: 1px 4px 4px $color-gray-verysoft
+    border: 1px solid $color-white-main
     margin-bottom: 30px
     background-color: $color-white-main
+    a 
+      text-decoration: none
     .card-competition--inside
         padding: 20px
         h3 
+            font-weight: 500
             margin: 10px 0 0
             height: 4.1em
             overflow: hidden

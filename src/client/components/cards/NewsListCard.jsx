@@ -6,7 +6,7 @@ export default (props) => {
     const target = `/news/${n.id}/${n.nospace_title}`
     return(
         <div className='col-md-4'>
-            <div className='card-competition no-border'>
+            <div className='card-competition'>
                 <Link to={target}>
                     <div className='card-competition--poster'>
                         <img src={n.image ? n.image.small : `/assets/4.2/img/slider/slider-2.png`} />
