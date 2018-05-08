@@ -13,6 +13,7 @@ class Categories extends Component {
   }
 
   componentDidMount() {
+    window.scrollTo(0, 0)
     const Categories = getStorage('categories')
     if (Categories) {
       this.props.dispatch(setCategories(JSON.parse(Categories)))
@@ -24,19 +25,23 @@ class Categories extends Component {
   generateList() {
     if (this.props.categories.meta.code == 200) {
       return (
-        <div className='col-md-12'>
-          <div className='container'>
+        <div className="col-md-12">
+          <div className="container">
             {this.props.categories.data.map((n, key) => {
               return (
-                <div key={key} className='categories'>
+                <div key={key} className="categories">
                   <h2>{n.main_kat}</h2>
-                  <div className='categories-child'>
-                    {
-                      n.subkat.map((m, key) => (
-                        <Link key={key} to={`/browse/${n.main_kat}/${m.sub_kat}`}>{m.sub_kat}<i className='fa fa-angle-right' /></Link>
-                      ))
-                    }
-                    <Link to={`/browse/${n.main_kat}`}>Semua {n.main_kat}<i className='fa fa-angle-right' /></Link>
+                  <div className="categories-child">
+                    {n.subkat.map((m, key) => (
+                      <Link key={key} to={`/browse/${n.main_kat}/${m.sub_kat}`}>
+                        {m.sub_kat}
+                        <i className="fa fa-angle-right" />
+                      </Link>
+                    ))}
+                    <Link to={`/browse/${n.main_kat}`}>
+                      Semua {n.main_kat}
+                      <i className="fa fa-angle-right" />
+                    </Link>
                   </div>
                 </div>
               )
@@ -46,7 +51,7 @@ class Categories extends Component {
       )
     } else {
       return (
-        <div className='align-center text-muted'>
+        <div className="align-center text-muted">
           <p>{this.props.categories.meta.message}</p>
         </div>
       )
@@ -57,16 +62,20 @@ class Categories extends Component {
     return (
       <div>
         <Helmet
-          title='Kategori Kompetisi'
-          description='Ikuti kompetisi-kompetisi berdasarkan kategori dan minat kamu'
+          title="Kategori Kompetisi"
+          description="Ikuti kompetisi-kompetisi berdasarkan kategori dan minat kamu"
         />
         <Subheader
-          title='Kategori Kompetisi'
-          desc='Ikuti kompetisi-kompetisi berdasarkan kategori dan minat kamu'
+          title="Kategori Kompetisi"
+          desc="Ikuti kompetisi-kompetisi berdasarkan kategori dan minat kamu"
         />
-        <div className='col-md-12'><div className='m-30' /></div>
+        <div className="col-md-12">
+          <div className="m-30" />
+        </div>
         {this.props.categories.meta ? this.generateList() : <Loader />}
-        <div className='col-md-12'><div className='m-30' /></div>
+        <div className="col-md-12">
+          <div className="m-30" />
+        </div>
       </div>
     )
   }
@@ -86,7 +95,4 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Categories)
+export default connect(mapStateToProps, mapDispatchToProps)(Categories)

@@ -1,26 +1,26 @@
-import React, { Component } from "react"
-import Helmet from "../../components/Helmet"
-import CompetitionBox from "../../components/boxs/CompetitionBox"
-import * as KompetisiActions from "../competition/actions"
-import { getStorage, setStorage } from "../../../store/helpers/LocalStorage"
-import { queryToObj } from "string-manager"
-import { connect } from "react-redux"
-import { bindActionCreators } from "redux"
-import { topLoading } from "../../components/preloaders"
+import React, { Component } from 'react'
+import Helmet from '../../components/Helmet'
+import CompetitionBox from '../../components/boxs/CompetitionBox'
+import * as KompetisiActions from '../competition/actions'
+import { getStorage, setStorage } from '../../../store/helpers/LocalStorage'
+import { queryToObj } from 'string-manager'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import { topLoading } from '../../components/preloaders'
 
 class Index extends Component {
-//   static fetchData({ store, params, query }) {
-//     const State = generateState(query, params)
-//     const Filter = generateFilter(State)
-//     const Params = generateParams(State)
-//     return store.dispatch(KompetisiActions.fetchJelajah(Params, Filter))
-//   }
+  //   static fetchData({ store, params, query }) {
+  //     const State = generateState(query, params)
+  //     const Filter = generateFilter(State)
+  //     const Params = generateParams(State)
+  //     return store.dispatch(KompetisiActions.fetchJelajah(Params, Filter))
+  //   }
 
   constructor(props) {
     super(props)
     this.state = generateState(
       this.props.location.search
-        ? queryToObj(this.props.location.search.replace("?", ""))
+        ? queryToObj(this.props.location.search.replace('?', ''))
         : {},
       this.props.match.params
     )
@@ -29,7 +29,7 @@ class Index extends Component {
   componentDidMount() {
     window.scrollTo(0, 0)
     this.reqData()
-    const Categories = getStorage("categories")
+    const Categories = getStorage('categories')
     if (Categories) {
       this.props.dispatch(
         KompetisiActions.setCategories(JSON.parse(Categories))
@@ -38,7 +38,7 @@ class Index extends Component {
       this.props.dispatch(KompetisiActions.getCategories())
     }
     //scroll event listener
-    window.addEventListener("scroll", e => this.handleScroll(e), true)
+    window.addEventListener('scroll', e => this.handleScroll(e), true)
   }
 
   componentWillReceiveProps(np) {
@@ -46,7 +46,7 @@ class Index extends Component {
       Object.assign(
         generateState(
           np.location.search
-            ? queryToObj(np.location.search.replace("?", ""))
+            ? queryToObj(np.location.search.replace('?', ''))
             : {},
           np.match.params
         ),
@@ -59,14 +59,14 @@ class Index extends Component {
   }
 
   componentWillUnmount() {
-    console.log("remove scroll listener")
-    window.removeEventListener("scroll", this.handleScroll)
+    console.log('remove scroll listener')
+    window.removeEventListener('scroll', this.handleScroll)
     // window.onscroll = null
   }
 
   handleScroll(e) {
-    if (document.getElementById("browse-container")) {
-      const ContainerHeight = document.getElementById("competition-container")
+    if (document.getElementById('browse-container')) {
+      const ContainerHeight = document.getElementById('competition-container')
         .offsetHeight
       if (window.pageYOffset >= ContainerHeight - 600) this.reqMore()
     }
@@ -102,11 +102,11 @@ class Index extends Component {
     const { tag, username, main_kat, sub_kat, q } = this.state
     const { data, categories } = this.props.kompetisi
     const filter = generateFilter(this.state)
-    const query = queryToObj(this.props.location.search.replace("?", "")) || {}
+    const query = queryToObj(this.props.location.search.replace('?', '')) || {}
 
-    let title = "Jelajah Kompetisi"
+    let title = 'Jelajah Kompetisi'
     let description =
-      "Jelajahi kompetisi dari berbagai macam kategori di Kompetisi Indonesia"
+      'Jelajahi kompetisi dari berbagai macam kategori di Kompetisi Indonesia'
 
     // jelajah kompetisi by kategori
     if (main_kat) {
@@ -138,7 +138,7 @@ class Index extends Component {
       description = `Jelajahi kompetisi yang menjadikan Kompetisi.id sebagai media partner`
     }
 
-    if(typeof window !== "undefined" && data[filter] && data[filter].meta) {
+    if (typeof window !== 'undefined' && data[filter] && data[filter].meta) {
       topLoading(false)
     }
 
@@ -147,15 +147,15 @@ class Index extends Component {
         <Helmet
           title={title}
           meta={[
-            { name: "description", content: description },
-            { property: "og:title", content: title },
-            { property: "og:url", content: "http://kompetisi.id/browse" },
+            { name: 'description', content: description },
+            { property: 'og:title', content: title },
+            { property: 'og:url', content: 'http://kompetisi.id/browse' },
             {
-              property: "og:image",
-              content: "http://kompetisi.id/assets/images/wide-red-logo.png"
+              property: 'og:image',
+              content: 'http://kompetisi.id/assets/images/wide-red-logo.png'
             },
-            { property: "og:description", content: description },
-            { property: "og:type", content: "article" }
+            { property: 'og:description', content: description },
+            { property: 'og:type', content: 'article' }
           ]}
         />
 
@@ -164,29 +164,29 @@ class Index extends Component {
           <div className="container">
             <div className="row no-margin">
               <h1>
-                {" "}
+                {' '}
                 Jelajah
-                {query.mediapartner == 1 ? " Media Partner" : ""}{" "}
+                {query.mediapartner == 1 ? ' Media Partner' : ''}{' '}
                 <a
                   href="javascript:;"
-                  onClick={() => modal("open", "select-main-kat")}
+                  onClick={() => modal('open', 'select-main-kat')}
                 >
                   {parseInt(main_kat) >= 0
                     ? categories.data[main_kat].main_kat
-                    : "Semua kategori"}
+                    : 'Semua kategori'}
                   <i className="fa fa-angle-down" />
                 </a>
                 {parseInt(main_kat) >= 0 ? (
                   <span>
-                    {" "}
-                    dan{" "}
+                    {' '}
+                    dan{' '}
                     <a
                       href="javascript:;"
-                      onClick={() => modal("open", "select-sub-kat")}
+                      onClick={() => modal('open', 'select-sub-kat')}
                     >
                       {parseInt(sub_kat) >= 0
                         ? categories.data[main_kat].subkat[sub_kat].sub_kat
-                        : "Semua subkategori"}
+                        : 'Semua subkategori'}
                       <i className="fa fa-angle-down" />
                     </a>
                   </span>
@@ -195,12 +195,12 @@ class Index extends Component {
             </div>
             <div className="row no-margin">
               <h1>
-                Sort by{" "}
+                Sort by{' '}
                 <a href="javascript:;">
                   Terbaru<i className="fa fa-angle-down" />
                 </a>
-                {tag ? ` Tag "${tag}"` : ""}
-                {q ? ` Pencarian "${q}"` : ""}
+                {tag ? ` Tag "${tag}"` : ''}
+                {q ? ` Pencarian "${q}"` : ''}
               </h1>
             </div>
             <div className="row no-margin">
@@ -223,7 +223,10 @@ class Index extends Component {
             <div className="container">
               <div className="modal-title">
                 Pilih Kategori dibawah ini
-                <a className="btn btn-white btn-close-modal btn-sm fa fa-close" />
+                <a
+                  className="btn btn-white btn-close-modal btn-sm fa fa-close"
+                  href="javascript:;"
+                />
               </div>
               <hr />
               {categories.meta && categories.meta.code == 200 ? (
@@ -232,9 +235,9 @@ class Index extends Component {
                     <a
                       href="javascript:;"
                       onClick={() =>
-                        this.setState({ main_kat: "" }, () => {
-                          modal("close", "select-main-kat")
-                          this.props.history.push("/browse")
+                        this.setState({ main_kat: '' }, () => {
+                          modal('close', 'select-main-kat')
+                          this.props.history.push('/browse')
                         })
                       }
                       className="text-muted"
@@ -248,7 +251,7 @@ class Index extends Component {
                         <a
                           href="javascript:;"
                           onClick={() => {
-                            modal("close", "select-main-kat")
+                            modal('close', 'select-main-kat')
                             this.props.history.push(`/browse/${n.main_kat}`)
                           }}
                           className="text-muted"
@@ -260,7 +263,7 @@ class Index extends Component {
                   })}
                 </ul>
               ) : (
-                "loading..."
+                'loading...'
               )}
             </div>
           </div>
@@ -276,8 +279,8 @@ class Index extends Component {
                   <a
                     href="javascript:;"
                     onClick={() =>
-                      this.setState({ sub_kat: "" }, () => {
-                        modal("close", "select-sub-kat")
+                      this.setState({ sub_kat: '' }, () => {
+                        modal('close', 'select-sub-kat')
                         this.props.history.push(
                           `/browse/${categories.data[main_kat].main_kat}`
                         )
@@ -295,7 +298,7 @@ class Index extends Component {
                           <a
                             href="javascript:;"
                             onClick={() => {
-                              modal("close", "select-sub-kat")
+                              modal('close', 'select-sub-kat')
                               this.props.history.push(
                                 `/browse/${
                                   categories.data[main_kat].main_kat
@@ -328,7 +331,7 @@ function setCategories(props = {}, state = {}) {
         if (n.main_kat === props.match.params.mainkat) main_kat = key
       })
     } else {
-      main_kat = ""
+      main_kat = ''
     }
 
     if (
@@ -339,7 +342,7 @@ function setCategories(props = {}, state = {}) {
         if (n.sub_kat === props.match.params.subkat) sub_kat = key
       })
     } else {
-      sub_kat = ""
+      sub_kat = ''
     }
   }
   return {
@@ -353,11 +356,11 @@ function generateState(query = {}, params = {}) {
   const { mediapartner, berakhir, garansi, q } = query
 
   return {
-    main_kat: "",
-    sub_kat: "",
-    q: q || "",
-    tag: tag || "",
-    username: username || "",
+    main_kat: '',
+    sub_kat: '',
+    q: q || '',
+    tag: tag || '',
+    username: username || '',
     is_mediapartner: mediapartner && mediapartner == 1,
     is_berakhir: berakhir && berakhir == 1,
     is_garansi: garansi && garansi == 1
@@ -383,9 +386,9 @@ function generateParams(n = {}, props = null) {
     if (parseInt(sub_kat) >= 0)
       Params.subkat = categories.data[main_kat].subkat[sub_kat].sub_kat
   }
-  if (q && q != "") Params.q = q
-  if (username && username != "") Params.username = username
-  if (tag && tag != "") Params.tag = tag
+  if (q && q != '') Params.q = q
+  if (username && username != '') Params.username = username
+  if (tag && tag != '') Params.tag = tag
   if (is_mediapartner) Params.mediapartner = 1
   if (is_berakhir) Params.berakhir = 1
   if (is_garansi) Params.garansi = 1
@@ -404,11 +407,11 @@ function generateFilter(n = {}) {
     tag,
     is_garansi
   } = n
-  let Filter = "jelajah"
+  let Filter = 'jelajah'
   if (parseInt(main_kat) >= 0) Filter += `_${main_kat}`
   if (parseInt(sub_kat) >= 0) Filter += `_${sub_kat}`
-  if (q != "") Filter += `_${q}`
-  if (tag != "") Filter += `_${tag}`
+  if (q != '') Filter += `_${q}`
+  if (tag != '') Filter += `_${tag}`
   Filter = `${Filter}_${is_mediapartner}_${is_berakhir}_${is_garansi}`
 
   return Filter
