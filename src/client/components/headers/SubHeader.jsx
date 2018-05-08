@@ -30,6 +30,7 @@ const HeaderContentStyled = Styled.div`
     margin: .5em 0;
     padding-left: 25px;
     width: 500px;
+    max-width: 100%;
   }
 `
 
