@@ -32,7 +32,7 @@ export default (req, res) => {
 
   // function to get string of html
   // <link href="/assets/4.2/css/style.css?v=${ version.CSS_VERSION }" rel="stylesheet" />
-  function renderHtml(body = '', state = {}) {
+  function renderHtml(body = '', state = {}, styleTags = '') {
     const head = Helmet.rewind()
     return `
         <!DOCTYPE html>
@@ -42,6 +42,7 @@ export default (req, res) => {
                 ${head.meta.toString()}
                 ${head.style.toString()}
                 ${head.link.toString()}
+                ${styleTags}
                 <meta charset="utf-8" />
                 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -108,8 +109,9 @@ export default (req, res) => {
     if (context.url) {
       res.status(500).send('something wrong')
     } else {
-      let state = store.getState()
-      res.send(renderHtml(html, state))
+      const state = store.getState()
+      const styleTags = sheet.getStyleTags()
+      res.send(renderHtml(html, state, styleTags))
     }
   })
 }

@@ -14,6 +14,7 @@ const CompetitionDetailBox = props => {
     <div id="competition-detail" className="row no-margin p-50-0">
       <div className="col-md-12">
         <div className="container">
+          <div className="row m-20" />
           <div className="competition-author">
             <Link
               to={`/user/${data.author.username}`}
