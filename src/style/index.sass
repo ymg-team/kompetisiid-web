@@ -82,6 +82,20 @@ img.avatar
     -ms-transform: rotateY(-360deg)
     transform: rotateY(-360deg)
 
+ul.inline-list
+  list-style-type: none
+  margin: 0
+  padding: 0
+  overflow: hidden
+  &.inline-list-right
+    li 
+      float: right
+  &.inline-list-left
+    li 
+      float: left
+  li 
+    float: left
+
 @import partials/footer
 @import partials/slider
 @import partials/home

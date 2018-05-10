@@ -24,6 +24,7 @@ import Error from '../containers/4.2/Error'
 // layouts
 import LayoutRoot from '../layouts/4.2/Root'
 import LayoutHome from '../layouts/4.2/Home'
+import LayoutHomeV5 from "../layouts/HomeLayoutV5"
 import LayoutError from '../layouts/4.2/Error'
 import LayoutDashboard from '../layouts/4.2/Dashboard'
 
@@ -32,7 +33,7 @@ export default [
     component: LayoutRoot,
     routes: [
       {
-        component: LayoutHome,
+        component: LayoutHomeV5,
         routes: [
           {
             path: '/',
