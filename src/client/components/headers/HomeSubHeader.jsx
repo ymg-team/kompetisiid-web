@@ -18,7 +18,8 @@ const DotsStyled = Styled.div`
 const SubHeader = Styled.div`
   padding-bottom: 100px;
   transition: all .5s ease;
-  height: 800px;
+  height: 100vh;
+  min-height: 750px;
 
   &.bg-red {
     background-color: ${Colors.mainRed};
@@ -26,6 +27,13 @@ const SubHeader = Styled.div`
 
   &.bg-blue {
     background-color: ${Colors.mainBlue};
+  }
+
+  .subheader-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
   }
 `
 
@@ -95,7 +103,9 @@ class HomeSubHeader extends Component {
         <div className="container">
           {/* navbar */}
           <Navbar />
+        </div>
 
+        <div className="container subheader-content">
           {/* slider */}
           <HomeSlider>
             {this.state.active === 0 ? (
@@ -160,6 +170,7 @@ const WelcomeStaticSlider = props => (
       <Link
         to="/browse"
         className="btn btn-white btn-rounded btn-lg"
+        style={{borderColor: "#FFF", color: Colors.mainRed}}
       >
         Jelajah Kompetisi
       </Link>
@@ -199,7 +210,7 @@ const CompetitionSlider = props => (
         style={{ width: '150px' }}
         className="btn btn-borderwhite btn-rounded btn-lg"
       >
-        Selengkanya
+        Selengkapnya
       </Link>
     </div>
     <div className="col-md-12">

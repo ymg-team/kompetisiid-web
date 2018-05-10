@@ -24,7 +24,7 @@ import { fetchBerita } from '../../../store/berita/actions'
 
 const GrayBackgroundStyled = Styled.div`
   padding: 30px;
-  background: ${Colors.softGray};
+  /* background: ${Colors.softGray}; */
 `
 
 class Home extends Component {
@@ -35,7 +35,7 @@ class Home extends Component {
       this.props.dispatch(fetchJelajah({ limit: 9 }, 'home_latest'))
 
     if (!this.props.kompetisi.data.home_popular) topLoading(true)
-    this.props.dispatch(fetchJelajah({ limit: 4, popular: 1 }, 'home_popular'))
+    this.props.dispatch(fetchJelajah({ limit: 7, popular: 1 }, 'home_popular'))
 
     if (!this.props.kompetisi.data.home_mediapartner)
       this.props.dispatch(
@@ -89,7 +89,7 @@ class Home extends Component {
         />
 
         {/* competition */}
-        <div className="col-md-12 bg-white">
+        <div className="col-md-12 bg-gray">
           <SubHeaderTitle
             title="Kompetisi Baru"
             text="Ikuti beragam kompetisi disini sesuai dengan minat kamu."
@@ -105,7 +105,7 @@ class Home extends Component {
         </GrayBackgroundStyled>
 
         {/* news */}
-        <div className="col-md-12 bg-white">
+        <div className="col-md-12 bg-gray">
           <SubHeaderTitle
             title="Kabar Baru"
             text="Update dengan kabar baru seputar kompetisi di Indonesia."
@@ -114,7 +114,7 @@ class Home extends Component {
         <GrayBackgroundStyled className="col-md-12">
           <NewsBox subtitle={false} {...berita.data['home_latest']} />
           <div className="row align-center">
-            <Link className="btn btn-bordergray" to="/browse">
+            <Link className="btn btn-bordergray" to="/news">
               BERITA BERIKUTNYA
             </Link>
           </div>
