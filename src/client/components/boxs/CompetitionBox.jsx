@@ -46,7 +46,6 @@ const CompetitionBox = (props) => {
                 </Transition>
                 
               { is_loading || !meta ? <Loader size={props.size} total={props.total} /> : null }
-              <div className='row m-10' />                
             </div>
           </div>
       </div>
