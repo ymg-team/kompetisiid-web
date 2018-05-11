@@ -94,6 +94,7 @@ class Index extends Component {
           detail[encid].meta.code == 200 ? (
             <div className="competition-detail">
               <CompetitionDetailBox data={detail[encid].data} />
+              <div className="m-20" />
               <Tab
                 active={this.props.route.active_tab}
                 data={detail[encid].data}

@@ -5,7 +5,7 @@
 # Kompetisi Indonesia Web
 Indonesian Competition Platform [https://kompetisi.id](https://kompetisi.id)
 
-[![ki repo](https://pbs.twimg.com/media/DKtmk3jVwAIXmSt.jpg:large)](https://kompetisi.id)
+[![ki repo](http://res.cloudinary.com/dhjkktmal/image/upload/v1526045249/kompetisi-id/Frame.png)](https://kompetisi.id)
 
 
 ## Env 
