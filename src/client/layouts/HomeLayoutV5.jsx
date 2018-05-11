@@ -15,10 +15,11 @@ class RootLayoutV5 extends Component {
         {this.props.location.pathname !== '/' ? (
           <div
             style={{ backgroundColor: 'rgb(228, 228, 228)' }}
-            className="col-md-12"
           >
             <div className="container">
-              <Navbar className="bg-gray" />
+              <div className="row">
+                <Navbar className="bg-gray" />
+              </div>
             </div>
           </div>
         ) : null}

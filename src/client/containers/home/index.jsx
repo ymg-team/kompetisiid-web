@@ -23,7 +23,7 @@ import {
 import { fetchBerita } from '../../../store/berita/actions'
 
 const GrayBackgroundStyled = Styled.div`
-  padding: 30px;
+  padding: 30px 0;
   /* background: ${Colors.softGray}; */
 `
 

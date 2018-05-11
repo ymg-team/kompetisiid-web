@@ -1,5 +1,6 @@
 import React from 'react'
 import Styled from "styled-components"
+import * as Colors from "../../../style/colors"
 
 const SubHeaderStyled = Styled.div`
 `
@@ -10,16 +11,15 @@ const HeaderContentStyled = Styled.div`
     margin: 0;
     line-height: 1;
     font-size: 2.5em;
-    color: #000;
   
     &:after {
       content: "";
       display: block;
-      width: 40px;
-      border-top: 5px solid #000;
+      width: 30px;
+      border-top: 8px solid ${Colors.mainGray};
       box-sizing: border-box;
       margin: 15px 0 25px 0;
-      border-radius: 10px;
+      border-radius: 5px;
     }
   }
   
