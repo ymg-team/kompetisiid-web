@@ -6,10 +6,30 @@ import {queryToObj} from "string-manager"
 
 const NavbarStyled = Styled.div`
   padding: .5em 0;
+  transition: all .5s ease;
+
+  &.fixed {
+    position: fixed;
+    width: 100%;
+    z-index: 10;
+  }
+
+  &.bg-gray {
+    color: #3a3a3a;
+    a {
+      color: #3a3a3a;
+    }
+    input[type="search"] {
+      border-bottom: 2px solid #3a3a3a;
+      color: #3a3a3a;
+    }
+  }
+
   img#ki-logo {
     width: 40px;
     height: 40px;
   }
+
   a {
     transition: all .5s ease;
     color: #FFF;
@@ -21,21 +41,8 @@ const NavbarStyled = Styled.div`
 
   ul.inline-list {
     height: 40px;
-  }
-  ul.inline-list {
     li {
       padding: 10px
-    }
-  }
-
-  &.bg-gray {
-    color: #3a3a3a;
-    a {
-      color: #3a3a3a;
-    }
-    input[type="search"] {
-      border-bottom: 2px solid #3a3a3a;
-      color: #3a3a3a;
     }
   }
 `

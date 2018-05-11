@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import * as Colors from "../../style/colors"
 
 export const Fullscreen = styled.div`
   color: #fff;
@@ -10,10 +11,10 @@ export const Fullscreen = styled.div`
   justify-content: center;ß
   padding: 0 10px;
   &.error {
-    background: #e74c3c;
+    background: ${Colors.mainRed};
   }
   &.login {
-    background: #191515;
+    background: ${Colors.darkGray};
   }
   &.bg-gray-soft {
     color: gray

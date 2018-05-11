@@ -4,6 +4,7 @@
  */
 
 import React from 'react'
+import { Redirect } from 'react-router-dom'
 
 //  routes
 import News from './berita'
@@ -24,7 +25,7 @@ import Error from '../containers/4.2/Error'
 // layouts
 import LayoutRoot from '../layouts/4.2/Root'
 import LayoutHome from '../layouts/4.2/Home'
-import LayoutHomeV5 from "../layouts/HomeLayoutV5"
+import LayoutHomeV5 from '../layouts/HomeLayoutV5'
 import LayoutError from '../layouts/4.2/Error'
 import LayoutDashboard from '../layouts/4.2/Dashboard'
 
@@ -51,6 +52,23 @@ export default [
             fullscreen: true,
             exact: true,
             component: Login
+          },
+          // redirect
+          {
+            path: '/berita/baca/:encid/:title',
+            fullscreen: true,
+            exact: true,
+            component: props => {
+              if (typeof window != 'undefined')
+                return (
+                  <Redirect
+                    to={`/news/${props.match.params.encid}/${
+                      props.match.params.title
+                    }`}
+                  />
+                )
+              return null
+            }
           },
           {
             fullscreen: true,

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import Footer from "../components/Footer"
-import { renderRoutes } from 'react-router-config'
+import Footer from '../components/Footer'
+import { renderRoutes, matchRoutes } from 'react-router-config'
 import Styled from 'styled-components'
 import Navbar from '../components/navigations/TransparentNavbar'
 
@@ -8,23 +8,26 @@ const LayoutStyled = Styled.div`
   min-height: 100%;
 `
 
+let addedEventScroll = false
+
 class RootLayoutV5 extends Component {
+  componentDidMount() {}
+
   render() {
+    const { fullscreen } = matchRoutes(this.props.route.routes, this.props.location.pathname)[0].route
     return (
       <LayoutStyled>
-        {this.props.location.pathname !== '/' ? (
-          <div
-            style={{ backgroundColor: 'rgb(228, 228, 228)' }}
-          >
+        {this.props.location.pathname === '/' || fullscreen ? null : (
+          <div style={{ backgroundColor: 'rgb(228, 228, 228)' }}>
             <div className="container">
               <div className="row">
                 <Navbar className="bg-gray" />
               </div>
             </div>
           </div>
-        ) : null}
+        )}
         {renderRoutes(this.props.route.routes)}
-        <Footer />
+        {fullscreen ? null : <Footer /> }
         <div id="fullalert" />
       </LayoutStyled>
     )
