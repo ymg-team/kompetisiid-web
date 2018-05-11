@@ -58,8 +58,15 @@ export default [
             path: '/berita/baca/:encid/:title',
             fullscreen: true,
             exact: true,
-            component: (props) => {
-              if(typeof window != 'undefined') return <Redirect to={`/news/${props.match.params.encid}/${props.match.params.title}`} />
+            component: props => {
+              if (typeof window != 'undefined')
+                return (
+                  <Redirect
+                    to={`/news/${props.match.params.encid}/${
+                      props.match.params.title
+                    }`}
+                  />
+                )
               return null
             }
           },
