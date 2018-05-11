@@ -64,7 +64,7 @@ class Header extends Component {
               </li>
               <li>
                 <Link onClick={() => toggleNavTop()} to="/news">
-                  berita
+                  kabar
                 </Link>
               </li>
               {/*
