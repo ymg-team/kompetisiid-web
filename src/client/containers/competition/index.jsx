@@ -98,7 +98,7 @@ class Index extends Component {
                 active={this.props.route.active_tab}
                 data={detail[encid].data}
               />
-              <div className="col-md-12">
+              <div className="row">
                 <div className="container">
                   <div className="row competition-detail--content">
                     <div className="col-md-10 col-md-push-1">
@@ -144,6 +144,7 @@ class Index extends Component {
                       ) : null}
                       {/*end of alert*/}
                       <div className="m-20" />
+                      
                       <div className="row">
                         <div
                           className={active_tab == 1 ? 'col-md-8' : 'col-md-12'}

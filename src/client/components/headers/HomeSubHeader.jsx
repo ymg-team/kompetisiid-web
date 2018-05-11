@@ -50,6 +50,23 @@ const HomeSlider = Styled.div`
   .text{
     padding: 3em 0;
   }
+
+  /* responsiveness */
+
+  /* small */
+  @media only screen and (max-width: 543px) {
+    h1 {
+      font-size: 2em;
+    }
+  }
+
+  /* medium screen */
+  @media only screen and (min-width: 544px) and (max-width: 767px) {
+    h1 {
+      font-size: 2.5em;
+    }
+  }
+
 `
 
 class HomeSubHeader extends Component {
@@ -64,7 +81,6 @@ class HomeSubHeader extends Component {
   componentWillReceiveProps(np) {
     if (np.slider.meta && np.slider.meta.code === 200) {
       this.setState({
-        // active: 1,
         totalSliders: 1 + np.slider.data.length
       })
     }
@@ -73,7 +89,7 @@ class HomeSubHeader extends Component {
   componentDidMount() {
     this.sliderInterval = setInterval(() => {
       this.setActive()
-    }, 2500)
+    }, 5000)
   }
 
   setActive() {
@@ -96,7 +112,7 @@ class HomeSubHeader extends Component {
     return (
       <SubHeader
         id="homepage-subheader"
-        className={`col-md-12 ${
+        className={`row ${
           this.state.active === 0 ? 'bg-red' : 'bg-blue'
         }`}
       >
@@ -115,14 +131,15 @@ class HomeSubHeader extends Component {
             ) : null}
 
             {/* slider navigation */}
-            <DotsStyled className="col-md-12">
+            <DotsStyled className="row">
               {(() => {
                 let Dots = []
                 for (let n = 0; n < this.state.totalSliders; n++) {
                   Dots.push(
                     <span
                       key={n}
-                      style={{ margin: '0 .3em', color: '#FFF' }}
+                      style={{ margin: '0 .3em', color: '#FFF', cursor: "pointer" }}
+                      onClick={() => { this.setState({active: n}) }}
                       className={
                         this.state.active === n
                           ? 'fa fa-circle'
@@ -146,13 +163,15 @@ class HomeSubHeader extends Component {
 
 const WelcomeStaticSlider = props => (
   <div>
-    <div className="col-md-12">
+    <div className="row">
       <div className="col-md-6 col-md-offset-3">
         <h1>Setiap Hari Ada Hadiah Disini.</h1>
         </div>
     </div>
-    <Count {...props.stats} />
-    <div className="col-md-12">
+    <div className="row">
+      <Count {...props.stats} />
+    </div>
+    <div className="row">
       {/* <Link
         to="/register"
         style={{ width: '150px' }}
@@ -181,7 +200,7 @@ const WelcomeStaticSlider = props => (
         Pasang Kompetisi
       </Link>
     </div>
-    <div className="col-md-12">
+    <div className="row">
       <div className="col-md-6 col-md-offset-3">
         <div className="text">
           Kompetisi.id membuka kesempatan untuk para penyelenggara kompetisi ini
@@ -200,7 +219,7 @@ const CompetitionSlider = props => (
       <div className="col-md-8 col-md-offset-2">
         <h1 style={{ paddingBottom: 0 }}>{props.title}</h1>
         <h2 style={{ paddingBottom: '1em' }}>
-          Hadiah senilai Rp {props.total_hadiah}
+          Hadiah senilai {props.total_hadiah}
         </h2>
       </div>
     </div>

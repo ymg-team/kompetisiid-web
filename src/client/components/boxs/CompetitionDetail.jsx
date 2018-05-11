@@ -11,8 +11,8 @@ const CompetitionDetailBox = props => {
     data.id_kompetisi
   }/regulations/${data.nospace_title}`
   return (
-    <div id="competition-detail" className="row no-margin p-50-0">
-      <div className="col-md-12">
+    <div id="competition-detail" className="row">
+      <div className="row">
         <div className="container">
           <div className="row m-20" />
           <div className="competition-author">
