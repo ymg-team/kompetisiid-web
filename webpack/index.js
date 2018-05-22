@@ -28,8 +28,8 @@ module.exports = {
 
   output: {
     path: Path.resolve(__dirname, BUILD_DIR),
-    chunkFilename: '[name].[chunkhash].js',
     filename: NODE_ENV == 'production' ? '[name].[hash].js' : '[name].js',
+    chunkFilename: NODE_ENV == 'production' ? '[name].[hash].js' : '[name].js',
     publicPath: '/build/'
   },
 
@@ -41,8 +41,7 @@ module.exports = {
     new webpack.NoEmitOnErrorsPlugin(),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
-      filename:
-        process.env.NODE_ENV == 'production' ? 'vendor.[hash].js' : 'vendor.js',
+      filename: NODE_ENV == 'production' ? 'vendor.[hash].js' : 'vendor.js',
       minChunks: Infinity
     }),
     new webpack.DefinePlugin({
@@ -51,22 +50,38 @@ module.exports = {
         APP_KEY: JSON.stringify(APP_KEY || 'kompetisiid')
       }
     }),
-    new ExtractTextPlugin(NODE_ENV == 'production' ? '[name].[hash].css' : '[name].css')
+    new ExtractTextPlugin(
+      NODE_ENV == 'production' ? '[name].[hash].css' : '[name].css'
+    )
   ],
 
   resolve: {
     extensions: ['.js', '.jsx', '.css', '.sass'],
-    alias: {
-      react: 'preact-compat',
-      'react-dom': 'preact-compat'
-    }
+    // alias: {
+    //   react: 'preact-compat',
+    //   'react-dom': 'preact-compat'
+    // }
   },
 
   module: {
     rules: [
       {
         test: /\.(js|jsx)$/,
-        use: ['babel-loader']
+        use: [
+          {
+            loader: 'babel-loader',
+            options: {
+              babelrc: false,
+              presets: ['es2015', 'react'],
+              plugins: ['transform-class-properties', 'syntax-dynamic-import'],
+              env: {
+                production: {
+                  presets: []
+                }
+              }
+            }
+          }
+        ]
       },
       {
         test: /\.sass$/,
