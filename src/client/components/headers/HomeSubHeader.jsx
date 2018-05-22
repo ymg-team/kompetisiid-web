@@ -8,11 +8,8 @@ import * as Colors from '../../../style/colors'
 
 const DotsStyled = Styled.div`
   position: absolute;
-  width: auto;
-  left: 50%;
-  margin-left: -200px;
-  bottom: 50px;
-  width: 400px;
+  margin: auto;
+  bottom: 0;
 `
 
 const SubHeader = Styled.div`
@@ -69,19 +66,26 @@ const HomeSlider = Styled.div`
 
 `
 
+const Static = [
+  // {
+  //   url: "http://res.cloudinary.com/dhjkktmal/image/upload/v1526547300/kompetisi-id/Screen_Shot_2018-05-17_at_15.54.33.png",
+  //   title: "Ramadhan Kareem for kompetisi.id"
+  // }
+]
+
 class HomeSubHeader extends Component {
   constructor(props) {
     super(props)
     this.state = {
       active: 0,
-      totalSliders: 1
+      totalSliders: 1 + Static.length
     }
   }
 
   componentWillReceiveProps(np) {
     if (np.slider.meta && np.slider.meta.code === 200) {
       this.setState({
-        totalSliders: 1 + np.slider.data.length
+        // totalSliders: 1 + np.slider.data.length + Static.length
       })
     }
   }
@@ -112,49 +116,66 @@ class HomeSubHeader extends Component {
     return (
       <SubHeader
         id="homepage-subheader"
-        className={`row ${
-          this.state.active === 0 ? 'bg-red' : 'bg-blue'
-        }`}
+        className={`row ${this.state.active === 0 ? 'bg-red' : 'bg-blue'}`}
       >
         <div className="container">
           {/* navbar */}
           <Navbar />
         </div>
 
-        <div className="container subheader-content">
+        <div style={{position:'relative'}} className="container subheader-content">
+          {/* {
+              Static.length > 0 ?
+                this.state.active < Static.length ?
+                  <div 
+                    className="row"
+                    style={{width: "100%", height: "100%", backgroundSize: "cover", backgroundImage: `url(${Static[this.state.active].url})`}}
+                  />
+                : null
+              : null
+            } */}
+
           {/* slider */}
           <HomeSlider>
-            {this.state.active === 0 ? (
-              <WelcomeStaticSlider stats={this.props.stats} />
-            ) : meta.code === 200 ? (
-              <CompetitionSlider {...data[this.state.active - 1]} />
+            {Static.length <= 0 ||
+            (Static.length > 0 && this.state.active >= Static.length) ? (
+              this.state.active === 0 ? (
+                <WelcomeStaticSlider stats={this.props.stats} />
+              ) : meta.code === 200 ? (
+                <CompetitionSlider {...data[this.state.active - 1]} />
+              ) : null
             ) : null}
-
-            {/* slider navigation */}
-            <DotsStyled className="row">
-              {(() => {
-                let Dots = []
-                for (let n = 0; n < this.state.totalSliders; n++) {
-                  Dots.push(
-                    <span
-                      key={n}
-                      style={{ margin: '0 .3em', color: '#FFF', cursor: "pointer" }}
-                      onClick={() => { this.setState({active: n}) }}
-                      className={
-                        this.state.active === n
-                          ? 'fa fa-circle'
-                          : 'fa fa-circle-o'
-                      }
-                    />
-                  )
-                }
-                return Dots
-                })()}
-            </DotsStyled>
-            {/* end of slider bavigation */}
           </HomeSlider>
-
           {/* end of slider */}
+
+          {/* slider navigation */}
+          <DotsStyled className="row">
+            {(() => {
+              let Dots = []
+              for (let n = 0; n < this.state.totalSliders; n++) {
+                Dots.push(
+                  <span
+                    key={n}
+                    style={{
+                      margin: '0 .3em',
+                      color: '#FFF',
+                      cursor: 'pointer'
+                    }}
+                    onClick={() => {
+                      this.setState({ active: n })
+                    }}
+                    className={
+                      this.state.active === n
+                        ? 'fa fa-circle'
+                        : 'fa fa-circle-o'
+                    }
+                  />
+                )
+              }
+              return Dots
+            })()}
+          </DotsStyled>
+          {/* end of slider bavigation */}
         </div>
       </SubHeader>
     )
@@ -166,7 +187,7 @@ const WelcomeStaticSlider = props => (
     <div className="row">
       <div className="col-md-6 col-md-offset-3">
         <h1>Setiap Hari Ada Hadiah Disini.</h1>
-        </div>
+      </div>
     </div>
     <div className="row">
       <Count {...props.stats} />
@@ -189,14 +210,11 @@ const WelcomeStaticSlider = props => (
       <Link
         to="/browse"
         className="btn btn-white btn-rounded btn-lg"
-        style={{borderColor: "#FFF", color: Colors.mainRed}}
+        style={{ borderColor: '#FFF', color: Colors.mainRed }}
       >
         Jelajah Kompetisi
       </Link>
-      <Link
-        to="/add"
-        className="btn btn-borderwhite btn-rounded btn-lg"
-      >
+      <Link to="/add" className="btn btn-borderwhite btn-rounded btn-lg">
         Pasang Kompetisi
       </Link>
     </div>
@@ -225,7 +243,9 @@ const CompetitionSlider = props => (
     </div>
     <div className="col-md-12">
       <Link
-        to={`/competition/${props.id_kompetisi}/regulations/${props.nospace_title}`}
+        to={`/competition/${props.id_kompetisi}/regulations/${
+          props.nospace_title
+        }`}
         style={{ width: '150px' }}
         className="btn btn-borderwhite btn-rounded btn-lg"
       >

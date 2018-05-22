@@ -1,13 +1,9 @@
 {
-    "presets": ["es2015", "react"],
-     "env": {
-        "production": {
-        "presets": []
-        }
-    },
-    "plugins": [
-        [
-            "transform-class-properties"
-        ]
-    ]
+  "presets": ["es2015", "react"],
+  "plugins": ["transform-class-properties", "syntax-dynamic-import" ,"dynamic-import-node"],
+  "env": {
+    "production": {
+      "presets": []
+    }
+  }
 }
