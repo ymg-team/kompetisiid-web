@@ -85,7 +85,7 @@ class HomeSubHeader extends Component {
   componentWillReceiveProps(np) {
     if (np.slider.meta && np.slider.meta.code === 200) {
       this.setState({
-        // totalSliders: 1 + np.slider.data.length + Static.length
+        totalSliders: 1 + np.slider.data.length + Static.length
       })
     }
   }
