@@ -1,19 +1,34 @@
-// components
+// deps
 import React, { Component } from 'react'
-import SubHeader from '../../components/headers/HomeSubHeader'
-import SubHeaderTitle from '../../components/headers/SubHeader'
-import Helmet from '../../components/Helmet'
-import CompetitionBox from '../../components/boxs/CompetitionBox'
-import NewsBox from '../../components/boxs/NewsBox'
-import MediapartnerBox from '../../components/boxs/MediapartnerBox'
-import { Link } from 'react-router-dom'
-
-// modules
+import Loadable from 'react-loadable'
 import Styled from 'styled-components'
-import * as Colors from '../../../style/colors'
 import { connect } from 'react-redux'
 import { topLoading } from '../../components/preloaders'
 import { getStorage, setStorage } from '../../../store/helpers/LocalStorage'
+
+// components
+import SubHeader from '../../components/headers/HomeSubHeader'
+import SubHeaderTitle from '../../components/headers/SubHeader'
+import Helmet from '../../components/Helmet'
+// import CompetitionBox from '../../components/boxs/CompetitionBox'
+// import NewsBox from '../../components/boxs/NewsBox'
+import NewsLoading from '../../components/preloaders/NewsCardLoader'
+import CompetitionLoading from '../../components/preloaders/CompetitionCardLoader'
+import MediapartnerBox from '../../components/boxs/MediapartnerBox'
+import { Link } from 'react-router-dom'
+
+// split components
+const NewsBox = Loadable({
+  loader: () => import('../../components/boxs/NewsBox'),
+  loading: NewsLoading
+})
+const CompetitionBox = Loadable({
+  loader: () => import("../../components/boxs/CompetitionBox"),
+  loading: CompetitionLoading
+})
+
+// actions and store
+import * as Colors from '../../../style/colors'
 import {
   fetchJelajah,
   getCategories,
