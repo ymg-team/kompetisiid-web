@@ -10,8 +10,6 @@ import { getStorage, setStorage } from '../../../store/helpers/LocalStorage'
 import SubHeader from '../../components/headers/HomeSubHeader'
 import SubHeaderTitle from '../../components/headers/SubHeader'
 import Helmet from '../../components/Helmet'
-// import CompetitionBox from '../../components/boxs/CompetitionBox'
-// import NewsBox from '../../components/boxs/NewsBox'
 import NewsLoading from '../../components/preloaders/NewsCardLoader'
 import CompetitionLoading from '../../components/preloaders/CompetitionCardLoader'
 import MediapartnerBox from '../../components/boxs/MediapartnerBox'
@@ -35,7 +33,7 @@ import {
   setCategories,
   getStats
 } from '../competition/actions'
-import { fetchBerita } from '../../../store/berita/actions'
+import { fetchBerita } from '../news/actions'
 
 const GrayBackgroundStyled = Styled.div`
   padding: 30px 0;

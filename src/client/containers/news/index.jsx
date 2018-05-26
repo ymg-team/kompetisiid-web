@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import * as BeritaActions from '../../../store/berita/actions'
+import * as BeritaActions from './actions'
 import Helmet from '../../components/Helmet'
 import Author from '../../components/cards/NewsAuthorCard'
 import NewsBox from '../../components/boxs/NewsBox'
@@ -8,7 +8,7 @@ import Host from '../../../config/host'
 import Preloader from "../../components/preloaders/NewsDetail"
 import {pushScript} from '../../helpers/DomEvents'
 import {connect} from 'react-redux'
-import { topLoading } from "../../components/preloaders"
+import {topLoading} from "../../components/preloaders"
 import {datetimeToRelativeTime} from '../../helpers/DateTime'
 import {truncate} from 'string-manager'
 
@@ -100,7 +100,7 @@ export default class Index extends Component {
       })
     }
 
-    if(typeof window !== "undefined" && detail[encid] && detail[encid].meta ) topLoading(false)
+    if (typeof window !== "undefined" && detail[encid] && detail[encid].meta) topLoading(false)
 
     return (
       <div>
@@ -174,7 +174,9 @@ export default class Index extends Component {
         }
         {detail[encid] && detail[encid].meta && detail[encid].is_loading ? <Preloader/> : null}
         {/* comment section */}
-        <div style={{display: detail[encid] && detail[encid].meta && detail[encid] && detail[encid].meta === 200 ? 'block' : 'hidden' }} className='col-md-6 col-md-push-3 col-md-pull-3'>
+        <div
+          style={{display: detail[encid] && detail[encid].meta && detail[encid] && detail[encid].meta === 200 ? 'block' : 'hidden'}}
+          className='col-md-6 col-md-push-3 col-md-pull-3'>
           <div style={{padding: '50px 0'}} className='row comments' id='disqus_thread'/>
         </div>
         {/* end of comment section */}

@@ -1,4 +1,4 @@
-import CompetitionList from '../containers/4.2/Dashboard/CompetitionList'
+import CompetitionList from '../containers/Dashboard/CompetitionList'
 
 
 export default {

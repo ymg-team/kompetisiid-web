@@ -1,5 +1,5 @@
-import Add from '../containers/4.2/AddCompetition'
-import SendCompetition from '../containers/4.2/SendCompetition'
+import Add from '../containers/sendCompetition/form'
+import SendCompetition from '../containers/sendCompetition/index'
 
 import EmptyLayout from '../layouts/4.2/Empty'
 

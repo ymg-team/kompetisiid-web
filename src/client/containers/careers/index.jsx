@@ -2,7 +2,7 @@ import React from 'react'
 import Helmet from '../../components/Helmet'
 import Subheader from '../../components/Subheader'
 
-const Careers = () => (
+const Index = () => (
     <div>
         <Helmet 
             title='Karir - Kompetisi Indonesia'
@@ -107,4 +107,4 @@ const Careers = () => (
     </div>
 )
 
-export default Careers
+export default Index
