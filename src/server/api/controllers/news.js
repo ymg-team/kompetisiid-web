@@ -20,9 +20,10 @@ export function getNews(req, res, next)
 export function getNewsDetail(req, res, next)
 {
     req.reqdata = {
+        version: 'v42',
         method: 'get',
         params: req.params,
-        url: `/berita/read/${req.params.id}`,
+        url: `/v2/news/${req.params.id}`,
     }
 
     next()

@@ -6,100 +6,111 @@ import Newsbox from '../../components/boxs/NewsBox'
 import { fetchBerita, fetchBeritaMore } from './actions'
 import { connect } from 'react-redux'
 
-const Filter = 'list'
 const Limit = 6
 
-class List extends Component
-{
-    // static fetchData({store})
-    // {
-    //     return store.dispatch(fetchBerita({ limit: Limit }, Filter))
-    // }
+class List extends Component {
+  // static fetchData({store})
+  // {
+  //     return store.dispatch(fetchBerita({ limit: Limit }, Filter))
+  // }
 
-    constructor(props)
-    {
-        super(props)
+  constructor(props) {
+    super(props)
+  }
+
+  componentDidMount() {
+    this.reqData(this.props)
+    window.scrollTo(0, 0)
+    window.addEventListener('scroll', e => this.handleScroll(e), true)
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll', e => this.handleScroll(e), true)
+  }
+
+  handleScroll() {
+    if (document.getElementById('list-news')) {
+      const ContainerHeight = document.getElementById('news-container')
+        .offsetHeight
+      if (window.pageYOffset >= ContainerHeight - 600) {
+        this.reqMore()
+      }
+    }
+  }
+
+  reqData(props) {
+    const Filter = this.generateFilter(props)
+    let Params = { limit: Limit }
+    Params.status = 'published'
+
+    // filter by tag
+    if(props.match.params.tag) {
+      Params.tag = this.props.match.params.tag
     }
 
-    componentDidMount()
-    {
-        this.reqData()
-        window.scrollTo(0,0)
-        window.addEventListener('scroll', (e) => this.handleScroll(e), true)
+
+    if (!this.props.berita.data[Filter])
+      this.props.dispatch(fetchBerita(Params, Filter))
+  }
+
+  reqMore() {
+    const Filter = this.generateFilter()
+    let Params = { limit: Limit }
+    Params.status = 'published'
+    // filter by tag
+    if(this.props.match.params.tag) {
+      Params.tag = this.props.match.params.tag
     }
 
-    componentWillUnmount()
-    {
-        window.removeEventListener('scroll', (e) => this.handleScroll(e), true)
+    const Berita = this.props.berita.data[Filter]
+    if (Berita && Berita.data) {
+      Params.lastid = Berita.data[Berita.data.length - 1].id
+      if (!Berita.is_loading && Berita.status === 200) {
+        this.props.dispatch(fetchBeritaMore(Params, Filter))
+      }
+    }
+  }
+
+  generateFilter(props = this.props){
+    let Filter = 'list'
+    if(props.match.params.tag) {
+      Filter += `_${this.props.match.params.tag}`
     }
 
-    handleScroll()
-    {
-        if(document.getElementById('list-news'))
-        {
-            const ContainerHeight = document.getElementById('news-container').offsetHeight
-            if(window.pageYOffset >= ContainerHeight - 600) this.reqMore()
-        }
+    return Filter
+  }
+
+  render() {
+    const Filter = this.generateFilter()
+    let title = 'Kabar - Kompetisi.id'
+    let description = 'Temukan kabar seputar kompetisi di Indonesia'
+
+    if(this.props.match.params.tag) {
+      title += ` tag "${this.props.match.params.tag}"`
+      description += ` berdasarkan tag "${this.props.match.params.tag}"`
     }
 
-    reqData()
-    {
-        let Params = {limit: Limit}
-        Params.status = 'published'
-        if(!this.props.berita.data[Filter]) this.props.dispatch(fetchBerita(Params, Filter))
-    }
-
-    reqMore()
-    {
-        let Params = {limit: Limit}
-        Params.status = 'published'
-        const Berita = this.props.berita.data[Filter]
-        if(Berita && Berita.data)
-        {
-            Params.lastid = Berita.data[Berita.data.length - 1].id
-            if(!Berita.is_loading && Berita.status === 200)
-            {
-                this.props.dispatch(fetchBeritaMore(Params, Filter))
-            }
-        }
-    }
-
-    render()
-    {
-        return(
-            <div id='list-news'>
-                <Helmet 
-                    title="Kabar - Kompetisi.id"
-                    description="Temukan kabar seputar kompetisi di Indonesia"
-                />
-                <Subheader 
-                    title='Kabar kompetisi'
-                    desc='Kabar seputar kompetisi di Indonesia dan Internasional'
-                />
-                <Newsbox 
-                    {...this.props.berita.data[Filter]}
-                />
-            </div>
-        )
-    }
+    return (
+      <div id="list-news">
+        <Helmet title={title} description={description} />
+        <Subheader title={title} desc={description} />
+        <Newsbox {...this.props.berita.data[Filter]} />
+      </div>
+    )
+  }
 }
 
-function mapStateToProps(state)
-{
-    const {Berita} = state
-    return {
-        berita: Berita
-    }
+function mapStateToProps(state) {
+  const { Berita } = state
+  return {
+    berita: Berita
+  }
 }
 
-function mapDispatchToProps(dispatch)
-{
-    return {
-        dispatch
-    }
+function mapDispatchToProps(dispatch) {
+  return {
+    dispatch
+  }
 }
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(List)
+export default connect(mapStateToProps, mapDispatchToProps)(List)
