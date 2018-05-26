@@ -16,16 +16,16 @@ export default class NewsBox extends Component
 
     render()
     {
-        const {data, meta, is_loading} = this.props
+        const {status, message, count, data, is_loading} = this.props
         return(
             <div id='news-container'>
                 <div className='container'>
                     <div className='row no-margin'>
                     {
-                        this.props.subtitle && meta && meta.code == 200 ?
+                        this.props.subtitle && status === 200 ?
                             <span style={{display: 'table'}}>
                                 <br />
-                                menampilkan&nbsp;<strong> {data.length}&nbsp;</strong>dari&nbsp;<strong>beberapa&nbsp;</strong>berita
+                                menampilkan&nbsp;<strong> {data.length}&nbsp;</strong>dari&nbsp;<strong>{count}&nbsp;</strong>kabar
                                 <br />
                             </span>
                         : null
@@ -37,9 +37,9 @@ export default class NewsBox extends Component
                             {(state) => (
                                 <div style={Object.assign({}, style.fade.default, style.fade[state])}>
                                 {
-                                    meta && meta.code ?
+                                    status ?
                                         !data ? 
-                                            <p className='text-muted'>{meta.message}</p>
+                                            <p className='text-muted'>{message}</p>
                                         : this.generateList(data)
                                     : null                            
                                 }
@@ -47,7 +47,7 @@ export default class NewsBox extends Component
                             )}
                         </Transition>
                     </div>
-                    { is_loading || !meta ? <Loader /> : null }
+                    { is_loading || !status ? <Loader /> : null }
                 </div>
             </div>
         )

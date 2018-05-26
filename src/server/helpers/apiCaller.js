@@ -2,10 +2,8 @@ import request from 'request'
 import { httpException } from '../../store/helpers/Exceptions'
 import * as Url from './url'
 import fs from 'fs'
-import Host from '../../config/host'
 import Https from 'https'
 
-const API_HOST = Host[process.env.NODE_ENV].api
 // generate agent
 const agentOptions = new Https.Agent({
     rejectUnauthorized: false
@@ -17,6 +15,9 @@ const agentOptions = new Https.Agent({
  */
 export function requestAPI(method='GET', endpoint='', params={}, callback)
 {
+    const {API_HOST} = params
+    delete params.API_HOST
+
     // TODO : change static token to dinamic token
     let token = ''
     if(params.token)
@@ -34,7 +35,7 @@ export function requestAPI(method='GET', endpoint='', params={}, callback)
 
     //set options
     const options = {
-        method: method,
+        method,
         uri: API_HOST+endpoint,
         timeout: 60000,
         // resolved from : https://stackoverflow.com/questions/20433287/node-js-request-cert-has-expired#answer-29397100
@@ -100,6 +101,9 @@ export function requestAPI(method='GET', endpoint='', params={}, callback)
  */
 export function requestAPIV2(method='GET', endpoint='', params={})
 {
+    const {API_HOST} = params
+    delete params.API_HOST
+
     let token = ''
     if(params.token)
     {
@@ -114,18 +118,23 @@ export function requestAPIV2(method='GET', endpoint='', params={})
         delete params.query
     }
 
+    // debug api
+    const debugApi = require('debug')('app:api')
+
     //set options
     const options = {
-        method: method,
+        method,
         uri: API_HOST+endpoint,
         timeout: 60000,
-        agentOptions,
+        // agentOptions,
         headers: {
             token,
-            'User-Agent': 'request'
+            'User-Agent': 'ki-v42'
             // 'Content-Type' : 'json',
         },
     }
+
+    debugApi(options)
 
     // using POST method
     if(method.toLowerCase() === 'post') {
@@ -153,8 +162,7 @@ export function requestAPIV2(method='GET', endpoint='', params={})
     //start request
     return new Promise((resolve, reject) => {
         try {
-            request( options , function(error, response, body){
-                // console.log(`response from ${options.uri}: `)
+            request( options , (error, response, body) => {
 
                 if(error)
                 {

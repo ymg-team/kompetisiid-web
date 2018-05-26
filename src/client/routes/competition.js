@@ -1,5 +1,5 @@
 import Competition from '../containers/competition/index'
-import CompetitionIframe from '../containers/4.2/CompetitionIframe'
+import CompetitionIframe from '../containers/CompetitionIframe'
 import CompetitionLayout from "../containers/competition/Layout"
 
 export default {

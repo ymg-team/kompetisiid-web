@@ -1,5 +1,5 @@
 // containers
-import Categories from '../containers/4.2/Categories'
+import Categories from '../containers/categories/index'
 
 // layout
 import EmptyLayout from '../layouts/4.2/Empty'

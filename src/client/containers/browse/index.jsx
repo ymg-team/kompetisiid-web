@@ -1,12 +1,19 @@
 import React, { Component } from 'react'
 import Helmet from '../../components/Helmet'
-import CompetitionBox from '../../components/boxs/CompetitionBox'
+import CompetitionLoading from '../../components/preloaders/CompetitionCardLoader'
 import * as KompetisiActions from '../competition/actions'
+
+import Loadable from 'react-loadable'
 import { getStorage, setStorage } from '../../../store/helpers/LocalStorage'
 import { queryToObj } from 'string-manager'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { topLoading } from '../../components/preloaders'
+
+const CompetitionBox = Loadable({
+  loader: () => import('../../components/boxs/CompetitionBox'),
+  loading: CompetitionLoading
+})
 
 class Index extends Component {
   //   static fetchData({ store, params, query }) {

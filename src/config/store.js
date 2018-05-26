@@ -5,7 +5,7 @@ import createLogger from 'redux-logger'
 
 // reducers
 import Kompetisi from '../client/containers/competition/reducer'
-import Berita from '../store/berita/reducer'
+import Berita from '../client/containers/news/reducer'
 import Pasang from '../store/pasang/reducer'
 import User from '../store/user/reducer'
 

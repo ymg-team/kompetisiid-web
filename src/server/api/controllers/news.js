@@ -8,9 +8,10 @@ export function getNews(req, res, next)
     let {params} = req
     params.query = req.query
     req.reqdata = {
+        version: 'v42',
         method: 'get',
         params,
-        url: '/berita/list',
+        url: `/v2/news`,
     }
 
     next()
@@ -23,7 +24,7 @@ export function getRelated(req, res, next)
     req.reqdata = {
         method: 'get',
         params,
-        url: `/berita/related/${req.params.id}`,
+        url: `/berita/related/{req.params.id}`,
     }
 
     next()

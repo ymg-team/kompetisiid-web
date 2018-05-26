@@ -1,5 +1,5 @@
 import Browse from '../containers/browse/index'
-import Error from '../containers/4.2/Error'
+import Error from '../containers/error/index'
 
 import EmptyLayout from '../layouts/4.2/Empty'
 

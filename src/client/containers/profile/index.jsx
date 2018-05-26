@@ -6,7 +6,7 @@ import {profile} from '../../../store/user/actions'
 import {epochToRelativeTime} from '../../helpers/DateTime'
 import {connect} from 'react-redux'
 
-class UserProfile extends Component 
+class Index extends Component
 {
     static fetchData({params, store})
     {
@@ -122,4 +122,4 @@ function mapDispatchToProps(dispatch)
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(UserProfile)
+)(Index)

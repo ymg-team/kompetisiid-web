@@ -18,9 +18,9 @@ import Dashboard from './dashboard'
 import Careers from './careers'
 
 // containers
-import Login from '../containers/4.2/Login'
+import Login from '../containers/auth/Login'
 import Home from '../containers/home/index'
-import Error from '../containers/4.2/Error'
+import Error from '../containers/error/index'
 
 // layouts
 import LayoutRoot from '../layouts/4.2/Root'
@@ -125,7 +125,7 @@ export default [
 //                 Kompetisi,
 //                 Account,
 //                 Pasang,
-//                 Careers,
+//                 careers,
 //                 Profile
 //             ]
 //         },

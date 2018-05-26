@@ -44,7 +44,7 @@ const timeFunctions = [
 
 export function epochToRelativeTime(epochtime)
 {
-  const timeDifference = Date.now() - (epochtime)
+  const timeDifference = Date.now() - (epochtime * 1000)
   const index = timeSegments.findIndex(time => timeDifference >= time)
   const timeAgo = timeFunctions[index](timeSegments[index], timeDifference)
   return timeAgo
