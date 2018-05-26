@@ -45,12 +45,14 @@ class List extends Component
     reqData()
     {
         let Params = {limit: Limit}
+        Params.status = 'published'
         if(!this.props.berita.data[Filter]) this.props.dispatch(fetchBerita(Params, Filter))
     }
 
     reqMore()
     {
         let Params = {limit: Limit}
+        Params.status = 'published'
         const Berita = this.props.berita.data[Filter]
         if(Berita && Berita.data)
         {

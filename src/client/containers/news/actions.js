@@ -55,7 +55,7 @@ export function relatedBerita(encid)
     return {
         [CALL_API] : {
             method: 'get',
-            url: `/api/news/related/${encid}/${sealMiddleware.generateSeal()}`,
+            url: `/api/news/${sealMiddleware.generateSeal()}?notid=${encid}&limit=3`,
             target: 'berita_list',
             filter: `related_${encid}`,
             typeSuccess: RECEIVE_DATA,
