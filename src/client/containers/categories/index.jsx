@@ -7,7 +7,7 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { getStorage, setStorage } from '../../../store/helpers/LocalStorage'
 
-class Categories extends Component {
+class Index extends Component {
   static fetchData({ store }) {
     return store.dispatch(getCategories())
   }
@@ -95,4 +95,4 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Categories)
+export default connect(mapStateToProps, mapDispatchToProps)(Index)

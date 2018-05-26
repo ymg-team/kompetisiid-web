@@ -1,6 +1,6 @@
 import {combineReducers} from 'redux'
-import {RECEIVE_DATA, REQUEST_DATA, RECEIVE_MORE_DATA} from '../consts'
-import {pushData} from '../helpers/Normalizer'
+import {RECEIVE_DATA, REQUEST_DATA, RECEIVE_MORE_DATA} from '../../../store/consts'
+import {pushData} from '../../../store/helpers/Normalizer'
 
 function data(state = {}, action)
 {
@@ -27,8 +27,8 @@ function data(state = {}, action)
             {
                 state[action.filter].is_loading = false
                 nextstate = state
-                nextstate[action.filter].meta = action.json.meta
-                if(parseInt(action.json.meta.code) === 200)
+                nextstate[action.filter].status = action.json.status
+                if(parseInt(action.json.status) === 200)
                 {
                     nextstate.data = pushData(nextstate[action.filter].data, action.json.data)
                 }

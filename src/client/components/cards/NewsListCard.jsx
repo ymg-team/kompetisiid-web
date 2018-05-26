@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { CardCompetitionStyled } from './CompetitionListCard'
+import { epochToRelativeTime } from "../../helpers/DateTime"
 
 export default props => {
   const { n } = props
@@ -14,17 +15,18 @@ export default props => {
               src={
                 n.image ? n.image.small : `/assets/4.2/img/slider/slider-2.png`
               }
+              alt={n.title}
             />
           </div>
         </Link>
         <div className="card-competition--inside">
           <Link to={target}>
             <h3>{n.title}</h3>
-            <small className="text-muted">{n.created_at}</small>
+            <small className="text-muted">{epochToRelativeTime(n.created_at)}</small>
           </Link>
           <br />
           <small>
-            diposting oleh <Link to={`/user/${n.username}`}>{n.username}</Link>
+            diposting oleh <Link to={`/user/${n.author.username}`}>{n.author.username}</Link>
           </small>
           <br />
           <a className="muted" href="#">

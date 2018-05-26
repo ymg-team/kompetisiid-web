@@ -1,4 +1,4 @@
-import Careers from '../containers/4.2/Careers'
+import Index from '../containers/careers/index'
 
 function handleOther()
 {
@@ -10,7 +10,7 @@ export default {
         {
             path: 'careers',
             onEnter: () => handleOther(),
-            component: Careers,
+            component: Index,
         }
     ]
 }

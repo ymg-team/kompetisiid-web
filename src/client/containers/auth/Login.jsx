@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import Input from '../../components/form/InputText'
 import Button from '../../components/form/Button'
-import { validate } from '../../components/form/Validator'
 import { Link } from 'react-router-dom'
 import Helmet from '../../components/Helmet'
 import AuthFacebook from '../../components/buttons/AuthFacebook'

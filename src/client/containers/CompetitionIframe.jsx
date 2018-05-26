@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
-import Iframe from '../../components/Iframe'
-import Redirect from '../../components/Redirect'
-import Loader from '../../components/loaders/DefaultLoader'
+import Iframe from '../components/Iframe'
+import Redirect from '../components/Redirect'
+import Loader from '../components/loaders/DefaultLoader'
 
-import { getDetail } from '../competition/actions'
+import { getDetail } from './competition/actions'
 import { connect } from 'react-redux'
-import { isHttps } from '../../helpers/LinkGenerator'
+import { isHttps } from '../helpers/LinkGenerator'
 
 class CompetitionIframe extends Component {
   // static fetchData({params, store})

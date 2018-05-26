@@ -7,7 +7,7 @@ export const title = 'Pasang Kompetisi'
 export const desc =
   'Apakah kamu adalah penyelenggara kompetisi? jika iya, kamu bisa menggunakan fitur ini untuk mempulikasi kompetisimu di KompetisiIndonesia. Ada 2 cara untuk pasang kompetisi, yaitu "Kirim Kompetisi" dan "Pasang Kompetisi" untuk saat ini hanya "Kirim Kompetisi" yang bisa kamu coba.'
 
-export default class AddCompetition extends Component {
+export default class Form extends Component {
   componentWillUnmount() {
     fullalert('close')
   }
