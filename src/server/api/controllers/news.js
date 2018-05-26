@@ -17,19 +17,6 @@ export function getNews(req, res, next)
     next()
 }
 
-export function getRelated(req, res, next)
-{
-    let {params} = req
-    params.query = req.query
-    req.reqdata = {
-        method: 'get',
-        params,
-        url: `/berita/related/{req.params.id}`,
-    }
-
-    next()
-}
-
 export function getNewsDetail(req, res, next)
 {
     req.reqdata = {
