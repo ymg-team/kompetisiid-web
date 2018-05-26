@@ -8,6 +8,6 @@ export default (props) => (
             diposting oleh <strong>{props.data.username}</strong>
         </Link>
         <br />
-        <span className="text-muted">{props.data.moto}</span>
+        <span className="text-muted">{props.data.moto || ''}</span>
     </div>
 )

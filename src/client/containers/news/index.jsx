@@ -1,17 +1,20 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import * as BeritaActions from './actions'
+import Host from '../../../config/host'
+import { pushScript } from '../../helpers/DomEvents'
+import { connect } from 'react-redux'
+import { topLoading } from '../../components/preloaders'
+import { epochToRelativeTime } from '../../helpers/DateTime'
+import { truncate } from 'string-manager'
+import { textParser } from '../../helpers/String'
+
+// components
+import { Link } from 'react-router-dom'
 import Helmet from '../../components/Helmet'
 import Author from '../../components/cards/NewsAuthorCard'
 import NewsBox from '../../components/boxs/NewsBox'
 import ErrorCard from '../../components/cards/ErrorCard'
-import Host from '../../../config/host'
-import Preloader from "../../components/preloaders/NewsDetail"
-import {pushScript} from '../../helpers/DomEvents'
-import {connect} from 'react-redux'
-import {topLoading} from "../../components/preloaders"
-import {datetimeToRelativeTime} from '../../helpers/DateTime'
-import {truncate} from 'string-manager'
-
+import Preloader from '../../components/preloaders/NewsDetail'
 export default class Index extends Component {
   // static fetchData({params, store})
   // {
@@ -25,8 +28,11 @@ export default class Index extends Component {
   }
 
   componentWillReceiveProps(np) {
-    const {encid} = np.match.params
-    if ((encid != this.props.match.params.encid) || np.berita.detail[encid].meta) {
+    const { encid } = np.match.params
+    if (
+      encid != this.props.match.params.encid ||
+      np.berita.detail[encid].meta
+    ) {
       window.scrollTo(0, 0)
       this.resetDisquss(np)
     }
@@ -34,12 +40,14 @@ export default class Index extends Component {
   }
 
   resetDisquss(props) {
-    const url = `${Host[process.env.NODE_ENV].front}/news/${props.match.params.encid}/${props.match.params.title}`
+    const url = `${Host[process.env.NODE_ENV].front}/news/${
+      props.match.params.encid
+    }/${props.match.params.title}`
     // disquss reset after 1000ms
     if (window.DISQUS)
       DISQUS.reset({
         reload: true,
-        config: function () {
+        config: function() {
           this.page.identifier = url
           this.page.url = url
         }
@@ -47,28 +55,27 @@ export default class Index extends Component {
   }
 
   reqData(props) {
-    const {encid} = props.match.params
+    const { encid } = props.match.params
     if (!this.props.berita.detail[encid]) {
       topLoading(true)
       this.props.dispatch(BeritaActions.fetchBeritaDetail(encid))
     }
-    if (!this.props.berita.data[`related_${ encid }`]) {
-      this.props.dispatch(BeritaActions.relatedBerita(encid))
-    }
+    // if (!this.props.berita.data[`related_${ encid }`]) {
+    //   this.props.dispatch(BeritaActions.relatedBerita(encid))
+    // }
   }
 
   generateTags(tags = []) {
     tags = tags.split(',')
     if (tags && tags.length > 0) {
       return tags.map((n, key) => {
-        return <span key={key}>
-                        <a
-                          className='btn btn-white'
-                          href={`/news/tag/${n}`}>
-                        {n}
-                        </a>
-          {' '}
-                    </span>
+        return (
+          <span key={key}>
+            <Link className="btn btn-white" to={`/news/tag/${n}`}>
+              {n}
+            </Link>{' '}
+          </span>
+        )
       })
     }
 
@@ -76,21 +83,27 @@ export default class Index extends Component {
   }
 
   render() {
-    const {encid, title} = this.props.match.params
-    const {detail, data} = this.props.berita
+    const { encid, title } = this.props.match.params
+    const { detail, data } = this.props.berita
     let helmetdata = {
-      title: 'Berita Kompetisi.id',
-      description: 'Berita dari Kompetisi.id',
+      title: 'Kabar Kompetisi',
+      description: 'Kabar Kompetisi dari Kompetisi.id',
       url: `${Host[process.env.NODE_ENV].front}/news/${encid}/${title}`,
       script: []
     }
 
-    if (detail[encid] && detail[encid].meta && detail[encid].meta.code === 200) {
+    if (
+      detail[encid] &&
+      detail[encid].meta &&
+      detail[encid].meta.code === 200
+    ) {
       helmetdata = Object.assign(helmetdata, {
         title: detail[encid].data.title,
         description: detail[encid].data.contenttext,
-        url: `https://kompetisi.id/news/${detail[encid].data.id}/${detail[encid].data.nospace_title}`,
-        image: detail[encid].data.image.original,
+        url: `https://kompetisi.id/news/${detail[encid].data.id}/${
+          detail[encid].data.nospace_title
+        }`,
+        image: detail[encid].data.image.original
       })
 
       //add jsonld
@@ -100,84 +113,126 @@ export default class Index extends Component {
       })
     }
 
-    if (typeof window !== "undefined" && detail[encid] && detail[encid].meta) topLoading(false)
+    if (typeof window !== 'undefined' && detail[encid] && detail[encid].meta)
+      topLoading(false)
 
     return (
       <div>
         <Helmet {...helmetdata} />
-        {
-          (detail[encid] && detail[encid].meta) ?
-            parseInt(detail[encid].meta.code) === 200 ?
-              <div>
-                <div className='col-md-6 col-md-push-3 col-md-pull-3'>
-                  <div className='row'>
-                    <div className='col-md-12'>
-                      <div className='news-detail'>
-                        <Author data={detail[encid].data.author}/>
-                        <div className='content'>
-                          <article>
-                            <h1>{detail[encid].data.title}</h1>
-                            <p className='meta text-muted'>
-                                                        <span className='meta--item'>
-                                                            <i className='fa fa-calendar-o'/>
-                                                          {' '}
-                                                          {datetimeToRelativeTime(detail[encid].data.created_at)}
-                                                        </span>
-                              <span className='meta--item'>
-                                                            <a href='javascript:;' title='komentar' onClick={() => {
-                                                              document.getElementById('comments').scrollIntoView({behavior: 'smooth'})
-                                                            }}>
-                                                                <i className='fa fa-comment-o'/>
-                                                              {' '}
-                                                              <span className='fb-comments-count'
-                                                                    data-href={helmetdata.url}>0</span>
-                                                            </a>
-                                                    </span>
-                            </p>
-                          </article>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className='col-md-12'>
-                  <div className='row'>
-                    <div className='news-detail'>
-                      <div className='image'>
-                        <figure><img src={detail[encid].data.image.original}/></figure>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className='col-md-6 col-md-push-3 col-md-pull-3'>
-                  <div className='row'>
-                    <div className='col-md-12'>
-                      <div className='news-detail'>
-                        <article className='content'>
-                          <p dangerouslySetInnerHTML={{__html: detail[encid].data.content}}/>
-                          <div style={{margin: '1em 0'}}>
-                            {this.generateTags(detail[encid].data.tags)}
-                          </div>
+        {detail[encid] && detail[encid].status ? (
+          parseInt(detail[encid].status) === 200 ? (
+            <div>
+              <div className="col-md-6 col-md-push-3 col-md-pull-3">
+                <div className="row">
+                  <div className="col-md-12">
+                    <div className="news-detail">
+                      <Author data={detail[encid].data.author} />
+                      <div className="content">
+                        <article>
+                          <h1>{detail[encid].data.title}</h1>
+                          <p className="meta text-muted">
+                            <span className="meta--item">
+                              <i className="fa fa-calendar-o" />{' '}
+                              {epochToRelativeTime(
+                                detail[encid].data.created_at
+                              )}
+                            </span>
+                            <span className="meta--item">
+                              <a
+                                href="javascript:;"
+                                title="komentar"
+                                onClick={() => {
+                                  document
+                                    .getElementById('comments')
+                                    .scrollIntoView({ behavior: 'smooth' })
+                                }}
+                              >
+                                <i className="fa fa-comment-o" />{' '}
+                                <span
+                                  className="fb-comments-count"
+                                  data-href={helmetdata.url}
+                                >
+                                  0
+                                </span>
+                              </a>
+                            </span>
+                          </p>
                         </article>
                       </div>
                     </div>
                   </div>
                 </div>
-                <div className='col-md-12 bg-gray-soft'>
-                  <NewsBox
-                    {...data[`related_${encid}`]}
-                  />
+              </div>
+              <div className="col-md-12">
+                <div className="row">
+                  <div className="news-detail">
+                    <div className="image">
+                      <figure>
+                        <img src={detail[encid].data.image.original} />
+                      </figure>
+                    </div>
+                  </div>
                 </div>
               </div>
-              : <ErrorCard {...detail[encid].meta} />
-            : <div className="fullheight"><Preloader/></div>
-        }
-        {detail[encid] && detail[encid].meta && detail[encid].is_loading ? <Preloader/> : null}
+              <div className="col-md-6 col-md-push-3 col-md-pull-3">
+                <div className="row">
+                  <div className="col-md-12">
+                    <div className="news-detail">
+                      <article className="content">
+                        <p
+                          dangerouslySetInnerHTML={{
+                            __html: textParser(detail[encid].data.content)
+                          }}
+                        />
+                        <div style={{ margin: '1em 0' }}>
+                          {this.generateTags(detail[encid].data.tag)}
+                        </div>
+                      </article>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* related news */}
+              <div className="col-md-12 bg-gray-soft">
+                <NewsBox
+                  subtitle={false}
+                  data={detail[encid].related}
+                  status={detail[encid].status}
+                />
+              </div>
+            </div>
+          ) : (
+            <ErrorCard
+              code={detail[encid].status}
+              message={detail[encid].message}
+            />
+          )
+        ) : (
+          <div className="fullheight">
+            <Preloader />
+          </div>
+        )}
+        {detail[encid] && detail[encid].status && detail[encid].is_loading ? (
+          <Preloader />
+        ) : null}
         {/* comment section */}
         <div
-          style={{display: detail[encid] && detail[encid].meta && detail[encid] && detail[encid].meta === 200 ? 'block' : 'hidden'}}
-          className='col-md-6 col-md-push-3 col-md-pull-3'>
-          <div style={{padding: '50px 0'}} className='row comments' id='disqus_thread'/>
+          style={{
+            display:
+              detail[encid] &&
+              detail[encid].status &&
+              detail[encid].status === 200
+                ? 'block'
+                : 'hidden'
+          }}
+          className="col-md-6 col-md-push-3 col-md-pull-3"
+        >
+          <div
+            style={{ padding: '50px 0' }}
+            className="row comments"
+            id="disqus_thread"
+          />
         </div>
         {/* end of comment section */}
       </div>
@@ -231,7 +286,7 @@ function generateJsonld(n, url) {
 }
 
 function mapStateToProps(state) {
-  const {Berita} = state
+  const { Berita } = state
   return {
     berita: Berita
   }
@@ -243,7 +298,4 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-module.exports = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Index)
+module.exports = connect(mapStateToProps, mapDispatchToProps)(Index)
