@@ -3,7 +3,7 @@
     <Description>cari kompetisi</Description>
     <Url type="text/html" method="get" template="https://kompetisi.id/browse?q={searchTerms}"/>
     <Image height="16" width="16" type="image/png">
-        https://kompetisi.id/assets/images/icons/icon-72x72.png
+        https://kompetisi.id/assets/images/icons-red/icon-72x72.png
     </Image>
     <moz:SearchForm>https://kompetisi.id</moz:SearchForm>
     <Url type="application/opensearchdescription+xml" rel="self" template="https://kompetisi.id/assets/opensearch.xml"/>
