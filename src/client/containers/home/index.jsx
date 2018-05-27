@@ -50,7 +50,7 @@ class Home extends Component {
 
     // get lattest 7 active and popular competition  
     if (!this.props.kompetisi.data.home_popular) topLoading(true)
-    this.props.dispatch(fetchJelajah({ limit: 7, is_popular: 1, status: 'active' }, 'home_popular'))
+    this.props.dispatch(fetchJelajah({ limit: 7, is_popular: true, status: 'active' }, 'home_popular'))
 
     // get lattest 7 media partner
     if (!this.props.kompetisi.data.home_mediapartner)
