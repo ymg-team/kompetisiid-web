@@ -408,7 +408,7 @@ function generateParams(n = {}, props = null) {
   if (tag && tag != '') Params.tag = tag
 
   // browse competition filter by media partner
-  if (is_mediapartner) Params.mediapartner = true
+  if (is_mediapartner) Params.is_mediapartner = true
 
   // browse competition filter by ended
   if (is_berakhir) Params.is_end = true
