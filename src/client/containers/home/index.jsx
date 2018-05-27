@@ -44,17 +44,21 @@ class Home extends Component {
   componentDidMount() {
     window.scroll(0, 0)
 
+    // get lattest 9 active competition
     if (!this.props.kompetisi.data.home_latest)
-      this.props.dispatch(fetchJelajah({ limit: 9 }, 'home_latest'))
+      this.props.dispatch(fetchJelajah({ limit: 9, status: 'active' }, 'home_latest'))
 
+    // get lattest 7 active and popular competition  
     if (!this.props.kompetisi.data.home_popular) topLoading(true)
-    this.props.dispatch(fetchJelajah({ limit: 7, popular: 1 }, 'home_popular'))
+    this.props.dispatch(fetchJelajah({ limit: 7, is_popular: 1, status: 'active' }, 'home_popular'))
 
+    // get lattest 7 media partner
     if (!this.props.kompetisi.data.home_mediapartner)
       this.props.dispatch(
-        fetchJelajah({ limit: 4, mediapartner: 1 }, 'home_mediapartner')
+        fetchJelajah({ limit: 7, is_mediapartner: true }, 'home_mediapartner')
       )
 
+    // get lattest 6 news  
     if (!this.props.berita.data.home_latest)
       this.props.dispatch(fetchBerita({ limit: 6 }, 'home_latest'))
 

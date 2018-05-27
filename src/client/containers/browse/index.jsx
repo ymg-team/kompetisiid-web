@@ -399,7 +399,7 @@ function generateParams(n = {}, props = null) {
   }
 
   // search competitino by keyword
-  if (q && q != '') Params.keyword = q
+  if (q && q != '') Params.search = q
 
   // browse competition by username
   if (username && username != '') Params.username = username
