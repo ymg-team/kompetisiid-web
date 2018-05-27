@@ -1,9 +1,9 @@
 {
-  "name": "Kompetisi Indonesia",
-  "short_name": "kompetisi indonesia",
-  "theme_color": "#ff5a5a",
-  "background_color": "#f91e1e",
-  "display": "browser",
+  "name": "Kompetisi.id",
+  "short_name": "Kompetisi.id - Ada hadiah setiap hari",
+  "theme_color": "#cc5454",
+  "background_color": "#cc5454",
+  "display": "standalone",
   "Scope": "/",
   "start_url": "/",
   "icons": [

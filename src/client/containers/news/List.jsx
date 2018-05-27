@@ -7,6 +7,7 @@ import { fetchBerita, fetchBeritaMore } from './actions'
 import { connect } from 'react-redux'
 
 const Limit = 6
+let AddedEventListener = false
 
 class List extends Component {
   // static fetchData({store})
@@ -21,7 +22,10 @@ class List extends Component {
   componentDidMount() {
     this.reqData(this.props)
     window.scrollTo(0, 0)
-    window.addEventListener('scroll', e => this.handleScroll(e), true)
+    if(!AddedEventListener) {
+      AddedEventListener = true
+      window.addEventListener('scroll', e => this.handleScroll(e), true)
+    }
   }
 
   componentWillUnmount() {

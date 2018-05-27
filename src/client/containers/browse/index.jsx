@@ -97,9 +97,9 @@ class Index extends Component {
     if (Kompetisi) {
       if (
         !this.props.kompetisi.data[Filter].is_loading &&
-        this.props.kompetisi.data[Filter].meta.code === 200
+        this.props.kompetisi.data[Filter].status === 200
       ) {
-        Params.lastid = Kompetisi[Kompetisi.length - 1].id_kompetisi
+        Params.lastid = Kompetisi[Kompetisi.length - 1].id
         this.props.actions.getJelajahMore(Params, Filter)
       }
     }
@@ -385,20 +385,38 @@ function generateParams(n = {}, props = null) {
     username,
     is_garansi
   } = n
+
   let Params = {}
   if (props) {
     const { categories } = props.kompetisi
+    // browse competition by main category
     if (parseInt(main_kat) >= 0)
       Params.mainkat = categories.data[main_kat].main_kat
+    
+    // browse competition by sub category
     if (parseInt(sub_kat) >= 0)
       Params.subkat = categories.data[main_kat].subkat[sub_kat].sub_kat
   }
-  if (q && q != '') Params.q = q
+
+  // search competitino by keyword
+  if (q && q != '') Params.search = q
+
+  // browse competition by username
   if (username && username != '') Params.username = username
+
+  // browse competition by tag
   if (tag && tag != '') Params.tag = tag
-  if (is_mediapartner) Params.mediapartner = 1
-  if (is_berakhir) Params.berakhir = 1
-  if (is_garansi) Params.garansi = 1
+
+  // browse competition filter by media partner
+  if (is_mediapartner) Params.is_mediapartner = true
+
+  // browse competition filter by ended
+  if (is_berakhir) Params.is_end = true
+
+  // browse competition filter by guaranted
+  if (is_garansi) Params.is_guaranted = true
+
+  // limit data
   Params.limit = 9
 
   return Params

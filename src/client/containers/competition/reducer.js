@@ -1,13 +1,17 @@
-import {combineReducers} from 'redux'
-import {pushData} from '../../../store/helpers/Normalizer'
-import {RECEIVE_CATEGORIES} from './actions'
-import {REQUEST_DATA, RECEIVE_DATA, RECEIVE_MORE_DATA} from '../../../store/consts'
+import { combineReducers } from 'redux'
+import { pushData } from '../../../store/helpers/Normalizer'
+import { RECEIVE_CATEGORIES } from './actions'
+import {
+  REQUEST_DATA,
+  RECEIVE_DATA,
+  RECEIVE_MORE_DATA
+} from '../../../store/consts'
 
 function data(state = {}, action) {
   let nextstate = {}
-  const {target, filter} = action
+  const { target, filter } = action
   switch (action.type) {
-    case REQUEST_DATA :
+    case REQUEST_DATA:
       nextstate = state
 
       if (action.target === 'kompetisi_jelajah') {
@@ -18,8 +22,7 @@ function data(state = {}, action) {
 
       return state
 
-    case RECEIVE_DATA :
-
+    case RECEIVE_DATA:
       if (target === 'kompetisi_jelajah') {
         state[filter] = action.json
         state[filter].is_loading = false
@@ -27,32 +30,36 @@ function data(state = {}, action) {
       }
       return state
 
-    case RECEIVE_MORE_DATA :
+    case RECEIVE_MORE_DATA:
       if (action.target === 'kompetisi_jelajah') {
         state[action.filter].is_loading = false
         nextstate = state
-        nextstate[action.filter].meta = action.json.meta
-        if (parseInt(action.json.meta.code) === 200) {
-          nextstate.data = pushData(nextstate[action.filter].data, action.json.data)
+        nextstate[action.filter].message = action.json.message
+        nextstate[action.filter].status = action.json.status
+        if (action.json.status === 200) {
+          nextstate.data = pushData(
+            nextstate[action.filter].data,
+            action.json.data
+          )
         }
         return Object.assign({}, state, nextstate)
       }
 
-    default :
+    default:
       return state
   }
 }
 
 function detail(state = {}, action) {
   switch (action.type) {
-    case REQUEST_DATA :
+    case REQUEST_DATA:
       if (action.target === 'kompetisi_detail') {
         if (!state[action.filter]) state[action.filter] = {}
         state[action.filter].is_loading = true
         return Object.assign({}, state)
       }
 
-    case RECEIVE_DATA :
+    case RECEIVE_DATA:
       if (action.target === 'kompetisi_detail') {
         state[action.filter].is_loading = false
         state[action.filter] = action.json
@@ -65,9 +72,9 @@ function detail(state = {}, action) {
 }
 
 function related(state = {}, action) {
-  const {target, filter} = action
+  const { target, filter } = action
   switch (action.type) {
-    case REQUEST_DATA :
+    case REQUEST_DATA:
       if (target === 'kompetisi_related') {
         if (!state[filter]) state[filter] = {}
         state[filter].is_loading = true
@@ -75,7 +82,7 @@ function related(state = {}, action) {
       }
       return state
 
-    case RECEIVE_DATA :
+    case RECEIVE_DATA:
       if (target === 'kompetisi_related') {
         state[action.filter].is_loading = false
         state[action.filter] = action.json
@@ -83,7 +90,7 @@ function related(state = {}, action) {
       }
       return state
 
-    default :
+    default:
       return state
   }
 }
@@ -102,9 +109,9 @@ function categories(state = {}, action) {
 }
 
 function pengumuman(state = {}, action) {
-  const {target, filter} = action
+  const { target, filter } = action
   switch (action.type) {
-    case REQUEST_DATA :
+    case REQUEST_DATA:
       if (target === 'kompetisi_pengumuman') {
         if (!state[filter]) state[filter] = {}
         state[filter].is_loading = true
@@ -112,7 +119,7 @@ function pengumuman(state = {}, action) {
       }
       return state
 
-    case RECEIVE_DATA :
+    case RECEIVE_DATA:
       if (target === 'kompetisi_pengumuman') {
         state[filter].is_loading = false
         state[filter] = action.json
@@ -120,7 +127,7 @@ function pengumuman(state = {}, action) {
       }
       return state
 
-    default :
+    default:
       return state
   }
 }
@@ -128,11 +135,18 @@ function pengumuman(state = {}, action) {
 function tags(state = {}, action) {
   if (action.target === 'tags') {
     switch (action.type) {
-      case REQUEST_DATA :
-        return Object.assign({}, state, {[action.filter]: {is_loading: true}})
+      case REQUEST_DATA:
+        return Object.assign({}, state, {
+          [action.filter]: { is_loading: true }
+        })
 
-      case RECEIVE_DATA :
-        return Object.assign({}, state, {[action.filter]: {is_loading: true}}, {[action.filter]: action.json})
+      case RECEIVE_DATA:
+        return Object.assign(
+          {},
+          state,
+          { [action.filter]: { is_loading: true } },
+          { [action.filter]: action.json }
+        )
 
       default:
         return state
@@ -145,11 +159,11 @@ function tags(state = {}, action) {
 function stats(state = {}, action) {
   if (action.target === 'stats') {
     switch (action.type) {
-      case REQUEST_DATA :
-        return Object.assign({}, state, {is_loading: true})
+      case REQUEST_DATA:
+        return Object.assign({}, state, { is_loading: true })
 
-      case RECEIVE_DATA :
-        return Object.assign({}, state, {is_loading: false}, action.json)
+      case RECEIVE_DATA:
+        return Object.assign({}, state, { is_loading: false }, action.json)
 
       default:
         return state
@@ -160,6 +174,12 @@ function stats(state = {}, action) {
 }
 
 const reducer = combineReducers({
-  data, related, detail, categories, pengumuman, tags, stats
+  data,
+  related,
+  detail,
+  categories,
+  pengumuman,
+  tags,
+  stats
 })
 export default reducer

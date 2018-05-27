@@ -57,16 +57,6 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 })
 
-// toggle header search
-function toggleSearch()
-{
-    showSearch = !showSearch;
-    const headerEl = document.getElementsByClassName('nav-header')[0];
-    const searchEl = document.getElementsByClassName('nav-search')[0];
-    headerEl.style.top=(showSearch? '-50px' : '0px');
-    if(showSearch) searchEl.childNodes[1].focus();
-}
-
 // togle nav top
 function toggleNavTop()
 {
@@ -105,8 +95,14 @@ function removeClass(el, className) {
 function modal(act, target)
 {
   const el = document.getElementById(target);
-  if(act=='open') addClass(el, 'open');
-  if(act=='close') removeClass(el, 'open');
+  if(act=='open') {
+    document.getElementsByTagName('body')[0].style.overflow = 'hidden';
+    addClass(el, 'open');
+  }
+  if(act=='close') {
+    document.getElementsByTagName('body')[0].style.overflow = 'scroll';
+    removeClass(el, 'open');
+  } 
 }
 
 // fullalert

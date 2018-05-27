@@ -49,7 +49,11 @@ class LayoutCompetition extends Component {
   reqRelatedCompetitions(props) {
     const {encid} = props.match.params
     if (!props.kompetisi.data[`related_${encid}`])
-      this.props.dispatch(getRelated(encid, `related_${encid}`))
+      this.props.dispatch(getRelated({
+        notid: encid,
+        mainkat: 0,
+        tag: 'kompetisi'
+      }, `related_${encid}`))
   }
 
   render() {

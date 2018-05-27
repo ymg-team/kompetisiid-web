@@ -1,10 +1,13 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
 import Styled from 'styled-components'
-import Navbar from '../navigations/TransparentNavbar'
+import { nominalToText } from '../../helpers/Number'
+import * as Colors from '../../../style/colors'
+
+// components
+import { Link } from 'react-router-dom'
 import Slider from '../sliders'
 import Count from '../cards/HomeCount'
-import * as Colors from '../../../style/colors'
+import Navbar from '../navigations/TransparentNavbar'
 
 const DotsStyled = Styled.div`
   position: absolute;
@@ -83,7 +86,7 @@ class HomeSubHeader extends Component {
   }
 
   componentWillReceiveProps(np) {
-    if (np.slider.meta && np.slider.meta.code === 200) {
+    if (np.slider.status && np.slider.status === 200) {
       this.setState({
         totalSliders: 1 + np.slider.data.length + Static.length
       })
@@ -111,7 +114,7 @@ class HomeSubHeader extends Component {
   }
 
   render() {
-    const { data, meta } = this.props.slider
+    const { data, status, message } = this.props.slider
 
     return (
       <SubHeader
@@ -141,7 +144,7 @@ class HomeSubHeader extends Component {
             (Static.length > 0 && this.state.active >= Static.length) ? (
               this.state.active === 0 ? (
                 <WelcomeStaticSlider stats={this.props.stats} />
-              ) : meta.code === 200 ? (
+              ) : status === 200 ? (
                 <CompetitionSlider {...data[this.state.active - 1]} />
               ) : null
             ) : null}
@@ -237,13 +240,13 @@ const CompetitionSlider = props => (
       <div className="col-md-8 col-md-offset-2">
         <h1 style={{ paddingBottom: 0 }}>{props.title}</h1>
         <h2 style={{ paddingBottom: '1em' }}>
-          Hadiah senilai {props.total_hadiah}
+          Hadiah senilai {nominalToText(props.prize.total)}
         </h2>
       </div>
     </div>
     <div className="col-md-12">
       <Link
-        to={`/competition/${props.id_kompetisi}/regulations/${
+        to={`/competition/${props.id}/regulations/${
           props.nospace_title
         }`}
         style={{ width: '150px' }}

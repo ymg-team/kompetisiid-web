@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { withRouter } from 'react-router'
 import Styled from 'styled-components'
-import {queryToObj} from "string-manager"
+import { queryToObj } from 'string-manager'
 
 const NavbarStyled = Styled.div`
   padding: .5em 0;
@@ -62,11 +62,19 @@ class Navbar extends Component {
   constructor(props) {
     super(props)
 
-    const query = queryToObj(props.location.search.replace("?", ""))
+    const query = queryToObj(props.location.search.replace('?', ''))
     this.state = {
-      search: typeof query.q !== "undefined",
+      search: typeof query.q !== 'undefined',
       keyword: query.q || ''
     }
+  }
+
+  componentWillReceiveProps(np) {
+    const query = queryToObj(np.location.search.replace('?', ''))
+    this.setState({
+      search: typeof query.q !== 'undefined',
+      keyword: query.q
+    })
   }
 
   toggleSearch() {

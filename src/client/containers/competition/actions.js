@@ -21,7 +21,7 @@ export function fetchJelajah(params, filter) {
 }
 
 
-export function getRelated(id, filter) {
+export function getRelated(params = {}, filter) {
   return {
     [CALL_API]: {
       typeSuccess: RECEIVE_DATA,
@@ -29,7 +29,7 @@ export function getRelated(id, filter) {
       method: 'get',
       filter,
       target: 'kompetisi_related',
-      url: `/api/kompetisi/related/${id}/${sealMiddleware.generateSeal()}`
+      url: `/api/kompetisi/related/${sealMiddleware.generateSeal()}?${serialize(params)}`
     }
   }
 }
