@@ -15,12 +15,6 @@
  * @query q (string), keyboard to searching
  */
 export function getJelajah(req, res, next) {
-  // let endpoint = ''
-  
-  // const url =
-  //   req.query.popular && parseInt(req.query.popular) === 1
-  //     ? '/jelajah/popular'
-  //     : '/jelajah'
   let { params } = req
   params.query = req.query
   req.reqdata = {
@@ -40,8 +34,10 @@ export function getJelajah(req, res, next) {
  */
 export function getRelated(req, res, next) {
   req.reqdata = {
+    version: 'v42',
     method: 'get',
-    url: `/kompetisi/related/${req.params.id}`
+    params: {query: req.query},
+    url: `/v2/competitions/related`
   }
 
   next()

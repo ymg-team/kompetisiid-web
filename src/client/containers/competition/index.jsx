@@ -290,13 +290,14 @@ class Index extends Component {
 
               {/*related competitions*/}
               {related[`related_${encid}`] &&
-              related[`related_${encid}`].meta &&
-              related[`related_${encid}`].meta.code == 200 ? (
+              related[`related_${encid}`].status &&
+              related[`related_${encid}`].status === 200 ? (
                 <div className="col-md-12 bg-gray-soft">
                   <div className="m-20 row" />
                   <CompetitionListBox
                     subtitle={false}
-                    size="small"
+                    total={4}
+                    // size="small"
                     {...related[`related_${encid}`]}
                   />
                 </div>
