@@ -40,8 +40,8 @@ class Index extends Component {
     // generate helmet data
     if (
       detail[encid] &&
-      detail[encid].meta &&
-      parseInt(detail[encid].meta.code) === 200
+      detail[encid].status &&
+      detail[encid].status === 200
     ) {
       setTimeout(() => {
         if (typeof window != 'undefined') {

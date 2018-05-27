@@ -14,55 +14,71 @@ const Bulan = [
   ['sep', 'september'],
   ['okt', 'oktober'],
   ['nov', 'november'],
-  ['des', 'desember'],
+  ['des', 'desember']
 ]
 
-const timeSegments = [
-  3.154e10,
-  2.628e9,
-  6.048e8,
-  8.64e7,
-  3.6e6,
-  60000,
-  -Infinity
-]
+// ref : https://www.samclarke.com/javascript-convert-time-ago-future/
+export function epochToRelativeTime(epochtime) {
+  const lang = lang || {
+    postfixes: {
+      '<': ' lagi',
+      '>': ' lalu'
+    },
+    1000: {
+      singular: 'beberapa saat',
+      plural: 'beberapa saat'
+    },
+    60000: {
+      singular: 'semenit',
+      plural: '# menit'
+    },
+    3600000: {
+      singular: 'sejam',
+      plural: '# jam'
+    },
+    86400000: {
+      singular: 'sehari',
+      plural: '# hari'
+    },
+    2592000000: {
+      singular: 'sebulan',
+      plural: '# bulan'
+    },
+    31540000000: {
+      singular: 'setahun',
+      plural: '# tahun'
+    }
+  }
 
-const makeTimeString = (unit, singularString) => (timeSegment, time) =>
-time >= 2 * timeSegment
-  ? `${Math.floor(time / timeSegment)} ${unit} lalu`
-  : singularString
+  const now = Date.now()
+  const timespans = [1000, 60000, 3600000, 86400000, 2592000000, 31540000000]
+  let timeDifference = now - epochtime * 1000
+  const postfix = lang.postfixes[timeDifference < 0 ? '<' : '>']
+  let timespan = timespans[0]
 
-const timeFunctions = [
-  makeTimeString('tahun', 'setahun lalu'),
-  makeTimeString('bulan', 'sebulan lalu'),
-  makeTimeString('minggu', 'seminggu lalu'),
-  makeTimeString('hari', 'sehari lalu'),
-  makeTimeString('jam', 'sejam lalu'),
-  makeTimeString('menit', 'semenit lalu'),
-  () => 'barusaja'
-]
+  if(timeDifference < 0) timeDifference = timeDifference * -1
 
-export function epochToRelativeTime(epochtime)
-{
-  const timeDifference = Date.now() - (epochtime * 1000)
-  const index = timeSegments.findIndex(time => timeDifference >= time)
-  const timeAgo = timeFunctions[index](timeSegments[index], timeDifference)
-  return timeAgo
+  for (let i = 1; i < timespans.length; i++) {
+    if (timeDifference > timespans[i]) {
+      timespan = timespans[i]
+    }
+  }
+
+  const n = Math.round(timeDifference / timespan)
+
+  return lang[timespan][n > 1 ? 'plural' : 'singular'].replace('#', n) +  postfix
 }
 
-export function datetimeToRelativeTime(datetime)
-{
-    const date = new Date(datetime)
-    return epochToRelativeTime(date)
+export function datetimeToRelativeTime(datetime) {
+  const date = new Date(datetime)
+  return epochToRelativeTime(date)
 }
 
-export function strToDateTime(str)
-{
-    return ''
+export function strToDateTime(str) {
+  return ''
 }
 
-export function today(format = 'Do MMM YY')
-{
-    const d = new Date() 
-    return `${d.getDate()} ${Bulan[d.getMonth()][0]} ${d.getFullYear()}`
+export function today(format = 'Do MMM YY') {
+  const d = new Date()
+  return `${d.getDate()} ${Bulan[d.getMonth()][0]} ${d.getFullYear()}`
 }

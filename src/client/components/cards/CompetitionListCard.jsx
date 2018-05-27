@@ -1,6 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import Styled from 'styled-components'
+import { epochToRelativeTime } from "../../helpers/DateTime"
+import { nominalToText } from "../../helpers/Number"
 import * as Colors from '../../../style/colors'
 
 export const CardCompetitionStyled = Styled.div`
@@ -35,7 +37,7 @@ export const CardCompetitionStyled = Styled.div`
           -webkit-appearance: none;
           appearance: none;
           &::-webkit-progress-value {
-            background-color: $color-green-dark;
+            background-color: ${Colors.mainGreen};
           }
           &::-webkit-progress-bar {
             background-color: #eee;
@@ -49,7 +51,27 @@ export const CardCompetitionStyled = Styled.div`
       .meta > p {
         margin: 0;
       }
-    }    
+    } 
+
+    progress.ended {
+      &[value] {
+          -webkit-appearance: none;
+          appearance: none;
+          &::-webkit-progress-value {
+            background-color: ${Colors.mainRed};
+          }
+        }
+    }  
+
+    progress.waiting {
+      &[value] {
+          -webkit-appearance: none;
+          appearance: none;
+          &::-webkit-progress-value {
+            background-color: ${Colors.mainYellow};
+          }
+        }
+    }   
 
     .card-competition--poster {
       height: 200px;
@@ -88,17 +110,22 @@ const LabelEnd = () => (
 )
 
 const CompetitionListCard = props => {
+  // convert timestamp to seconds
+  const now = Date.now()
   const { n, size } = props
-  const target = `/competition/${n.id_kompetisi}/regulations/${n.nospace_title}`
-  const is_berakhir =
-    n.sisadeadline == 'berakhir' && n.sisapengumuman == 'berakhir'
+  const target = `/competition/${n.id}/regulations/${n.nospace_title}`
+  const deadline_at = n.deadline_at * 1000
+  const announcement_at = n.announcement_at * 1000
+  const is_ended = deadline_at < now && announcement_at < now
+  const is_waiting = deadline_at < now && announcement_at > now
+
   return (
     <CardCompetitionStyled
       className={size === 'large' ? 'col-md-4' : 'col-md-3'}
     >
-      {is_berakhir ? <LabelEnd /> : null}
+      {is_ended ? <LabelEnd /> : null}
       <div
-        style={{ opacity: is_berakhir ? 0.5 : 1 }}
+        style={{ opacity: is_ended ? 0.5 : 1 }}
         className="card-competition"
       >
         <Link to={target}>
@@ -106,14 +133,14 @@ const CompetitionListCard = props => {
         </Link>
         <div className="card-competition--inside">
           <div className="categories">
-            <Link className="muted" to={`/browse/${n.mainkategori}`}>
-              {n.mainkategori}
+            <Link className="muted" to={`/browse/${n.main_category.name}`}>
+              {n.main_category.name}
             </Link>,&nbsp;
             <Link
               className="muted"
-              to={`/browse/${n.mainkategori}/${n.subkategori}`}
+              to={`/browse/${n.main_category.name}/${n.sub_category.name}`}
             >
-              {n.subkategori}
+              {n.sub_category.name}
             </Link>
           </div>
           <Link to={target}>
@@ -123,7 +150,7 @@ const CompetitionListCard = props => {
           <Link className="muted" to={`/user/${n.author.username}`}>
             {n.author.username}
           </Link>
-          <progress value={setProgressBar(n.deadline_at)} max={100} />
+          <progress  className={is_ended ? 'ended' : is_waiting ? 'waiting' : ''} value={setProgressBar(n.deadline_at)} max={100} />
           <div className="types">
             {n.is_garansi ? (
               <span
@@ -143,21 +170,21 @@ const CompetitionListCard = props => {
             ) : null}
             {n.is_support ? (
               <span
-                title="kompetisi ini bisa diikuti melelui KI"
+                title="kompetisi ini bisa diikuti melalui KI"
                 className="label label-blue"
               >
                 Support
               </span>
             ) : null}
-            {is_berakhir ? (
+            {is_ended ? (
               <span
                 title="kompetisi ini telah berakhir"
                 className="label label-red"
               >
-                Berakhir
+                <i className="fa fa-check" /> Berakhir
               </span>
             ) : null}
-            {n.sisadeadline == 'berakhir' && n.sisapengumuman != 'berakhir' ? (
+            {is_waiting ? (
               <span
                 title="kompetisi ini telah berakhir"
                 className="label label-orange"
@@ -168,25 +195,36 @@ const CompetitionListCard = props => {
           </div>
           <div className="meta">
             <p>
-              <strong>{n.total_hadiah}</strong>
+              <strong>{nominalToText(n.prize.total)}</strong>
               <span className="text-muted">&nbsp;total hadiah</span>
             </p>
-            {n.sisadeadline == 'berakhir' && n.sisapengumuman == 'berakhir' ? (
+            
+            {/* competition status */}
+            {
+              is_ended ?
+              <p><strong>Kompetisi telah berakhir</strong></p>
+              : null
+            }
+
+            {
+              is_waiting ?
               <p>
-                <strong>Kompetisi telah berakhir</strong>
-              </p>
-            ) : n.sisadeadline == 'berakhir' &&
-            n.sisapengumuman != 'berakhir' ? (
-              <p>
-                <strong>{n.sisapengumuman} lagi</strong>{' '}
+                <strong>{epochToRelativeTime(n.announcement_at)}</strong>{' '}
                 <span className="text-muted">Pengumuman pemenang</span>
               </p>
-            ) : (
+              : null
+            }
+
+            {
+              deadline_at > now ?
               <p>
-                <strong>{n.sisadeadline} lagi</strong>{' '}
+                <strong>{epochToRelativeTime(n.deadline_at)}</strong>{' '}
                 <span className="text-muted">Deadline pendaftaran</span>
               </p>
-            )}
+              : null
+            }
+            {/* end of competition status */}
+            
           </div>
         </div>
       </div>
@@ -199,8 +237,7 @@ export function setProgressBar(deadline) {
 
   // set interval days
   today = new Date()
-  deadline = new Date(deadline)
-  interval = deadline.getTime() - today.getTime()
+  interval = deadline * 1000 - today.getTime()
   interval = Math.ceil(interval / (1000 * 3600 * 24))
 
   //set progress precentage
