@@ -39,7 +39,7 @@ const CompetitionBox = props => {
               >
                 {status ? (
                   !data ? (
-                    <p className="text-muted">{meta.message}</p>
+                    <p className="text-muted">{message}</p>
                   ) : (
                     generateList(size, data)
                   )
