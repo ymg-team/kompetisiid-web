@@ -5,7 +5,7 @@ import sealMiddleware from '../middlewares/seal'
 
 const router = express.Router()
 
-router.get('/related/:seal', sealMiddleware, controller.getRelated, apiCaller)
+router.get('/related/:id/:seal', sealMiddleware, controller.getRelated, apiCaller)
 router.get('/pengsumuman/:id/:seal', sealMiddleware, controller.getPengumuman, apiCaller)
 router.get('/favoritedtags/:seal', sealMiddleware, controller.getFavoritedtag)
 router.get('/kategori', controller.getCategories, apiCaller)

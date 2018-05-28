@@ -69,6 +69,18 @@ export function epochToRelativeTime(epochtime) {
   return lang[timespan][n > 1 ? 'plural' : 'singular'].replace('#', n) +  postfix
 }
 
+export function getCompetitionStatus(deadline_at, announcement_at){
+  const d = new Date()
+  d.setHours(0,0,0,0)
+  const now = d.getTime()
+  deadline_at = deadline_at * 1000
+  announcement_at = announcement_at * 1000
+  const is_ended = deadline_at < now && announcement_at < now
+  const is_waiting = deadline_at < now && announcement_at > now
+
+  return {is_ended, is_waiting, now, deadline_at, announcement_at}
+}
+
 export function datetimeToRelativeTime(datetime) {
   const date = new Date(datetime)
   return epochToRelativeTime(date)
