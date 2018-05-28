@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import Styled from 'styled-components'
-import { epochToRelativeTime } from "../../helpers/DateTime"
+import { epochToRelativeTime, getCompetitionStatus } from "../../helpers/DateTime"
 import { nominalToText } from "../../helpers/Number"
 import * as Colors from '../../../style/colors'
 
@@ -110,14 +110,10 @@ const LabelEnd = () => (
 )
 
 const CompetitionListCard = props => {
-  // convert timestamp to seconds
-  const now = Date.now()
+  // convert today midnight timestamp to seconds ref "https://stackoverflow.com/questions/3894048/what-is-the-best-way-to-initialize-a-javascript-date-to-midnight?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa
   const { n, size } = props
+  const {now, deadline_at, announcement_at, is_ended, is_waiting} = getCompetitionStatus(n.deadline_at, n.announcement_at)
   const target = `/competition/${n.id}/regulations/${n.nospace_title}`
-  const deadline_at = n.deadline_at * 1000
-  const announcement_at = n.announcement_at * 1000
-  const is_ended = deadline_at < now && announcement_at < now
-  const is_waiting = deadline_at < now && announcement_at > now
 
   return (
     <CardCompetitionStyled
@@ -224,6 +220,15 @@ const CompetitionListCard = props => {
               : null
             }
             {/* end of competition status */}
+
+            {
+              deadline_at === now ? 
+              <p>
+                <strong>hari ini</strong>{' '}
+                <span className="text-muted">Deadline pendaftaran</span>
+              </p>
+              : null
+            }
             
           </div>
         </div>

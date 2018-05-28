@@ -37,7 +37,7 @@ export function getRelated(req, res, next) {
     version: 'v42',
     method: 'get',
     params: {query: req.query},
-    url: `/v2/competitions/related`
+    url: `/v2/competitions/related/${req.params.id}`
   }
 
   next()
