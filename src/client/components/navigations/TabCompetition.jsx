@@ -4,12 +4,8 @@ import { Link } from 'react-router-dom'
 import BtnJoin from '../buttons/BtnJoin'
 
 const TabCompetition = props => {
-  const n_pengumuman =
-    props.data && props.data.dataPengumuman
-      ? JSON.parse(props.data.dataPengumuman).length
-      : 0
-  const n_kontak =
-    props.data && props.data.kontak ? JSON.parse(props.data.kontak).length : 0
+  const n_pengumuman = props.data ? props.data.announcement.length : 0
+  const n_kontak = props.data ? props.data.contacts.length : 0
   return (
     <div
       id="container-competition-tab"
@@ -26,9 +22,9 @@ const TabCompetition = props => {
                     className={props.active - 1 == key ? 'active' : ''}
                   >
                     <Link
-                      to={`/competition/${props.data.id_kompetisi}/${
-                        tab[key].link
-                      }/${props.data.nospace_title}`}
+                      to={`/competition/${props.data.id}/${tab[key].link}/${
+                        props.data.nospace_title
+                      }`}
                     >
                       {n.name}{' '}
                       {n.name == 'pengumuman' && n_pengumuman > 0 ? (

@@ -2,15 +2,25 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { openInNewTab } from '../../helpers/LinkGenerator'
 import { eventFire } from '../../helpers/DomEvents'
+import { getCompetitionStatus } from '../../helpers/DateTime'
 import copy from 'copy-to-clipboard'
 import BtnJoin from '../buttons/BtnJoin'
-import {alert} from '../Alert'
+import { alert } from '../Alert'
 
 const CompetitionDetailBox = props => {
   const { data } = props
   const link_competition = `https://kompetisi.id/competition/${
-    data.id_kompetisi
+    data.id
   }/regulations/${data.nospace_title}`
+
+  const {
+    now,
+    deadline_at,
+    announcement_at,
+    is_ended,
+    is_waiting
+  } = getCompetitionStatus(data.deadline_at, data.announcement_at)
+
   return (
     <div id="competition-detail" className="row">
       <div className="row">
@@ -34,11 +44,17 @@ const CompetitionDetailBox = props => {
               <br />
               <small className="text-muted">
                 {data.created_in} di{' '}
-                <a className="text-muted" href={`/browse/${data.mainkategori}`}>
-                  <strong>{`${data.mainkategori}`}</strong>
+                <a
+                  className="text-muted"
+                  href={`/browse/${data.main_category.name}`}
+                >
+                  <strong>{data.main_category.name}</strong>
                 </a>,
-                <a className="text-muted" href={`/browse/${data.subkategori}`}>
-                  <strong>{`${data.subkategori}`}</strong>
+                <a
+                  className="text-muted"
+                  href={`/browse/${data.sub_category.name}`}
+                >
+                  <strong>{data.sub_category.name}</strong>
                 </a>
               </small>
             </p>
@@ -56,41 +72,43 @@ const CompetitionDetailBox = props => {
               <div className="only-mobile m-30" />
               {/* competition status */}
               <div style={{ marginBottom: '20px' }}>
-                {data.sisadeadline == 'berakhir' &&
-                data.sisapengumuman == 'berakhir' ? (
+                {is_ended ? (
                   <span className="label label-red label-lg">
                     <i className="fa fa-check" /> Kompetisi telah berakhir
                   </span>
-                ) : data.sisadeadline == 'berakhir' &&
-                data.sisapengumuman != 'berakhir' ? (
+                ) : null}
+
+                {is_waiting ? (
                   <span
                     title={`Pengumuan pemenang dalam ${data.sisapengumuman}`}
                     className="label label-orange label-lg"
                   >
                     <i className="fa fa-flag" /> Kompetisi sedang berlangsung
                   </span>
-                ) : (
-                  <span className="label label-gray label-lg">
-                    <i className="fa fa-wpforms" /> Batas pendaftaran{' '}
-                    {data.sisadeadline}
-                  </span>
-                )}
+                ) : null}
               </div>
+
               <div className="competition-detail--title">
                 <h1>{data.title}</h1>
                 <div className="m-20" />
                 <p className="text-muted">
-                  Diselenggarakan oleh <strong>{data.penyelenggara}</strong>
+                  Diselenggarakan oleh <strong>{data.organizer}</strong>
                 </p>
                 <div className="m-20" />
                 <p className="text-muted">{data.sort}</p>
               </div>
               <div className="m-30" />
+
               <BtnJoin data={data} />
+
               <a
                 style={{ marginRight: '10px' }}
                 onClick={() =>
-                  alert(true, 'login terlebih dahulu untuk menyimpan', 'warning')
+                  alert(
+                    true,
+                    'login terlebih dahulu untuk menyimpan',
+                    'warning'
+                  )
                 }
                 className="btn btn-white"
                 href="javascript:;"
@@ -152,26 +170,40 @@ const CompetitionDetailBox = props => {
             />
           </div>
           <hr />
-          <a href={addCalendar.google(data)} target="_blank" title="Tambahkan ke Google Calendar" rel="noopener">
+          <a
+            href={addCalendar.google(data)}
+            target="_blank"
+            title="Tambahkan ke Google Calendar"
+            rel="noopener"
+          >
             <img
-              style={{ width: 'inherit', backgroundColor: "#FFF" }}
+              style={{ width: 'inherit', backgroundColor: '#FFF' }}
               src="/assets/4.2/img/google-calendar-icon.fullwidth.png"
             />
           </a>
-          <a href={addCalendar.yahoo(data)} target="_blank" title="Tambahkan ke Yahoo Calendar" rel="noopener">
+          <a
+            href={addCalendar.yahoo(data)}
+            target="_blank"
+            title="Tambahkan ke Yahoo Calendar"
+            rel="noopener"
+          >
             <img
-              style={{ width: 'inherit', backgroundColor: "#FFF" }}
+              style={{ width: 'inherit', backgroundColor: '#FFF' }}
               src="/assets/4.2/img/yahoo-calendar-icon.fullwidth.png"
             />
           </a>
           <a
             onClick={() =>
-              alert(true, 'untuk sekarang, kalender Microsoft untuk saat ini belum tersedia', 'warning')
+              alert(
+                true,
+                'untuk sekarang, kalender Microsoft untuk saat ini belum tersedia',
+                'warning'
+              )
             }
             href="javascript:;"
           >
             <img
-              style={{ width: 'inherit', backgroundColor: "#FFF" }}
+              style={{ width: 'inherit', backgroundColor: '#FFF' }}
               src="/assets/4.2/img/microsoft-calendar-icon.fullwidth.png"
             />
           </a>
@@ -191,8 +223,8 @@ const addCalendar = {
       ''
     )}T240000Z&details=${n.sort +
       '\n' +
-      n.hadiah}&location=http://kompetisi.id/competition/${
-      n.id_kompetisi
+      n.prize.description}&location=http://kompetisi.id/competition/${
+      n.id
     }/regulations/${n.nospace_title}&sf=true&output=xml#eventpage_6`
   },
   yahoo: (n, url) => {
@@ -201,8 +233,8 @@ const addCalendar = {
       n.title
     }&st=${d[0].replace(/-/g, '')}T000000Z&dur=0600&desc=${n.sort +
       '\n' +
-      n.hadiah}&in_loc=http://kompetisi.id/competition/${
-      n.id_kompetisi
+      n.prize.description}&in_loc=http://kompetisi.id/competition/${
+      n.id
     }/regulations/${n.nospace_title}`
   },
   microsoft: () => {}

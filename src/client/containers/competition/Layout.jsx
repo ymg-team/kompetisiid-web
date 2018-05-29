@@ -61,10 +61,10 @@ class LayoutCompetition extends Component {
     return (
       <div>
         {
-          detail[encid] && detail[encid].meta ?
-            detail[encid].meta.code === 200 ?
+          detail[encid] && detail[encid].status ?
+            detail[encid].status === 200 ?
               renderRoutes(this.props.route.routes)
-              : <p>{detail[encid].meta.message}</p>
+              : <p>{detail[encid].message}</p>
             : <CompetitionPreloader/>
         }
 
