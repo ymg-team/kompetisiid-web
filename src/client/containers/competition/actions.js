@@ -54,16 +54,6 @@ export function setCategories(json) {
   }
 }
 
-// export function getJelajah(params, filter)
-// {
-//     return dispatch => {
-//         dispatch(receiveJelajah(filter))
-//         requestApi('get', `/api/jelajah?${serialize(params)}`, params, res => {
-//             dispatch(receiveJelajah(filter, res))
-//         })
-//     }
-// }
-
 export function getJelajahMore(params, filter) {
   return dispatch => {
     dispatch(receiveJelajahMore(filter))

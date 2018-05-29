@@ -14,6 +14,9 @@ import NextPrev from '../../components/navigations/NextPrev'
 import ErrorCard from '../../components/cards/ErrorCard'
 import Host from '../../../config/host'
 
+import { epochToDMY, epochToRelativeTime } from '../../helpers/DateTime'
+import { nominalToText } from '../../helpers/Number'
+import { nl2br } from '../../helpers/String'
 import { toCamelCase } from 'string-manager'
 import { connect } from 'react-redux'
 
@@ -38,11 +41,7 @@ class Index extends Component {
       helmetdata = { script: [] }
 
     // generate helmet data
-    if (
-      detail[encid] &&
-      detail[encid].status &&
-      detail[encid].status === 200
-    ) {
+    if (detail[encid] && detail[encid].status && detail[encid].status === 200) {
       setTimeout(() => {
         if (typeof window != 'undefined') {
           handleScrollNav()
@@ -57,7 +56,7 @@ class Index extends Component {
         description: detail[encid].data.sort,
         image: detail[encid].data.poster.original,
         url: `${Host[process.env.NODE_ENV].front}/competition/${
-          detail[encid].data.id_kompetisi
+          detail[encid].data.id
         }/regulations/${detail[encid].data.nospace_title}`
       })
 
@@ -68,21 +67,21 @@ class Index extends Component {
       })
 
       // nextprev props
-      if (Object.keys(detail[encid].data.next).length > 0) {
+      if (Object.keys(detail[encid].next).length > 0) {
         NextPrevProps.next = {
-          title: detail[encid].data.next.title,
-          link: `/competition/${
-            detail[encid].data.next.id_kompetisi
-          }/regulations/${detail[encid].data.next.nospace_title}`
+          title: detail[encid].next.title,
+          link: `/competition/${detail[encid].next.id}/regulations/${
+            detail[encid].next.nospace_title
+          }`
         }
       }
 
-      if (Object.keys(detail[encid].data.prev).length > 0) {
+      if (Object.keys(detail[encid].prev).length > 0) {
         NextPrevProps.prev = {
-          title: detail[encid].data.prev.title,
-          link: `/competition/${
-            detail[encid].data.prev.id_kompetisi
-          }/regulations/${detail[encid].data.prev.nospace_title}`
+          title: detail[encid].prev.title,
+          link: `/competition/${detail[encid].prev.id}/regulations/${
+            detail[encid].prev.nospace_title
+          }`
         }
       }
     }
@@ -90,8 +89,8 @@ class Index extends Component {
     return (
       <div>
         <Helmet {...helmetdata} />
-        {detail[encid] && detail[encid].meta ? (
-          detail[encid].meta.code == 200 ? (
+        {detail[encid] && detail[encid].status ? (
+          detail[encid].status == 200 ? (
             <div className="competition-detail">
               <CompetitionDetailBox data={detail[encid].data} />
               <div className="m-20" />
@@ -145,7 +144,7 @@ class Index extends Component {
                       ) : null}
                       {/*end of alert*/}
                       <div className="m-20" />
-                      
+
                       <div className="row">
                         <div
                           className={active_tab == 1 ? 'col-md-8' : 'col-md-12'}
@@ -159,28 +158,30 @@ class Index extends Component {
                                     nospace_title={
                                       detail[encid].data.nospace_title
                                     }
-                                    sumber={detail[encid].data.sumber}
+                                    sumber={detail[encid].data.link_source}
                                     tags={
                                       detail[encid].data.tags
                                         ? detail[encid].data.tags.split(',')
                                         : []
                                     }
-                                    html={detail[encid].data.konten}
+                                    html={detail[encid].data.content}
                                   />
                                 )
                               case 2:
                                 return (
-                                  <Prizes html={detail[encid].data.hadiah} />
+                                  <Prizes
+                                    html={nl2br(
+                                      detail[encid].data.prize.description
+                                    )}
+                                  />
                                 )
                               case 3:
                                 return (
                                   <Announcements
                                     data={
-                                      detail[encid].data.dataPengumuman != ''
-                                        ? JSON.parse(
-                                            detail[encid].data.dataPengumuman
-                                          )
-                                        : {}
+                                      detail[encid].data.announcement
+                                        ? detail[encid].data.announcement
+                                        : []
                                     }
                                   />
                                 )
@@ -189,7 +190,11 @@ class Index extends Component {
                               case 5:
                                 return (
                                   <Contacts
-                                    data={JSON.parse(detail[encid].data.kontak)}
+                                    data={
+                                      detail[encid].data.contacts
+                                        ? detail[encid].data.contacts
+                                        : []
+                                    }
                                   />
                                 )
                               case 6:
@@ -205,6 +210,7 @@ class Index extends Component {
                             }
                           })()}
                         </div>
+
                         {/* show sidebar info */}
                         {active_tab == 1 ? (
                           <div className="col-md-4">
@@ -212,7 +218,9 @@ class Index extends Component {
                               <progress value={30} max={100} />
                               <h3 className="total-prize">
                                 <strong>
-                                  {detail[encid].data.total_hadiah}
+                                  {nominalToText(
+                                    detail[encid].data.prize.total
+                                  )}
                                 </strong>
                                 <small className="text-muted">
                                   total hadiah
@@ -223,16 +231,20 @@ class Index extends Component {
                                 <small className="text-muted">kunjungan</small>
                               </h3>
                               <h3 className="total-view">
-                                {detail[encid].data.sisadeadline}
-                                <small className="text-muted">{`deadline (${
-                                  detail[encid].data.deadline
-                                })`}</small>
+                                {epochToRelativeTime(
+                                  detail[encid].data.deadline_at
+                                )}
+                                <small className="text-muted">{`deadline (${epochToDMY(
+                                  detail[encid].data.deadline_at * 1000
+                                )})`}</small>
                               </h3>
                               <h3 className="total-view">
-                                {detail[encid].data.sisapengumuman}
-                                <small className="text-muted">{`pengumuman (${
-                                  detail[encid].data.pengumuman
-                                })`}</small>
+                                {epochToRelativeTime(
+                                  detail[encid].data.announcement_at
+                                )}
+                                <small className="text-muted">{`pengumuman (${epochToDMY(
+                                  detail[encid].data.announcement_at * 1000
+                                )})`}</small>
                               </h3>
                             </div>
                             <hr />
@@ -370,7 +382,6 @@ function handleScrollNav() {
   }
 }
 
-
 function mapStateToProps(state) {
   const { Kompetisi } = state
   return {
@@ -385,4 +396,3 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Index)
-
