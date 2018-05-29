@@ -92,12 +92,18 @@ class Index extends Component {
         {detail[encid] && detail[encid].status ? (
           detail[encid].status == 200 ? (
             <div className="competition-detail">
+              
+              {/* detail box competition */}
               <CompetitionDetailBox data={detail[encid].data} />
+
               <div className="m-20" />
+              
+              {/* competition tab navigation */}
               <Tab
                 active={this.props.route.active_tab}
                 data={detail[encid].data}
               />
+              
               <div className="row">
                 <div className="container">
                   <div className="row competition-detail--content">
@@ -158,7 +164,7 @@ class Index extends Component {
                                     nospace_title={
                                       detail[encid].data.nospace_title
                                     }
-                                    sumber={detail[encid].data.link_source}
+                                    link_source={detail[encid].data.link_source}
                                     tags={
                                       detail[encid].data.tags
                                         ? detail[encid].data.tags.split(',')
@@ -291,6 +297,7 @@ class Index extends Component {
                           </div>
                         ) : null}
                         {/* end of show sidebar info */}
+
                       </div>
                     </div>
                   </div>

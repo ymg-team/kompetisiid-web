@@ -1,5 +1,4 @@
 import Competition from '../containers/competition/index'
-import CompetitionIframe from '../containers/CompetitionIframe'
 import CompetitionLayout from "../containers/competition/Layout"
 
 export default {
@@ -47,20 +46,6 @@ export default {
       exact: true,
       active_tab: 6,
       component: Competition
-    },
-    {
-      path: '/competition/:encid/source/:title',
-      exact: true,
-      iframe_type: 'link_source',
-      fullscreen: true,
-      component: CompetitionIframe
-    },
-    {
-      path: '/competition/:encid/join/:title',
-      exact: true,
-      iframe_type: 'link_join',
-      fullscreen: true,
-      component: CompetitionIframe
     },
     {
       path:'/competition/:encid/*',
