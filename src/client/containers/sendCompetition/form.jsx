@@ -10,7 +10,7 @@ export const desc =
 
 export default class Form extends Component {
   componentWillUnmount() {
-    fullalert('close')
+    alert(false)
   }
 
   render() {

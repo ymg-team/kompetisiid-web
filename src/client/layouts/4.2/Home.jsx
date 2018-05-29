@@ -32,7 +32,6 @@ class LayoutHome extends Component {
         ) : null}
         {renderRoutes(this.props.route.routes)}
         {!fullscreen ? <Footer /> : null}
-        <div id="fullalert" />
       </div>
     )
   }

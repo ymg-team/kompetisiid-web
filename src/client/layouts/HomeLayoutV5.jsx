@@ -30,7 +30,6 @@ class RootLayoutV5 extends Component {
         {renderRoutes(this.props.route.routes)}
         {fullscreen ? null : <Footer /> }
         <Alert />
-        <div id="fullalert" />
       </LayoutStyled>
     )
   }

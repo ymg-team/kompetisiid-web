@@ -17,7 +17,6 @@ const CompetitionBox = props => {
     <div id="competition-container">
       <div className="container">
         <div className="row no-margin">
-
           {/* header total show competition */}
           {status && status === 200 && subtitle ? (
             <span style={{ display: 'table' }}>
@@ -29,7 +28,7 @@ const CompetitionBox = props => {
           ) : null}
           {subtitle ? <div className="row m-10" /> : null}
           {/* end of header total show competition */}
-          
+
           {/* competition literation */}
           <Transition in={status && status > 0} timeout={duration}>
             {state => (

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 
+import {alert} from "../Alert"
 import { connect } from 'react-redux'
 import { logout } from '../../../store/user/actions'
 
@@ -12,7 +13,7 @@ class Header extends Component {
   }
 
   handleLogout() {
-    fullalert('warning', 'logout...')
+    alert(true, 'logout...', 'warning')
     this.props.dispatch(logout())
   }
 
@@ -23,9 +24,9 @@ class Header extends Component {
         setTimeout(() => {
           window.location.href = '/'
         }, 1500)
-        fullalert('success', logout.meta.message, false)
+        alert(true, logout.meta.message, 'success', false)
       } else {
-        fullalert('error', logout.meta.message, false)
+        alert(true, logout.meta.message, 'error')
       }
     }
   }
