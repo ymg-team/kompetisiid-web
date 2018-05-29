@@ -9,3 +9,5 @@ export const darkGray = "#191515"
 export const mainGreen = "#1baf5c"
 
 export const mainYellow = "#ea8e21"
+
+export const mainWhite = "#FFF"

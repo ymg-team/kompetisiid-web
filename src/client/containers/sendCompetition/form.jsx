@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import Subheader from '../../components/Subheader'
 import Helmet from '../../components/Helmet'
+import { alert } from "../../components/Alert"
 
 export const title = 'Pasang Kompetisi'
 export const desc =
@@ -9,7 +10,7 @@ export const desc =
 
 export default class Form extends Component {
   componentWillUnmount() {
-    fullalert('close')
+    alert(false)
   }
 
   render() {
@@ -52,9 +53,10 @@ export default class Form extends Component {
                     <a
                       href="javascript:;"
                       onClick={() => {
-                        fullalert(
-                          'warning',
-                          'Login terlebih dahulu untuk menggunakan fitur ini'
+                        alert(
+                          true,
+                          'Login terlebih dahulu untuk menggunakan fitur ini',
+                          'warning'
                         )
                       }}
                       className="btn btn-white"

@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import {alert} from '../../components/Alert'
+
 import { Link } from 'react-router-dom'
 import Subheader from '../../components/Subheader'
 import Helmet from '../../components/Helmet'
@@ -37,19 +39,16 @@ class AddCompetitionFast extends Component {
   }
 
   componentWillUnmount() {
-    fullalert('close')
+    alert(false)
     if (RecaptchaContainer)
       grecaptcha.reset(RecaptchaContainer)
   }
 
   handleSubmit() {
     if (!this.state.is_accept) {
-      return fullalert(
-        'error',
-        'wajib menyetujui syarat dan ketentuan yang berlaku'
-      )
+      return alert(true, 'Wajib menyetujui syarat dan ketentuan yang berlaku', 'error')
     } else if (grecaptcha.getResponse().length == 0) {
-      return fullalert('error', 'Google Recaptcha belum valid')
+      return alert(true, 'Rechaptcha belum valid', 'error')
     } //start submit
     else {
       return this.props.dispatch(
@@ -65,16 +64,16 @@ class AddCompetitionFast extends Component {
 
   render() {
     const { response } = this.props
-    if (response.is_loading) fullalert('warning', 'mengirim kompetisi...')
+    if (response.is_loading)  alert(true, 'Mengirim kompetisi...', 'warning')
 
     if (response.meta) {
       if (response.meta.code === 201) {
-        fullalert('success', response.meta.message)
+        alert(true, response.meta.message, 'success')
         setTimeout(() => {
           location.href = '/add/send'
         }, 500)
       } else {
-        fullalert('error', response.meta.message)
+        alert(true, response.meta.message, 'error')
       }
     }
 

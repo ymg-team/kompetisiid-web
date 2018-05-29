@@ -80,6 +80,8 @@ class Navbar extends Component {
   toggleSearch() {
     this.setState({
       search: !this.state.search
+    }, () => {
+      this.props.history.push('/browse')
     })
   }
 

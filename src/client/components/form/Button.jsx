@@ -1,23 +1,23 @@
 import React, {Component} from 'react'
 import { validator, validationSeter, validationChecker } from './Validator'
+import {alert} from '../Alert'
 
 export default class Button extends Component 
 {
     handleClick()
     {
-        fullalert('warning', 'memproses permintaan....')
         if(Object.keys(validator).length < 1)//no data input
         {
-            fullalert('error', 'beberapa input wajib diisi')
+            alert(true, 'beberapa input wajib diisi', 'error')
             this.props.setState(validationSeter(this.props.requiredInputs), () => {
                 const errorEl = document.getElementsByClassName('error')[0]
                 errorEl.scrollIntoView({block: "end", behavior: "smooth"})
             })            
         }else if(!validationChecker())
         {
-            const errorEl = document.getElementsByClassName('error')[0]
-            fullalert('error', 'beberapa input belum valid')
-            errorEl.scrollIntoView({block: "end", behavior: "smooth"})
+          alert(true, 'beberapa input belum valid', 'error')
+          const errorEl = document.getElementsByClassName('error')[0]
+          errorEl.scrollIntoView({block: "end", behavior: "smooth"})
             
         }else
         {
