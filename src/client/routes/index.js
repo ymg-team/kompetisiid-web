@@ -21,6 +21,7 @@ import Careers from './careers'
 import Login from '../containers/auth/Login'
 import Home from '../containers/home/index'
 import Error from '../containers/error/index'
+import RedirectContainer from '../containers/Redirect'
 
 // layouts
 import LayoutRoot from '../layouts/4.2/Root'
@@ -69,6 +70,12 @@ export default [
                 )
               return null
             }
+          },
+          {
+            path: '/exit',
+            fullscreen: true,
+            exact: true,
+            component: RedirectContainer
           },
           {
             fullscreen: true,

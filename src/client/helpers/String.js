@@ -1,3 +1,5 @@
+import React from 'react'
+
 /**
  * Created by yussan on 18/12/16.
  */
@@ -22,8 +24,19 @@ function parseUrl(text = '') {
   text = text.replace(
     /(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim,
     function(t) {
-      return `<a target='_blank' rel='noopener' href='${t}'>${t}</a>`
+      return `<a target='_blank' rel='noopener' href='/exit?to=${t}'>${t}</a>`
     }
   )
   return text
+}
+
+/**
+ * function to conver /n to <br />
+ * @param {String} text
+ * @tutorial : https://medium.com/@kevinsimper/react-newline-to-break-nl2br-a1c240ba746
+ */
+export function nl2br(text) {
+  return text.split('\n').map((item, key) => {
+    return <span key={key}>{item}<br/></span>
+  })
 }

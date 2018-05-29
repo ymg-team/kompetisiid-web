@@ -38,8 +38,8 @@ class CompetitionIframe extends Component {
     const { kompetisi } = np
     if (
       kompetisi.detail[encid] &&
-      kompetisi.detail[encid].meta &&
-      kompetisi.detail[encid].meta.code == 200
+      kompetisi.detail[encid].status &&
+      kompetisi.detail[encid].status === 200
     ) {
       this.setState({
         is_redirect: true

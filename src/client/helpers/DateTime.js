@@ -86,6 +86,11 @@ export function datetimeToRelativeTime(datetime) {
   return epochToRelativeTime(date)
 }
 
+export function epochToDMY(epochtime) {
+  const d = new Date(epochtime)
+  return `${d.getDate()} ${Bulan[d.getMonth()][1]} ${d.getFullYear()}`
+}
+
 export function strToDateTime(str) {
   return ''
 }

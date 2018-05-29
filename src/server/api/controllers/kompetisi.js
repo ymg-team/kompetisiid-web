@@ -63,8 +63,9 @@ export function getCategories(req, res, next) {
  */
 export function getDetail(req, res, next) {
   req.reqdata = {
+    version: 'v42',
     method: 'get',
-    url: `/kompetisi/data/${req.params.id}`
+    url: `/v2/competition/${req.params.id}`
   }
 
   next()
