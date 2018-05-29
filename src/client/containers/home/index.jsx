@@ -132,7 +132,7 @@ class Home extends Component {
           <NewsBox subtitle={false} {...berita.data['home_latest']} />
           <div className="row align-center">
             <Link className="btn btn-bordergray" to="/news">
-              BERITA BERIKUTNYA
+              KABAR BERIKUTNYA
             </Link>
           </div>
         </GrayBackgroundStyled>

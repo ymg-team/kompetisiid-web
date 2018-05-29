@@ -12,7 +12,7 @@ export function generateLink(link, target = '_self')
 {
     if(link.search('http') > -1 )
     {
-        return <a href={link} target={target}>{link}</a>
+        return <a href={`/exit?to=${link}`} target={target}>{link}</a>
     }else
     {
         return link

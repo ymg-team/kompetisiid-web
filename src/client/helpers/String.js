@@ -24,7 +24,7 @@ function parseUrl(text = '') {
   text = text.replace(
     /(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim,
     function(t) {
-      return `<a target='_blank' rel='noopener' href='${t}'>${t}</a>`
+      return `<a target='_blank' rel='noopener' href='/exit?to=${t}'>${t}</a>`
     }
   )
   return text
