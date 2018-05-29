@@ -4,6 +4,7 @@ import { openInNewTab } from '../../helpers/LinkGenerator'
 import { eventFire } from '../../helpers/DomEvents'
 import copy from 'copy-to-clipboard'
 import BtnJoin from '../buttons/BtnJoin'
+import {alert} from '../Alert'
 
 const CompetitionDetailBox = props => {
   const { data } = props
@@ -89,7 +90,7 @@ const CompetitionDetailBox = props => {
               <a
                 style={{ marginRight: '10px' }}
                 onClick={() =>
-                  fullalert('warning', 'login terlebih dahulu untuk menyimpan')
+                  alert(true, 'login terlebih dahulu untuk menyimpan', 'warning')
                 }
                 className="btn btn-white"
                 href="javascript:;"
@@ -151,13 +152,13 @@ const CompetitionDetailBox = props => {
             />
           </div>
           <hr />
-          <a href={addCalendar.google(data)} target="_blank" title="Tambahkan ke Google Calendar">
+          <a href={addCalendar.google(data)} target="_blank" title="Tambahkan ke Google Calendar" rel="noopener">
             <img
               style={{ width: 'inherit', backgroundColor: "#FFF" }}
               src="/assets/4.2/img/google-calendar-icon.fullwidth.png"
             />
           </a>
-          <a href={addCalendar.yahoo(data)} target="_blank">
+          <a href={addCalendar.yahoo(data)} target="_blank" title="Tambahkan ke Yahoo Calendar" rel="noopener">
             <img
               style={{ width: 'inherit', backgroundColor: "#FFF" }}
               src="/assets/4.2/img/yahoo-calendar-icon.fullwidth.png"
@@ -165,10 +166,7 @@ const CompetitionDetailBox = props => {
           </a>
           <a
             onClick={() =>
-              fullalert(
-                'warning',
-                'untuk sekarang, kalender Microsoft untuk saat ini belum tersedia'
-              )
+              alert(true, 'untuk sekarang, kalender Microsoft untuk saat ini belum tersedia', 'warning')
             }
             href="javascript:;"
           >
@@ -217,7 +215,7 @@ function handleCopyLink(link) {
   // copy
   copy(link)
   // alert if link has copied
-  fullalert('success', 'Link telah berhasil di copy.')
+  alert(true, 'Link telah berhasil di copy.', 'success')
 }
 
 export default CompetitionDetailBox

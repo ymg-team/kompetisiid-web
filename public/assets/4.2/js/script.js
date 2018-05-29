@@ -2,14 +2,6 @@ let showSearch = false;
 let showNavTop = false;
 
 document.addEventListener('DOMContentLoaded', () => {
-  // on click full alert
-  const fullalertEl = document.getElementById('fullalert');
-  if(fullalertEl)
-  {
-    fullalertEl.addEventListener('click', (e) => {
-      if(fullalertEl.firstChild) fullalertEl.removeChild(fullalertEl.firstChild);//clear child node
-    })
-  }
   //show/hide search box
   const btnSearchEl = document.getElementById('btn-search');
   if(btnSearchEl)
@@ -103,17 +95,4 @@ function modal(act, target)
     document.getElementsByTagName('body')[0].style.overflow = 'scroll';
     removeClass(el, 'open');
   } 
-}
-
-// fullalert
-window.fullalert = (type, text) => {
-  const fullalertEl = document.getElementById('fullalert');
-  if(fullalertEl.firstChild) fullalertEl.removeChild(fullalertEl.firstChild);//clear child node
-  if(type == 'close') return true;
-  // extends alert child
-  const divEl = document.createElement('div');
-  divEl.className = `fullalert fullalert-${type}`;
-  const textNode = document.createTextNode(text);
-  divEl.appendChild(textNode);
-  return fullalertEl.appendChild(divEl);
 }

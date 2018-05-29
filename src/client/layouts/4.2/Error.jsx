@@ -7,7 +7,6 @@ export default class Error extends Component
         return(
             <span>
                 {this.props.children}
-                <div id="fullalert" />
             </span>
         )
     }

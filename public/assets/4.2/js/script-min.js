@@ -1,6 +1,4 @@
-let showSearch=!1;let showNavTop=!1;document.addEventListener('DOMContentLoaded',()=>{const fullalertEl=document.getElementById('fullalert');if(fullalertEl)
-{fullalertEl.addEventListener('click',(e)=>{if(fullalertEl.firstChild)fullalertEl.removeChild(fullalertEl.firstChild)})}
-const btnSearchEl=document.getElementById('btn-search');if(btnSearchEl)
+let showSearch=!1;let showNavTop=!1;document.addEventListener('DOMContentLoaded',()=>{const btnSearchEl=document.getElementById('btn-search');if(btnSearchEl)
 {btnSearchEl.addEventListener('click',(e)=>{toggleSearch()})
 document.getElementById('btn-closesearch').addEventListener('click',(e)=>{toggleSearch()})
 document.getElementById('btn-show-nav').addEventListener('click',(e)=>{toggleNavTop()})
@@ -21,4 +19,3 @@ el.classList.remove(className);else if(hasClass(el,className)){var reg=new RegEx
 function modal(act,target)
 {const el=document.getElementById(target);if(act=='open'){document.getElementsByTagName('body')[0].style.overflow='hidden';addClass(el,'open')}
 if(act=='close'){document.getElementsByTagName('body')[0].style.overflow='scroll';removeClass(el,'open')}}
-window.fullalert=(type,text)=>{const fullalertEl=document.getElementById('fullalert');if(fullalertEl.firstChild)fullalertEl.removeChild(fullalertEl.firstChild);if(type=='close')return!0;const divEl=document.createElement('div');divEl.className=`fullalert fullalert-${type}`;const textNode=document.createTextNode(text);divEl.appendChild(textNode);return fullalertEl.appendChild(divEl)}

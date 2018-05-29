@@ -7,6 +7,7 @@ import AuthFacebook from '../../components/buttons/AuthFacebook'
 import AuthGoogle from '../../components/buttons/AuthGoogle'
 import { Fullscreen } from '../../components/Fullscreen'
 
+import {alert} from '../../components/Alert'
 import { profile, login } from '../../../store/user/actions'
 import { connect } from 'react-redux'
 
@@ -62,15 +63,15 @@ class Login extends Component {
     //generate alert
     if (profile[username] && profile[username].meta) {
       if (profile[username].meta.code != 200)
-        fullalert('error', 'user tidak terdaftar')
+        alert(true, 'user tidak terdaftar', 'error')
       else
-        fullalert('close')
+        alert(false)
     }
     if (login && login.meta) {
       if (login.meta.code != 201) {
-        fullalert('error', 'password tidak cocok')
+        alert(true, 'password tidak cocok', 'error')
       } else {
-        fullalert('success', 'login berhasil')
+        alert(true, 'login berhasil', 'success', false)
         setTimeout(() => { location.href = '/dashboard/competition' }, 500)
       }
     }

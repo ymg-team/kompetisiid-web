@@ -39,7 +39,6 @@ export default class Dashboard extends Component
                     </div>
                 </div>
                 <Footer />
-                <div id='fullalert' />
             </div>
         )
     }
