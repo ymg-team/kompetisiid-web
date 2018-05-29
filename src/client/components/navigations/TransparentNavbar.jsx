@@ -81,7 +81,7 @@ class Navbar extends Component {
     this.setState({
       search: !this.state.search
     }, () => {
-      this.props.history.push('/browse')
+      if(!this.state.search) this.props.history.push('/browse')
     })
   }
 
