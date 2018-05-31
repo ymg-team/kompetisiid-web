@@ -92,7 +92,7 @@ function modal(act, target)
     addClass(el, 'open');
   }
   if(act=='close') {
-    document.getElementsByTagName('body')[0].style.overflow = 'scroll';
+    document.getElementsByTagName('body')[0].style.overflow = 'auto';
     removeClass(el, 'open');
   } 
 }

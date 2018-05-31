@@ -26,6 +26,7 @@ export default class Redirect extends Component {
 function queryToObj(a) {
   try {
     var b = {}
+    // ref:https://stackoverflow.com/questions/4607745/split-string-only-on-first-instance-of-specified-character/36263419?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa
     return (
       a.split('&').map(function(a) {
         ;(a = a.split(/=(.+)/)), (b[a[0]] = a[1])
