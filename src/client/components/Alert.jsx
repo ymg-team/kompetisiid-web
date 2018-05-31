@@ -28,21 +28,36 @@ const Alert = Styled.div`
   &.success {
     background-color: ${Colors.mainGreen}; 
   }
+
+  /* small */
+  @media only screen and (max-width: 543px) {
+    width: 100%;
+    right: 0;
+  }
+
+  /* medium screen */
+  @media only screen and (min-width: 544px) and (max-width: 767px) {
+    width: 100%;
+    right: 0;
+  }
 `
 
-export default props => <Alert onClick={() => alert(false)} id="ki-alert">alert.. !</Alert>
+export default props => (
+  <Alert onClick={() => alert(false)} id="ki-alert">
+    alert.. !
+  </Alert>
+)
 
-let timeout 
+let timeout
 
-export function alert(show=true, text='', type='') {
-
+export function alert(show = true, text = '', type = '') {
   clearTimeout(timeout)
 
-  if(typeof window !== 'undefined') {
+  if (typeof window !== 'undefined') {
     const alertEl = window.document.getElementById('ki-alert')
 
-    if(show) {
-      alertEl.innerText = text 
+    if (show) {
+      alertEl.innerText = text
       alertEl.classList.add(type)
       alertEl.style.bottom = '20px'
 
@@ -50,8 +65,7 @@ export function alert(show=true, text='', type='') {
         alertEl.style.bottom = '-100px'
         alertEl.classList.remove(type)
       }, 4000)
-    }
-    else {
+    } else {
       alertEl.style.bottom = '-100px'
     }
   }

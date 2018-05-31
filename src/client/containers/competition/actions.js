@@ -20,6 +20,20 @@ export function fetchJelajah(params, filter) {
   }
 }
 
+export function fetchJelajahMore(params, filter) {
+  const url = `/api/jelajah/${sealMiddleware.generateSeal()}`
+  return {
+    [CALL_API]: {
+      typeSuccess: RECEIVE_MORE_DATA,
+      typeWaiting: REQUEST_DATA,
+      filter,
+      method: 'get',
+      target: 'kompetisi_jelajah',
+      url: `${url}?${serialize(params)}`
+    }
+  }
+}
+
 
 export function getRelated(id, filter) {
   return {
@@ -51,15 +65,6 @@ export function setCategories(json) {
     type: RECEIVE_DATA,
     json,
     target: 'kompetisi_categories'
-  }
-}
-
-export function getJelajahMore(params, filter) {
-  return dispatch => {
-    dispatch(receiveJelajahMore(filter))
-    requestApi('get', `/api/jelajah/${sealMiddleware.generateSeal()}?${serialize(params)}`, params, res => {
-      dispatch(receiveJelajahMore(filter, res))
-    })
   }
 }
 
@@ -111,39 +116,5 @@ export function getStats() {
       typeSuccess: RECEIVE_DATA,
       target: 'stats',
     }
-  }
-}
-
-function receiveJelajah(filter, json = null) {
-  let type, target
-  if (!json) {
-    type = REQUEST_DATA
-    target = 'kompetisi_jelajah'
-  } else {
-    type = RECEIVE_DATA
-    target = 'kompetisi_jelajah'
-  }
-  return {
-    type,
-    target,
-    filter,
-    json
-  }
-}
-
-function receiveJelajahMore(filter, json = null) {
-  let type, target
-  if (!json) {
-    type = REQUEST_DATA
-    target = 'kompetisi_jelajah'
-  } else {
-    type = RECEIVE_MORE_DATA
-    target = 'kompetisi_jelajah'
-  }
-  return {
-    type,
-    target,
-    filter,
-    json
   }
 }
