@@ -2,7 +2,9 @@ import React, { Component } from 'react'
 import Helmet from '../../components/Helmet'
 import CompetitionLoading from '../../components/preloaders/CompetitionCardLoader'
 import * as KompetisiActions from '../competition/actions'
+import Modal from '../../components/modals'
 
+// components
 import Loadable from 'react-loadable'
 import { getStorage, setStorage } from '../../../store/helpers/LocalStorage'
 import { queryToObj } from 'string-manager'
@@ -226,7 +228,8 @@ class Index extends Component {
 
         {/*modal*/}
         <div>
-          <div className="modal" id="select-main-kat">
+          {/* modal select main category */}
+          <Modal id="select-main-kat">
             <div className="container">
               <div className="modal-title">
                 Pilih Kategori dibawah ini
@@ -273,7 +276,8 @@ class Index extends Component {
                 'loading...'
               )}
             </div>
-          </div>
+          </Modal>
+
           <div className="modal" id="select-sub-kat">
             <div className="container">
               <div className="modal-title">
@@ -392,7 +396,7 @@ function generateParams(n = {}, props = null) {
     // browse competition by main category
     if (parseInt(main_kat) >= 0)
       Params.mainkat = categories.data[main_kat].main_kat
-    
+
     // browse competition by sub category
     if (parseInt(sub_kat) >= 0)
       Params.subkat = categories.data[main_kat].subkat[sub_kat].sub_kat
