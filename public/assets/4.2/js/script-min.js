@@ -18,4 +18,4 @@ function removeClass(el,className){if(el.classList)
 el.classList.remove(className);else if(hasClass(el,className)){var reg=new RegExp('(\\s|^)'+className+'(\\s|$)');el.className=el.className.replace(reg,' ')}}
 function modal(act,target)
 {const el=document.getElementById(target);if(act=='open'){document.getElementsByTagName('body')[0].style.overflow='hidden';addClass(el,'open')}
-if(act=='close'){document.getElementsByTagName('body')[0].style.overflow='scroll';removeClass(el,'open')}}
+if(act=='close'){document.getElementsByTagName('body')[0].style.overflow='auto';removeClass(el,'open')}}

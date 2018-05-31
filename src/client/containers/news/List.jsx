@@ -1,13 +1,21 @@
 import React, { Component } from 'react'
-import Helmet from '../../components/Helmet'
-import Subheader from '../../components/Subheader'
-import Newsbox from '../../components/boxs/NewsBox'
-
 import { fetchBerita, fetchBeritaMore } from './actions'
 import { connect } from 'react-redux'
+import Loadable from 'react-loadable'
+
+// components
+import NewsLoading from '../../components/preloaders/NewsCardLoader'
+import Helmet from '../../components/Helmet'
+import Subheader from '../../components/Subheader'
+// import Newsbox from '../../components/boxs/NewsBox'
 
 const Limit = 6
 let AddedEventListener = false
+
+const Newsbox = Loadable({
+  loader: () => import('../../components/boxs/NewsBox'),
+  loading: NewsLoading
+})
 
 class List extends Component {
   // static fetchData({store})
@@ -22,7 +30,7 @@ class List extends Component {
   componentDidMount() {
     this.reqData(this.props)
     window.scrollTo(0, 0)
-    if(!AddedEventListener) {
+    if (!AddedEventListener) {
       AddedEventListener = true
       window.addEventListener('scroll', e => this.handleScroll(e), true)
     }
@@ -48,10 +56,9 @@ class List extends Component {
     Params.status = 'published'
 
     // filter by tag
-    if(props.match.params.tag) {
+    if (props.match.params.tag) {
       Params.tag = this.props.match.params.tag
     }
-
 
     if (!this.props.berita.data[Filter])
       this.props.dispatch(fetchBerita(Params, Filter))
@@ -62,7 +69,7 @@ class List extends Component {
     let Params = { limit: Limit }
     Params.status = 'published'
     // filter by tag
-    if(this.props.match.params.tag) {
+    if (this.props.match.params.tag) {
       Params.tag = this.props.match.params.tag
     }
 
@@ -75,9 +82,9 @@ class List extends Component {
     }
   }
 
-  generateFilter(props = this.props){
+  generateFilter(props = this.props) {
     let Filter = 'list'
-    if(props.match.params.tag) {
+    if (props.match.params.tag) {
       Filter += `_${this.props.match.params.tag}`
     }
 
@@ -89,7 +96,7 @@ class List extends Component {
     let title = 'Kabar - Kompetisi.id'
     let description = 'Temukan kabar seputar kompetisi di Indonesia'
 
-    if(this.props.match.params.tag) {
+    if (this.props.match.params.tag) {
       title += ` tag "${this.props.match.params.tag}"`
       description += ` berdasarkan tag "${this.props.match.params.tag}"`
     }

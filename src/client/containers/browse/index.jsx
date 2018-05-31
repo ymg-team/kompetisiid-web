@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Helmet from '../../components/Helmet'
 import CompetitionLoading from '../../components/preloaders/CompetitionCardLoader'
-import * as KompetisiActions from '../competition/actions'
+import * as KompetisiActs from '../competition/actions'
 import Modal from '../../components/modals'
 
 // components
@@ -16,6 +16,11 @@ const CompetitionBox = Loadable({
   loader: () => import('../../components/boxs/CompetitionBox'),
   loading: CompetitionLoading
 })
+
+const SortText = {
+  time_dsc: 'Terbaru',
+  prize_dsc: 'Hadiah terbesar'
+}
 
 class Index extends Component {
   //   static fetchData({ store, params, query }) {
@@ -40,11 +45,9 @@ class Index extends Component {
     this.reqData()
     const Categories = getStorage('categories')
     if (Categories) {
-      this.props.dispatch(
-        KompetisiActions.setCategories(JSON.parse(Categories))
-      )
+      this.props.dispatch(KompetisiActs.setCategories(JSON.parse(Categories)))
     } else {
-      this.props.dispatch(KompetisiActions.getCategories())
+      this.props.dispatch(KompetisiActs.getCategories())
     }
     //scroll event listener
     window.addEventListener('scroll', e => this.handleScroll(e), true)
@@ -86,7 +89,7 @@ class Index extends Component {
     const Params = generateParams(this.state, this.props)
     if (!this.props.kompetisi.data[Filter]) {
       topLoading(true)
-      this.props.dispatch(KompetisiActions.fetchJelajah(Params, Filter))
+      this.props.dispatch(KompetisiActs.fetchJelajah(Params, Filter))
     }
   }
 
@@ -102,7 +105,7 @@ class Index extends Component {
         this.props.kompetisi.data[Filter].status === 200
       ) {
         Params.lastid = Kompetisi[Kompetisi.length - 1].id
-        this.props.actions.getJelajahMore(Params, Filter)
+        this.props.dispatch(KompetisiActs.fetchJelajahMore(Params, Filter))
       }
     }
   }
@@ -205,8 +208,9 @@ class Index extends Component {
             <div className="row no-margin">
               <h1>
                 Sort by{' '}
-                <a href="javascript:;">
-                  Terbaru<i className="fa fa-angle-down" />
+                <a href="javascript:;" onClick={() => modal('open', 'sort-by')}>
+                  {SortText[this.state.sort] || 'Terbaru'}
+                  <i className="fa fa-angle-down" />
                 </a>
                 {tag ? ` Tag "${tag}"` : ''}
                 {q ? ` Pencarian "${q}"` : ''}
@@ -247,7 +251,9 @@ class Index extends Component {
                       onClick={() =>
                         this.setState({ main_kat: '' }, () => {
                           modal('close', 'select-main-kat')
-                          this.props.history.push('/browse')
+                          this.props.history.push(
+                            `/browse${this.props.location.search}`
+                          )
                         })
                       }
                       className="text-muted"
@@ -262,7 +268,11 @@ class Index extends Component {
                           href="javascript:;"
                           onClick={() => {
                             modal('close', 'select-main-kat')
-                            this.props.history.push(`/browse/${n.main_kat}`)
+                            this.props.history.push(
+                              `/browse/${n.main_kat}${
+                                this.props.location.search
+                              }`
+                            )
                           }}
                           className="text-muted"
                         >
@@ -278,7 +288,8 @@ class Index extends Component {
             </div>
           </Modal>
 
-          <div className="modal" id="select-sub-kat">
+          {/* modal to set sub category */}
+          <Modal id="select-sub-kat">
             <div className="container">
               <div className="modal-title">
                 Pilih sub kategori dibawah ini
@@ -293,7 +304,9 @@ class Index extends Component {
                       this.setState({ sub_kat: '' }, () => {
                         modal('close', 'select-sub-kat')
                         this.props.history.push(
-                          `/browse/${categories.data[main_kat].main_kat}`
+                          `/browse/${categories.data[main_kat].main_kat}${
+                            this.props.location.search
+                          }`
                         )
                       })
                     }
@@ -313,7 +326,7 @@ class Index extends Component {
                               this.props.history.push(
                                 `/browse/${
                                   categories.data[main_kat].main_kat
-                                }/${n.sub_kat}`
+                                }/${n.sub_kat}${this.props.location.search}`
                               )
                             }}
                             className="text-muted"
@@ -326,7 +339,49 @@ class Index extends Component {
                   : null}
               </ul>
             </div>
-          </div>
+          </Modal>
+
+          {/* modal sort by */}
+          <Modal id="sort-by">
+            <div className="container">
+              <div className="modal-title">
+                Urutkan kompetisi berdasarkan
+                <a
+                  className="btn btn-white btn-close-modal btn-sm fa fa-close"
+                  href="javascript:;"
+                />
+              </div>
+              <hr />
+              <ul className="vertical-menu list-categories">
+                <li>
+                  <a
+                    onClick={() => {
+                      modal('close', 'sort-by')
+                      this.props.history.push({
+                        search: `?sort=time_dsc`
+                      })
+                    }}
+                    href="javascript:;"
+                  >
+                    Terbaru
+                  </a>
+                </li>
+                <li>
+                  <a
+                    onClick={() => {
+                      modal('close', 'sort-by')
+                      this.props.history.push({
+                        search: `?sort=prize_dsc`
+                      })
+                    }}
+                    href="javascript:;"
+                  >
+                    Hadiah Terbesar
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </Modal>
         </div>
         {/*end of modal*/}
       </div>
@@ -362,13 +417,15 @@ function setCategories(props = {}, state = {}) {
   }
 }
 
+// function to generate react state based on httpquery
 function generateState(query = {}, params = {}) {
   const { tag, username } = params
-  const { mediapartner, berakhir, garansi, q } = query
+  const { orderby, mediapartner, berakhir, garansi, q, sort } = query
 
   return {
     main_kat: '',
     sub_kat: '',
+    sort: sort || 'time_dsc',
     q: q || '',
     tag: tag || '',
     username: username || '',
@@ -378,6 +435,7 @@ function generateState(query = {}, params = {}) {
   }
 }
 
+// function to generate params to request api
 function generateParams(n = {}, props = null) {
   const {
     main_kat,
@@ -387,7 +445,8 @@ function generateParams(n = {}, props = null) {
     q,
     tag,
     username,
-    is_garansi
+    is_garansi,
+    sort
   } = n
 
   let Params = {}
@@ -402,14 +461,17 @@ function generateParams(n = {}, props = null) {
       Params.subkat = categories.data[main_kat].subkat[sub_kat].sub_kat
   }
 
+  // sort
+  if (sort && sort !== '') Params.orderby = sort
+
   // search competitino by keyword
-  if (q && q != '') Params.search = q
+  if (q && q !== '') Params.search = q
 
   // browse competition by username
-  if (username && username != '') Params.username = username
+  if (username && username !== '') Params.username = username
 
   // browse competition by tag
-  if (tag && tag != '') Params.tag = tag
+  if (tag && tag !== '') Params.tag = tag
 
   // browse competition filter by media partner
   if (is_mediapartner) Params.is_mediapartner = true
@@ -426,6 +488,7 @@ function generateParams(n = {}, props = null) {
   return Params
 }
 
+// function to generate filter for store
 function generateFilter(n = {}) {
   const {
     main_kat,
@@ -434,13 +497,15 @@ function generateFilter(n = {}) {
     is_berakhir,
     q,
     tag,
-    is_garansi
+    is_garansi,
+    sort
   } = n
   let Filter = 'jelajah'
   if (parseInt(main_kat) >= 0) Filter += `_${main_kat}`
   if (parseInt(sub_kat) >= 0) Filter += `_${sub_kat}`
-  if (q != '') Filter += `_${q}`
-  if (tag != '') Filter += `_${tag}`
+  if (q !== '') Filter += `_${q}`
+  if (tag !== '') Filter += `_${tag}`
+  if (sort !== '') Filter += `_${sort}`
   Filter = `${Filter}_${is_mediapartner}_${is_berakhir}_${is_garansi}`
 
   return Filter
@@ -456,7 +521,6 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    actions: bindActionCreators(Object.assign({}, KompetisiActions), dispatch),
     dispatch
   }
 }
