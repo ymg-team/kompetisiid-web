@@ -21,7 +21,6 @@ module.exports = {
       'redux',
       'react-redux',
       'superagent',
-      'redux-thunk',
       'react-transition-group'
     ]
   },
@@ -57,10 +56,10 @@ module.exports = {
 
   resolve: {
     extensions: ['.js', '.jsx', '.css', '.sass'],
-    // alias: {
-    //   react: 'preact-compat',
-    //   'react-dom': 'preact-compat'
-    // }
+    alias: {
+      react: 'preact-compat',
+      'react-dom': 'preact-compat'
+    }
   },
 
   module: {
