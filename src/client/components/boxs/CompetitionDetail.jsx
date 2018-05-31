@@ -1,9 +1,12 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 import { openInNewTab } from '../../helpers/LinkGenerator'
 import { eventFire } from '../../helpers/DomEvents'
 import { getCompetitionStatus } from '../../helpers/DateTime'
 import copy from 'copy-to-clipboard'
+
+// components
+import Modal from '../modals/index'
+import { Link } from 'react-router-dom'
 import BtnJoin from '../buttons/BtnJoin'
 import { alert } from '../Alert'
 
@@ -159,8 +162,9 @@ const CompetitionDetailBox = props => {
           </div>
         </div>
       </div>
+
       {/* modal save to calendar */}
-      <div className="modal" id="save-to-calendar">
+       <Modal id="save-to-calendar">
         <div className="container">
           <div className="modal-title">
             Simpan ke kalender
@@ -177,7 +181,7 @@ const CompetitionDetailBox = props => {
             rel="noopener"
           >
             <img
-              style={{ width: 'inherit', backgroundColor: '#FFF' }}
+              style={{ width: 'inherit', backgroundColor: '#FFF', maxWidth:'100%' }}
               src="/assets/4.2/img/google-calendar-icon.fullwidth.png"
             />
           </a>
@@ -188,7 +192,7 @@ const CompetitionDetailBox = props => {
             rel="noopener"
           >
             <img
-              style={{ width: 'inherit', backgroundColor: '#FFF' }}
+              style={{ width: 'inherit', backgroundColor: '#FFF', maxWidth:'100%' }}
               src="/assets/4.2/img/yahoo-calendar-icon.fullwidth.png"
             />
           </a>
@@ -203,12 +207,12 @@ const CompetitionDetailBox = props => {
             href="javascript:;"
           >
             <img
-              style={{ width: 'inherit', backgroundColor: '#FFF' }}
+              style={{ width: 'inherit', backgroundColor: '#FFF', maxWidth:'100%' }}
               src="/assets/4.2/img/microsoft-calendar-icon.fullwidth.png"
             />
           </a>
         </div>
-      </div>
+      </Modal>
     </div>
   )
 }
