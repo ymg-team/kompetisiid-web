@@ -205,7 +205,7 @@ class Index extends Component {
             <div className="row no-margin">
               <h1>
                 Sort by{' '}
-                <a href="javascript:;">
+                <a href="javascript:;" onClick={() => modal('open', 'sort-by')}>
                   Terbaru<i className="fa fa-angle-down" />
                 </a>
                 {tag ? ` Tag "${tag}"` : ''}
@@ -278,7 +278,8 @@ class Index extends Component {
             </div>
           </Modal>
 
-          <div className="modal" id="select-sub-kat">
+          {/* modal to set sub category */}
+          <Modal id="select-sub-kat">
             <div className="container">
               <div className="modal-title">
                 Pilih sub kategori dibawah ini
@@ -326,7 +327,29 @@ class Index extends Component {
                   : null}
               </ul>
             </div>
-          </div>
+          </Modal>
+
+          {/* modal sort by */}
+          <Modal id="sort-by">
+            <div className="container">
+              <div className="modal-title">
+                Urutkan kompetisi berdasarkan
+                <a
+                  className="btn btn-white btn-close-modal btn-sm fa fa-close"
+                  href="javascript:;"
+                />
+              </div>
+              <hr />
+              <ul className="vertical-menu list-categories">
+                <li>
+                  <a href="javascript:;">Terbaru</a>
+                </li>
+                <li>
+                  <a href="javascript:;">Hadiah Terbesar</a>
+                </li>
+              </ul>
+            </div>
+          </Modal>
         </div>
         {/*end of modal*/}
       </div>

@@ -1,5 +1,4 @@
 import {combineReducers, createStore, applyMiddleware} from 'redux'
-import thunkMiddleware from 'redux-thunk'
 import apiMiddleware from '../store/middlewares/api' 
 import createLogger from 'redux-logger'
 
@@ -13,10 +12,10 @@ let Middlewares
 
 if(process.env.NODE_ENV == 'production' || typeof window == 'undefined')
 {
-  Middlewares = applyMiddleware(apiMiddleware, thunkMiddleware)
+  Middlewares = applyMiddleware(apiMiddleware)
 }else
 {
-  Middlewares = applyMiddleware(apiMiddleware, createLogger(), thunkMiddleware)
+  Middlewares = applyMiddleware(apiMiddleware, createLogger())
 }
 
 const Reducers = combineReducers({
