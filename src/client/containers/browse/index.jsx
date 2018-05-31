@@ -7,7 +7,7 @@ import Modal from '../../components/modals'
 // components
 import Loadable from 'react-loadable'
 import { getStorage, setStorage } from '../../../store/helpers/LocalStorage'
-import { queryToObj } from 'string-manager'
+import { queryToObj, objToQuery } from 'string-manager'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { topLoading } from '../../components/preloaders'
@@ -20,6 +20,10 @@ const CompetitionBox = Loadable({
 const SortText = {
   time_dsc: 'Terbaru',
   prize_dsc: 'Hadiah terbesar'
+}
+
+const FilterStatus = {
+  'active': 'Masih berlangsung'
 }
 
 class Index extends Component {
@@ -104,10 +108,21 @@ class Index extends Component {
         !this.props.kompetisi.data[Filter].is_loading &&
         this.props.kompetisi.data[Filter].status === 200
       ) {
-        Params.lastid = Kompetisi[Kompetisi.length - 1].id
+        console.log('params', Params)
+        if (Params.orderby === 'prize_dsc') {
+          Params.lastid = Kompetisi[Kompetisi.length - 1].prize.total
+        } else {
+          Params.lastid = Kompetisi[Kompetisi.length - 1].id
+        }
         this.props.dispatch(KompetisiActs.fetchJelajahMore(Params, Filter))
       }
     }
+  }
+
+  updateQuery(nextquery) {
+    let query = queryToObj(this.props.location.search.replace('?', ''))
+    query = Object.assign(query, nextquery)
+    return this.props.history.push({search: `?${objToQuery(query)}`})
   }
 
   render() {
@@ -174,6 +189,7 @@ class Index extends Component {
         {/*filter*/}
         <div className="col-md-12 filter-jelajah">
           <div className="container">
+            {/* filter by main category and sub category */}
             <div className="row no-margin">
               <h1>
                 {' '}
@@ -205,21 +221,35 @@ class Index extends Component {
                 ) : null}
               </h1>
             </div>
+
             <div className="row no-margin">
               <h1>
-                Sort by{' '}
+                {/* sortby */}
+                Urutkan{' '}
                 <a href="javascript:;" onClick={() => modal('open', 'sort-by')}>
                   {SortText[this.state.sort] || 'Terbaru'}
+                  <i className="fa fa-angle-down" />
+                </a>{' '}
+                {/* filter by status */}
+                Tampilkan{' '}
+                <a
+                  href="javascript:;"
+                  onClick={() => modal('open', 'filter-by-status')}
+                >
+                  { FilterStatus[this.state.status] || 'Semua'}
                   <i className="fa fa-angle-down" />
                 </a>
                 {tag ? ` Tag "${tag}"` : ''}
                 {q ? ` Pencarian "${q}"` : ''}
               </h1>
+
+              {/* filter by status */}
             </div>
+
             <div className="row no-margin">
               <p className="text-muted">
-                Gunakan filter ini untuk menemukan kompetisi yang sesuai dengan
-                minat kamu
+                Gunakan filter diatas untuk menemukan kompetisi yang sesuai
+                dengan minat kamu
               </p>
             </div>
           </div>
@@ -341,7 +371,7 @@ class Index extends Component {
             </div>
           </Modal>
 
-          {/* modal sort by */}
+          {/* modal sort-by */}
           <Modal id="sort-by">
             <div className="container">
               <div className="modal-title">
@@ -357,9 +387,7 @@ class Index extends Component {
                   <a
                     onClick={() => {
                       modal('close', 'sort-by')
-                      this.props.history.push({
-                        search: `?sort=time_dsc`
-                      })
+                      this.updateQuery({sort: 'time_dsc'})
                     }}
                     href="javascript:;"
                   >
@@ -370,13 +398,49 @@ class Index extends Component {
                   <a
                     onClick={() => {
                       modal('close', 'sort-by')
-                      this.props.history.push({
-                        search: `?sort=prize_dsc`
-                      })
+                      this.updateQuery({sort: 'prize_dsc'})
                     }}
                     href="javascript:;"
                   >
                     Hadiah Terbesar
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </Modal>
+
+          {/* modal filter-by-status */}
+          <Modal id="filter-by-status">
+            <div className="container">
+              <div className="modal-title">
+                Menampilkan kompetisi dengan status
+                <a
+                  className="btn btn-white btn-close-modal btn-sm fa fa-close"
+                  href="javascript:;"
+                />
+              </div>
+              <hr />
+              <ul className="vertical-menu list-categories">
+                <li>
+                  <a
+                    onClick={() => {
+                      modal('close', 'filter-by-status')
+                      this.updateQuery({status: 'all'})
+                    }}
+                    href="javascript:;"
+                  >
+                    Semua
+                  </a>
+                </li>
+                <li>
+                  <a
+                    onClick={() => {
+                      modal('close', 'filter-by-status')
+                      this.updateQuery({status: 'active'})
+                    }}
+                    href="javascript:;"
+                  >
+                    Masih berlangsung
                   </a>
                 </li>
               </ul>
@@ -420,7 +484,7 @@ function setCategories(props = {}, state = {}) {
 // function to generate react state based on httpquery
 function generateState(query = {}, params = {}) {
   const { tag, username } = params
-  const { orderby, mediapartner, berakhir, garansi, q, sort } = query
+  const { orderby, mediapartner, berakhir, garansi, q, sort, status } = query
 
   return {
     main_kat: '',
@@ -431,7 +495,8 @@ function generateState(query = {}, params = {}) {
     username: username || '',
     is_mediapartner: mediapartner && mediapartner == 1,
     is_berakhir: berakhir && berakhir == 1,
-    is_garansi: garansi && garansi == 1
+    is_garansi: garansi && garansi == 1,
+    status: status || 'all'
   }
 }
 
@@ -446,7 +511,8 @@ function generateParams(n = {}, props = null) {
     tag,
     username,
     is_garansi,
-    sort
+    sort,
+    status
   } = n
 
   let Params = {}
@@ -462,16 +528,19 @@ function generateParams(n = {}, props = null) {
   }
 
   // sort
-  if (sort && sort !== '') Params.orderby = sort
+  if (sort) Params.orderby = sort
+
+  // filter by status
+  if (status) Params.status = status
 
   // search competitino by keyword
-  if (q && q !== '') Params.search = q
+  if (q) Params.search = q
 
   // browse competition by username
-  if (username && username !== '') Params.username = username
+  if (username) Params.username = username
 
   // browse competition by tag
-  if (tag && tag !== '') Params.tag = tag
+  if (tag) Params.tag = tag
 
   // browse competition filter by media partner
   if (is_mediapartner) Params.is_mediapartner = true
@@ -498,14 +567,16 @@ function generateFilter(n = {}) {
     q,
     tag,
     is_garansi,
-    sort
+    sort,
+    status
   } = n
   let Filter = 'jelajah'
   if (parseInt(main_kat) >= 0) Filter += `_${main_kat}`
   if (parseInt(sub_kat) >= 0) Filter += `_${sub_kat}`
-  if (q !== '') Filter += `_${q}`
-  if (tag !== '') Filter += `_${tag}`
-  if (sort !== '') Filter += `_${sort}`
+  if (q) Filter += `_${q}`
+  if (tag) Filter += `_${tag}`
+  if (sort) Filter += `_${sort}`
+  if (status) Filter += `_${status}`
   Filter = `${Filter}_${is_mediapartner}_${is_berakhir}_${is_garansi}`
 
   return Filter
