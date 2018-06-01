@@ -1,15 +1,16 @@
+// containers
 import Index from '../containers/careers/index'
 
-function handleOther()
-{
-    if(typeof window != 'undefined') window.scrollTo(0,0)
-}
+// layout
+import EmptyLayout from '../layouts/4.2/Empty'
 
 export default {
-    childRoutes: [
+    path: '/careers',
+    component: EmptyLayout,
+    routes: [
         {
-            path: 'careers',
-            onEnter: () => handleOther(),
+            path: '/careers',
+            exact: true,
             component: Index,
         }
     ]

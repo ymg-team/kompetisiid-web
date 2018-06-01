@@ -18,7 +18,7 @@ const CompetitionBox = props => {
       <div className="container">
         <div className="row no-margin">
           {/* header total show competition */}
-          {status && status === 200 && subtitle ? (
+          {data && status && subtitle ? (
             <span style={{ display: 'table' }}>
               <br />
               menampilkan <strong> {data.length || 0}</strong> dari{' '}

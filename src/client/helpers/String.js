@@ -22,7 +22,7 @@ export function textParser(text = '') {
  */
 function parseUrl(text = '') {
   text = text.replace(
-    /(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gim,
+    /(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])(?![^<>]*>)/gim,
     function(t) {
       return `<a target='_blank' rel='noopener' href='/exit?to=${t}'>${t}</a>`
     }
