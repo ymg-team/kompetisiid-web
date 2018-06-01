@@ -8,7 +8,6 @@ const Index = () => (
             title='Karir - Kompetisi Indonesia'
             description='Mari bergabung bersama kami untuk terus meramaikan semangat kompetisi di Indonesia'
         />
-        
         <div className='col-md-12 careers-header' style={{textAlign: 'center', backgroundImage:'url(/assets/4.2/img/careers-background.jpg)'}}>
             <div className='container'>
             <div className='row no-margin' />
@@ -22,7 +21,7 @@ const Index = () => (
             <div className="col-md-12">
                 <div className="col-md-12">
                 <h2>Software Engineer</h2></div>
-                <div className="col-md-6 carrers-item"><strong>Web Developers</strong>
+                <div className="col-md-6 carrers-item"><strong>Web Engineers</strong>
                 <ul className="align-left">
                     <li>NodeJS + Express (isomorphic app)</li>
                     <li>ReactJS (diutamakan), VueJS (libs based on components)</li>
@@ -31,7 +30,7 @@ const Index = () => (
                 </ul>
                 <button className="btn btn-gray btn-sm" disabled="true">Pendaftaran Belum Dibuka</button>
                 </div>
-                <div className="col-md-6 carrers-item"><strong>API Developers</strong>
+                <div className="col-md-6 carrers-item"><strong>API Engineers</strong>
                 <ul className="align-left">
                     <li>Python + Flasks (api core)</li>
                     <li>SQL and NOSQL databases</li>
@@ -82,6 +81,8 @@ const Index = () => (
             <hr />
             </div>
             <div className="col-md-12">
+
+            {/* contact */}
             <div className="co-md-12">
                 <h1>Selengkapnya</h1>
                 <h3 style={{fontWeight: 'normal'}}>Ada pertanyaan lebih lanjut, jangan sungkan-sungkan sampaikan kepada kami.</h3>
@@ -91,19 +92,18 @@ const Index = () => (
                 <p className="text-muted">atau temui kami di</p>
                 <ul className="horizontal-menu">
                 <li>
-                    <a className="btn btn-socmed btn-gray btn-lg fa fa-facebook" href="https://facebook.com/kompetisiindo" target="_blank" />
+                    <a className="btn btn-socmed btn-gray btn-lg fa fa-facebook" href="https://facebook.com/kompetisiid" rel="noopener" target="_blank" />
                 </li>
                 <li>
-                    <a className="btn btn-socmed btn-gray btn-lg fa fa-twitter" href="https://twitter.com/kompetisiindo" target="_blank" />
+                    <a className="btn btn-socmed btn-gray btn-lg fa fa-twitter" href="https://twitter.com/_kompetisiid" rel="noopener" target="_blank" />
                 </li>
                 <li>
-                    <a className="btn btn-socmed btn-gray btn-lg fa fa-instagram" href="https://instagram.com/kompetisiindo" target="_blank" />
+                    <a className="btn btn-socmed btn-gray btn-lg fa fa-instagram" href="https://instagram.com/kompetisiid" rel="noopener" target="_blank" />
                 </li>
                 </ul>
             </div>
             </div>
         </div>
-
     </div>
 )
 
