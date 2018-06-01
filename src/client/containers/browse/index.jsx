@@ -1,16 +1,16 @@
 import React, { Component } from 'react'
-import Helmet from '../../components/Helmet'
-import CompetitionLoading from '../../components/preloaders/CompetitionCardLoader'
+import { LOCAL_STORAGE_CATEGORIES } from '../../../config/version'
 import * as KompetisiActs from '../competition/actions'
-import Modal from '../../components/modals'
+import { getStorage, setStorage } from '../../../store/helpers/LocalStorage'
+import Loadable from 'react-loadable'
+import { queryToObj, objToQuery } from 'string-manager'
+import { topLoading } from '../../components/preloaders'
+import { connect } from 'react-redux'
 
 // components
-import Loadable from 'react-loadable'
-import { getStorage, setStorage } from '../../../store/helpers/LocalStorage'
-import { queryToObj, objToQuery } from 'string-manager'
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
-import { topLoading } from '../../components/preloaders'
+import Helmet from '../../components/Helmet'
+import CompetitionLoading from '../../components/preloaders/CompetitionCardLoader'
+import Modal from '../../components/modals'
 
 const CompetitionBox = Loadable({
   loader: () => import('../../components/boxs/CompetitionBox'),
@@ -46,18 +46,28 @@ class Index extends Component {
 
   componentDidMount() {
     window.scrollTo(0, 0)
-    this.reqData()
-    const Categories = getStorage('categories')
+    // request categries data from locaStorage / api
+    const Categories = getStorage(LOCAL_STORAGE_CATEGORIES)
     if (Categories) {
       this.props.dispatch(KompetisiActs.setCategories(JSON.parse(Categories)))
     } else {
       this.props.dispatch(KompetisiActs.getCategories())
     }
+    // request
+    this.reqData()
     //scroll event listener
     window.addEventListener('scroll', e => this.handleScroll(e), true)
   }
 
   componentWillReceiveProps(np) {
+    if (
+      np.kompetisi.categories.status &&
+      np.kompetisi.categories.status == 200
+    ) {
+      // save categories to local storage
+      setStorage(LOCAL_STORAGE_CATEGORIES, JSON.stringify(np.kompetisi.categories))
+    }
+
     this.setState(
       Object.assign(
         generateState(
@@ -137,13 +147,13 @@ class Index extends Component {
 
     // jelajah kompetisi by kategori
     if (main_kat) {
-      title += ` di Kategori "${categories.data[main_kat].main_kat}"`
+      title += ` di Kategori "${categories.data[main_kat].name}"`
     }
 
     // jelajah kompetisi by sub kategori
     if (sub_kat) {
       title += ` Subkategori "${
-        categories.data[main_kat].subkat[sub_kat].sub_kat
+        categories.data[main_kat].subcategories[sub_kat].name
       }"`
     }
 
@@ -200,7 +210,7 @@ class Index extends Component {
                   onClick={() => modal('open', 'select-main-kat')}
                 >
                   {parseInt(main_kat) >= 0
-                    ? categories.data[main_kat].main_kat
+                    ? categories.data[main_kat].name
                     : 'Semua kategori'}
                   <i className="fa fa-angle-down" />
                 </a>
@@ -213,7 +223,7 @@ class Index extends Component {
                       onClick={() => modal('open', 'select-sub-kat')}
                     >
                       {parseInt(sub_kat) >= 0
-                        ? categories.data[main_kat].subkat[sub_kat].sub_kat
+                        ? categories.data[main_kat].subcategories[sub_kat].name
                         : 'Semua subkategori'}
                       <i className="fa fa-angle-down" />
                     </a>
@@ -273,7 +283,7 @@ class Index extends Component {
                 />
               </div>
               <hr />
-              {categories.meta && categories.meta.code == 200 ? (
+              {categories.status && categories.status === 200 ? (
                 <ul className="vertical-menu list-categories">
                   <li>
                     <a
@@ -299,14 +309,14 @@ class Index extends Component {
                           onClick={() => {
                             modal('close', 'select-main-kat')
                             this.props.history.push(
-                              `/browse/${n.main_kat}${
+                              `/browse/${n.name}${
                                 this.props.location.search
                               }`
                             )
                           }}
                           className="text-muted"
                         >
-                          {n.main_kat}
+                          {n.name}
                         </a>
                       </li>
                     )
@@ -334,7 +344,7 @@ class Index extends Component {
                       this.setState({ sub_kat: '' }, () => {
                         modal('close', 'select-sub-kat')
                         this.props.history.push(
-                          `/browse/${categories.data[main_kat].main_kat}${
+                          `/browse/${categories.data[main_kat].name}${
                             this.props.location.search
                           }`
                         )
@@ -346,7 +356,7 @@ class Index extends Component {
                   </a>
                 </li>
                 {parseInt(main_kat) >= 0
-                  ? categories.data[main_kat].subkat.map((n, key) => {
+                  ? categories.data[main_kat].subcategories.map((n, key) => {
                       return (
                         <li key={key}>
                           <a
@@ -355,13 +365,13 @@ class Index extends Component {
                               modal('close', 'select-sub-kat')
                               this.props.history.push(
                                 `/browse/${
-                                  categories.data[main_kat].main_kat
-                                }/${n.sub_kat}${this.props.location.search}`
+                                  categories.data[main_kat].name
+                                }/${n.name}${this.props.location.search}`
                               )
                             }}
                             className="text-muted"
                           >
-                            {n.sub_kat}
+                            {n.name}
                           </a>
                         </li>
                       )
@@ -455,10 +465,11 @@ class Index extends Component {
 
 function setCategories(props = {}, state = {}) {
   let main_kat, sub_kat
-  if (props.kompetisi.categories.meta) {
+  if (props.kompetisi.categories.status) {
+    
     if (props.match.params.mainkat) {
       props.kompetisi.categories.data.map((n, key) => {
-        if (n.main_kat === props.match.params.mainkat) main_kat = key
+        if (n.name === props.match.params.mainkat) main_kat = key
       })
     } else {
       main_kat = ''
@@ -466,10 +477,10 @@ function setCategories(props = {}, state = {}) {
 
     if (
       props.match.params.subkat &&
-      props.kompetisi.categories.data[main_kat].subkat
+      props.kompetisi.categories.data[main_kat].subcategories
     ) {
-      props.kompetisi.categories.data[main_kat].subkat.map((n, key) => {
-        if (n.sub_kat === props.match.params.subkat) sub_kat = key
+      props.kompetisi.categories.data[main_kat].subcategories.map((n, key) => {
+        if (n.name === props.match.params.subkat) sub_kat = key
       })
     } else {
       sub_kat = ''
@@ -520,11 +531,11 @@ function generateParams(n = {}, props = null) {
     const { categories } = props.kompetisi
     // browse competition by main category
     if (parseInt(main_kat) >= 0)
-      Params.mainkat = categories.data[main_kat].main_kat
+      Params.mainkat = categories.data[main_kat].name
 
     // browse competition by sub category
     if (parseInt(sub_kat) >= 0)
-      Params.subkat = categories.data[main_kat].subkat[sub_kat].sub_kat
+      Params.subkat = categories.data[main_kat].subcategories[sub_kat].name
   }
 
   // sort

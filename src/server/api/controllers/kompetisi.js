@@ -49,9 +49,14 @@ export function getRelated(req, res, next) {
  */
 export function getCategories(req, res, next) {
   req.reqdata = {
+    version: 'v42',
     method: 'get',
-    url: '/kategori/kategori'
+    url: '/v2/maincategories'
   }
+  // req.reqdata = {
+  //   method: 'get',
+  //   url: '/kategori/kategori'
+  // }
 
   next()
 }
