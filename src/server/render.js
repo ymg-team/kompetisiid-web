@@ -24,7 +24,7 @@ export default (req, res) => {
 
   // dettect static function fetchData in container target
   const promises = matchRoutes(routes, req.url).map(({ route, match }) => {
-    let fetchData = route.component.fetchData
+    let fetchData = route.component && route.component.fetchData ? route.component.fetchData : {}
     return fetchData instanceof Function
       ? fetchData({ store, params: match.params, query: req.query })
       : Promise.resolve()

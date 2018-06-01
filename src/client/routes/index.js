@@ -48,6 +48,7 @@ export default [
           Add,
           Categories,
           User,
+          Careers,
           {
             path: '/login',
             fullscreen: true,

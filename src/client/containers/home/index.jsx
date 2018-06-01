@@ -5,6 +5,7 @@ import Styled from 'styled-components'
 import { connect } from 'react-redux'
 import { topLoading } from '../../components/preloaders'
 import { getStorage, setStorage } from '../../../store/helpers/LocalStorage'
+import { LOCAL_STORAGE_CATEGORIES } from '../../../config/version'
 
 // components
 import SubHeader from '../../components/headers/HomeSubHeader'
@@ -68,16 +69,16 @@ class Home extends Component {
 
   componentWillReceiveProps(np) {
     if (
-      np.kompetisi.categories.meta &&
-      np.kompetisi.categories.meta.code == 200
+      np.kompetisi.categories.status &&
+      np.kompetisi.categories.status == 200
     ) {
       // save categories to local storage
-      setStorage('categories', JSON.stringify(np.kompetisi.categories))
+      setStorage(LOCAL_STORAGE_CATEGORIES, JSON.stringify(np.kompetisi.categories))
     }
   }
 
   reqCategories() {
-    const Categories = getStorage('categories')
+    const Categories = getStorage(LOCAL_STORAGE_CATEGORIES)
     if (Categories) {
       this.props.dispatch(setCategories(JSON.parse(Categories)))
     } else {
