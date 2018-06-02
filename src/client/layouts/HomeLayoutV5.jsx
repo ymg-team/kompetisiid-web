@@ -12,7 +12,14 @@ const LayoutStyled = Styled.div`
 let addedEventScroll = false
 
 class RootLayoutV5 extends Component {
-  componentDidMount() {}
+  componentDidMount() {
+    // Google Analytics handler
+    this.props.history.listen(location => {
+      if(window.ga) {
+        ga('send', 'pageview', location.pathname + location.search)
+      }
+    })
+  }
 
   render() {
     const { fullscreen } = matchRoutes(this.props.route.routes, this.props.location.pathname)[0].route
