@@ -16,6 +16,7 @@ class RootLayoutV5 extends Component {
     // Google Analytics handler
     this.props.history.listen(location => {
       if(window.ga) {
+        // ref : https://developers.google.com/analytics/devguides/collection/gajs/
         ga('send', 'pageview', location.pathname + location.search)
       }
     })

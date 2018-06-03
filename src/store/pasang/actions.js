@@ -8,7 +8,7 @@ export function submitCepat(params)
     return {
         [CALL_API] : {
             method: 'post',
-            url: '/api/pasang/cepat',
+            url: '/api/request/send-competition',
             params,
             target: 'pasang_cepat',
             typeWaiting: REQUEST_DATA,
