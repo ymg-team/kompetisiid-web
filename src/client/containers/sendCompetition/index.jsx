@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {alert} from '../../components/Alert'
+import { alert } from '../../components/Alert'
 
 import { Link } from 'react-router-dom'
 import Subheader from '../../components/Subheader'
@@ -40,13 +40,16 @@ class AddCompetitionFast extends Component {
 
   componentWillUnmount() {
     alert(false)
-    if (RecaptchaContainer)
-      grecaptcha.reset(RecaptchaContainer)
+    if (RecaptchaContainer) grecaptcha.reset(RecaptchaContainer)
   }
 
   handleSubmit() {
     if (!this.state.is_accept) {
-      return alert(true, 'Wajib menyetujui syarat dan ketentuan yang berlaku', 'error')
+      return alert(
+        true,
+        'Wajib menyetujui syarat dan ketentuan yang berlaku',
+        'error'
+      )
     } else if (grecaptcha.getResponse().length == 0) {
       return alert(true, 'Rechaptcha belum valid', 'error')
     } //start submit
@@ -54,7 +57,7 @@ class AddCompetitionFast extends Component {
       return this.props.dispatch(
         submitCepat({
           link: this.state.input_link,
-          nama: this.state.input_title,
+          title: this.state.input_title,
           email: this.state.input_email,
           poster: this.state.input_poster
         })
@@ -64,16 +67,16 @@ class AddCompetitionFast extends Component {
 
   render() {
     const { response } = this.props
-    if (response.is_loading)  alert(true, 'Mengirim kompetisi...', 'warning')
+    if (response.is_loading) alert(true, 'Mengirim kompetisi...', 'warning')
 
-    if (response.meta) {
-      if (response.meta.code === 201) {
-        alert(true, response.meta.message, 'success')
+    if (response.status) {
+      if (response.status === 201) {
+        alert(true, response.message, 'success')
         setTimeout(() => {
-          location.href = '/add/send'
-        }, 500)
+          location.href = '/'
+        }, 2000)
       } else {
-        alert(true, response.meta.message, 'error')
+        alert(true, response.message, 'error')
       }
     }
 
@@ -202,6 +205,4 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-  AddCompetitionFast
-)
+export default connect(mapStateToProps, mapDispatchToProps)(AddCompetitionFast)
