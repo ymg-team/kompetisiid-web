@@ -23,7 +23,8 @@ class AddCompetitionFast extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      is_accept: false
+      is_accept: false,
+      loading: true,
     }
   }
 
@@ -31,10 +32,12 @@ class AddCompetitionFast extends Component {
     addScript()
     setTimeout(() => {
       renderRecaptcha()
+      this.setState({loading: false})
     }, 1500)
   }
 
-  componentWillReceiveProps() {
+  componentWillReceiveProps(np) {
+    if(np.response.status && np.response.status != 201) this.setState({loading: false})
     renderRecaptcha()
   }
 
@@ -54,20 +57,24 @@ class AddCompetitionFast extends Component {
       return alert(true, 'Rechaptcha belum valid', 'error')
     } //start submit
     else {
-      return this.props.dispatch(
-        submitCepat({
-          link: this.state.input_link,
-          title: this.state.input_title,
-          email: this.state.input_email,
-          poster: this.state.input_poster
-        })
-      )
+      this.setState({
+        loading: true
+      }, () => {
+        return this.props.dispatch(
+          submitCepat({
+            link: this.state.input_link,
+            title: this.state.input_title,
+            email: this.state.input_email,
+            poster: this.state.input_poster
+          })
+        )
+      })
     }
   }
 
   render() {
     const { response } = this.props
-    if (response.is_loading) alert(true, 'Mengirim kompetisi...', 'warning')
+    if (response.is_loading) alert(true, 'Mengirim kompetisi...', 'warning', true)
 
     if (response.status) {
       if (response.status === 201) {
@@ -155,6 +162,7 @@ class AddCompetitionFast extends Component {
                 </div>
                 <div className="form-child">
                   <Button
+                    loading={this.state.loading}
                     text="kirim permintaan"
                     disabled={response.is_loading}
                     requiredInputs={[
