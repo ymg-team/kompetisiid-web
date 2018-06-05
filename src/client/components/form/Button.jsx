@@ -27,16 +27,16 @@ export default class Button extends Component
 
     render()
     {
-        const {style, className} = this.props
+        let {style, className} = this.props
         return(
             <div className='form-child'>
                 <button 
                     onClick={() => this.handleClick()}
-                    className={className} 
-                    disabled={this.props.disabled}
+                    className={`${className} ${this.props.loading ? 'loading' : ''}`} 
+                    disabled={(this.props.disabled || this.props.loading)}
                     style={style}
                     type={this.props.type}>
-                    {this.props.text}
+                    {this.props.loading ? 'Memproses permintaan...' : this.props.text }
                 </button>
             </div>
         )
@@ -46,5 +46,6 @@ export default class Button extends Component
 Button.defaultProps = {
     type: 'submit',
     disabled: false,
-    className: 'btn btn-white'
+    className: 'btn btn-white',
+    style: {},
 }

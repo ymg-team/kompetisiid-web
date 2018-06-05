@@ -50,7 +50,7 @@ export default props => (
 
 let timeout
 
-export function alert(show = true, text = '', type = '') {
+export function alert(show = true, text = '', type = '', fixed=false) {
   clearTimeout(timeout)
 
   if (typeof window !== 'undefined') {
@@ -61,10 +61,12 @@ export function alert(show = true, text = '', type = '') {
       alertEl.classList.add(type)
       alertEl.style.bottom = '20px'
 
-      timeout = setTimeout(() => {
-        alertEl.style.bottom = '-100px'
-        alertEl.classList.remove(type)
-      }, 4000)
+      if(!fixed) {
+        timeout = setTimeout(() => {
+          alertEl.style.bottom = '-100px'
+          alertEl.classList.remove(type)
+        }, 4000)
+      }
     } else {
       alertEl.style.bottom = '-100px'
     }
