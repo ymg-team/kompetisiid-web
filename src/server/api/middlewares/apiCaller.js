@@ -7,6 +7,8 @@ import Host from '../../../config/host'
 
 export default function(req, res)
 {
+    // console.log('apa ini', req.header('x-forwarded-for') || req.connection.remoteAddress)
+
     let API_HOST = ''
     const {method, url, params = {}, nextaction, resType = 'json'} = req.reqdata
 
