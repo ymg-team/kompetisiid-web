@@ -21,11 +21,6 @@ import { toCamelCase } from 'string-manager'
 import { connect } from 'react-redux'
 
 class Index extends Component {
-  // static fetchData({params, store})
-  // {
-  //   return store.dispatch(getDetail(params.encid))
-  // }
-
   constructor(props) {
     super(props)
     this.state = {

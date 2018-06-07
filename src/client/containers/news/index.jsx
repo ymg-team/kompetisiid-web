@@ -16,10 +16,9 @@ import NewsBox from '../../components/boxs/NewsBox'
 import ErrorCard from '../../components/cards/ErrorCard'
 import Preloader from '../../components/preloaders/NewsDetail'
 export default class Index extends Component {
-  // static fetchData({params, store})
-  // {
-  //     return store.dispatch(BeritaActions.fetchBeritaDetail(params.encid))
-  // }
+  static fetchData({ params, store }) {
+    return store.dispatch(BeritaActions.fetchBeritaDetail(params.encid))
+  }
 
   componentDidMount() {
     window.scrollTo(0, 0)
@@ -60,9 +59,6 @@ export default class Index extends Component {
       topLoading(true)
       this.props.dispatch(BeritaActions.fetchBeritaDetail(encid))
     }
-    // if (!this.props.berita.data[`related_${ encid }`]) {
-    //   this.props.dispatch(BeritaActions.relatedBerita(encid))
-    // }
   }
 
   generateTags(tags = []) {
@@ -298,4 +294,7 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-module.exports = connect(mapStateToProps, mapDispatchToProps)(Index)
+module.exports = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Index)
