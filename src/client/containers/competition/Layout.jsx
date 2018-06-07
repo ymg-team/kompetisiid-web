@@ -11,6 +11,11 @@ import {pushScript} from "../../helpers/DomEvents"
 
 class LayoutCompetition extends Component {
 
+  static fetchData({params, store})
+  {
+    return store.dispatch(getDetail(params.encid))
+  }
+
   constructor(props) {
     super(props)
     this.state = {
