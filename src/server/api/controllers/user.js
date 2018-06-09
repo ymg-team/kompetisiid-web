@@ -19,11 +19,12 @@ export function getProfile(req, res, next)
 export function postLogin(req, res, next)
 {
     req.reqdata = {
+        version: 'v42',
         method: 'post',
-        url: '/user/login',
+        url: '/v2/login',
         params: req.params,
         nextaction: result => {
-            if(result.meta.code === 201) Session.setData(req, 'userdata', result)
+            if(result.status === 200) Session.setData(req, 'userdata', result)
         }
     }
 

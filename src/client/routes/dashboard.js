@@ -1,6 +1,5 @@
 import CompetitionList from '../containers/Dashboard/CompetitionList'
 
-
 export default {
     childRoutes: [
         {
