@@ -26,7 +26,7 @@ export default function(req, res)
     return requestAPIV2(method, url, params).then(response => {
 
         // log 
-        if(nextaction) nextaction(result)
+        if(nextaction) nextaction(response)
         if(resType === 'json') res.json(response.body)
         if(resType === 'text') res.end(response.body)
         if(resType === 'xml'){

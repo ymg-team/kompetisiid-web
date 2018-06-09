@@ -57,6 +57,11 @@ export function alert(show = true, text = '', type = '', fixed=false) {
     const alertEl = window.document.getElementById('ki-alert')
 
     if (show) {
+      alertEl.classList.remove('success')
+      alertEl.classList.remove('error')
+      alertEl.classList.remove('warning')
+
+
       alertEl.innerText = text
       alertEl.classList.add(type)
       alertEl.style.bottom = '20px'

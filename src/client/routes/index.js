@@ -55,6 +55,12 @@ export default [
             exact: true,
             component: Login
           },
+          {
+            path: '/super',
+            fullscreen: true,
+            exact: true,
+            component: Login
+          },
           // redirect
           {
             path: '/berita/baca/:encid/:title',
