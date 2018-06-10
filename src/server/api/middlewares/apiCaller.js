@@ -5,7 +5,7 @@
 import { requestAPIV2 } from '../../helpers/apiCaller'
 import Host from '../../../config/host'
 
-export default function(req, res)
+export default function(req, res, next)
 {
     // console.log('apa ini', req.header('x-forwarded-for') || req.connection.remoteAddress)
 
@@ -26,13 +26,16 @@ export default function(req, res)
     return requestAPIV2(method, url, params).then(response => {
 
         // log 
-        if(nextaction) nextaction(response)
-        if(resType === 'json') res.json(response.body)
-        if(resType === 'text') res.end(response.body)
-        if(resType === 'xml'){
-            const xml = require('xml')
-            res.set('Content-Type', 'text/xml')
-            res.end(xml(response.body))
+        if(typeof nextaction === 'function'){
+          nextaction(req, res, next, response.body)
+        } else {
+          if(resType === 'json') return res.json(response.body)
+          if(resType === 'text') return res.end(response.body)
+          if(resType === 'xml'){
+              const xml = require('xml')
+              res.set('Content-Type', 'text/xml')
+              res.end(xml(response.body))
+          }
         }
     })
 }

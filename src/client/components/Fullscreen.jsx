@@ -16,6 +16,9 @@ export const Fullscreen = styled.div`
   &.login {
     background: ${Colors.mainRed};
   }
+  &.login.login-super {
+    background: ${Colors.darkGray};
+  }
   &.bg-gray-soft {
     color: gray
   }

@@ -16,6 +16,7 @@ import Add from './add'
 import User from './user'
 import Dashboard from './dashboard'
 import Careers from './careers'
+import Super from './super'
 
 // containers
 import Login from '../containers/auth/Login'
@@ -28,7 +29,6 @@ import LayoutRoot from '../layouts/4.2/Root'
 import LayoutHome from '../layouts/4.2/Home'
 import LayoutHomeV5 from '../layouts/HomeLayoutV5'
 import LayoutError from '../layouts/4.2/Error'
-import LayoutDashboard from '../layouts/4.2/Dashboard'
 
 export default [
   {
@@ -61,6 +61,7 @@ export default [
             exact: true,
             component: Login
           },
+          Super,
           // redirect
           {
             path: '/berita/baca/:encid/:title',

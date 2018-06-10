@@ -14,11 +14,12 @@ import { connect } from 'react-redux'
 class Login extends Component {
   constructor(props) {
     super(props)
+
     this.state = {
       loading: false,
       inputPassword: false,
       profile: {},
-      isSuperPage: false
+      isSuperPage: this.props.location.pathname === '/super'
     }
   }
 
@@ -28,7 +29,7 @@ class Login extends Component {
         this.setState({ inputPassword: true })
     } else {
       alert(true, 'Mencoba login', 'warning', true)
-      this.setState({loading: true}, () => {
+      this.setState({ loading: true }, () => {
         // request to login user
         this.props.dispatch(
           login({
@@ -53,12 +54,17 @@ class Login extends Component {
     }
 
     if (np.login && np.login.status) {
-      if(np.login.status === 200) {
+      if (np.login.status === 200) {
         // login success
-        alert(true, `Login sukses, selamat datang kembali "${np.login.data.username}"`, 'success', true)
+        alert(
+          true,
+          `Login sukses, selamat datang kembali "${np.login.data.username}"`,
+          'success',
+          true
+        )
         // redirect to dashboard
         setTimeout(() => {
-          location.href = '/dashboard'
+          location.href = this.state.isSuperPage ? '/super/dashboard' : '/dashboard'
         }, 1500)
       } else {
         // user and password not match
@@ -67,7 +73,6 @@ class Login extends Component {
           loading: false
         })
       }
-      
     }
   }
 
@@ -86,21 +91,27 @@ class Login extends Component {
       else alert(false)
     }
 
+    let title = 'Login'
+    let description = 'Mari ramaikan semangat kompetisi di Indonesia.'
+
+    if (this.state.isSuperPage) {
+      title = 'Halaman Super'
+      description = 'Selalu jaga rahasia anda demi keamanan di Kompetisi.id'
+    }
+
     return (
-      <Fullscreen className="login">
-        <Helmet
-          title="Masuk - Kompetisi Indonesia"
-          description="input username dan password kamu untuk mendapat akses lebih di Kompetisi Indonesia"
-        />
+      <Fullscreen className={`login ${this.state.isSuperPage ? 'login-super' : ''}`}>
+        <Helmet title={title} description={description} />
         <div className="login-box">
+          {/* header */}
           <div className="login-box__title">
             <h1 style={{ textAlign: 'center', lineHeight: 1 }}>
-              Masuk ke KI <br />
-              <small style={{ fontWeight: 'normal' }}>
-                Mari ramaikan semangat kompetisi di Indonesia.
-              </small>
+              {title} <br />
+              <small style={{ fontWeight: 'normal' }}>{description}.</small>
             </h1>
           </div>
+
+          {/* form input */}
           <div className="login-box__content">
             {this.state.inputPassword ? (
               <div className="login-box__content__avatar">
@@ -155,21 +166,25 @@ class Login extends Component {
               </div>
             </form>
             {!is_userfound ? (
-              <span>
-                <p>Atau masuk menggunakan</p>
-                <div className="login-box__content__auth">
-                  <AuthFacebook />
-                  <AuthGoogle />
-                </div>
-              </span>
+              !this.state.isSuperPage ? (
+                <span>
+                  <p>Atau masuk menggunakan</p>
+                  <div className="login-box__content__auth">
+                    <AuthFacebook />
+                    <AuthGoogle />
+                  </div>
+                </span>
+              ) : null
             ) : (
               <Link to="/register">Lupa password</Link>
             )}
             <hr />
-            <p>
-              Belum punya akun, silahkan{' '}
-              <Link to="/register">Regiser Disini</Link>
-            </p>
+            {!this.state.isSuperPage ? (
+              <p>
+                Belum punya akun, silahkan{' '}
+                <Link to="/register">Regiser Disini</Link>
+              </p>
+            ) : null}
           </div>
 
           {/* footer navigation */}
