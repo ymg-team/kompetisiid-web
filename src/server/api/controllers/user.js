@@ -23,8 +23,18 @@ export function postLogin(req, res, next)
         method: 'post',
         url: '/v2/login',
         params: req.params,
-        nextaction: result => {
-            if(result.status === 200) Session.setData(req, 'userdata', result)
+        nextaction: (req, res, next, result) => {
+
+            if(result.status === 200) {
+              Session.setData(req, 'userdata', result.data)
+              // req.session.userdata = result.data
+              // return req.session.save((err) => {
+              //   if(!err)
+              //     return res.json(result)
+              // })
+            }
+
+            return res.json(result)
         }
     }
 

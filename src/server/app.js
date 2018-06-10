@@ -6,6 +6,8 @@ import AppApi from './api'
 import AppFeed from './feed'
 import AppRender from './render'
 
+import * as AuthMiddleware from './api/middlewares/auth'
+
 import compression from 'compression'
 
 const App = express()
@@ -18,8 +20,8 @@ if(process.env.NODE_ENV === 'production')
 }
 
 App.use(cookieSession({
-	secret: [process.env.APP_KEY, 'kompetisid'],
-	name: 'kompetisi-id',
+  name: 'kompetisi-id',
+	keys: [process.env.APP_KEY || 'kompetisi', 'kompetisid'],
 	maxAge: 12 * 30 * 24 * 60 * 60 * 1000
 }))
 
@@ -31,7 +33,7 @@ const staticOptions = function()
             maxAge: 12 * 30 * 24 * 60 * 60 * 1000,
             etag: false,
         }
-    }else 
+    }else
     {
         return {}
     }
@@ -58,6 +60,17 @@ App.use('/service-worker.js', express.static(__dirname + '/../../public/service-
 // app routes
 App.use('/api', AppApi)
 App.use('/feed', AppFeed)
+
+// dashboard pages, only for 'member'
+App.get('/login', AuthMiddleware.dashboardMiddleware, AppRender)
+App.get('/dashboard', AuthMiddleware.dashboardMiddleware, AppRender)
+App.get('/dashboard/*', AuthMiddleware.dashboardMiddleware, AppRender)
+
+// super pages, only for 'admin'
+App.get('/super', AuthMiddleware.superMiddleware,AppRender)
+App.get('/super/*', AuthMiddleware.superMiddleware,AppRender)
+
+// global path
 App.get('*', AppRender)
 
 function checkAuth(req, res, next)

@@ -94,7 +94,7 @@ class Header extends Component {
                   <span className="fa fa-search" />
                 </a>
               </li>
-              {session && session.meta && session.meta.code == 201 ? (
+              {Object.keys(session.userdata).length > 0 && session.userdata.id ? (
                 <li>
                   <div className="dropdown">
                     <a className="avatar" href="javascript:;">
@@ -107,7 +107,7 @@ class Header extends Component {
                     <div className="dropdown-items" id="avatar-menu">
                       <ul>
                         <li>
-                          <Link to={`/user/${session.data.username}`}>
+                          <Link to={`/user/${session.userdata.username}`}>
                             Profil saya
                           </Link>
                         </li>

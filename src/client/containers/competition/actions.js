@@ -1,7 +1,13 @@
-import {requestApi} from '../../../store/helpers/ApiCaller'
-import {POST_DATA, RECEIVE_DATA, RECEIVE_MORE_DATA, DELETE_DATA, REQUEST_DATA} from '../../../store/consts'
-import {serialize} from '../../../server/helpers/url'
-import {CALL_API} from '../../../store/middlewares/api'
+import { requestApi } from '../../../store/helpers/ApiCaller'
+import {
+  POST_DATA,
+  RECEIVE_DATA,
+  RECEIVE_MORE_DATA,
+  DELETE_DATA,
+  REQUEST_DATA
+} from '../../../store/consts'
+import { queryToObj } from 'string-manager'
+import { CALL_API } from '../../../store/middlewares/api'
 import sealMiddleware from '../../helpers/seal'
 
 export const RECEIVE_CATEGORIES = 'RECEIVE_CATEGORIES'
@@ -15,7 +21,7 @@ export function fetchJelajah(params, filter) {
       filter,
       method: 'get',
       target: 'kompetisi_jelajah',
-      url: `${url}?${serialize(params)}`
+      url: `${url}?${queryToObj(params)}`
     }
   }
 }
@@ -29,11 +35,10 @@ export function fetchJelajahMore(params, filter) {
       filter,
       method: 'get',
       target: 'kompetisi_jelajah',
-      url: `${url}?${serialize(params)}`
+      url: `${url}?${queryToObj(params)}`
     }
   }
 }
-
 
 export function getRelated(id, filter) {
   return {
@@ -114,7 +119,7 @@ export function getStats() {
       method: 'get',
       typeWaiting: REQUEST_DATA,
       typeSuccess: RECEIVE_DATA,
-      target: 'stats',
+      target: 'stats'
     }
   }
 }
