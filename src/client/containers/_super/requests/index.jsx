@@ -101,10 +101,7 @@ function generateParams(props) {
     limit: Limit,
     username: props.session.username
   }
-  if (tab_active == 1) Params.live = 1
-  if (tab_active == 2) Params.berakhir = 1
-  if (tab_active == 3) Params.waiting = 1
-  if (tab_active == 4) Params.reject = 1
+  Params.status = status
 
   return Params
 }
