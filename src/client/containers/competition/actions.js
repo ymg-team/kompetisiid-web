@@ -86,19 +86,6 @@ export function getDetail(id) {
   }
 }
 
-// export function getPengumuman(id) {
-//   return {
-//     [CALL_API]: {
-//       url: `/api/kompetisi/pengumuman/${id}/${sealMiddleware.generateSeal()}`,
-//       method: 'get',
-//       typeWaiting: REQUEST_DATA,
-//       typeSuccess: RECEIVE_DATA,
-//       target: 'kompetisi_pengumuman',
-//       filter: id
-//     }
-//   }
-// }
-
 export function getFavoritedTags(params = {}) {
   return {
     [CALL_API]: {

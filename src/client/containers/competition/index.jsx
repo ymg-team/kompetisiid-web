@@ -26,6 +26,35 @@ class Index extends Component {
     this.state = {
       encid: this.props.match.params.encid
     }
+    this.handleScroll = this.handleScroll.bind(this)
+  }
+
+  componentDidMount(){
+    // add scroll listener
+    addEventListener('scroll', this.handleScroll, true)
+  }
+
+  componentWillUnmount() {
+    // remove event listener
+    removeEventListener('scroll', this.handleScroll, true)
+  }
+
+  handleScroll(e) {
+    console.log('scrolling in competition detail...')
+    const afterScroll =
+      document.getElementById('competition-detail').offsetHeight + 40
+    const tabEl = document.getElementById('container-competition-tab')
+    const joinEl = document.getElementById('btn-join')
+
+    if (joinEl && afterScroll) {
+      if (window.pageYOffset > afterScroll) {
+        tabEl.classList.add('fixed')
+        joinEl.style.opacity = 1
+      } else {
+        tabEl.classList.remove('fixed')
+        joinEl.style.opacity = 0
+      }
+    }
   }
 
   render() {
@@ -37,11 +66,6 @@ class Index extends Component {
 
     // generate helmet data
     if (detail[encid] && detail[encid].status && detail[encid].status === 200) {
-      setTimeout(() => {
-        if (typeof window != 'undefined') {
-          handleScrollNav()
-        }
-      }, 2000)
       helmetdata = Object.assign(helmetdata, {
         title: toCamelCase(
           `${tab[this.props.route.active_tab - 1].name + ' ' || ''}${
@@ -364,24 +388,6 @@ function generateJsonld(n, url) {
       "address": "Indonesia"
     }
   }`
-}
-
-function handleScrollNav() {
-  window.onscroll = function() {
-    const afterScroll =
-      document.getElementById('competition-detail').offsetHeight + 40
-    const tabEl = document.getElementById('container-competition-tab')
-    const joinEl = document.getElementById('btn-join')
-    if (joinEl && afterScroll) {
-      if (document.body.scrollTop > afterScroll) {
-        addClass(tabEl, 'fixed')
-        joinEl.style.opacity = 1
-      } else {
-        removeClass(tabEl, 'fixed')
-        joinEl.style.opacity = 0
-      }
-    }
-  }
 }
 
 function mapStateToProps(state) {

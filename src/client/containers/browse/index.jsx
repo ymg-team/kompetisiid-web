@@ -42,6 +42,7 @@ class Index extends Component {
         : {},
       this.props.match.params
     )
+    this.handleScroll = this.handleScroll.bind(this)
   }
 
   componentDidMount() {
@@ -56,7 +57,7 @@ class Index extends Component {
     // request
     this.reqData()
     //scroll event listener
-    window.addEventListener('scroll', e => this.handleScroll(e), true)
+    window.addEventListener('scroll', this.handleScroll, true)
   }
 
   componentWillReceiveProps(np) {
@@ -86,11 +87,12 @@ class Index extends Component {
 
   componentWillUnmount() {
     console.log('remove scroll listener')
-    window.removeEventListener('scroll', this.handleScroll)
+    window.removeEventListener('scroll', this.handleScroll, true)
     // window.onscroll = null
   }
 
   handleScroll(e) {
+    console.log('scrolling in browse competition...')
     if (document.getElementById('browse-container')) {
       const ContainerHeight = document.getElementById('competition-container')
         .offsetHeight
