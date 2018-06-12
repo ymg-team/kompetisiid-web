@@ -6,13 +6,13 @@ import {
   DELETE_DATA,
   REQUEST_DATA
 } from '../../../store/consts'
-import { queryToObj } from 'string-manager'
 import { CALL_API } from '../../../store/middlewares/api'
 import sealMiddleware from '../../helpers/seal'
+import { objToQuery } from 'string-manager/dist/modules/httpquery'
 
 export const RECEIVE_CATEGORIES = 'RECEIVE_CATEGORIES'
 
-export function fetchJelajah(params, filter) {
+export function fetchJelajah(params = {}, filter) {
   const url = `/api/jelajah/${sealMiddleware.generateSeal()}`
   return {
     [CALL_API]: {
@@ -21,7 +21,7 @@ export function fetchJelajah(params, filter) {
       filter,
       method: 'get',
       target: 'kompetisi_jelajah',
-      url: `${url}?${queryToObj(params)}`
+      url: `${url}?${objToQuery(params)}`
     }
   }
 }
@@ -35,7 +35,7 @@ export function fetchJelajahMore(params, filter) {
       filter,
       method: 'get',
       target: 'kompetisi_jelajah',
-      url: `${url}?${queryToObj(params)}`
+      url: `${url}?${objToQuery(params)}`
     }
   }
 }
