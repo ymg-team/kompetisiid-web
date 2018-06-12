@@ -6,5 +6,14 @@ import {
 } from '../../../../store/consts'
 
 export function fetchRequest(params, filter){
-  
+  return {
+    [CALL_API]: {
+      typeSuccess: RECEIVE_DATA,
+      typeWaiting: REQUEST_DATA,
+      filter,
+      method: 'get',
+      target: 'kompetisi_jelajah',
+      url: `${url}?${queryToObj(params)}`
+    }
+  }
 }

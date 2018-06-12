@@ -1,7 +1,6 @@
 /**
  * Created by yussan on 27/10/16.
  */
-import Promise from 'bluebird'
 import {requestApi} from '../helpers/ApiCaller'
 import Host from '../../config/host'
 

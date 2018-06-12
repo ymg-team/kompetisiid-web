@@ -180,7 +180,7 @@ class CareersContainer extends Component {
                 </li>
                 <li>
                   <a
-                    className="btn btn-socmed btn-gray btn-lg fa fa-twitter"
+                    className="btn btn-socmed btn-gray btn-lg fab fa-twitter"
                     href="https://twitter.com/_kompetisiid"
                     rel="noopener"
                     target="_blank"
@@ -188,7 +188,7 @@ class CareersContainer extends Component {
                 </li>
                 <li>
                   <a
-                    className="btn btn-socmed btn-gray btn-lg fa fa-instagram"
+                    className="btn btn-socmed btn-gray btn-lg fab fa-instagram"
                     href="https://instagram.com/kompetisiid"
                     rel="noopener"
                     target="_blank"
