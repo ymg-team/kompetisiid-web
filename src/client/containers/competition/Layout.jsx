@@ -1,18 +1,16 @@
-import React, {Component} from "react"
-import {renderRoutes, matchRoutes} from "react-router-config"
-import Tab, {tab} from "../../components/navigations/TabCompetition"
+import React, { Component } from 'react'
+import { renderRoutes, matchRoutes } from 'react-router-config'
+import Tab, { tab } from '../../components/navigations/TabCompetition'
 
-import {connect} from "react-redux"
-import CompetitionPreloader from "../../components/preloaders/CompetitionDetail"
-import {topLoading} from "../../components/preloaders"
-import {toCamelCase} from 'string-manager'
-import {getDetail, getRelated} from "./actions"
-import {pushScript} from "../../helpers/DomEvents"
+import { connect } from 'react-redux'
+import CompetitionPreloader from '../../components/preloaders/CompetitionDetail'
+import { topLoading } from '../../components/preloaders'
+import { toCamelCase } from 'string-manager'
+import { getDetail, getRelated } from './actions'
+import { pushScript } from '../../helpers/DomEvents'
 
 class LayoutCompetition extends Component {
-
-  static fetchData({params, store})
-  {
+  static fetchData({ params, store }) {
     return store.dispatch(getDetail(params.encid))
   }
 
@@ -30,12 +28,8 @@ class LayoutCompetition extends Component {
     pushScript('https://kompetisiindonesia.disqus.com/embed.js')
   }
 
-  componentWillUnmount() {
-    window.onscroll = null
-  }
-
   componentWillReceiveProps(np) {
-    this.setState({encid: np.match.params.encid})
+    this.setState({ encid: np.match.params.encid })
     if (this.props.match.params.encid != np.match.params.encid) {
       if (window != undefined) window.scrollTo(0, 0)
       this.reqData(np)
@@ -44,7 +38,7 @@ class LayoutCompetition extends Component {
   }
 
   reqData(props) {
-    const {encid} = props.match.params
+    const { encid } = props.match.params
     if (!props.kompetisi.detail[encid]) {
       topLoading(true)
       this.props.dispatch(getDetail(encid))
@@ -52,27 +46,29 @@ class LayoutCompetition extends Component {
   }
 
   reqRelatedCompetitions(props) {
-    const {encid} = props.match.params
+    const { encid } = props.match.params
     if (!props.kompetisi.data[`related_${encid}`])
       this.props.dispatch(getRelated(encid, `related_${encid}`))
   }
 
   render() {
-    const {encid} = this.state
-    const {detail, related, pengumuman} = this.props.kompetisi
+    const { encid } = this.state
+    const { detail, related, pengumuman } = this.props.kompetisi
 
-    if (typeof  window !== "undefined" && detail[encid] && detail[encid].meta) topLoading(false)
+    if (typeof window !== 'undefined' && detail[encid] && detail[encid].meta)
+      topLoading(false)
 
     return (
       <div>
-        {
-          detail[encid] && detail[encid].status ?
-            detail[encid].status === 200 ?
-              renderRoutes(this.props.route.routes)
-              : <p>{detail[encid].message}</p>
-            : <CompetitionPreloader/>
-        }
-
+        {detail[encid] && detail[encid].status ? (
+          detail[encid].status === 200 ? (
+            renderRoutes(this.props.route.routes)
+          ) : (
+            <p>{detail[encid].message}</p>
+          )
+        ) : (
+          <CompetitionPreloader />
+        )}
       </div>
     )
   }
@@ -115,7 +111,7 @@ function generateJsonld(n, url) {
 }
 
 function mapStateToProps(state) {
-  const {Kompetisi} = state
+  const { Kompetisi } = state
   return {
     kompetisi: Kompetisi
   }
@@ -127,4 +123,7 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(LayoutCompetition)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(LayoutCompetition)
