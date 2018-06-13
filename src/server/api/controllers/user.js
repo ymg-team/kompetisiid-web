@@ -16,6 +16,10 @@ export function getProfile(req, res, next)
     next()
 }
 
+/**
+ * @description function to get username and password and store sessino
+ * @param {String} req 
+ */
 export function postLogin(req, res, next)
 {
     req.reqdata = {
@@ -27,11 +31,6 @@ export function postLogin(req, res, next)
 
             if(result.status === 200) {
               Session.setData(req, 'userdata', result.data)
-              // req.session.userdata = result.data
-              // return req.session.save((err) => {
-              //   if(!err)
-              //     return res.json(result)
-              // })
             }
 
             return res.json(result)
@@ -41,6 +40,22 @@ export function postLogin(req, res, next)
     next()
 }
 
+/**
+ * @description function to handle logout / delete session
+ */
+export function postLogout(req, res, next) 
+{ 
+  // remove session 
+  Session.destroy(req, 'userdata')
+  return res.json({
+    status: 200,
+    message: 'logout berhasil'
+  })
+}
+
+/**
+ * @description function to handle register
+ */
 export function postRegister(req, res, next)
 {
     req.reqdata = {
@@ -49,20 +64,6 @@ export function postRegister(req, res, next)
         params: req.params,
         nextaction: result => {
             if(result.meta.code === 201) Session.setData(req, 'userdata', result)
-        }
-    }
-
-    next()
-}
-
-export function postLogout(req, res, next)
-{
-    req.reqdata = {
-        method: 'post',
-        url: '/user/logout',
-        params: req.params,
-        nextaction: result => {
-            Session.destroy(req, 'userdata')
         }
     }
 

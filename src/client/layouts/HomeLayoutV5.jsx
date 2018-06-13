@@ -4,6 +4,7 @@ import { renderRoutes, matchRoutes } from 'react-router-config'
 import Styled from 'styled-components'
 import Navbar from '../components/navigations/TransparentNavbar'
 import Alert from '../components/Alert'
+import FullScreenLoader from '../components/preloaders/FullPage'
 
 const LayoutStyled = Styled.div`
   min-height: 100%;
@@ -38,6 +39,7 @@ class RootLayoutV5 extends Component {
         {renderRoutes(this.props.route.routes)}
         {fullscreen ? null : <Footer /> }
         <Alert />
+        <FullScreenLoader />
       </LayoutStyled>
     )
   }

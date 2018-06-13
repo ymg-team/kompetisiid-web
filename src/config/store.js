@@ -1,35 +1,16 @@
-import {combineReducers, createStore, applyMiddleware} from 'redux'
-import apiMiddleware from '../store/middlewares/api' 
-import createLogger from 'redux-logger'
-
-// reducers
-import Kompetisi from '../client/containers/competition/reducer'
-import Berita from '../client/containers/news/reducer'
-import Pasang from '../store/pasang/reducer'
-import User from '../store/user/reducer'
+import { combineReducers, createStore, applyMiddleware } from 'redux'
+import apiMiddleware from '../store/middlewares/api'
+import Reducers from '../store/combineReducers'
 
 let Middlewares
 
-if(process.env.NODE_ENV == 'production' || typeof window == 'undefined')
-{
+if (process.env.NODE_ENV == 'production' || typeof window == 'undefined') {
   Middlewares = applyMiddleware(apiMiddleware)
-}else
-{
+} else {
+  const createLogger = require('redux-logger')
   Middlewares = applyMiddleware(apiMiddleware, createLogger())
 }
 
-const Reducers = combineReducers({
-  Kompetisi,
-  Berita,
-  Pasang,
-  User
-})
-
 const preloadedState = typeof window != 'undefined' ? window.__data__ : {}
 
-export default createStore(
-        Reducers,
-        preloadedState,
-        Middlewares
-    )
-
+export default createStore(Reducers, preloadedState, Middlewares)

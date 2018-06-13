@@ -1,8 +1,11 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
 import Styled from 'styled-components'
 import { queryToObj } from 'string-manager'
+
+// components
+import { Link } from 'react-router-dom'
 
 const NavbarStyled = Styled.div`
   padding: .5em 0;
@@ -78,17 +81,22 @@ class Navbar extends Component {
   }
 
   toggleSearch() {
-    this.setState({
-      search: !this.state.search
-    }, () => {
-      if(!this.state.search) this.props.history.push('/browse')
-    })
+    this.setState(
+      {
+        search: !this.state.search
+      },
+      () => {
+        if (!this.state.search) this.props.history.push('/browse')
+      }
+    )
   }
 
   render() {
     let logo = '/assets/images/small-white-logo-transparent.png'
     if (this.props.className === 'bg-gray')
       logo = '/assets/images/small-gray-logo-transparent.png'
+
+    const { session } = this.props
 
     return (
       <NavbarStyled className={`${this.props.className} row`}>
@@ -166,12 +174,56 @@ class Navbar extends Component {
                     href="javascript:;"
                   />
                 </li>
+
                 {/* <li>
               <Link to="/news">
                 Login
                 <i className="fa sort-down"/>
               </Link>
             </li> */}
+
+                {/* auth */}
+                {Object.keys(session).length > 0 && session.id ? (
+                  <li>
+                    <div className="dropdown">
+                      <a className="avatar" href="javascript:;">
+                        <img
+                          className="dropdown-button"
+                          src="/assets/4.2/img/avatar-default.jpg"
+                          data-target="avatar-menu"
+                        />
+                      </a>
+                      <div className="dropdown-items" id="avatar-menu">
+                        <ul>
+                          <li>
+                            <Link to={`/user/user/${session.username}`}>
+                              Profil saya
+                            </Link>
+                          </li>
+                          <li>
+                            <Link to={`/dashboard/`}>Dashboard</Link>
+                          </li>
+                          <li>
+                            <Link to="/settings">Setelan</Link>
+                          </li>
+                          <li>
+                            <a
+                              href="javascript:;"
+                              onClick={() => this.handleLogout()}
+                            >
+                              Logout
+                            </a>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </li>
+                ) : (
+                  <li style={{ display: 'none' }} className="hide-mobile">
+                    <Link to="/login">login</Link>
+                  </li>
+                )}
+                {/* end of auth */}
               </ul>
             </div>
           </div>
@@ -185,4 +237,11 @@ Navbar.defaultProps = {
   className: ''
 }
 
-export default withRouter(Navbar)
+function mapStateToProps(state) {
+  const { User } = state
+  return {
+    session: User.session
+  }
+}
+
+export default connect(mapStateToProps)(withRouter(Navbar))

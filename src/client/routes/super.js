@@ -31,14 +31,14 @@ export default {
       component: Request
     },
     {
-      path: '/super/requests/approved',
-      status: 'approved',
+      path: '/super/requests/posted',
+      status: 'posted',
       exact: true,
       component: Request
     },
     {
-      path: '/super/requests/rejected',
-      status: 'rejected',
+      path: '/super/requests/reject',
+      status: 'reject',
       exact: true,
       component: Request
     },
