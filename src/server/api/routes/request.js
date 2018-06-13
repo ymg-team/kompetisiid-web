@@ -7,6 +7,7 @@ import * as requestMiddleware from '../middlewares/handleRequest'
 import apiCaller from '../middlewares/apiCaller'
 const router = express.Router()
 
+router.get('/', controller.getRequest, apiCaller)
 router.post('/send-competition', requestMiddleware.post, controller.sendCompetition, apiCaller)
 
 module.exports = router

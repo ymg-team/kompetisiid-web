@@ -1,17 +1,36 @@
 import React, { Component } from 'react'
 import HeaderDashboard from '../../../components/cards/HeaderDashboard'
 import Tab from '../../../components/navigations/Tab'
-import CompetitionCard from '../../../components/cards/dashboard/CompetitionListCard'
-import Loader from '../../../components/loaders/DefaultLoader'
+import Loader from '../../../components/preloaders/GlobalLoader'
 import Helmet from '../../../components/Helmet'
 
-import { fetchJelajah } from '../../competition/actions'
+import { fetchRequest } from './actions'
 import { connect } from 'react-redux'
 
 let Filter, Params
 let Limit = 20
 
-class MyCompetition extends Component {
+class RequestCompetition extends Component {
+
+  componentDidMount(){
+    const filter = this.generateFilter(this.props)
+    const params = this.generateParams(this.props)
+    this.props.dispatch(fetchRequest(params, filter))
+  }
+
+  generateFilter(props) {
+    Filter = `request_${props.route.status}`
+    return Filter
+  }
+
+  generateParams(props){
+    Params = {
+      status: props.route.status
+    }
+
+    return Params
+  }
+
   render() {
     const { status } = this.props.route
     const { data } = this.props
@@ -24,15 +43,15 @@ class MyCompetition extends Component {
       },
       {
         text: 'diterima',
-        is_active: status == 'approved',
+        is_active: status == 'posted',
         count: 12,
-        target: '/super/requests/approved'
+        target: '/super/requests/posted'
       },
       {
         text: 'ditolak',
-        is_active: status === 'rejected',
+        is_active: status === 'reject',
         count: 12,
-        target: '/super/requests/rejected'
+        target: '/super/requests/reject'
       }
     ]
 
@@ -56,22 +75,26 @@ class MyCompetition extends Component {
           </div>
         ) : null}
         
-        {data[Filter] && data[Filter].meta ? (
+        {data[Filter] && data[Filter].status ? (
           <div className="p-b-50">
-            {data[Filter].meta.code == 200 ? (
+            {data[Filter].status === 200 ? (
               <p>
                 Menampilkan <strong>{data[Filter].data.length}</strong> dari{' '}
-                <strong>beberapa</strong> kompetisi
+                <strong>{data[Filter].data.count}</strong> request
               </p>
             ) : null}
-            {data[Filter].meta.code == 200 ? (
+
+
+            {data[Filter].status === 200 ? (
               data[Filter].data.map((n, key) => {
-                return <CompetitionCard key={key} n={n} />
+                return <p>{key}</p>
               })
             ) : (
-              <p className="text-muted">{data[Filter].meta.message}</p>
+              <p className="text-muted">{data[Filter].message}</p>
             )}
-            {data[Filter].meta.code == 200 ? (
+
+
+            {data[Filter].status === 200 ? (
               <span>
                 <a className="btn btn-white">
                   <i className="fa fa-angle-left">&nbsp;</i>sebelumnya{' '}
@@ -107,10 +130,10 @@ function generateParams(props) {
 }
 
 function mapStateToProps(state) {
-  const { Kompetisi, User } = state
+  const { User, Request } = state
   return {
-    data: Kompetisi.data,
-    session: User.session.data
+    session: User.session.data,
+    data: Request
   }
 }
 
@@ -123,4 +146,4 @@ function mapDispatchToProps(dispatch) {
 module.exports = connect(
   mapStateToProps,
   mapDispatchToProps
-)(MyCompetition)
+)(RequestCompetition)

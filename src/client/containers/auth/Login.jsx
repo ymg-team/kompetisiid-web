@@ -1,4 +1,7 @@
 import React, { Component } from 'react'
+import { fullPageLoader } from '../../components/preloaders/FullPage'
+
+// components
 import Input from '../../components/form/InputText'
 import Button from '../../components/form/Button'
 import { Link } from 'react-router-dom'
@@ -6,7 +9,6 @@ import Helmet from '../../components/Helmet'
 import AuthFacebook from '../../components/buttons/AuthFacebook'
 import AuthGoogle from '../../components/buttons/AuthGoogle'
 import { Fullscreen } from '../../components/Fullscreen'
-
 import { alert } from '../../components/Alert'
 import { profile, login } from '../../../store/user/actions'
 import { connect } from 'react-redux'
@@ -28,7 +30,7 @@ class Login extends Component {
       if (this.state.username.trim() != '')
         this.setState({ inputPassword: true })
     } else {
-      alert(true, 'Mencoba login', 'warning', true)
+      fullPageLoader(true)
       this.setState({ loading: true }, () => {
         // request to login user
         this.props.dispatch(
@@ -68,6 +70,7 @@ class Login extends Component {
         }, 1500)
       } else {
         // user and password not match
+        fullPageLoader(false)
         alert(true, 'User dan password tidak cocok', 'error')
         this.setState({
           loading: false

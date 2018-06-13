@@ -9,7 +9,7 @@ const Alert = Styled.div`
   right: 20px;
   bottom: -100px;
   margin-left: -200px;
-  z-index: 20; 
+  z-index: 100; 
   padding: 10px;
   text-align: center;
   background-color: ${Colors.darkGray}; 

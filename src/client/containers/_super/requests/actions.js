@@ -4,16 +4,18 @@ import {
   RECEIVE_DATA,
   RECEIVE_MORE_DATA
 } from '../../../../store/consts'
+import { CALL_API } from '../../../../store/middlewares/api'
+import { objToQuery } from 'string-manager/dist/modules/httpquery'
 
-export function fetchRequest(params, filter){
+export function fetchRequest(params = {}, filter){
   return {
     [CALL_API]: {
       typeSuccess: RECEIVE_DATA,
       typeWaiting: REQUEST_DATA,
       filter,
       method: 'get',
-      target: 'kompetisi_jelajah',
-      url: `${url}?${queryToObj(params)}`
+      target: 'request_kompetisi',
+      url: `/api/request/?${objToQuery(params)}`
     }
   }
 }

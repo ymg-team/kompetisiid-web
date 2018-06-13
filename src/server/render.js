@@ -22,7 +22,7 @@ export default (req, res) => {
   let html,
     context = {}
 
-  // dettect static function fetchData in container target
+  // detect static function fetchData in container target
   const promises = matchRoutes(routes, req.url).map(({ route, match }) => {
     let fetchData = route.component && route.component.fetchData ? route.component.fetchData : {}
     return fetchData instanceof Function
@@ -31,7 +31,6 @@ export default (req, res) => {
   })
 
   // function to get string of html
-  // <link href="/assets/4.2/css/style.css?v=${ version.CSS_VERSION }" rel="stylesheet" />
   function renderHtml(body = '', state = {}, styleTags = '') {
     const head = Helmet.rewind()
     return `
@@ -111,6 +110,11 @@ export default (req, res) => {
     } else {
       const state = store.getState()
       const styleTags = sheet.getStyleTags()
+
+      // get session
+      let { userdata } = req.session
+      state.User.session = userdata
+
       res.send(renderHtml(html, state, styleTags))
     }
   })

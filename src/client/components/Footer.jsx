@@ -110,17 +110,17 @@ export default props => (
               <ul className="horizontal-menu pull-right social-media">
                 <li>
                   <a href="https://facebook.com/kompetisiid" target="_blank">
-                    <i className="fa fa-facebook" />
+                    <i className="fab fa-facebook-f" />
                   </a>
                 </li>
                 <li>
                   <a href="https://twitter.com/_kompetisiid" target="_blank">
-                    <i className="fa fa-twitter" />
+                    <i className="fab fa-twitter" />
                   </a>
                 </li>
                 <li>
                   <a href="https://instagram.com/kompetisiid" target="_blank">
-                    <i className="fa fa-instagram" />
+                    <i className="fab fa-instagram" />
                   </a>
                 </li>
                 <li>

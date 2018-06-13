@@ -108,29 +108,29 @@ function categories(state = {}, action) {
   }
 }
 
-function pengumuman(state = {}, action) {
-  const { target, filter } = action
-  switch (action.type) {
-    case REQUEST_DATA:
-      if (target === 'kompetisi_pengumuman') {
-        if (!state[filter]) state[filter] = {}
-        state[filter].is_loading = true
-        return Object.assign({}, state)
-      }
-      return state
+// function pengumuman(state = {}, action) {
+//   const { target, filter } = action
+//   switch (action.type) {
+//     case REQUEST_DATA:
+//       if (target === 'kompetisi_pengumuman') {
+//         if (!state[filter]) state[filter] = {}
+//         state[filter].is_loading = true
+//         return Object.assign({}, state)
+//       }
+//       return state
 
-    case RECEIVE_DATA:
-      if (target === 'kompetisi_pengumuman') {
-        state[filter].is_loading = false
-        state[filter] = action.json
-        return Object.assign({}, state)
-      }
-      return state
+//     case RECEIVE_DATA:
+//       if (target === 'kompetisi_pengumuman') {
+//         state[filter].is_loading = false
+//         state[filter] = action.json
+//         return Object.assign({}, state)
+//       }
+//       return state
 
-    default:
-      return state
-  }
-}
+//     default:
+//       return state
+//   }
+// }
 
 function tags(state = {}, action) {
   if (action.target === 'tags') {
@@ -178,7 +178,7 @@ const reducer = combineReducers({
   related,
   detail,
   categories,
-  pengumuman,
+  // pengumuman,
   tags,
   stats
 })

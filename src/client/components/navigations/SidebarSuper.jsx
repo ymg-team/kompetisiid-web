@@ -1,6 +1,7 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
-export default () => (
+export default props => (
   <div className="dashboard-sidebar">
     <ul>
       <li className="active">
@@ -13,6 +14,8 @@ export default () => (
           Kompetisi Saya<span className="label label-blue">23</span>
         </a>
       </li>
+
+      {/* competition */}
       <hr />
       <li>
         {' '}
@@ -24,20 +27,16 @@ export default () => (
         </a>
       </li>
       <li>
-        <a href="#">
-          Request Pasang Cepat<span className="label label-blue">245</span>
+        <Link to="/super/requests">
+          Request Pasang Kompetisi<span className="label label-blue">245</span>
           <span className="label label-red">56</span>
-        </a>
+        </Link>
       </li>
-      <li>
-        <a href="#">
-          Request Pasang Komplit<span className="label label-blue">245</span>
-          <span className="label label-red">12</span>
-        </a>
-      </li>
+
+      {/* kabar */}
       <hr />
       <li>
-        <strong>Manajemen Berita </strong>
+        <strong>Manajemen Kabar </strong>
       </li>
       <li>
         <a href="#">
@@ -45,12 +44,15 @@ export default () => (
         </a>
       </li>
 
+      {/* akun */}
       <hr />
       <li>
         <strong>Akun</strong>
       </li>
       <li>
-        <a href="#">Logout</a>
+        <a onClick={() => props.handleLogout()} href="javascript:;">
+          Logout
+        </a>
       </li>
     </ul>
   </div>
