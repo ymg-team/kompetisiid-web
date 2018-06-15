@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { truncate } from 'string-manager'
-import Loader from '../loaders/DefaultLoader'
+import Loader from '../preloaders/GlobalLoader'
 
 export default class MediapartnerBox extends Component {
   generateList() {

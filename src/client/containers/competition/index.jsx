@@ -1,9 +1,17 @@
 import React, { Component } from 'react'
-import Tab, { tab } from '../../components/navigations/TabCompetition'
+import { epochToDMY, epochToRelativeTime } from '../../helpers/DateTime'
+import Loadable from 'react-loadable'
+import { nominalToText } from '../../helpers/Number'
+import { nl2br } from '../../helpers/String'
+import { toCamelCase } from 'string-manager'
+import { connect } from 'react-redux'
+
+// components
 import Helmet from '../../components/Helmet'
+import Tab, { tab } from '../../components/navigations/TabCompetition'
 import Loader from '../../components/loaders/DefaultLoader'
 import CompetitionDetailBox from '../../components/boxs/CompetitionDetail'
-import CompetitionListBox from '../../components/boxs/CompetitionBox'
+import CompetitionLoading from '../../components/preloaders/CompetitionCardLoader'
 import Regulations from '../../components/competition-detail/Regulations'
 import Prizes from '../../components/competition-detail/Prizes'
 import Announcements from '../../components/competition-detail/Announcements'
@@ -14,11 +22,10 @@ import NextPrev from '../../components/navigations/NextPrev'
 import ErrorCard from '../../components/cards/ErrorCard'
 import Host from '../../../config/host'
 
-import { epochToDMY, epochToRelativeTime } from '../../helpers/DateTime'
-import { nominalToText } from '../../helpers/Number'
-import { nl2br } from '../../helpers/String'
-import { toCamelCase } from 'string-manager'
-import { connect } from 'react-redux'
+const CompetitionBox = Loadable({
+  loader: () => import('../../components/boxs/CompetitionBox'),
+  loading: CompetitionLoading
+})
 
 class Index extends Component {
   constructor(props) {
@@ -332,7 +339,7 @@ class Index extends Component {
               related[`related_${encid}`].status === 200 ? (
                 <div className="col-md-12 bg-gray-soft">
                   <div className="m-20 row" />
-                  <CompetitionListBox
+                  <CompetitionBox
                     subtitle={false}
                     total={4}
                     // size="small"

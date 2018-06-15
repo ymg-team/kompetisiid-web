@@ -61,6 +61,7 @@
     "string-manager": "^2.0.0-beta.0",
     "styled-components": "^3.2.5",
     "superagent": "2.3.0",
+    "sweetalert": "^2.1.0",
     "xml": "1.0.1"
   },
   "devDependencies": {

@@ -7,7 +7,6 @@ import Loadable from 'react-loadable'
 import NewsLoading from '../../components/preloaders/NewsCardLoader'
 import Helmet from '../../components/Helmet'
 import Subheader from '../../components/Subheader'
-// import Newsbox from '../../components/boxs/NewsBox'
 
 const Limit = 6
 let AddedEventListener = false

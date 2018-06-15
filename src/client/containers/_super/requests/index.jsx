@@ -1,14 +1,19 @@
 import React, { Component } from 'react'
-import HeaderDashboard from '../../../components/cards/HeaderDashboard'
-import Tab from '../../../components/navigations/Tab'
-import Loader from '../../../components/preloaders/GlobalLoader'
-import Helmet from '../../../components/Helmet'
-
+import Loadable from 'react-loadable'
 import { fetchRequest } from './actions'
 import { connect } from 'react-redux'
 
+import HeaderDashboard from '../../../components/cards/HeaderDashboard'
+import Tab from '../../../components/navigations/Tab'
+import Loading from '../../../components/preloaders/GlobalLoader'
+import Helmet from '../../../components/Helmet'
+
+const RequestBox = Loadable({
+  loader: () => import('../../../components/boxs/_super/RequestBox'),
+  loading: Loading
+})
+
 let Filter, Params
-let Limit = 20
 
 class RequestCompetition extends Component {
 
@@ -68,46 +73,11 @@ class RequestCompetition extends Component {
         />
         
         <Tab tabs={tabcontent} />
-        
-        {data[Filter] && data[Filter].is_loading ? (
-          <div className="row">
-            <Loader />
-          </div>
-        ) : null}
-        
-        {data[Filter] && data[Filter].status ? (
-          <div className="p-b-50">
-            {data[Filter].status === 200 ? (
-              <p>
-                Menampilkan <strong>{data[Filter].data.length}</strong> dari{' '}
-                <strong>{data[Filter].data.count}</strong> request
-              </p>
-            ) : null}
 
+        <RequestBox 
+          data = {data[Filter] || {}}
+        />
 
-            {data[Filter].status === 200 ? (
-              data[Filter].data.map((n, key) => {
-                return <p>{key}</p>
-              })
-            ) : (
-              <p className="text-muted">{data[Filter].message}</p>
-            )}
-
-
-            {data[Filter].status === 200 ? (
-              <span>
-                <a className="btn btn-white">
-                  <i className="fa fa-angle-left">&nbsp;</i>sebelumnya{' '}
-                </a>
-                {data[Filter].data.length >= Limit ? (
-                  <a className="btn btn-white">
-                    berikutnya <i className="fa fa-angle-right" />
-                  </a>
-                ) : null}
-              </span>
-            ) : null}
-          </div>
-        ) : null}
       </div>
     )
   }
