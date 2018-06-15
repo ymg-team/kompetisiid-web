@@ -134,7 +134,7 @@ class Navbar extends Component {
                 <li>
                   <a
                     onClick={() => this.toggleSearch()}
-                    className="fa fa-close"
+                    className="fas fa-times"
                     href="javascript:;"
                   />
                 </li>
@@ -170,7 +170,7 @@ class Navbar extends Component {
                 <li>
                   <a
                     onClick={() => this.toggleSearch()}
-                    className="fa fa-search"
+                    className="fas fa-search"
                     href="javascript:;"
                   />
                 </li>
@@ -184,7 +184,7 @@ class Navbar extends Component {
 
                 {/* auth */}
                 {Object.keys(session).length > 0 && session.id ? (
-                  <li>
+                  <li style={{ padding: '5px 10px' }}>
                     <div className="dropdown">
                       <a className="avatar" href="javascript:;">
                         <img

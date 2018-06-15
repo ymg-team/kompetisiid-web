@@ -8,12 +8,12 @@ import { getStorage, setStorage } from '../../../store/helpers/LocalStorage'
 import { LOCAL_STORAGE_CATEGORIES } from '../../../config/version'
 
 // components
+import Loading from '../../components/preloaders/GlobalLoader'
 import SubHeader from '../../components/headers/HomeSubHeader'
 import SubHeaderTitle from '../../components/headers/SubHeader'
 import Helmet from '../../components/Helmet'
 import NewsLoading from '../../components/preloaders/NewsCardLoader'
 import CompetitionLoading from '../../components/preloaders/CompetitionCardLoader'
-import MediapartnerBox from '../../components/boxs/MediapartnerBox'
 import { Link } from 'react-router-dom'
 
 // split components
@@ -22,8 +22,12 @@ const NewsBox = Loadable({
   loading: NewsLoading
 })
 const CompetitionBox = Loadable({
-  loader: () => import("../../components/boxs/CompetitionBox"),
+  loader: () => import('../../components/boxs/CompetitionBox'),
   loading: CompetitionLoading
+})
+const MediapartnerBox = Loadable({
+  loader: () => import('../../components/boxs/MediapartnerBox'),
+  loading: Loading
 })
 
 // actions and store
@@ -47,11 +51,18 @@ class Home extends Component {
 
     // get lattest 9 active competition
     if (!this.props.kompetisi.data.home_latest)
-      this.props.dispatch(fetchJelajah({ limit: 9, status: 'active' }, 'home_latest'))
+      this.props.dispatch(
+        fetchJelajah({ limit: 9, status: 'active' }, 'home_latest')
+      )
 
-    // get lattest 7 active and popular competition  
+    // get lattest 7 active and popular competition
     if (!this.props.kompetisi.data.home_popular) topLoading(true)
-    this.props.dispatch(fetchJelajah({ limit: 7, is_popular: true, status: 'active' }, 'home_popular'))
+    this.props.dispatch(
+      fetchJelajah(
+        { limit: 7, is_popular: true, status: 'active' },
+        'home_popular'
+      )
+    )
 
     // get lattest 7 media partner
     if (!this.props.kompetisi.data.home_mediapartner)
@@ -59,7 +70,7 @@ class Home extends Component {
         fetchJelajah({ limit: 7, is_mediapartner: true }, 'home_mediapartner')
       )
 
-    // get lattest 6 news  
+    // get lattest 6 news
     if (!this.props.berita.data.home_latest)
       this.props.dispatch(fetchBerita({ limit: 6 }, 'home_latest'))
 
@@ -73,7 +84,10 @@ class Home extends Component {
       np.kompetisi.categories.status == 200
     ) {
       // save categories to local storage
-      setStorage(LOCAL_STORAGE_CATEGORIES, JSON.stringify(np.kompetisi.categories))
+      setStorage(
+        LOCAL_STORAGE_CATEGORIES,
+        JSON.stringify(np.kompetisi.categories)
+      )
     }
   }
 
@@ -159,4 +173,7 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Home)

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import * as BeritaActions from './actions'
 import Host from '../../../config/host'
+import Loadable from 'react-loadable'
 import { pushScript } from '../../helpers/DomEvents'
 import { connect } from 'react-redux'
 import { topLoading } from '../../components/preloaders'
@@ -10,11 +11,17 @@ import { textParser } from '../../helpers/String'
 
 // components
 import { Link } from 'react-router-dom'
+import Loading from '../../components/preloaders/GlobalLoader'
 import Helmet from '../../components/Helmet'
 import Author from '../../components/cards/NewsAuthorCard'
-import NewsBox from '../../components/boxs/NewsBox'
 import ErrorCard from '../../components/cards/ErrorCard'
 import Preloader from '../../components/preloaders/NewsDetail'
+
+const NewsBox = Loadable({
+  loader: () => import('../../components/boxs/NewsBox'),
+  loading: Loading
+})
+
 export default class Index extends Component {
   static fetchData({ params, store }) {
     return store.dispatch(BeritaActions.fetchBeritaDetail(params.encid))
