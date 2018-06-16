@@ -113,7 +113,8 @@ export default (req, res) => {
 
       // get session
       let { userdata } = req.session
-      state.User.session = userdata
+      if(userdata && userdata.id) state.User.session = userdata
+      else state.User.session = {}
 
       res.send(renderHtml(html, state, styleTags))
     }
