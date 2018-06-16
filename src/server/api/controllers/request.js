@@ -13,7 +13,7 @@ import { objToQuery } from "string-manager/dist/modules/httpquery"
     req.reqdata = {
       version: 'v42',
       method: 'post',
-      params: req.params,
+      params: req.body,
       url: `/v2/request`,
   }
 
@@ -28,8 +28,28 @@ export function getRequest(req, res, next) {
   req.reqdata = {
     version: 'v42',
     method: 'get',
-    params: req.params,
     url: `/v2/request${query}`
+  }
+
+  next()
+}
+
+/**
+ * @description function to handle action request 
+ * @method PUT 
+ */
+export function actionRequest(req, res, next) {
+  req.reqdata = {
+    version: 'v42',
+    method: 'put',
+    headers: {
+      Authorization: 'yussan-1234567890'
+    },
+    params: {
+      message: req.body.note,
+      status: req.body.status
+    },
+    url: `/v2/request/action/${req.params.id}`
   }
 
   next()

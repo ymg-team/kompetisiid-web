@@ -10,7 +10,7 @@ export default function(req, res, next)
     // console.log('apa ini', req.header('x-forwarded-for') || req.connection.remoteAddress)
 
     let API_HOST = ''
-    const {method, url, params = {}, nextaction, resType = 'json'} = req.reqdata
+    const {method, url, params = {}, headers = {}, nextaction, resType = 'json'} = req.reqdata
 
   // set api server
     if(req.reqdata.version === 'v42') {
@@ -23,7 +23,7 @@ export default function(req, res, next)
     params.resType = resType
 
     // log
-    return requestAPIV2(method, url, params).then(response => {
+    return requestAPIV2(method, url, params, headers).then(response => {
 
         // log 
         if(typeof nextaction === 'function'){

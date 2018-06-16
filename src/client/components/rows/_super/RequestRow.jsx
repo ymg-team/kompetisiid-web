@@ -1,7 +1,9 @@
 import React from 'react'
 import Styled from 'styled-components'
+import { connect } from 'react-redux'
 import { epochToRelativeTime } from '../../../helpers/DateTime'
 import * as Colors from '../../../../style/colors'
+import * as RequestActions from '../../../containers/_super/requests/actions'
 import swal from 'sweetalert'
 
 // components
@@ -26,6 +28,8 @@ const RequestListStyled = Styled.div`
       height: 100px;
       background-size: contain;
       margin-right: 10px;
+      background-repeat: no-repeat;
+      background-position-x: center;
     }
 
     .item__right {
@@ -36,20 +40,21 @@ const RequestListStyled = Styled.div`
   }
 `
 
-function handleAction(accept=true, props) {
+function handleAction(accept = true, props) {
   swal({
     title: `${accept ? 'Menerima' : 'Menolak'} Permintaan`,
     text: 'Tulis pesan yang ingin kamu sampaikan kepada pengirim',
     content: 'input'
   }).then(value => {
-    if(value) {
-      return swal({
-        title: 'Selesai', 
-        text: `Permintaan telah berhasil ${accept ? '"diterima"' : '"ditolak"'} dan pesan telah terkirim ke email pengirim`,
-        icon: 'success',
-        timer: 2000,
-        buttons: false
-      })
+    if (value) {
+      // redux action
+      const params = {
+        id: props.id,
+        note: value,
+        status: accept ? 'posted' : 'reject'
+      }
+
+      props.dispatch(RequestActions.actionRequest(params))
     }
   })
 }
@@ -78,8 +83,11 @@ const RequestRow = props => {
     <RequestListStyled>
       <div className="item">
         <div
+          onClick={() => {
+            window.open(props.poster.original, '_blank')
+          }}
           className="item__thumbnails"
-          style={{ backgroundImage: `url(/assets/images/default-poster.png)` }}
+          style={{ backgroundImage: `url(${props.poster.small})` }}
         />
         <div className="item__right">
           <h4>
@@ -100,6 +108,8 @@ const RequestRow = props => {
                 )} dengan catatan "${props.note || 'tidak ada'}"`
               : 'Permintaan belum diproses'}
           </p>
+
+          {/* action request */}
           {props.updated_at === props.created_at ? (
             <div className="item__action">
               <small>
@@ -111,9 +121,11 @@ const RequestRow = props => {
                   {' '}
                   <span className="fas fa-check-circle" /> Terima Permintaan
                 </a>{' '}
-                <a style={{ color: Colors.mainRed }} 
+                <a
+                  style={{ color: Colors.mainRed }}
                   href="javascript:;"
-                  onClick={() => handleAction(false, props)}>
+                  onClick={() => handleAction(false, props)}
+                >
                   {' '}
                   <span className="fas fa-times-circle" /> Tolak Permintaan
                 </a>
@@ -126,4 +138,10 @@ const RequestRow = props => {
   )
 }
 
-export default RequestRow
+function mapDispatchToProps(dispatch) {
+  return {
+    dispatch
+  }
+}
+
+export default connect(mapDispatchToProps)(RequestRow)

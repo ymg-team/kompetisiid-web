@@ -1,10 +1,12 @@
 import superagent from 'superagent'
+import { alert } from '../../client/components/Alert'
 import { httpException } from './Exceptions'
 
 export function requestApi(method, path, params = {}, callback)
 {
-  const formdata = !params || method.toLowerCase() === 'get' ? {} : generateFormdata(params)
-  return superagent[method.toLowerCase()](path)
+  method = method.toLowerCase()
+  const formdata = !params || method === 'get' ? {} : generateFormdata(params)
+  return superagent[method](path)
       .withCredentials()
       .timeout(60000)
       .set('Accept', 'application/json')
@@ -18,7 +20,12 @@ export function requestApi(method, path, params = {}, callback)
           return callback(httpException(500, err, true))
         }else
         {
-          return callback(JSON.parse(res.text))
+          const response = JSON.parse(res.text)
+          if(method !== 'get') {
+            let status = 'success'
+            alert(true, response.message, response.status === 200 || response.status === 201 ? 'success' : 'error')
+          }
+          return callback(response)
         }
       })
 }
