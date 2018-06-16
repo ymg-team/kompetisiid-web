@@ -1,12 +1,18 @@
-import {requestApi} from '../../../store/helpers/ApiCaller'
-import {POST_DATA, RECEIVE_DATA, RECEIVE_MORE_DATA, DELETE_DATA, REQUEST_DATA} from '../../../store/consts'
-import {serialize} from '../../../server/helpers/url'
-import {CALL_API} from '../../../store/middlewares/api'
+import { requestApi } from '../../../store/helpers/ApiCaller'
+import {
+  POST_DATA,
+  RECEIVE_DATA,
+  RECEIVE_MORE_DATA,
+  DELETE_DATA,
+  REQUEST_DATA
+} from '../../../store/consts'
+import { CALL_API } from '../../../store/middlewares/api'
 import sealMiddleware from '../../helpers/seal'
+import { objToQuery } from 'string-manager/dist/modules/httpquery'
 
 export const RECEIVE_CATEGORIES = 'RECEIVE_CATEGORIES'
 
-export function fetchJelajah(params, filter) {
+export function fetchJelajah(params = {}, filter) {
   const url = `/api/jelajah/${sealMiddleware.generateSeal()}`
   return {
     [CALL_API]: {
@@ -15,7 +21,7 @@ export function fetchJelajah(params, filter) {
       filter,
       method: 'get',
       target: 'kompetisi_jelajah',
-      url: `${url}?${serialize(params)}`
+      url: `${url}?${objToQuery(params)}`
     }
   }
 }
@@ -29,11 +35,10 @@ export function fetchJelajahMore(params, filter) {
       filter,
       method: 'get',
       target: 'kompetisi_jelajah',
-      url: `${url}?${serialize(params)}`
+      url: `${url}?${objToQuery(params)}`
     }
   }
 }
-
 
 export function getRelated(id, filter) {
   return {
@@ -81,19 +86,6 @@ export function getDetail(id) {
   }
 }
 
-// export function getPengumuman(id) {
-//   return {
-//     [CALL_API]: {
-//       url: `/api/kompetisi/pengumuman/${id}/${sealMiddleware.generateSeal()}`,
-//       method: 'get',
-//       typeWaiting: REQUEST_DATA,
-//       typeSuccess: RECEIVE_DATA,
-//       target: 'kompetisi_pengumuman',
-//       filter: id
-//     }
-//   }
-// }
-
 export function getFavoritedTags(params = {}) {
   return {
     [CALL_API]: {
@@ -114,7 +106,7 @@ export function getStats() {
       method: 'get',
       typeWaiting: REQUEST_DATA,
       typeSuccess: RECEIVE_DATA,
-      target: 'stats',
+      target: 'stats'
     }
   }
 }

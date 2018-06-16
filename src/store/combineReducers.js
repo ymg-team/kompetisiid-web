@@ -5,14 +5,14 @@ import Kompetisi from '../client/containers/competition/reducer'
 import Berita from '../client/containers/news/reducer'
 import Pasang from './pasang/reducer'
 import User from './user/reducer'
+import Request from '../client/containers/_super/requests/reducer'
 
 import {combineReducers} from 'redux'
 
-const Reducers = combineReducers({
+export default combineReducers({
     Kompetisi,
     Berita,
     Pasang,
-    User
+    User,
+    Request
 })
-
-export default Reducers

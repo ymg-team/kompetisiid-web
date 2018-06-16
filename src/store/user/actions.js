@@ -32,6 +32,18 @@ export function login(params)
     }
 }
 
+export function logout() {
+  return {
+    [CALL_API] : {
+      method: 'post',
+      url: '/api/user/logout',
+      target: 'user_logout',
+      typeWaiting: REQUEST_DATA,
+      typeSuccess: RECEIVE_DATA
+  }
+  }
+}
+
 export function register(params)
 {
     return {
@@ -73,15 +85,3 @@ export function emailVerification(token)
     }
 }
 
-export function logout()
-{
-    return {
-        [CALL_API] : {
-            method: 'post',
-            url: '/api/user/logout',
-            target: 'user_logout',
-            typeWaiting: REQUEST_DATA,
-            typeSuccess: RECEIVE_DATA
-        }
-    }
-}

@@ -1,7 +1,6 @@
 /**
  * Created by yussan on 27/10/16.
  */
-import Promise from 'bluebird'
 import {requestApi} from '../helpers/ApiCaller'
 import Host from '../../config/host'
 
@@ -14,7 +13,7 @@ export default store => next => action => {
     let request = action[CALL_API]
     let {
       typeSuccess, typeWaiting,
-      method, url, params,
+      method, url, params = {},
       filter, target, formdata = {},
       token = '', extradata = {}
     } = request
@@ -25,7 +24,8 @@ export default store => next => action => {
         next({
           type: typeWaiting,
           filter,
-          target
+          target,
+          params
         })
       }
       //completing request
@@ -37,6 +37,7 @@ export default store => next => action => {
           filter,
           json,
           target,
+          params,
           extradata
         })
 

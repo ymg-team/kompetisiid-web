@@ -38,7 +38,6 @@
   "homepage": "https://github.com/idmore/kompetisiid-web#README",
   "dependencies": {
     "babel-eslint": "^8.2.1",
-    "bluebird": "3.4.6",
     "compression": "1.6.2",
     "cookie-session": "^2.0.0-beta.3",
     "copy-to-clipboard": "^3.0.8",
@@ -59,9 +58,10 @@
     "redux": "^3.7.2",
     "request": "2.75.0",
     "seal-middleware": "^0.1.0",
-    "string-manager": "^1.1.1",
+    "string-manager": "^2.0.0-beta.0",
     "styled-components": "^3.2.5",
     "superagent": "2.3.0",
+    "sweetalert": "^2.1.0",
     "xml": "1.0.1"
   },
   "devDependencies": {

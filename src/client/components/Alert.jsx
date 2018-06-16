@@ -9,7 +9,7 @@ const Alert = Styled.div`
   right: 20px;
   bottom: -100px;
   margin-left: -200px;
-  z-index: 20; 
+  z-index: 100; 
   padding: 10px;
   text-align: center;
   background-color: ${Colors.darkGray}; 
@@ -57,6 +57,11 @@ export function alert(show = true, text = '', type = '', fixed=false) {
     const alertEl = window.document.getElementById('ki-alert')
 
     if (show) {
+      alertEl.classList.remove('success')
+      alertEl.classList.remove('error')
+      alertEl.classList.remove('warning')
+
+
       alertEl.innerText = text
       alertEl.classList.add(type)
       alertEl.style.bottom = '20px'

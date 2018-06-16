@@ -22,7 +22,7 @@ export default (req, res) => {
   let html,
     context = {}
 
-  // dettect static function fetchData in container target
+  // detect static function fetchData in container target
   const promises = matchRoutes(routes, req.url).map(({ route, match }) => {
     let fetchData = route.component && route.component.fetchData ? route.component.fetchData : {}
     return fetchData instanceof Function
@@ -31,7 +31,6 @@ export default (req, res) => {
   })
 
   // function to get string of html
-  // <link href="/assets/4.2/css/style.css?v=${ version.CSS_VERSION }" rel="stylesheet" />
   function renderHtml(body = '', state = {}, styleTags = '') {
     const head = Helmet.rewind()
     return `
@@ -55,7 +54,7 @@ export default (req, res) => {
                 <meta property="fb:app_id" content="1419514554927551">
                 <meta property="fb:admins" content="100000359263988">
                 <link rel="stylesheet" href="${webpackAssets.style.css}">
-                <link rel="stylesheet" href="/assets/4.2/lib/font-awesome-4.7.0/css/font-awesome.min.css" />
+                <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
                 <link rel="icon" href="/assets/icons-red/icon-128x128.png" />
                 <link rel="manifest" href="/manifest.json" />
                 <link rel="search" type="application/opensearchdescription+xml" href="/opensearch.xml" title="Cari Kompetisi"/>
@@ -111,6 +110,11 @@ export default (req, res) => {
     } else {
       const state = store.getState()
       const styleTags = sheet.getStyleTags()
+
+      // get session
+      let { userdata } = req.session
+      state.User.session = userdata
+
       res.send(renderHtml(html, state, styleTags))
     }
   })

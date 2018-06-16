@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 
-import {alert} from "../Alert"
+import { alert } from '../Alert'
 import { connect } from 'react-redux'
 import { logout } from '../../../store/user/actions'
 
@@ -78,7 +78,7 @@ class Header extends Component {
             </ul>
           </div>
           <div className="logo hide-mobile">
-            <Link className='stage' to="/">
+            <Link className="stage" to="/">
               <img id="ki-logo" src="/assets/4.2/img/icon-128x128.png" />
             </Link>
           </div>
@@ -94,7 +94,7 @@ class Header extends Component {
                   <span className="fa fa-search" />
                 </a>
               </li>
-              {session && session.meta && session.meta.code == 201 ? (
+              {Object.keys(session).length > 0 && session.id ? (
                 <li>
                   <div className="dropdown">
                     <a className="avatar" href="javascript:;">
@@ -107,14 +107,12 @@ class Header extends Component {
                     <div className="dropdown-items" id="avatar-menu">
                       <ul>
                         <li>
-                          <Link to={`/user/${session.data.username}`}>
+                          <Link to={`/user/${session.username}`}>
                             Profil saya
                           </Link>
                         </li>
                         <li>
-                          <Link to={`/dashboard/competition/live`}>
-                            Dashboard
-                          </Link>
+                          <Link to={`/dashboard/`}>Dashboard</Link>
                         </li>
                         <li>
                           <Link to="/settings">Setelan</Link>
@@ -179,4 +177,7 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Header)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Header)

@@ -6,6 +6,7 @@ import {
   RECEIVE_DATA,
   RECEIVE_MORE_DATA
 } from '../../../store/consts'
+import * as Mutations from '../../../store/helpers/Mutations'
 
 function data(state = {}, action) {
   let nextstate = {}
@@ -15,19 +16,16 @@ function data(state = {}, action) {
       nextstate = state
 
       if (action.target === 'kompetisi_jelajah') {
-        if (!nextstate[action.filter]) nextstate[action.filter] = {}
-        nextstate[action.filter].is_loading = true
-        return Object.assign({}, state, nextstate)
+        return Mutations.requestListByFilter(state, action)
       }
 
       return state
 
     case RECEIVE_DATA:
       if (target === 'kompetisi_jelajah') {
-        state[filter] = action.json
-        state[filter].is_loading = false
-        return Object.assign({}, state)
+        return Mutations.receiveListByFilter(state, action)
       }
+
       return state
 
     case RECEIVE_MORE_DATA:
@@ -54,17 +52,17 @@ function detail(state = {}, action) {
   switch (action.type) {
     case REQUEST_DATA:
       if (action.target === 'kompetisi_detail') {
-        if (!state[action.filter]) state[action.filter] = {}
-        state[action.filter].is_loading = true
-        return Object.assign({}, state)
+        return Mutations.requestListByFilter(state, action)
       }
+
+      return state
 
     case RECEIVE_DATA:
       if (action.target === 'kompetisi_detail') {
-        state[action.filter].is_loading = false
-        state[action.filter] = action.json
-        return Object.assign({}, state)
+        return Mutations.receiveListByFilter(state, action)
       }
+
+      return state
 
     default:
       return state
@@ -108,29 +106,29 @@ function categories(state = {}, action) {
   }
 }
 
-function pengumuman(state = {}, action) {
-  const { target, filter } = action
-  switch (action.type) {
-    case REQUEST_DATA:
-      if (target === 'kompetisi_pengumuman') {
-        if (!state[filter]) state[filter] = {}
-        state[filter].is_loading = true
-        return Object.assign({}, state)
-      }
-      return state
+// function pengumuman(state = {}, action) {
+//   const { target, filter } = action
+//   switch (action.type) {
+//     case REQUEST_DATA:
+//       if (target === 'kompetisi_pengumuman') {
+//         if (!state[filter]) state[filter] = {}
+//         state[filter].is_loading = true
+//         return Object.assign({}, state)
+//       }
+//       return state
 
-    case RECEIVE_DATA:
-      if (target === 'kompetisi_pengumuman') {
-        state[filter].is_loading = false
-        state[filter] = action.json
-        return Object.assign({}, state)
-      }
-      return state
+//     case RECEIVE_DATA:
+//       if (target === 'kompetisi_pengumuman') {
+//         state[filter].is_loading = false
+//         state[filter] = action.json
+//         return Object.assign({}, state)
+//       }
+//       return state
 
-    default:
-      return state
-  }
-}
+//     default:
+//       return state
+//   }
+// }
 
 function tags(state = {}, action) {
   if (action.target === 'tags') {
@@ -178,7 +176,7 @@ const reducer = combineReducers({
   related,
   detail,
   categories,
-  pengumuman,
+  // pengumuman,
   tags,
   stats
 })

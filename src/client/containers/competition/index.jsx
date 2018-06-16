@@ -1,9 +1,17 @@
 import React, { Component } from 'react'
-import Tab, { tab } from '../../components/navigations/TabCompetition'
+import { epochToDMY, epochToRelativeTime } from '../../helpers/DateTime'
+import Loadable from 'react-loadable'
+import { nominalToText } from '../../helpers/Number'
+import { nl2br } from '../../helpers/String'
+import { toCamelCase } from 'string-manager'
+import { connect } from 'react-redux'
+
+// components
 import Helmet from '../../components/Helmet'
+import Tab, { tab } from '../../components/navigations/TabCompetition'
 import Loader from '../../components/loaders/DefaultLoader'
 import CompetitionDetailBox from '../../components/boxs/CompetitionDetail'
-import CompetitionListBox from '../../components/boxs/CompetitionBox'
+import CompetitionLoading from '../../components/preloaders/CompetitionCardLoader'
 import Regulations from '../../components/competition-detail/Regulations'
 import Prizes from '../../components/competition-detail/Prizes'
 import Announcements from '../../components/competition-detail/Announcements'
@@ -14,17 +22,45 @@ import NextPrev from '../../components/navigations/NextPrev'
 import ErrorCard from '../../components/cards/ErrorCard'
 import Host from '../../../config/host'
 
-import { epochToDMY, epochToRelativeTime } from '../../helpers/DateTime'
-import { nominalToText } from '../../helpers/Number'
-import { nl2br } from '../../helpers/String'
-import { toCamelCase } from 'string-manager'
-import { connect } from 'react-redux'
+const CompetitionBox = Loadable({
+  loader: () => import('../../components/boxs/CompetitionBox'),
+  loading: CompetitionLoading
+})
 
 class Index extends Component {
   constructor(props) {
     super(props)
     this.state = {
       encid: this.props.match.params.encid
+    }
+    this.handleScroll = this.handleScroll.bind(this)
+  }
+
+  componentDidMount(){
+    // add scroll listener
+    addEventListener('scroll', this.handleScroll, true)
+  }
+
+  componentWillUnmount() {
+    // remove event listener
+    removeEventListener('scroll', this.handleScroll, true)
+  }
+
+  handleScroll(e) {
+    console.log('scrolling in competition detail...')
+    const afterScroll =
+      document.getElementById('competition-detail').offsetHeight + 40
+    const tabEl = document.getElementById('container-competition-tab')
+    const joinEl = document.getElementById('btn-join')
+
+    if (joinEl && afterScroll) {
+      if (window.pageYOffset > afterScroll) {
+        tabEl.classList.add('fixed')
+        joinEl.style.opacity = 1
+      } else {
+        tabEl.classList.remove('fixed')
+        joinEl.style.opacity = 0
+      }
     }
   }
 
@@ -37,11 +73,6 @@ class Index extends Component {
 
     // generate helmet data
     if (detail[encid] && detail[encid].status && detail[encid].status === 200) {
-      setTimeout(() => {
-        if (typeof window != 'undefined') {
-          handleScrollNav()
-        }
-      }, 2000)
       helmetdata = Object.assign(helmetdata, {
         title: toCamelCase(
           `${tab[this.props.route.active_tab - 1].name + ' ' || ''}${
@@ -308,7 +339,7 @@ class Index extends Component {
               related[`related_${encid}`].status === 200 ? (
                 <div className="col-md-12 bg-gray-soft">
                   <div className="m-20 row" />
-                  <CompetitionListBox
+                  <CompetitionBox
                     subtitle={false}
                     total={4}
                     // size="small"
@@ -364,24 +395,6 @@ function generateJsonld(n, url) {
       "address": "Indonesia"
     }
   }`
-}
-
-function handleScrollNav() {
-  window.onscroll = function() {
-    const afterScroll =
-      document.getElementById('competition-detail').offsetHeight + 40
-    const tabEl = document.getElementById('container-competition-tab')
-    const joinEl = document.getElementById('btn-join')
-    if (joinEl && afterScroll) {
-      if (document.body.scrollTop > afterScroll) {
-        addClass(tabEl, 'fixed')
-        joinEl.style.opacity = 1
-      } else {
-        removeClass(tabEl, 'fixed')
-        joinEl.style.opacity = 0
-      }
-    }
-  }
 }
 
 function mapStateToProps(state) {
