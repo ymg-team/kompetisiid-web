@@ -96,7 +96,7 @@ class Navbar extends Component {
     if (this.props.className === 'bg-gray')
       logo = '/assets/images/small-gray-logo-transparent.png'
 
-    const session = this.props.session || {}
+    const { session } = this.props
 
     return (
       <NavbarStyled className={`${this.props.className} row`}>
