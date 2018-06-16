@@ -5,47 +5,46 @@
 
 import * as Session from '../../helpers/session'
 
-export function getProfile(req, res, next)
-{
-    req.reqdata = {
-        method: 'get',
-        params: req.params,
-        url: `/user/profile/${req.params.username}`,
-    }
+export function getProfile(req, res, next) {
+  req.reqdata = {
+    method: 'get',
+    params: req.params,
+    url: `/user/profile/${req.params.username}`
+  }
 
-    next()
+  next()
 }
 
 /**
  * @description function to get username and password and store sessino
- * @param {String} req 
+ * @param {String} req
  */
-export function postLogin(req, res, next)
-{
-    req.reqdata = {
-        version: 'v42',
-        method: 'post',
-        url: '/v2/login',
-        params: req.params,
-        nextaction: (req, res, next, result) => {
+export function postLogin(req, res, next) {
+  req.reqdata = {
+    version: 'v42',
+    method: 'post',
+    url: '/v2/login',
+    params: req.body,
+    headers: {
+      Authorization: 'yussan-1234567890'
+    },
+    nextaction: (req, res, next, result) => {
+      if (result.status === 200) {
+        Session.setData(req, 'userdata', result.data)
+      }
 
-            if(result.status === 200) {
-              Session.setData(req, 'userdata', result.data)
-            }
-
-            return res.json(result)
-        }
+      return res.json(result)
     }
+  }
 
-    next()
+  next()
 }
 
 /**
  * @description function to handle logout / delete session
  */
-export function postLogout(req, res, next) 
-{ 
-  // remove session 
+export function postLogout(req, res, next) {
+  // remove session
   Session.destroy(req, 'userdata')
   return res.json({
     status: 200,
@@ -56,37 +55,34 @@ export function postLogout(req, res, next)
 /**
  * @description function to handle register
  */
-export function postRegister(req, res, next)
-{
-    req.reqdata = {
-        method: 'post',
-        url: '/user/register',
-        params: req.params,
-        nextaction: result => {
-            if(result.meta.code === 201) Session.setData(req, 'userdata', result)
-        }
+export function postRegister(req, res, next) {
+  req.reqdata = {
+    method: 'post',
+    url: '/user/register',
+    params: req.params,
+    nextaction: result => {
+      if (result.meta.code === 201) Session.setData(req, 'userdata', result)
     }
+  }
 
-    next()
+  next()
 }
 
-export function postEmailVerification(req, res, next)
-{
-    req.reqdata = {
-        method: 'post',
-        url: `/user/emailverification?token=${req.query.token}`,
-        params: req.params,
-        nextaction: result => {
-            if(result.meta.code === 201){
-                let nextdata = req.session.userdata
-                if(nextdata)
-                {
-                    nextdata.data.is_verified = 1
-                    Session.update(req, 'userdata', nextdata)
-                }
-            }
+export function postEmailVerification(req, res, next) {
+  req.reqdata = {
+    method: 'post',
+    url: `/user/emailverification?token=${req.query.token}`,
+    params: req.params,
+    nextaction: result => {
+      if (result.meta.code === 201) {
+        let nextdata = req.session.userdata
+        if (nextdata) {
+          nextdata.data.is_verified = 1
+          Session.update(req, 'userdata', nextdata)
         }
+      }
     }
+  }
 
-    next()
+  next()
 }
