@@ -155,7 +155,7 @@ class Login extends Component {
                   className="btn btn-gray"
                   disabled={loading}
                   action={() => this.handleLogin()}
-                  requiredInputs={['username', 'password']}
+                  requiredInputs={['username']}
                   setState={(n, cb) => this.setState(n, cb)}
                   type="submit"
                   style={{
