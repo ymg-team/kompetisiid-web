@@ -169,7 +169,7 @@ const CompetitionDetailBox = props => {
           <div className="modal-title">
             Simpan ke kalender
             <a
-              className="btn btn-white btn-close-modal btn-sm fa fa-close"
+              className="btn btn-white btn-close-modal btn-sm fas fa-times"
               href="javascript:;"
             />
           </div>

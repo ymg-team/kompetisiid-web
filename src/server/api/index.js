@@ -1,8 +1,9 @@
 import express from 'express'
+import routes from './routes'
 
 const router = express.Router()
 
-router.use('/', require('./routes'))
+router.use('/', routes)
 router.use('*', (req, res) => {
   res.json({
     meta: {
