@@ -50,7 +50,7 @@ class Header extends Component {
               <a
                 style={{ position: 'absolute', top: '0.5em', right: '0.5em' }}
                 id="btn-hide-nav"
-                className=" btn-close-nav only-mobile fa fa-close"
+                className=" btn-close-nav only-mobile fas fa-times"
                 href="javascript:;"
               />
               <li>
@@ -155,7 +155,7 @@ class Header extends Component {
             title="tutup pencarian"
           >
             {' '}
-            <span className="fa fa-close" />
+            <span className="fas fa-times" />
           </a>
         </div>
       </nav>

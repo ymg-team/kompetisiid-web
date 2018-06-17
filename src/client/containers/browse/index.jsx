@@ -280,7 +280,7 @@ class Index extends Component {
               <div className="modal-title">
                 Pilih Kategori dibawah ini
                 <a
-                  className="btn btn-white btn-close-modal btn-sm fa fa-close"
+                  className="btn btn-white btn-close-modal btn-sm fas fa-times"
                   href="javascript:;"
                 />
               </div>
@@ -335,7 +335,7 @@ class Index extends Component {
             <div className="container">
               <div className="modal-title">
                 Pilih sub kategori dibawah ini
-                <a className="btn btn-white btn-close-modal btn-sm fa fa-close" />
+                <a className="btn btn-white btn-close-modal btn-sm fas fa-times" />
               </div>
               <hr />
               <ul className="vertical-menu list-categories">
@@ -389,7 +389,7 @@ class Index extends Component {
               <div className="modal-title">
                 Urutkan kompetisi berdasarkan
                 <a
-                  className="btn btn-white btn-close-modal btn-sm fa fa-close"
+                  className="btn btn-white btn-close-modal btn-sm fas fa-times"
                   href="javascript:;"
                 />
               </div>
@@ -427,7 +427,7 @@ class Index extends Component {
               <div className="modal-title">
                 Menampilkan kompetisi dengan status
                 <a
-                  className="btn btn-white btn-close-modal btn-sm fa fa-close"
+                  className="btn btn-white btn-close-modal btn-sm fas fa-times"
                   href="javascript:;"
                 />
               </div>

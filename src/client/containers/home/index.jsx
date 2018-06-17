@@ -8,8 +8,9 @@ import { getStorage, setStorage } from '../../../store/helpers/LocalStorage'
 import { LOCAL_STORAGE_CATEGORIES } from '../../../config/version'
 
 // components
+import EmptyLoading from '../../components/preloaders/EmptyLoader'
 import Loading from '../../components/preloaders/GlobalLoader'
-import SubHeader from '../../components/headers/HomeSubHeader'
+// import SubHeaderHome from '../../components/headers/HomeSubHeader'
 import SubHeaderTitle from '../../components/headers/SubHeader'
 import Helmet from '../../components/Helmet'
 import NewsLoading from '../../components/preloaders/NewsCardLoader'
@@ -28,6 +29,10 @@ const CompetitionBox = Loadable({
 const MediapartnerBox = Loadable({
   loader: () => import('../../components/boxs/MediapartnerBox'),
   loading: Loading
+})
+const SubHeaderHome = Loadable({
+  loader: () => import('../../components/headers/HomeSubHeader'),
+  loading: EmptyLoading
 })
 
 // actions and store
@@ -115,7 +120,7 @@ class Home extends Component {
       <div>
         <Helmet />
         {/* slider */}
-        <SubHeader
+        <SubHeaderHome
           stats={kompetisi.stats || {}}
           slider={kompetisi.data['home_popular'] || {}}
         />

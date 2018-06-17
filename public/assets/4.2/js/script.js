@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // dropdown
   window.onclick = (e) => {
       // show hide modal
-      if(e.target.matches('.btn.btn-white.btn-close-modal.btn-sm.fa.fa-close'))
+      if(e.target.matches('.btn.btn-white.btn-close-modal.btn-sm.fas.fa-times'))
       {
         let {id} = e.target.parentNode.parentNode;
         if(!id) id = e.target.parentNode.parentNode.parentNode.id;

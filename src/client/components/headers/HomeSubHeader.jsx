@@ -170,7 +170,7 @@ class HomeSubHeader extends Component {
                     className={
                       this.state.active === n
                         ? 'fa fa-circle'
-                        : 'fa fa-circle-o'
+                        : 'far fa-circle'
                     }
                   />
                 )
