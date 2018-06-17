@@ -18,27 +18,35 @@ class RequestBox extends Component {
 
         {data && data.status ? (
           <div className="p-b-50">
-            {data.status === 200 ? (
+
+            {/* data count status */}
+            {data.data && data.status === 200 ? (
               <p>
                 Menampilkan <strong>{data.data.length}</strong> dari{' '}
                 <strong>{data.count}</strong> request
               </p>
             ) : null}
 
-            {data.status === 200 ? (
-              data.data.map((n, key) => {
-                return <List key={key} {...n} />
-              })
-            ) : (
-              <div className="muted">{data.message}</div>
-            )}
+            {/* rows literation */}
+            {data.data
+              ? data.data.map((n, key) => {
+                  return <List key={key} {...n} />
+                })
+              : null}
 
-            <div className='align-center'>
-              <a className="btn btn-white">
-                Request berikutnya <i className="fa fa-angle-down" />
-              </a>
-            </div>
+            {/* print message from api */}
+            {data.status !== 200 ? (
+              <div className="muted align-center">{data.message}</div>
+            ) : null}
 
+            {/* button loadmore */}
+            {data.data && data.status === 200 ? (
+              <div className="align-center">
+                <a className="btn btn-white">
+                  Request berikutnya <i className="fa fa-angle-down" />
+                </a>
+              </div>
+            ) : null}
           </div>
         ) : null}
       </div>
