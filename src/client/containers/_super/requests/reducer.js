@@ -5,8 +5,9 @@ import {
 } from '../../../../store/consts'
 import * as Mutations from '../../../../store/helpers/Mutations'
 import * as Selector from './selectors'
+import { combineReducers } from 'redux'
 
-export default (state = {}, action = {}) => {
+function list(state = {}, action = {}) {
   switch (action.type) {
     // request data from api
     case REQUEST_DATA:
@@ -41,3 +42,7 @@ export default (state = {}, action = {}) => {
       return state
   }
 }
+
+export default combineReducers({
+  list
+})

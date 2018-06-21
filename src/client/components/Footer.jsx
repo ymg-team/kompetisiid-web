@@ -52,6 +52,16 @@ export default props => (
                   </Link>
                 </li>
                 <li>
+                  <Link to="/news/TVRnPQ/Term-Of-Use">
+                    Aturan Penggunaan
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/news/TVRjPQ/Privacy-Policy">
+                    Kebijakan Privasi
+                  </Link>
+                </li>
+                <li>
                   <Link to="/news">Berita terbaru</Link>
                 </li>
                 <li>

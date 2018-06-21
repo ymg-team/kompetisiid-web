@@ -103,7 +103,7 @@ function mapStateToProps(state) {
   const { User, Request } = state
   return {
     session: User.session.data,
-    data: Request
+    data: Request.list
   }
 }
 
