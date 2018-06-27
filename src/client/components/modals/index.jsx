@@ -1,21 +1,6 @@
 import Styled from 'styled-components'
 import { transparentBlack, mainWhite } from '../../../style/colors'
 
-const ModalBgImage = [
-  {
-    url: 'http://res.cloudinary.com/dhjkktmal/image/upload/v1527807398/kompetisi-id/volcano-16912_1280.jpg',
-    caption: 'Gunung Bromo, Kabupaten Probolinggo, Kabupaten Pasuruan, Kabupaten Lumajang, dan Kabupaten Malang, Jawa Timur - pixabay.com'
-  },
-  {
-    url: 'http://res.cloudinary.com/dhjkktmal/image/upload/v1527807398/kompetisi-id/temple-2366184_1280.jpg',
-    caption: 'Candi Borobudur, Magelang, Jawa Tengah - pixabay.com'
-  },
-  {
-    url: 'http://res.cloudinary.com/dhjkktmal/image/upload/v1527807399/kompetisi-id/beach-3268191_1280.jpg',
-    caption: 'Pantai Pok Tunggal, Gunung Kidul, DIY - pixabay.com'
-  }
-]
-
 const ModalStyled = Styled.div`
   visibility: hidden; 
   opacity: 0;
@@ -40,8 +25,6 @@ const ModalStyled = Styled.div`
     z-index: -1;
     
     display: block;
-    background-image: url(${ModalBgImage[1].url});
-    background-size:cover;
     width: 100%;
     height: 100%;
     
