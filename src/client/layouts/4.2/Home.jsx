@@ -23,7 +23,10 @@ class LayoutHome extends Component {
   }
 
   render() {
-    const { fullscreen } = matchRoutes(this.props.route.routes, this.props.location.pathname)[0].route
+    const { fullscreen } = matchRoutes(
+      this.props.route.routes,
+      this.props.location.pathname
+    )[0].route
     const { q } = this.state
     return (
       <div>

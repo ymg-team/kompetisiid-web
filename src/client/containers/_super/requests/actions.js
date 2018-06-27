@@ -8,6 +8,22 @@ import { CALL_API } from '../../../../store/middlewares/api'
 import { objToQuery } from 'string-manager/dist/modules/httpquery'
 
 /**
+ * @description function to request count total send competition
+ */
+export function fetchCountRequest() {
+  return {
+    [CALL_API]: {
+      typeSuccess: RECEIVE_DATA,
+      typeWaiting: REQUEST_DATA,
+      filter,
+      method: 'get',
+      target: 'count_request_kompetisi',
+      url: `/api/request/count`
+    }
+  }
+}
+
+/**
  * @description function to request list send competition by parameters
  * @param {Object} params
  * @param {String} params.status, oneof: posted, reject, waiting
