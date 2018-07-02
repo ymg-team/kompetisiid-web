@@ -53,7 +53,14 @@ class AddCompetitionFast extends Component {
         'Wajib menyetujui syarat dan ketentuan yang berlaku',
         'error'
       )
-    } else if (grecaptcha.getResponse().length == 0) {
+    } else if (!this.state.input_poster) {
+      return alert(
+        true,
+        'Wajib upload poster',
+        'error'
+      )
+    }
+    else if (grecaptcha.getResponse().length == 0) {
       return alert(true, 'Rechaptcha belum valid', 'error')
     } //start submit
     else {
