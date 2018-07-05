@@ -11,6 +11,7 @@ import { connect } from 'react-redux'
 import Helmet from '../../components/Helmet'
 import CompetitionLoading from '../../components/preloaders/CompetitionCardLoader'
 import Modal from '../../components/modals'
+import MediaPartner from '../../components/cards/MediaPartner'
 
 const CompetitionBox = Loadable({
   loader: () => import('../../components/boxs/CompetitionBox'),
@@ -23,7 +24,7 @@ const SortText = {
 }
 
 const FilterStatus = {
-  'active': 'Masih berlangsung'
+  active: 'Masih berlangsung'
 }
 
 class Index extends Component {
@@ -66,7 +67,10 @@ class Index extends Component {
       np.kompetisi.categories.status == 200
     ) {
       // save categories to local storage
-      setStorage(LOCAL_STORAGE_CATEGORIES, JSON.stringify(np.kompetisi.categories))
+      setStorage(
+        LOCAL_STORAGE_CATEGORIES,
+        JSON.stringify(np.kompetisi.categories)
+      )
     }
 
     this.setState(
@@ -134,7 +138,7 @@ class Index extends Component {
   updateQuery(nextquery) {
     let query = queryToObj(this.props.location.search.replace('?', ''))
     query = Object.assign(query, nextquery)
-    return this.props.history.push({search: `?${objToQuery(query)}`})
+    return this.props.history.push({ search: `?${objToQuery(query)}` })
   }
 
   render() {
@@ -248,7 +252,7 @@ class Index extends Component {
                   href="javascript:;"
                   onClick={() => modal('open', 'filter-by-status')}
                 >
-                  { FilterStatus[this.state.status] || 'Semua'}
+                  {FilterStatus[this.state.status] || 'Semua'}
                   <i className="fa fa-angle-down" />
                 </a>
                 {tag ? ` Tag "${tag}"` : ''}
@@ -267,6 +271,14 @@ class Index extends Component {
           </div>
         </div>
         {/*end of filter*/}
+
+        {/* media partner ads*/}
+        <div className="container">
+          <div className="col-md-12">
+            <MediaPartner />
+          </div>
+        </div>
+        {/* end of media partner */}
 
         {/*content*/}
         <CompetitionBox subtitle={true} {...data[filter]} />
@@ -311,9 +323,7 @@ class Index extends Component {
                           onClick={() => {
                             modal('close', 'select-main-kat')
                             this.props.history.push(
-                              `/browse/${n.name}${
-                                this.props.location.search
-                              }`
+                              `/browse/${n.name}${this.props.location.search}`
                             )
                           }}
                           className="text-muted"
@@ -366,9 +376,9 @@ class Index extends Component {
                             onClick={() => {
                               modal('close', 'select-sub-kat')
                               this.props.history.push(
-                                `/browse/${
-                                  categories.data[main_kat].name
-                                }/${n.name}${this.props.location.search}`
+                                `/browse/${categories.data[main_kat].name}/${
+                                  n.name
+                                }${this.props.location.search}`
                               )
                             }}
                             className="text-muted"
@@ -399,7 +409,7 @@ class Index extends Component {
                   <a
                     onClick={() => {
                       modal('close', 'sort-by')
-                      this.updateQuery({sort: 'time_dsc'})
+                      this.updateQuery({ sort: 'time_dsc' })
                     }}
                     href="javascript:;"
                   >
@@ -410,7 +420,7 @@ class Index extends Component {
                   <a
                     onClick={() => {
                       modal('close', 'sort-by')
-                      this.updateQuery({sort: 'prize_dsc'})
+                      this.updateQuery({ sort: 'prize_dsc' })
                     }}
                     href="javascript:;"
                   >
@@ -437,7 +447,7 @@ class Index extends Component {
                   <a
                     onClick={() => {
                       modal('close', 'filter-by-status')
-                      this.updateQuery({status: 'all'})
+                      this.updateQuery({ status: 'all' })
                     }}
                     href="javascript:;"
                   >
@@ -448,7 +458,7 @@ class Index extends Component {
                   <a
                     onClick={() => {
                       modal('close', 'filter-by-status')
-                      this.updateQuery({status: 'active'})
+                      this.updateQuery({ status: 'active' })
                     }}
                     href="javascript:;"
                   >
@@ -468,7 +478,6 @@ class Index extends Component {
 function setCategories(props = {}, state = {}) {
   let main_kat, sub_kat
   if (props.kompetisi.categories.status) {
-    
     if (props.match.params.mainkat) {
       props.kompetisi.categories.data.map((n, key) => {
         if (n.name === props.match.params.mainkat) main_kat = key
@@ -532,8 +541,7 @@ function generateParams(n = {}, props = null) {
   if (props) {
     const { categories } = props.kompetisi
     // browse competition by main category
-    if (parseInt(main_kat) >= 0)
-      Params.mainkat = categories.data[main_kat].name
+    if (parseInt(main_kat) >= 0) Params.mainkat = categories.data[main_kat].name
 
     // browse competition by sub category
     if (parseInt(sub_kat) >= 0)
@@ -609,4 +617,7 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Index)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Index)
