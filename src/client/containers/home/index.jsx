@@ -10,7 +10,7 @@ import { LOCAL_STORAGE_CATEGORIES } from '../../../config/version'
 // components
 import EmptyLoading from '../../components/preloaders/EmptyLoader'
 import Loading from '../../components/preloaders/GlobalLoader'
-// import SubHeaderHome from '../../components/headers/HomeSubHeader'
+import MediaPartner from '../../components/cards/MediaPartner'
 import SubHeaderTitle from '../../components/headers/SubHeader'
 import Helmet from '../../components/Helmet'
 import NewsLoading from '../../components/preloaders/NewsCardLoader'
@@ -132,6 +132,14 @@ class Home extends Component {
             text="Ikuti beragam kompetisi disini sesuai dengan minat kamu."
           />
         </div>
+        
+        {/* media partners ads */}
+        <div className="container">
+          <div className="col-md-12">
+            <MediaPartner />
+          </div>
+        </div>
+
         <GrayBackgroundStyled className="col-md-12">
           <CompetitionBox subtitle={false} {...kompetisi.data['home_latest']} />
           <div className="row align-center">

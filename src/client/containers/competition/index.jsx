@@ -21,6 +21,7 @@ import Discussions from '../../components/competition-detail/Discussions'
 import NextPrev from '../../components/navigations/NextPrev'
 import ErrorCard from '../../components/cards/ErrorCard'
 import Host from '../../../config/host'
+import MediaPartner from '../../components/cards/MediaPartner'
 
 const CompetitionBox = Loadable({
   loader: () => import('../../components/boxs/CompetitionBox'),
@@ -309,6 +310,10 @@ class Index extends Component {
                             ) : null}
                             <br />
                             <br />
+                            
+                            {/* media parner ads */}
+                            <MediaPartner size="square" />
+
                             {/* show you */}
                             <a
                               target="_blank"
