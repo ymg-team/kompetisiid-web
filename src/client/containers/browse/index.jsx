@@ -149,7 +149,7 @@ class Index extends Component {
 
     let title = 'Jelajah Kompetisi'
     let description =
-      'Jelajahi kompetisi dari berbagai macam kategori di Kompetisi Indonesia'
+      'Jelajahi kompetisi dari berbagai macam kategori di Kompetisi ID'
 
     // jelajah kompetisi by kategori
     if (main_kat) {

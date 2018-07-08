@@ -21,16 +21,34 @@ const MediaPartnerStyled = Styled.div`
   }
 `
 
+let adsInterval
+
 export default class MediaPartner extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      active: 0
+      active: Math.floor(Math.random() * MediaPartnerData.length)
     }
   }
 
   static defaultProps = {
     size: 'landscape'
+  }
+
+  componentDidMount() {
+    // generate random index
+    adsInterval = setInterval(() => {
+      const nextIndex = Math.floor(Math.random() * MediaPartnerData.length)
+      console.log('update ads to index : ')
+      this.setState({
+        active: nextIndex
+      })
+    }, 20000)
+  }
+
+  componentWillUnmount()
+  {
+    clearInterval(adsInterval)
   }
 
   render() {

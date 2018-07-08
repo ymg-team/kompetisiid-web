@@ -144,7 +144,7 @@ class Index extends Component {
                         >
                           <strong>Perhatian&nbsp;</strong>
                           Di kompetisi ini,{' '}
-                          <strong>Kompetisi Indonesia </strong>hanya berlaku
+                          <strong>Kompetisi ID </strong>hanya berlaku
                           sebagai media publikasi. Jika ada pertanyaan lebih
                           lanjut mengenai kompetisi ini silahkan sampaikan
                           langsung ke kontak yang tersedia tab kontak.
@@ -158,7 +158,7 @@ class Index extends Component {
                         >
                           <strong>Perhatian&nbsp;</strong>
                           Di kompetisi ini,{' '}
-                          <strong>Kompetisi Indonesia </strong>berlaku sebagai
+                          <strong>Kompetisi ID </strong>berlaku sebagai
                           media partner, jika ada pertanyaan lebih lanjut
                           mengenai kompetisi ini, bisa ditanyakan langsung ke
                           penyelenggara atau melalui tab diskusi.
@@ -171,7 +171,7 @@ class Index extends Component {
                         >
                           <strong>Perhatian&nbsp;</strong>
                           Kompetisi ini bisa diikuti langsung di{' '}
-                          <strong>Kompetisi Indonesia</strong>, silahkan login
+                          <strong>Kompetisi ID</strong>, silahkan login
                           dan klik tombol 'ikuti kompetisi'.
                         </div>
                       ) : null}

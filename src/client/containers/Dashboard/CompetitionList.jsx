@@ -76,7 +76,7 @@ class MyCompetition extends Component
                 />
                 <HeaderDashboard 
                     title='Kompetisi Terpasang'
-                    text= 'Berikut adalah kompetisi yang telah anda pasang di Kompetisi Indonesia.'
+                    text= 'Berikut adalah kompetisi yang telah anda pasang di Kompetisi ID.'
                 />
                 <Tab 
                     tabs={tabcontent}
