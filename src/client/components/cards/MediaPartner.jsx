@@ -43,7 +43,7 @@ export default class MediaPartner extends Component {
       this.setState({
         active: nextIndex
       })
-    }, 20000)
+    }, 10000)
   }
 
   componentWillUnmount()
