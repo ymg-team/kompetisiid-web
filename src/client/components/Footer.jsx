@@ -109,7 +109,7 @@ export default props => (
               <img
                 className="footer-copyright-logo"
                 src="/assets/4.2/img/icon-128x128.png"
-                title="kompetisi indonesia icon"
+                title="kompetisi id icon"
               />
               <small className="footer-copyright-text">
                 &copy; 2013 - {new Date().getFullYear()} - now by Kompetisi
