@@ -45,13 +45,13 @@ class Index extends Component
             if(profile[username].meta.code == 200)
             {
                 helmetdata = {
-                    title: `profil ${username} - Kompetisi Indonesia`,
-                    description: `halaman profil ${username} - di Kompetisi Indonesia`
+                    title: `profil ${username} - Kompetisi ID`,
+                    description: `halaman profil ${username} - di Kompetisi ID`
                 }
             }else 
             {
                 helmetdata = {
-                    title: `profil ${username} - Kompetisi Indonesia`,
+                    title: `profil ${username} - Kompetisi ID`,
                     description: profile[username].meta.message
                 }
             }

@@ -91,8 +91,8 @@ export default class Register extends Component {
     return (
       <div className="container">
         <Helmet
-          title="Register - Kompetisi Indonesia"
-          description="Mendaftarkan akun baru di Kompetisi Indonesia"
+          title="Register - Kompetisi ID"
+          description="Mendaftarkan akun baru di Kompetisi ID"
         />
         <div className="col-md-12 full-body-header">
           <Link to="/">

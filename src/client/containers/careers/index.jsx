@@ -21,7 +21,7 @@ class CareersContainer extends Component {
     return (
       <div>
         <Helmet
-          title="Karir - Kompetisi Indonesia"
+          title="Karir - Kompetisi ID"
           description="Mari bergabung bersama kami untuk terus meramaikan semangat kompetisi di Indonesia"
         />
         <CareerBox />
