@@ -8,16 +8,12 @@ import { connect } from 'react-redux'
 
 // components
 import Helmet from '../../components/Helmet'
+import Loading from "../../components/preloaders/GlobalLoader"
+import EmptyLoading from "../../components/preloaders/EmptyLoader"
 import Tab, { tab } from '../../components/navigations/TabCompetition'
 import Loader from '../../components/loaders/DefaultLoader'
 import CompetitionDetailBox from '../../components/boxs/CompetitionDetail'
 import CompetitionLoading from '../../components/preloaders/CompetitionCardLoader'
-import Regulations from '../../components/competition-detail/Regulations'
-import Prizes from '../../components/competition-detail/Prizes'
-import Announcements from '../../components/competition-detail/Announcements'
-import Contacts from '../../components/competition-detail/Contacts'
-import Share from '../../components/competition-detail/Share'
-import Discussions from '../../components/competition-detail/Discussions'
 import NextPrev from '../../components/navigations/NextPrev'
 import ErrorCard from '../../components/cards/ErrorCard'
 import Host from '../../../config/host'
@@ -26,6 +22,30 @@ import MediaPartner from '../../components/cards/MediaPartner'
 const CompetitionBox = Loadable({
   loader: () => import('../../components/boxs/CompetitionBox'),
   loading: CompetitionLoading
+})
+const Contacts = Loadable({
+  loader: () => import('../../components/competition-detail/Contacts'),
+  loading: Loading
+})
+const Share = Loadable({
+  loader: () => import('../../components/competition-detail/Share'),
+  loading: Loading
+})
+const Announcements = Loadable({
+  loader: () => import('../../components/competition-detail/Announcements'),
+  loading: Loading
+})
+const Prizes = Loadable({
+  loader: () => import('../../components/competition-detail/Prizes'),
+  loading: Loading
+})
+const Regulations = Loadable({
+  loader: () => import('../../components/competition-detail/Regulations'),
+  loading: Loading
+})
+const Discussions = Loadable({
+  loader: () => import('../../components/competition-detail/Discussions'),
+  loading: Loading
 })
 
 class Index extends Component {
