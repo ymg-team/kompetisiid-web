@@ -193,8 +193,8 @@ class Index extends Component {
                                     }
                                     link_source={detail[encid].data.link_source}
                                     tags={
-                                      detail[encid].data.tags
-                                        ? detail[encid].data.tags.split(',')
+                                      detail[encid].data.tag
+                                        ? detail[encid].data.tag.split(',')
                                         : []
                                     }
                                     html={detail[encid].data.content}
