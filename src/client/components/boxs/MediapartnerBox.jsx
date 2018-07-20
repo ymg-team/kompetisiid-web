@@ -4,7 +4,7 @@ import { truncate } from 'string-manager'
 import Loader from '../preloaders/GlobalLoader'
 
 export default class MediapartnerBox extends Component {
-  generateList() {
+  generateList = () => {
     const { data } = this.props
     return data.map((n, key) => {
       return (

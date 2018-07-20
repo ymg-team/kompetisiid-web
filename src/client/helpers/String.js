@@ -24,7 +24,12 @@ function parseUrl(text = '') {
   text = text.replace(
     /(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])(?![^<>]*>)/gim,
     function(t) {
-      return `<a target='_blank' rel='noopener' href='/exit?to=${t}'>${t}</a>`
+      console.log('link', t)
+      if(t.search('https://kompetisi.id') === 0) {
+        return `<a href="${t}">${t}</a>`
+      } else {
+        return `<a target='_blank' rel='noopener' href='/exit?to=${t}'>${t}</a>`
+      }
     }
   )
   return text

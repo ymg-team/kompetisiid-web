@@ -9,10 +9,10 @@ export default [
   },
   {
     title: '16th Economix - Global Economic Challenges ',
-    url: 'http://www.economix-febui.com/competition/',
+    url: 'https://kompetisi.id/news/TlRBPQ/16th-Economix---Global-Economic-Challenges-',
     poster: {
-      landscape: 'https://res.cloudinary.com/dhjkktmal/image/upload/v1531012335/kompetisi-id/media-partners/feb_ui_economix_square_landscape.png',
-      square: 'https://res.cloudinary.com/dhjkktmal/image/upload/v1531012334/kompetisi-id/media-partners/feb_ui_economix_square.jpg'
+      landscape: 'https://res.cloudinary.com/dhjkktmal/image/upload/v1532005124/kompetisi-id/media-partners/2018/media_partner_economix.png',
+      square: 'https://res.cloudinary.com/dhjkktmal/image/upload/c_scale,q_65,w_800/v1532005682/kompetisi-id/media-partners/2018/Instagram_Economix_copy.jpg'
     }
   }
 ]
