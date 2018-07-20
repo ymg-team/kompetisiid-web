@@ -1,11 +1,26 @@
+import Loadable from 'react-loadable'
+
 // layouts
 import EmptyLayout from '../layouts/4.2/Empty'
 import SuperLayout from '../layouts/SuperLayoutV5'
 
+// components
+import Loading from '../components/preloaders/GlobalLoader'
+import EmptyLoading from '../components/preloaders/EmptyLoader'
+
 // containers
-import SuperDashboard from '../containers/_super/dashboard/index'
-import Request from '../containers/_super/requests/index'
-import NotFound from '../containers/error/index'
+const SuperDashboard = Loadable({
+  loader: () => import('../containers/_super/dashboard/index'),
+  loading: Loading
+})
+const Request = Loadable({
+  loader: () => import('../containers/_super/requests/index'),
+  loading: Loading
+})
+const NotFound = Loadable({
+  loader: () => import('../containers/error/index'),
+  loading: Loading
+})
 
 export default {
   path: '/super',

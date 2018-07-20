@@ -10,8 +10,6 @@ import { LOCAL_STORAGE_CATEGORIES } from '../../../config/version'
 // components
 import EmptyLoading from '../../components/preloaders/EmptyLoader'
 import Loading from '../../components/preloaders/GlobalLoader'
-import MediaPartner from '../../components/cards/MediaPartner'
-import SubHeaderTitle from '../../components/headers/SubHeader'
 import Helmet from '../../components/Helmet'
 import NewsLoading from '../../components/preloaders/NewsCardLoader'
 import CompetitionLoading from '../../components/preloaders/CompetitionCardLoader'
@@ -32,6 +30,14 @@ const MediapartnerBox = Loadable({
 })
 const SubHeaderHome = Loadable({
   loader: () => import('../../components/headers/HomeSubHeader'),
+  loading: EmptyLoading
+})
+const SubHeaderTitle = Loadable({
+  loader: () => import('../../components/headers/SubHeader'),
+  loading: EmptyLoading
+})
+const MediaPartner = Loadable({
+  loader: () => import('../../components/cards/MediaPartner'),
   loading: EmptyLoading
 })
 

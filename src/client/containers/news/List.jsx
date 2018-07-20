@@ -5,12 +5,16 @@ import Loadable from 'react-loadable'
 
 // components
 import NewsLoading from '../../components/preloaders/NewsCardLoader'
+import EmptyLoading from '../../components/preloaders/EmptyLoader'
 import Helmet from '../../components/Helmet'
-import Subheader from '../../components/Subheader'
 
 const Limit = 6
 let AddedEventListener = false
 
+const Subheader = Loadable({
+  loader: () => import('../../components/Subheader'),
+  loading: EmptyLoading
+})
 const Newsbox = Loadable({
   loader: () => import('../../components/boxs/NewsBox'),
   loading: NewsLoading
@@ -123,4 +127,7 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(List)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(List)

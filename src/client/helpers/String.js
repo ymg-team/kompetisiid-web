@@ -25,7 +25,7 @@ function parseUrl(text = '') {
     /(\b(https?|ftp):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])(?![^<>]*>)/gim,
     function(t) {
       console.log('link', t)
-      if(t.search('https://kompetisi.id') === 0) {
+      if (t.search('https://kompetisi.id') === 0) {
         return `<a href="${t}">${t}</a>`
       } else {
         return `<a target='_blank' rel='noopener' href='/exit?to=${t}'>${t}</a>`
@@ -42,6 +42,11 @@ function parseUrl(text = '') {
  */
 export function nl2br(text) {
   return text.split('\n').map((item, key) => {
-    return <span key={key}>{item}<br/></span>
+    return (
+      <span key={key}>
+        {item}
+        <br />
+      </span>
+    )
   })
 }

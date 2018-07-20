@@ -17,6 +17,7 @@ class Index extends Component {
 
   componentDidMount() {
     window.scrollTo(0, 0)
+
     const Categories = getStorage(LOCAL_STORAGE_CATEGORIES)
     if (Categories) {
       this.props.dispatch(setCategories(JSON.parse(Categories)))
