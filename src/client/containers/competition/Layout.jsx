@@ -1,58 +1,54 @@
 import React, { Component } from 'react'
 import { renderRoutes, matchRoutes } from 'react-router-config'
-import Tab, { tab } from '../../components/navigations/TabCompetition'
-
 import { connect } from 'react-redux'
-import CompetitionPreloader from '../../components/preloaders/CompetitionDetail'
+import memoize from 'memoize-one'
+import { pushScript } from '../../helpers/DomEvents'
 import { topLoading } from '../../components/preloaders'
 import { toCamelCase } from 'string-manager'
+
+// components
+import Tab, { tab } from '../../components/navigations/TabCompetition'
+import CompetitionPreloader from '../../components/preloaders/CompetitionDetail'
 import { getDetail, getRelated } from './actions'
-import { pushScript } from '../../helpers/DomEvents'
 
 class LayoutCompetition extends Component {
   static fetchData({ params, store }) {
     return store.dispatch(getDetail(params.encid))
   }
 
-  constructor(props) {
-    super(props)
-    this.state = {
-      encid: this.props.match.params.encid
-    }
-  }
-
   componentDidMount() {
     window.scrollTo(0, 0)
-    this.reqData(this.props)
-    this.reqRelatedCompetitions(this.props)
+    this.reqData(this.props.match.params.encid)
+    this.reqRelatedCompetitions(this.props.match.params.encid)
     pushScript('https://kompetisiindonesia.disqus.com/embed.js')
   }
 
-  componentWillReceiveProps(np) {
-    this.setState({ encid: np.match.params.encid })
-    if (this.props.match.params.encid != np.match.params.encid) {
-      if (window != undefined) window.scrollTo(0, 0)
-      this.reqData(np)
-      this.reqRelatedCompetitions(np)
-    }
+  componentDidUpdate() {
+    // on update route to other competition
+    this.onUpdateRoute(this.props.match.params.encid)
   }
 
-  reqData(props) {
-    const { encid } = props.match.params
-    if (!props.kompetisi.detail[encid]) {
+  onUpdateRoute = memoize(encid => {
+    scrollTo(0,0)
+    this.reqData(encid)
+    this.reqRelatedCompetitions(encid)
+  })
+
+  reqData(encid) {
+    // const { encid } = props.match.params
+    if (!this.props.kompetisi.detail[encid]) {
       topLoading(true)
       this.props.dispatch(getDetail(encid))
     }
   }
 
-  reqRelatedCompetitions(props) {
-    const { encid } = props.match.params
-    if (!props.kompetisi.data[`related_${encid}`])
+  reqRelatedCompetitions(encid) {
+    if (!this.props.kompetisi.data[`related_${encid}`])
       this.props.dispatch(getRelated(encid, `related_${encid}`))
   }
 
   render() {
-    const { encid } = this.state
+    const { encid } = this.props.match.params
     const { detail, related, pengumuman } = this.props.kompetisi
 
     if (typeof window !== 'undefined' && detail[encid] && detail[encid].meta)

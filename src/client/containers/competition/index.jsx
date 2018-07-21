@@ -5,11 +5,12 @@ import { nominalToText } from '../../helpers/Number'
 import { nl2br } from '../../helpers/String'
 import { toCamelCase } from 'string-manager'
 import { connect } from 'react-redux'
+import memoize from 'memoize-one'
 
 // components
 import Helmet from '../../components/Helmet'
-import Loading from "../../components/preloaders/GlobalLoader"
-import EmptyLoading from "../../components/preloaders/EmptyLoader"
+import Loading from '../../components/preloaders/GlobalLoader'
+import EmptyLoading from '../../components/preloaders/EmptyLoader'
 import Tab, { tab } from '../../components/navigations/TabCompetition'
 import Loader from '../../components/loaders/DefaultLoader'
 import CompetitionDetailBox from '../../components/boxs/CompetitionDetail'
@@ -57,7 +58,7 @@ class Index extends Component {
     this.handleScroll = this.handleScroll.bind(this)
   }
 
-  componentDidMount(){
+  componentDidMount() {
     // add scroll listener
     addEventListener('scroll', this.handleScroll, true)
   }
@@ -68,7 +69,7 @@ class Index extends Component {
   }
 
   handleScroll(e) {
-    console.log('scrolling in competition detail...')
+    // console.log('scrolling in competition detail...')
     const afterScroll =
       document.getElementById('competition-detail').offsetHeight + 40
     const tabEl = document.getElementById('container-competition-tab')
@@ -139,18 +140,17 @@ class Index extends Component {
         {detail[encid] && detail[encid].status ? (
           detail[encid].status == 200 ? (
             <div className="competition-detail">
-              
               {/* detail box competition */}
               <CompetitionDetailBox data={detail[encid].data} />
 
               <div className="m-20" />
-              
+
               {/* competition tab navigation */}
               <Tab
                 active={this.props.route.active_tab}
                 data={detail[encid].data}
               />
-              
+
               <div className="row">
                 <div className="container">
                   <div className="row competition-detail--content">
@@ -163,10 +163,9 @@ class Index extends Component {
                           className="alert alert-warning"
                         >
                           <strong>Perhatian&nbsp;</strong>
-                          Di kompetisi ini,{' '}
-                          <strong>Kompetisi ID </strong>hanya berlaku
-                          sebagai media publikasi. Jika ada pertanyaan lebih
-                          lanjut mengenai kompetisi ini silahkan sampaikan
+                          Di kompetisi ini, <strong>Kompetisi ID </strong>hanya
+                          berlaku sebagai media publikasi. Jika ada pertanyaan
+                          lebih lanjut mengenai kompetisi ini silahkan sampaikan
                           langsung ke kontak yang tersedia tab kontak.
                         </div>
                       ) : null}
@@ -177,11 +176,12 @@ class Index extends Component {
                           className="alert alert-blue"
                         >
                           <strong>Perhatian&nbsp;</strong>
-                          Di kompetisi ini,{' '}
-                          <strong>Kompetisi ID </strong>berlaku sebagai
-                          media partner, jika ada pertanyaan lebih lanjut
-                          mengenai kompetisi ini, bisa ditanyakan langsung ke
-                          penyelenggara atau melalui tab diskusi.
+                          Di kompetisi ini, <strong>
+                            Kompetisi ID{' '}
+                          </strong>berlaku sebagai media partner, jika ada
+                          pertanyaan lebih lanjut mengenai kompetisi ini, bisa
+                          ditanyakan langsung ke penyelenggara atau melalui tab
+                          diskusi.
                         </div>
                       ) : null}
                       {detail[encid].data.is_support ? (
@@ -191,8 +191,8 @@ class Index extends Component {
                         >
                           <strong>Perhatian&nbsp;</strong>
                           Kompetisi ini bisa diikuti langsung di{' '}
-                          <strong>Kompetisi ID</strong>, silahkan login
-                          dan klik tombol 'ikuti kompetisi'.
+                          <strong>Kompetisi ID</strong>, silahkan login dan klik
+                          tombol 'ikuti kompetisi'.
                         </div>
                       ) : null}
                       {/*end of alert*/}
@@ -330,7 +330,7 @@ class Index extends Component {
                             ) : null}
                             <br />
                             <br />
-                            
+
                             {/* media parner ads */}
                             <MediaPartner size="square" />
 
@@ -348,7 +348,6 @@ class Index extends Component {
                           </div>
                         ) : null}
                         {/* end of show sidebar info */}
-
                       </div>
                     </div>
                   </div>
@@ -435,4 +434,7 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Index)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Index)

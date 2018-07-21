@@ -1,30 +1,31 @@
-import React, { Component } from 'react'
-import { LOCAL_STORAGE_CATEGORIES } from '../../../config/version'
-import * as KompetisiActs from '../competition/actions'
-import { getStorage, setStorage } from '../../../store/helpers/LocalStorage'
-import Loadable from 'react-loadable'
-import { queryToObj, objToQuery } from 'string-manager'
-import { topLoading } from '../../components/preloaders'
-import { connect } from 'react-redux'
+import React, { Component } from "react"
+import { LOCAL_STORAGE_CATEGORIES } from "../../../config/version"
+import * as KompetisiActs from "../competition/actions"
+import { getStorage, setStorage } from "../../../store/helpers/LocalStorage"
+import Loadable from "react-loadable"
+import { queryToObj, objToQuery } from "string-manager"
+import { topLoading } from "../../components/preloaders"
+import { connect } from "react-redux"
+import memoize from "memoize-one"
 
 // components
-import Helmet from '../../components/Helmet'
-import CompetitionLoading from '../../components/preloaders/CompetitionCardLoader'
-import Modal from '../../components/modals'
-import MediaPartner from '../../components/cards/MediaPartner'
+import Helmet from "../../components/Helmet"
+import CompetitionLoading from "../../components/preloaders/CompetitionCardLoader"
+import Modal from "../../components/modals"
+import MediaPartner from "../../components/cards/MediaPartner"
 
 const CompetitionBox = Loadable({
-  loader: () => import('../../components/boxs/CompetitionBox'),
+  loader: () => import("../../components/boxs/CompetitionBox"),
   loading: CompetitionLoading
 })
 
 const SortText = {
-  time_dsc: 'Terbaru',
-  prize_dsc: 'Hadiah terbesar'
+  time_dsc: "Terbaru",
+  prize_dsc: "Hadiah terbesar"
 }
 
 const FilterStatus = {
-  active: 'Masih berlangsung'
+  active: "Masih berlangsung"
 }
 
 class Index extends Component {
@@ -39,7 +40,7 @@ class Index extends Component {
     super(props)
     this.state = generateState(
       this.props.location.search
-        ? queryToObj(this.props.location.search.replace('?', ''))
+        ? queryToObj(this.props.location.search.replace("?", ""))
         : {},
       this.props.match.params
     )
@@ -58,7 +59,7 @@ class Index extends Component {
     // request
     this.reqData()
     //scroll event listener
-    window.addEventListener('scroll', this.handleScroll, true)
+    window.addEventListener("scroll", this.handleScroll, true)
   }
 
   componentWillReceiveProps(np) {
@@ -77,7 +78,7 @@ class Index extends Component {
       Object.assign(
         generateState(
           np.location.search
-            ? queryToObj(np.location.search.replace('?', ''))
+            ? queryToObj(np.location.search.replace("?", ""))
             : {},
           np.match.params
         ),
@@ -90,15 +91,15 @@ class Index extends Component {
   }
 
   componentWillUnmount() {
-    console.log('remove scroll listener')
-    window.removeEventListener('scroll', this.handleScroll, true)
+    // console.log('remove scroll listener')
+    window.removeEventListener("scroll", this.handleScroll, true)
     // window.onscroll = null
   }
 
   handleScroll(e) {
-    console.log('scrolling in browse competition...')
-    if (document.getElementById('browse-container')) {
-      const ContainerHeight = document.getElementById('competition-container')
+    // console.log('scrolling in browse competition...')
+    if (document.getElementById("browse-container")) {
+      const ContainerHeight = document.getElementById("competition-container")
         .offsetHeight
       if (window.pageYOffset >= ContainerHeight - 600) this.reqMore()
     }
@@ -124,8 +125,8 @@ class Index extends Component {
         !this.props.kompetisi.data[Filter].is_loading &&
         this.props.kompetisi.data[Filter].status === 200
       ) {
-        console.log('params', Params)
-        if (Params.orderby === 'prize_dsc') {
+        console.log("params", Params)
+        if (Params.orderby === "prize_dsc") {
           Params.lastid = Kompetisi[Kompetisi.length - 1].prize.total
         } else {
           Params.lastid = Kompetisi[Kompetisi.length - 1].id
@@ -136,7 +137,7 @@ class Index extends Component {
   }
 
   updateQuery(nextquery) {
-    let query = queryToObj(this.props.location.search.replace('?', ''))
+    let query = queryToObj(this.props.location.search.replace("?", ""))
     query = Object.assign(query, nextquery)
     return this.props.history.push({ search: `?${objToQuery(query)}` })
   }
@@ -145,11 +146,11 @@ class Index extends Component {
     const { tag, username, main_kat, sub_kat, q } = this.state
     const { data, categories } = this.props.kompetisi
     const filter = generateFilter(this.state)
-    const query = queryToObj(this.props.location.search.replace('?', '')) || {}
+    const query = queryToObj(this.props.location.search.replace("?", "")) || {}
 
-    let title = 'Jelajah Kompetisi'
+    let title = "Jelajah Kompetisi"
     let description =
-      'Jelajahi kompetisi dari berbagai macam kategori di Kompetisi ID'
+      "Jelajahi kompetisi dari berbagai macam kategori di Kompetisi ID"
 
     // jelajah kompetisi by kategori
     if (main_kat) {
@@ -181,7 +182,7 @@ class Index extends Component {
       description = `Jelajahi kompetisi yang menjadikan Kompetisi.id sebagai media partner`
     }
 
-    if (typeof window !== 'undefined' && data[filter] && data[filter].meta) {
+    if (typeof window !== "undefined" && data[filter] && data[filter].meta) {
       topLoading(false)
     }
 
@@ -190,15 +191,15 @@ class Index extends Component {
         <Helmet
           title={title}
           meta={[
-            { name: 'description', content: description },
-            { property: 'og:title', content: title },
-            { property: 'og:url', content: 'http://kompetisi.id/browse' },
+            { name: "description", content: description },
+            { property: "og:title", content: title },
+            { property: "og:url", content: "http://kompetisi.id/browse" },
             {
-              property: 'og:image',
-              content: 'http://kompetisi.id/assets/images/wide-red-logo.png'
+              property: "og:image",
+              content: "http://kompetisi.id/assets/images/wide-red-logo.png"
             },
-            { property: 'og:description', content: description },
-            { property: 'og:type', content: 'article' }
+            { property: "og:description", content: description },
+            { property: "og:type", content: "article" }
           ]}
         />
 
@@ -208,29 +209,29 @@ class Index extends Component {
             {/* filter by main category and sub category */}
             <div className="row no-margin">
               <h1>
-                {' '}
+                {" "}
                 Jelajah
-                {query.mediapartner == 1 ? ' Media Partner' : ''}{' '}
+                {query.mediapartner == 1 ? " Media Partner" : ""}{" "}
                 <a
                   href="javascript:;"
-                  onClick={() => modal('open', 'select-main-kat')}
+                  onClick={() => modal("open", "select-main-kat")}
                 >
                   {parseInt(main_kat) >= 0
                     ? categories.data[main_kat].name
-                    : 'Semua kategori'}
+                    : "Semua kategori"}
                   <i className="fa fa-angle-down" />
                 </a>
                 {parseInt(main_kat) >= 0 ? (
                   <span>
-                    {' '}
-                    dan{' '}
+                    {" "}
+                    dan{" "}
                     <a
                       href="javascript:;"
-                      onClick={() => modal('open', 'select-sub-kat')}
+                      onClick={() => modal("open", "select-sub-kat")}
                     >
                       {parseInt(sub_kat) >= 0
                         ? categories.data[main_kat].subcategories[sub_kat].name
-                        : 'Semua subkategori'}
+                        : "Semua subkategori"}
                       <i className="fa fa-angle-down" />
                     </a>
                   </span>
@@ -241,22 +242,22 @@ class Index extends Component {
             <div className="row no-margin">
               <h1>
                 {/* sortby */}
-                Urutkan{' '}
-                <a href="javascript:;" onClick={() => modal('open', 'sort-by')}>
-                  {SortText[this.state.sort] || 'Terbaru'}
+                Urutkan{" "}
+                <a href="javascript:;" onClick={() => modal("open", "sort-by")}>
+                  {SortText[this.state.sort] || "Terbaru"}
                   <i className="fa fa-angle-down" />
-                </a>{' '}
+                </a>{" "}
                 {/* filter by status */}
-                Tampilkan{' '}
+                Tampilkan{" "}
                 <a
                   href="javascript:;"
-                  onClick={() => modal('open', 'filter-by-status')}
+                  onClick={() => modal("open", "filter-by-status")}
                 >
-                  {FilterStatus[this.state.status] || 'Semua'}
+                  {FilterStatus[this.state.status] || "Semua"}
                   <i className="fa fa-angle-down" />
                 </a>
-                {tag ? ` Tag "${tag}"` : ''}
-                {q ? ` Pencarian "${q}"` : ''}
+                {tag ? ` Tag "${tag}"` : ""}
+                {q ? ` Pencarian "${q}"` : ""}
               </h1>
 
               {/* filter by status */}
@@ -303,8 +304,8 @@ class Index extends Component {
                     <a
                       href="javascript:;"
                       onClick={() =>
-                        this.setState({ main_kat: '' }, () => {
-                          modal('close', 'select-main-kat')
+                        this.setState({ main_kat: "" }, () => {
+                          modal("close", "select-main-kat")
                           this.props.history.push(
                             `/browse${this.props.location.search}`
                           )
@@ -321,7 +322,7 @@ class Index extends Component {
                         <a
                           href="javascript:;"
                           onClick={() => {
-                            modal('close', 'select-main-kat')
+                            modal("close", "select-main-kat")
                             this.props.history.push(
                               `/browse/${n.name}${this.props.location.search}`
                             )
@@ -335,7 +336,7 @@ class Index extends Component {
                   })}
                 </ul>
               ) : (
-                'loading...'
+                "loading..."
               )}
             </div>
           </Modal>
@@ -353,8 +354,8 @@ class Index extends Component {
                   <a
                     href="javascript:;"
                     onClick={() =>
-                      this.setState({ sub_kat: '' }, () => {
-                        modal('close', 'select-sub-kat')
+                      this.setState({ sub_kat: "" }, () => {
+                        modal("close", "select-sub-kat")
                         this.props.history.push(
                           `/browse/${categories.data[main_kat].name}${
                             this.props.location.search
@@ -374,7 +375,7 @@ class Index extends Component {
                           <a
                             href="javascript:;"
                             onClick={() => {
-                              modal('close', 'select-sub-kat')
+                              modal("close", "select-sub-kat")
                               this.props.history.push(
                                 `/browse/${categories.data[main_kat].name}/${
                                   n.name
@@ -408,8 +409,8 @@ class Index extends Component {
                 <li>
                   <a
                     onClick={() => {
-                      modal('close', 'sort-by')
-                      this.updateQuery({ sort: 'time_dsc' })
+                      modal("close", "sort-by")
+                      this.updateQuery({ sort: "time_dsc" })
                     }}
                     href="javascript:;"
                   >
@@ -419,8 +420,8 @@ class Index extends Component {
                 <li>
                   <a
                     onClick={() => {
-                      modal('close', 'sort-by')
-                      this.updateQuery({ sort: 'prize_dsc' })
+                      modal("close", "sort-by")
+                      this.updateQuery({ sort: "prize_dsc" })
                     }}
                     href="javascript:;"
                   >
@@ -446,8 +447,8 @@ class Index extends Component {
                 <li>
                   <a
                     onClick={() => {
-                      modal('close', 'filter-by-status')
-                      this.updateQuery({ status: 'all' })
+                      modal("close", "filter-by-status")
+                      this.updateQuery({ status: "all" })
                     }}
                     href="javascript:;"
                   >
@@ -457,8 +458,8 @@ class Index extends Component {
                 <li>
                   <a
                     onClick={() => {
-                      modal('close', 'filter-by-status')
-                      this.updateQuery({ status: 'active' })
+                      modal("close", "filter-by-status")
+                      this.updateQuery({ status: "active" })
                     }}
                     href="javascript:;"
                   >
@@ -483,7 +484,7 @@ function setCategories(props = {}, state = {}) {
         if (n.name === props.match.params.mainkat) main_kat = key
       })
     } else {
-      main_kat = ''
+      main_kat = ""
     }
 
     if (
@@ -494,7 +495,7 @@ function setCategories(props = {}, state = {}) {
         if (n.name === props.match.params.subkat) sub_kat = key
       })
     } else {
-      sub_kat = ''
+      sub_kat = ""
     }
   }
   return {
@@ -509,16 +510,16 @@ function generateState(query = {}, params = {}) {
   const { orderby, mediapartner, berakhir, garansi, q, sort, status } = query
 
   return {
-    main_kat: '',
-    sub_kat: '',
-    sort: sort || 'time_dsc',
-    q: q || '',
-    tag: tag || '',
-    username: username || '',
+    main_kat: "",
+    sub_kat: "",
+    sort: sort || "time_dsc",
+    q: q || "",
+    tag: tag || "",
+    username: username || "",
     is_mediapartner: mediapartner && mediapartner == 1,
     is_berakhir: berakhir && berakhir == 1,
     is_garansi: garansi && garansi == 1,
-    status: status || 'all'
+    status: status || "all"
   }
 }
 
@@ -591,7 +592,7 @@ function generateFilter(n = {}) {
     sort,
     status
   } = n
-  let Filter = 'jelajah'
+  let Filter = "jelajah"
   if (parseInt(main_kat) >= 0) Filter += `_${main_kat}`
   if (parseInt(sub_kat) >= 0) Filter += `_${sub_kat}`
   if (q) Filter += `_${q}`
