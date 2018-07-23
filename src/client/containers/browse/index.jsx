@@ -7,12 +7,14 @@ import { queryToObj, objToQuery } from "string-manager"
 import { topLoading } from "../../components/preloaders"
 import { connect } from "react-redux"
 import memoize from "memoize-one"
+import StaticSpecialTags from "../../../store/static_data/SpecialTags"
 
 // components
 import Helmet from "../../components/Helmet"
 import CompetitionLoading from "../../components/preloaders/CompetitionCardLoader"
 import Modal from "../../components/modals"
 import MediaPartner from "../../components/cards/MediaPartner"
+import SpecialTags from "../../components/boxs/SpecialTags"
 
 const CompetitionBox = Loadable({
   loader: () => import("../../components/boxs/CompetitionBox"),
@@ -143,7 +145,7 @@ class Index extends Component {
   }
 
   render() {
-    const { tag, username, main_kat, sub_kat, q } = this.state
+    const { tag, username, main_kat, sub_kat, q, special_tags } = this.state
     const { data, categories } = this.props.kompetisi
     const filter = generateFilter(this.state)
     const query = queryToObj(this.props.location.search.replace("?", "")) || {}
@@ -204,73 +206,81 @@ class Index extends Component {
         />
 
         {/*filter*/}
-        <div className="col-md-12 filter-jelajah">
-          <div className="container">
-            {/* filter by main category and sub category */}
-            <div className="row no-margin">
-              <h1>
-                {" "}
-                Jelajah
-                {query.mediapartner == 1 ? " Media Partner" : ""}{" "}
-                <a
-                  href="javascript:;"
-                  onClick={() => modal("open", "select-main-kat")}
-                >
-                  {parseInt(main_kat) >= 0
-                    ? categories.data[main_kat].name
-                    : "Semua kategori"}
-                  <i className="fa fa-angle-down" />
-                </a>
-                {parseInt(main_kat) >= 0 ? (
-                  <span>
-                    {" "}
-                    dan{" "}
-                    <a
-                      href="javascript:;"
-                      onClick={() => modal("open", "select-sub-kat")}
-                    >
-                      {parseInt(sub_kat) >= 0
-                        ? categories.data[main_kat].subcategories[sub_kat].name
-                        : "Semua subkategori"}
-                      <i className="fa fa-angle-down" />
-                    </a>
-                  </span>
-                ) : null}
-              </h1>
-            </div>
+        {special_tags && special_tags.tag ? (
+          <SpecialTags  {...special_tags} />
+        ) : (
+          <div className="col-md-12 filter-jelajah">
+            <div className="container">
+              {/* filter by main category and sub category */}
+              <div className="row no-margin">
+                <h1>
+                  {" "}
+                  Jelajah
+                  {query.mediapartner == 1 ? " Media Partner" : ""}{" "}
+                  <a
+                    href="javascript:;"
+                    onClick={() => modal("open", "select-main-kat")}
+                  >
+                    {parseInt(main_kat) >= 0
+                      ? categories.data[main_kat].name
+                      : "Semua kategori"}
+                    <i className="fa fa-angle-down" />
+                  </a>
+                  {parseInt(main_kat) >= 0 ? (
+                    <span>
+                      {" "}
+                      dan{" "}
+                      <a
+                        href="javascript:;"
+                        onClick={() => modal("open", "select-sub-kat")}
+                      >
+                        {parseInt(sub_kat) >= 0
+                          ? categories.data[main_kat].subcategories[sub_kat]
+                              .name
+                          : "Semua subkategori"}
+                        <i className="fa fa-angle-down" />
+                      </a>
+                    </span>
+                  ) : null}
+                </h1>
+              </div>
 
-            <div className="row no-margin">
-              <h1>
-                {/* sortby */}
-                Urutkan{" "}
-                <a href="javascript:;" onClick={() => modal("open", "sort-by")}>
-                  {SortText[this.state.sort] || "Terbaru"}
-                  <i className="fa fa-angle-down" />
-                </a>{" "}
+              <div className="row no-margin">
+                <h1>
+                  {/* sortby */}
+                  Urutkan{" "}
+                  <a
+                    href="javascript:;"
+                    onClick={() => modal("open", "sort-by")}
+                  >
+                    {SortText[this.state.sort] || "Terbaru"}
+                    <i className="fa fa-angle-down" />
+                  </a>{" "}
+                  {/* filter by status */}
+                  Tampilkan{" "}
+                  <a
+                    href="javascript:;"
+                    onClick={() => modal("open", "filter-by-status")}
+                  >
+                    {FilterStatus[this.state.status] || "Semua"}
+                    <i className="fa fa-angle-down" />
+                  </a>
+                  {tag ? ` Tag "${tag}"` : ""}
+                  {q ? ` Pencarian "${q}"` : ""}
+                </h1>
+
                 {/* filter by status */}
-                Tampilkan{" "}
-                <a
-                  href="javascript:;"
-                  onClick={() => modal("open", "filter-by-status")}
-                >
-                  {FilterStatus[this.state.status] || "Semua"}
-                  <i className="fa fa-angle-down" />
-                </a>
-                {tag ? ` Tag "${tag}"` : ""}
-                {q ? ` Pencarian "${q}"` : ""}
-              </h1>
+              </div>
 
-              {/* filter by status */}
-            </div>
-
-            <div className="row no-margin">
-              <p className="text-muted">
-                Gunakan filter diatas untuk menemukan kompetisi yang sesuai
-                dengan minat kamu
-              </p>
+              <div className="row no-margin">
+                <p className="text-muted">
+                  Gunakan filter diatas untuk menemukan kompetisi yang sesuai
+                  dengan minat kamu
+                </p>
+              </div>
             </div>
           </div>
-        </div>
+        )}
         {/*end of filter*/}
 
         {/* media partner ads*/}
@@ -509,6 +519,14 @@ function generateState(query = {}, params = {}) {
   const { tag, username } = params
   const { orderby, mediapartner, berakhir, garansi, q, sort, status } = query
 
+  // check if special tags
+  let special_tags = {}
+  if (tag) {
+    special_tags = StaticSpecialTags.find(n => {
+      return n.tag === tag
+    })
+  }
+
   return {
     main_kat: "",
     sub_kat: "",
@@ -519,7 +537,8 @@ function generateState(query = {}, params = {}) {
     is_mediapartner: mediapartner && mediapartner == 1,
     is_berakhir: berakhir && berakhir == 1,
     is_garansi: garansi && garansi == 1,
-    status: status || "all"
+    status: status || "all",
+    special_tags
   }
 }
 
