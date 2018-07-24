@@ -18,11 +18,11 @@ import { Link } from 'react-router-dom'
 // split components
 const NewsBox = Loadable({
   loader: () => import('../../components/boxs/NewsBox'),
-  loading: NewsLoading
+  loading: () => <NewsLoading withContainer />
 })
 const CompetitionBox = Loadable({
   loader: () => import('../../components/boxs/CompetitionBox'),
-  loading: CompetitionLoading
+  loading: () => <CompetitionLoading withContainer />
 })
 const MediapartnerBox = Loadable({
   loader: () => import('../../components/boxs/MediapartnerBox'),
