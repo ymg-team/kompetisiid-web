@@ -1,8 +1,8 @@
-import React from 'react'
-import Card from '../cards/CompetitionListCard'
-import Loader from '../preloaders/CompetitionCardLoader'
-import Transition from 'react-transition-group/Transition'
-import { duration, style } from '../Transtition'
+import React from "react"
+import Card from "../cards/CompetitionListCard"
+import Loader from "../preloaders/CompetitionCardLoader"
+import Transition from "react-transition-group/Transition"
+import { duration, style } from "../Transtition"
 
 function generateList(size, n) {
   return n.map((n, key) => <Card size={size} key={key} n={n} />)
@@ -10,8 +10,8 @@ function generateList(size, n) {
 
 const CompetitionBox = props => {
   let { data, status, message, is_loading, subtitle, size, count, meta } = props
-  if (typeof subtitle == 'undefined') subtitle = true
-  if (typeof size == 'undefined') size = 'large'
+  if (typeof subtitle == "undefined") subtitle = true
+  if (typeof size == "undefined") size = "large"
 
   return (
     <div id="competition-container">
@@ -19,10 +19,10 @@ const CompetitionBox = props => {
         <div className="row no-margin">
           {/* header total show competition */}
           {data && status && subtitle ? (
-            <span style={{ display: 'table' }}>
+            <span style={{ display: "table" }}>
               <br />
-              menampilkan <strong> {data.length || 0}</strong> dari{' '}
-              <strong>{count > 5000 ? 'beberapa' : count}</strong> kompetisi
+              menampilkan <strong> {data.length || 0}</strong> dari{" "}
+              <strong>{count > 5000 ? "beberapa" : count}</strong> kompetisi
               <br />
             </span>
           ) : null}

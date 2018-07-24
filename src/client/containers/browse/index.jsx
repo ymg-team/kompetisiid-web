@@ -18,7 +18,7 @@ import SpecialTags from "../../components/boxs/SpecialTags"
 
 const CompetitionBox = Loadable({
   loader: () => import("../../components/boxs/CompetitionBox"),
-  loading: CompetitionLoading
+  loading: () => <CompetitionLoading withContainer />
 })
 
 const SortText = {
@@ -40,12 +40,14 @@ class Index extends Component {
 
   constructor(props) {
     super(props)
-    this.state = generateState(
+    const state = generateState(
       this.props.location.search
         ? queryToObj(this.props.location.search.replace("?", ""))
         : {},
       this.props.match.params
     )
+
+    this.state = state
     this.handleScroll = this.handleScroll.bind(this)
   }
 
@@ -168,7 +170,8 @@ class Index extends Component {
 
     //jelajah kompetisi by tag
     if (tag) {
-      title += ` dengan Tag "${tag}"`
+      // ref: https://stackoverflow.com/a/20792617/2780875
+      title += ` dengan Tag "${tag.replace(/%20/g, " ")}"`
       description = `Jelajahi kompetisi berdasarkan tag ${tag}`
     }
 
@@ -207,7 +210,7 @@ class Index extends Component {
 
         {/*filter*/}
         {special_tags && special_tags.tag ? (
-          <SpecialTags  {...special_tags} />
+          <SpecialTags {...special_tags} />
         ) : (
           <div className="col-md-12 filter-jelajah">
             <div className="container">
@@ -521,6 +524,7 @@ function generateState(query = {}, params = {}) {
 
   // check if special tags
   let special_tags = {}
+
   if (tag) {
     special_tags = StaticSpecialTags.find(n => {
       return n.tag === tag
