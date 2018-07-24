@@ -17,7 +17,7 @@ const Subheader = Loadable({
 })
 const Newsbox = Loadable({
   loader: () => import('../../components/boxs/NewsBox'),
-  loading: NewsLoading
+  loading: () => <NewsLoading style={{marginTop: "20px"}} withContainer />
 })
 
 class List extends Component {
