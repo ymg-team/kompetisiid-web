@@ -1,18 +1,18 @@
 /**
  * Created by yussan on 02/10/16.
  */
-import express from 'express'
-import React from 'react'
-import { Provider } from 'react-redux'
-import ReactDOMServer from 'react-dom/server'
-import { StaticRouter } from 'react-router'
-import { renderRoutes, matchRoutes } from 'react-router-config'
-import routes from '../client/routes'
-import version from '../config/version'
-import store from '../config/store'
-import Helmet from 'react-helmet'
-import webpackAssets from '../config/webpack-assets'
-import { ServerStyleSheet, StyleSheetManager } from 'styled-components'
+import express from "express"
+import React from "react"
+import { Provider } from "react-redux"
+import ReactDOMServer from "react-dom/server"
+import { StaticRouter } from "react-router"
+import { renderRoutes, matchRoutes } from "react-router-config"
+import routes from "../client/routes"
+import version from "../config/version"
+import store from "../config/store"
+import Helmet from "react-helmet"
+import webpackAssets from "../config/webpack-assets"
+import { ServerStyleSheet, StyleSheetManager } from "styled-components"
 
 // ref: https://www.styled-components.com/docs/advanced#server-side-rendering
 const sheet = new ServerStyleSheet()
@@ -24,14 +24,17 @@ export default (req, res) => {
 
   // detect static function fetchData in container target
   const promises = matchRoutes(routes, req.url).map(({ route, match }) => {
-    let fetchData = route.component && route.component.fetchData ? route.component.fetchData : {}
+    let fetchData =
+      route.component && route.component.fetchData
+        ? route.component.fetchData
+        : {}
     return fetchData instanceof Function
       ? fetchData({ store, params: match.params, query: req.query })
       : Promise.resolve()
   })
 
   // function to get string of html
-  function renderHtml(body = '', state = {}, styleTags = '') {
+  function renderHtml(body = "", state = {}, styleTags = "") {
     const head = Helmet.rewind()
     return `
         <!DOCTYPE html>
@@ -83,7 +86,7 @@ export default (req, res) => {
                 ${getScript(state)}
             </body>
         </html>
-        `.replace(/\s\s+/g, '')
+        `.replace(/\s\s+/g, "")
   }
 
   // return function as promise
@@ -100,20 +103,20 @@ export default (req, res) => {
       )
     } catch (err) {
       // if react not valid
-      console.log('error render', err)
-      html = 'something wrong'
+      console.log("error render", err)
+      html = "something wrong"
     }
 
     // res end
     if (context.url) {
-      res.status(500).send('something wrong')
+      res.status(500).send("something wrong")
     } else {
       const state = store.getState()
       const styleTags = sheet.getStyleTags()
 
       // get session
       let { userdata } = req.session
-      if(userdata && userdata.id) state.User.session = userdata
+      if (userdata && userdata.id) state.User.session = userdata
       else state.User.session = {}
 
       res.send(renderHtml(html, state, styleTags))
@@ -145,13 +148,24 @@ function getScript(state) {
     }"></script>
     <script src="${webpackAssets.vendor.js}"></script>
     <script src="${webpackAssets.app.js}"></script>
-    ${process.env.NODE_ENV === 'production' ? getTrackingScript() : ''}
+    ${process.env.NODE_ENV === "production" ? 
+      `${getTrackingScript()} 
+      ${getAdsenseScript()}` :  ""}
     `
 }
 
 // adsense script
 function getAdsenseScript() {
-  return ``
+  return `
+  <!-- Gads -->
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+      google_ad_client: "ca-pub-4468477322781117",
+      enable_page_level_ads: true
+    });
+  </script>
+  `
 }
 
 // tracking script
