@@ -27,6 +27,7 @@ class GoogleAds extends Component {
 
   componentDidMount() {
     // render new Google Ads
+    (window.adsbygoogle = window.adsbygoogle || []).push({})
   }
 
   componentWillUnmount() {
@@ -41,11 +42,11 @@ class GoogleAds extends Component {
         <Ads
           className="adsbygoogle"
           style={this.props.style}
-          data-ad-client="ca-pub-4468477322781117"
-          data-ad-slot={this.props.ad}
+          data-ad-client={this.props.adClient}
+          data-ad-slot={this.props.adSlot}
           data-ad-format="auto"
           data-full-width-responsive="true"
-          data-adtest={adTest ? "on" : "off"}
+          data-adtest={this.props.adTest ? "on" : "off"}
         />
       )
     }
