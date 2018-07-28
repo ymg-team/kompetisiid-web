@@ -89,7 +89,7 @@ class Home extends Component {
     this.props.dispatch(getStats())
   }
 
-  componentWillReceiveProps(np) {
+  UNSAFE_componentWillReceiveProps(np) {
     if (
       np.kompetisi.categories.status &&
       np.kompetisi.categories.status == 200

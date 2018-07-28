@@ -17,7 +17,7 @@ class Header extends Component {
     this.props.dispatch(logout())
   }
 
-  componentWillReceiveProps(np) {
+  UNSAFE_componentWillReceiveProps(np) {
     const { logout } = np
     if (logout.meta) {
       if (logout.meta.code === 201) {

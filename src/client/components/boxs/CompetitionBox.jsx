@@ -1,11 +1,23 @@
 import React from "react"
-import Card from "../cards/CompetitionListCard"
-import Loader from "../preloaders/CompetitionCardLoader"
-import Transition from "react-transition-group/Transition"
 import { duration, style } from "../Transtition"
 
+// components
+import Ads from "../cards/GoogleAds"
+import Transition from "react-transition-group/Transition"
+import Card from "../cards/CompetitionListCard"
+import Loader from "../preloaders/CompetitionCardLoader"
+
 function generateList(size, n) {
-  return n.map((n, key) => <Card size={size} key={key} n={n} />)
+  return n.map((n, key) => {
+    if (key % 12 === 0 && key !== 0) {
+      return [
+        <Ads key={`ads_key`} dummy={true} adTest={true} style={{height: "200px", backgroundColor: "#f4f4f4", margin: "0 0 40px"}} />,
+        <Card size={size} key={key} n={n} />
+      ]
+    } else {
+      return <Card size={size} key={key} n={n} />
+    }
+  })
 }
 
 const CompetitionBox = props => {

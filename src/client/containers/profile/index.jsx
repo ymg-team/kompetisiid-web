@@ -18,7 +18,7 @@ class Index extends Component
         this.reqData(this.props)
     }
 
-    componentWillReceiveProps(np)
+    UNSAFE_componentWillReceiveProps(np)
     {
         this.reqData(np)
     }
