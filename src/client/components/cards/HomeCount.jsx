@@ -3,19 +3,34 @@ import Styled from 'styled-components'
 import { today } from '../../helpers/DateTime'
 
 const HomeCountStyled = Styled.div`
-  padding: 2.5em 0;
+  padding: 20px 0 40px;
+  display: inline-block;
   .home-count-item {
     line-height: 1.1;
     text-align: center;
     .home-count-text-large {
-      font-size: 2em;
-      font-weight: bold
+      font-size: 1.5em;
+      font-weight: bold;
     }
     .home-count-text-small{
-      font-size: 1.3em;
+      font-size: 1em;
       color: $color-gray-soft;
     }
   }
+
+  /* small */
+  /* @media only screen and (max-width: 543px) {
+    .home-count-item {
+      margin-bottom: 2em;
+    }
+  }
+
+  /* medium screen */
+  @media only screen and (min-width: 544px) and (max-width: 767px) {
+    .home-count-item {
+      margin-bottom: 2em;
+    }
+  } */
 `
 
 export default props => {

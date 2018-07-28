@@ -1,4 +1,5 @@
 import React from "react"
+import Loadable from "react-loadable"
 import { openInNewTab } from "../../helpers/LinkGenerator"
 import { eventFire } from "../../helpers/DomEvents"
 import { getCompetitionStatus } from "../../helpers/DateTime"
@@ -6,10 +7,15 @@ import copy from "copy-to-clipboard"
 
 // components
 import Modal from "../modals/index"
+import EmptyLoading from "../preloaders/EmptyLoader"
 import { Link } from "react-router-dom"
 import BtnJoin from "../buttons/BtnJoin"
 import { alert } from "../Alert"
-import GAds from "../cards/GoogleAds"
+
+const GAds = Loadable({
+  loader: () => import("../cards/GoogleAds"),
+  loading: EmptyLoading
+})
 
 const CompetitionDetailBox = props => {
   const { data } = props
@@ -27,6 +33,18 @@ const CompetitionDetailBox = props => {
 
   return (
     <div id="competition-detail" className="row">
+      {/* GAds */}
+      <div className="row">
+        <div className="col-md-12">
+          <GAds
+            adClient="ca-pub-4468477322781117"
+            adSlot={5218613800}
+            timeout={2000}
+          />
+        </div>
+      </div>
+      {/* end of GAds */}
+
       <div className="row">
         <div className="container">
           <div className="row m-20" />
@@ -163,14 +181,6 @@ const CompetitionDetailBox = props => {
                 </div>
               </div>
             </div>
-          </div>
-
-          <div className="row">
-            {/* GAds */}
-            <div className="col-md-12">
-              <GAds adClient="ca-pub-4468477322781117" adSlot={5218613800} />
-            </div>
-            {/* end of GAds */}
           </div>
         </div>
       </div>

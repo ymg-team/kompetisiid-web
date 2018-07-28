@@ -29,7 +29,7 @@ class Slider extends Component {
     navigation: false,
     navigationStyle: {},
     infinite: false,
-    speed: 5000,
+    speed: 1000,
     slidesToShow: 2,
     id: "slider",
     auto: true,

@@ -1,13 +1,13 @@
-import React, { Component } from 'react'
-import Styled from 'styled-components'
-import { nominalToText } from '../../helpers/Number'
-import * as Colors from '../../../style/colors'
+import React, { Component } from "react"
+import Styled from "styled-components"
+import { nominalToText } from "../../helpers/Number"
+import * as Colors from "../../../style/colors"
 
 // components
-import { Link } from 'react-router-dom'
-import Slider from '../sliders'
-import Count from '../cards/HomeCount'
-import Navbar from '../navigations/TransparentNavbar'
+import { Link } from "react-router-dom"
+import Slider from "../sliders"
+import Count from "../cards/HomeCount"
+import Navbar from "../navigations/TransparentNavbar"
 
 const DotsStyled = Styled.div`
   position: absolute;
@@ -20,6 +20,7 @@ const SubHeader = Styled.div`
   transition: all .5s ease;
   height: 100vh;
   min-height: 750px;
+  
 
   &.bg-red {
     background-color: ${Colors.mainRed};
@@ -29,45 +30,46 @@ const SubHeader = Styled.div`
     background-color: ${Colors.mainBlue};
   }
 
-  .subheader-content {
+  .home-slider {
+    color: #FFF;
+    padding: 2em 0;
+    text-align: center;
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 100%;
+    min-height: 100%;
+    h1 {
+      font-size: 3em;
+      padding: 1em 0 0.5em;
+      margin: 0;
+      line-height: 1.2;
+    }
+    .text{
+      padding: 3em 0;
+      font-size: .8em;
+    }
+
+    /* responsiveness */
+
+    /* small */
+    @media only screen and (max-width: 543px) {
+      h1 {
+        font-size: 2em;
+      }
+    }
+
+    /* medium screen */
+    @media only screen and (min-width: 544px) and (max-width: 767px) {
+      h1 {
+        font-size: 2.5em;
+      }
+    }
   }
 `
 
-const HomeSlider = Styled.div`
-  color: #FFF;
-  padding: 2em 0;
-  text-align: center;
-  h1 {
-    font-size: 4em;
-    padding: 1em 0 0.5em;
-    margin: 0;
-    line-height: 1.2;
-  }
-  .text{
-    padding: 3em 0;
-  }
+// const HomeSlider = Styled.div`
 
-  /* responsiveness */
-
-  /* small */
-  @media only screen and (max-width: 543px) {
-    h1 {
-      font-size: 2em;
-    }
-  }
-
-  /* medium screen */
-  @media only screen and (min-width: 544px) and (max-width: 767px) {
-    h1 {
-      font-size: 2.5em;
-    }
-  }
-
-`
+// `
 
 const Static = [
   // {
@@ -94,9 +96,9 @@ class HomeSubHeader extends Component {
   }
 
   componentDidMount() {
-    this.sliderInterval = setInterval(() => {
-      this.setActive()
-    }, 5000)
+    // this.sliderInterval = setInterval(() => {
+    //   this.setActive()
+    // }, 5000)
   }
 
   setActive() {
@@ -119,67 +121,18 @@ class HomeSubHeader extends Component {
     return (
       <SubHeader
         id="homepage-subheader"
-        className={`row ${this.state.active === 0 ? 'bg-red' : 'bg-blue'}`}
+        className={`row ${this.state.active === 0 ? "bg-red" : "bg-blue"}`}
       >
         <div className="container">
-          {/* navbar */}
           <Navbar />
         </div>
 
-        <div style={{position:'relative'}} className="container subheader-content">
-          {/* {
-              Static.length > 0 ?
-                this.state.active < Static.length ?
-                  <div 
-                    className="row"
-                    style={{width: "100%", height: "100%", backgroundSize: "cover", backgroundImage: `url(${Static[this.state.active].url})`}}
-                  />
-                : null
-              : null
-            } */}
-
-          {/* slider */}
-          <HomeSlider>
-            {Static.length <= 0 ||
-            (Static.length > 0 && this.state.active >= Static.length) ? (
-              this.state.active === 0 ? (
-                <WelcomeStaticSlider stats={this.props.stats} />
-              ) : status === 200 ? (
-                <CompetitionSlider {...data[this.state.active - 1]} />
-              ) : null
-            ) : null}
-          </HomeSlider>
-          {/* end of slider */}
-
-          {/* slider navigation */}
-          <DotsStyled className="row">
-            {(() => {
-              let Dots = []
-              for (let n = 0; n < this.state.totalSliders; n++) {
-                Dots.push(
-                  <span
-                    key={n}
-                    style={{
-                      margin: '0 .3em',
-                      color: '#FFF',
-                      cursor: 'pointer'
-                    }}
-                    onClick={() => {
-                      this.setState({ active: n })
-                    }}
-                    className={
-                      this.state.active === n
-                        ? 'fa fa-circle'
-                        : 'far fa-circle'
-                    }
-                  />
-                )
-              }
-              return Dots
-            })()}
-          </DotsStyled>
-          {/* end of slider bavigation */}
-        </div>
+        <Slider className="container subheader-content home-slider">
+          <WelcomeStaticSlider stats={this.props.stats} />
+          {status && status === 200
+            ? data.map((n, key) => <CompetitionSlider key={key} {...n} />)
+            : null}
+        </Slider>
       </SubHeader>
     )
   }
@@ -196,24 +149,10 @@ const WelcomeStaticSlider = props => (
       <Count {...props.stats} />
     </div>
     <div className="row">
-      {/* <Link
-        to="/register"
-        style={{ width: '150px' }}
-        className="btn btn-white btn-rounded btn-lg"
-      >
-        Register
-      </Link>
-      <Link
-        to="/login"
-        style={{ width: '150px' }}
-        className="btn btn-borderwhite btn-rounded btn-lg"
-      >
-        Login
-      </Link> */}
       <Link
         to="/browse"
         className="btn btn-white btn-rounded btn-lg"
-        style={{ borderColor: '#FFF', color: Colors.mainRed }}
+        style={{ borderColor: "#FFF", color: Colors.mainRed }}
       >
         Jelajah Kompetisi
       </Link>
@@ -239,17 +178,15 @@ const CompetitionSlider = props => (
     <div className="col-md-12">
       <div className="col-md-8 col-md-offset-2">
         <h1 style={{ paddingBottom: 0 }}>{props.title}</h1>
-        <h2 style={{ paddingBottom: '1em' }}>
+        <h2 style={{ paddingBottom: "1em" }}>
           Hadiah senilai {nominalToText(props.prize.total)}
         </h2>
       </div>
     </div>
     <div className="col-md-12">
       <Link
-        to={`/competition/${props.id}/regulations/${
-          props.nospace_title
-        }`}
-        style={{ width: '150px' }}
+        to={`/competition/${props.id}/regulations/${props.nospace_title}`}
+        style={{ width: "150px" }}
         className="btn btn-borderwhite btn-rounded btn-lg"
       >
         Selengkapnya

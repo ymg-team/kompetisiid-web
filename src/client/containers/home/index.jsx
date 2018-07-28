@@ -30,7 +30,7 @@ const MediapartnerBox = Loadable({
 })
 const SubHeaderHome = Loadable({
   loader: () => import('../../components/headers/HomeSubHeader'),
-  loading: EmptyLoading
+  loading: Loading
 })
 const SubHeaderTitle = Loadable({
   loader: () => import('../../components/headers/SubHeader'),
