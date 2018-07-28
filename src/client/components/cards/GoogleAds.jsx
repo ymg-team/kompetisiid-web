@@ -35,13 +35,15 @@ class GoogleAds extends Component {
   }
 
   render() {
+    let style = {display:"block"}
+    style = Object.assign(style, this.props.style)
     if (this.props.dummy) {
-      return <Ads className="col-md-12" style={this.props.style} />
+      return <Ads className="col-md-12" style={style} />
     } else {
       return (
         <Ads
           className="adsbygoogle"
-          style={this.props.style}
+          style={style}
           data-ad-client={this.props.adClient}
           data-ad-slot={this.props.adSlot}
           data-ad-format="auto"
