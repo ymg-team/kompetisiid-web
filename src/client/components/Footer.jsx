@@ -26,10 +26,6 @@ img {
 `
 
 export default class Footer extends Component {
-  componentDidMount() {
-    ;(window.adsbygoogle = window.adsbygoogle || []).push({})
-  }
-
   render() {
     return (
       <FooterWrapper>
