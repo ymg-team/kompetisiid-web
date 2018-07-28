@@ -129,7 +129,6 @@ class Index extends Component {
         !this.props.kompetisi.data[Filter].is_loading &&
         this.props.kompetisi.data[Filter].status === 200
       ) {
-        console.log("params", Params)
         if (Params.orderby === "prize_dsc") {
           Params.lastid = Kompetisi[Kompetisi.length - 1].prize.total
         } else {
