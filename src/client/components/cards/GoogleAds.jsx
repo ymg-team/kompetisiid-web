@@ -14,7 +14,8 @@ class GoogleAds extends Component {
     adSlot: PropTypes.number.isRequired,
     adTest: PropTypes.bool.isRequired,
     dummy: PropTypes.bool.isRequired,
-    style: PropTypes.bool
+    style: PropTypes.object,
+    timeout: PropTypes.number
   }
 
   static defaultProps = {
@@ -27,7 +28,13 @@ class GoogleAds extends Component {
 
   componentDidMount() {
     // render new Google Ads
-    (window.adsbygoogle = window.adsbygoogle || []).push({})
+    if(this.props.timeout) {
+      setTimeout(() => {
+        (window.adsbygoogle = window.adsbygoogle || []).push({})
+      }, this.props.timeout)      
+    } else {
+      (window.adsbygoogle = window.adsbygoogle || []).push({})
+    }
   }
 
   componentWillUnmount() {
