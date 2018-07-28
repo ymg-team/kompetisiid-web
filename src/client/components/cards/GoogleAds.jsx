@@ -31,7 +31,7 @@ class GoogleAds extends Component {
   }
 
   componentWillUnmount() {
-    // destory Google Ads
+    // destroy Google Ads
   }
 
   render() {
