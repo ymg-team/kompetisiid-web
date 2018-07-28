@@ -109,7 +109,11 @@ export default class Footer extends Component {
                 </div>
               </div>
               {/* gads */}
-              <GAds adClient="ca-pub-4468477322781117" adSlot={5218613800} adTest={true} />
+              <GAds
+                adClient="ca-pub-4468477322781117"
+                adSlot={5218613800}
+                // adTest={true}
+              />
               {/* gads */}
               <hr style={{ borderTop: "1px solid #656565" }} />
               <div className="row vertical-center">
