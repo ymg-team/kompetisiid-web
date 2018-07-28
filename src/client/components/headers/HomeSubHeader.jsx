@@ -85,7 +85,7 @@ class HomeSubHeader extends Component {
     }
   }
 
-  componentWillReceiveProps(np) {
+  UNSAFE_componentWillReceiveProps(np) {
     if (np.slider.status && np.slider.status === 200) {
       this.setState({
         totalSliders: 1 + np.slider.data.length + Static.length

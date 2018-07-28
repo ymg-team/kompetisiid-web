@@ -66,7 +66,7 @@ class Index extends Component {
     window.addEventListener("scroll", this.handleScroll, true)
   }
 
-  componentWillReceiveProps(np) {
+  UNSAFE_componentWillReceiveProps(np) {
     if (
       np.kompetisi.categories.status &&
       np.kompetisi.categories.status == 200

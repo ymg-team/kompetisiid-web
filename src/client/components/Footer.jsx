@@ -3,6 +3,7 @@ import Styled from "styled-components"
 import * as Color from "./styles/colors"
 
 // components
+import GAds from "../components/cards/GoogleAds"
 import { Link } from "react-router-dom"
 
 const FooterWrapper = Styled.div``
@@ -26,7 +27,7 @@ img {
 
 export default class Footer extends Component {
   componentDidMount() {
-    (window.adsbygoogle = window.adsbygoogle || []).push({})
+    ;(window.adsbygoogle = window.adsbygoogle || []).push({})
   }
 
   render() {
@@ -112,15 +113,7 @@ export default class Footer extends Component {
                 </div>
               </div>
               {/* gads */}
-              <ins
-                className="adsbygoogle"
-                style={{ display: "block" }}
-                data-ad-client="ca-pub-4468477322781117"
-                data-ad-slot={5218613800}
-                data-ad-format="auto"
-                data-full-width-responsive="true"
-                data-adtest="on"
-              />
+              <GAds adClient="ca-pub-4468477322781117" adSlot={5218613800} />
               {/* gads */}
               <hr style={{ borderTop: "1px solid #656565" }} />
               <div className="row vertical-center">

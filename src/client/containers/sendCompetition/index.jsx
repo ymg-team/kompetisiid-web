@@ -36,7 +36,7 @@ class AddCompetitionFast extends Component {
     }, 1500)
   }
 
-  componentWillReceiveProps(np) {
+  UNSAFE_componentWillReceiveProps(np) {
     if(np.response.status && np.response.status != 201) this.setState({loading: false})
     renderRecaptcha()
   }
