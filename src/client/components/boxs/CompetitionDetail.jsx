@@ -1,14 +1,15 @@
-import React from 'react'
-import { openInNewTab } from '../../helpers/LinkGenerator'
-import { eventFire } from '../../helpers/DomEvents'
-import { getCompetitionStatus } from '../../helpers/DateTime'
-import copy from 'copy-to-clipboard'
+import React from "react"
+import { openInNewTab } from "../../helpers/LinkGenerator"
+import { eventFire } from "../../helpers/DomEvents"
+import { getCompetitionStatus } from "../../helpers/DateTime"
+import copy from "copy-to-clipboard"
 
 // components
-import Modal from '../modals/index'
-import { Link } from 'react-router-dom'
-import BtnJoin from '../buttons/BtnJoin'
-import { alert } from '../Alert'
+import Modal from "../modals/index"
+import { Link } from "react-router-dom"
+import BtnJoin from "../buttons/BtnJoin"
+import { alert } from "../Alert"
+import GAds from "../cards/GoogleAds"
 
 const CompetitionDetailBox = props => {
   const { data } = props
@@ -29,24 +30,25 @@ const CompetitionDetailBox = props => {
       <div className="row">
         <div className="container">
           <div className="row m-20" />
+
           <div className="competition-author">
             <Link
               to={`/user/${data.author.username}`}
               title={`ke profil ${data.author.username}`}
             >
               <img
-                style={{ float: 'left', marginRight: '10px' }}
+                style={{ float: "left", marginRight: "10px" }}
                 src="/assets/4.2/img/default-avatar.jpg"
               />
             </Link>
             <p>
-              dipasang oleh{' '}
+              dipasang oleh{" "}
               <Link className="text-muted" to={`/user/${data.author.username}`}>
                 {data.author.username}
               </Link>
               <br />
               <small className="text-muted">
-                {data.created_in} di{' '}
+                {data.created_in} di{" "}
                 <a
                   className="text-muted"
                   href={`/browse/${data.main_category.name}`}
@@ -62,7 +64,9 @@ const CompetitionDetailBox = props => {
               </small>
             </p>
           </div>
+
           <div className="row m-20" />
+
           <div className="row competition-detail--meta">
             <div className="col-md-6 align-center poster">
               <img
@@ -74,7 +78,7 @@ const CompetitionDetailBox = props => {
             <div className="col-md-6 count">
               <div className="only-mobile m-30" />
               {/* competition status */}
-              <div style={{ marginBottom: '20px' }}>
+              <div style={{ marginBottom: "20px" }}>
                 {is_ended ? (
                   <span className="label label-red label-lg">
                     <i className="fa fa-check" /> Kompetisi telah berakhir
@@ -105,12 +109,12 @@ const CompetitionDetailBox = props => {
               <BtnJoin data={data} />
 
               <a
-                style={{ marginRight: '10px' }}
+                style={{ marginRight: "10px" }}
                 onClick={() =>
                   alert(
                     true,
-                    'login terlebih dahulu untuk menyimpan',
-                    'warning'
+                    "login terlebih dahulu untuk menyimpan",
+                    "warning"
                   )
                 }
                 className="btn btn-white"
@@ -120,9 +124,9 @@ const CompetitionDetailBox = props => {
                 <i className="fa fa-save" />
               </a>
               <a
-                style={{ marginRight: '10px' }}
+                style={{ marginRight: "10px" }}
                 onClick={() => {
-                  modal('open', 'save-to-calendar')
+                  modal("open", "save-to-calendar")
                 }}
                 className="btn btn-white"
                 href="javascript:;"
@@ -160,11 +164,19 @@ const CompetitionDetailBox = props => {
               </div>
             </div>
           </div>
+
+          <div className="row">
+            {/* GAds */}
+            <div className="col-md-12">
+              <GAds adClient="ca-pub-4468477322781117" adSlot={5218613800} />
+            </div>
+            {/* end of GAds */}
+          </div>
         </div>
       </div>
 
       {/* modal save to calendar */}
-       <Modal id="save-to-calendar">
+      <Modal id="save-to-calendar">
         <div className="container">
           <div className="modal-title">
             Simpan ke kalender
@@ -181,7 +193,11 @@ const CompetitionDetailBox = props => {
             rel="noopener"
           >
             <img
-              style={{ width: 'inherit', backgroundColor: '#FFF', maxWidth:'100%' }}
+              style={{
+                width: "inherit",
+                backgroundColor: "#FFF",
+                maxWidth: "100%"
+              }}
               src="/assets/4.2/img/google-calendar-icon.fullwidth.png"
             />
           </a>
@@ -192,7 +208,11 @@ const CompetitionDetailBox = props => {
             rel="noopener"
           >
             <img
-              style={{ width: 'inherit', backgroundColor: '#FFF', maxWidth:'100%' }}
+              style={{
+                width: "inherit",
+                backgroundColor: "#FFF",
+                maxWidth: "100%"
+              }}
               src="/assets/4.2/img/yahoo-calendar-icon.fullwidth.png"
             />
           </a>
@@ -200,14 +220,18 @@ const CompetitionDetailBox = props => {
             onClick={() =>
               alert(
                 true,
-                'untuk sekarang, kalender Microsoft untuk saat ini belum tersedia',
-                'warning'
+                "untuk sekarang, kalender Microsoft untuk saat ini belum tersedia",
+                "warning"
               )
             }
             href="javascript:;"
           >
             <img
-              style={{ width: 'inherit', backgroundColor: '#FFF', maxWidth:'100%' }}
+              style={{
+                width: "inherit",
+                backgroundColor: "#FFF",
+                maxWidth: "100%"
+              }}
               src="/assets/4.2/img/microsoft-calendar-icon.fullwidth.png"
             />
           </a>
@@ -219,24 +243,24 @@ const CompetitionDetailBox = props => {
 
 const addCalendar = {
   google: (n, url) => {
-    const d = n.deadline_at.split(' ')
+    const d = n.deadline_at.split(" ")
     return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=deadline ${
       n.title
-    }&dates=${d[0].replace(/-/g, '')}T000000Z/${d[0].replace(
+    }&dates=${d[0].replace(/-/g, "")}T000000Z/${d[0].replace(
       /-/g,
-      ''
+      ""
     )}T240000Z&details=${n.sort +
-      '\n' +
+      "\n" +
       n.prize.description}&location=http://kompetisi.id/competition/${
       n.id
     }/regulations/${n.nospace_title}&sf=true&output=xml#eventpage_6`
   },
   yahoo: (n, url) => {
-    const d = n.deadline_at.split(' ')
+    const d = n.deadline_at.split(" ")
     return `https://calendar.yahoo.com/?v=60&view=d&type=20&title=deadline ${
       n.title
-    }&st=${d[0].replace(/-/g, '')}T000000Z&dur=0600&desc=${n.sort +
-      '\n' +
+    }&st=${d[0].replace(/-/g, "")}T000000Z&dur=0600&desc=${n.sort +
+      "\n" +
       n.prize.description}&in_loc=http://kompetisi.id/competition/${
       n.id
     }/regulations/${n.nospace_title}`
@@ -247,11 +271,11 @@ const addCalendar = {
 // function to handle copy link
 function handleCopyLink(link) {
   // trigger to click body
-  eventFire(document.getElementsByTagName('body')[0], 'click')
+  eventFire(document.getElementsByTagName("body")[0], "click")
   // copy
   copy(link)
   // alert if link has copied
-  alert(true, 'Link telah berhasil di copy.', 'success')
+  alert(true, "Link telah berhasil di copy.", "success")
 }
 
 export default CompetitionDetailBox

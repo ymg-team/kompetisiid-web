@@ -19,6 +19,7 @@ import NextPrev from '../../components/navigations/NextPrev'
 import ErrorCard from '../../components/cards/ErrorCard'
 import Host from '../../../config/host'
 import MediaPartner from '../../components/cards/MediaPartner'
+import GAds from "../../components/cards/GoogleAds"
 
 const CompetitionBox = Loadable({
   loader: () => import('../../components/boxs/CompetitionBox'),
@@ -142,7 +143,7 @@ class Index extends Component {
             <div className="competition-detail">
               {/* detail box competition */}
               <CompetitionDetailBox data={detail[encid].data} />
-
+              
               <div className="m-20" />
 
               {/* competition tab navigation */}
