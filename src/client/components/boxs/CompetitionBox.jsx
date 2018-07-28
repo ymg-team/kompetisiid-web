@@ -9,7 +9,7 @@ import Loader from "../preloaders/CompetitionCardLoader"
 
 function generateList(size, n) {
   return n.map((n, key) => {
-    if (key % 24 === 0) {
+    if (key % 24 === 0 && key !== 0) {
       return [
         <div className="col-md-12" style={{ margin: "0 0 40px" }}>
           <GAds
