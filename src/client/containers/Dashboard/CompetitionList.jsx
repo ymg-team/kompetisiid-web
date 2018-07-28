@@ -27,7 +27,7 @@ class MyCompetition extends Component
         this.props.dispatch(fetchJelajah(Params, Filter))
     }
 
-    componentWillReceiveProps(np)
+    UNSAFE_componentWillReceiveProps(np)
     {
         const NextFilter = generateFilter(np)
         if(Filter != NextFilter)

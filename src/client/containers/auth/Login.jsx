@@ -43,7 +43,7 @@ class Login extends Component {
     }
   }
 
-  componentWillReceiveProps(np) {
+  UNSAFE_componentWillReceiveProps(np) {
     const { username } = this.state
     if (
       np.profile[username] &&

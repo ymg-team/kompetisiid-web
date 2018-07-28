@@ -72,7 +72,7 @@ class Navbar extends Component {
     }
   }
 
-  componentWillReceiveProps(np) {
+  UNSAFE_componentWillReceiveProps(np) {
     const query = queryToObj(np.location.search.replace('?', ''))
     this.setState({
       search: typeof query.q !== 'undefined',

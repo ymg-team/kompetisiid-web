@@ -34,7 +34,7 @@ export default class Register extends Component {
     document.getElementsByTagName('body')[0].style.background = '#FFF'
   }
 
-  componentWillReceiveProps(np) {
+  UNSAFE_componentWillReceiveProps(np) {
     if (np.register.meta) {
       this.setState(
         {

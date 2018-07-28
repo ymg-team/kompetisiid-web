@@ -15,7 +15,7 @@ class EmailVerify extends Component {
     this.props.dispatch(emailVerification(token))
   }
 
-  componentWillReceiveProps(np) {
+  UNSAFE_componentWillReceiveProps(np) {
     if (np.email_verification.meta) {
       this.setState(
         {

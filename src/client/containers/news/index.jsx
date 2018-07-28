@@ -95,7 +95,7 @@ export default class Index extends Component {
     this.reqData(this.props)
   }
 
-  componentWillReceiveProps(np) {
+  UNSAFE_componentWillReceiveProps(np) {
     const { encid } = np.match.params
     if (
       encid != this.props.match.params.encid ||
