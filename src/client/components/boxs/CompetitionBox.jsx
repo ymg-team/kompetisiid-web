@@ -16,7 +16,7 @@ function generateList(size, n) {
             key={`ads_key`}
             adClient="ca-pub-4468477322781117"
             adSlot={5218613800}
-            adTest={true}
+            // adTest={true}
           />
         </div>,
         <Card size={size} key={key} n={n} />
