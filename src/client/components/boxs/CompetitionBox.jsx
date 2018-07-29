@@ -11,7 +11,7 @@ function generateList(size, n) {
   return n.map((n, key) => {
     if (key % 15 === 0 && key !== 0) {
       return [
-        <div className="col-md-12" style={{ margin: "0 0 40px" }}>
+        <div className="col-md-12 align-center" style={{ margin: "0 0 40px" }}>
           <GAds
             key={`ads_key`}
             adClient="ca-pub-4468477322781117"
