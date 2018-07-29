@@ -19,6 +19,7 @@ export default class NewsBox extends Component {
               key={`ads_key`}
               adClient="ca-pub-4468477322781117"
               adSlot={5218613800}
+              timeout={2000}
               // adTest={true}
             />
           </div>,
