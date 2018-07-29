@@ -15,7 +15,6 @@ export default class NewsBox extends Component {
         return [
           <div className="col-md-12 align-center" style={{ margin: "0 0 40px" }}>
             <GAds
-              dummy={true}
               key={`ads_key`}
               adClient="ca-pub-4468477322781117"
               adSlot={5218613800}
