@@ -18,6 +18,7 @@ const SliderWrapper = Styled.div`
     float: left;
     bottom: 0;
     ul {
+      padding: 0;
       li {
         list-style: none;
         display: inline-block;
