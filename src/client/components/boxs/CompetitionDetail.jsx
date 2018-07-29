@@ -35,7 +35,7 @@ const CompetitionDetailBox = props => {
     <div id="competition-detail" className="row">
       {/* GAds */}
       <div className="row">
-        <div className="col-md-12">
+        <div className="col-md-12 align-center">
           <GAds
             adClient="ca-pub-4468477322781117"
             adSlot={5218613800}

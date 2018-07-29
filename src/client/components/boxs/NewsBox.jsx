@@ -3,6 +3,7 @@ import { duration, style } from '../Transtition'
 import Transition from 'react-transition-group/Transition'
 
 // components
+import GAds from "../cards/GoogleAds"
 import Card from '../cards/NewsListCard'
 import Loader from '../preloaders/NewsCardLoader'
 import { Link } from 'react-router-dom'
@@ -10,7 +11,22 @@ import { Link } from 'react-router-dom'
 export default class NewsBox extends Component {
   generateList(n) {
     return n.map((n, key) => {
-      return <Card key={key} n={n} />
+      if (key % 15 === 0 && key !== 0) {
+        return [
+          <div className="col-md-12 align-center" style={{ margin: "0 0 40px" }}>
+            <GAds
+              dummy={true}
+              key={`ads_key`}
+              adClient="ca-pub-4468477322781117"
+              adSlot={5218613800}
+              // adTest={true}
+            />
+          </div>,
+          <Card key={key} n={n} />
+        ]
+      } else {
+        return <Card key={key} n={n} />
+      }
     })
   }
 

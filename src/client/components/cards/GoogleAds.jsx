@@ -43,7 +43,12 @@ class GoogleAds extends Component {
 
   render() {
     let style = {display:"block"}
+    if(this.props.dummy) {
+      style.backgroundColor = "#F4F4F4"
+      style.height = "100px"
+    }
     style = Object.assign(style, this.props.style)
+
     if (this.props.dummy) {
       return <Ads className="col-md-12" style={style} />
     } else {
