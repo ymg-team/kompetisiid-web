@@ -95,25 +95,25 @@ class HomeSubHeader extends Component {
     }
   }
 
-  componentDidMount() {
-    // this.sliderInterval = setInterval(() => {
-    //   this.setActive()
-    // }, 5000)
-  }
+  // componentDidMount() {
+  //   this.sliderInterval = setInterval(() => {
+  //     this.setActive()
+  //   }, 5000)
+  // }
 
-  setActive() {
-    let { active } = this.state
-    if (this.state.active < this.state.totalSliders - 1) {
-      active++
-    } else {
-      active = 0
-    }
-    this.setState({ active })
-  }
+  // setActive() {
+  //   let { active } = this.state
+  //   if (this.state.active < this.state.totalSliders - 1) {
+  //     active++
+  //   } else {
+  //     active = 0
+  //   }
+  //   this.setState({ active })
+  // }
 
-  componentWillUnmount() {
-    clearInterval(this.sliderInterval)
-  }
+  // componentWillUnmount() {
+  //   clearInterval(this.sliderInterval)
+  // }
 
   render() {
     const { data, status, message } = this.props.slider

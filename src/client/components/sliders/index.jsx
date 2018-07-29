@@ -5,11 +5,26 @@ import PropTypes from "prop-types"
 const SliderWrapper = Styled.div`
   position: relative;
 
-  div.slider-items {
+  .slider-items {
     width: 100%;
     display: -webkit-inline-box;
     transition: all 0.5s ease;
     overflow: hidden;
+  }
+
+  .slider-navigation {
+    position: absolute;
+    width: 100%;
+    float: left;
+    bottom: 0;
+    ul {
+      li {
+        list-style: none;
+        display: inline-block;
+        margin: 0 5px;
+        cursor: pointer;
+      }
+    }
   }
 `
 
@@ -58,6 +73,7 @@ class Slider extends Component {
   }
 
   move(target) {
+    console.log(target)
     this.setState(
       {
         active: this.setActive(target)
@@ -105,6 +121,48 @@ class Slider extends Component {
     return (
       <SliderWrapper id={this.props.id} className={this.props.className}>
         <div className="slider-items">{this.props.children}</div>
+        {this.state.elSlider && this.state.elSlider.childElementCount > 1 ? (
+          <div className="slider-navigation">
+            <ul>
+              {(() => {
+                let nav = []
+                for (
+                  let n = 0;
+                  n < this.state.elSlider.childElementCount;
+                  n++
+                ) {
+                  nav.push(
+                    <li
+                      key={n}
+                      onClick={() => {
+                        const oldActive = this.state.active
+                        this.setState(
+                          { active: this.state.active > n ? n + 1 : n - 1 },
+                          () => {
+                            // clearInterval(this.sliderInterval)
+                            if (this.state.active > oldActive)
+                              this.move("right")
+                            else this.move("left")
+                          }
+                        )
+                      }}
+                    >
+                      <span
+                        className={
+                          this.state.active === n
+                            ? "fa fa-circle"
+                            : "far fa-circle"
+                        }
+                      />
+                    </li>
+                  )
+                }
+
+                return nav
+              })()}
+            </ul>
+          </div>
+        ) : null}
       </SliderWrapper>
     )
   }
