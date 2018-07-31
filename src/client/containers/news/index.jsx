@@ -258,16 +258,16 @@ export default class Index extends Component {
                 <div className="row">
                   <div className="col-md-12">
                     <div className="news-detail">
-                      <article className="content">
-                        <p
-                          dangerouslySetInnerHTML={{
-                            __html: textParser(detail[encid].data.content)
-                          }}
-                        />
-                        <div style={{ margin: "1em 0" }}>
-                          {this.generateTags(detail[encid].data.tag)}
-                        </div>
+                      <article
+                        className="content"
+                        dangerouslySetInnerHTML={{
+                          __html: textParser(detail[encid].data.content)
+                        }}
+                      >
                       </article>
+                      <div style={{ margin: "1em 0" }}>
+                        {this.generateTags(detail[encid].data.tag)}
+                      </div>
                     </div>
                   </div>
                 </div>
