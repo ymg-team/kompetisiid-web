@@ -398,17 +398,15 @@ class Index extends Component {
 }
 
 function generateJsonld(n, url) {
-  const start_date = n.created_at.split(" ")
-  const end_date = n.deadline_at.split(" ")
   return `{
     "@context": "http://schema.org",
     "@type": "Event",
-    "name": "${n.title.replace(/\"/g, "")}",
-    "description": "${n.sort.replace(/\"/g, "")}",
-    "startDate": "${start_date[0]}T${start_date[1]}.000Z",
-    "endDate": "${end_date[0]}T${end_date[1]}.000Z",
+    "name": "${n.title.replace(/\"/g, '')}",
+    "description": "${n.sort.replace(/\"/g, '')}",
+    "startDate": ${new Date(n.created_at * 1000).toISOString()},
+    "endDate": ${new Date(n.deadline_at * 1000).toISOString()},
     "url": "${url}",
-    "sameAs": "${n.sumber}",
+    "sameAs": "${n.link_source}",
     "image": {
         "@type": "ImageObject",
         "url": "${n.poster.original}",
@@ -417,10 +415,10 @@ function generateJsonld(n, url) {
     },
     "organizer": {
       "@type": "Organization",
-      "name": "${n.penyelenggara}",
+      "name": "${n.organizer}",
       "logo": {
           "@type": "ImageObject",
-          "url": "https://scontent-sin6-1.xx.fbcdn.net/v/t1.0-9/21529_1680281178877316_3989323526762937427_n.png?oh=30d4cacd082cb9b7bffbd9abf01c1cb0&oe=5A01639C",
+          "url": "https://res.cloudinary.com/dhjkktmal/image/upload/v1528851826/kompetisi-id/email_assets/icon-512x512.png",
           "height": "500",
           "width": "500"
       }
@@ -429,7 +427,9 @@ function generateJsonld(n, url) {
       "@type": "Place",
       "name": "Indonesia",
       "address": "Indonesia"
-    }
+    },
+    "offers": "Menangkan ${n.prize.description}",
+    "performers": "Warga Negara Indonesia"
   }`
 }
 

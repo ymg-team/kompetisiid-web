@@ -160,8 +160,8 @@ export default class Index extends Component {
 
     if (
       detail[encid] &&
-      detail[encid].meta &&
-      detail[encid].meta.code === 200
+      detail[encid].status &&
+      detail[encid].status === 200
     ) {
       helmetdata = Object.assign(helmetdata, {
         title: detail[encid].data.title,
@@ -318,8 +318,6 @@ export default class Index extends Component {
 }
 
 function generateJsonld(n, url) {
-  const created_at = n.created_at.split(" ")
-  const updated_at = n.updated_at.split(" ")
   return `{
         "@context": "https://schema.org",
         "@type": "Article",
@@ -328,7 +326,7 @@ function generateJsonld(n, url) {
             "name": "Id+More",
             "logo": {
                 "@type": "ImageObject",
-                "url": "https://scontent-sin6-1.xx.fbcdn.net/v/t1.0-9/21529_1680281178877316_3989323526762937427_n.png?oh=30d4cacd082cb9b7bffbd9abf01c1cb0&oe=5A01639C",
+                "url": "https://res.cloudinary.com/dhjkktmal/image/upload/v1528851826/kompetisi-id/email_assets/icon-512x512.png",
                 "height": "500",
                 "width": "500"
             }
@@ -336,8 +334,8 @@ function generateJsonld(n, url) {
         "author": {
             "@type": "Person",
             "name": "${n.author.username}",
-            "image": "http://kompetisi.id/assets/4.2/img/default-avatar.jpg",
-            "url": "http://kompetisi.id/${n.author.username}",
+            "image": "https://kompetisi.id/assets/4.2/img/default-avatar.jpg",
+            "url": "https://kompetisi.id/user/${n.author.username}",
             "sameAs": [
                 ""
             ],
@@ -345,8 +343,8 @@ function generateJsonld(n, url) {
         },
         "headline": "${n.title}",
         "url": "${url}",
-        "datePublished": "${created_at[0]}T${created_at[1]}.000Z",
-        "dateModified": "${updated_at[0]}T${updated_at[1]}.000Z",
+        "datePublished": ${new Date(n.created_at * 1000).toISOString()},
+        "dateModified": ${new Date(n.updated_at * 1000).toISOString()},
         "image": {
             "@type": "ImageObject",
             "url": "${n.image.original}",
