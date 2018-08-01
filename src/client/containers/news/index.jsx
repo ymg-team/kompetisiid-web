@@ -355,8 +355,8 @@ function generateJsonld(n, url) {
             "@type": "WebPage",
             "@id": "${url}"
         },
-        "keywords": "${n.tags}",
-        "description": "${truncate(n.contenttext, 300)}"
+        "keywords": "${n.tag}",
+        "description": "${n.content}"
     }`
 }
 
