@@ -343,8 +343,8 @@ function generateJsonld(n, url) {
         },
         "headline": "${n.title}",
         "url": "${url}",
-        "datePublished": ${new Date(n.created_at * 1000).toISOString()},
-        "dateModified": ${new Date(n.updated_at * 1000).toISOString()},
+        "datePublished": "${new Date(n.created_at * 1000).toISOString()}",
+        "dateModified": "${new Date(n.updated_at * 1000).toISOString()}",
         "image": {
             "@type": "ImageObject",
             "url": "${n.image.original}",
