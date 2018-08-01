@@ -1,51 +1,52 @@
-import React, { Component } from 'react'
-import { epochToDMY, epochToRelativeTime } from '../../helpers/DateTime'
-import Loadable from 'react-loadable'
-import { nominalToText } from '../../helpers/Number'
-import { nl2br } from '../../helpers/String'
-import { toCamelCase } from 'string-manager'
-import { connect } from 'react-redux'
-import memoize from 'memoize-one'
+import React, { Component } from "react"
+import { epochToDMY, epochToRelativeTime } from "../../helpers/DateTime"
+import Loadable from "react-loadable"
+import { nominalToText } from "../../helpers/Number"
+import { nl2br } from "../../helpers/String"
+import { toCamelCase } from "string-manager"
+import { connect } from "react-redux"
+import memoize from "memoize-one"
 
 // components
-import Helmet from '../../components/Helmet'
-import Loading from '../../components/preloaders/GlobalLoader'
-import EmptyLoading from '../../components/preloaders/EmptyLoader'
-import Tab, { tab } from '../../components/navigations/TabCompetition'
-import Loader from '../../components/loaders/DefaultLoader'
-import CompetitionDetailBox from '../../components/boxs/CompetitionDetail'
-import CompetitionLoading from '../../components/preloaders/CompetitionCardLoader'
-import NextPrev from '../../components/navigations/NextPrev'
-import ErrorCard from '../../components/cards/ErrorCard'
-import Host from '../../../config/host'
-import MediaPartner from '../../components/cards/MediaPartner'
+import Helmet from "../../components/Helmet"
+import Loading from "../../components/preloaders/GlobalLoader"
+import EmptyLoading from "../../components/preloaders/EmptyLoader"
+import Tab, { tab } from "../../components/navigations/TabCompetition"
+import Loader from "../../components/loaders/DefaultLoader"
+import CompetitionDetailBox from "../../components/boxs/CompetitionDetail"
+import CompetitionLoading from "../../components/preloaders/CompetitionCardLoader"
+import NextPrev from "../../components/navigations/NextPrev"
+import ErrorCard from "../../components/cards/ErrorCard"
+import Host from "../../../config/host"
+import MediaPartner from "../../components/cards/MediaPartner"
+import GAds from "../../components/cards/GoogleAds"
 
 const CompetitionBox = Loadable({
-  loader: () => import('../../components/boxs/CompetitionBox'),
+  loader: () => import("../../components/boxs/CompetitionBox"),
   loading: CompetitionLoading
 })
 const Contacts = Loadable({
-  loader: () => import('../../components/competition-detail/Contacts'),
+  loader: () => import("../../components/competition-detail/Contacts"),
   loading: Loading
 })
 const Share = Loadable({
-  loader: () => import('../../components/competition-detail/Share'),
+  loader: () => import("../../components/competition-detail/Share"),
   loading: Loading
 })
 const Announcements = Loadable({
-  loader: () => import('../../components/competition-detail/Announcements'),
+  loader: () => import("../../components/competition-detail/Announcements"),
   loading: Loading
 })
 const Prizes = Loadable({
-  loader: () => import('../../components/competition-detail/Prizes'),
+  loader: () => import("../../components/competition-detail/Prizes"),
   loading: Loading
 })
 const Regulations = Loadable({
-  loader: () => import('../../components/competition-detail/Regulations'),
+  loader: () => import("../../components/competition-detail/Regulations"),
   loading: Loading
 })
 const Discussions = Loadable({
-  loader: () => import('../../components/competition-detail/Discussions'),
+  loader: () => import("../../components/competition-detail/Discussions"),
   loading: Loading
 })
 
@@ -60,27 +61,27 @@ class Index extends Component {
 
   componentDidMount() {
     // add scroll listener
-    addEventListener('scroll', this.handleScroll, true)
+    addEventListener("scroll", this.handleScroll, true)
   }
 
   componentWillUnmount() {
     // remove event listener
-    removeEventListener('scroll', this.handleScroll, true)
+    removeEventListener("scroll", this.handleScroll, true)
   }
 
   handleScroll(e) {
     // console.log('scrolling in competition detail...')
     const afterScroll =
-      document.getElementById('competition-detail').offsetHeight + 40
-    const tabEl = document.getElementById('container-competition-tab')
-    const joinEl = document.getElementById('btn-join')
+      document.getElementById("competition-detail").offsetHeight + 40
+    const tabEl = document.getElementById("container-competition-tab")
+    const joinEl = document.getElementById("btn-join")
 
     if (joinEl && afterScroll) {
       if (window.pageYOffset > afterScroll) {
-        tabEl.classList.add('fixed')
+        tabEl.classList.add("fixed")
         joinEl.style.opacity = 1
       } else {
-        tabEl.classList.remove('fixed')
+        tabEl.classList.remove("fixed")
         joinEl.style.opacity = 0
       }
     }
@@ -97,7 +98,7 @@ class Index extends Component {
     if (detail[encid] && detail[encid].status && detail[encid].status === 200) {
       helmetdata = Object.assign(helmetdata, {
         title: toCamelCase(
-          `${tab[this.props.route.active_tab - 1].name + ' ' || ''}${
+          `${tab[this.props.route.active_tab - 1].name + " " || ""}${
             detail[encid].data.title
           }`
         ),
@@ -110,7 +111,7 @@ class Index extends Component {
 
       // add jsonld
       helmetdata.script.push({
-        type: 'application/ld+json',
+        type: "application/ld+json",
         innerHTML: generateJsonld(detail[encid].data, helmetdata.url)
       })
 
@@ -142,7 +143,7 @@ class Index extends Component {
             <div className="competition-detail">
               {/* detail box competition */}
               <CompetitionDetailBox data={detail[encid].data} />
-              
+
               <div className="m-20" />
 
               {/* competition tab navigation */}
@@ -150,6 +151,19 @@ class Index extends Component {
                 active={this.props.route.active_tab}
                 data={detail[encid].data}
               />
+
+              {/* GAds */}
+              <div className="row">
+                <div className="col-md-12 align-center">
+                  <GAds
+                    style={{marginBottom: 0}}
+                    adClient="ca-pub-4468477322781117"
+                    adSlot={9209398500}
+                    timeout={1000}
+                  />
+                </div>
+              </div>
+              {/* end of GAds */}
 
               <div className="row">
                 <div className="container">
@@ -177,7 +191,7 @@ class Index extends Component {
                         >
                           <strong>Perhatian&nbsp;</strong>
                           Di kompetisi ini, <strong>
-                            Kompetisi ID{' '}
+                            Kompetisi ID{" "}
                           </strong>berlaku sebagai media partner, jika ada
                           pertanyaan lebih lanjut mengenai kompetisi ini, bisa
                           ditanyakan langsung ke penyelenggara atau melalui tab
@@ -190,7 +204,7 @@ class Index extends Component {
                           className="alert alert-blue"
                         >
                           <strong>Perhatian&nbsp;</strong>
-                          Kompetisi ini bisa diikuti langsung di{' '}
+                          Kompetisi ini bisa diikuti langsung di{" "}
                           <strong>Kompetisi ID</strong>, silahkan login dan klik
                           tombol 'ikuti kompetisi'.
                         </div>
@@ -200,7 +214,7 @@ class Index extends Component {
 
                       <div className="row">
                         <div
-                          className={active_tab == 1 ? 'col-md-8' : 'col-md-12'}
+                          className={active_tab == 1 ? "col-md-8" : "col-md-12"}
                         >
                           {(() => {
                             switch (active_tab) {
@@ -214,7 +228,7 @@ class Index extends Component {
                                     link_source={detail[encid].data.link_source}
                                     tags={
                                       detail[encid].data.tag
-                                        ? detail[encid].data.tag.split(',')
+                                        ? detail[encid].data.tag.split(",")
                                         : []
                                     }
                                     html={detail[encid].data.content}
@@ -333,18 +347,16 @@ class Index extends Component {
 
                             {/* media parner ads */}
                             <MediaPartner size="square" />
-
-                            {/* show you */}
-                            <a
-                              target="_blank"
-                              href="https://vip.bitcoin.co.id/ref/xyussanx/1"
-                            >
-                              <img
-                                style={{ maxWidth: '100%' }}
-                                src="https://s3.amazonaws.com/bitcoin.co.id/banner/250x250.jpg"
-                                alt="Yuk berdagang Bitcoin dan dapatkan keuntungan jutaan rupiah"
-                              />
-                            </a>
+                            
+                            
+                            {/* GAds */}
+                            <GAds
+                              style={{margin: 0}}
+                              adClient="ca-pub-4468477322781117"
+                              adSlot={9209398500}
+                              timeout={1000}
+                            />
+                            {/* end of GAds */}
                           </div>
                         ) : null}
                         {/* end of show sidebar info */}
@@ -386,13 +398,13 @@ class Index extends Component {
 }
 
 function generateJsonld(n, url) {
-  const start_date = n.created_at.split(' ')
-  const end_date = n.deadline_at.split(' ')
+  const start_date = n.created_at.split(" ")
+  const end_date = n.deadline_at.split(" ")
   return `{
     "@context": "http://schema.org",
     "@type": "Event",
-    "name": "${n.title.replace(/\"/g, '')}",
-    "description": "${n.sort.replace(/\"/g, '')}",
+    "name": "${n.title.replace(/\"/g, "")}",
+    "description": "${n.sort.replace(/\"/g, "")}",
     "startDate": "${start_date[0]}T${start_date[1]}.000Z",
     "endDate": "${end_date[0]}T${end_date[1]}.000Z",
     "url": "${url}",

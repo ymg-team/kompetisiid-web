@@ -3,7 +3,6 @@ import Styled from "styled-components"
 import * as Color from "./styles/colors"
 
 // components
-import GAds from "../components/cards/GoogleAds"
 import { Link } from "react-router-dom"
 
 const FooterWrapper = Styled.div``
@@ -108,13 +107,6 @@ export default class Footer extends Component {
                   <p />
                 </div>
               </div>
-              {/* gads */}
-              <GAds
-                adClient="ca-pub-4468477322781117"
-                adSlot={5218613800}
-                // adTest={true}
-              />
-              {/* gads */}
               <hr style={{ borderTop: "1px solid #656565" }} />
               <div className="row vertical-center">
                 <div className="col-md-6 footer-copyright">
