@@ -14,6 +14,7 @@ import Helmet from '../../components/Helmet'
 import NewsLoading from '../../components/preloaders/NewsCardLoader'
 import CompetitionLoading from '../../components/preloaders/CompetitionCardLoader'
 import { Link } from 'react-router-dom'
+import GAds from '../../components/cards/GoogleAds'
 
 // split components
 const NewsBox = Loadable({
@@ -148,6 +149,7 @@ class Home extends Component {
 
         <GrayBackgroundStyled className="col-md-12">
           <CompetitionBox subtitle={false} {...kompetisi.data['home_latest']} />
+
           <div className="row align-center">
             <Link className="btn btn-bordergray" to="/browse">
               JELAJAH KOMPETISI

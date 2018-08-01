@@ -22,18 +22,20 @@ class GoogleAds extends Component {
     adTest: false,
     dummy: false,
     adSlot: 0,
-    adClient: '',
+    adClient: "",
     style: {}
   }
 
   componentDidMount() {
     // render new Google Ads
-    if(this.props.timeout) {
-      setTimeout(() => {
-        (window.adsbygoogle = window.adsbygoogle || []).push({})
-      }, this.props.timeout)      
-    } else {
-      (window.adsbygoogle = window.adsbygoogle || []).push({})
+    if (process.env.NODE_ENV === "production") {
+      if (this.props.timeout) {
+        setTimeout(() => {
+          ;(window.adsbygoogle = window.adsbygoogle || []).push({})
+        }, this.props.timeout)
+      } else {
+        ;(window.adsbygoogle = window.adsbygoogle || []).push({})
+      }
     }
   }
 
@@ -42,8 +44,8 @@ class GoogleAds extends Component {
   }
 
   render() {
-    let style = {display:"block"}
-    if(this.props.dummy) {
+    let style = { display: "block" }
+    if (this.props.dummy) {
       style.backgroundColor = "#F4F4F4"
       style.height = "100px"
     }

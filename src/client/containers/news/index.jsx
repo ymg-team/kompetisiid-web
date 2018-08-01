@@ -186,18 +186,6 @@ export default class Index extends Component {
       <NewsDetailStyled>
         <Helmet {...helmetdata} />
 
-        {/* Google Ads */}
-        <div className="row">
-          <div style={{ marginTop: "50px" }} className="col-md-12 align-center">
-            <GAds
-              adClient="ca-pub-4468477322781117"
-              adSlot={5218613800}
-              timeout={1000}
-            />
-          </div>
-        </div>
-        {/* end of Google Ads */}
-
         {detail[encid] && detail[encid].status ? (
           parseInt(detail[encid].status) === 200 ? (
             <div>
@@ -254,6 +242,16 @@ export default class Index extends Component {
                   </div>
                 </div>
               </div>
+              {/* Google Ads */}
+              <div className="col-md-12 align-center">
+                <GAds
+                  style={{ marginTop: 0 }}
+                  adClient="ca-pub-4468477322781117"
+                  adSlot={1270681813}
+                  timeout={1000}
+                />
+              </div>
+              {/* end of Google Ads */}
               <div className="col-md-6 col-md-push-3 col-md-pull-3">
                 <div className="row">
                   <div className="col-md-12">
@@ -263,8 +261,7 @@ export default class Index extends Component {
                         dangerouslySetInnerHTML={{
                           __html: textParser(detail[encid].data.content)
                         }}
-                      >
-                      </article>
+                      />
                       <div style={{ margin: "1em 0" }}>
                         {this.generateTags(detail[encid].data.tag)}
                       </div>

@@ -33,18 +33,6 @@ const CompetitionDetailBox = props => {
 
   return (
     <div id="competition-detail" className="row">
-      {/* GAds */}
-      <div className="row">
-        <div className="col-md-12 align-center">
-          <GAds
-            adClient="ca-pub-4468477322781117"
-            adSlot={5218613800}
-            timeout={1000}
-          />
-        </div>
-      </div>
-      {/* end of GAds */}
-
       <div className="row">
         <div className="container">
           <div className="row m-20" />
