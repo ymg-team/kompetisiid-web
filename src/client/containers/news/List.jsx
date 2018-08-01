@@ -107,7 +107,7 @@ class List extends Component {
         <Helmet title={title} description={description} />
         <Subheader title={title} desc={description} />
         {/* Google Ads */}
-        <div className="row align-center">
+        <div className="col-md-12 align-center">
           <GAds
             adClient="ca-pub-4468477322781117"
             adSlot={1270681813}

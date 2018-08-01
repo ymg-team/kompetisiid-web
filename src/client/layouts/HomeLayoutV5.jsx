@@ -45,10 +45,9 @@ class RootLayoutV5 extends Component {
 
         {/* gads */}
         {!fullscreen ? (
-          <div className="row align-center">
+          <div className="col-md-12 align-center">
             <GAds
               // dummy={true}
-              style={{marginTop:0}}
               adClient="ca-pub-4468477322781117"
               adSlot={5218613800}
               // adTest={true}
