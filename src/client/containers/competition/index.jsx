@@ -403,8 +403,8 @@ function generateJsonld(n, url) {
     "@type": "Event",
     "name": "${n.title.replace(/\"/g, '')}",
     "description": "${n.sort.replace(/\"/g, '')}",
-    "startDate": ${new Date(n.created_at * 1000).toISOString()},
-    "endDate": ${new Date(n.deadline_at * 1000).toISOString()},
+    "startDate": "${new Date(n.created_at * 1000).toISOString()}",
+    "endDate": "${new Date(n.deadline_at * 1000).toISOString()}",
     "url": "${url}",
     "sameAs": "${n.link_source}",
     "image": {

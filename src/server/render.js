@@ -86,7 +86,8 @@ export default (req, res) => {
                 ${getScript(state)}
             </body>
         </html>
-        `.replace(/\s\s+/g, "")
+        `
+        // .replace(/\s\s+/g, "")
   }
 
   // return function as promise
