@@ -7,7 +7,7 @@ import * as Colors from "../../../style/colors"
 import { Link } from "react-router-dom"
 import Slider from "../sliders"
 import Count from "../cards/HomeCount"
-import Navbar from "../navigations/TransparentNavbar"
+// import Navbar from "../navigations/TransparentNavbar"
 
 const DotsStyled = Styled.div`
   position: absolute;
@@ -123,9 +123,9 @@ class HomeSubHeader extends Component {
         id="homepage-subheader"
         className={`row ${this.state.active === 0 ? "bg-red" : "bg-blue"}`}
       >
-        <div className="container">
+        {/* <div className="container">
           <Navbar />
-        </div>
+        </div> */}
 
         <Slider className="container subheader-content home-slider">
           <WelcomeStaticSlider stats={this.props.stats} />

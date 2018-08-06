@@ -13,6 +13,7 @@ import store from "../config/store"
 import Helmet from "react-helmet"
 import webpackAssets from "../config/webpack-assets"
 import { ServerStyleSheet, StyleSheetManager } from "styled-components"
+import Loadable from "react-loadable"
 
 // ref: https://www.styled-components.com/docs/advanced#server-side-rendering
 const sheet = new ServerStyleSheet()
@@ -87,7 +88,7 @@ export default (req, res) => {
             </body>
         </html>
         `
-        // .replace(/\s\s+/g, "")
+    // .replace(/\s\s+/g, "")
   }
 
   // return function as promise
@@ -96,11 +97,13 @@ export default (req, res) => {
     try {
       // if react component valid
       html = ReactDOMServer.renderToString(
-        <StyleSheetManager sheet={sheet.instance}>
-          <StaticRouter location={req.originalUrl} context={context}>
-            <Provider store={store}>{renderRoutes(routes)}</Provider>
-          </StaticRouter>
-        </StyleSheetManager>
+        <Loadable.Capture report={moduleName => modules.push(moduleName)}>
+          <StyleSheetManager sheet={sheet.instance}>
+            <StaticRouter location={req.originalUrl} context={context}>
+              <Provider store={store}>{renderRoutes(routes)}</Provider>
+            </StaticRouter>
+          </StyleSheetManager>
+        </Loadable.Capture>
       )
     } catch (err) {
       // if react not valid
@@ -149,9 +152,12 @@ function getScript(state) {
     }"></script>
     <script src="${webpackAssets.vendor.js}"></script>
     <script src="${webpackAssets.app.js}"></script>
-    ${process.env.NODE_ENV === "production" ? 
-      `${getTrackingScript()} 
-      ${getAdsenseScript()}` :  ""}
+    ${
+      process.env.NODE_ENV === "production"
+        ? `${getTrackingScript()} 
+      ${getAdsenseScript()}`
+        : ""
+    }
     `
 }
 

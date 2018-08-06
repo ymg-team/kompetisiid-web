@@ -15,6 +15,7 @@ import NewsLoading from '../../components/preloaders/NewsCardLoader'
 import CompetitionLoading from '../../components/preloaders/CompetitionCardLoader'
 import { Link } from 'react-router-dom'
 import GAds from '../../components/cards/GoogleAds'
+import Navbar from '../../components/navigations/TransparentNavbar'
 
 // split components
 const NewsBox = Loadable({
@@ -126,6 +127,14 @@ class Home extends Component {
     return (
       <div>
         <Helmet />
+
+        {/* navbar */}
+        <div style={{background:'#cc5454'}}>
+          <div className="container">
+            <Navbar />
+          </div>
+        </div>
+
         {/* slider */}
         <SubHeaderHome
           stats={kompetisi.stats || {}}
