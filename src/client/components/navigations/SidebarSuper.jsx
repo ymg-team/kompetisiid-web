@@ -1,15 +1,20 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React from "react"
+import { Link } from "react-router-dom"
 
 export default props => (
   <div className="dashboard-sidebar">
     <ul>
+      <li>
+        {" "}
+        <Link to="/super/dashboard">Dashboard</Link>
+      </li>
+      <hr />
       <li className="active">
-        {' '}
+        {" "}
         <a href="#">Pasang Kompetisi</a>
       </li>
       <li>
-        {' '}
+        {" "}
         <a href="#">
           Kompetisi Saya<span className="label label-blue">23</span>
         </a>
@@ -18,7 +23,7 @@ export default props => (
       {/* competition */}
       <hr />
       <li>
-        {' '}
+        {" "}
         <strong>Manajemen Kompetisi</strong>
       </li>
       <li>
