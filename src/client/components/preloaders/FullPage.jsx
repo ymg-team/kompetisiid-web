@@ -1,13 +1,13 @@
-import React from 'react'
-import Styled from 'styled-components'
+import React from "react"
+import Styled from "styled-components"
 
-export function fullPageLoader(show = true){
-  const el = document.getElementById('ki-fullpage-loader')
-  if(show) {
-    el.style.display = 'flex'
+export function fullPageLoader(show = true) {
+  const el = document.getElementById("ki-fullpage-loader")
+  if (show) {
+    el.style.display = "flex"
     el.style.opacity = 100
   } else {
-    el.style.display = 'none'
+    el.style.display = "none"
     el.style.opacity = 0
   }
 }
@@ -15,16 +15,17 @@ export function fullPageLoader(show = true){
 const FullPageLoaderStyled = Styled.div`
   width: 100vw;
   height: 100vh;
-  display: flex;
+  /* display: flex; */
   align-items: center;
   justify-content: center;
   position: fixed;
   top: 0;
-  background-color: #ffffffd4;
+  left: 0;
+  background-color: #ffffff;
   z-index: 20; 
   transition: opacity .3s ease;
-  opacity: 0;
-  display: none;
+  opacity: ${props => props.show ? 100 : 0};
+  display: ${props => props.show ? 'flex' : 'none'};
 
   .fullpage-loader {
     height: auto;
@@ -70,12 +71,17 @@ const FullPageLoaderStyled = Styled.div`
 `
 
 const FullPageLoader = props => {
-  return <FullPageLoaderStyled id="ki-fullpage-loader">
-    <div className="fullpage-loader">
-      <img src="https://res.cloudinary.com/dhjkktmal/image/upload/w_100,h_100,c_scale/v1528851826/kompetisi-id/email_assets/icon-512x512.png" alt="Kompetisi.id loader" />
-      <div className="fullpage-progressbar" />
-    </div>
-  </FullPageLoaderStyled>
+  return (
+    <FullPageLoaderStyled id="ki-fullpage-loader" {...props}>
+      <div className="fullpage-loader">
+        <img
+          src="https://res.cloudinary.com/dhjkktmal/image/upload/w_100,h_100,c_scale/v1528851826/kompetisi-id/email_assets/icon-512x512.png"
+          alt="Kompetisi.id loader"
+        />
+        <div className="fullpage-progressbar" />
+      </div>
+    </FullPageLoaderStyled>
+  )
 }
 
 export default FullPageLoader

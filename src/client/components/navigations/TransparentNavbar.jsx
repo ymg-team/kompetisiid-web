@@ -83,7 +83,8 @@ class Navbar extends Component {
   toggleSearch() {
     this.setState(
       {
-        search: !this.state.search
+        search: !this.state.search,
+        keyword: ''
       },
       () => {
         if (!this.state.search) this.props.history.push('/browse')
@@ -120,7 +121,7 @@ class Navbar extends Component {
                     value={this.state.keyword}
                     onChange={e =>
                       this.setState({
-                        keyword: e.target.value
+                        keyword: e.target.value || ''
                       })
                     }
                     onKeyDown={e => {
