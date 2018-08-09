@@ -5,7 +5,7 @@ import Styled from "styled-components"
 import Navbar from "../components/navigations/TransparentNavbar"
 import Alert from "../components/Alert"
 import FullScreenLoader from "../components/preloaders/FullPage"
-import GAds from '../components/cards/GoogleAds'
+import GAds from "../components/cards/GoogleAds"
 
 const LayoutStyled = Styled.div`
   min-height: 100%;

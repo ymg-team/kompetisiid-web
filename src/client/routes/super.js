@@ -6,12 +6,13 @@ import SuperLayout from '../layouts/SuperLayoutV5'
 
 // components
 import Loading from '../components/preloaders/GlobalLoader'
+import ContentLoading from '../components/preloaders/FullContentLoader'
 import EmptyLoading from '../components/preloaders/EmptyLoader'
 
 // containers
 const SuperDashboard = Loadable({
   loader: () => import('../containers/_super/dashboard/index'),
-  loading: Loading
+  loading: ContentLoading
 })
 const Request = Loadable({
   loader: () => import('../containers/_super/requests/index'),

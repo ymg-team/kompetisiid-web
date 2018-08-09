@@ -74,7 +74,6 @@ class Slider extends Component {
   }
 
   move(target) {
-    console.log(target)
     this.setState(
       {
         active: this.setActive(target)
