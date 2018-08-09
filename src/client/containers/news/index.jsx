@@ -51,7 +51,7 @@ const NewsDetailStyled = Styled.div`
 
   .meta {
     letter-spacing: 0;
-    .meta-item {
+    .meta--item {
       margin-right: 20px;
     }
   }
@@ -86,6 +86,12 @@ const NewsDetailStyled = Styled.div`
 `
 
 export default class Index extends Component {
+  state = {
+    url: `${Host[process.env.NODE_ENV].front}/news/${
+      this.props.match.params.encid
+    }/${this.props.match.params.title}`
+  }
+
   static fetchData({ params, store }) {
     return store.dispatch(BeritaActions.fetchBeritaDetail(params.encid))
   }
@@ -93,6 +99,9 @@ export default class Index extends Component {
   componentDidMount() {
     window.scrollTo(0, 0)
     pushScript("https://kompetisiindonesia.disqus.com/embed.js")
+    pushScript("https://kompetisiindonesia.disqus.com/count.js", {
+      id: "dsq-count-scr"
+    })
     this.reqData(this.props)
   }
 
@@ -112,15 +121,23 @@ export default class Index extends Component {
     const url = `${Host[process.env.NODE_ENV].front}/news/${
       props.match.params.encid
     }/${props.match.params.title}`
-    // disquss reset after 1000ms
-    if (window.DISQUS)
-      DISQUS.reset({
-        reload: true,
-        config: function() {
-          this.page.identifier = url
-          this.page.url = url
-        }
-      })
+
+    this.setState({ url }, () => {
+      setTimeout(() => {
+        // reset disqus count
+        if (window.DISQUSWIDGETS) DISQUSWIDGETS.getCount({ reset: true })
+  
+        // disquss reset after 1000ms
+        if (window.DISQUS)
+          DISQUS.reset({
+            reload: true,
+            config: function() {
+              this.page.identifier = url
+              this.page.url = url
+            }
+          })
+      }, 1000)
+    })
   }
 
   reqData(props) {
@@ -158,11 +175,7 @@ export default class Index extends Component {
       script: []
     }
 
-    if (
-      detail[encid] &&
-      detail[encid].status &&
-      detail[encid].status === 200
-    ) {
+    if (detail[encid] && detail[encid].status && detail[encid].status === 200) {
       helmetdata = Object.assign(helmetdata, {
         title: detail[encid].data.title,
         description: detail[encid].data.contenttext,
@@ -211,14 +224,14 @@ export default class Index extends Component {
                                 title="komentar"
                                 onClick={() => {
                                   document
-                                    .getElementById("comments")
+                                    .getElementById("disqus_thread")
                                     .scrollIntoView({ behavior: "smooth" })
                                 }}
                               >
-                                <i className="fa fa-comment-o" />{" "}
+                                <i className="far fa-comment" />{" "}
                                 <span
-                                  className="fb-comments-count"
-                                  data-href={helmetdata.url}
+                                  className="disqus-comment-count"
+                                  data-disqus-url={this.state.url}
                                 >
                                   0
                                 </span>

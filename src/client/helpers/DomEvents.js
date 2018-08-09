@@ -12,14 +12,14 @@ export function eventFire(el, evType)
     }
 }
 
-export function pushScript(src, cb)
+export function pushScript(src, args = {})
 {
     if(!isScriptLoaded())
     {
         const s = document.createElement('script')
         s.setAttribute('src', src)
-        if(cb)
-            s.onload = cb
+        if(args.id) s.setAttribute('id', args.id)
+        if(args.cb) s.onload = args.cb
         document.body.appendChild(s)
     }
 }
