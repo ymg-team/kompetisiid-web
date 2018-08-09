@@ -77,7 +77,7 @@ App.use(
     staticOptions()
   )
 )
-App.use('/robot.txt', express.static(__dirname + '/../../public/robot.txt'))
+App.use('/robots.txt', express.static(__dirname + '/../../public/robots.txt'))
 App.use(
   '/opensearch.xml',
   express.static(__dirname + '/../../public/opensearch.xml')
