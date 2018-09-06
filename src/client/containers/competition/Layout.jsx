@@ -27,6 +27,11 @@ class LayoutCompetition extends Component {
     this.onUpdateRoute(this.props.match.params.encid)
   }
 
+  // UNSAFE_componentWillReceiveProps(np) {
+  //   this.reqData(np.match.params.encid)
+  //   this.reqRelatedCompetitions(np.match.params.encid)
+  // }
+
   onUpdateRoute = memoize(encid => {
     scrollTo(0,0)
     this.reqData(encid)
@@ -34,7 +39,6 @@ class LayoutCompetition extends Component {
   })
 
   reqData(encid) {
-    // const { encid } = props.match.params
     if (!this.props.kompetisi.detail[encid]) {
       topLoading(true)
       this.props.dispatch(getDetail(encid))
@@ -42,7 +46,7 @@ class LayoutCompetition extends Component {
   }
 
   reqRelatedCompetitions(encid) {
-    if (!this.props.kompetisi.data[`related_${encid}`])
+    if (!this.props.kompetisi.related[`related_${encid}`])
       this.props.dispatch(getRelated(encid, `related_${encid}`))
   }
 

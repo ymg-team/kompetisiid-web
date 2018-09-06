@@ -88,7 +88,7 @@ class Index extends Component {
   }
 
   render() {
-    const { encid } = this.state
+    const { encid } = this.props.match.params
     const { detail, related, pengumuman } = this.props.kompetisi
     const { active_tab } = this.props.route
     let NextPrevProps = {},
@@ -156,7 +156,7 @@ class Index extends Component {
               <div className="row">
                 <div className="col-md-12 align-center">
                   <GAds
-                    style={{marginBottom: 0}}
+                    style={{ marginBottom: 0 }}
                     adClient="ca-pub-4468477322781117"
                     adSlot={9209398500}
                     timeout={1000}
@@ -177,10 +177,11 @@ class Index extends Component {
                           className="alert alert-warning"
                         >
                           <strong>Perhatian&nbsp;</strong>
-                          Di kompetisi ini, <strong>Kompetisi ID </strong>hanya
-                          berlaku sebagai media publikasi. Jika ada pertanyaan
-                          lebih lanjut mengenai kompetisi ini silahkan sampaikan
-                          langsung ke kontak yang tersedia tab kontak.
+                          Di kompetisi ini, <strong>Kompetisi ID </strong>
+                          hanya berlaku sebagai media publikasi. Jika ada
+                          pertanyaan lebih lanjut mengenai kompetisi ini
+                          silahkan sampaikan langsung ke kontak yang tersedia
+                          tab kontak.
                         </div>
                       ) : null}
                       {detail[encid].data.is_mediapartner &&
@@ -190,12 +191,10 @@ class Index extends Component {
                           className="alert alert-blue"
                         >
                           <strong>Perhatian&nbsp;</strong>
-                          Di kompetisi ini, <strong>
-                            Kompetisi ID{" "}
-                          </strong>berlaku sebagai media partner, jika ada
-                          pertanyaan lebih lanjut mengenai kompetisi ini, bisa
-                          ditanyakan langsung ke penyelenggara atau melalui tab
-                          diskusi.
+                          Di kompetisi ini, <strong>Kompetisi ID </strong>
+                          berlaku sebagai media partner, jika ada pertanyaan
+                          lebih lanjut mengenai kompetisi ini, bisa ditanyakan
+                          langsung ke penyelenggara atau melalui tab diskusi.
                         </div>
                       ) : null}
                       {detail[encid].data.is_support ? (
@@ -347,11 +346,10 @@ class Index extends Component {
 
                             {/* media parner ads */}
                             <MediaPartner size="square" />
-                            
-                            
+
                             {/* GAds */}
                             <GAds
-                              style={{margin: 0}}
+                              style={{ margin: 0 }}
                               adClient="ca-pub-4468477322781117"
                               adSlot={9209398500}
                               timeout={1000}
@@ -401,8 +399,8 @@ function generateJsonld(n, url) {
   return `{
     "@context": "http://schema.org",
     "@type": "Event",
-    "name": "${n.title.replace(/\"/g, '')}",
-    "description": "${n.sort.replace(/\"/g, '')}",
+    "name": "${n.title.replace(/\"/g, "")}",
+    "description": "${n.sort.replace(/\"/g, "")}",
     "startDate": "${new Date(n.created_at * 1000).toISOString()}",
     "endDate": "${new Date(n.deadline_at * 1000).toISOString()}",
     "url": "${url}",
