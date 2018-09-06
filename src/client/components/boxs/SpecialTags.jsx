@@ -19,7 +19,12 @@ const SpecialTags = props => {
         <img className="specialtags-image" src={props.image} />
         <span className="specialtags-description">
           <h1>{props.name}</h1>
-          <p>{props.description} <a href={props.link} target="_blank">Selengkapnya</a></p>
+          <p>
+            {props.description}{" "}
+            <a href={props.link} target="_blank">
+              Selengkapnya
+            </a>
+          </p>
         </span>
       </div>
     </SpecialTagsStyled>
