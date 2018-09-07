@@ -58,6 +58,7 @@ class Index extends Component {
   }
 
   componentDidMount() {
+    
     // add scroll listener
     addEventListener("scroll", this.handleScroll, true)
   }
@@ -148,6 +149,7 @@ class Index extends Component {
               <Tab
                 active={this.props.route.active_tab}
                 data={detail[encid].data}
+                link={helmetdata.url}
               />
 
               {/* GAds */}
@@ -277,9 +279,7 @@ class Index extends Component {
 
                         {/* show sidebar info */}
                         {active_tab == 1 ? (
-                          <Sidebar 
-                            {...detail[encid]}
-                          />
+                          <Sidebar {...detail[encid]} />
                         ) : null}
                         {/* end of show sidebar info */}
                       </div>

@@ -1,21 +1,34 @@
 import React, { Component } from "react"
-
+import { pushScript } from "../../helpers/DomEvents"
 export default class Discussions extends Component {
   componentDidMount() {
+    // disquss js sdk
+    pushScript("https://kompetisiindonesia.disqus.com/embed.js")
+    
     setTimeout(() => {
       this.resetDisqus()
     }, 1000)
   }
 
+  componentWillReceiveProps() {
+
+  }
+
   resetDisqus() {
-    if (window.DISQUS)
+    console.log("reset Disqus...")
+    if (window.DISQUS) {
       DISQUS.reset({
         reload: true,
         config: function() {
-          this.page.identifier = this.props.link
+          this.page.identifier = `${this.props.link}`
           this.page.url = this.props.link
+          this.callbacks.onNewComment = [function(comment) {
+            console.log("Thanks for comment...", comment.text)
+            if (window.DISQUSWIDGETS) DISQUSWIDGETS.getCount({ reset: true })
+          }]
         }
       })
+    }
   }
 
   render() {
@@ -28,7 +41,7 @@ export default class Discussions extends Component {
           penyelenggara kompetisi sendiri.
         </p>
         <hr />
-        <div id="disqus_thread" />
+        <div id="disqus_thread">Tunggu Sebentar...</div>
       </div>
     )
   }
