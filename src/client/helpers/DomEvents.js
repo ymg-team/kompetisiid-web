@@ -14,11 +14,11 @@ export function eventFire(el, evType)
 
 export function pushScript(src, args = {})
 {
-    if(!isScriptLoaded())
+    if(!isScriptLoaded(src))
     {
         const s = document.createElement('script')
-        s.setAttribute('src', src)
         if(args.id) s.setAttribute('id', args.id)
+        s.setAttribute('src', src)
         if(args.cb) s.onload = args.cb
         document.body.appendChild(s)
     }
