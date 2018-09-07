@@ -1,15 +1,14 @@
-import React, { Component } from 'react'
-import { renderRoutes, matchRoutes } from 'react-router-config'
-import { connect } from 'react-redux'
-import memoize from 'memoize-one'
-import { pushScript } from '../../helpers/DomEvents'
-import { topLoading } from '../../components/preloaders'
-import { toCamelCase } from 'string-manager'
+import React, { Component } from "react"
+import { renderRoutes, matchRoutes } from "react-router-config"
+import { connect } from "react-redux"
+import memoize from "memoize-one"
+import { topLoading } from "../../components/preloaders"
+import { toCamelCase } from "string-manager"
 
 // components
-import Tab, { tab } from '../../components/navigations/TabCompetition'
-import CompetitionPreloader from '../../components/preloaders/CompetitionDetail'
-import { getDetail, getRelated } from './actions'
+import Tab, { tab } from "../../components/navigations/TabCompetition"
+import CompetitionPreloader from "../../components/preloaders/CompetitionDetail"
+import { getDetail, getRelated } from "./actions"
 class LayoutCompetition extends Component {
   static fetchData({ params, store }) {
     return store.dispatch(getDetail(params.encid))
@@ -19,7 +18,6 @@ class LayoutCompetition extends Component {
     window.scrollTo(0, 0)
     this.reqData(this.props.match.params.encid)
     this.reqRelatedCompetitions(this.props.match.params.encid)
-    pushScript('https://kompetisiindonesia.disqus.com/embed.js')
   }
 
   componentDidUpdate() {
@@ -27,13 +25,8 @@ class LayoutCompetition extends Component {
     this.onUpdateRoute(this.props.match.params.encid)
   }
 
-  // UNSAFE_componentWillReceiveProps(np) {
-  //   this.reqData(np.match.params.encid)
-  //   this.reqRelatedCompetitions(np.match.params.encid)
-  // }
-
   onUpdateRoute = memoize(encid => {
-    scrollTo(0,0)
+    scrollTo(0, 0)
     this.reqData(encid)
     this.reqRelatedCompetitions(encid)
   })
@@ -54,7 +47,7 @@ class LayoutCompetition extends Component {
     const { encid } = this.props.match.params
     const { detail, related, pengumuman } = this.props.kompetisi
 
-    if (typeof window !== 'undefined' && detail[encid] && detail[encid].meta)
+    if (typeof window !== "undefined" && detail[encid] && detail[encid].meta)
       topLoading(false)
 
     return (

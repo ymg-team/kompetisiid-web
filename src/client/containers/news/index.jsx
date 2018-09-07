@@ -124,9 +124,6 @@ export default class Index extends Component {
 
     this.setState({ url }, () => {
       setTimeout(() => {
-        // reset disqus count
-        if (window.DISQUSWIDGETS) DISQUSWIDGETS.getCount({ reset: true })
-  
         // disquss reset after 1000ms
         if (window.DISQUS)
           DISQUS.reset({
@@ -136,6 +133,10 @@ export default class Index extends Component {
               this.page.url = url
             }
           })
+        
+          // reset disqus count
+          if (window.DISQUSWIDGETS) DISQUSWIDGETS.getCount({ reset: true })
+
       }, 1000)
     })
   }
@@ -231,6 +232,7 @@ export default class Index extends Component {
                                 <i className="far fa-comment" />{" "}
                                 <span
                                   className="disqus-comment-count"
+                                  // data-disqus-identifier={this.state.url}
                                   data-disqus-url={this.state.url}
                                 >
                                   0
