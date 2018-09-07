@@ -14,11 +14,15 @@ import Helmet from "../../components/Helmet"
 import CompetitionLoading from "../../components/preloaders/CompetitionCardLoader"
 import Modal from "../../components/modals"
 import MediaPartner from "../../components/cards/MediaPartner"
-import SpecialTags from "../../components/boxs/SpecialTags"
+import GlobalLoading from "../../components/preloaders/GlobalLoader"
 
 const CompetitionBox = Loadable({
   loader: () => import("../../components/boxs/CompetitionBox"),
   loading: () => <CompetitionLoading withContainer />
+})
+const SpecialTags = Loadable({
+  loader: () => import("../../components/boxs/SpecialTags"),
+  loading: GlobalLoading
 })
 
 const SortText = {
@@ -31,28 +35,34 @@ const FilterStatus = {
 }
 
 class Index extends Component {
-    // static fetchData({ store, params, query }) {
-    //   const State = generateState(query, params)
-    //   const Filter = generateFilter(State)
-    //   const Params = generateParams(State)
-    //   return store.dispatch(KompetisiActs.fetchJelajah(Params, Filter))
-    // }
+  // static fetchData({ store, params, query }) {
+  //   const State = generateState(query, params)
+  //   const Filter = generateFilter(State)
+  //   const Params = generateParams(State)
+  //   return store.dispatch(KompetisiActs.fetchJelajah(Params, Filter))
+  // }
+  state = {
+    loading: true
+  }
 
   constructor(props) {
     super(props)
-    const state = generateState(
-      this.props.location.search
-        ? queryToObj(this.props.location.search.replace("?", ""))
-        : {},
-      this.props.match.params
-    )
-
-    this.state = state
     this.handleScroll = this.handleScroll.bind(this)
   }
 
   componentDidMount() {
     window.scrollTo(0, 0)
+
+    // initial state
+    this.setState(
+      generateState(
+        this.props.location.search
+          ? queryToObj(this.props.location.search.replace("?", ""))
+          : {},
+        this.props.match.params
+      )
+    )
+
     // request categries data from locaStorage / api
     const Categories = getStorage(LOCAL_STORAGE_CATEGORIES)
     if (Categories) {
@@ -146,6 +156,14 @@ class Index extends Component {
   }
 
   render() {
+    // const special_tags = {
+    //   tag: "asian games 2018",
+    //   name: "Asian Games 2018",
+    //   image: "https://pbs.twimg.com/profile_images/1000991349686976512/0oPdxBMF_400x400.jpg",
+    //   description: "Asian Games 2018, yang secara resmi dikenal sebagai Asian Games ke-18 dan juga dikenal sebagai Jakarta Palembang 2018, adalah acara multi-olahraga pan Asia yang dijadwalkan diadakan dari 18 Agustus hingga 2 September 2018 di kota-kota Indonesia di Jakarta dan Palembang. Untuk pertama kalinya, Asian Games diselenggarakan bersama di dua kota; ibukota Indonesia Jakarta (yang menjadi tuan rumah Olimpiade untuk pertama kalinya sejak 1962), dan Palembang, ibu kota provinsi Sumatera Selatan. Acara akan diadakan di dan sekitar dua kota, termasuk tempat-tempat di Bandung dan provinsi Jawa Barat. Stadion Utama Gelora Bung Karno di Jakarta akan menjadi tuan rumah upacara pembukaan dan penutupan Olimpiade.",
+    //   link: "https://asiangames2018.id/"
+    // }
+
     const { tag, username, main_kat, sub_kat, q, special_tags } = this.state
     const { data, categories } = this.props.kompetisi
     const filter = generateFilter(this.state)
@@ -208,7 +226,9 @@ class Index extends Component {
         />
 
         {/*filter*/}
-        {special_tags && special_tags.tag ? (
+        {this.state.loading ? (
+          <GlobalLoading />
+        ) : special_tags && special_tags.tag ? (
           <SpecialTags {...special_tags} />
         ) : (
           <div className="col-md-12 filter-jelajah">
@@ -522,15 +542,14 @@ function generateState(query = {}, params = {}) {
   const { orderby, mediapartner, berakhir, garansi, q, sort, status } = query
 
   // check if special tags
-  let special_tags = {}
+  let special_tags
 
-  if (tag) {
-    special_tags = StaticSpecialTags.find(n => {
-      return n.tag === tag
-    })
-  }
+  StaticSpecialTags.map(n => {
+    if (n.tag === tag) special_tags = n
+  })
 
   return {
+    loading: false,
     main_kat: "",
     sub_kat: "",
     sort: sort || "time_dsc",

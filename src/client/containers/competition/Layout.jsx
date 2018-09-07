@@ -2,7 +2,6 @@ import React, { Component } from "react"
 import { renderRoutes, matchRoutes } from "react-router-config"
 import { connect } from "react-redux"
 import memoize from "memoize-one"
-import { pushScript } from "../../helpers/DomEvents"
 import { topLoading } from "../../components/preloaders"
 import { toCamelCase } from "string-manager"
 
@@ -19,11 +18,6 @@ class LayoutCompetition extends Component {
     window.scrollTo(0, 0)
     this.reqData(this.props.match.params.encid)
     this.reqRelatedCompetitions(this.props.match.params.encid)
-
-    // disquss count sdk
-    pushScript("https://kompetisiindonesia.disqus.com/count.js", {
-      id: "dsq-count-scr"
-    })
   }
 
   componentDidUpdate() {

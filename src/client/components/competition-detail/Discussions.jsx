@@ -3,7 +3,7 @@ import { pushScript } from "../../helpers/DomEvents"
 export default class Discussions extends Component {
   componentDidMount() {
     // disquss js sdk
-    pushScript("https://kompetisiindonesia.disqus.com/embed.js")
+    pushScript("//kompetisiindonesia.disqus.com/embed.js")
     
     setTimeout(() => {
       this.resetDisqus()
@@ -41,7 +41,7 @@ export default class Discussions extends Component {
           penyelenggara kompetisi sendiri.
         </p>
         <hr />
-        <div id="disqus_thread">Tunggu Sebentar...</div>
+        <div id="disqus_thread" />
       </div>
     )
   }

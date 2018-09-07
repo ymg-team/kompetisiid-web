@@ -2,13 +2,25 @@ import React, { Component } from "react"
 import Styled from "styled-components"
 import { Link } from "react-router-dom"
 import BtnJoin from "../buttons/BtnJoin"
+// import { pushScript } from "../../helpers/DomEvents"
 
 class TabCompetition extends Component {
   componentDidMount() {
-    setTimeout(() => {
-      if (window.DISQUSWIDGETS) DISQUSWIDGETS.getCount({ reset: true })
-    }, 3000)
+
+    // // disquss count sdk
+    // pushScript("//kompetisiindonesia.disqus.com/count.js", {
+    //   id: "dsq-count-scr"
+    // })
+
+    // setTimeout(() => {
+    //   this.resetDisqusCount()
+    // }, 2000)
   }
+
+  // resetDisqusCount = () => {
+  //   console.log("reset disqus count...")
+  //   if (window.DISQUSWIDGETS) DISQUSWIDGETS.getCount({ reset: true })
+  // }
 
   render = () => {
     const n_pengumuman = this.props.data
@@ -63,7 +75,7 @@ class TabCompetition extends Component {
                           </div>
                         ) : null}
                         {/* count comments */}
-                        {n.name == "diskusi" ? (
+                        {/* {n.name == "diskusi" ? (
                           <div
                             // data-disqus-identifier={this.props.link}
                             data-disqus-url={this.props.link}
@@ -75,7 +87,7 @@ class TabCompetition extends Component {
                           >
                             0
                           </div>
-                        ) : null}
+                        ) : null} */}
                       </Link>
                     </li>
                   ))}
