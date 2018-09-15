@@ -57,7 +57,8 @@ Router.get(
   (req, res, next) => {
     req.reqdata = {
       method: "get",
-      url: "/feed/berita",
+      url: "/v2/feed/news",
+      version: "v42",
       resType: "text"
     }
     next()
