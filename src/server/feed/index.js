@@ -17,7 +17,8 @@ Router.get(
   (req, res, next) => {
     req.reqdata = {
       method: "get",
-      url: "/feed",
+      url: "/v2/feed/competition",
+      version: "v42",
       resType: "text"
     }
     next()
@@ -36,7 +37,8 @@ Router.get(
   (req, res, next) => {
     req.reqdata = {
       method: "get",
-      url: "/feed/berita",
+      url: "/v2/feed/news",
+      version: "v42",
       resType: "text"
     }
     next()
