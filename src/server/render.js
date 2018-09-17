@@ -130,6 +130,7 @@ export default (req, res) => {
 
 // initial script
 function getScript(state) {
+  console.log(state)
   // <script>
   //     if('serviceWorker' in navigator)
   //     {
@@ -143,10 +144,11 @@ function getScript(state) {
   // </script>
   // <script type="text/javascript" src="https:////connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8&appId=1419514554927551" async defer></script>
   // <script type="text/javascript" src="https://apis.google.com/js/platform.js" async defer></script>
+  // ref __data__ : https://redux.js.org/recipes/serverrendering
   return `
     <script type="text/javascript">window.__data__=${JSON.stringify(
       state
-    )}</script>
+    ).replace(/</g, "\\u003c")}</script>
     <script type="text/javascript" src="/assets/4.2/js/script-min.js?v=${
       version.JS_VERSION
     }"></script>

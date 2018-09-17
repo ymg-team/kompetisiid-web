@@ -14,12 +14,18 @@ const SuperDashboard = Loadable({
   loader: () => import('../containers/_super/dashboard/index'),
   loading: ContentLoading
 })
+const NotFound = Loadable({
+  loader: () => import('../containers/error/index'),
+  loading: Loading
+})
+// request containers
 const Request = Loadable({
   loader: () => import('../containers/_super/requests/index'),
   loading: Loading
 })
-const NotFound = Loadable({
-  loader: () => import('../containers/error/index'),
+// competition containers
+const CompetitionList = Loadable({
+  loader: () => import('../containers/_super/competitions/CompetitionList'),
   loading: Loading
 })
 
@@ -31,6 +37,38 @@ export default {
       path: '/super/dashboard',
       exact: true,
       component: SuperDashboard
+    },
+
+    // data competition
+    {
+      path: "/super/competition",
+      exact: true,
+      tab_active: 1,
+      component: CompetitionList
+    },
+    {
+      path: "/super/competition/live",
+      exact: true,
+      tab_active: 1,
+      component: CompetitionList
+    },
+    {
+      path: "/super/competition/end",
+      exact: true,
+      tab_active: 2,
+      component: CompetitionList
+    },
+    {
+      path: "/super/competition/moderation",
+      exact: true,
+      tab_active: 3,
+      component: CompetitionList
+    },
+    {
+      path: "/super/competition/reject",
+      exact: true,
+      tab_active: 4,
+      component: CompetitionList
     },
 
     // request send competition
