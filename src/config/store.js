@@ -1,4 +1,4 @@
-import { combineReducers, createStore, applyMiddleware } from 'redux'
+import { createStore, applyMiddleware } from 'redux'
 import apiMiddleware from '../store/middlewares/api'
 import Reducers from '../store/combineReducers'
 
