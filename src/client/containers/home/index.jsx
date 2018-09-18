@@ -126,17 +126,18 @@ class Home extends Component {
         <Helmet />
 
         {/* navbar */}
-        <div style={{ background: "#cc5454" }}>
+        {/* special background image */}
+        <div style={{backgroundImage:`url(/assets/images/background-1.jpg)`, backgroundSize: 'cover'}}>
           <div className="container">
             <Navbar />
           </div>
-        </div>
 
-        {/* slider */}
-        <SubHeaderHome
-          stats={kompetisi.stats || {}}
-          slider={kompetisi.data["home_popular"] || {}}
-        />
+          {/* slider */}
+          <SubHeaderHome
+            stats={kompetisi.stats || {}}
+            slider={kompetisi.data["home_popular"] || {}}
+          />
+        </div>
 
         {/* competition */}
         <div className="col-md-12 bg-gray">

@@ -59,6 +59,7 @@ export default (req, res) => {
                 <meta property="fb:admins" content="100000359263988">
                 <link rel="stylesheet" href="${webpackAssets.style.css}">
                 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+                <link href="https://fonts.googleapis.com/css?family=Raleway:400,500" rel="stylesheet">
                 <link rel="icon" href="/assets/icons-red/icon-128x128.png" />
                 <link rel="manifest" href="/manifest.json" />
                 <link rel="search" type="application/opensearchdescription+xml" href="/opensearch.xml" title="Cari Kompetisi"/>
@@ -130,7 +131,6 @@ export default (req, res) => {
 
 // initial script
 function getScript(state) {
-  console.log(state)
   // <script>
   //     if('serviceWorker' in navigator)
   //     {

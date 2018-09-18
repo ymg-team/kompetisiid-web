@@ -39,10 +39,17 @@ const SubHeader = Styled.div`
     justify-content: center;
     min-height: 100%;
     h1 {
+      color: #ffffffd9;
       font-size: 3em;
+      font-family: raleway, sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      line-height: 1.1;
       padding: 1em 0 0.5em;
       margin: 0;
-      line-height: 1.2;
+    }
+    h2 {
+      font-family: raleway, sans-serif;
     }
     .text{
       padding: 3em 0;
@@ -121,7 +128,6 @@ class HomeSubHeader extends Component {
     return (
       <SubHeader
         id="homepage-subheader"
-        className={`row ${this.state.active === 0 ? "bg-red" : "bg-blue"}`}
       >
         {/* <div className="container">
           <Navbar />
