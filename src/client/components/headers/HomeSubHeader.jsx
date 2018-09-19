@@ -126,9 +126,7 @@ class HomeSubHeader extends Component {
     const { data, status, message } = this.props.slider
 
     return (
-      <SubHeader
-        id="homepage-subheader"
-      >
+      <SubHeader id="homepage-subheader">
         {/* <div className="container">
           <Navbar />
         </div> */}
@@ -155,12 +153,8 @@ const WelcomeStaticSlider = props => (
       <Count {...props.stats} />
     </div>
     <div className="row">
-      <Link
-        to="/browse"
-        className="btn btn-white btn-rounded btn-lg"
-        style={{ borderColor: "#FFF", color: Colors.mainRed }}
-      >
-        Jelajah Kompetisi
+      <Link to="/browse" className="btn btn-borderwhite btn-rounded btn-lg">
+        > Jelajah Kompetisi
       </Link>
       <Link to="/add" className="btn btn-borderwhite btn-rounded btn-lg">
         Pasang Kompetisi
