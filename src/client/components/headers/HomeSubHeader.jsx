@@ -154,7 +154,8 @@ const WelcomeStaticSlider = props => (
     </div>
     <div className="row">
       <Link to="/browse" className="btn btn-borderwhite btn-rounded btn-lg">
-        > Jelajah Kompetisi
+        Jelajah Kompetisi&nbsp;
+        <i className="fas fa-arrow-alt-circle-right" />
       </Link>
       <Link to="/add" className="btn btn-borderwhite btn-rounded btn-lg">
         Pasang Kompetisi
