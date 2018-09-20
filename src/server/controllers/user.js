@@ -3,7 +3,7 @@
  * Created by yussan on 13/11/16.
  */
 
-import * as Session from '../../helpers/session'
+import * as Session from '../helpers/session'
 
 export function getProfile(req, res, next) {
   req.reqdata = {

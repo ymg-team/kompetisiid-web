@@ -2,7 +2,7 @@
  * Created by yussan on 17/02/17.
  */
 import express from "express"
-import ApiCaller from "../api/middlewares/apiCaller"
+import ApiCaller from "../middlewares/apiCaller"
 
 const Router = express.Router()
 
