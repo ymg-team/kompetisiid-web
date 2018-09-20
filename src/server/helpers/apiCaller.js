@@ -103,7 +103,7 @@ export function requestAPI(
  * using promise
  * @params (string) method, (string) endpoint, (object) params
  */
-export function requestAPIV2(method = 'GET', endpoint = '', params = {}, headers) {
+export function requestAPIV2(method = 'GET', endpoint = '', params = {}, headers = {}) {
   const { API_HOST } = params
   delete params.API_HOST
 

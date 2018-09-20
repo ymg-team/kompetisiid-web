@@ -2,9 +2,9 @@
  * Created by yussan on 13/11/16.
  */
 import express from 'express'
-import * as controller from '../controllers/user'
-import * as requestMiddleware from '../middlewares/handleRequest'
-import apiCaller from '../middlewares/apiCaller'
+import * as controller from '../../controllers/user'
+import * as requestMiddleware from '../../middlewares/handleRequest'
+import apiCaller from '../../middlewares/apiCaller'
 const router = express.Router()
 
 router.get('/:username', controller.getProfile, apiCaller)

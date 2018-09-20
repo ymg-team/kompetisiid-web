@@ -10,9 +10,9 @@ import Tab, { tab } from "../../components/navigations/TabCompetition"
 import CompetitionPreloader from "../../components/preloaders/CompetitionDetail"
 import { getDetail, getRelated } from "./actions"
 class LayoutCompetition extends Component {
-  static fetchData({ params, store }) {
-    return store.dispatch(getDetail(params.encid))
-  }
+  // static fetchData({ params, store }) {
+  //   return store.dispatch(getDetail(params.encid))
+  // }
 
   componentDidMount() {
     window.scrollTo(0, 0)

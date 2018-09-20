@@ -36,16 +36,41 @@ export default (req, res) => {
 
   // function to get string of html
   function renderHtml(body = "", state = {}, styleTags = "") {
-    const head = Helmet.rewind()
+    
+
+    // custom meta
+    let metaTags, head
+
+    if (!req.meta) {
+      head = Helmet.renderStatic()
+      metaTags = `
+        ${head.title.toString()}
+        ${head.meta.toString()}
+        ${head.style.toString()}
+        ${head.link.toString()}
+      `
+    } else {
+      metaTags = `
+      <title>${req.meta.title}</title>
+      <meta name="description" content="${req.meta.desc}"/>
+
+      <meta name="twitter:card" content="summary"/>,
+      <meta name="twitter:image" content="${req.meta.image}"/>
+      <meta name="twitter:title" content="${req.meta.title}"/>
+      <meta name="twitter:description" content="${req.meta.desc}" />
+
+      <meta property="og:title" content="${req.meta.title}" />
+      <meta property="og:type" content="${req.meta.type || "blog"}" />
+      <meta property="og:url" content="${req.meta.url || "https://kompetisi.id"}" />
+      <meta property="og:image" content="${req.meta.image}" />
+      <meta property="og:description" content="${req.meta.desc}" />
+      `
+    }
+
     return `
         <!DOCTYPE html>
         <html lang="id-id">
             <head>
-                ${head.title.toString()}
-                ${head.meta.toString()}
-                ${head.style.toString()}
-                ${head.link.toString()}
-                ${styleTags}
                 <meta charset="utf-8" />
                 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -57,6 +82,7 @@ export default (req, res) => {
                 <meta name="google-site-verification" content="pUksy8ewwm4bzRVqaTQXKmWfRFZc9_L0iuESNDg7190" />
                 <meta property="fb:app_id" content="1419514554927551">
                 <meta property="fb:admins" content="100000359263988">
+                ${styleTags}
                 <link rel="stylesheet" href="${webpackAssets.style.css}">
                 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
                 <link href="https://fonts.googleapis.com/css?family=Raleway:400,500" rel="stylesheet">
@@ -80,11 +106,12 @@ export default (req, res) => {
                     transition: opacity 300ms ease-in;
                 }
                 </style>
+                ${metaTags}
             </head>
             <body>
                 <div id="root">${body}</div>
                 <div id="fb-root"></div>
-                ${head.script.toString()}
+                ${head ? head.script.toString() : ''}
                 ${getScript(state)}
             </body>
         </html>
@@ -131,19 +158,6 @@ export default (req, res) => {
 
 // initial script
 function getScript(state) {
-  // <script>
-  //     if('serviceWorker' in navigator)
-  //     {
-  //         navigator.serviceWorker.register('/service-worker.js')
-  //             .then(function(registration){
-  //                 console.log(registration);
-  //             }).catch(function(err){
-  //                 console.log('ServiceWorker registration is failed', err);
-  //             });
-  //     }
-  // </script>
-  // <script type="text/javascript" src="https:////connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8&appId=1419514554927551" async defer></script>
-  // <script type="text/javascript" src="https://apis.google.com/js/platform.js" async defer></script>
   // ref __data__ : https://redux.js.org/recipes/serverrendering
   return `
     <script type="text/javascript">window.__data__=${JSON.stringify(

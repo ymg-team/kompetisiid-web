@@ -1,32 +1,33 @@
-import express from 'express'
-import path from 'path'
-import cookieSession from 'cookie-session'
+import express from "express"
+import path from "path"
+import cookieSession from "cookie-session"
 
-import AppApi from './api'
-import AppFeed from './feed'
-import AppRender from './render'
+import AppApi from "./routes/api/index"
+import AppFeed from "./controllers/feed"
+import AppRender from "./render"
 
-import * as AuthMiddleware from './api/middlewares/auth'
+import * as AuthMiddleware from "./middlewares/auth"
+import * as FrontMiddleware from "./middlewares/frontend"
 
 const App = express()
 
-App.disable('x-powered-by')
+App.disable("x-powered-by")
 
-if (process.env.NODE_ENV === 'production') {
-  const compression = require('compression')
+if (process.env.NODE_ENV === "production") {
+  const compression = require("compression")
   App.use(compression())
 }
 
 App.use(
   cookieSession({
-    name: 'kompetisi-id',
-    keys: [process.env.APP_KEY || 'kompetisi', 'kompetisid'],
+    name: "kompetisi-id",
+    keys: [process.env.APP_KEY || "kompetisi", "kompetisid"],
     maxAge: 12 * 30 * 24 * 60 * 60 * 1000
   })
 )
 
 const staticOptions = function() {
-  if (process.env.NODE_ENV == 'production') {
+  if (process.env.NODE_ENV == "production") {
     return {
       maxAge: 12 * 30 * 24 * 60 * 60 * 1000,
       etag: false
@@ -43,55 +44,65 @@ App.use((req, res, next) => {
 })
 
 // app routes
-App.use('/api', AppApi)
-App.use('/feed', AppFeed)
+App.use("/api", AppApi)
+App.use("/feed", AppFeed)
 
 // dashboard pages, only for 'member'
-App.get('/login', AuthMiddleware.dashboardMiddleware, AppRender)
-App.get('/dashboard', AuthMiddleware.dashboardMiddleware, AppRender)
-App.get('/dashboard/*', AuthMiddleware.dashboardMiddleware, AppRender)
+App.get("/login", AuthMiddleware.dashboardMiddleware, AppRender)
+App.get("/dashboard", AuthMiddleware.dashboardMiddleware, AppRender)
+App.get("/dashboard/*", AuthMiddleware.dashboardMiddleware, AppRender)
 
 // super pages, only for 'admin'
-App.get('/super', AuthMiddleware.superMiddleware, AppRender)
-App.get('/super/*', AuthMiddleware.superMiddleware, AppRender)
+App.get("/super", AuthMiddleware.superMiddleware, AppRender)
+App.get("/super/*", AuthMiddleware.superMiddleware, AppRender)
 
 // static files
 App.use(
-  '/static',
+  "/static",
   express.static(
     path.resolve(`${__dirname}/../../public/assets`),
     staticOptions()
   )
 )
 App.use(
-  '/assets',
+  "/assets",
   express.static(
     path.resolve(`${__dirname}/../../public/assets`),
     staticOptions()
   )
 )
 App.use(
-  '/build',
+  "/build",
   express.static(
     path.resolve(`${__dirname}/../../dist-client`),
     staticOptions()
   )
 )
-App.use('/robots.txt', express.static(__dirname + '/../../public/robots.txt'))
+App.use("/robots.txt", express.static(__dirname + "/../../public/robots.txt"))
 App.use(
-  '/opensearch.xml',
-  express.static(__dirname + '/../../public/opensearch.xml')
+  "/opensearch.xml",
+  express.static(__dirname + "/../../public/opensearch.xml")
 )
 App.use(
-  '/manifest.json',
-  express.static(__dirname + '/../../public/manifest.json')
+  "/manifest.json",
+  express.static(__dirname + "/../../public/manifest.json")
 )
 App.use(
-  '/service-worker.js',
-  express.static(__dirname + '/../../public/service-worker.js')
+  "/service-worker.js",
+  express.static(__dirname + "/../../public/service-worker.js")
 )
 
-// global path
-App.get('*', AppRender)
+// React path
+
+// competition routes
+App.get("/competition/:id/*", FrontMiddleware.generateMetaCompetition, AppRender)
+// App.get('/competition/:encid/prizes/:title', AppRender)
+// App.get('/competition/:encid/announcements/:title', AppRender)
+// App.get('/competition/:encid/discussions/:title', AppRender)
+// App.get('/competition/:encid/contacts/:title', AppRender)
+// App.get('/competition/:encid/share/:title', AppRender)
+
+// global routes
+App.get("*", AppRender)
 
 export default App

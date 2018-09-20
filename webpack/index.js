@@ -11,7 +11,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin')
 module.exports = {
   entry: {
     style: ['./src/style/index.sass'],
-    app: ['./src/client/index.js'],
+    app: ['./src/client/feed.js'],
     vendor: [
       'react',
       'react-router',
