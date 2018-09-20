@@ -49,9 +49,11 @@ const SubHeader = Styled.div`
       margin: 0;
     }
     h2 {
+      color: #ffffffd9;
       font-family: raleway, sans-serif;
     }
     .text{
+      color: #ffffffd9;
       padding: 3em 0;
       font-size: .8em;
     }
@@ -133,9 +135,9 @@ class HomeSubHeader extends Component {
 
         <Slider className="container subheader-content home-slider">
           <WelcomeStaticSlider stats={this.props.stats} />
-          {status && status === 200
+          {/* {status && status === 200
             ? data.map((n, key) => <CompetitionSlider key={key} {...n} />)
-            : null}
+            : null} */}
         </Slider>
       </SubHeader>
     )
@@ -149,7 +151,7 @@ const WelcomeStaticSlider = props => (
         <h1>Setiap Hari Ada Hadiah Disini.</h1>
       </div>
     </div>
-    <div className="row">
+    <div className="row hide-mobile">
       <Count {...props.stats} />
     </div>
     <div className="row">
