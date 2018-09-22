@@ -1,4 +1,7 @@
 import React, { Component } from "react"
+import * as Colors from "../../style/colors"
+
+// components
 import Footer from "../components/Footer"
 import { renderRoutes, matchRoutes } from "react-router-config"
 import Styled from "styled-components"
@@ -7,6 +10,19 @@ import Alert from "../components/Alert"
 import FullScreenLoader from "../components/preloaders/FullPage"
 import GAds from "../components/cards/GoogleAds"
 
+const BackToTop = Styled.button`
+  outline: none;
+  transition: bottom .5s ease, top .5s ease;
+  padding: 5px 10px; 
+  background: ${Colors.mainWhite};
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  border-radius: 20px;
+  color: ${Colors.mainGray};
+  border: 1px solid ${Colors.softGray};
+`
+
 const LayoutStyled = Styled.div`
   min-height: 100%;
 `
@@ -14,7 +30,21 @@ const LayoutStyled = Styled.div`
 let addedEventScroll = false
 
 class RootLayoutV5 extends Component {
+  state = {
+    showBtnTop: false
+  }
+
   componentDidMount() {
+    // scroll event listener
+    document.addEventListener("scroll", e => {
+      const position = window.scrollY
+      if (position > 500) {
+        if (!this.state.showBtnTop) this.setState({ showBtnTop: true })
+      } else {
+        if (this.state.showBtnTop) this.setState({ showBtnTop: false })
+      }
+    })
+
     // Google Analytics handler
     this.props.history.listen(location => {
       if (window.ga) {
@@ -33,11 +63,7 @@ class RootLayoutV5 extends Component {
       <LayoutStyled>
         {this.props.location.pathname === "/" || fullscreen ? null : (
           <div style={{ backgroundColor: "rgb(228, 228, 228)" }}>
-            <div className="container">
-              <div className="row">
-                <Navbar className="bg-gray" />
-              </div>
-            </div>
+            <Navbar className="bg-gray" />
           </div>
         )}
 
@@ -57,6 +83,20 @@ class RootLayoutV5 extends Component {
         {/* gads */}
 
         {fullscreen ? null : <Footer />}
+
+        {/* button click to go top */}
+        <BackToTop
+          onClick={() => {
+            document.getElementById("ki-logo").scrollIntoView({
+              behavior: "smooth"
+            })
+          }}
+          style={!this.state.showBtnTop ? { bottom: "-200px" } : {}}
+        >
+          <i className="fas fa-arrow-alt-circle-up" />
+          &nbsp;
+          <span>Kembali ke Atas</span>
+        </BackToTop>
         <Alert />
         <FullScreenLoader />
       </LayoutStyled>

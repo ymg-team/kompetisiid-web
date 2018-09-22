@@ -135,9 +135,9 @@ class HomeSubHeader extends Component {
 
         <Slider className="container subheader-content home-slider">
           <WelcomeStaticSlider stats={this.props.stats} />
-          {/* {status && status === 200
+          {status && status === 200
             ? data.map((n, key) => <CompetitionSlider key={key} {...n} />)
-            : null} */}
+            : null}
         </Slider>
       </SubHeader>
     )
