@@ -48,22 +48,10 @@ class MyCompetition extends Component {
         target: "/super/competition/live"
       },
       {
-        text: "berakhir",
+        text: "semua kompetisi",
         is_active: tab_active == 2,
         count: 12,
         target: "/super/competition/end"
-      },
-      {
-        text: "moderasi",
-        is_active: tab_active == 3,
-        count: 12,
-        target: "/super/competition/moderation"
-      },
-      {
-        text: "ditolak",
-        is_active: tab_active == 4,
-        count: 2,
-        target: "/super/competition/reject"
       }
     ]
 
@@ -133,8 +121,8 @@ function generateParams(props) {
   }
   if (tab_active == 1) Params.live = 1
   if (tab_active == 2) Params.berakhir = 1
-  if (tab_active == 3) Params.waiting = 1
-  if (tab_active == 4) Params.reject = 1
+  // if (tab_active == 3) Params.waiting = 1
+  // if (tab_active == 4) Params.reject = 1
 
   return Params
 }

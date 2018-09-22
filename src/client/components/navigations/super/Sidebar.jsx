@@ -8,17 +8,6 @@ export default props => (
         {" "}
         <Link to="/super/dashboard">Dashboard</Link>
       </li>
-      <hr />
-      <li className="active">
-        {" "}
-        <a href="#">Pasang Kompetisi</a>
-      </li>
-      <li>
-        {" "}
-        <a href="#">
-          Kompetisi Saya<span className="label label-blue">23</span>
-        </a>
-      </li>
 
       {/* competition */}
       <hr />
@@ -27,13 +16,15 @@ export default props => (
         <strong>Manajemen Kompetisi</strong>
       </li>
       <li>
-        <a href="#">
-          Semua Kompetisi<span className="label label-blue">245</span>
-        </a>
+        <Link to="/super/competition">
+          Semua Kompetisi Terpasang
+          <span className="label label-blue">245</span>
+        </Link>
       </li>
       <li>
         <Link to="/super/requests">
-          Request Pasang Kompetisi<span className="label label-blue">245</span>
+          Request Pasang Kompetisi
+          <span className="label label-blue">245</span>
           <span className="label label-red">56</span>
         </Link>
       </li>
@@ -44,9 +35,22 @@ export default props => (
         <strong>Manajemen Kabar </strong>
       </li>
       <li>
-        <a href="#">
-          Semua Berita<span className="label label-blue">24</span>
-        </a>
+        <Link to="/super/news">
+          Semua Berita
+          <span className="label label-blue">24</span>
+        </Link>
+      </li>
+
+      {/* member */}
+      <hr />
+      <li>
+        <strong>Members</strong>
+      </li>
+      <li>
+        <Link to="/super/members">
+          Semua Member
+          <span className="label label-blue">24</span>
+        </Link>
       </li>
 
       {/* akun */}
