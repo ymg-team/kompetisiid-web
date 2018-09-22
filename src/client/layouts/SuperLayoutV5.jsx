@@ -11,7 +11,7 @@ import { renderRoutes, matchRoutes } from 'react-router-config'
 import { Link } from 'react-router-dom'
 
 const Sidebar = Loadable({
-  loader: () => import('../components/navigations/SidebarSuper'),
+  loader: () => import('../components/navigations/super/Sidebar'),
   loading: Loading
 })
 
