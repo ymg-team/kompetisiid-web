@@ -8,7 +8,7 @@ import { LOCAL_STORAGE_CATEGORIES } from "../../../config/version"
 import Helmet from '../../components/Helmet'
 import Subheader from '../../components/Subheader'
 import { Link } from 'react-router-dom'
-import Loader from '../../components/loaders/DefaultLoader'
+import Loader from '../../components/preloaders/GlobalLoader'
 
 class Index extends Component {
   static fetchData({ store }) {

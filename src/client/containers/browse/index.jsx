@@ -35,12 +35,6 @@ const FilterStatus = {
 }
 
 class Index extends Component {
-  // static fetchData({ store, params, query }) {
-  //   const State = generateState(query, params)
-  //   const Filter = generateFilter(State)
-  //   const Params = generateParams(State)
-  //   return store.dispatch(KompetisiActs.fetchJelajah(Params, Filter))
-  // }
   state = {
     loading: true
   }

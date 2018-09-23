@@ -35,8 +35,8 @@ const HeaderContentStyled = Styled.div`
 `
 
 const SubHeader = props => (
-  <SubHeaderStyled className={props.customClass || "container p-50-0"}>
-    <HeaderContentStyled className={"col-md-12"}>
+  <SubHeaderStyled style={props.customStyle || {}} className={props.customClass || "container p-50-0"}>
+    <HeaderContentStyled className={props.customClassContent || "col-md-12"}>
       <h2>{props.title}</h2>
       <h3 className={"text-muted"}>{props.text}</h3>
     </HeaderContentStyled>

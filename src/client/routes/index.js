@@ -16,7 +16,7 @@ import Add from './add'
 import User from './user'
 import Dashboard from './dashboard'
 import Careers from './careers'
-import Super from './super'
+import Super from './super/index'
 
 // containers
 import Login from '../containers/auth/Login'

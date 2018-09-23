@@ -2,10 +2,10 @@ import React, { Component } from "react"
 import HeaderDashboard from "../../../components/cards/HeaderDashboard"
 import Tab from "../../../components/navigations/Tab"
 import CompetitionCard from "../../../components/cards/dashboard/CompetitionListCard"
-import Loader from "../../../components/loaders/DefaultLoader"
+import Loader from "../../../components/preloaders/GlobalLoader"
 import Helmet from "../../../components/Helmet"
 
-import { fetchJelajah } from "../../competition/actions"
+import { fetchJelajah, fetchJelajahMore } from "../../competition/actions"
 import { connect } from "react-redux"
 
 let Filter, Params
@@ -16,16 +16,20 @@ class MyCompetition extends Component {
     data: {}
   }
 
-  static fetchData({ store, params, query }) {
-    return new Promise(resolve => {
-      return resolve()
-    })
+  componentDidMount() {
+    this.fetchData()
   }
 
-  componentDidMount() {
+  fetchData() {
     Filter = generateFilter(this.props)
     Params = generateParams(this.props)
     this.props.dispatch(fetchJelajah(Params, Filter))
+  }
+
+  fetchMoreData() {
+    const competition = this.props.data[Filter]
+    Params.lastid = competition.data[competition.data.length - 1].id
+    this.props.dispatch(fetchJelajahMore(Params, Filter))
   }
 
   UNSAFE_componentWillReceiveProps(np) {
@@ -51,7 +55,7 @@ class MyCompetition extends Component {
         text: "semua kompetisi",
         is_active: tab_active == 2,
         count: 12,
-        target: "/super/competition/end"
+        target: "/super/competition/all"
       }
     ]
 
@@ -78,28 +82,28 @@ class MyCompetition extends Component {
             {competitions.status == 200 ? (
               <p>
                 Menampilkan <strong>{competitions.data.length}</strong> dari{" "}
-                <strong>{competitions.count}</strong> kompetisi
+                <strong>{competitions.count}</strong> kompetisi 
               </p>
             ) : null}
-            {competitions.status == 200 ? (
-              competitions.data.map((n, key) => {
-                return <CompetitionCard key={key} n={n} />
-              })
-            ) : (
-              <p className="text-muted">{competitions.message}</p>
-            )}
-            {competitions.status == 200 ? (
-              <span>
-                <a className="btn btn-white">
-                  <i className="fa fa-angle-left">&nbsp;</i>
-                  sebelumnya{" "}
+            {competitions.data
+              ? competitions.data.map((n, key) => {
+                  return <CompetitionCard key={key} n={n} />
+                })
+              : null}
+            {competitions.status != 200 ? (
+              <p className="text-muted align-center">{competitions.message}</p>
+            ) : null}
+
+            {/* load more competitions */}
+            {competitions.status == 200 && !competitions.is_loading ? (
+              <div className="align-center">
+                <a
+                  onClick={() => this.fetchMoreData()}
+                  className="btn btn-white"
+                >
+                  Tampilan Kompetisi Berikutnya
                 </a>
-                {competitions.data.length >= Limit ? (
-                  <a className="btn btn-white">
-                    berikutnya <i className="fa fa-angle-right" />
-                  </a>
-                ) : null}
-              </span>
+              </div>
             ) : null}
           </div>
         ) : null}
@@ -117,12 +121,10 @@ function generateParams(props) {
   const { tab_active } = props.route
   let Params = {
     limit: Limit,
-    username: props.session.username
+    username: props.session.username,
+    // available status : active || all || waiting || reject || accept
+    status: props.route.status || "all"
   }
-  if (tab_active == 1) Params.live = 1
-  if (tab_active == 2) Params.berakhir = 1
-  // if (tab_active == 3) Params.waiting = 1
-  // if (tab_active == 4) Params.reject = 1
 
   return Params
 }

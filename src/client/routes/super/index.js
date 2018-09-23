@@ -1,31 +1,35 @@
 import Loadable from 'react-loadable'
 
 // layouts
-import EmptyLayout from '../layouts/4.2/Empty'
-import SuperLayout from '../layouts/SuperLayoutV5'
+import EmptyLayout from '../../layouts/4.2/Empty'
+import SuperLayout from '../../layouts/SuperLayoutV5'
 
 // components
-import Loading from '../components/preloaders/GlobalLoader'
-import ContentLoading from '../components/preloaders/FullContentLoader'
-import EmptyLoading from '../components/preloaders/EmptyLoader'
+import Loading from '../../components/preloaders/GlobalLoader'
+import ContentLoading from '../../components/preloaders/FullContentLoader'
+import EmptyLoading from '../../components/preloaders/EmptyLoader'
 
 // containers
 const SuperDashboard = Loadable({
-  loader: () => import('../containers/_super/dashboard/index'),
+  loader: () => import('../../containers/_super/dashboard/index'),
   loading: ContentLoading
 })
 const NotFound = Loadable({
-  loader: () => import('../containers/error/index'),
+  loader: () => import('../../containers/error/index'),
   loading: Loading
 })
 // request containers
 const Request = Loadable({
-  loader: () => import('../containers/_super/requests/index'),
+  loader: () => import('../../containers/_super/requests/index'),
   loading: Loading
 })
 // competition containers
 const CompetitionList = Loadable({
-  loader: () => import('../containers/_super/competitions/CompetitionList'),
+  loader: () => import('../../containers/_super/competitions/CompetitionList'),
+  loading: Loading
+})
+const CompetitionForm  = Loadable({
+  loader: () => import('../../containers/_super/competitions/CompetitionForm'),
   loading: Loading
 })
 
@@ -44,31 +48,36 @@ export default {
       path: "/super/competition",
       exact: true,
       tab_active: 1,
+      status: 'active',
       component: CompetitionList
     },
     {
       path: "/super/competition/live",
       exact: true,
       tab_active: 1,
+      status: 'active',
       component: CompetitionList
     },
     {
-      path: "/super/competition/end",
+      path: "/super/competition/all",
       exact: true,
       tab_active: 2,
+      status: 'all',
       component: CompetitionList
     },
+
+    // form competition
     {
-      path: "/super/competition/moderation",
+      path: "/super/competition/create",
       exact: true,
-      tab_active: 3,
-      component: CompetitionList
+      component: CompetitionForm
+
     },
     {
-      path: "/super/competition/reject",
+      path: "/super/competition/update/:id",
       exact: true,
-      tab_active: 4,
-      component: CompetitionList
+      component: CompetitionForm
+
     },
 
     // request send competition
