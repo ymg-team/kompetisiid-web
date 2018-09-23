@@ -16,6 +16,11 @@ export default props => (
         <strong>Manajemen Kompetisi</strong>
       </li>
       <li>
+        <Link to="/super/competition/create">
+          <i className="fas fa-plus" /> Tambah Kompetisi
+        </Link>
+      </li>
+      <li>
         <Link to="/super/competition">
           Semua Kompetisi Terpasang
           <span className="label label-blue">245</span>

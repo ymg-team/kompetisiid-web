@@ -87,9 +87,8 @@ class RootLayoutV5 extends Component {
         {/* button click to go top */}
         <BackToTop
           onClick={() => {
-            document.getElementById("ki-logo").scrollIntoView({
-              behavior: "smooth"
-            })
+            // ref: https://stackoverflow.com/a/1145012/2780875
+            window.scrollTo({top: 0, behavior: "smooth"})
           }}
           style={!this.state.showBtnTop ? { bottom: "-200px" } : {}}
         >
