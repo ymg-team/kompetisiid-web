@@ -1,19 +1,23 @@
-import React, { Component } from 'react'
-import { duration, style } from '../Transtition'
-import Transition from 'react-transition-group/Transition'
+import React, { Component } from "react"
+import { duration, style } from "../Transtition"
+import Transition from "react-transition-group/Transition"
 
 // components
 import GAds from "../cards/GoogleAds"
-import Card from '../cards/NewsListCard'
-import Loader from '../preloaders/NewsCardLoader'
-import { Link } from 'react-router-dom'
+import Card from "../cards/NewsListCard"
+import Loader from "../preloaders/NewsCardLoader"
+import { Link } from "react-router-dom"
 
 export default class NewsBox extends Component {
   generateList(n) {
     return n.map((n, key) => {
       if (key % 15 === 0 && key !== 0) {
         return [
-          <div className="col-md-12 align-center" style={{ margin: "0 0 40px" }}>
+          <div
+            className="col-md-12 align-center"
+            style={{ margin: "0 0 40px" }}
+            key={`ads_${key}`}
+          >
             <GAds
               key={`ads_key`}
               adClient="ca-pub-4468477322781117"
@@ -37,12 +41,20 @@ export default class NewsBox extends Component {
         <div className="container">
           <div className="row no-margin">
             {this.props.subtitle && data ? (
-              <span style={{ display: 'table' }}>
+              <span style={{ display: "table" }}>
                 <br />
-                menampilkan&nbsp;<strong>
-                  {' '}
-                  {data.length}&nbsp;
-                </strong>dari&nbsp;<strong>{count}&nbsp;</strong>kabar
+                menampilkan&nbsp;
+                <strong>
+                  {" "}
+                  {data.length}
+                  &nbsp;
+                </strong>
+                dari&nbsp;
+                <strong>
+                  {count}
+                  &nbsp;
+                </strong>
+                kabar
                 <br />
               </span>
             ) : null}

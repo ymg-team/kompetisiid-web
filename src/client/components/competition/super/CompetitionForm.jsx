@@ -4,7 +4,8 @@ import React from "react"
 import SubHeader from "../../headers/SubHeader"
 import Helmet from "../../Helmet"
 import Input from "../../form/InputText"
-
+import InputFile from "../../form/InputFile"
+import Select from "../../form/Select"
 class CompetitionForm extends React.Component {
   state = {}
 
@@ -28,10 +29,11 @@ class CompetitionForm extends React.Component {
           title={title}
         />
         <form
-          className="form-ki no-padding col-md-8 col-lg-10"
+          className="form-ki no-padding col-md-8"
           action="javascript:;"
           method="post"
         >
+          {/* input text of judul */}
           <Input
             label="Judul Kompetisi"
             name="title"
@@ -42,6 +44,26 @@ class CompetitionForm extends React.Component {
             required={true}
             setState={(n, cb) => this.setState(n, cb)}
           />
+          {/* end of input file judul */}
+
+          {/* input file of poster */}
+          <InputFile
+            label="Poster Kompetisi"
+            name="poster"
+            id="input-poster"
+            value={this.state.poster || ""}
+            validate={this.state.poster_validate || {}}
+            required={true}
+            setState={(n, cb) => this.setState(n, cb)}
+          />
+          {/* end of input file of poster */}
+
+          {/* main kategori */}
+          <Select 
+            label="Kategori Utama"
+            name="mainkat"
+          />
+          {/* end of main kategori */}
         </form>
       </React.Fragment>
     )
