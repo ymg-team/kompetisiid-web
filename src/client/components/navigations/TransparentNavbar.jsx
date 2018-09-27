@@ -114,7 +114,8 @@ class Navbar extends Component {
   handleStickyNavbar(e) {
     const position = window.scrollY
     if (position > 500) {
-      if (!this.state.sticky) {
+      const pathArr = window.location.pathname.split('/')
+      if (!this.state.sticky && pathArr[1] !== "competition") {
         this.setState({ sticky: true })
         setTimeout(() => {
           this.setState({

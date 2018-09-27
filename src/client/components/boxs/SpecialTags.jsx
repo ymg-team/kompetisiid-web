@@ -5,7 +5,7 @@ const SpecialTagsStyled = Styled.div`
   .specialtags-image {
     float: left;
     margin-right: 20px;
-    max-width: 100%;
+    max-width: 250px;
   }
   border-bottom: 1px solid lightgray;
   padding: 25px 0;

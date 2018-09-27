@@ -34,7 +34,7 @@ export default class InputText extends Component {
     const is_valid = !(!validate.is_valid && validate.message)
     return (
       <div className={`form-child ${!is_valid ? "error" : ""}`}>
-        <label htmlFor={name}>{label}</label>
+        <label htmlFor={name}>{label} { this.props.required ? <span className="text-red">*</span> : null }</label>
         <input
           onChange={e => this.handleChange(e)}
           onBlur={e => this.handleChange(e)}
