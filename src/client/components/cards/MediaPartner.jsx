@@ -68,7 +68,7 @@ export default class MediaPartner extends Component {
       )
     } else {
       return (
-        <div className="col-md-12 align-center">
+        <div className="align-center">
           <GAds
             style={{ marginTop: "50px" }}
             adClient="ca-pub-4468477322781117"
