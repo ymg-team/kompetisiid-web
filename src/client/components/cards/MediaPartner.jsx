@@ -1,6 +1,9 @@
-import React, { Component } from 'react'
-import Styled from 'styled-components'
-import MediaPartnerData from '../../../store/consts/media_partners'
+import React, { Component } from "react"
+import Styled from "styled-components"
+import MediaPartnerData from "../../../store/consts/media_partners"
+
+// components
+import GAds from "./GoogleAds"
 
 const MediaPartnerStyled = Styled.div`
   padding: 1em 0;
@@ -32,22 +35,21 @@ export default class MediaPartner extends Component {
   }
 
   static defaultProps = {
-    size: 'landscape'
+    size: "landscape"
   }
 
   componentDidMount() {
     // generate random index
     adsInterval = setInterval(() => {
       const nextIndex = Math.floor(Math.random() * MediaPartnerData.length)
-      console.log('update ads to index : ')
+      console.log("update ads to index : ")
       this.setState({
         active: nextIndex
       })
     }, 10000)
   }
 
-  componentWillUnmount()
-  {
+  componentWillUnmount() {
     clearInterval(adsInterval)
   }
 
@@ -58,12 +60,23 @@ export default class MediaPartner extends Component {
         <MediaPartnerStyled>
           <a href={data.url} title={data.title} target="_blank">
             <img src={data.poster[this.props.size]} alt={data.title} />
-            <span className="mediapartner-text">Kompetisi.id sebagai Media Partner</span>
+            <span className="mediapartner-text">
+              Kompetisi.id sebagai Media Partner
+            </span>
           </a>
         </MediaPartnerStyled>
       )
     } else {
-      return null
+      return (
+        <div className="col-md-12 align-center">
+          <GAds
+            style={{ marginTop: "50px" }}
+            adClient="ca-pub-4468477322781117"
+            adSlot={1270681813}
+            timeout={1000}
+          />
+        </div>
+      )
     }
   }
 }
