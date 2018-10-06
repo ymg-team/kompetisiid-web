@@ -1,7 +1,7 @@
 import Styled from 'styled-components'
 import { transparentBlack, mainWhite } from '../../../style/colors'
 
-const ModalStyled = Styled.div`
+export const ModalStyled = Styled.div`
   visibility: hidden; 
   opacity: 0;
   overflow-y: auto;

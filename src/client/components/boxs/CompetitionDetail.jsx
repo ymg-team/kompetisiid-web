@@ -4,6 +4,7 @@ import { openInNewTab } from "../../helpers/LinkGenerator"
 import { eventFire } from "../../helpers/DomEvents"
 import { getCompetitionStatus } from "../../helpers/DateTime"
 import copy from "copy-to-clipboard"
+import Styled from "styled-components"
 
 // components
 import Modal from "../modals/index"
@@ -12,10 +13,24 @@ import { Link } from "react-router-dom"
 import BtnJoin from "../buttons/BtnJoin"
 import { alert } from "../Alert"
 
+const StyledCalendar = Styled.div`
+  a.calendar-item {
+    width: calc(100% / 3);
+  }
+
+  /* responsive handler */
+  @media only screen and (max-width: 543px) {
+    a.calendar-item {
+      width: 100%;
+    }
+  }
+`
+
 const GAds = Loadable({
   loader: () => import("../cards/GoogleAds"),
   loading: EmptyLoading
 })
+
 
 const CompetitionDetailBox = props => {
   const { data } = props
@@ -60,7 +75,8 @@ const CompetitionDetailBox = props => {
                   href={`/browse/${data.main_category.name}`}
                 >
                   <strong>{data.main_category.name}</strong>
-                </a>,
+                </a>
+                ,
                 <a
                   className="text-muted"
                   href={`/browse/${data.sub_category.name}`}
@@ -77,7 +93,7 @@ const CompetitionDetailBox = props => {
             <div className="col-md-6 align-center poster">
               <img
                 alt={data.title}
-                className="poster"
+                className="poster image-modal-target"
                 src={data.poster.original}
               />
             </div>
@@ -184,55 +200,69 @@ const CompetitionDetailBox = props => {
             />
           </div>
           <hr />
-          <a
-            href={addCalendar.google(data)}
-            target="_blank"
-            title="Tambahkan ke Google Calendar"
-            rel="noopener"
-          >
-            <img
-              style={{
-                width: "inherit",
-                backgroundColor: "#FFF",
-                maxWidth: "100%"
-              }}
-              src="/assets/4.2/img/google-calendar-icon.fullwidth.png"
-            />
-          </a>
-          <a
-            href={addCalendar.yahoo(data)}
-            target="_blank"
-            title="Tambahkan ke Yahoo Calendar"
-            rel="noopener"
-          >
-            <img
-              style={{
-                width: "inherit",
-                backgroundColor: "#FFF",
-                maxWidth: "100%"
-              }}
-              src="/assets/4.2/img/yahoo-calendar-icon.fullwidth.png"
-            />
-          </a>
-          <a
-            onClick={() =>
-              alert(
-                true,
-                "untuk sekarang, kalender Microsoft untuk saat ini belum tersedia",
-                "warning"
-              )
-            }
-            href="javascript:;"
-          >
-            <img
-              style={{
-                width: "inherit",
-                backgroundColor: "#FFF",
-                maxWidth: "100%"
-              }}
-              src="/assets/4.2/img/microsoft-calendar-icon.fullwidth.png"
-            />
-          </a>
+
+          <StyledCalendar>
+            {/* add to Google Calendar */}
+            <a
+              className="calendar-item"
+              href={addCalendar.google(data)}
+              target="_blank"
+              title="Tambahkan ke Google Calendar"
+              rel="noopener"
+            >
+              <img
+                style={{
+                  width: "inherit",
+                  backgroundColor: "#FFF",
+                  maxWidth: "100%"
+                }}
+                src="/assets/4.2/img/google-calendar-icon.fullwidth.png"
+              />
+            </a>
+            {/* end of add to Google Calendar */}
+
+            {/* add to Yahoo Calendar */}
+            <a
+              className="calendar-item"
+              href={addCalendar.yahoo(data)}
+              target="_blank"
+              title="Tambahkan ke Yahoo Calendar"
+              rel="noopener"
+            >
+              <img
+                style={{
+                  width: "inherit",
+                  backgroundColor: "#FFF",
+                  maxWidth: "100%"
+                }}
+                src="/assets/4.2/img/yahoo-calendar-icon.fullwidth.png"
+              />
+            </a>
+            {/* end of add to Yahoo Calendar */}
+
+            {/* add to Miscrosoft Calendar */}
+            <a
+              className="calendar-item"
+              onClick={() =>
+                alert(
+                  true,
+                  "untuk sekarang, kalender Microsoft untuk saat ini belum tersedia",
+                  "warning"
+                )
+              }
+              href="javascript:;"
+            >
+              <img
+                style={{
+                  width: "inherit",
+                  backgroundColor: "#FFF",
+                  maxWidth: "100%"
+                }}
+                src="/assets/4.2/img/microsoft-calendar-icon.fullwidth.png"
+              />
+            </a>
+            {/* end of add to Microsoft Calendar */}
+          </StyledCalendar>
         </div>
       </Modal>
     </div>
