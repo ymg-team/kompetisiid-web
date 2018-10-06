@@ -66,7 +66,7 @@ export default class MediaPartner extends Component {
           </a>
         </MediaPartnerStyled>
       )
-    } else {
+    } else if (!this.props.noads) {
       return (
         <div className="align-center">
           <GAds
@@ -77,6 +77,8 @@ export default class MediaPartner extends Component {
           />
         </div>
       )
+    } else {
+      return null
     }
   }
 }
