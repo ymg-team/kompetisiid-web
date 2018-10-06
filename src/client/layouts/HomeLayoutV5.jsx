@@ -1,5 +1,6 @@
 import React, { Component } from "react"
 import * as Colors from "../../style/colors"
+import { initModalImages } from "../helpers/Modal"
 
 // components
 import Footer from "../components/Footer"
@@ -8,6 +9,7 @@ import Styled from "styled-components"
 import Navbar from "../components/navigations/TransparentNavbar"
 import Alert from "../components/Alert"
 import FullScreenLoader from "../components/preloaders/FullPage"
+import ImageModal from "../components/modals/ImageModal"
 import GAds from "../components/cards/GoogleAds"
 
 const BackToTop = Styled.button`
@@ -35,6 +37,9 @@ class RootLayoutV5 extends Component {
   }
 
   componentDidMount() {
+    // init modal images
+    initModalImages()
+    
     // scroll event listener
     document.addEventListener("scroll", e => {
       const position = window.scrollY
@@ -88,7 +93,7 @@ class RootLayoutV5 extends Component {
         <BackToTop
           onClick={() => {
             // ref: https://stackoverflow.com/a/1145012/2780875
-            window.scrollTo({top: 0, behavior: "smooth"})
+            window.scrollTo({ top: 0, behavior: "smooth" })
           }}
           style={!this.state.showBtnTop ? { bottom: "-200px" } : {}}
         >
@@ -98,6 +103,7 @@ class RootLayoutV5 extends Component {
         </BackToTop>
         <Alert />
         <FullScreenLoader />
+        <ImageModal />
       </LayoutStyled>
     )
   }

@@ -133,10 +133,9 @@ export default class Index extends Component {
               this.page.url = url
             }
           })
-        
-          // reset disqus count
-          if (window.DISQUSWIDGETS) DISQUSWIDGETS.getCount({ reset: true })
 
+        // reset disqus count
+        if (window.DISQUSWIDGETS) DISQUSWIDGETS.getCount({ reset: true })
       }, 1000)
     })
   }
@@ -251,7 +250,10 @@ export default class Index extends Component {
                   <div className="news-detail">
                     <div className="image">
                       <figure>
-                        <img src={detail[encid].data.image.original} />
+                        <img
+                          src={detail[encid].data.image.original}
+                          className="image-modal-target"
+                        />
                       </figure>
                     </div>
                   </div>
