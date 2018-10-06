@@ -63,7 +63,7 @@ export default props => {
       <br />
 
       {/* media parner ads */}
-      <MediaPartner size="square" />
+      <MediaPartner size="square" noads={true} />
 
       {/* GAds */}
       <GAds
