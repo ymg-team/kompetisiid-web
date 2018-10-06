@@ -1,11 +1,11 @@
-import React, { Component } from 'react'
-import Styled from 'styled-components'
+import React, { Component } from "react"
+import Styled from "styled-components"
 
 // components
-import { Link } from 'react-router-dom'
-import Helmet from '../../components/Helmet'
-import Subheader from '../../components/Subheader'
-import { alert } from '../../components/Alert'
+import { Link } from "react-router-dom"
+import Helmet from "../../components/Helmet"
+import Subheader from "../../components/Subheader"
+import { alert } from "../../components/Alert"
 
 const ChooseMethodStyled = Styled.div`
   .add-competition {
@@ -44,9 +44,9 @@ const ChooseMethodStyled = Styled.div`
 
 `
 
-export const title = 'Pasang Kompetisi'
+export const title = "Pasang Kompetisi"
 export const desc =
-  'Apakah kamu adalah penyelenggara kompetisi? jika iya, kamu bisa menggunakan fitur ini untuk mempulikasi kompetisimu di KompetisiIndonesia. Ada 2 cara untuk pasang kompetisi, yaitu "Kirim Kompetisi" dan "Pasang Kompetisi" untuk saat ini hanya "Kirim Kompetisi" yang bisa kamu coba.'
+  'Apakah kamu adalah penyelenggara kompetisi? jika iya, kamu bisa menggunakan fitur ini untuk mempublikasi kompetisimu di KompetisiIndonesia. Ada 2 cara untuk pasang kompetisi, yaitu "Kirim Kompetisi" dan "Pasang Kompetisi" untuk saat ini hanya "Kirim Kompetisi" yang bisa kamu coba.'
 
 export default class Form extends Component {
   componentWillUnmount() {
@@ -87,15 +87,15 @@ export default class Form extends Component {
                   <p className="text-muted">
                     Login dan pasang sendiri kompetisimu melalui dashboard
                     member. Kamu akan lebih mudah memanage kompetisi lainnya,
-                    diskusi dan memberikan pengumuman kepada para pengunjung.{' '}
+                    diskusi dan memberikan pengumuman kepada para pengunjung.{" "}
                   </p>
                   <a
                     href="javascript:;"
                     onClick={() => {
                       alert(
                         true,
-                        'Login terlebih dahulu untuk menggunakan fitur ini',
-                        'warning'
+                        "Login terlebih dahulu untuk menggunakan fitur ini",
+                        "warning"
                       )
                     }}
                     className="btn btn-white"

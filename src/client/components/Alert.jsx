@@ -17,8 +17,12 @@ const Alert = Styled.div`
   color: ${Colors.mainWhite}; 
   font-weight: bold;
   cursor: pointer;
-  transition: all .5s ease;
+  transition: bottom .5s ease, padding .5s ease;
   
+  &:hover {
+    padding-top: 20px
+    padding-bottom: 20px
+  }
   &.error {
     background-color: ${Colors.mainRed}; 
   }
