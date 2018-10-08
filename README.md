@@ -3,7 +3,7 @@
 [![style: styled-components](https://img.shields.io/badge/style-%F0%9F%92%85%20styled--components-orange.svg?colorB=daa357&colorA=db748e)](https://github.com/styled-components/styled-components)
 
 # Kompetisi ID Web
-Indonesian Competition Platform [https://kompetisi.id](https://kompetisi.id)
+Indonesia Competition Platform [https://kompetisi.id](https://kompetisi.id)
 
 [![ki repo](http://res.cloudinary.com/dhjkktmal/image/upload/v1526045249/kompetisi-id/Frame.png)](https://kompetisi.id)
 
