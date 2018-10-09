@@ -4,6 +4,7 @@ import cookieSession from "cookie-session"
 
 import AppApi from "./routes/api/index"
 import AppFeed from "./controllers/feed"
+import AppSitemap from "./controllers/sitemap"
 import AppRender from "./render"
 
 import * as AuthMiddleware from "./middlewares/auth"
@@ -46,6 +47,7 @@ App.use((req, res, next) => {
 // app routes
 App.use("/api", AppApi)
 App.use("/feed", AppFeed)
+App.use("/sitemap", AppSitemap)
 
 // dashboard pages, only for 'member'
 App.get("/login", AuthMiddleware.dashboardMiddleware, AppRender)
