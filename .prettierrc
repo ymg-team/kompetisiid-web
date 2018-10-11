@@ -2,5 +2,7 @@
   "semi": false,
   "singleQuote": false,
   "jsxBracketSameLine": false,
-  "eslineIntegration": true
+  "eslineIntegration": true,
+  "tabWidth": 2,
+  "useTabs": false
 }

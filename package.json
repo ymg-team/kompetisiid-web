@@ -89,6 +89,7 @@
     "node-sass": "^4.8.3",
     "nodemon": "^1.12.0",
     "pre-commit": "^1.2.2",
+    "prettier": "^1.14.3",
     "react-loadable": "^5.4.0",
     "redux-logger": "2.6.1",
     "rimraf": "^2.6.1",

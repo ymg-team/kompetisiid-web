@@ -8,125 +8,125 @@ import {REQUEST_DATA, RECEIVE_DATA} from '../consts'
 
 function profile(state={}, action)
 {
-    if(action.target === 'user_profile')
+  if(action.target === 'user_profile')
+  {
+    switch(action.type)
     {
-        switch(action.type)
-        {
-            case REQUEST_DATA :
-                return setToLoading(state, action)
+    case REQUEST_DATA :
+      return setToLoading(state, action)
 
-            case RECEIVE_DATA :
-                return receiveData(state, action)
+    case RECEIVE_DATA :
+      return receiveData(state, action)
                 
-            default :
-                return state
-        }
+    default :
+      return state
     }
+  }
 
-    return state
+  return state
 }
 
 function login(state={}, action)
 {
-    if(action.target === 'user_login')
+  if(action.target === 'user_login')
+  {
+    switch(action.type)
     {
-        switch(action.type)
-        {
-            case REQUEST_DATA :
-                state.is_loading = true
-                return Object.assign({}, state)
+    case REQUEST_DATA :
+      state.is_loading = true
+      return Object.assign({}, state)
 
-            case RECEIVE_DATA :
-                state.is_loading = false
-                return Object.assign({}, state, action.json)
+    case RECEIVE_DATA :
+      state.is_loading = false
+      return Object.assign({}, state, action.json)
 
-            default :
-                return state
-        }
+    default :
+      return state
     }
+  }
 
-    if(action.target === 'user_logout') return {}
+  if(action.target === 'user_logout') return {}
 
-    return state
+  return state
 }
 
 function register(state={}, action)
 {
-    if(action.target === 'user_register')
+  if(action.target === 'user_register')
+  {
+    switch(action.type)
     {
-        switch(action.type)
-        {
-            case REQUEST_DATA :
-                state.is_loading = true
-                return Object.assign({}, state)
+    case REQUEST_DATA :
+      state.is_loading = true
+      return Object.assign({}, state)
 
-            case RECEIVE_DATA :
-                state.is_loading = false
-                return Object.assign({}, state, action.json)
+    case RECEIVE_DATA :
+      state.is_loading = false
+      return Object.assign({}, state, action.json)
 
-            default :
-                return state
-        }
+    default :
+      return state
     }
+  }
 
-    return state
+  return state
 }
 
 function logout(state={}, action)
 {
-    if(action.target === 'user_logout')
+  if(action.target === 'user_logout')
+  {
+    switch(action.type)
     {
-        switch(action.type)
-        {
-            case REQUEST_DATA :
-                state.is_loading = true
-                return Object.assign({}, state)
+    case REQUEST_DATA :
+      state.is_loading = true
+      return Object.assign({}, state)
 
-            case RECEIVE_DATA :
-                state.is_loading = false
-                return Object.assign({}, state, action.json)
+    case RECEIVE_DATA :
+      state.is_loading = false
+      return Object.assign({}, state, action.json)
 
-            default :
-                return state
-        }
+    default :
+      return state
     }
+  }
 
-    return state
+  return state
 }
 
 function session(state={}, action)
 {
-    return state
+  return state
 }
 
 function email_verification(state={}, action)
 {
-    if(action.target === 'user_email_verification')
+  if(action.target === 'user_email_verification')
+  {
+    switch(action.type)
     {
-        switch(action.type)
-        {
-            case REQUEST_DATA :
-                state.is_loading = true
-                return Object.assign({}, state)
+    case REQUEST_DATA :
+      state.is_loading = true
+      return Object.assign({}, state)
 
-            case RECEIVE_DATA :
-                state.is_loading = false
-                return Object.assign({}, state, action.json)
+    case RECEIVE_DATA :
+      state.is_loading = false
+      return Object.assign({}, state, action.json)
 
-            default :
-                return state
-        }
+    default :
+      return state
     }
+  }
 
-    return state
+  return state
 }
 
 const reducer = combineReducers({
-    profile,
-    login,
-    register,
-    logout,
-    session,
-    email_verification
+  profile,
+  login,
+  register,
+  logout,
+  session,
+  email_verification
 })
 export default reducer

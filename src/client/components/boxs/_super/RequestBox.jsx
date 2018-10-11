@@ -30,8 +30,8 @@ class RequestBox extends Component {
             {/* rows literation */}
             {data.data
               ? data.data.map((n, key) => {
-                  return <List key={key} {...n} />
-                })
+                return <List key={key} {...n} />
+              })
               : null}
 
             {/* print message from api */}

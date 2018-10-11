@@ -5,26 +5,26 @@
 
 export function getNews(req, res, next)
 {
-    let {params} = req
-    params.query = req.query
-    req.reqdata = {
-        version: 'v42',
-        method: 'get',
-        params,
-        url: `/v2/news`,
-    }
+  let {params} = req
+  params.query = req.query
+  req.reqdata = {
+    version: 'v42',
+    method: 'get',
+    params,
+    url: `/v2/news`,
+  }
 
-    next()
+  next()
 }
 
 export function getNewsDetail(req, res, next)
 {
-    req.reqdata = {
-        version: 'v42',
-        method: 'get',
-        params: req.params,
-        url: `/v2/news/${req.params.id}`,
-    }
+  req.reqdata = {
+    version: 'v42',
+    method: 'get',
+    params: req.params,
+    url: `/v2/news/${req.params.id}`,
+  }
 
-    next()
+  next()
 }

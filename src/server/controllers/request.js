@@ -8,13 +8,13 @@ import { objToQuery } from "string-manager/dist/modules/httpquery"
 /**
  * @description function to handle send comeptition by public
  */
- export function sendCompetition(req, res, next)
+export function sendCompetition(req, res, next)
 {
-    req.reqdata = {
-      version: 'v42',
-      method: 'post',
-      params: req.body,
-      url: `/v2/request`,
+  req.reqdata = {
+    version: 'v42',
+    method: 'post',
+    params: req.body,
+    url: `/v2/request`,
   }
 
   next()

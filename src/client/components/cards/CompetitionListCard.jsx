@@ -198,36 +198,36 @@ const CompetitionListCard = props => {
             {/* competition status */}
             {
               is_ended ?
-              <p><strong>Kompetisi telah berakhir</strong></p>
-              : null
+                <p><strong>Kompetisi telah berakhir</strong></p>
+                : null
             }
 
             {
               is_waiting ?
-              <p>
-                <strong>{epochToRelativeTime(n.announcement_at)}</strong>{' '}
-                <span className="text-muted">Pengumuman pemenang</span>
-              </p>
-              : null
+                <p>
+                  <strong>{epochToRelativeTime(n.announcement_at)}</strong>{' '}
+                  <span className="text-muted">Pengumuman pemenang</span>
+                </p>
+                : null
             }
 
             {
               deadline_at > now ?
-              <p>
-                <strong>{epochToRelativeTime(n.deadline_at)}</strong>{' '}
-                <span className="text-muted">Deadline pendaftaran</span>
-              </p>
-              : null
+                <p>
+                  <strong>{epochToRelativeTime(n.deadline_at)}</strong>{' '}
+                  <span className="text-muted">Deadline pendaftaran</span>
+                </p>
+                : null
             }
             {/* end of competition status */}
 
             {
               deadline_at === now ? 
-              <p>
-                <strong>hari ini</strong>{' '}
-                <span className="text-muted">Deadline pendaftaran</span>
-              </p>
-              : null
+                <p>
+                  <strong>hari ini</strong>{' '}
+                  <span className="text-muted">Deadline pendaftaran</span>
+                </p>
+                : null
             }
             
           </div>

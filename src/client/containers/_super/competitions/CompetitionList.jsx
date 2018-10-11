@@ -87,8 +87,8 @@ class MyCompetition extends Component {
             ) : null}
             {competitions.data
               ? competitions.data.map((n, key) => {
-                  return <CompetitionCard key={key} n={n} />
-                })
+                return <CompetitionCard key={key} n={n} />
+              })
               : null}
             {competitions.status != 200 ? (
               <p className="text-muted align-center">{competitions.message}</p>

@@ -10,9 +10,9 @@ import Request from '../client/containers/_super/requests/reducer'
 import {combineReducers} from 'redux'
 
 export default combineReducers({
-    Kompetisi,
-    Berita,
-    Pasang,
-    User,
-    Request
+  Kompetisi,
+  Berita,
+  Pasang,
+  User,
+  Request
 })
