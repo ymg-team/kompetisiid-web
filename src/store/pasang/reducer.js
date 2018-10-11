@@ -7,49 +7,49 @@ import {REQUEST_DATA, RECEIVE_DATA} from '../consts'
 
 function cepat(state={}, action)
 {
-    if(action.target === 'pasang_cepat')
+  if(action.target === 'pasang_cepat')
+  {
+    switch(action.type)
     {
-        switch(action.type)
-        {
-            case REQUEST_DATA :
-                state.is_loading = true
-                return Object.assign({}, state)
+    case REQUEST_DATA :
+      state.is_loading = true
+      return Object.assign({}, state)
 
-            case RECEIVE_DATA :
-                state.is_loading = false
-                return Object.assign({}, state, action.json)
+    case RECEIVE_DATA :
+      state.is_loading = false
+      return Object.assign({}, state, action.json)
 
-            default :
-                return state
-        }
-    }else
-    {
-        return state
+    default :
+      return state
     }
+  }else
+  {
+    return state
+  }
 }
 
 function komplit(state={}, action)
 {
-    if(action.target === 'pasang_komplit')
+  if(action.target === 'pasang_komplit')
+  {
+    switch(action.type)
     {
-        switch(action.type)
-        {
-            case REQUEST_DATA :
-                return setToLoading(state, action)
+    case REQUEST_DATA :
+      return setToLoading(state, action)
 
-            case RECEIVE_DATA :
-                return state
+    case RECEIVE_DATA :
+      return state
 
-            default :
-                return state
-        }
-    }else
-    {
-        return state
+    default :
+      return state
     }
+  }else
+  {
+    return state
+  }
 }
 
 const reducer = combineReducers({
-    cepat, komplit
+  cepat, komplit
 })
 export default reducer

@@ -1,11 +1,11 @@
 export function serialize(obj)
 {
-	let str = []
+  let str = []
 
-	for(var p in obj)
-    {
-      if(obj.hasOwnProperty(p)) str.push(encodeURIComponent(p) + '=' + encodeURIComponent(obj[p]))
-    }
+  for(var p in obj)
+  {
+    if(obj.hasOwnProperty(p)) str.push(encodeURIComponent(p) + '=' + encodeURIComponent(obj[p]))
+  }
 
-	return str.join('&')
+  return str.join('&')
 }

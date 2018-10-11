@@ -5,29 +5,29 @@
  */
 export function removeById(id, state, action)
 {
-    Object.keys(state).map(n => {
-        if(state[n].result)
-        {
-            state[n].result.map((m, key) => {
-                if(m.id === id){
-                    state[n].result[key]['is_delete'] = true
-                    if(action.json)
-                    {
-                        if(action.json.status === 200)
-                        {
-                            delete state[n].result[key]
-                            state[n].total = state[n].total - 1
-                        }else
-                        {
-                            state[n].result[key]['is_delete'] = false
-                        }
-                    }
-                }
-            })
+  Object.keys(state).map(n => {
+    if(state[n].result)
+    {
+      state[n].result.map((m, key) => {
+        if(m.id === id){
+          state[n].result[key]['is_delete'] = true
+          if(action.json)
+          {
+            if(action.json.status === 200)
+            {
+              delete state[n].result[key]
+              state[n].total = state[n].total - 1
+            }else
+            {
+              state[n].result[key]['is_delete'] = false
+            }
+          }
         }
-    })
+      })
+    }
+  })
 
-    return state
+  return state
 }
 
 /**
@@ -38,19 +38,19 @@ export function removeById(id, state, action)
  */
 export function updateByKey(id, state, selector)
 {
-    Object.keys(state).map(n => {
-        if(state[n].result)
+  Object.keys(state).map(n => {
+    if(state[n].result)
+    {
+      state[n].result.map((m, key) => {
+        if(m.id  === id)
         {
-            state[n].result.map((m, key) => {
-                if(m.id  === id)
-                {
-                    state[n].result[key] = selector(m)
-                }
-            })
+          state[n].result[key] = selector(m)
         }
-    })
+      })
+    }
+  })
 
-    return state
+  return state
 }
 
 
@@ -59,10 +59,10 @@ export function updateByKey(id, state, selector)
  */
 export function pushData(currentdata, nextdata)
 {
-    nextdata.map(n => {
-        currentdata.push(n)
-    })
-    return currentdata
+  nextdata.map(n => {
+    currentdata.push(n)
+  })
+  return currentdata
 }
 
 /**
@@ -70,9 +70,9 @@ export function pushData(currentdata, nextdata)
  */
 export function setToLoading(state, action)
 {
-    if(!state[action.filter]) state[action.filter] = {}
-    state[action.filter].is_loading = true
-    return Object.assign({}, state)
+  if(!state[action.filter]) state[action.filter] = {}
+  state[action.filter].is_loading = true
+  return Object.assign({}, state)
 }
 
 /**
@@ -80,5 +80,5 @@ export function setToLoading(state, action)
  */
 export function receiveData(state, action)
 {
-    return Object.assign({}, state, {[action.filter]: action.json})
+  return Object.assign({}, state, {[action.filter]: action.json})
 }

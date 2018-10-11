@@ -161,19 +161,19 @@ function getScript(state) {
   // ref __data__ : https://redux.js.org/recipes/serverrendering
   return `
     <script type="text/javascript">window.__data__=${JSON.stringify(
-      state
-    ).replace(/</g, "\\u003c")}</script>
+    state
+  ).replace(/</g, "\\u003c")}</script>
     <script type="text/javascript" src="/assets/4.2/js/script-min.js?v=${
-      version.JS_VERSION
-    }"></script>
+  version.JS_VERSION
+}"></script>
     <script src="${webpackAssets.vendor.js}"></script>
     <script src="${webpackAssets.app.js}"></script>
     ${
-      process.env.NODE_ENV === "production"
-        ? `${getTrackingScript()} 
+  process.env.NODE_ENV === "production"
+    ? `${getTrackingScript()} 
       ${getAdsenseScript()}`
-        : ""
-    }
+    : ""
+}
     `
 }
 
