@@ -2,119 +2,112 @@
  * Created by yussan on 28/01/17.
  */
 
-import {combineReducers} from 'redux'
-import {setToLoading, receiveData} from '../helpers/Normalizer'
-import {REQUEST_DATA, RECEIVE_DATA} from '../consts'
+import { combineReducers } from "redux"
+import { setToLoading, receiveData } from "../helpers/Normalizer"
+import { REQUEST_DATA, RECEIVE_DATA } from "../consts"
+import { LOGOUT } from "./actions"
 
-function profile(state={}, action)
-{
-  if(action.target === 'user_profile')
-  {
-    switch(action.type)
-    {
-    case REQUEST_DATA :
-      return setToLoading(state, action)
+function profile(state = {}, action) {
+  if (action.target === "user_profile") {
+    switch (action.type) {
+      case REQUEST_DATA:
+        return setToLoading(state, action)
 
-    case RECEIVE_DATA :
-      return receiveData(state, action)
-                
-    default :
-      return state
+      case RECEIVE_DATA:
+        return receiveData(state, action)
+
+      default:
+        return state
     }
   }
 
   return state
 }
 
-function login(state={}, action)
-{
-  if(action.target === 'user_login')
-  {
-    switch(action.type)
-    {
-    case REQUEST_DATA :
-      state.is_loading = true
-      return Object.assign({}, state)
+function login(state = {}, action) {
+  if (action.target === "user_login") {
+    switch (action.type) {
+      case REQUEST_DATA:
+        state.is_loading = true
+        return Object.assign({}, state)
 
-    case RECEIVE_DATA :
-      state.is_loading = false
-      return Object.assign({}, state, action.json)
+      case RECEIVE_DATA:
+        state.is_loading = false
+        return Object.assign({}, state, action.json)
 
-    default :
-      return state
+      default:
+        return state
     }
   }
 
-  if(action.target === 'user_logout') return {}
+  if (action.target === "user_logout") return {}
 
   return state
 }
 
-function register(state={}, action)
-{
-  if(action.target === 'user_register')
-  {
-    switch(action.type)
-    {
-    case REQUEST_DATA :
-      state.is_loading = true
-      return Object.assign({}, state)
+function register(state = {}, action) {
+  if (action.target === "user_register") {
+    switch (action.type) {
+      case REQUEST_DATA:
+        state.is_loading = true
+        return Object.assign({}, state)
 
-    case RECEIVE_DATA :
-      state.is_loading = false
-      return Object.assign({}, state, action.json)
+      case RECEIVE_DATA:
+        state.is_loading = false
+        return Object.assign({}, state, action.json)
 
-    default :
-      return state
+      default:
+        return state
     }
   }
 
   return state
 }
 
-function logout(state={}, action)
-{
-  if(action.target === 'user_logout')
-  {
-    switch(action.type)
-    {
-    case REQUEST_DATA :
-      state.is_loading = true
-      return Object.assign({}, state)
-
-    case RECEIVE_DATA :
-      state.is_loading = false
-      return Object.assign({}, state, action.json)
-
-    default :
+function logout(state = {}, action) {
+  switch (action.type) {
+    case LOGOUT:
+      if (action.json && action.json.status === 200)
+        location.reload()
       return state
-    }
+
+    default:
+      if (action.target === "user_logout") {
+        switch (action.type) {
+          case REQUEST_DATA:
+            state.is_loading = true
+            return Object.assign({}, state)
+
+          case RECEIVE_DATA:
+            state.is_loading = false
+            return Object.assign({}, state, action.json)
+
+          default:
+            return state
+        }
+      }
+
+      return state
   }
+}
 
+function session(state = {}, action) {
   return state
 }
 
-function session(state={}, action)
-{
-  return state
-}
+function email_verification(state = {}, action) {
+  if (action.target === "user_email_verification") {
+    switch (action.type) {
+      case REQUEST_DATA:
+        state.is_loading = true
+        return Object.assign({}, state)
 
-function email_verification(state={}, action)
-{
-  if(action.target === 'user_email_verification')
-  {
-    switch(action.type)
-    {
-    case REQUEST_DATA :
-      state.is_loading = true
-      return Object.assign({}, state)
+      case RECEIVE_DATA:
+        state.is_loading = false
+        return Object.assign({}, state, action.json)
 
-    case RECEIVE_DATA :
-      state.is_loading = false
-      return Object.assign({}, state, action.json)
-
-    default :
-      return state
+      default:
+        return state
     }
   }
 

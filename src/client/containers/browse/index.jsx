@@ -102,13 +102,10 @@ class Index extends Component {
   }
 
   componentWillUnmount() {
-    // console.log('remove scroll listener')
     window.removeEventListener("scroll", this.handleScroll, true)
-    // window.onscroll = null
   }
 
   handleScroll(e) {
-    // console.log('scrolling in browse competition...')
     if (document.getElementById("browse-container")) {
       const ContainerHeight = document.getElementById("competition-container")
         .offsetHeight
@@ -229,7 +226,7 @@ class Index extends Component {
                   Jelajah
                   {query.mediapartner == 1 ? " Media Partner" : ""}{" "}
                   <a
-                    href="javascript:;"x
+                    href="javascript:;"
                     onClick={() => modal("open", "select-main-kat")}
                   >
                     {parseInt(main_kat) >= 0
@@ -247,7 +244,7 @@ class Index extends Component {
                       >
                         {parseInt(sub_kat) >= 0
                           ? categories.data[main_kat].subcategories[sub_kat]
-                            .name
+                              .name
                           : "Semua subkategori"}
                         <i className="fa fa-angle-down" />
                       </a>
@@ -391,25 +388,25 @@ class Index extends Component {
                 </li>
                 {parseInt(main_kat) >= 0
                   ? categories.data[main_kat].subcategories.map((n, key) => {
-                    return (
-                      <li key={key}>
-                        <a
-                          href="javascript:;"
-                          onClick={() => {
-                            modal("close", "select-sub-kat")
-                            this.props.history.push(
-                              `/browse/${categories.data[main_kat].name}/${
-                                n.name
-                              }${this.props.location.search}`
-                            )
-                          }}
-                          className="text-muted"
-                        >
-                          {n.name}
-                        </a>
-                      </li>
-                    )
-                  })
+                      return (
+                        <li key={key}>
+                          <a
+                            href="javascript:;"
+                            onClick={() => {
+                              modal("close", "select-sub-kat")
+                              this.props.history.push(
+                                `/browse/${categories.data[main_kat].name}/${
+                                  n.name
+                                }${this.props.location.search}`
+                              )
+                            }}
+                            className="text-muted"
+                          >
+                            {n.name}
+                          </a>
+                        </li>
+                      )
+                    })
                   : null}
               </ul>
             </div>

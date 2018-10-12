@@ -12,6 +12,7 @@ export default store => next => action => {
     // get data using api v1
     let request = action[CALL_API]
     let {
+      type = "DEFAULT_TYPE",
       typeSuccess, typeWaiting,
       method, url, params = {},
       filter, target, formdata = {},
@@ -22,7 +23,7 @@ export default store => next => action => {
       //on request
       if (typeWaiting) {
         next({
-          type: typeWaiting,
+          type: typeWaiting || type,
           filter,
           target,
           params
@@ -33,7 +34,7 @@ export default store => next => action => {
         // if(method.toLowerCase() === 'post') openNotif(json)
 
         next({
-          type: typeSuccess,
+          type: typeSuccess || type,
           filter,
           json,
           target,

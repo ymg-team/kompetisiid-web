@@ -42,7 +42,6 @@ export default class MediaPartner extends Component {
     // generate random index
     adsInterval = setInterval(() => {
       const nextIndex = Math.floor(Math.random() * MediaPartnerData.length)
-      console.log("update ads to index : ")
       this.setState({
         active: nextIndex
       })
