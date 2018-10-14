@@ -10,16 +10,45 @@ export const generateMetaCompetition = (req, res, next) => {
   }).then(response => {
     const competition = JSON.parse(response.body)
     if(competition.status === 200) {
+      let title = competition.data.title
+      const urlArr = req.originalUrl.split('/')
+
+      switch(urlArr[3]) {
+        case 'regulations':
+          title = `Peraturan ${title}`
+          break 
+        case 'prizes':
+          title = `Hadiah ${title}`
+          break
+        case 'annoucements':
+          title = `Pengumuman ${title}`
+          break
+        case 'discussions':
+          title = `Diskusi ${title}`
+          break
+        case 'contacts':
+          title = `Kontak ${title}`
+          break
+        case 'share':
+          title = `Share ${title}`
+          break
+      }
+
       req.meta = {
-        title: competition.data.title,
+        title,
         desc: competition.data.sort,
         image: competition.data.poster.original,
         url: `https://kompetisi.id/competition/${competition.data.id}/regulations/${competition.data.nospace_title}`,
         type: "event"
       }
-
-      
-    } 
+    } else {
+      req.meta = {
+        title: competition.message,
+        desc: competition.message,
+        url: `https://kompetisi.id/competition/${req.params.id}/regulations/${req.params.title}`,
+        type: "event"
+      }
+    }
 
     return next()
 
