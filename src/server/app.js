@@ -98,6 +98,7 @@ App.use(
 
 // competition routes
 App.get("/competition/:id/*", FrontMiddleware.generateMetaCompetition, AppRender)
+App.get("/news/:id/*", FrontMiddleware.generateMetaNews, AppRender)
 
 
 // global routes
