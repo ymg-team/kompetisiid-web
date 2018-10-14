@@ -12,6 +12,7 @@ export default store => next => action => {
     // get data using api v1
     let request = action[CALL_API]
     let {
+      type = "DEFAULT_TYPE",
       typeSuccess, typeWaiting,
       method, url, params = {},
       filter, target, formdata = {},
@@ -20,20 +21,18 @@ export default store => next => action => {
 
     return new Promise((resolve, reject) => {
       //on request
-      if (typeWaiting) {
-        next({
-          type: typeWaiting,
-          filter,
-          target,
-          params
-        })
-      }
+      next({
+        type: typeWaiting || type,
+        filter,
+        target,
+        params
+      })
       //completing request
       requestApi(method, typeof window != 'undefined' ? url : Host[process.env.NODE_ENV].front + url, params, json => {
         // if(method.toLowerCase() === 'post') openNotif(json)
 
         next({
-          type: typeSuccess,
+          type: typeSuccess || type,
           filter,
           json,
           target,

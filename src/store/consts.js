@@ -11,9 +11,9 @@ export const POST_DATA = 'POST_DATA'
 
 // for tester
 export const expectedAction = {
-    [CALL_API]: {
-        method: '',
-        url: '',
-        successType: ''
-    }
+  [CALL_API]: {
+    method: '',
+    url: '',
+    successType: ''
+  }
 }

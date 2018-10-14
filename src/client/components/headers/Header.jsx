@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 import { alert } from '../Alert'
 import { connect } from 'react-redux'
-import { logout } from '../../../store/user/actions'
+import { logout } from '../../containers/user/actions'
 
 class Header extends Component {
   handleSearch(e) {

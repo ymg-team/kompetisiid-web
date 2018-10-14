@@ -62,21 +62,21 @@ function handleAction(accept = true, props) {
 const RequestRow = props => {
   let labelClassname, labelText
   switch (props.status) {
-    case 'posted':
-      labelClassname = 'label label-green'
-      labelText = 'diterima'
-      break
+  case 'posted':
+    labelClassname = 'label label-green'
+    labelText = 'diterima'
+    break
 
-    case 'reject':
-      labelClassname = 'label label-red'
-      labelText = 'ditolak'
-      break
+  case 'reject':
+    labelClassname = 'label label-red'
+    labelText = 'ditolak'
+    break
 
-    case 'waiting':
-    default:
-      labelClassname = 'label label-orange'
-      labelText = 'menunggu'
-      break
+  case 'waiting':
+  default:
+    labelClassname = 'label label-orange'
+    labelText = 'menunggu'
+    break
   }
 
   return (
@@ -102,10 +102,10 @@ const RequestRow = props => {
             <br />
             {props.updated_at !== props.created_at
               ? `Kompetisi telah ${
-                  props.status === 'posted' ? 'diterima' : 'ditolak'
-                } pada ${epochToRelativeTime(
-                  props.updated_at
-                )} dengan catatan "${props.note || 'tidak ada'}"`
+                props.status === 'posted' ? 'diterima' : 'ditolak'
+              } pada ${epochToRelativeTime(
+                props.updated_at
+              )} dengan catatan "${props.note || 'tidak ada'}"`
               : 'Permintaan belum diproses'}
           </p>
 

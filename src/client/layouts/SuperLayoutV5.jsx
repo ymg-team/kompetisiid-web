@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import Loadable from 'react-loadable'
 import { alert } from '../components/Alert'
 import { fullPageLoader } from '../components/preloaders/FullPage'
-import { logout } from '../../store/user/actions'
+import { logout } from '../containers/user/actions'
 import { connect } from 'react-redux'
 
 // components
@@ -44,9 +44,9 @@ class SuperLayout extends Component {
 
 function mapDispatchToProps(dispatch)
 {
-    return {
-        dispatch
-    }
+  return {
+    dispatch
+  }
 }
 
 export default connect(mapDispatchToProps)(SuperLayout)

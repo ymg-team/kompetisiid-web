@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import Styled from "styled-components"
 import { fullPageLoader } from '../../components/preloaders/FullPage'
 
 // components
@@ -10,8 +11,12 @@ import AuthFacebook from '../../components/buttons/AuthFacebook'
 import AuthGoogle from '../../components/buttons/AuthGoogle'
 import { Fullscreen } from '../../components/Fullscreen'
 import { alert } from '../../components/Alert'
-import { profile, login } from '../../../store/user/actions'
+import { profile, login } from '../user/actions'
 import { connect } from 'react-redux'
+
+const LoginBoxStyled = Styled.div`
+  
+`
 
 class Login extends Component {
   constructor(props) {
@@ -66,12 +71,12 @@ class Login extends Component {
         )
         // redirect to dashboard
         setTimeout(() => {
-          location.href = this.state.isSuperPage ? '/super/dashboard' : '/dashboard'
+          location.href = this.state.isSuperPage ? '/super/dashboard' : '/'
         }, 1500)
       } else {
         // user and password not match
         fullPageLoader(false)
-        alert(true, 'User dan password tidak cocok', 'error')
+        alert(true, np.login.message || 'User dan password tidak cocok', 'error')
         this.setState({
           loading: false
         })
@@ -105,7 +110,7 @@ class Login extends Component {
     return (
       <Fullscreen className={`login ${this.state.isSuperPage ? 'login-super' : ''}`}>
         <Helmet title={title} description={description} />
-        <div className="login-box">
+        <LoginBoxStyled className="login-box">
           {/* header */}
           <div className="login-box__title">
             <h1 style={{ textAlign: 'center', lineHeight: 1 }}>
@@ -207,7 +212,7 @@ class Login extends Component {
               <Link to="/news/TXpVPQ/About">About</Link>
             </small>
           </div>
-        </div>
+        </LoginBoxStyled>
       </Fullscreen>
     )
   }
@@ -221,13 +226,6 @@ function mapStateToProps(state) {
   }
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    dispatch
-  }
-}
-
 export default connect(
-  mapStateToProps,
-  mapDispatchToProps
+  mapStateToProps
 )(Login)

@@ -102,13 +102,10 @@ class Index extends Component {
   }
 
   componentWillUnmount() {
-    // console.log('remove scroll listener')
     window.removeEventListener("scroll", this.handleScroll, true)
-    // window.onscroll = null
   }
 
   handleScroll(e) {
-    // console.log('scrolling in browse competition...')
     if (document.getElementById("browse-container")) {
       const ContainerHeight = document.getElementById("competition-container")
         .offsetHeight
@@ -229,7 +226,7 @@ class Index extends Component {
                   Jelajah
                   {query.mediapartner == 1 ? " Media Partner" : ""}{" "}
                   <a
-                    href="javascript:;"x
+                    href="javascript:;"
                     onClick={() => modal("open", "select-main-kat")}
                   >
                     {parseInt(main_kat) >= 0

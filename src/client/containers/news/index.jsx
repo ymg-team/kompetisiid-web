@@ -59,6 +59,7 @@ const NewsDetailStyled = Styled.div`
   .content {
     letter-spacing: 0.8px;
     font-size: 1.1em;
+    line-height: 1.7;
     iframe {
       display: block; 
       margin: 2em auto;
@@ -208,39 +209,35 @@ export default class Index extends Component {
                     {/* start news detail wrapper */}
                     <div className="news-detail">
                       <Author data={detail[encid].data.author} />
-                      <div className="content">
-                        <article>
-                          <h1>{detail[encid].data.title}</h1>
-                          <p className="meta text-muted">
-                            <span className="meta--item">
-                              <i className="fa fa-calendar-o" />{" "}
-                              {epochToRelativeTime(
-                                detail[encid].data.created_at
-                              )}
-                            </span>
-                            <span className="meta--item">
-                              <a
-                                href="javascript:;"
-                                title="komentar"
-                                onClick={() => {
-                                  document
-                                    .getElementById("disqus_thread")
-                                    .scrollIntoView({ behavior: "smooth" })
-                                }}
+                      <article className="content">
+                        <h1>{detail[encid].data.title}</h1>
+                        <p className="meta text-muted">
+                          <span className="meta--item">
+                            <i className="fa fa-calendar-o" />{" "}
+                            {epochToRelativeTime(detail[encid].data.created_at)}
+                          </span>
+                          <span className="meta--item">
+                            <a
+                              href="javascript:;"
+                              title="komentar"
+                              onClick={() => {
+                                document
+                                  .getElementById("disqus_thread")
+                                  .scrollIntoView({ behavior: "smooth" })
+                              }}
+                            >
+                              <i className="far fa-comment" />{" "}
+                              <span
+                                className="disqus-comment-count"
+                                // data-disqus-identifier={this.state.url}
+                                data-disqus-url={this.state.url}
                               >
-                                <i className="far fa-comment" />{" "}
-                                <span
-                                  className="disqus-comment-count"
-                                  // data-disqus-identifier={this.state.url}
-                                  data-disqus-url={this.state.url}
-                                >
-                                  0
-                                </span>
-                              </a>
-                            </span>
-                          </p>
-                        </article>
-                      </div>
+                                0
+                              </span>
+                            </a>
+                          </span>
+                        </p>
+                      </article>
                     </div>
                   </div>
                 </div>

@@ -28,12 +28,12 @@ export default class HomeCategories extends PureComponent {
             <div className="row">
               {this.props.meta && this.props.meta.code == 200
                 ? this.props.data.map((n, key) => (
-                    <span style={{ marginRight: '10px' }} key={key}>
-                      <Link to={`/browse/${n.main_kat}`}>{`${n.main_kat} (${
-                        n.count_kompetisi
-                      })`}</Link>
-                    </span>
-                  ))
+                  <span style={{ marginRight: '10px' }} key={key}>
+                    <Link to={`/browse/${n.main_kat}`}>{`${n.main_kat} (${
+                      n.count_kompetisi
+                    })`}</Link>
+                  </span>
+                ))
                 : null}
               <br />
               <br />

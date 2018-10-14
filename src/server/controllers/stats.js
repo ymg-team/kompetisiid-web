@@ -3,10 +3,10 @@
  */
 export function getStats(req, res, next)
 {
-    req.reqdata = {
-        method: 'get',
-        url: '/stats',
-    }
+  req.reqdata = {
+    method: 'get',
+    url: '/stats',
+  }
 
-    next()
+  next()
 }
