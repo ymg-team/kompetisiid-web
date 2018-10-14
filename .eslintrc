@@ -18,8 +18,7 @@
     "react/jsx-uses-vars": 2,
     "react/react-in-jsx-scope": 2,
     "no-underscore-dangle": 0,
-    "no-console": 1,
-    "indent": ["error", 2]
+    "no-console": 1
   },
   "plugins": [
     "react"

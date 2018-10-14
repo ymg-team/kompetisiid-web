@@ -13,8 +13,8 @@ export const Fullscreen = styled.div`
   &.error {
     background: ${Colors.mainRed};
   }
-  &.login {
-    background: ${Colors.mainRed};
+  &.login{
+    color: ${Colors.darkGray};
   }
   &.login.login-super {
     background: ${Colors.darkGray};

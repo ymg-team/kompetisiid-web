@@ -4,6 +4,7 @@ import { withRouter } from "react-router"
 import Styled from "styled-components"
 import { queryToObj } from "string-manager"
 import * as Colors from "../../../style/colors"
+import { logout } from "../../../store/user/actions"
 
 // components
 import { Link } from "react-router-dom"
@@ -74,6 +75,12 @@ const NavbarStyled = Styled.div`
       padding: 10px
     }
   }
+
+  #avatar-menu {
+    a {
+      color: ${Colors.mainGray}
+    }
+  }
 `
 
 const SearchStyled = Styled.div`
@@ -114,7 +121,7 @@ class Navbar extends Component {
   handleStickyNavbar(e) {
     const position = window.scrollY
     if (position > 500) {
-      const pathArr = window.location.pathname.split('/')
+      const pathArr = window.location.pathname.split("/")
       if (!this.state.sticky && pathArr[1] !== "competition") {
         this.setState({ sticky: true })
         setTimeout(() => {
@@ -217,7 +224,7 @@ class Navbar extends Component {
                 </div>
               </SearchStyled>
             ) : (
-              <div>
+              <React.Fragment>
                 <div className="col-xs-6">
                   <ul className="inline-list inline-list-left">
                     <li style={{ padding: 0 }}>
@@ -226,13 +233,6 @@ class Navbar extends Component {
                         to="/"
                         style={{ backgroundImage: `url(${logo})` }}
                       />
-                      {/* <Link to="/">
-                      <img
-                        id="ki-logo"
-                        src={logo}
-                        alt="kompetisi.id transparent logo"
-                      />
-                    </Link> */}
                     </li>
                     <li>
                       <Link to="/browse">Jelajah</Link>
@@ -255,17 +255,13 @@ class Navbar extends Component {
                       />
                     </li>
 
-                    {/* <li>
-                <Link to="/news">
-                  Login
-                  <i className="fa sort-down"/>
-                </Link>
-              </li> */}
-
                     {/* auth */}
                     {Object.keys(session).length > 0 && session.id ? (
-                      <li style={{ padding: "5px 10px" }}>
-                        <div className="dropdown">
+                      <li style={{ marginRight: "25px", padding: "5px 10px" }}>
+                        <div
+                          style={{ position: "absolute" }}
+                          className="dropdown"
+                        >
                           <a className="avatar" href="javascript:;">
                             <img
                               className="dropdown-button"
@@ -289,7 +285,7 @@ class Navbar extends Component {
                               <li>
                                 <a
                                   href="javascript:;"
-                                  onClick={() => this.handleLogout()}
+                                  onClick={() => this.props.dispatch(logout())}
                                 >
                                   Logout
                                 </a>
@@ -306,7 +302,7 @@ class Navbar extends Component {
                     {/* end of auth */}
                   </ul>
                 </div>
-              </div>
+              </React.Fragment>
             )}
           </NavbarStyled>
         </div>
@@ -320,9 +316,8 @@ Navbar.defaultProps = {
 }
 
 function mapStateToProps(state) {
-  const { User } = state
   return {
-    session: User.session
+    session: state.User.session || {}
   }
 }
 

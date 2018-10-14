@@ -54,7 +54,7 @@ export default (req, res) => {
       <title>${req.meta.title}</title>
       <meta name="description" content="${req.meta.desc}"/>
 
-      <meta name="twitter:card" content="summary"/>,
+      <meta name="twitter:card" content="summary"/>
       <meta name="twitter:image" content="${req.meta.image}"/>
       <meta name="twitter:title" content="${req.meta.title}"/>
       <meta name="twitter:description" content="${req.meta.desc}" />
