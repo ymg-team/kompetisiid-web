@@ -7,7 +7,7 @@ import Loader from '../components/spiner/Circle'
 
 import { alert } from '../components/Alert'
 import { connect } from 'react-redux'
-import { emailVerification } from '../../store/user/actions'
+import { emailVerification } from './user/actions'
 
 class EmailVerify extends Component {
   componentDidMount() {

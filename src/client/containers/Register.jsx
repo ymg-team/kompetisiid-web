@@ -9,7 +9,7 @@ import Validator from '../helpers/Validator'
 import Text from '../components/LoginText'
 
 import { alert } from '../components/Alert'
-import { register } from '../../store/user/actions'
+import { register } from './user/actions'
 import { connect } from 'react-redux'
 
 export default class Register extends Component {

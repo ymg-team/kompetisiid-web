@@ -7,10 +7,13 @@ import {
   RECEIVE_MORE_DATA,
   DELETE_DATA,
   REQUEST_DATA
-} from "../consts"
-import { CALL_API } from "../middlewares/api"
+} from "../../../store/consts"
+
+import { CALL_API } from "../../../store/middlewares/api"
 
 export const LOGOUT = "LOGOUT"
+export const LOGIN = "LOGIN"
+export const OAUTH_LOGIN = "OAUTH_LOGIN"
 
 export function profile(username) {
   return {
@@ -31,9 +34,7 @@ export function login(params) {
       method: "post",
       url: "/api/user/login",
       params,
-      target: "user_login",
-      typeWaiting: REQUEST_DATA,
-      typeSuccess: RECEIVE_DATA
+      type: "LOGIN"
     }
   }
 }
@@ -62,15 +63,19 @@ export function register(params) {
   }
 }
 
-export function oauth(type, params) {
+/**
+ * @description function to do oauth login 
+ * @param {string} params.provider oauth provider facebook|google 
+ * @param {string} params.token token from  oauth
+ * @param {string} params.user_id user id from oauth
+ */
+export function oauthLogin(params) {
   return {
     [CALL_API]: {
       method: "post",
-      url: `/api/user/oauth/${type}`,
+      url: `/api/user/oauth/login`,
       params,
-      target: `user_oauth_${type}`,
-      typeWaiting: REQUEST_DATA,
-      typeSuccess: RECEIVE_DATA
+      type: OAUTH_LOGIN
     }
   }
 }

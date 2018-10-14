@@ -3,9 +3,9 @@
  */
 
 import { combineReducers } from "redux"
-import { setToLoading, receiveData } from "../helpers/Normalizer"
-import { REQUEST_DATA, RECEIVE_DATA } from "../consts"
-import { LOGOUT } from "./actions"
+import { setToLoading, receiveData, receiveApiResponse } from "../../../store/helpers/Normalizer"
+import { REQUEST_DATA, RECEIVE_DATA } from "../../../store/consts"
+import { LOGOUT, OAUTH_LOGIN, LOGIN } from "./actions"
 
 function profile(state = {}, action) {
   if (action.target === "user_profile") {
@@ -25,24 +25,15 @@ function profile(state = {}, action) {
 }
 
 function login(state = {}, action) {
-  if (action.target === "user_login") {
-    switch (action.type) {
-      case REQUEST_DATA:
-        state.is_loading = true
-        return Object.assign({}, state)
-
-      case RECEIVE_DATA:
-        state.is_loading = false
-        return Object.assign({}, state, action.json)
-
-      default:
-        return state
-    }
+  switch(action.type) {
+    case OAUTH_LOGIN:
+    case LOGIN:
+      return receiveApiResponse(state, action) 
+    case LOGOUT:
+      return {}
+    default:
+      return state
   }
-
-  if (action.target === "user_logout") return {}
-
-  return state
 }
 
 function register(state = {}, action) {

@@ -9,7 +9,7 @@ import InputText from "../../components/form/InputText"
 import InputFile from "../../components/form/InputFile"
 import Button from "../../components/form/Button"
 
-import { submitCepat } from "../../../store/pasang/actions"
+import { submitCepat } from "./actions"
 import {
   validator,
   validationSeter,

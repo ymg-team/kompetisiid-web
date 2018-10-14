@@ -40,6 +40,27 @@ export function postLogin(req, res, next) {
   next()
 }
 
+export function postOauthLogin(req, res, next) {
+  req.reqdata = {
+    version: 'v42',
+    method: 'post',
+    url: '/v2/oauth/login',
+    params: req.body,
+    headers: {
+      Authorization: 'ki-1234567890'
+    },
+    nextaction: (req, res, next, result) => {
+      if (result.status === 200) {
+        Session.setData(req, 'userdata', result.data)
+      }
+
+      return res.json(result)
+    }
+  }
+
+  next()
+}
+
 /**
  * @description function to handle logout / delete session
  */

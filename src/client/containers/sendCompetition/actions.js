@@ -1,8 +1,8 @@
 /**
  * Created by yussan on 13/11/16.
  */
-import {POST_DATA, RECEIVE_DATA, RECEIVE_MORE_DATA, DELETE_DATA, REQUEST_DATA} from '../consts'
-import {CALL_API} from '../middlewares/api'
+import {POST_DATA, RECEIVE_DATA, RECEIVE_MORE_DATA, DELETE_DATA, REQUEST_DATA} from '../../../store/consts'
+import {CALL_API} from '../../../store/middlewares/api'
 export function submitCepat(params)
 {
   return {

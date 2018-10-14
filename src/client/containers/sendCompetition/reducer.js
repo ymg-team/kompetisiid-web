@@ -2,8 +2,8 @@
  * Created by yussan on 13/11/16.
  */
 import {combineReducers} from 'redux'
-import {setToLoading} from '../helpers/Normalizer'
-import {REQUEST_DATA, RECEIVE_DATA} from '../consts'
+import {setToLoading} from '../../../store/helpers/Normalizer'
+import {REQUEST_DATA, RECEIVE_DATA} from '../../../store/consts'
 
 function cepat(state={}, action)
 {

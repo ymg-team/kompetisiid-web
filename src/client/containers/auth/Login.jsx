@@ -11,7 +11,7 @@ import AuthFacebook from '../../components/buttons/AuthFacebook'
 import AuthGoogle from '../../components/buttons/AuthGoogle'
 import { Fullscreen } from '../../components/Fullscreen'
 import { alert } from '../../components/Alert'
-import { profile, login } from '../../../store/user/actions'
+import { profile, login } from '../user/actions'
 import { connect } from 'react-redux'
 
 const LoginBoxStyled = Styled.div`
@@ -76,7 +76,7 @@ class Login extends Component {
       } else {
         // user and password not match
         fullPageLoader(false)
-        alert(true, 'User dan password tidak cocok', 'error')
+        alert(true, np.login.message || 'User dan password tidak cocok', 'error')
         this.setState({
           loading: false
         })
@@ -226,13 +226,6 @@ function mapStateToProps(state) {
   }
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    dispatch
-  }
-}
-
 export default connect(
-  mapStateToProps,
-  mapDispatchToProps
+  mapStateToProps
 )(Login)

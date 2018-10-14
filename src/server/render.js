@@ -82,6 +82,7 @@ export default (req, res) => {
                 <meta name="google-site-verification" content="pUksy8ewwm4bzRVqaTQXKmWfRFZc9_L0iuESNDg7190" />
                 <meta property="fb:app_id" content="1419514554927551">
                 <meta property="fb:admins" content="100000359263988">
+                <meta name="google-signin-client_id" content="825189798997-4gtj3pdnfpj2gvkvad6984emfg67kvec.apps.googleusercontent.com">
                 ${styleTags}
                 <link rel="stylesheet" href="${webpackAssets.style.css}">
                 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
@@ -168,6 +169,25 @@ function getScript(state) {
 }"></script>
     <script src="${webpackAssets.vendor.js}"></script>
     <script src="${webpackAssets.app.js}"></script>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script>
+      window.fbAsyncInit = function() {
+        FB.init({
+          appId            : '1419514554927551',
+          autoLogAppEvents : true,
+          xfbml            : true,
+          version          : 'v3.1'
+        });
+      };
+    
+      (function(d, s, id){
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) {return;}
+        js = d.createElement(s); js.id = id;
+        js.src = "https://connect.facebook.net/en_US/sdk.js";
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));
+    </script>
     ${
   process.env.NODE_ENV === "production"
     ? `${getTrackingScript()} 

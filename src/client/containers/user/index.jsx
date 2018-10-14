@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import UserStats from '../../components/navigations/TabProfile'
 import Helmet from '../../components/Helmet'
 
-import {profile} from '../../../store/user/actions'
+import {profile} from './actions'
 import {epochToRelativeTime} from '../../helpers/DateTime'
 import {connect} from 'react-redux'
 

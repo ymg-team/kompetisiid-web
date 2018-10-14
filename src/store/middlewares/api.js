@@ -21,14 +21,12 @@ export default store => next => action => {
 
     return new Promise((resolve, reject) => {
       //on request
-      if (typeWaiting) {
-        next({
-          type: typeWaiting || type,
-          filter,
-          target,
-          params
-        })
-      }
+      next({
+        type: typeWaiting || type,
+        filter,
+        target,
+        params
+      })
       //completing request
       requestApi(method, typeof window != 'undefined' ? url : Host[process.env.NODE_ENV].front + url, params, json => {
         // if(method.toLowerCase() === 'post') openNotif(json)
