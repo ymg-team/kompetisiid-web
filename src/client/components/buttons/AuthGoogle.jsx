@@ -21,6 +21,8 @@ class AuthGoogle extends Component {
           //scope: 'additional_scope'
         })
 
+        auth2.signOut()
+
         this.setState({ auth2 })
         // attachSignin(document.getElementById("googleBtn"))
       })
@@ -47,9 +49,10 @@ class AuthGoogle extends Component {
     // ref : https://developers.google.com/identity/sign-in/web/people
     const { auth2 } = this.state
 
-    auth2.signOut()
-
     if (auth2) {
+
+      auth2.signOut()
+
       if (auth2.isSignedIn.get()) {
         // get user data to request api
         const profile = auth2.currentUser.get().getBasicProfile()
