@@ -313,9 +313,9 @@ export default class Index extends Component {
             display:
               detail[encid] &&
               detail[encid].status &&
-              detail[encid].status === 200
+              detail[encid].status == 200
                 ? "block"
-                : "hidden"
+                : "none"
           }}
           className="col-md-6 col-md-push-3 col-md-pull-3"
         >
