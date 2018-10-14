@@ -53,10 +53,6 @@ export function getCategories(req, res, next) {
     method: 'get',
     url: '/v2/maincategories'
   }
-  // req.reqdata = {
-  //   method: 'get',
-  //   url: '/kategori/kategori'
-  // }
 
   next()
 }
