@@ -9,6 +9,7 @@ import { toCamelCase } from "string-manager"
 import Tab, { tab } from "../../components/navigations/TabCompetition"
 import CompetitionPreloader from "../../components/preloaders/CompetitionDetail"
 import { getDetail, getRelated } from "./actions"
+import Error from "../../components/cards/ErrorCard"
 class LayoutCompetition extends Component {
   // static fetchData({ params, store }) {
   //   return store.dispatch(getDetail(params.encid))
@@ -56,7 +57,7 @@ class LayoutCompetition extends Component {
           detail[encid].status === 200 ? (
             renderRoutes(this.props.route.routes)
           ) : (
-            <p>{detail[encid].message}</p>
+            <Error code={detail[encid].status == 204 ? 404 : detail[encid].status} message={detail[encid].message} />
           )
         ) : (
           <CompetitionPreloader />

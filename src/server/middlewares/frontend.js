@@ -17,9 +17,14 @@ export const generateMetaCompetition = (req, res, next) => {
         url: `https://kompetisi.id/competition/${competition.data.id}/regulations/${competition.data.nospace_title}`,
         type: "event"
       }
-
-      
-    } 
+    } else {
+      req.meta = {
+        title: competition.message,
+        desc: competition.message,
+        url: `https://kompetisi.id/competition/${req.params.id}/regulations/${req.params.title}`,
+        type: "event"
+      }
+    }
 
     return next()
 
