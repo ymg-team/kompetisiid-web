@@ -55,14 +55,17 @@ class AuthGoogle extends Component {
         const profile = auth2.currentUser.get().getBasicProfile()
         return this.reqToApi(profile)
       } else {
-        auth2.signIn({scope: 'profile email'}).then(() => {
-          const profile = auth2.currentUser.get().getBasicProfile()
-          return this.reqToApi(profile)
-        }).catch(e => {
-          // get the error and close window auth
-          console.log(e) 
-          fullPageLoader(false)
-        })
+        auth2
+          .signIn({ scope: "profile email" })
+          .then(() => {
+            const profile = auth2.currentUser.get().getBasicProfile()
+            return this.reqToApi(profile)
+          })
+          .catch(e => {
+            // get the error and close window auth
+            console.log(e)
+            fullPageLoader(false)
+          })
       }
     } else {
       fullPageLoader(false)
