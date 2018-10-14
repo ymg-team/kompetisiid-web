@@ -1,5 +1,7 @@
 import { requestAPIV2 } from "../helpers/apiCaller"
 import Host from "../../config/host"
+import { requestApi } from "../../store/helpers/ApiCaller"
+import {stripTags, truncate} from "string-manager"
 
 /**
  * @description middleware to request competition detail on server
@@ -9,6 +11,7 @@ export const generateMetaCompetition = (req, res, next) => {
     API_HOST: Host[process.env.NODE_ENV].api_v42
   }).then(response => {
     const competition = JSON.parse(response.body)
+    const url = `https://kompetisi.id/competition${req.originalUrl}`
     if(competition.status === 200) {
       let title = competition.data.title
       const urlArr = req.originalUrl.split('/')
@@ -38,19 +41,51 @@ export const generateMetaCompetition = (req, res, next) => {
         title,
         desc: competition.data.sort,
         image: competition.data.poster.original,
-        url: `https://kompetisi.id/competition/${competition.data.id}/regulations/${competition.data.nospace_title}`,
+        url,
         type: "event"
       }
     } else {
       req.meta = {
         title: competition.message,
         desc: competition.message,
-        url: `https://kompetisi.id/competition/${req.params.id}/regulations/${req.params.title}`,
+        url,
         type: "event"
       }
     }
 
     return next()
 
+  })
+}
+
+export const generateMetaNews = (req, res, next) => {
+  return requestAPIV2("get", `/v2/news/${req.params.id}`, {
+    API_HOST: Host[process.env.NODE_ENV].api_v42
+  }).then(response => {
+
+    const news = JSON.parse(response.body)
+    const url = `https://kompetisi.id/competition${req.originalUrl}`
+
+    if(news.status == 200) {
+      let desc = stripTags(news.data.content)
+      desc = truncate(desc, 500, '...')
+
+      req.meta = {
+        title: news.data.title,
+        desc,
+        image: news.data.image.original,
+        url,
+        type: "news"
+      }
+    } else {
+      req.meta = {
+        title: news.message,
+        desc: news.message,
+        url,
+        type: "news"
+      }
+    }
+
+    return next()
   })
 }

@@ -93,9 +93,9 @@ export default class Index extends Component {
     }/${this.props.match.params.title}`
   }
 
-  static fetchData({ params, store }) {
-    return store.dispatch(BeritaActions.fetchBeritaDetail(params.encid))
-  }
+  // static fetchData({ params, store }) {
+  //   return store.dispatch(BeritaActions.fetchBeritaDetail(params.encid))
+  // }
 
   componentDidMount() {
     window.scrollTo(0, 0)
@@ -313,9 +313,9 @@ export default class Index extends Component {
             display:
               detail[encid] &&
               detail[encid].status &&
-              detail[encid].status === 200
+              detail[encid].status == 200
                 ? "block"
-                : "hidden"
+                : "none"
           }}
           className="col-md-6 col-md-push-3 col-md-pull-3"
         >
