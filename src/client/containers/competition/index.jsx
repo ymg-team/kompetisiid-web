@@ -280,7 +280,7 @@ class Index extends Component {
           related[`related_${encid}`].status &&
           related[`related_${encid}`].status === 200 ? (
               <div className="col-md-12 bg-gray-soft">
-                <div className="m-20 row" />
+                <div className="m-15 row" />
                 <CompetitionBox
                   subtitle={false}
                   total={4}
