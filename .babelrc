@@ -1,6 +1,16 @@
 {
   "presets": ["es2015", "react"],
-  "plugins": ["transform-class-properties", "syntax-dynamic-import" ,"dynamic-import-node"],
+  "plugins": [
+    "transform-class-properties",
+    "syntax-dynamic-import",
+    "dynamic-import-node",
+    [
+      "babel-plugin-styled-components",
+      {
+        "pure": true
+      }
+    ]
+  ],
   "env": {
     "production": {
       "presets": []
