@@ -36,8 +36,6 @@ export default (req, res) => {
 
   // function to get string of html
   function renderHtml(body = "", state = {}, styleTags = "") {
-    
-
     // custom meta
     let metaTags, head
 
@@ -61,9 +59,18 @@ export default (req, res) => {
 
       <meta property="og:title" content="${req.meta.title}" />
       <meta property="og:type" content="${req.meta.type || "blog"}" />
-      <meta property="og:url" content="${req.meta.url || "https://kompetisi.id"}" />
+      <meta property="og:url" content="${req.meta.url ||
+        "https://kompetisi.id"}" />
       <meta property="og:image" content="${req.meta.image}" />
       <meta property="og:description" content="${req.meta.desc}" />
+
+      ${
+        req.meta.jsonld
+          ? `
+        <script type="application/ld+json">${req.meta.jsonld}</script>
+        `
+          : ""
+      }
       `
     }
 
@@ -112,7 +119,7 @@ export default (req, res) => {
             <body>
                 <div id="root">${body}</div>
                 <div id="fb-root"></div>
-                ${head ? head.script.toString() : ''}
+                ${head ? head.script.toString() : ""}
                 ${getScript(state)}
             </body>
         </html>
@@ -162,11 +169,11 @@ function getScript(state) {
   // ref __data__ : https://redux.js.org/recipes/serverrendering
   return `
     <script type="text/javascript">window.__data__=${JSON.stringify(
-    state
-  ).replace(/</g, "\\u003c")}</script>
+      state
+    ).replace(/</g, "\\u003c")}</script>
     <script type="text/javascript" src="/assets/4.2/js/script-min.js?v=${
-  version.JS_VERSION
-}"></script>
+      version.JS_VERSION
+    }"></script>
     <script src="${webpackAssets.vendor.js}"></script>
     <script src="${webpackAssets.app.js}"></script>
     <script src="https://apis.google.com/js/platform.js" async defer></script>
@@ -189,11 +196,11 @@ function getScript(state) {
       }(document, 'script', 'facebook-jssdk'));
     </script>
     ${
-  process.env.NODE_ENV === "production"
-    ? `${getTrackingScript()} 
+      process.env.NODE_ENV === "production"
+        ? `${getTrackingScript()} 
       ${getAdsenseScript()}`
-    : ""
-}
+        : ""
+    }
     `
 }
 

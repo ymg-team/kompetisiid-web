@@ -36,7 +36,7 @@ const CompetitionBox = props => {
   return (
     <div id="competition-container">
       <div className="container">
-        <div className="row no-margin">
+        <div className="no-margin">
           {/* header total show competition */}
           {data && status && subtitle ? (
             <span style={{ display: "table" }}>
@@ -54,7 +54,7 @@ const CompetitionBox = props => {
             {state => (
               <div
                 className="row"
-                style={Object.assign({}, style.fade.default, style.fade[state])}
+                style={Object.assign({margin: "0 -15px 0"}, style.fade.default, style.fade[state])}
               >
                 {status ? (
                   !data ? (
