@@ -113,7 +113,7 @@ export default class Footer extends Component {
                   <img
                     className="footer-copyright-logo"
                     src="/assets/4.2/img/icon-128x128.png"
-                    title="kompetisi id icon"
+                    alt="kompetisi id icon"
                   />
                   <small className="footer-copyright-text">
                     &copy; 2013 - {new Date().getFullYear()} by Id More<br />DIY,
@@ -165,7 +165,7 @@ export default class Footer extends Component {
                 <a href="https://byidmore.com" target="_blank">
                   <img
                     src="/assets/4.2/img/icon-byidmore.png"
-                    title="idmore icon"
+                    alt="idmore icon"
                   />
                 </a>
               </div>

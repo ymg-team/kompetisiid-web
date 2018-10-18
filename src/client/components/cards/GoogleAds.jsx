@@ -4,7 +4,7 @@ import PropTypes from "prop-types"
 
 // components
 const Ads = styled.ins`
-  display: "block";
+  display: block;
   margin: 30px 0;
 `
 
