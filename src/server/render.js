@@ -78,7 +78,7 @@ export default (req, res) => {
         <!DOCTYPE html>
         <html lang="id-id">
             <head>
-                <meta charset="utf-8" />
+                <meta charset="UTF-8" />
                 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <meta property="fb:app_id" content="1419514554927551" />
@@ -98,7 +98,6 @@ export default (req, res) => {
                 <link rel="manifest" href="/manifest.json" />
                 <link rel="search" type="application/opensearchdescription+xml" href="/opensearch.xml" title="Cari Kompetisi"/>
                 <style>
-                // transition
                 .card-enter {
                     opacity: 0.01;
                 }
@@ -168,10 +167,10 @@ export default (req, res) => {
 function getScript(state) {
   // ref __data__ : https://redux.js.org/recipes/serverrendering
   return `
-    <script type="text/javascript">window.__data__=${JSON.stringify(
+    <script>window.__data__=${JSON.stringify(
       state
     ).replace(/</g, "\\u003c")}</script>
-    <script type="text/javascript" src="/assets/4.2/js/script-min.js?v=${
+    <script src="/assets/4.2/js/script-min.js?v=${
       version.JS_VERSION
     }"></script>
     <script src="${webpackAssets.vendor.js}"></script>

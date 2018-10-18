@@ -20,8 +20,8 @@ const Alert = Styled.div`
   transition: bottom .5s ease, padding .5s ease;
   
   &:hover {
-    padding-top: 20px
-    padding-bottom: 20px
+    padding-top: 20px;
+    padding-bottom: 20px;
   }
   &.error {
     background-color: ${Colors.mainRed}; 
