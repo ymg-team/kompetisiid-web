@@ -11,7 +11,7 @@ export const generateMetaCompetition = (req, res, next) => {
     API_HOST: Host[process.env.NODE_ENV].api_v42
   }).then(response => {
     const competition = JSON.parse(response.body)
-    const url = `https://kompetisi.id/competition${req.originalUrl}`
+    const url = `https://kompetisi.id${req.originalUrl}`
     if (competition.status === 200) {
       let title = competition.data.title
       const urlArr = req.originalUrl.split("/")
@@ -101,7 +101,7 @@ export const generateMetaNews = (req, res, next) => {
     API_HOST: Host[process.env.NODE_ENV].api_v42
   }).then(response => {
     const news = JSON.parse(response.body)
-    const url = `https://kompetisi.id/competition${req.originalUrl}`
+    const url = `https://kompetisi.id${req.originalUrl}`
 
     if (news.status == 200) {
       let desc = stripTags(news.data.content)
