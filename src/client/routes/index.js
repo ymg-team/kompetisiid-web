@@ -3,32 +3,43 @@
  * Created by yussan on 06/10/16.
  */
 
-import React from 'react'
-import { Redirect } from 'react-router-dom'
+import React from "react"
+import Loadable from "react-loadable"
+import { Redirect } from "react-router-dom"
 
 //  routes
-import News from './berita'
-import Categories from './categories'
-import Browse from './browse'
-import Competition from './competition'
-import Account from './account'
-import Add from './add'
-import User from './user'
-import Dashboard from './dashboard'
-import Careers from './careers'
-import Super from './super/index'
+import News from "./berita"
+import Categories from "./categories"
+import Browse from "./browse"
+import Competition from "./competition"
+import Account from "./account"
+import Add from "./add"
+import User from "./user"
+import Dashboard from "./dashboard"
+import Careers from "./careers"
+import Super from "./super/index"
+
+// components
+import FullPagePreloader from "../components/preloaders/FullPage"
 
 // containers
-import Login from '../containers/auth/Login'
-import Home from '../containers/home/index'
-import Error from '../containers/error/index'
-import RedirectContainer from '../containers/Redirect'
+const Login = Loadable({
+  loader: () => import("../containers/auth/Login"),
+  loading: FullPagePreloader
+})
+const Register = Loadable({
+  loader: () => import("../containers/auth/Register"),
+  loading: FullPagePreloader
+})
+import Home from "../containers/home/index"
+import Error from "../containers/error/index"
+import RedirectContainer from "../containers/Redirect"
 
 // layouts
-import LayoutRoot from '../layouts/4.2/Root'
-import LayoutHome from '../layouts/4.2/Home'
-import LayoutHomeV5 from '../layouts/HomeLayoutV5'
-import LayoutError from '../layouts/4.2/Error'
+import LayoutRoot from "../layouts/4.2/Root"
+import LayoutHome from "../layouts/4.2/Home"
+import LayoutHomeV5 from "../layouts/HomeLayoutV5"
+import LayoutError from "../layouts/4.2/Error"
 
 export default [
   {
@@ -38,7 +49,7 @@ export default [
         component: LayoutHomeV5,
         routes: [
           {
-            path: '/',
+            path: "/",
             exact: true,
             component: Home
           },
@@ -50,25 +61,38 @@ export default [
           User,
           Careers,
           {
-            path: '/login',
+            path: "/login",
             fullscreen: true,
             exact: true,
             component: Login
           },
           {
-            path: '/super',
+            path: "/register",
+            fullscreen: true,
+            exact: true,
+            component: Register
+          },
+          {
+            path: "/super",
             fullscreen: true,
             exact: true,
             component: Login
           },
+          {
+            path: "/exit",
+            fullscreen: true,
+            exact: true,
+            component: RedirectContainer
+          },
+          // Super pages
           Super,
-          // redirect
+          // Redirect pages
           {
-            path: '/berita/baca/:encid/:title',
+            path: "/berita/baca/:encid/:title",
             fullscreen: true,
             exact: true,
             component: props => {
-              if (typeof window != 'undefined')
+              if (typeof window != "undefined")
                 return (
                   <Redirect
                     to={`/news/${props.match.params.encid}/${
@@ -80,16 +104,10 @@ export default [
             }
           },
           {
-            path: '/exit',
             fullscreen: true,
-            exact: true,
-            component: RedirectContainer
-          },
-          {
-            fullscreen: true,
-            path: '*',
+            path: "*",
             error_code: 404,
-            error_msg: 'Halaman yang anda kunjungi tidak ditemukan',
+            error_msg: "Halaman yang anda kunjungi tidak ditemukan",
             component: Error
           }
         ]
@@ -97,52 +115,3 @@ export default [
     ]
   }
 ]
-
-// const old_routes =  {
-//     path: '/',
-//     childRoutes: [
-//         {
-//             component: LayoutError,
-//             childRoutes: [
-//                 {
-//                     path: 'dashboard',
-//                     error_code: 404,
-//                     error_msg: 'Halaman yang anda kunjungi tidak ditemukan',
-//                     component: Error
-//                 }
-//             ]
-//         },
-//         {
-//             component: LayoutError,
-//             childRoutes: [
-//                 {
-//                     path: 'login',
-//                     component: Login
-//                 }
-//             ]
-//         },
-//         {
-//             component: LayoutDashboard,
-//             childRoutes: [
-//                 Dashboard
-//             ]
-//         },
-//         {
-//             component: LayoutHome,
-//             indexRoute: {
-//                 isRed: true,
-//                 component: Home
-//             },
-//             childRoutes: [
-//                 Berita,
-//                 Categories,
-//                 Jelajah,
-//                 Kompetisi,
-//                 Account,
-//                 Pasang,
-//                 careers,
-//                 Profile
-//             ]
-//         },
-//     ]
-// }
