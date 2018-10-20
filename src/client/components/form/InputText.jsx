@@ -2,7 +2,11 @@ import React, { Component } from "react"
 import { validate, validator } from "./Validator"
 
 export default class InputText extends Component {
-  handleChange(e) {
+  componentDidMount = () => {
+    validate(this.props)
+  }
+
+  handleChange = e => {
     this.props.setState(
       {
         [this.props.name]: e.target.value
@@ -13,8 +17,8 @@ export default class InputText extends Component {
     )
   }
 
-  validateInput() {
-    const result = validate(this.props)
+  validateInput(props = this.props) {
+    const result = validate(props)
     this.props.setState({
       [this.props.name + "_validate"]: result
     })

@@ -2,10 +2,14 @@ import React, { Component } from "react"
 import { validate, validator } from "./Validator"
 
 export default class InputFile extends Component {
-
   static defaultProps = {
     type: "file",
-    max: 1000000
+    max: 1000000,
+    customStyle: {}
+  }
+
+  componentDidMount = () => {
+    validate(this.props)
   }
 
   handleChange(e) {
@@ -22,8 +26,8 @@ export default class InputFile extends Component {
     }
   }
 
-  validateInput() {
-    const result = validate(this.props)
+  validateInput(props = this.props) {
+    const result = validate(props)
     this.props.setState({
       [this.props.name + "_validate"]: result
     })
@@ -33,12 +37,17 @@ export default class InputFile extends Component {
     const { max, label, name, validate, required } = this.props
     const is_valid = !(!validate.is_valid && validate.message)
     return (
-      <div className={`form-child ${!is_valid ? "error" : ""}`}>
-        <label htmlFor={name}>{label} { required ? <span className="text-red">*</span> : null }</label>
+      <div
+        style={this.props.customStyle}
+        className={`form-child ${!is_valid ? "error" : ""}`}
+      >
+        <label htmlFor={name}>
+          {label} {required ? <span className="text-red">*</span> : null}
+        </label>
         <input
           name={name}
           type="file"
-          id={name}
+          id={this.props.id || name}
           onChange={e => this.handleChange(e)}
           onBlur={e => this.handleChange(e)}
         />

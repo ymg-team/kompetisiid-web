@@ -20,17 +20,19 @@ class AuthFacebook extends Component {
     }, 1500)
   }
 
-  reqToApi(fbResponse = {}){
-    this.props.dispatch(oauthLogin({
-      provider: "facebook",
-      user_id: fbResponse.authResponse.userID,
-      token: fbResponse.authResponse.accessToken
-    }))
+  reqToApi(fbResponse = {}) {
+    console.log("fbResponse", fbResponse)
+    this.props.dispatch(
+      oauthLogin({
+        provider: "facebook",
+        user_id: fbResponse.authResponse.userID,
+        token: fbResponse.authResponse.accessToken
+      })
+    )
   }
 
   clickHandler() {
     fullPageLoader(true)
-    console.log(this.state.response)
     // ref: https://developers.facebook.com/docs/facebook-login/web/
     switch (this.state.response.status) {
       case "connected":
@@ -41,9 +43,8 @@ class AuthFacebook extends Component {
         FB.login(
           response => {
             fullPageLoader(false)
-            console.log("FB Login response", response)
             if (response.status == "connected") {
-              return this.reqToApi(this.state.response)
+              return this.reqToApi(response)
             }
           },
           { scope: "public_profile,email" }
