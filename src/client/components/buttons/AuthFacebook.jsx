@@ -20,13 +20,15 @@ class AuthFacebook extends Component {
     }, 1500)
   }
 
-  reqToApi(fbResponse = {}){
+  reqToApi(fbResponse = {}) {
     console.log("fbResponse", fbResponse)
-    this.props.dispatch(oauthLogin({
-      provider: "facebook",
-      user_id: fbResponse.authResponse.userID,
-      token: fbResponse.authResponse.accessToken
-    }))
+    this.props.dispatch(
+      oauthLogin({
+        provider: "facebook",
+        user_id: fbResponse.authResponse.userID,
+        token: fbResponse.authResponse.accessToken
+      })
+    )
   }
 
   clickHandler() {

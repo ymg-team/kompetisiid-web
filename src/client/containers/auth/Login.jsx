@@ -1,21 +1,39 @@
-import React, { Component } from 'react'
+import React, { Component } from "react"
 import Styled from "styled-components"
-import { fullPageLoader } from '../../components/preloaders/FullPage'
+import { fullPageLoader } from "../../components/preloaders/FullPage"
+import { connect } from "react-redux"
+import { resetValidator } from "../../components/form/Validator"
 
 // components
-import Input from '../../components/form/InputText'
-import Button from '../../components/form/Button'
-import { Link } from 'react-router-dom'
-import Helmet from '../../components/Helmet'
-import AuthFacebook from '../../components/buttons/AuthFacebook'
-import AuthGoogle from '../../components/buttons/AuthGoogle'
-import { Fullscreen } from '../../components/Fullscreen'
-import { alert } from '../../components/Alert'
-import { profile, login } from '../user/actions'
-import { connect } from 'react-redux'
+import Input from "../../components/form/InputText"
+import Button from "../../components/form/Button"
+import { Link } from "react-router-dom"
+import Helmet from "../../components/Helmet"
+import AuthFacebook from "../../components/buttons/AuthFacebook"
+import AuthGoogle from "../../components/buttons/AuthGoogle"
+import { Fullscreen } from "../../components/Fullscreen"
+import { alert } from "../../components/Alert"
+import { profile, login } from "../user/actions"
 
-const LoginBoxStyled = Styled.div`
-  
+export const LoginBoxStyled = Styled.div`
+
+  &.register-box {
+    /* because in register box if user tap avatar, will convert to browse file */
+    .login-box__content__avatar {
+      img {
+        cursor: pointer;
+        border: solid 2px #F4F4F4;
+        height: 90px;
+        width: 90px;
+      }
+    }
+  }
+
+  .login-box__footer {
+    width: 100%;
+    text-align: center;
+    padding: 10px;
+  }
 `
 
 class Login extends Component {
@@ -26,13 +44,13 @@ class Login extends Component {
       loading: false,
       inputPassword: false,
       profile: {},
-      isSuperPage: this.props.location.pathname === '/super'
+      isSuperPage: this.props.location.pathname === "/super"
     }
   }
 
   handleLogin() {
     if (!this.state.password) {
-      if (this.state.username.trim() != '')
+      if (this.state.username.trim() != "")
         this.setState({ inputPassword: true })
     } else {
       fullPageLoader(true)
@@ -48,11 +66,15 @@ class Login extends Component {
     }
   }
 
+  componentWillUnmount() {
+    resetValidator()
+  }
+
   UNSAFE_componentWillReceiveProps(np) {
     const { username } = this.state
     if (
       np.profile[username] &&
-      np.profile[username] != this.props.profile['username']
+      np.profile[username] != this.props.profile["username"]
     ) {
       this.setState({
         loading: false,
@@ -66,17 +88,21 @@ class Login extends Component {
         alert(
           true,
           `Login sukses, selamat datang kembali "${np.login.data.username}"`,
-          'success',
+          "success",
           true
         )
         // redirect to dashboard
         setTimeout(() => {
-          location.href = this.state.isSuperPage ? '/super/dashboard' : '/'
+          location.href = this.state.isSuperPage ? "/super/dashboard" : "/"
         }, 1500)
       } else {
         // user and password not match
         fullPageLoader(false)
-        alert(true, np.login.message || 'User dan password tidak cocok', 'error')
+        alert(
+          true,
+          np.login.message || "User dan password tidak cocok",
+          "error"
+        )
         this.setState({
           loading: false
         })
@@ -95,27 +121,29 @@ class Login extends Component {
     //generate alert
     if (profile[username] && profile[username].meta) {
       if (profile[username].meta.code != 200)
-        alert(true, 'user tidak terdaftar', 'error')
+        alert(true, "user tidak terdaftar", "error")
       else alert(false)
     }
 
-    let title = 'Login'
-    let description = 'Mari ramaikan semangat kompetisi di Indonesia.'
+    let title = "Login"
+    let description = "Mari ramaikan semangat kompetisi di Indonesia."
 
     if (this.state.isSuperPage) {
-      title = 'Halaman Super'
-      description = 'Selalu jaga rahasia anda demi keamanan di Kompetisi.id'
+      title = "Halaman Super"
+      description = "Selalu jaga rahasia anda demi keamanan di Kompetisi.id"
     }
 
     return (
-      <Fullscreen className={`login ${this.state.isSuperPage ? 'login-super' : ''}`}>
+      <Fullscreen
+        className={`login ${this.state.isSuperPage ? "login-super" : ""}`}
+      >
         <Helmet title={title} description={description} />
         <LoginBoxStyled className="login-box">
           {/* header */}
           <div className="login-box__title">
-            <h1 style={{ textAlign: 'center', lineHeight: 1 }}>
+            <h1 style={{ textAlign: "center", lineHeight: 1 }}>
               {title} <br />
-              <small style={{ fontWeight: 'normal' }}>{description}.</small>
+              <small style={{ fontWeight: "normal" }}>{description}.</small>
             </h1>
           </div>
 
@@ -137,7 +165,7 @@ class Login extends Component {
                     name="password"
                     type="password"
                     id="input-password"
-                    value={password || ''}
+                    value={password || ""}
                     validate={this.state.password_validate || {}}
                     required={true}
                     setState={(n, cb) => this.setState(n, cb)}
@@ -148,7 +176,7 @@ class Login extends Component {
                     name="username"
                     type="text"
                     id="input-username"
-                    value={username || ''}
+                    value={username || ""}
                     validate={this.state.username_validate || {}}
                     required={true}
                     setState={(n, cb) => this.setState(n, cb)}
@@ -160,16 +188,16 @@ class Login extends Component {
                   className="btn btn-gray"
                   disabled={loading}
                   action={() => this.handleLogin()}
-                  requiredInputs={['username']}
+                  requiredInputs={["username"]}
                   setState={(n, cb) => this.setState(n, cb)}
                   type="submit"
                   style={{
-                    fontWeight: 'bold',
-                    width: '100%',
-                    backgroundColor: '#FFF',
-                    color: '#292929'
+                    fontWeight: "bold",
+                    width: "100%",
+                    backgroundColor: "#FFF",
+                    color: "#292929"
                   }}
-                  text={loading ? 'loading...' : 'login'}
+                  text={loading ? "loading..." : "login"}
                 />
               </div>
             </form>
@@ -189,8 +217,8 @@ class Login extends Component {
             <hr />
             {!this.state.isSuperPage ? (
               <p>
-                Belum punya akun, silahkan{' '}
-                <Link to="/register">Regiser Disini</Link>
+                Belum punya akun, silahkan{" "}
+                <Link to="/register">Register Disini</Link>
               </p>
             ) : null}
           </div>
@@ -212,6 +240,7 @@ class Login extends Component {
               <Link to="/news/TXpVPQ/About">About</Link>
             </small>
           </div>
+          {/* end of footer navigation */}
         </LoginBoxStyled>
       </Fullscreen>
     )
@@ -226,6 +255,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(
-  mapStateToProps
-)(Login)
+export default connect(mapStateToProps)(Login)
