@@ -30,10 +30,6 @@ class Register extends Component {
     avatarPreview: ""
   }
 
-  componentDidMount() {
-    resetValidator()
-  }
-
   UNSAFE_componentWillUpdate(nextprops, nextstate) {
     if (nextstate.avatar && nextstate.avatar.lastModified !== this.state.avatar.lastModified) {
       // ref: https://stackoverflow.com/a/36281449/2780875
@@ -50,7 +46,11 @@ class Register extends Component {
   }
 
   regHandler = () => {
-    console.log("request api to register...")
+    this.setState({
+      loading: true
+    }, () => {
+      console.log("request api to register...")
+    })
   }
 
   render = () => {
@@ -98,7 +98,7 @@ class Register extends Component {
                   }
                 />
                 <InputFile
-                  style={{textAlign: "left"}}
+                  customStyle={{textAlign: "left"}}
                   label="Avatar"
                   name="avatar"
                   id="input-avatar"
