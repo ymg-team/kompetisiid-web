@@ -78,11 +78,16 @@ export function postLogout(req, res, next) {
  */
 export function postRegister(req, res, next) {
   req.reqdata = {
+    version: 'v42',
     method: 'post',
-    url: '/user/register',
-    params: req.params,
-    nextaction: result => {
-      if (result.meta.code === 201) Session.setData(req, 'userdata', result)
+    url: '/v2/register',
+    params: req.body,
+    nextaction: (req, res, next, result) => {
+      if (result.status === 201) {
+        Session.setData(req, 'userdata', result.data)
+      }
+
+      return res.json(result)
     }
   }
 

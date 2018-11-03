@@ -12,7 +12,6 @@ export default class Button extends Component {
         errorEl.scrollIntoView({ block: "end", behavior: "smooth" })
       })
     } else if (!validationChecker()) {
-      console.log("validator", validator)
       alert(true, "beberapa input belum valid", "error")
       this.props.setState(validationSeter(this.props.requiredInputs), () => {
         const errorEl = document.getElementsByClassName("error")[0]

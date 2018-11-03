@@ -5,7 +5,7 @@
 import { combineReducers } from "redux"
 import { setToLoading, receiveData, receiveApiResponse } from "../../../store/helpers/Normalizer"
 import { REQUEST_DATA, RECEIVE_DATA } from "../../../store/consts"
-import { LOGOUT, OAUTH_LOGIN, LOGIN } from "./actions"
+import { LOGOUT, OAUTH_LOGIN, LOGIN, REGISTER } from "./actions"
 
 function profile(state = {}, action) {
   if (action.target === "user_profile") {
@@ -37,22 +37,12 @@ function login(state = {}, action) {
 }
 
 function register(state = {}, action) {
-  if (action.target === "user_register") {
-    switch (action.type) {
-      case REQUEST_DATA:
-        state.is_loading = true
-        return Object.assign({}, state)
-
-      case RECEIVE_DATA:
-        state.is_loading = false
-        return Object.assign({}, state, action.json)
-
-      default:
-        return state
-    }
+  switch(action.type) {
+    case REGISTER:
+      return receiveApiResponse(state, action) 
+    default: 
+      return state
   }
-
-  return state
 }
 
 function logout(state = {}, action) {
