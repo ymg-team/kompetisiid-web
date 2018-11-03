@@ -10,10 +10,14 @@ import {
 } from "../../../store/consts"
 
 import { CALL_API } from "../../../store/middlewares/api"
+import sealMiddleware from '../../helpers/seal'
 
 export const LOGOUT = "LOGOUT"
 export const LOGIN = "LOGIN"
+export const REGISTER = "REGISTER"
 export const OAUTH_LOGIN = "OAUTH_LOGIN"
+export const EMAIL_VALIDATION = "EMAIL_VALIDATION"
+export const RESEND_EMAIL_VALIDATION_TOKEN = "RESEND_EMAIL_VALIDATION_TOKEN"
 
 export function profile(username) {
   return {
@@ -32,7 +36,7 @@ export function login(params) {
   return {
     [CALL_API]: {
       method: "post",
-      url: "/api/user/login",
+      url: `/api/user/login/${sealMiddleware.generateSeal()}`,
       params,
       type: "LOGIN"
     }
@@ -53,14 +57,19 @@ export function logout() {
 export function register(params) {
   return {
     [CALL_API]: {
+      type: REGISTER,
       method: "post",
-      url: "/api/user/register",
-      params,
-      target: "user_register",
-      typeWaiting: REQUEST_DATA,
-      typeSuccess: RECEIVE_DATA
+      url: `/api/user/register/${sealMiddleware.generateSeal()}`,
+      params
     }
   }
+}
+
+export function emailValidation() {
+}
+
+export function resendEmailValidationToken() {
+
 }
 
 /**

@@ -1,6 +1,8 @@
 import React, { Component } from "react"
+import { connect } from "react-redux"
 import { toCamelCase } from "string-manager"
 import { resetValidator } from "../../components/form/Validator"
+import { register } from "../user/actions"
 
 // components
 import Input from "../../components/form/InputText"
@@ -30,13 +32,27 @@ class Register extends Component {
     avatarPreview: ""
   }
 
-  UNSAFE_componentWillUpdate(nextprops, nextstate) {
+  UNSAFE_componentWillUpdate = (nextprops, nextstate) => {
     if (nextstate.avatar && nextstate.avatar.lastModified !== this.state.avatar.lastModified) {
       // ref: https://stackoverflow.com/a/36281449/2780875
       const reader = new FileReader()
       reader.readAsDataURL(nextstate.avatar)
       reader.onload = () => {
         this.setState({ avatarPreview: reader.result })
+      }
+    }
+  }
+
+  UNSAFE_componentWillReceiveProps = nextprops => {
+    if(nextprops.response.status) {
+      
+      if(nextprops.response.status === 201) {
+        setTimeout(() => {
+          // register success, redirect to homepage
+          location.href = "/"
+        }, 1500)
+      } else {
+        this.setState({loading: false})
       }
     }
   }
@@ -49,7 +65,18 @@ class Register extends Component {
     this.setState({
       loading: true
     }, () => {
-      console.log("request api to register...")
+      // generate params
+      let params = {
+        fullname: this.state.fullname,
+        username: this.state.username,
+        email: this.state.email,
+        password: this.state.password,
+      }
+
+      if(this.state.avatar.name) params.avatar = this.state.avatar
+
+      console.log("request api to register...", params)
+      this.props.dispatch(register(params))
     })
   }
 
@@ -98,8 +125,8 @@ class Register extends Component {
                   }
                 />
                 <InputFile
-                  customStyle={{textAlign: "left"}}
-                  label="Avatar"
+                  customStyle={{textAlign: "center"}}
+                  customStyleInput={{width: "auto", background: "#ededed", margin: "0 auto", padding: "5px"}}
                   name="avatar"
                   id="input-avatar"
                   value={avatar || ""}
@@ -231,4 +258,10 @@ class Register extends Component {
   }
 }
 
-export default Register
+const mapStateToProps = state => {
+  return {
+    response: state.User.register
+  }
+}
+
+export default connect(mapStateToProps)(Register)

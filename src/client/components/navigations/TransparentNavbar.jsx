@@ -295,8 +295,8 @@ class Navbar extends Component {
                         </div>
                       </li>
                     ) : (
-                      <li style={{ display: "none" }} className="hide-mobile">
-                        <Link to="/login">login</Link>
+                      <li className="hide-mobile">
+                        <Link to="/login">Login</Link>
                       </li>
                     )}
                     {/* end of auth */}
