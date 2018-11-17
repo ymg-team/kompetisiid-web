@@ -16,7 +16,7 @@ export const LOGOUT = "LOGOUT"
 export const LOGIN = "LOGIN"
 export const REGISTER = "REGISTER"
 export const OAUTH_LOGIN = "OAUTH_LOGIN"
-export const EMAIL_VALIDATION = "EMAIL_VALIDATION"
+export const EMAIL_VERIFICATION = "EMAIL_VERIFICATION"
 export const RESEND_EMAIL_VALIDATION_TOKEN = "RESEND_EMAIL_VALIDATION_TOKEN"
 
 export function profile(username) {
@@ -99,10 +99,8 @@ export function emailVerification(token) {
   return {
     [CALL_API]: {
       method: "post",
-      url: `/api/user/emailverification?token=${token}`,
-      target: "user_email_verification",
-      typeWaiting: REQUEST_DATA,
-      typeSuccess: RECEIVE_DATA
+      url: `/api/user/email-verification/${token}`,
+      type: EMAIL_VERIFICATION
     }
   }
 }

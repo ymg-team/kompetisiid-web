@@ -127,12 +127,20 @@ class RootLayoutV5 extends Component {
         <ImageModal />
 
         {/* notification to verify email */}
-        {this.props.session &&
+        {!fullscreen &&
+        this.props.session &&
         this.props.session.id &&
         !this.props.session.is_verified ? (
           <div style={StickyNoteStyle}>
             Kamu belum melakukan verifikasi email, segera cek email kamu. Atau
-            klik <a onClick={() => this.props.dispatch(resendEmailValidationToken())} style={StickyNoteLinkStyle} href="javascript:;">kirim ulang link verifikasi</a>
+            klik{" "}
+            <a
+              onClick={() => this.props.dispatch(resendEmailValidationToken())}
+              style={StickyNoteLinkStyle}
+              href="javascript:;"
+            >
+              kirim ulang link verifikasi
+            </a>
           </div>
         ) : null}
       </LayoutStyled>

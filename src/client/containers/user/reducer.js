@@ -6,7 +6,7 @@ import { combineReducers } from "redux"
 import { setToLoading, receiveData, receiveApiResponse } from "../../../store/helpers/Normalizer"
 import {alert} from "../../components/Alert"
 import { REQUEST_DATA, RECEIVE_DATA } from "../../../store/consts"
-import { LOGOUT, OAUTH_LOGIN, LOGIN, REGISTER, RESEND_EMAIL_VALIDATION_TOKEN } from "./actions"
+import { LOGOUT, OAUTH_LOGIN, LOGIN, REGISTER, RESEND_EMAIL_VALIDATION_TOKEN, EMAIL_VERIFICATION } from "./actions"
 
 function profile(state = {}, action) {
   if (action.target === "user_profile") {
@@ -80,30 +80,19 @@ function session(state = {}, action) {
   }
 }
 
-function email_verification(state = {}, action) {
-  if (action.target === "user_email_verification") {
-    switch (action.type) {
-      case REQUEST_DATA:
-        state.is_loading = true
-        return Object.assign({}, state)
-
-      case RECEIVE_DATA:
-        state.is_loading = false
-        return Object.assign({}, state, action.json)
-
-      default:
-        return state
-    }
-  }
-
-  return state
-}
-
 /**
  * @description versatile redux store properties
  */
 function etc(state = {}, action) {
   switch(action.type) {
+    case EMAIL_VERIFICATION:
+      if(action.json && action.json.status) {
+        alert(true, action.json.message, action.json.status === 201 ? "success" : "error")
+        if(action.json.status === 201) setTimeout(() => { location.href="/" }, 800)
+        state.email_verification = action.json
+        return Object.assign({}, state)
+      }
+      return state
     case RESEND_EMAIL_VALIDATION_TOKEN:
       if(action.json && action.json.status) {
         alert(true, action.json.message, action.json.status === 200 ? "success" : "error")
@@ -120,7 +109,6 @@ const reducer = combineReducers({
   register,
   logout,
   session,
-  email_verification,
   etc,
 })
 export default reducer

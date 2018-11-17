@@ -36,8 +36,7 @@ router.post("/logout", requestMiddleware.post, controller.postLogout, apiCaller)
 
 // endpoint of verification
 router.post(
-  "/emailverification",
-  requestMiddleware.post,
+  "/email-verification/:token",
   controller.postEmailVerification,
   apiCaller
 )

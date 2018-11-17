@@ -96,17 +96,20 @@ export function postRegister(req, res, next) {
 
 export function postEmailVerification(req, res, next) {
   req.reqdata = {
+    version: 'v42',
     method: 'post',
-    url: `/user/emailverification?token=${req.query.token}`,
+    url: `/v2/email-verification/${req.params.token}`,
     params: req.params,
-    nextaction: result => {
-      if (result.meta.code === 201) {
+    nextaction: (req, res, next, result) => {
+      if (result.status === 201) {
         let nextdata = req.session.userdata
         if (nextdata) {
-          nextdata.data.is_verified = 1
+          nextdata.is_verified = 1
           Session.update(req, 'userdata', nextdata)
         }
       }
+
+      return res.json(result)
     }
   }
 

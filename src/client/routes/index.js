@@ -39,6 +39,10 @@ const Error = Loadable({
   loader: () => import("../containers/error/index"),
   loading: FullPagePreloader
 })
+const EmailVerification = Loadable({
+  loader: () => import("../containers/auth/EmailVerification"),
+  loading: FullPagePreloader
+})
 
 // containers
 import Home from "../containers/home/index"
@@ -91,6 +95,13 @@ export default [
             fullscreen: true,
             exact: true,
             component: RedirectContainer
+          },
+          // route to do email verification
+          {
+            fullscreen: true,
+            path: "/email-verification/:token",
+            exact: true,
+            component: EmailVerification
           },
           // Super pages
           Super,
