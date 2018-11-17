@@ -1,6 +1,8 @@
 import React, { Component } from "react"
+import { connect } from "react-redux"
 import * as Colors from "../../style/colors"
 import { initModalImages } from "../helpers/Modal"
+import { resendEmailValidationToken } from "../containers/user/actions"
 
 // components
 import Footer from "../components/Footer"
@@ -11,6 +13,23 @@ import Alert from "../components/Alert"
 import FullScreenLoader from "../components/preloaders/FullPage"
 import ImageModal from "../components/modals/ImageModal"
 import GAds from "../components/cards/GoogleAds"
+
+const StickyNoteStyle = {
+  position: "fixed",
+  bottom: 0,
+  zIndex: 50,
+  background: "#e74c3c",
+  color: "#FFF",
+  textAlign: "center",
+  padding: "10px",
+  width: "100%",
+  fontWeight: "bold"
+}
+
+const StickyNoteLinkStyle = {
+  color: "#FFF",
+  textDecoration: "underline"
+}
 
 const BackToTop = Styled.button`
   outline: none;
@@ -36,10 +55,12 @@ class RootLayoutV5 extends Component {
     showBtnTop: false
   }
 
-  componentDidMount() {
+  resendEmailVerification = () => {}
+
+  componentDidMount = () => {
     // init modal images
     initModalImages()
-    
+
     // scroll event listener
     document.addEventListener("scroll", e => {
       const position = window.scrollY
@@ -59,7 +80,7 @@ class RootLayoutV5 extends Component {
     })
   }
 
-  render() {
+  render = () => {
     const { fullscreen } = matchRoutes(
       this.props.route.routes,
       this.props.location.pathname
@@ -104,9 +125,33 @@ class RootLayoutV5 extends Component {
         <Alert />
         <FullScreenLoader />
         <ImageModal />
+
+        {/* notification to verify email */}
+        {!fullscreen &&
+        this.props.session &&
+        this.props.session.id &&
+        !this.props.session.is_verified ? (
+          <div style={StickyNoteStyle}>
+            Kamu belum melakukan verifikasi email, segera cek email kamu. Atau
+            klik{" "}
+            <a
+              onClick={() => this.props.dispatch(resendEmailValidationToken())}
+              style={StickyNoteLinkStyle}
+              href="javascript:;"
+            >
+              kirim ulang link verifikasi
+            </a>
+          </div>
+        ) : null}
       </LayoutStyled>
     )
   }
 }
 
-export default RootLayoutV5
+const mapStateToProps = state => {
+  return {
+    session: state.User.session
+  }
+}
+
+export default connect(mapStateToProps)(RootLayoutV5)
