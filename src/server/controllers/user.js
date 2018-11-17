@@ -112,3 +112,16 @@ export function postEmailVerification(req, res, next) {
 
   next()
 }
+
+export function postResendEmailVerification(req, res, next) {
+  req.reqdata = {
+    version: 'v42',
+    method: 'post',
+    url: `/v2/email-verification/request`,
+    params: {
+      user_id: req.session.userdata ? req.session.userdata.id : 0
+    }
+  }
+
+  next()
+}

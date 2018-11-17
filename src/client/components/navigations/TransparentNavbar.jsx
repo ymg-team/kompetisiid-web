@@ -272,7 +272,7 @@ class Navbar extends Component {
                           <div className="dropdown-items" id="avatar-menu">
                             <ul>
                               <li>
-                                <Link to={`/user/user/${session.username}`}>
+                                <Link to={`/user/${session.username}`}>
                                   Profil saya
                                 </Link>
                               </li>

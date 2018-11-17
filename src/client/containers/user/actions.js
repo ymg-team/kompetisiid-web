@@ -68,8 +68,14 @@ export function register(params) {
 export function emailValidation() {
 }
 
-export function resendEmailValidationToken() {
-
+export function resendEmailValidationToken(params) {
+  return {
+    [CALL_API]: {
+      type: RESEND_EMAIL_VALIDATION_TOKEN,
+      method: "post",
+      url: `/api/user/resend-email-verification/${sealMiddleware.generateSeal()}`
+    }
+  }
 }
 
 /**
