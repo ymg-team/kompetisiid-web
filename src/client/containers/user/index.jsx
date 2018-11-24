@@ -29,8 +29,8 @@ class Index extends Component {
     const { username } = this.props.match.params
     let helmetdata = {}
 
-    if (profile[username] && profile[username].meta) {
-      if (profile[username].meta.code == 200) {
+    if (profile[username] && profile[username].status) {
+      if (profile[username].status == 200) {
         helmetdata = {
           title: `profil ${username} - Kompetisi ID`,
           description: `halaman profil ${username} - di Kompetisi ID`
@@ -63,21 +63,19 @@ class Index extends Component {
                 </div>
               </div>
               <div className="col-sm-9 col-sm-push-1 col-xs-9">
-                {profile[username] && profile[username].meta ? (
-                  profile[username].meta.code == 200 ? (
+                {profile[username] && profile[username].status ? (
+                  profile[username].status == 200 ? (
                     <h3>
                       {profile[username].data.username}
                       &nbsp;
                       <small>
                         terdaftar{" "}
-                        {epochToRelativeTime(
-                          profile[username].data.register_date
-                        )}
+                        {profile[username].data.register_date}
                         {/*terakhir login {epochToRelativeTime(profile[username].data.last_active)}*/}
                       </small>
                     </h3>
                   ) : (
-                    <h3>{profile[username].meta.message}</h3>
+                    <h3>{profile[username].message}</h3>
                   )
                 ) : (
                   <h3>
@@ -88,11 +86,10 @@ class Index extends Component {
             </div>
           </div>
         </div>
-        {profile[username] &&
-        profile[username].meta &&
-        profile[username].meta.code == 200 ? (
+        {/* {profile[username] &&
+        profile[username].status == 200 ? (
           <UserStats data={profile[username].data.competition_stats} />
-        ) : null}
+        ) : null} */}
       </div>
     )
   }

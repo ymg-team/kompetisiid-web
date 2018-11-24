@@ -7,9 +7,10 @@ import * as Session from '../helpers/session'
 
 export function getProfile(req, res, next) {
   req.reqdata = {
+    version: 'v42',
     method: 'get',
     params: req.params,
-    url: `/user/profile/${req.params.username}`
+    url: `/v2/user/${req.params.username}`
   }
 
   next()
