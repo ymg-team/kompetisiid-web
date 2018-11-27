@@ -7,9 +7,10 @@ import * as Session from '../helpers/session'
 
 export function getProfile(req, res, next) {
   req.reqdata = {
+    version: 'v42',
     method: 'get',
     params: req.params,
-    url: `/user/profile/${req.params.username}`
+    url: `/v2/user/${req.params.username}`
   }
 
   next()
@@ -78,11 +79,16 @@ export function postLogout(req, res, next) {
  */
 export function postRegister(req, res, next) {
   req.reqdata = {
+    version: 'v42',
     method: 'post',
-    url: '/user/register',
-    params: req.params,
-    nextaction: result => {
-      if (result.meta.code === 201) Session.setData(req, 'userdata', result)
+    url: '/v2/register',
+    params: req.body,
+    nextaction: (req, res, next, result) => {
+      if (result.status === 201) {
+        Session.setData(req, 'userdata', result.data)
+      }
+
+      return res.json(result)
     }
   }
 
@@ -91,17 +97,33 @@ export function postRegister(req, res, next) {
 
 export function postEmailVerification(req, res, next) {
   req.reqdata = {
+    version: 'v42',
     method: 'post',
-    url: `/user/emailverification?token=${req.query.token}`,
+    url: `/v2/email-verification/${req.params.token}`,
     params: req.params,
-    nextaction: result => {
-      if (result.meta.code === 201) {
+    nextaction: (req, res, next, result) => {
+      if (result.status === 201) {
         let nextdata = req.session.userdata
         if (nextdata) {
-          nextdata.data.is_verified = 1
+          nextdata.is_verified = 1
           Session.update(req, 'userdata', nextdata)
         }
       }
+
+      return res.json(result)
+    }
+  }
+
+  next()
+}
+
+export function postResendEmailVerification(req, res, next) {
+  req.reqdata = {
+    version: 'v42',
+    method: 'post',
+    url: `/v2/email-verification/request`,
+    params: {
+      user_id: req.session.userdata ? req.session.userdata.id : 0
     }
   }
 

@@ -72,7 +72,7 @@ function handleFileValidator(props) {
 }
 
 function generateResult(props, is_valid = true, message = "") {
-
+  console.log("validator", validator)
   const { name } = props
   const result = {
     is_valid,

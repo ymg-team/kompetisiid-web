@@ -22,7 +22,7 @@ import Super from "./super/index"
 // components
 import FullPagePreloader from "../components/preloaders/FullPage"
 
-// containers
+// loadable containers
 const Login = Loadable({
   loader: () => import("../containers/auth/Login"),
   loading: FullPagePreloader
@@ -31,9 +31,21 @@ const Register = Loadable({
   loader: () => import("../containers/auth/Register"),
   loading: FullPagePreloader
 })
+const RedirectContainer = Loadable({
+  loader: () => import("../containers/Redirect"),
+  loading: FullPagePreloader
+})
+const Error = Loadable({
+  loader: () => import("../containers/error/index"),
+  loading: FullPagePreloader
+})
+const EmailVerification = Loadable({
+  loader: () => import("../containers/auth/EmailVerification"),
+  loading: FullPagePreloader
+})
+
+// containers
 import Home from "../containers/home/index"
-import Error from "../containers/error/index"
-import RedirectContainer from "../containers/Redirect"
 
 // layouts
 import LayoutRoot from "../layouts/4.2/Root"
@@ -84,8 +96,17 @@ export default [
             exact: true,
             component: RedirectContainer
           },
+          // route to do email verification
+          {
+            fullscreen: true,
+            path: "/email-verification/:token",
+            exact: true,
+            component: EmailVerification
+          },
           // Super pages
           Super,
+          // Dashboard pages
+          Dashboard,
           // Redirect pages
           {
             path: "/berita/baca/:encid/:title",

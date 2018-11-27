@@ -41,15 +41,18 @@ export default class InputFile extends Component {
         style={this.props.customStyle}
         className={`form-child ${!is_valid ? "error" : ""}`}
       >
-        <label htmlFor={name}>
-          {label} {required ? <span className="text-red">*</span> : null}
-        </label>
+        {label ? (
+          <label htmlFor={name}>
+            {label} {required ? <span className="text-red">*</span> : null}
+          </label>
+        ) : null}
         <input
           name={name}
           type="file"
           id={this.props.id || name}
           onChange={e => this.handleChange(e)}
           onBlur={e => this.handleChange(e)}
+          style={this.props.customStyleInput || {}}
         />
         <small>
           maks {max / 1000000}

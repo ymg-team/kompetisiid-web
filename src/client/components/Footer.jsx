@@ -116,8 +116,9 @@ export default class Footer extends Component {
                     alt="kompetisi id icon"
                   />
                   <small className="footer-copyright-text">
-                    &copy; 2013 - {new Date().getFullYear()} by Id More<br />DIY,
-                    Indonesia
+                    &copy; 2013 - {new Date().getFullYear()} by Id More
+                    <br />
+                    DIY, Indonesia
                   </small>
                 </div>
                 <div className="col-md-6">

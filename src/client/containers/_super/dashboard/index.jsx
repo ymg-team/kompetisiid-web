@@ -5,12 +5,12 @@ import { connect } from "react-redux"
 import Helmet from "../../../components/Helmet"
 class SuperContainer extends Component {
   render() {
-    return <React.Fragment>
-      <Helmet 
-        title="Dashboard - Kompetisi Id"
-      />
-      <p>This is container of Super Page</p>
-    </React.Fragment>
+    return (
+      <React.Fragment>
+        <Helmet title="Dashboard - Kompetisi Id" />
+        <p>This is container of Super Page</p>
+      </React.Fragment>
+    )
   }
 }
 
