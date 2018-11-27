@@ -24,8 +24,8 @@ const FullPageLoaderStyled = Styled.div`
   background-color: #ffffff;
   z-index: 20; 
   transition: opacity .3s ease;
-  opacity: ${props => props.show ? 100 : 0};
-  display: ${props => props.show ? 'flex' : 'none'};
+  opacity: ${props => (props.show ? 100 : 0)};
+  display: ${props => (props.show ? "flex" : "none")};
 
   .fullpage-loader {
     height: auto;

@@ -42,11 +42,4 @@ class SuperLayout extends Component {
   }
 }
 
-function mapDispatchToProps(dispatch)
-{
-  return {
-    dispatch
-  }
-}
-
-export default connect(mapDispatchToProps)(SuperLayout)
+export default connect()(SuperLayout)

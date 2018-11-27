@@ -105,6 +105,8 @@ export default [
           },
           // Super pages
           Super,
+          // Dashboard pages
+          Dashboard,
           // Redirect pages
           {
             path: "/berita/baca/:encid/:title",
