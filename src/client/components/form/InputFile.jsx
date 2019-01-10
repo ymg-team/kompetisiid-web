@@ -42,7 +42,7 @@ export default class InputFile extends Component {
         className={`form-child ${!is_valid ? "error" : ""}`}
       >
         {label ? (
-          <label htmlFor={name}>
+          <label htmlFor={this.props.id || name}>
             {label} {required ? <span className="text-red">*</span> : null}
           </label>
         ) : null}

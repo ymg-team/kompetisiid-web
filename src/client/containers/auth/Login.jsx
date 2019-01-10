@@ -6,7 +6,7 @@ import { resetValidator } from "../../components/form/Validator"
 
 // components
 import Input from "../../components/form/InputText"
-import Button from "../../components/form/Button"
+import Submit from "../../components/form/Submit"
 import { Link } from "react-router-dom"
 import Helmet from "../../components/Helmet"
 import AuthFacebook from "../../components/buttons/AuthFacebook"
@@ -184,7 +184,7 @@ class Login extends Component {
                 )}
               </div>
               <div className="form-child">
-                <Button
+                <Submit
                   className="btn btn-gray"
                   disabled={loading}
                   action={() => this.handleLogin()}

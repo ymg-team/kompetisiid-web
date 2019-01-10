@@ -7,9 +7,9 @@ form.form-ki
     .form-child 
         padding: 10px 0
         &.error 
-            label, small
+            label, small, input::placeholder, textarea::placeholder
                 color: $color-red-alert !important
-            input[type='text'], input[type='number'], input[type='email'], input[type='link'], input[type='password']
+            input[type='text'], input[type='number'], input[type='email'], input[type='link'], input[type='password'], textarea
                 border-bottom: 2px solid $color-red-alert !important
                 &:focus
                     border-bottom: 2px solid $color-red-alert !important

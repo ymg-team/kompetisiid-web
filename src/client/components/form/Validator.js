@@ -6,7 +6,7 @@ export function resetValidator() {
 
 export function validate(props) {
   const { name, max, value, required, type } = props
-  if (required && !value) {
+  if (required && (!value || value == 0)) {
     return generateResult(props, false, "wajib diisi")
   } else if (max && value.length > max) {
     //handle max character
@@ -15,7 +15,7 @@ export function validate(props) {
       false,
       "input melebihi batas maksimal karakter"
     )
-  } else if (type == "number" && parseInt(value)) {
+  } else if (type == "number" && !parseInt(value)) {
     //handle input type number
     return generateResult(props, false, "inputan bukan angka")
   } else if (type == "link" && !value.includes("http")) {
@@ -46,7 +46,7 @@ export function validationChecker() {
 
 export function validationSeter(keys) {
   keys.map(n => {
-    if(!validator[n + "_validate"]) {
+    if (!validator[n + "_validate"]) {
       validator[n + "_validate"] = generateResult(
         { name: n },
         false,
@@ -72,7 +72,6 @@ function handleFileValidator(props) {
 }
 
 function generateResult(props, is_valid = true, message = "") {
-  console.log("validator", validator)
   const { name } = props
   const result = {
     is_valid,

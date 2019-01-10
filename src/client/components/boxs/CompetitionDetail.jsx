@@ -12,6 +12,7 @@ import EmptyLoading from "../preloaders/EmptyLoader"
 import { Link } from "react-router-dom"
 import BtnJoin from "../buttons/BtnJoin"
 import { alert } from "../Alert"
+import BtnLike from "../buttons/BtnLikeCompetition"
 
 const StyledCalendar = Styled.div`
   a.calendar-item {
@@ -30,7 +31,6 @@ const GAds = Loadable({
   loader: () => import("../cards/GoogleAds"),
   loading: EmptyLoading
 })
-
 
 const CompetitionDetailBox = props => {
   const { data } = props
@@ -130,60 +130,67 @@ const CompetitionDetailBox = props => {
 
               <BtnJoin data={data} />
 
-              <a
-                style={{ marginRight: "10px" }}
-                onClick={() =>
-                  alert(
-                    true,
-                    "login terlebih dahulu untuk menyimpan",
-                    "warning"
-                  )
-                }
-                className="btn btn-white"
-                href="javascript:;"
-                title="simpan ke akun"
-              >
-                <i className="fa fa-save" />
-              </a>
-              <a
-                style={{ marginRight: "10px" }}
-                onClick={() => {
-                  modal("open", "save-to-calendar")
-                }}
-                className="btn btn-white"
-                href="javascript:;"
-                title="simpan ke kalender"
-              >
-                <i className="fa fa-calendar" />
-              </a>
-              <div className="dropdown">
-                <a
-                  className="fa fa-ellipsis-v btn btn-gray dropdown-button"
-                  data-target="action-competition"
-                />
-                <div className="dropdown-items" id="action-competition">
-                  <ul>
-                    <li>
-                      <a
-                        className="scopy-button"
-                        onClick={() => handleCopyLink(link_competition)}
-                        target="_blank"
-                        href="javascript:;"
-                      >
-                        Copy Link
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        target="_blank"
-                        href={`https://docs.google.com/forms/d/e/1FAIpQLSdmsHkJdGctVkWYFhhLC10YYVbtNIi5IF8X0mbdd2DjS-N1eQ/viewform?entry.559533126=${link_competition}`}
-                      >
-                        Laporkan Kompetisi
-                      </a>
-                    </li>
-                  </ul>
+                {/* like button */}
+                <BtnLike isLike={false} />
+                {/* end of like button */}
+
+                {/* more menus */}
+                <div className="dropdown">
+                  <a
+                    className="fa fa-ellipsis-h dropdown-button btn"
+                    data-target="action-competition"
+                    style={{ fontSize: 25, padding: "5px 10px" }}
+                  />
+                  <div className="dropdown-items" id="action-competition">
+                    <ul>
+                      <li>
+                        <a
+                          onClick={() =>
+                            alert(
+                              true,
+                              "login terlebih dahulu untuk menyimpan",
+                              "warning"
+                            )
+                          }
+                          href="javascript:;"
+                          title="simpan ke akun"
+                        >
+                          Simpan Kompetisi
+                        </a>
+                      </li>
+                      <li>
+                        <a
+                          onClick={() => {
+                            modal("open", "save-to-calendar")
+                          }}
+                          href="javascript:;"
+                          title="simpan ke kalender"
+                        >
+                          Tambahkan ke Kalender
+                        </a>
+                      </li>
+                      <li>
+                        <a
+                          className="scopy-button"
+                          onClick={() => handleCopyLink(link_competition)}
+                          target="_blank"
+                          href="javascript:;"
+                        >
+                          Salin Link Kompetisi
+                        </a>
+                      </li>
+                      <li>
+                        <a
+                          target="_blank"
+                          href={`https://docs.google.com/forms/d/e/1FAIpQLSdmsHkJdGctVkWYFhhLC10YYVbtNIi5IF8X0mbdd2DjS-N1eQ/viewform?entry.559533126=${link_competition}`}
+                        >
+                          Laporkan Kompetisi
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
                 </div>
-              </div>
+                {/* end of more menus */}
             </div>
           </div>
         </div>
