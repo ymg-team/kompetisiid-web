@@ -1,13 +1,22 @@
-import React, { Component } from "react"
+import React from "react"
+import Styled from "styled-components"
 import { validate, validator } from "./Validator"
 
-export default class InputText extends Component {
+const TextareaStyled = Styled.textarea`
+  resize: none;
+  overflow: auto;
+  min-height: 50px;
+  max-height: 100px;
+`
+
+export default class Textarea extends React.Component {
   componentDidMount = () => {
     validate(this.props)
   }
 
   handleChange = e => {
     const { value } = e.target
+    this.autoGrow(e)
     this.props.setState(
       {
         [this.props.name]: value
@@ -23,6 +32,12 @@ export default class InputText extends Component {
     this.props.setState({
       [this.props.name + "_validate"]: result
     })
+  }
+
+  // auto set height of textarea
+  autoGrow(e) {
+    e.target.style.height = "5px"
+    e.target.style.height = e.target.scrollHeight + "px"
   }
 
   render() {
@@ -43,13 +58,13 @@ export default class InputText extends Component {
           {label}{" "}
           {this.props.required ? <span className="text-red">*</span> : null}
         </label>
-        <input
+        <TextareaStyled
           onChange={e => this.handleChange(e)}
           onBlur={e => this.handleChange(e)}
           type={type}
           name={name}
           id={this.props.id || name}
-          value={type === "number" ? value : value.replace(/[\u200B-\u200D\uFEFF]|\s\s/g, " ")}
+          value={value.replace(/[\u200B-\u200D\uFEFF]|\s\s/g, " ")}
           autoFocus={autofocus}
           placeholder={this.props.placeholder}
         />
@@ -64,7 +79,7 @@ export default class InputText extends Component {
   }
 }
 
-InputText.defaultProps = {
+Textarea.defaultProps = {
   type: "text",
   required: false,
   placeholder: ""

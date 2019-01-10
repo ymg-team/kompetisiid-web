@@ -81,6 +81,11 @@ const NavbarStyled = Styled.div`
       color: ${Colors.mainGray}
     }
   }
+
+  li.li-auth {
+    margin-right: ${props => (props.session.id ? "25px" : "0")};
+    padding: ${props => (props.session.id ? "5px 10px !important" : "0")};
+  }
 `
 
 const SearchStyled = Styled.div`
@@ -180,7 +185,10 @@ class Navbar extends Component {
         className={`${this.state.sticky ? "sticky" : ""}`}
       >
         <div className="container">
-          <NavbarStyled className={`${this.props.className} row`}>
+          <NavbarStyled
+            session={session || {}}
+            className={`${this.props.className} row`}
+          >
             {this.state.search ? (
               <SearchStyled>
                 <div className="col-xs-12">
@@ -256,8 +264,8 @@ class Navbar extends Component {
                     </li>
 
                     {/* auth */}
-                    {Object.keys(session).length > 0 && session.id ? (
-                      <li style={{ marginRight: "25px", padding: "5px 10px" }}>
+                    <li className="li-auth">
+                      {session.id && session.username ? (
                         <div
                           style={{ position: "absolute" }}
                           className="dropdown"
@@ -293,12 +301,10 @@ class Navbar extends Component {
                             </ul>
                           </div>
                         </div>
-                      </li>
-                    ) : (
-                      <li className="hide-mobile">
+                      ) : (
                         <Link to="/login">Login</Link>
-                      </li>
-                    )}
+                      )}
+                    </li>
                     {/* end of auth */}
                   </ul>
                 </div>

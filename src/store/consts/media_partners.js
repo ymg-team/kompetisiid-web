@@ -7,12 +7,12 @@ export default [
   //     square: 'https://res.cloudinary.com/dhjkktmal/image/upload/q_40/v1530798431/kompetisi-id/media-partners/2018/35998465_183220035704829_6058124883668238336_n.jpg'
   //   }
   // },
-  // {
-  //   title: '16th Economix - Global Economic Challenges ',
-  //   url: 'https://kompetisi.id/news/TlRBPQ/16th-Economix---Global-Economic-Challenges-',
-  //   poster: {
-  //     landscape: 'https://res.cloudinary.com/dhjkktmal/image/upload/v1532005124/kompetisi-id/media-partners/2018/media_partner_economix.png',
-  //     square: 'https://res.cloudinary.com/dhjkktmal/image/upload/c_scale,q_65,w_800/v1532005682/kompetisi-id/media-partners/2018/Instagram_Economix_copy.jpg'
-  //   }
-  // }
+  {
+    title: 'Try Out Ujian Masuk Politeknik Negeri (UMPN) 2019',
+    url: 'https://kompetisi.id/competition/TVRFNE1BPT0/contacts/Try-Out-Ujian-Masuk-Politeknik-Negeri-(UMPN)-2019',
+    poster: {
+      landscape: 'https://res.cloudinary.com/dhjkktmal/image/upload/c_scale,w_500/v1547085720/kompetisi-id/media-partners/2019/Screen_Shot_2019-01-10_at_08.50.33.png',
+      square: 'https://res.cloudinary.com/dhjkktmal/image/upload/c_scale,w_500/v1547085720/kompetisi-id/media-partners/2019/Screen_Shot_2019-01-10_at_08.50.33.png'
+    }
+  }
 ]

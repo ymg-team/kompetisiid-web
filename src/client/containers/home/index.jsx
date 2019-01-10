@@ -127,7 +127,13 @@ class Home extends Component {
 
         {/* navbar */}
         {/* special background image */}
-        <div style={{backgroundImage:`url(https://res.cloudinary.com/dhjkktmal/image/upload/c_crop,e_blur:1500,q_40,x_1500,y_800/v1537329130/kompetisi-id/web_assets/background-1.jpg)`, backgroundSize: 'cover', backgroundColor:'#6796bb'}}>
+        <div
+          style={{
+            backgroundImage: `url(https://res.cloudinary.com/dhjkktmal/image/upload/c_crop,e_blur:1500,q_40,x_1500,y_800/v1537329130/kompetisi-id/web_assets/background-1.jpg)`,
+            backgroundSize: "cover",
+            backgroundColor: "#6796bb"
+          }}
+        >
           {/* navbar */}
           <Navbar />
 

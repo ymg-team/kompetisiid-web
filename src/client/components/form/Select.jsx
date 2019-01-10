@@ -1,15 +1,39 @@
-import React, {Component} from 'react'
+import React, { Component } from "react"
 import Styled from "styled-components"
+import { validate, validator } from "./Validator"
 
 const SelectStyled = Styled.select`
   background: none;
   height: 40px;
+
+  &.error {
+    border-color: #cf3030 !important;
+    color: #cf3030 !important;
+  }
 `
 
 class Select extends Component {
-
   static defaultProps = {
-    validate: {}
+    validate: {},
+    options: []
+  }
+
+  handleChange = e => {
+    this.props.setState(
+      {
+        [this.props.name]: e.target.value
+      },
+      () => {
+        this.validateInput()
+      }
+    )
+  }
+
+  validateInput(props = this.props) {
+    const result = validate(props)
+    this.props.setState({
+      [this.props.name + "_validate"]: result
+    })
   }
 
   render = () => {
@@ -18,17 +42,29 @@ class Select extends Component {
       label,
       name,
       validate,
-      autofocus
+      autofocus,
+      options,
+      valueKey,
+      textKey
     } = this.props
     const is_valid = !(!validate.is_valid && validate.message)
-    
+
     return (
       <div className={`form-child ${!is_valid ? "error" : ""}`}>
-        <label htmlFor={name}>{label} { this.props.required ? <span className="text-red">*</span> : null }</label>
-        <SelectStyled>
-          <option value="1">opsi 1</option>
-          <option value="2">opsi 2</option>
-          <option value="3">opsi 3</option>
+        <label htmlFor={name}>
+          {label}{" "}
+          {this.props.required ? <span className="text-red">*</span> : null}
+        </label>
+        <SelectStyled
+          className={`form-child ${!is_valid ? "error" : ""}`}
+          onChange={e => this.handleChange(e)}
+        >
+          <option value="0">--- Pilih salah satu ---</option>
+          {this.props.options.map((n, key) => (
+            <option key={key} value={n[valueKey] || "no value"}>
+              {n[textKey] || "no text"}
+            </option>
+          ))}
         </SelectStyled>
       </div>
     )

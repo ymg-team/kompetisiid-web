@@ -7,7 +7,7 @@ import { register } from "../user/actions"
 // components
 import Input from "../../components/form/InputText"
 import InputFile from "../../components/form/InputFile"
-import Button from "../../components/form/Button"
+import Submit from "../../components/form/Submit"
 import { Link } from "react-router-dom"
 import Helmet from "../../components/Helmet"
 import { Fullscreen } from "../../components/Fullscreen"
@@ -213,7 +213,7 @@ class Register extends Component {
 
               {/* register submit button */}
               <div className="form-child">
-                <Button
+                <Submit
                   className="btn btn-gray"
                   disabled={loading}
                   action={() => this.regHandler()}
