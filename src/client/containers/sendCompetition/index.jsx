@@ -7,7 +7,7 @@ import Helmet from "../../components/Helmet"
 import { title, desc } from "./form"
 import InputText from "../../components/form/InputText"
 import InputFile from "../../components/form/InputFile"
-import Button from "../../components/form/Button"
+import Submit from "../../components/form/Submit"
 
 import { submitCepat } from "./actions"
 import {
@@ -174,7 +174,7 @@ class AddCompetitionFast extends Component {
                   />
                 </div>
                 <div className="form-child">
-                  <Button
+                  <Submit
                     loading={this.state.loading}
                     text="kirim permintaan"
                     disabled={response.is_loading}

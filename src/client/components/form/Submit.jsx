@@ -2,7 +2,7 @@ import React, { Component } from "react"
 import { validator, validationSeter, validationChecker } from "./Validator"
 import { alert } from "../Alert"
 
-export default class Button extends Component {
+export default class Submit extends Component {
   handleClick() {
     if (Object.keys(validator).length < 1) {
       //no data input
@@ -40,7 +40,7 @@ export default class Button extends Component {
   }
 }
 
-Button.defaultProps = {
+Submit.defaultProps = {
   type: "submit",
   disabled: false,
   className: "btn btn-white",
