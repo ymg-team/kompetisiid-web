@@ -95,7 +95,21 @@ export function strToDateTime(str) {
   return ''
 }
 
-export function today(format = 'Do MMM YY') {
+export function dateToFormat(date, format) {
+  const d = new Date(date)
+  switch (format) {
+    case "Y-m-d":
+    default:
+      return `${d.getFullYear()}-${d.getMonth() < 10 ? `0${d.getMonth() + 1}` : d.getMonth() + 1}-${d.getDate()}`
+  }
+}
+
+export function today(format = '') {
   const d = new Date()
-  return `${d.getDate()} ${Bulan[d.getMonth()][0]} ${d.getFullYear()}`
+  switch (format) {
+    case "Y-m-d":
+      return `${d.getFullYear()}-${d.getMonth() < 10 ? `0${d.getMonth() + 1}` : d.getMonth() + 1}-${d.getDate()}`
+    default:
+      return `${d.getDate()} ${Bulan[d.getMonth()][0]} ${d.getFullYear()}`
+  }
 }

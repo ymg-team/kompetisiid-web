@@ -7,6 +7,7 @@ const TitleLevel2 = Styled.div`
   margin-bottom: 20px;
   h2 {
     margin-bottom: 0;
+    font-size: 2.5em;
   }
   small {
     color: gray;
