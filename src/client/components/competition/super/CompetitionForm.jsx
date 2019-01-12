@@ -1,5 +1,6 @@
 import React from "react"
 import { getCategories } from "../../../containers/competition/actions"
+import { dateToFormat } from "../../../helpers/DateTime"
 
 // components
 import TitleLevel2Box from "../../boxs/TitleLevel2"
@@ -8,22 +9,42 @@ import Helmet from "../../Helmet"
 import Input from "../../form/InputText"
 import Textarea from "../../form/Textarea"
 import InputFile from "../../form/InputFile"
+import InputTags from "../../form/InputTags"
 import Select from "../../form/Select"
 import DatePicker from "../../form/DatePicker"
 import BtnSubmit from "../../form/Submit"
 import Spacer from "../../boxs/Spacer"
 import Contact from "./ContactForm"
+import Editor from "../../form/Editor"
 
 class CompetitionForm extends React.Component {
-  state = {
-  }
+  state = {}
 
   componentDidMount = () => {
     this.props.dispatch(getCategories())
   }
 
   submitHandler = () => {
-    console.log("submit handler...")
+    let formdata = {
+      title: this.state.title,
+      description: this.state.description,
+      prize_total: this.state.prize_total,
+      prize_description: this.state.prize_description,
+      organizer: this.state.organizer,
+      deadline_date: dateToFormat(this.state.deadline),
+      announcement_date: dateToFormat(this.state.announcement),
+      main_cat: this.state.maincat,
+      sub_cat: this.state.subcat,
+      source_link: this.state.source_link || "",
+      register_link: this.state.register_link || "",
+      contacts: JSON.stringify(this.state.contacts || []),
+      tags: this.state.tags ? this.state.tags.toString() : "",
+      content: this.state.content
+    }
+
+    if (this.state.poster) formdata.poster = this.state.poster
+
+    console.log("submit handler...", formdata)
   }
 
   render = () => {
@@ -50,7 +71,7 @@ class CompetitionForm extends React.Component {
           action="javascript:;"
           method="post"
         >
-          <TitleLevel2Box 
+          <TitleLevel2Box
             title="Data Kompetisi"
             text="Pastikan memasukan data selengkap mungkin untuk memudahkan pengunjung memahami mekanisme kompetisi yang bersangkutan."
           />
@@ -112,11 +133,12 @@ class CompetitionForm extends React.Component {
           <DatePicker
             label="Deadline"
             name="deadline"
+            value={this.state.deadline || ""}
+            validate={this.state.deadline_validate || {}}
             required={true}
             config={{
               minDate: new Date()
             }}
-            validate={this.state.deadline_validate || {}}
             setState={(n, cb) => this.setState(n, cb)}
           />
           {/* end of deadline competition */}
@@ -125,11 +147,12 @@ class CompetitionForm extends React.Component {
           <DatePicker
             label="Pengumuman"
             name="announcement"
+            value={this.state.announcement || ""}
+            validate={this.state.announcement_validate || {}}
             required={true}
             config={{
               minDate: new Date()
             }}
-            validate={this.state.announcement_validate || {}}
             setState={(n, cb) => this.setState(n, cb)}
           />
           {/* pengumuman */}
@@ -138,13 +161,13 @@ class CompetitionForm extends React.Component {
           {this.props.categories.status ? (
             <Select
               label="Kategori Utama"
-              name="mainkat"
+              name="maincat"
               required={true}
               options={this.props.categories.data}
-              value={this.state.mainkat}
+              value={this.state.maincat}
               valueKey="id"
               textKey="name"
-              validate={this.state.mainkat_validate || {}}
+              validate={this.state.maincat_validate || {}}
               setState={(n, cb) => this.setState(n, cb)}
             />
           ) : (
@@ -153,30 +176,37 @@ class CompetitionForm extends React.Component {
           {/* end of main kategori */}
 
           {/* sub kategori */}
-          {
-            this.state.mainkat && this.state.mainkat != 0 ?
-              <Select
-                label="Sub Kategori"
-                name="subkat"
-                required={true}
-                options={(this.props.categories.data.find(n => n.id == this.state.mainkat)).subcategories}
-                value={this.state.subkat}
-                valueKey="id"
-                textKey="name"
-                validate={this.state.subkat_validate || {}}
-                setState={(n, cb) => this.setState(n, cb)}
-              />
-            : null
-          }
+          {this.state.maincat && this.state.maincat != 0 ? (
+            <Select
+              label="Sub Kategori"
+              name="subcat"
+              required={true}
+              options={
+                this.props.categories.data.find(n => n.id == this.state.maincat)
+                  .subcategories
+              }
+              value={this.state.subcat}
+              valueKey="id"
+              textKey="name"
+              validate={this.state.subcat_validate || {}}
+              setState={(n, cb) => this.setState(n, cb)}
+            />
+          ) : null}
           {/* end of subkategori */}
 
           {/* peraturan */}
+          <Editor
+            label="Peraturan kompetisi"
+            description="Berisi syarat, ketentuan, mekanisme dan hal-hal lain yang berkaitan untuk ikut serta kompetisi ini"
+            name="content"
+            required={true}
+            setState={(n, cb) => this.setState(n, cb)}
+          />
           {/* peraturan */}
 
           <Spacer size="large" />
 
-
-          <TitleLevel2Box 
+          <TitleLevel2Box
             title="Hadiah Kompetisi"
             text="Cantumkan perkiraan nilai total hadiah dan detail hadiah untuk para pemenang."
           />
@@ -184,11 +214,11 @@ class CompetitionForm extends React.Component {
           {/* input nilai total hadiah */}
           <Input
             label="Nilai total hadiah (dalam Rp)"
-            name="price_total"
+            name="prize_total"
             type="number"
-            id="input-price-total"
-            value={this.state.price_total || 0}
-            validate={this.state.price_total_validate || {}}
+            id="input-prize-total"
+            value={this.state.prize_total || 0}
+            validate={this.state.prize_total_validate || {}}
             placeholder="Contoh: 1000000 (hanya masukan angka)"
             required={true}
             setState={(n, cb) => this.setState(n, cb)}
@@ -198,10 +228,10 @@ class CompetitionForm extends React.Component {
           {/* input deskripsi hadiah */}
           <Textarea
             label="Deskripsi hadiah"
-            name="price_description"
-            id="input-price-description"
-            value={this.state.price_description || ""}
-            validate={this.state.price_description_validate || {}}
+            name="prize_description"
+            id="input-prize-description"
+            value={this.state.prize_description || ""}
+            validate={this.state.prize_description_validate || {}}
             placeholder="Contoh: Juara 1 mendapatkan... , dst"
             required={true}
             setState={(n, cb) => this.setState(n, cb)}
@@ -215,14 +245,15 @@ class CompetitionForm extends React.Component {
             text="Kontak yang memungkinkan para peserta kompetisi untuk terhubung langsung dengan Penyelenggara"
           />
           {/*input contact*/}
-          <Contact contact={this.state.contact} setState={(val, callback) => this.setState(val, callback)} />
+          <Contact
+            contacts={this.state.contacts || []}
+            setState={(val, cb) => this.setState(val, cb)}
+          />
           {/*end of input contact*/}
 
           <Spacer size="large" />
 
-          <TitleLevel2Box
-            title="Opsional"
-          />
+          <TitleLevel2Box title="Opsional" />
           {/*input link join competition*/}
           <Input
             label="Link Mendaftar Kompetisi"
@@ -249,17 +280,23 @@ class CompetitionForm extends React.Component {
           />
           {/*end of link competition source*/}
 
+          {/* input competition tag */}
+          <InputTags
+            label="Masukan Tag"
+            name="tags"
+            tags={this.state.tags || []}
+            setState={(n, cb) => this.setState(n, cb)}
+          />
+          {/* end of input competition tag */}
+
           <Spacer size="large" />
 
-
           {/* submit form */}
-          <BtnSubmit 
+          <BtnSubmit
             text={title}
             action={() => this.submitHandler()}
             setState={(n, cb) => this.setState(n, cb)}
-            requiredInputs={[
-              "title"
-            ]}
+            requiredInputs={["maincat", "subcat"]}
           />
           {/* end of submit form */}
         </form>

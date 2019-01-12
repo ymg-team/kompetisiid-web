@@ -1,51 +1,109 @@
 import React from "react"
 import Button from "../../buttons/index"
 
-
 const CONTACT_TYPE = [
   {
-    type: "Facebook", icon: "",
-    type: "Instagram", icon: "",
-    type: "Youtube", icon: "",
-    type: "Email", icon: "",
-    type: "Telepon", icon: "",
-    type: "Alamat", icon: "",
-    type: "Web Link", icon: "",
+    id: 1,
+    type: "Web Link",
+    icon: ""
+  },
+  {
+    id: 2,
+    type: "Facebook",
+    icon: ""
+  },
+  {
+    id: 3,
+    type: "Twitter",
+    icon: ""
+  },
+  {
+    id: 4,
+    type: "Instagram",
+    icon: ""
+  },
+  {
+    id: 5,
+    type: "Google Plus",
+    icon: ""
+  },
+  {
+    id: 6,
+    type: "Email",
+    icon: ""
+  },
+  {
+    id: 7,
+    type: "Alamat",
+    icon: ""
+  },
+  {
+    id: 8,
+    type: "Youtube",
+    icon: ""
+  },
+  {
+    id: 9,
+    type: "Telepon",
+    icon: ""
   }
 ]
 
 class ContactForm extends React.Component {
-  state = {
-    contacts: []
-  }
-
   addContactHandler = () => {
-    let {contacts} = this.state
-    contacts.push({type: "facebook", value:""})
-    return this.setState(contacts)
+    let { contacts } = this.props
+    contacts.push({ type: 1, value: "" })
+    return this.props.setState({contacts})
   }
 
-  removeContactHandler = (key) => {
-    let {contacts} = this.state
+  removeContactHandler = key => {
+    let { contacts } = this.props
     contacts.splice(key, 1)
-    return this.setState(contacts)
+    return this.props.setState(contacts)
   }
 
-  itemGenerator = (contact, key) => {
+  changeSelectHandler = (e, key) => {
+    let { contacts } = this.props
+    contacts[key].type = e.target.value 
+
+    return this.props.setState({contacts})
+  }
+
+  changeInputHandler = (e, key) => {
+    let { contacts } = this.props
+    contacts[key].value = e.target.value 
+    return this.props.setState({contacts})
+  }
+
+  itemGenerator = (key) => {
     return (
-      <div key={key} className="row" style={{padding: "10px 0"}}>
-        <div style={{paddingLeft: 0}} className="col-xs-4">
-          <select className="form-child">
-            {
-              CONTACT_TYPE.map((n, key) => <option key={key} value={n.type}>{n.type}</option>)
-            }
+      <div key={key} className="row" style={{ padding: "10px 0" }}>
+        <div style={{ paddingLeft: 0 }} className="col-xs-4">
+          <select
+            className="form-child"
+            onChange={e => this.changeSelectHandler(e, key)}
+          >
+            {CONTACT_TYPE.map((n, key) => {
+              return (
+                <option key={key} value={n.id}>
+                  {n.type}
+                </option>
+              )
+            })}
           </select>
         </div>
         <div className="col-xs-6">
-          <input style={{padding:0, margin: 0}} className="form-child" type="text" />
+          <input
+            onChange={e => this.changeInputHandler(e, key)}
+            style={{ padding: 0, margin: 0 }}
+            className="form-child"
+            type="text"
+          />
         </div>
         <div className="col-xs-2">
-          <Button onClick={() => this.removeContactHandler(key)} color={"red"}>X</Button>
+          <Button onClick={() => this.removeContactHandler(key)} color={"red"}>
+            X
+          </Button>
         </div>
       </div>
     )
@@ -54,13 +112,15 @@ class ContactForm extends React.Component {
   render = () => {
     return (
       <React.Fragment>
-        {
-          this.state.contacts.map((n, key) => {
-            return this.itemGenerator(n, key)
-          })
-        }
-        <div style={{paddingLeft: 0}} className="row col-xs-12">
-          <Button onClick={() => this.addContactHandler()}> Tambahkan Kontak</Button>
+        {this.props.contacts.map((n, key) => {
+          return this.itemGenerator(key)
+        })}
+        <div style={{ paddingLeft: 0 }} className="row col-xs-12">
+          {this.props.contacts.length > 0 ? <br /> : null}
+          <Button onClick={() => this.addContactHandler()}>
+            {" "}
+            + Tambahkan Kontak
+          </Button>
         </div>
       </React.Fragment>
     )
