@@ -10,6 +10,12 @@ export const Fullscreen = styled.div`
   align-items: center;
   justify-content: center;ß
   padding: 0 10px;
+  &.login-super {
+    color: ${Colors.mainWhite} !important;
+    a {
+      color: ${Colors.mainWhite} !important;
+    }
+  }
   &.error {
     background: ${Colors.mainRed};
   }
