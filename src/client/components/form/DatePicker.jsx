@@ -8,6 +8,8 @@ export default class DatePicker extends React.Component {
   }
 
   componentDidMount = () => {
+    validate(this.props)
+
     let {config} = this.props
     config = Object.assign({
       field: document.getElementById(this.props.id || this.props.name),
@@ -25,7 +27,18 @@ export default class DatePicker extends React.Component {
     }, config)
     setTimeout(() => {
       this.picker = new Pikaday(config)
+
+      // set default Pikaday value
+      if(this.props.value) {
+        console.log("set timepicket value", this.props.value)
+        this.picker.setDate(this.props.value)
+      }
     }, 1500)
+  }
+
+  componentWillReceiveProps = np => {
+    // validate on edit / set default value
+    if(!this.props.value && np.value) validate(np)
   }
 
   validateInput(props = this.props) {
@@ -36,7 +49,7 @@ export default class DatePicker extends React.Component {
   }
 
   render = () => {
-    const is_valid = !(!validate.is_valid && validate.message)
+    const is_valid = !(!this.props.validate.is_valid && this.props.validate.message)
     return (
       <div className={`form-child ${!is_valid ? "error" : ""}`}>
         {this.props.label ? (

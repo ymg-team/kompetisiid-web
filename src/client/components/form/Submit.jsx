@@ -13,6 +13,7 @@ export default class Submit extends Component {
       })
     } else if (!validationChecker()) {
       alert(true, "beberapa input belum valid", "error")
+      console.warn("FORM NOT VALID", validator)
       this.props.setState(validationSeter(this.props.requiredInputs), () => {
         const errorEl = document.getElementsByClassName("error")[0]
         errorEl.scrollIntoView({ block: "end", behavior: "smooth" })

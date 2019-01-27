@@ -4,6 +4,7 @@ import Tab from "../../../components/navigations/Tab"
 import CompetitionCard from "../../../components/cards/dashboard/CompetitionListCard"
 import Loader from "../../../components/preloaders/GlobalLoader"
 import Helmet from "../../../components/Helmet"
+import Button from "../../../components/buttons/index"
 
 import { fetchJelajah, fetchJelajahMore } from "../../competition/actions"
 import { connect } from "react-redux"
@@ -70,7 +71,7 @@ class MyCompetition extends Component {
         <Tab tabs={tabcontent} />
 
         {/* preloader */}
-        {competitions && competitions.is_loading ? (
+        {competitions && competitions.is_loading && !competitions.status ? (
           <div className="row">
             <Loader />
           </div>
@@ -95,14 +96,14 @@ class MyCompetition extends Component {
             ) : null}
 
             {/* load more competitions */}
-            {competitions.status == 200 && !competitions.is_loading ? (
+            {competitions.status == 200 ? (
               <div className="align-center">
-                <a
+                <Button 
                   onClick={() => this.fetchMoreData()}
-                  className="btn btn-white"
-                >
-                  Tampilan Kompetisi Berikutnya
-                </a>
+                  size="large"
+                  color="white"
+                  loading={competitions.is_loading}
+                />
               </div>
             ) : null}
           </div>
@@ -121,7 +122,7 @@ function generateParams(props) {
   const { tab_active } = props.route
   let Params = {
     limit: Limit,
-    username: props.session.username,
+    // username: props.session.username,
     // available status : active || all || waiting || reject || accept
     status: props.route.status || "all"
   }

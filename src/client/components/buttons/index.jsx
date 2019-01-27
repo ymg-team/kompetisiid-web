@@ -3,58 +3,80 @@ import Styled from "styled-components"
 import PropTypes from "prop-types"
 
 const ButtonStyled = Styled.button`
-  background-color: #FFF;
-  color: #000;
-  
+  border-radius: 5px;
   
   ${props => {
     switch (props.size) {
       case "medium":
         return ``
       case "large":
-        return ``
+        return `
+          font-size: 15px;
+          padding: 8px 16px;
+        `
       default:
         return `
           font-size: 12px;
           padding: 2px 5px;`
-    } 
-}}
+    }
+  }}
 
-${
-  props => {
-    switch (props.color) {
-      case "red":
-        return `
+${props => {
+  switch (props.color) {
+    case "red":
+      return `
           background: #ea4b35;
           color: #FFF;
           border: 1px solid #c53d25;
         `
-      default:
-        return ``
-    } 
+    case "white":
+      return `
+          border: 1px solid #969696;
+          background-color: #FFFFFF;
+          color: #313131;
+          &.btn-close-modal {
+            background-color: #ffffff00;
+            border-radius: 200px;
+            color: #3a3a3a;
+          }
+          &:hover {
+            background-color: #efefef;
+          }
+        `
+    default:
+      return `
+        background-color: #FFF;
+        color: #000;
+      `
   }
-  }
+}}
 `
 
-class Button extends React.Component {
-  static propTypes = {
-    onClick: PropTypes.func,
-    className: PropTypes.string,
-    style: PropTypes.object,
-    size: PropTypes.oneOf(["small", "medium", "large"])
+const Button = props => {
+  let style = {}
+  if(props.loading) {
+    style.opacity = 0.4
+    style.cursor = "not-allowed"
   }
-
-  static defaultProps = {
-    text: "Button Text",
-  }
-
-  render = () => {
-    return <ButtonStyled
-      onClick={() => this.props.onClick()}
-    >
-      {this.props.children || this.props.text }
+  return (
+    <ButtonStyled {...props} style={style}>
+      { props.loading ? "Menunggu..." : props.children || props.text}
     </ButtonStyled>
-  }
+  )
+}
+
+Button.propTypes = {
+  onClick: PropTypes.func,
+  className: PropTypes.string,
+  style: PropTypes.object,
+  size: PropTypes.oneOf(["small", "medium", "large"]),
+  color: PropTypes.oneOf(["white", "red"]),
+  loading: PropTypes.bool
+}
+
+Button.defaultProps = {
+  text: "Button Text",
+  onClick: () => {}
 }
 
 export default Button

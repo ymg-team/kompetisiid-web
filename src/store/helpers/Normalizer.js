@@ -65,10 +65,20 @@ export function setToLoading(state, action) {
 }
 
 /**
- * function to receive new json
+ * @description function to receive json response and update store 
+ * @param {object} state , state from redux 
+ * @param {object} action , action from redux
  */
 export function receiveData(state, action) {
-  return Object.assign({}, state, { [action.filter]: action.json })
+  if(state[action.filter]) state[action.filter] = {}
+  if(!action.json) {
+    state[action.filter].is_loading = true
+    return Object.assign({}, state)
+  }
+  else {
+    state[action.filter].is_loading = false 
+    return Object.assign({}, state, { [action.filter]: action.json })
+  }
 }
 
 /**
