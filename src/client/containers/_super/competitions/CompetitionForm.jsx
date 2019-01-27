@@ -2,6 +2,7 @@ import React from "react"
 import { connect } from "react-redux"
 import { alert } from "../../../components/Alert"
 import { getDetail } from "../../competition/actions"
+import { Prompt } from "react-router"
 
 // components
 import Helmet from "../../../components/Helmet"
@@ -10,6 +11,9 @@ import FullPageLoader from "../../../components/preloaders/FullContentLoader"
 import FullPageError from "../../../components/boxs/FullPageError"
 
 class CompetitionFormContainer extends React.Component {
+
+  notSubmited = true
+
   UNSAFE_componentWillReceiveProps = np => {
     if (np.others.competition_form && np.others.competition_form.message) {
       const { message, status } = np.others.competition_form
@@ -18,7 +22,10 @@ class CompetitionFormContainer extends React.Component {
         message,
         status === 201 || status === 200 ? "success" : "error"
       )
-      if (status === 201 || status === 200) location.href = "/super/competition"
+      if (status === 201 || status === 200) {
+        this.notSubmited = false
+        location.href = "/super/competition"
+      }
     }
   }
 
@@ -48,6 +55,7 @@ class CompetitionFormContainer extends React.Component {
             }
           ]}
         />
+        <Prompt when={this.notSubmited} message={"Data kompetisi yang kamu ketikan akan hilang, apakah yakin?"} />
         {(id && competitionData.is_loading) ||
         (id && !competitionData.status) ? (
           <FullPageLoader />
