@@ -234,10 +234,10 @@ class Login extends Component {
               </a>
             </small>
             <small>
-              <Link to="/">Privacy</Link>
+              <a href="https://kompetisi.id/news/TVRjPQ/Privacy-Policy" target="_blank">Privacy</a>
             </small>
             <small>
-              <Link to="/news/TXpVPQ/About">About</Link>
+              <a href="https://kompetisi.id/news/TXpVPQ/About" target="_blank">About</a>
             </small>
           </div>
           {/* end of footer navigation */}
