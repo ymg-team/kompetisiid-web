@@ -6,6 +6,11 @@ export default class InputText extends Component {
     validate(this.props)
   }
 
+  componentWillReceiveProps = np => {
+    // validate on edit / set default value
+    if(!this.props.value && np.value) validate(np)
+  }
+
   handleChange = e => {
     const { value } = e.target
     this.props.setState(

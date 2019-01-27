@@ -1,5 +1,5 @@
 import React from "react"
-import { EditorState, convertToRaw } from "draft-js"
+import { EditorState, ContentState, convertToRaw, convertFromHTML } from "draft-js"
 import { Editor } from "react-draft-wysiwyg"
 import draftToHtml from "draftjs-to-html"
 import Styled from "styled-components"
@@ -23,7 +23,16 @@ class EditorKI extends React.Component {
   componentDidMount = () => {
     require("react-draft-wysiwyg/dist/react-draft-wysiwyg.css")
     setTimeout(() => {
-      this.setState({ready: true})
+      this.setState({ready: true}, () => {
+        console.log("value", this.props.value)
+        if(this.props.value) {
+          this.setState({
+            editorState: EditorState.createWithContent(ContentState.createFromBlockArray(
+              convertFromHTML(this.props.value)
+            ))
+          })
+        }
+      })
     }, 1200)
   }
 

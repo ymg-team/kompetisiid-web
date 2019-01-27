@@ -1,6 +1,7 @@
 import React from "react"
 import { getCategories } from "../../../containers/competition/actions"
 import { dateToFormat } from "../../../helpers/DateTime"
+import { createCompetition,updateCompetition } from "../../../containers/competition/actions"
 
 // components
 import TitleLevel2Box from "../../boxs/TitleLevel2"
@@ -16,13 +17,10 @@ import BtnSubmit from "../../form/Submit"
 import Spacer from "../../boxs/Spacer"
 import Contact from "./ContactForm"
 import Editor from "../../form/Editor"
+import Checkbox from "../../form/Checkbox"
 
 class CompetitionForm extends React.Component {
   state = {}
-
-  componentDidMount = () => {
-    this.props.dispatch(getCategories())
-  }
 
   submitHandler = () => {
     let formdata = {
@@ -35,23 +33,68 @@ class CompetitionForm extends React.Component {
       announcement_date: dateToFormat(this.state.announcement),
       main_cat: this.state.maincat,
       sub_cat: this.state.subcat,
-      source_link: this.state.source_link || "",
-      register_link: this.state.register_link || "",
+      source_link: this.state.link_source || "",
+      register_link: this.state.link_join || "",
       contacts: JSON.stringify(this.state.contacts || []),
       tags: this.state.tags ? this.state.tags.toString() : "",
-      content: this.state.content
+      content: this.state.content,
+      is_guaranteed: this.state.is_guaranteed || false,
+      is_mediapartner: this.state.is_mediapartner || false,
     }
 
     if (this.state.poster) formdata.poster = this.state.poster
 
     console.log("submit handler...", formdata)
+    
+    // request to save data to api
+    if(this.props.competitionId) {
+      // update competition by competitionId
+      this.props.dispatch(updateCompetition(formdata, this.props.competitionId))
+    } else {
+      // create new competition
+      this.props.dispatch(createCompetition(formdata))
+    }
+
+  }
+
+  componentDidMount = () => {
+    this.props.dispatch(getCategories())
+    const {competitionData, competitionId} = this.props
+    if(competitionId && 
+      competitionData) {
+      // set state to edit competition
+      let nextState = {
+        title: competitionData.title,
+        description: competitionData.sort,
+        organizer: competitionData.organizer,
+        contacts: competitionData.contacts,
+        link_source: competitionData.link_source,
+        link_join: competitionData.link_join,
+        link_join: competitionData.link_join,
+        prize_total: competitionData.content,
+        tags: competitionData.tag.split(","),
+        is_guaranteed: competitionData.is_garansi,
+        is_mediapartner: competitionData.is_mediapartner,
+        prize_total: competitionData.prize.total,
+        prize_description: competitionData.prize.description,
+        content: competitionData.content,
+        deadline: new Date(competitionData.deadline_at * 1000),
+        announcement: new Date(competitionData.announcement_at * 1000),
+        maincat: competitionData.main_category.id,
+        subcat: competitionData.sub_category.id,
+        is_guaranteed: competitionData.is_garansi,
+        is_mediapartner: competitionData.is_mediapartner
+      } 
+
+      this.setState(nextState)
+    }
   }
 
   render = () => {
-    const { id } = this.props
+    const { competitionId, response } = this.props
     let title = ""
 
-    if (id) {
+    if (competitionId) {
       title = "Update Kompetisi"
     } else {
       title = "Tambah Kompetisi"
@@ -124,7 +167,7 @@ class CompetitionForm extends React.Component {
             id="input-poster"
             value={this.state.poster || ""}
             validate={this.state.poster_validate || {}}
-            required={true}
+            required={typeof this.props.competitionId === "undefined"}
             setState={(n, cb) => this.setState(n, cb)}
           />
           {/* end of input file of poster */}
@@ -151,7 +194,7 @@ class CompetitionForm extends React.Component {
             validate={this.state.announcement_validate || {}}
             required={true}
             config={{
-              minDate: new Date()
+              minDate: this.state.deadline || new Date()
             }}
             setState={(n, cb) => this.setState(n, cb)}
           />
@@ -176,7 +219,7 @@ class CompetitionForm extends React.Component {
           {/* end of main kategori */}
 
           {/* sub kategori */}
-          {this.state.maincat && this.state.maincat != 0 ? (
+          {this.state.maincat && this.state.maincat != 0 && this.props.categories.status ? (
             <Select
               label="Sub Kategori"
               name="subcat"
@@ -200,6 +243,7 @@ class CompetitionForm extends React.Component {
             description="Berisi syarat, ketentuan, mekanisme dan hal-hal lain yang berkaitan untuk ikut serta kompetisi ini"
             name="content"
             required={true}
+            value={this.state.content}
             setState={(n, cb) => this.setState(n, cb)}
           />
           {/* peraturan */}
@@ -217,7 +261,7 @@ class CompetitionForm extends React.Component {
             name="prize_total"
             type="number"
             id="input-prize-total"
-            value={this.state.prize_total || 0}
+            value={this.state.prize_total || ""}
             validate={this.state.prize_total_validate || {}}
             placeholder="Contoh: 1000000 (hanya masukan angka)"
             required={true}
@@ -254,6 +298,25 @@ class CompetitionForm extends React.Component {
           <Spacer size="large" />
 
           <TitleLevel2Box title="Opsional" />
+
+          {/* is guaranted competition */}
+          <Checkbox 
+            name="is_guaranteed" 
+            label="Kompetisi ini Bergaransi" 
+            value={this.state.is_guaranteed} 
+            validate={this.state.is_guaranteed_validate || {}} 
+            setState={(n, cb) => this.setState(n, cb)}  />
+          {/* end of is guarantec competition */}
+
+          {/* is media partner */}
+          <Checkbox 
+            name="is_mediapartner" 
+            label="Kompetisi ini adalah Media Partner" 
+            value={this.state.is_mediapartner} 
+            validate={this.state.is_mediapartner_validate || {}} 
+            setState={(n, cb) => this.setState(n, cb)}  />
+          {/* end of is media parter */}
+
           {/*input link join competition*/}
           <Input
             label="Link Mendaftar Kompetisi"
@@ -276,6 +339,7 @@ class CompetitionForm extends React.Component {
             value={this.state.link_source || ""}
             validate={this.state.link_source_validate || {}}
             placeholder="https://"
+            required
             setState={(n, cb) => this.setState(n, cb)}
           />
           {/*end of link competition source*/}
@@ -285,6 +349,7 @@ class CompetitionForm extends React.Component {
             label="Masukan Tag"
             name="tags"
             tags={this.state.tags || []}
+            initialValue={this.state.tags}
             setState={(n, cb) => this.setState(n, cb)}
           />
           {/* end of input competition tag */}
@@ -293,6 +358,7 @@ class CompetitionForm extends React.Component {
 
           {/* submit form */}
           <BtnSubmit
+            disabled={response.is_loading || response.status === 201 || response.status === 200}
             text={title}
             action={() => this.submitHandler()}
             setState={(n, cb) => this.setState(n, cb)}

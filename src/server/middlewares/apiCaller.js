@@ -7,7 +7,7 @@ import Host from "../../config/host"
 
 export default function(req, res, next) {
   let API_HOST = ""
-  const {
+  let {
     method,
     url,
     params = {},
@@ -21,6 +21,11 @@ export default function(req, res, next) {
     API_HOST = Host[process.env.NODE_ENV].api_v42
   } else {
     API_HOST = Host[process.env.NODE_ENV].api
+  }
+
+  // set auth header
+  if(req.session.userdata && req.session.userdata.id) {
+    headers["User-Key"] = req.session.userdata.user_key
   }
 
   params.API_HOST = API_HOST

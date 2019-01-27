@@ -1,5 +1,33 @@
-/***
- * function to get kompetisi list
+
+/**
+ * controller to create competition
+ */
+export function create(req, res, next) {
+  req.reqdata = {
+    version: 'v42',
+    method: 'post',
+    params: req.body,
+    url: '/v2/competition'
+  }
+
+  next()
+}
+
+/* controller to update competition
+*/
+export function update(req, res, next) {
+ req.reqdata = {
+   version: 'v42',
+   method: 'put',
+   params: req.body,
+   url: `/v2/competition/${req.params.id}`
+ }
+
+ next()
+}
+
+/**
+ * @description function to get kompetisi list
  * @method GET
  * @query limit (int)
  * @query popular (boolean), default not set
@@ -20,7 +48,7 @@ export function getJelajah(req, res, next) {
   req.reqdata = {
     version: 'v42',
     method: 'get',
-    params: req.params,
+    params,
     url: '/v2/competitions'
   }
 

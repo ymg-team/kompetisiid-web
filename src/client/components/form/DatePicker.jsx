@@ -21,14 +21,24 @@ export default class DatePicker extends React.Component {
           },
           () => {
             this.validateInput()
-            // get pikaday value
           }
         )
       }
     }, config)
     setTimeout(() => {
       this.picker = new Pikaday(config)
+
+      // set default Pikaday value
+      if(this.props.value) {
+        console.log("set timepicket value", this.props.value)
+        this.picker.setDate(this.props.value)
+      }
     }, 1500)
+  }
+
+  componentWillReceiveProps = np => {
+    // validate on edit / set default value
+    if(!this.props.value && np.value) validate(np)
   }
 
   validateInput(props = this.props) {

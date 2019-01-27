@@ -17,6 +17,15 @@ class Select extends Component {
     validate: {},
     options: []
   }
+  
+  componentDidMount = () => {
+    validate(this.props)
+  }
+
+  componentWillReceiveProps = np => {
+    // validate on edit / set default value
+    if(!this.props.value && np.value) validate(np)
+  }
 
   handleChange = e => {
     this.props.setState(
@@ -58,6 +67,7 @@ class Select extends Component {
         <SelectStyled
           className={`form-child ${!is_valid ? "error" : ""}`}
           onChange={e => this.handleChange(e)}
+          value={this.props.value || ""}
         >
           <option value="0">--- Pilih salah satu ---</option>
           {this.props.options.map((n, key) => (

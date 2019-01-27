@@ -75,13 +75,14 @@ class ContactForm extends React.Component {
     return this.props.setState({contacts})
   }
 
-  itemGenerator = (key) => {
+  itemGenerator = (n = {}, key) => {
     return (
       <div key={key} className="row" style={{ padding: "10px 0" }}>
         <div style={{ paddingLeft: 0 }} className="col-xs-4">
           <select
             className="form-child"
             onChange={e => this.changeSelectHandler(e, key)}
+            value={n.type || ""}
           >
             {CONTACT_TYPE.map((n, key) => {
               return (
@@ -98,6 +99,7 @@ class ContactForm extends React.Component {
             style={{ padding: 0, margin: 0 }}
             className="form-child"
             type="text"
+            value={n.value || ""}
           />
         </div>
         <div className="col-xs-2">
@@ -113,7 +115,7 @@ class ContactForm extends React.Component {
     return (
       <React.Fragment>
         {this.props.contacts.map((n, key) => {
-          return this.itemGenerator(key)
+          return this.itemGenerator(n, key)
         })}
         <div style={{ paddingLeft: 0 }} className="row col-xs-12">
           {this.props.contacts.length > 0 ? <br /> : null}
