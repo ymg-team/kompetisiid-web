@@ -61,7 +61,7 @@ class MyCompetition extends Component {
     ]
 
     return (
-      <div>
+      <React.Fragment>
         <Helmet title={`kompetisi ${tabcontent[tab_active - 1].text}`} />
         <HeaderDashboard
           title="Kompetisi Terpasang"
@@ -83,13 +83,13 @@ class MyCompetition extends Component {
             {competitions.status == 200 ? (
               <p>
                 Menampilkan <strong>{competitions.data.length}</strong> dari{" "}
-                <strong>{competitions.count}</strong> kompetisi 
+                <strong>{competitions.count}</strong> kompetisi
               </p>
             ) : null}
             {competitions.data
               ? competitions.data.map((n, key) => {
-                return <CompetitionCard key={key} n={n} />
-              })
+                  return <CompetitionCard key={key} n={n} />
+                })
               : null}
             {competitions.status != 200 ? (
               <p className="text-muted align-center">{competitions.message}</p>
@@ -98,17 +98,19 @@ class MyCompetition extends Component {
             {/* load more competitions */}
             {competitions.status == 200 ? (
               <div className="align-center">
-                <Button 
+                <Button
                   onClick={() => this.fetchMoreData()}
                   size="large"
                   color="white"
                   loading={competitions.is_loading}
+                  text="Kompetisi Berikutnya"
                 />
               </div>
             ) : null}
+            {/* end of load more competitions */}
           </div>
         ) : null}
-      </div>
+      </React.Fragment>
     )
   }
 }
@@ -138,13 +140,6 @@ function mapStateToProps(state) {
   }
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    dispatch
-  }
-}
-
 module.exports = connect(
-  mapStateToProps,
-  mapDispatchToProps
+  mapStateToProps
 )(MyCompetition)
