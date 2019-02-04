@@ -69,7 +69,8 @@ export default class Textarea extends React.Component {
           type={type}
           name={name}
           id={this.props.id || name}
-          value={value.replace(/[\u200B-\u200D\uFEFF]|\s\s/g, " ")}
+          // value={value.replace(/[\u200B-\u200D\uFEFF]|\s\s/g, " ")}
+          value={value}
           autoFocus={autofocus}
           placeholder={this.props.placeholder}
         />

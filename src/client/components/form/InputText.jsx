@@ -54,7 +54,8 @@ export default class InputText extends Component {
           type={type}
           name={name}
           id={this.props.id || name}
-          value={type === "number" ? value : value.replace(/[\u200B-\u200D\uFEFF]|\s\s/g, " ")}
+          // value={type === "number" ? value : value.replace(/[\u200B-\u200D\uFEFF]|\s\s/g, " ")}
+          value={value}
           autoFocus={autofocus}
           placeholder={this.props.placeholder}
         />
