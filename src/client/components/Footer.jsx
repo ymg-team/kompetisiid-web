@@ -25,6 +25,16 @@ img {
 `
 
 export default class Footer extends Component {
+  state = {
+    isLoggedIn: false
+  }
+
+  componentDidMount = () => {
+    if (window.__data__.User && window.__data__.User.session.id) {
+      this.setState({ isLoggedIn: true })
+    }
+  }
+
   render() {
     return (
       <FooterWrapper>
@@ -100,9 +110,11 @@ export default class Footer extends Component {
                     <li>
                       <Link to="/categories">Kategori</Link>
                     </li>
-                    <li>
-                      <Link to="/login">Login / register</Link>
-                    </li>
+                    {!this.state.isLoggedIn ? (
+                      <li>
+                        <Link to="/login">Login / register</Link>
+                      </li>
+                    ) : null}
                   </ul>
                   <p />
                 </div>
