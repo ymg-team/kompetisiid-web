@@ -3,18 +3,14 @@ import Loadable from "react-loadable"
 import { nl2br } from "../../helpers/String"
 import { toCamelCase } from "string-manager"
 import { connect } from "react-redux"
-import memoize from "memoize-one"
 
 // components
 import Helmet from "../../components/Helmet"
 import Loading from "../../components/preloaders/GlobalLoader"
-import EmptyLoading from "../../components/preloaders/EmptyLoader"
 import Tab, { tab } from "../../components/navigations/TabCompetition"
-import Loader from "../../components/preloaders/GlobalLoader"
 import CompetitionDetailBox from "../../components/boxs/CompetitionDetail"
 import CompetitionLoading from "../../components/preloaders/CompetitionCardLoader"
 import NextPrev from "../../components/navigations/NextPrev"
-import ErrorCard from "../../components/cards/ErrorCard"
 import Host from "../../../config/host"
 import GAds from "../../components/cards/GoogleAds"
 
