@@ -58,6 +58,11 @@ class RootLayoutV5 extends Component {
   resendEmailVerification = () => {}
 
   componentDidMount = () => {
+    // global redirect function
+    window.redirectTo = path => {
+      this.props.history.push(path)
+    }
+
     // init modal images
     initModalImages()
 
