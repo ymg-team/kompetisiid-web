@@ -6,7 +6,6 @@ import Loadable from "react-loadable"
 import { queryToObj, objToQuery } from "string-manager"
 import { topLoading } from "../../components/preloaders"
 import { connect } from "react-redux"
-import memoize from "memoize-one"
 import StaticSpecialTags from "../../../store/static_data/SpecialTags"
 
 // components
