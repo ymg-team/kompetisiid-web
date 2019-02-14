@@ -2,10 +2,15 @@ import React from "react"
 import Styled from "styled-components"
 
 const SpecialTagsStyled = Styled.div`
+  .col-md-12 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
   .specialtags-image {
     float: left;
     margin-right: 20px;
-    max-width: 250px;
+    max-width: 200px;
   }
   border-bottom: 1px solid lightgray;
   padding: 25px 0;

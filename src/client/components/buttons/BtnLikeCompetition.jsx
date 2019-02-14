@@ -1,6 +1,17 @@
 import React from "react"
+import {connect} from "react-redux"
+import {alert} from "../Alert"
 
 class BtnLikeCompetition extends React.Component {
+
+  clickHandler = () => {
+    if(this.props.auth && this.props.auth.id) {
+      window.redirectTo("/login")
+    } else {
+      alert(true, "Maaf sistem belum tersedia", "warning")
+    }
+  }
+
   render = () => {
     return (
       <a
@@ -10,6 +21,7 @@ class BtnLikeCompetition extends React.Component {
           this.props.isLike ? "batal menyukai" : "menyukai"
         } kompetisi ini`}
         style={{ fontSize: 25, padding: "5px 10px" }}
+        onClick={() => this.clickHandler()}
       >
         <span
           className={`fa  ${
@@ -30,4 +42,10 @@ class BtnLikeCompetition extends React.Component {
   }
 }
 
-export default BtnLikeCompetition
+const mapStateToProps = State => {
+  return {
+    auth: State.auth
+  }
+}
+
+export default connect(mapStateToProps)(BtnLikeCompetition)
