@@ -33,7 +33,7 @@ const Register = Loadable({
 })
 const RedirectContainer = Loadable({
   loader: () => import("../containers/Redirect"),
-  loading: () => FullPagePreloader
+  loading: FullPagePreloader
 })
 const Error = Loadable({
   loader: () => import("../containers/error/index"),
