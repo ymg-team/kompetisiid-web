@@ -1,6 +1,7 @@
 import React, { Component } from "react"
 import { Link } from "react-router-dom"
 import { Fullscreen } from "./Fullscreen"
+import Helmet from "./Helmet"
 
 export default class Redirect extends Component {
   componentDidMount = () => {
@@ -12,6 +13,7 @@ export default class Redirect extends Component {
   render = () => {
     return (
       <Fullscreen className="bg-gray-soft">
+        <Helmet title={`Kamu diredirect ke ${this.props.url} `} />
         <div className="container">
           <div className="row redirect">
             <div className="redirect-content bg-white align-center">

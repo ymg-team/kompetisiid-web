@@ -12,7 +12,6 @@ import News from "./berita"
 import Categories from "./categories"
 import Browse from "./browse"
 import Competition from "./competition"
-import Account from "./account"
 import Add from "./add"
 import User from "./user"
 import Dashboard from "./dashboard"
@@ -20,7 +19,8 @@ import Careers from "./careers"
 import Super from "./super/index"
 
 // components
-import FullPagePreloader from "../components/preloaders/FullPage"
+import FullPagePreloaderOri from "../components/preloaders/FullPage"
+const FullPagePreloader = () => <FullPagePreloaderOri style={{display: "flex", opacity: 1}} />
 
 // loadable containers
 const Login = Loadable({
@@ -33,7 +33,7 @@ const Register = Loadable({
 })
 const RedirectContainer = Loadable({
   loader: () => import("../containers/Redirect"),
-  loading: FullPagePreloader
+  loading: () => FullPagePreloader
 })
 const Error = Loadable({
   loader: () => import("../containers/error/index"),
