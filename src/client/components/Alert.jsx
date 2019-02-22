@@ -6,8 +6,8 @@ const Alert = Styled.div`
   display: block;
   position: fixed;
   width: 400px;
-  right: 20px;
-  bottom: -100px;
+  left: 50%;
+  top: -100px;
   margin-left: -200px;
   z-index: 100; 
   padding: 10px;
@@ -15,9 +15,8 @@ const Alert = Styled.div`
   background-color: ${Colors.darkGray}; 
   border: 1px solid ${Colors.mainWhite};
   color: ${Colors.mainWhite}; 
-  font-weight: bold;
   cursor: pointer;
-  transition: bottom .5s ease, padding .5s ease;
+  transition: top .5s ease, padding .5s ease;
   
   &:hover {
     padding-top: 20px;
@@ -68,16 +67,17 @@ export function alert(show = true, text = '', type = '', fixed=false) {
 
       alertEl.innerText = text
       alertEl.classList.add(type)
-      alertEl.style.bottom = '20px'
+      // alertEl.style.bottom = '20px'
+      alertEl.style.top = '20px'
 
       if(!fixed) {
         timeout = setTimeout(() => {
-          alertEl.style.bottom = '-100px'
+          alertEl.style.top = '-100px'
           alertEl.classList.remove(type)
         }, 4000)
       }
     } else {
-      alertEl.style.bottom = '-100px'
+      alertEl.style.top = '-100px'
     }
   }
 }
