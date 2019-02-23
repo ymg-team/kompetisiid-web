@@ -91,14 +91,12 @@ export default props => {
           <div className="item__right-item">
             <div className="dropdown">
               <a
-                className="btn btn-sm dropdown-button text-muted"
+                className="btn btn-sm dropdown-button text-muted fa fa-ellipsis-v"
                 title="options"
                 href="javascript:;"
-                data-target="menu-2"
-              >
-                <i className="fa fa-ellipsis-v" />
-              </a>
-              <div className="dropdown-items" id="menu-2">
+                data-target={`menu-${n.id}`}
+              />
+              <div className="dropdown-items" id={`menu-${n.id}`}>
                 <ul>
                   <li>
                     <a
