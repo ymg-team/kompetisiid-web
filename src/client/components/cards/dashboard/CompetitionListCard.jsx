@@ -103,7 +103,7 @@ export default props => {
                   <li>
                     <a
                       target="_blank"
-                      href={`/competition/${n.id_kompetisi}/regulations/${
+                      href={`/competition/${n.id}/regulations/${
                         n.nospace_title
                       }`}
                     >
