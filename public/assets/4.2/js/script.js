@@ -31,21 +31,17 @@ document.addEventListener('DOMContentLoaded', () => {
         modal('close', id);
       }
 
-      //hide or show dropdown
-      if(!e.target.matches('.dropdown-button'))
-      {
-          const dropdowns = document.getElementsByClassName("dropdown-items");
-          for (let i = 0; i < dropdowns.length; i++) {
-              let openDropdown = dropdowns[i];
-              if (openDropdown.classList.contains('show')) {
-                  openDropdown.classList.remove('show');
-              }
+      // close all active dropdown
+      const dropdowns = document.getElementsByClassName("dropdown-items");
+      for (let i = 0; i < dropdowns.length; i++) {
+          let openDropdown = dropdowns[i];
+          if (openDropdown.classList.contains('show')) {
+              openDropdown.classList.remove('show');
           }
-      }else 
-      {
-          const target = e.target.getAttribute('data-target');
-          document.getElementById(target).classList.toggle('show');
       }
+
+      const target = e.target.getAttribute('data-target');
+      if(target) document.getElementById(target).classList.toggle('show');
   }
 })
 
