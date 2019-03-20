@@ -33,7 +33,7 @@ export default class DatePicker extends React.Component {
         console.log("set timepicket value", this.props.value)
         this.picker.setDate(this.props.value)
       }
-    }, 1500)
+    }, 2000)
   }
 
   componentWillReceiveProps = np => {
