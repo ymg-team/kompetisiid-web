@@ -24,7 +24,7 @@ class EditorKI extends React.Component {
     require("react-draft-wysiwyg/dist/react-draft-wysiwyg.css")
     setTimeout(() => {
       this.setState({ready: true}, () => {
-        console.log("value", this.props.value)
+        // console.log("value", this.props.value)
         if(this.props.value) {
           this.setState({
             editorState: EditorState.createWithContent(ContentState.createFromBlockArray(
