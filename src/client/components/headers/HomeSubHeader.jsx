@@ -7,7 +7,6 @@ import * as Colors from "../../../style/colors"
 import { Link } from "react-router-dom"
 import Slider from "../sliders"
 import Count from "../cards/HomeCount"
-// import Navbar from "../navigations/TransparentNavbar"
 
 const DotsStyled = Styled.div`
   position: absolute;
