@@ -87,6 +87,7 @@ export default props => {
             </h4>
           </div>
           {/* end of stats count */}
+          
           {/* dropdown menus */}
           <div className="item__right-item">
             <div className="dropdown">

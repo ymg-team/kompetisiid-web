@@ -94,7 +94,7 @@ class Login extends Component {
         // redirect to dashboard
         setTimeout(() => {
           location.href = this.state.isSuperPage ? "/super/dashboard" : "/"
-        }, 1500)
+        }, 1000)
       } else {
         // user and password not match
         fullPageLoader(false)
