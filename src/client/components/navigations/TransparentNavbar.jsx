@@ -1,6 +1,5 @@
 import React, { Component } from "react"
 import { connect } from "react-redux"
-import { withRouter } from "react-router"
 import Styled from "styled-components"
 import { queryToObj } from "string-manager"
 import * as Colors from "../../../style/colors"
@@ -82,10 +81,6 @@ const NavbarStyled = Styled.div`
     }
   }
 
-  li.li-auth {
-    margin-right: ${props => (props.session.id ? "25px" : "0")};
-    padding: ${props => (props.session.id ? "5px 10px !important" : "0")};
-  }
 `
 
 const SearchStyled = Styled.div`
@@ -165,7 +160,7 @@ class Navbar extends Component {
         keyword: ""
       },
       () => {
-        if (!this.state.search) this.props.history.push("/browse")
+        if (!this.state.search) window.transitionTo("/browse")
       }
     )
   }
@@ -177,7 +172,7 @@ class Navbar extends Component {
     if (this.state.sticky)
       logo = "/assets/images/small-red-logo-transparent.png"
 
-    const { session } = this.props
+    const session = this.props.user.session || {}
 
     return (
       <StickyNavbarStyled
@@ -186,7 +181,7 @@ class Navbar extends Component {
       >
         <div className="container">
           <NavbarStyled
-            session={session || {}}
+            session={session}
             className={`${this.props.className} row`}
           >
             {this.state.search ? (
@@ -215,7 +210,7 @@ class Navbar extends Component {
                             e.keyCode === 13 &&
                             this.state.keyword.trim() !== ""
                           )
-                            this.props.history.push(
+                            window.transitionTo(
                               `/browse?q=${this.state.keyword}`
                             )
                         }}
@@ -264,8 +259,15 @@ class Navbar extends Component {
                     </li>
 
                     {/* auth */}
-                    <li className="li-auth">
-                      {session.id && session.username ? (
+                    {typeof session.id  !== "undefined"? (
+                      <div
+                        key="loggedin"
+                        style={{
+                          marginRight: "25px",
+                          padding: "5px 10px",
+                          float: "right"
+                        }}
+                      >
                         <div
                           style={{ position: "absolute" }}
                           className="dropdown"
@@ -301,10 +303,13 @@ class Navbar extends Component {
                             </ul>
                           </div>
                         </div>
-                      ) : (
+                      </div>
+                    ) : (
+                      <li
+                      key="public">
                         <Link to="/login">Login</Link>
-                      )}
-                    </li>
+                      </li>
+                    )}
                     {/* end of auth */}
                   </ul>
                 </div>
@@ -323,8 +328,8 @@ Navbar.defaultProps = {
 
 function mapStateToProps(state) {
   return {
-    session: state.User.session || {}
+    user: state.User
   }
 }
 
-export default connect(mapStateToProps)(withRouter(Navbar))
+export default connect(mapStateToProps)(Navbar)

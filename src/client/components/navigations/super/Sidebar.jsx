@@ -40,6 +40,11 @@ export default props => (
         <strong>Manajemen Kabar </strong>
       </li>
       <li>
+        <Link to="/super/news/create">
+          <i className="fas fa-plus" /> Tambah Berita
+        </Link>
+      </li>
+      <li>
         <Link to="/super/news">
           Semua Berita
           <span className="label label-blue">24</span>

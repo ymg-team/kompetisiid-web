@@ -45,5 +45,6 @@ Submit.defaultProps = {
   type: "submit",
   disabled: false,
   className: "btn btn-white",
-  style: {}
+  style: {},
+  requiredInputs: []
 }

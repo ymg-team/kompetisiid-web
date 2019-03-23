@@ -63,6 +63,9 @@ class RootLayoutV5 extends Component {
       this.props.history.push(path)
     }
 
+    // global function to use react-router transition
+    window.transitionTo = path => this.props.history.push(path)
+
     // init modal images
     initModalImages()
 
@@ -94,7 +97,7 @@ class RootLayoutV5 extends Component {
       <LayoutStyled>
         {this.props.location.pathname === "/" || fullscreen ? null : (
           <div style={{ backgroundColor: "rgb(228, 228, 228)" }}>
-            <Navbar className="bg-gray" />
+            <Navbar location={this.props.location} className="bg-gray" />
           </div>
         )}
 

@@ -94,7 +94,7 @@ class Login extends Component {
         // redirect to dashboard
         setTimeout(() => {
           location.href = this.state.isSuperPage ? "/super/dashboard" : "/"
-        }, 1500)
+        }, 1000)
       } else {
         // user and password not match
         fullPageLoader(false)
@@ -133,6 +133,16 @@ class Login extends Component {
       description = "Selalu jaga rahasia anda demi keamanan di Kompetisi.id"
     }
 
+    // remove auto complete using dom: solving issue #189
+    if (this.state.inputPassword) {
+      // trigger esc button
+      setTimeout(() => {
+        document
+          .getElementById("input-password")
+          .dispatchEvent(new KeyboardEvent("keypress", { keyCode: 27 }))
+      }, 500)
+    }
+
     return (
       <Fullscreen
         className={`login ${this.state.isSuperPage ? "login-super" : ""}`}
@@ -153,6 +163,15 @@ class Login extends Component {
               <div className="login-box__content__avatar">
                 <p>
                   Halo <strong>{this.state.username}</strong>
+                  &nbsp;
+                  <a
+                    href="javascript:;"
+                    onClick={() =>
+                      this.setState({ inputPassword: false, password: null })
+                    }
+                  >
+                    ubah
+                  </a>
                 </p>
                 <img src="/assets/4.2/img/default-avatar.jpg" />
               </div>
@@ -169,6 +188,8 @@ class Login extends Component {
                     validate={this.state.password_validate || {}}
                     required={true}
                     setState={(n, cb) => this.setState(n, cb)}
+                    autoFocus={true}
+                    autoComplete="off"
                   />
                 ) : (
                   <Input
@@ -180,6 +201,8 @@ class Login extends Component {
                     validate={this.state.username_validate || {}}
                     required={true}
                     setState={(n, cb) => this.setState(n, cb)}
+                    autoFocus={true}
+                    autoComplete="off"
                   />
                 )}
               </div>
@@ -234,10 +257,17 @@ class Login extends Component {
               </a>
             </small>
             <small>
-              <a href="https://kompetisi.id/news/TVRjPQ/Privacy-Policy" target="_blank">Privacy</a>
+              <a
+                href="https://kompetisi.id/news/TVRjPQ/Privacy-Policy"
+                target="_blank"
+              >
+                Privacy
+              </a>
             </small>
             <small>
-              <a href="https://kompetisi.id/news/TXpVPQ/About" target="_blank">About</a>
+              <a href="https://kompetisi.id/news/TXpVPQ/About" target="_blank">
+                About
+              </a>
             </small>
           </div>
           {/* end of footer navigation */}

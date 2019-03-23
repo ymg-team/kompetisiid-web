@@ -135,7 +135,7 @@ class Home extends Component {
           }}
         >
           {/* navbar */}
-          <Navbar />
+          <Navbar location={this.props.location} />
 
           {/* slider */}
           <SubHeaderHome

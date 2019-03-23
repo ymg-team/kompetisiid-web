@@ -50,9 +50,8 @@ function logout(state = {}, action) {
   switch (action.type) {
     case LOGOUT:
       if (action.json && action.json.status === 200)
-        location.reload()
+        location.href = "/"
       return state
-
     default:
       if (action.target === "user_logout") {
         switch (action.type) {
@@ -88,7 +87,7 @@ function etc(state = {}, action) {
     case EMAIL_VERIFICATION:
       if(action.json && action.json.status) {
         alert(true, action.json.message, action.json.status === 201 ? "success" : "error")
-        if(action.json.status === 201) setTimeout(() => { location.href="/" }, 800)
+        if(action.json.status === 201) setTimeout(() => { location.href="/" }, 1500)
         state.email_verification = action.json
         return Object.assign({}, state)
       }

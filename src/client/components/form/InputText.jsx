@@ -39,7 +39,8 @@ export default class InputText extends Component {
       name,
       type,
       validate,
-      autofocus
+      autoFocus,
+      autoComplete
     } = this.props
     const is_valid = !(!validate.is_valid && validate.message)
     return (
@@ -56,7 +57,8 @@ export default class InputText extends Component {
           id={this.props.id || name}
           // value={type === "number" ? value : value.replace(/[\u200B-\u200D\uFEFF]|\s\s/g, " ")}
           value={value}
-          autoFocus={autofocus}
+          autoFocus={autoFocus}
+          autoComplete={autoComplete}
           placeholder={this.props.placeholder}
         />
         {max ? (
@@ -73,5 +75,7 @@ export default class InputText extends Component {
 InputText.defaultProps = {
   type: "text",
   required: false,
+  autoFocus: false,
+  autoComplete: "off",
   placeholder: ""
 }

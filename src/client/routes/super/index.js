@@ -36,6 +36,10 @@ const NewsList = Loadable({
   loader: () => import("../../containers/_super/news/NewsList"),
   loading: Loading
 })
+const NewsForm = Loadable({
+  loader: () => import("../../containers/_super/news/NewsForm"),
+  loading: Loading
+})
 
 export default {
   path: "/super",
@@ -111,9 +115,19 @@ export default {
     // news routes
     {
       path: "/super/news",
+      exact: true,
       component: NewsList
     },
-
+    {
+      path: "/super/news/create",
+      exact: true,
+      component: NewsForm
+    },
+    {
+      path: "/super/news/:id",
+      exact: true,
+      component: NewsForm
+    },
     // 404
     {
       path: "/super/*",
