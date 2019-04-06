@@ -11,7 +11,6 @@ import FullPageLoader from "../../../components/preloaders/FullContentLoader"
 import FullPageError from "../../../components/boxs/FullPageError"
 
 class CompetitionFormContainer extends React.Component {
-
   notSubmited = true
 
   UNSAFE_componentWillReceiveProps = np => {
@@ -39,6 +38,7 @@ class CompetitionFormContainer extends React.Component {
   render = () => {
     const { id } = this.props.match.params
     const competitionData = this.props.competition[id] || {}
+    
     return (
       <React.Fragment>
         <Helmet
@@ -55,7 +55,12 @@ class CompetitionFormContainer extends React.Component {
             }
           ]}
         />
-        <Prompt when={this.notSubmited} message={"Data kompetisi yang kamu ketikan akan hilang, apakah yakin?"} />
+        <Prompt
+          when={this.notSubmited}
+          message={
+            "Data kompetisi yang kamu ketikan akan hilang, apakah yakin?"
+          }
+        />
         {(id && competitionData.is_loading) ||
         (id && !competitionData.status) ? (
           <FullPageLoader />

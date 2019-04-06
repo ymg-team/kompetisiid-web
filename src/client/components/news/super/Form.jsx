@@ -1,4 +1,7 @@
 import React from "react"
+import { createNews, updateNews } from "../../../containers/news/actions"
+
+// components
 import SubHeader from "../../headers/SubHeader"
 import TitleLevel2Box from "../../boxs/TitleLevel2"
 import InputText from "../../form/InputText"
@@ -9,7 +12,6 @@ import BtnSubmit from "../../form/Submit"
 import Spacer from "../../boxs/Spacer"
 
 class FormNews extends React.Component {
-
   static defaultProps = {
     response: {}
   }
@@ -20,8 +22,8 @@ class FormNews extends React.Component {
   }
 
   componentDidMount = () => {
-    const {newsData, newsId} = this.props
-    if(newsData && newsId) {
+    const { newsData, newsId } = this.props
+    if (newsData && newsId) {
       let nextstate = {
         title: newsData.title,
         content: newsData.content,
@@ -36,16 +38,27 @@ class FormNews extends React.Component {
     let formdata = {
       title: this.state.title,
       content: this.state.content,
-      tags: this.state.tags ? this.state.tags.toString() : "",
+      tags: this.state.tags ? this.state.tags.toString() : ""
     }
 
-    if(this.state.image) formdata.image = this.state.image
-
+    if (this.state.image) formdata.image = this.state.image
+    
     console.log("submit handler...", formdata)
+
+    if(this.props.newsId) {
+      // update news
+      this.props.dispatch(updateNews(this.props.newsId, formdata))
+    } else {
+      // create news
+      this.props.dispatch(createNews(formdata))
+    }
+
   }
 
   render = () => {
-    const {response} = this.props 
+    const { response } = this.props
+    const loading =
+      response.is_loading || response.status === 201 || response.status === 200
     return (
       <React.Fragment>
         <SubHeader
@@ -105,8 +118,8 @@ class FormNews extends React.Component {
           <Spacer size="large" />
 
           <BtnSubmit
-            disabled={response.is_loading || response.status === 201 || response.status === 200}
-            text={this.props.title}
+            disabled={loading}
+            text={loading ? "loading..." : this.props.title}
             action={() => this.submitHandler()}
             setState={(n, cb) => this.setState(n, cb)}
           />

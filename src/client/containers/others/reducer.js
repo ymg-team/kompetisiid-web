@@ -1,13 +1,13 @@
-import { combineReducers } from "redux"
 import { CREATE_COMPETITION } from "../competition/actions"
+import { CREATE_NEWS } from "../news/actions"
 import { receiveApiResponse } from "../../../store/helpers/Normalizer"
 
 export default (state = {}, action) => {
-
-  switch(action.type) {
+  switch (action.type) {
     case CREATE_COMPETITION:
+    case CREATE_NEWS:
       return receiveApiResponse(state, action)
-    default: 
+    default:
       return state
   }
 }

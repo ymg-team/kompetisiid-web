@@ -6,6 +6,7 @@ import { connect } from "react-redux"
 import { fetchBeritaDetail } from "../../news/actions"
 import FullPageLoader from "../../../components/preloaders/FullContentLoader"
 import FullPageError from "../../../components/boxs/FullPageError"
+import { alert } from "../../../components/Alert"
 
 class NewsCreate extends React.Component {
   notSubmited = true
@@ -17,12 +18,29 @@ class NewsCreate extends React.Component {
     }
   }
 
+  UNSAFE_componentWillReceiveProps = np => {
+    if (np.others.news_form && np.others.news_form.message) {
+      const { message, status } = np.others.news_form
+      alert(
+        true,
+        message,
+        status === 201 || status === 200 ? "success" : "error"
+      )
+      if (status === 201 || status === 200) {
+        this.notSubmited = false
+        location.href = "/super/news"
+      }
+    }
+  }
+
   render = () => {
     const { id } = this.props.match.params
     const newsData = this.props.news[id] || {}
     const title = id ? "Update Berita" : "Tambah Berita"
 
     if (id && newsData.status !== 200) this.notSubmited = false
+
+    const response = this.props.others.news_form || {}
 
     return (
       <React.Fragment>
@@ -36,7 +54,13 @@ class NewsCreate extends React.Component {
         ) : id && newsData.status != 200 ? (
           <FullPageError code={newsData.status} message={newsData.message} />
         ) : (
-          <Form title={title} newsId={id} dispatch={this.props.dispatch} newsData={newsData.data} />
+          <Form
+            response={response}
+            title={title}
+            newsId={id}
+            dispatch={this.props.dispatch}
+            newsData={newsData.data}
+          />
         )}
       </React.Fragment>
     )
@@ -45,7 +69,8 @@ class NewsCreate extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    news: state.Berita.detail
+    news: state.Berita.detail,
+    others: state.Others
   }
 }
 

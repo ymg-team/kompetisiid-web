@@ -1,7 +1,10 @@
 import React from "react"
 import { getCategories } from "../../../containers/competition/actions"
 import { dateToFormat } from "../../../helpers/DateTime"
-import { createCompetition,updateCompetition } from "../../../containers/competition/actions"
+import {
+  createCompetition,
+  updateCompetition
+} from "../../../containers/competition/actions"
 
 // components
 import TitleLevel2Box from "../../boxs/TitleLevel2"
@@ -39,29 +42,27 @@ class CompetitionForm extends React.Component {
       tags: this.state.tags ? this.state.tags.toString() : "",
       content: this.state.content,
       is_guaranteed: this.state.is_guaranteed || false,
-      is_mediapartner: this.state.is_mediapartner || false,
+      is_mediapartner: this.state.is_mediapartner || false
     }
 
     if (this.state.poster) formdata.poster = this.state.poster
 
     console.log("submit handler...", formdata)
-    
+
     // request to save data to api
-    if(this.props.competitionId) {
+    if (this.props.competitionId) {
       // update competition by competitionId
       this.props.dispatch(updateCompetition(formdata, this.props.competitionId))
     } else {
       // create new competition
       this.props.dispatch(createCompetition(formdata))
     }
-
   }
 
   componentDidMount = () => {
     this.props.dispatch(getCategories())
-    const {competitionData, competitionId} = this.props
-    if(competitionId && 
-      competitionData) {
+    const { competitionData, competitionId } = this.props
+    if (competitionId && competitionData) {
       // set state to edit competition
       let nextState = {
         title: competitionData.title,
@@ -84,7 +85,7 @@ class CompetitionForm extends React.Component {
         subcat: competitionData.sub_category.id,
         is_guaranteed: competitionData.is_garansi,
         is_mediapartner: competitionData.is_mediapartner
-      } 
+      }
 
       this.setState(nextState)
     }
@@ -92,6 +93,8 @@ class CompetitionForm extends React.Component {
 
   render = () => {
     const { competitionId, response } = this.props
+    const loading =
+      response.is_loading || response.status === 201 || response.status === 200
     let title = ""
 
     if (competitionId) {
@@ -219,7 +222,9 @@ class CompetitionForm extends React.Component {
           {/* end of main kategori */}
 
           {/* sub kategori */}
-          {this.state.maincat && this.state.maincat != 0 && this.props.categories.status ? (
+          {this.state.maincat &&
+          this.state.maincat != 0 &&
+          this.props.categories.status ? (
             <Select
               label="Sub Kategori"
               name="subcat"
@@ -300,21 +305,23 @@ class CompetitionForm extends React.Component {
           <TitleLevel2Box title="Opsional" />
 
           {/* is guaranted competition */}
-          <Checkbox 
-            name="is_guaranteed" 
-            label="Kompetisi ini Bergaransi" 
-            value={this.state.is_guaranteed} 
-            validate={this.state.is_guaranteed_validate || {}} 
-            setState={(n, cb) => this.setState(n, cb)}  />
+          <Checkbox
+            name="is_guaranteed"
+            label="Kompetisi ini Bergaransi"
+            value={this.state.is_guaranteed}
+            validate={this.state.is_guaranteed_validate || {}}
+            setState={(n, cb) => this.setState(n, cb)}
+          />
           {/* end of is guarantec competition */}
 
           {/* is media partner */}
-          <Checkbox 
-            name="is_mediapartner" 
-            label="Kompetisi ini adalah Media Partner" 
-            value={this.state.is_mediapartner} 
-            validate={this.state.is_mediapartner_validate || {}} 
-            setState={(n, cb) => this.setState(n, cb)}  />
+          <Checkbox
+            name="is_mediapartner"
+            label="Kompetisi ini adalah Media Partner"
+            value={this.state.is_mediapartner}
+            validate={this.state.is_mediapartner_validate || {}}
+            setState={(n, cb) => this.setState(n, cb)}
+          />
           {/* end of is media parter */}
 
           {/*input link join competition*/}
@@ -358,8 +365,8 @@ class CompetitionForm extends React.Component {
 
           {/* submit form */}
           <BtnSubmit
-            disabled={response.is_loading || response.status === 201 || response.status === 200}
-            text={title}
+            disabled={loading}
+            text={loading ? "loading..." : title}
             action={() => this.submitHandler()}
             setState={(n, cb) => this.setState(n, cb)}
             requiredInputs={["maincat", "subcat"]}
