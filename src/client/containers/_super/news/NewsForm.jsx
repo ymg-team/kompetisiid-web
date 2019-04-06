@@ -6,6 +6,7 @@ import { connect } from "react-redux"
 import { fetchBeritaDetail } from "../../news/actions"
 import FullPageLoader from "../../../components/preloaders/FullContentLoader"
 import FullPageError from "../../../components/boxs/FullPageError"
+import { alert } from "../../../components/Alert"
 
 class NewsCreate extends React.Component {
   notSubmited = true
@@ -17,6 +18,21 @@ class NewsCreate extends React.Component {
     }
   }
 
+  UNSAFE_componentWillReceiveProps = np => {
+    if (np.others.news_form && np.others.news_form.message) {
+      const { message, status } = np.others.news_form
+      alert(
+        true,
+        message,
+        status === 201 || status === 200 ? "success" : "error"
+      )
+      if (status === 201 || status === 200) {
+        this.notSubmited = false
+        location.href = "/super/news"
+      }
+    }
+  }
+
   render = () => {
     const { id } = this.props.match.params
     const newsData = this.props.news[id] || {}
@@ -24,7 +40,7 @@ class NewsCreate extends React.Component {
 
     if (id && newsData.status !== 200) this.notSubmited = false
 
-    const response = this.props.other.form_news || {}
+    const response = this.props.others.news_form || {}
 
     return (
       <React.Fragment>
@@ -54,7 +70,7 @@ class NewsCreate extends React.Component {
 const mapStateToProps = state => {
   return {
     news: state.Berita.detail,
-    other: state.Others
+    others: state.Others
   }
 }
 

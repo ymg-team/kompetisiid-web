@@ -12,18 +12,37 @@ import {
 } from "../../../store/consts"
 import sealMiddleware from "../../helpers/seal"
 import { objToQuery } from "string-manager"
-import { UPDATE_OTHER } from "../others/actions"
+
+
+export const CREATE_NEWS = "CREATE_NEWS"
 
 /**
  * function to create news
- * @@param {string} title
+ * @param {object} params
  */
 export function createNews(params = {}) {
   return {
     [CALL_API]: {
       method: "post",
-      url: `/api/news`,
-      type: UPDATE_OTHER,
+      url: `/api/news/${sealMiddleware.generateSeal()}`,
+      type: CREATE_NEWS,
+      filter: "news_form",
+      params
+    }
+  }
+}
+
+/**
+ * function to update news by id
+ * @param {object} params 
+ * @param {number} news_id
+ */
+export function updateNews(news_id, params = {}) {
+  return {
+    [CALL_API]: {
+      method: "put",
+      url: `/api/news/${news_id}/${sealMiddleware.generateSeal()}`,
+      type: CREATE_NEWS,
       filter: "news_form",
       params
     }
