@@ -30,6 +30,8 @@ export function udpateNewsById(req, res, next) {
     params: req.body,
     url: `/v2/news/${req.params.id}`
   }
+
+  next()
 }
 
 export function getNews(req, res, next) {

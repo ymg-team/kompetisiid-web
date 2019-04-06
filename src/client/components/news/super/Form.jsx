@@ -1,4 +1,7 @@
 import React from "react"
+import { createNews, updateNews } from "../../../containers/news/actions"
+
+// components
 import SubHeader from "../../headers/SubHeader"
 import TitleLevel2Box from "../../boxs/TitleLevel2"
 import InputText from "../../form/InputText"
@@ -39,8 +42,17 @@ class FormNews extends React.Component {
     }
 
     if (this.state.image) formdata.image = this.state.image
-
+    
     console.log("submit handler...", formdata)
+
+    if(this.props.newsId) {
+      // update news
+      this.props.dispatch(updateNews(this.props.newsId, formdata))
+    } else {
+      // create news
+      this.props.dispatch(createNews(formdata))
+    }
+
   }
 
   render = () => {
