@@ -24,6 +24,8 @@ class NewsCreate extends React.Component {
 
     if (id && newsData.status !== 200) this.notSubmited = false
 
+    const response = this.props.other.form_news || {}
+
     return (
       <React.Fragment>
         <Helmet title={title} />
@@ -36,7 +38,13 @@ class NewsCreate extends React.Component {
         ) : id && newsData.status != 200 ? (
           <FullPageError code={newsData.status} message={newsData.message} />
         ) : (
-          <Form title={title} newsId={id} dispatch={this.props.dispatch} newsData={newsData.data} />
+          <Form
+            response={response}
+            title={title}
+            newsId={id}
+            dispatch={this.props.dispatch}
+            newsData={newsData.data}
+          />
         )}
       </React.Fragment>
     )
@@ -45,7 +53,8 @@ class NewsCreate extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    news: state.Berita.detail
+    news: state.Berita.detail,
+    other: state.Others
   }
 }
 
