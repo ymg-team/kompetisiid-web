@@ -1,4 +1,3 @@
-import { combineReducers } from "redux"
 import { CREATE_COMPETITION } from "../competition/actions"
 import { receiveApiResponse } from "../../../store/helpers/Normalizer"
 
