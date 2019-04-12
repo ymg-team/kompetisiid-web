@@ -94,11 +94,11 @@ class List extends Component {
 
   render() {
     const Filter = this.generateFilter()
-    let title = "Kabar - Kompetisi.id"
-    let description = "Temukan kabar seputar kompetisi di Indonesia"
+    let title = "Kabar Kompetisi"
+    let description = "Kabar terbaru seputar kompetisi dari Kompetisi Id"
 
     if (this.props.match.params.tag) {
-      title += ` tag "${this.props.match.params.tag}"`
+      title += ` berdasarkan tag "${this.props.match.params.tag}"`
       description += ` berdasarkan tag "${this.props.match.params.tag}"`
     }
 
@@ -112,7 +112,7 @@ class List extends Component {
             adClient="ca-pub-4468477322781117"
             adSlot={1270681813}
             timeout={1000}
-            style={{marginBottom: "10px"}}
+            style={{marginBottom: 10}}
           />
         </div>
         {/* end of Google Ads */}

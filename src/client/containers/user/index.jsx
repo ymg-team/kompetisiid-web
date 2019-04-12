@@ -27,24 +27,17 @@ class Index extends Component {
   render() {
     const { profile } = this.props
     const { username } = this.props.match.params
-    let helmetdata = {}
+
+    let helmetdata = {
+      title: `profil ${username}`,
+      description: `halaman profil ${username} di Kompetisi ID`
+    }
 
     if (profile[username] && profile[username].status) {
-      if (profile[username].status == 200) {
+      if (profile[username].status != 200) {
         helmetdata = {
-          title: `profil ${username} - Kompetisi ID`,
-          description: `halaman profil ${username} - di Kompetisi ID`
-        }
-      } else {
-        helmetdata = {
-          title: `profil ${username} - Kompetisi ID`,
           description: profile[username].meta.message
         }
-      }
-    } else {
-      helmetdata = {
-        title: "user tidak ditemukan",
-        description: "user tidak ditemukan"
       }
     }
 
@@ -69,8 +62,7 @@ class Index extends Component {
                       {profile[username].data.username}
                       &nbsp;
                       <small>
-                        terdaftar{" "}
-                        {profile[username].data.register_date}
+                        terdaftar {profile[username].data.register_date}
                         {/*terakhir login {epochToRelativeTime(profile[username].data.last_active)}*/}
                       </small>
                     </h3>

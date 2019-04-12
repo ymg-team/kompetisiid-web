@@ -168,10 +168,10 @@ export default class Index extends Component {
 
   render() {
     const { encid, title } = this.props.match.params
-    const { detail, data } = this.props.berita
+    const { detail } = this.props.berita
     let helmetdata = {
       title: "Kabar Kompetisi",
-      description: "Kabar Kompetisi dari Kompetisi.id",
+      description: "Kabar terbaru seputar kompetisi dari Kompetisi Id",
       url: `${Host[process.env.NODE_ENV].front}/news/${encid}/${title}`,
       script: []
     }
