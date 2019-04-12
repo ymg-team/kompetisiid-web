@@ -34,13 +34,13 @@ const HomeCountStyled = Styled.div`
 `
 
 export default props => {
-  if (props.data) {
+  if (props.status == 200) {
     return (
       <HomeCountStyled className="col-md-6 col-md-offset-3 home-count">
         <div>
           <div className="col-sm-4 col-xs-4 home-count-item">
             <div className="home-count-text-large">
-              {props.data.totalcompetition}
+              {props.activeCompetition}
             </div>
             <div className="home-count-text-small text-gray">
               Kompetisi Aktif
@@ -48,14 +48,14 @@ export default props => {
           </div>
           <div className="col-sm-4 col-xs-4 home-count-item">
             <div className="home-count-text-large">
-              {props.data.totalthismounth}
+              {props.deadlineThisMonth}
             </div>
             <div className="home-count-text-small text-gray">
               Deadline Bulan ini
             </div>
           </div>
           <div className="col-sm-4 col-xs-4 home-count-item">
-            <div className="home-count-text-large">{props.data.totalprize}</div>
+            <div className="home-count-text-large">{props.totalPrizeActiveCompetition}</div>
             <div className="home-count-text-small text-gray">
               Nilai Total Hadiah
             </div>

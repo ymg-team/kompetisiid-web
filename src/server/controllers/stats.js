@@ -4,8 +4,9 @@
 export function getStats(req, res, next)
 {
   req.reqdata = {
+    version: "v42",
     method: 'get',
-    url: '/stats',
+    url: '/v2/home-counter',
   }
 
   next()
