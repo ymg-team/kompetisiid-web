@@ -7,13 +7,13 @@ const Helmet = props => {
 
   return (
     <ReactHelmet
-      title={toCamelCase(title) + " - Kompetisi.id"}
+      title={toCamelCase(title) + " - Kompetisi Id"}
       meta={[
         { name: "description", content: description },
         { property: "og:type", content: type || "article" },
         {
           property: "og:title",
-          content: toCamelCase(title) + " - Kompetisi.id"
+          content: toCamelCase(title) + " - Kompetisi Id"
         },
         { property: "og:url", content: url },
         { property: "og:image", content: image },
