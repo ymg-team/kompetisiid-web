@@ -159,22 +159,22 @@ class Index extends Component {
       "Jelajahi kompetisi dari berbagai macam kategori di Kompetisi ID"
 
     // jelajah kompetisi by kategori
-    if (main_kat) {
-      title += ` di Kategori "${categories.data[main_kat].name}"`
+    if (this.props.match.params.mainkat) {
+      title += ` ${this.props.match.params.mainkat}`
+      description = ` berdasarkan kategori ${this.props.match.params.mainkat}`
     }
 
     // jelajah kompetisi by sub kategori
-    if (sub_kat) {
-      title += ` Subkategori "${
-        categories.data[main_kat].subcategories[sub_kat].name
-      }"`
+    if (this.props.match.params.subkat) {
+      title += ` - ${this.props.match.params.subkat}`
+      description = ` dan subkategori ${this.props.match.params.subkat}`
     }
 
     //jelajah kompetisi by tag
-    if (tag) {
+    if (this.props.match.params.tag) {
       // ref: https://stackoverflow.com/a/20792617/2780875
-      title += ` dengan Tag "${tag.replace(/%20/g, " ")}"`
-      description = `Jelajahi kompetisi berdasarkan tag ${tag}`
+      title += ` berdasarkan tag ${this.props.match.params.tag}`
+      description = ` berdasarkan tag ${this.props.match.params.tag}`
     }
 
     //jelajah kompetisi by username
@@ -197,6 +197,7 @@ class Index extends Component {
       <div id="browse-container">
         <Helmet
           title={title}
+          description={description}
           meta={[
             { name: "description", content: description },
             { property: "og:title", content: title },

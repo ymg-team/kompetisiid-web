@@ -96,7 +96,7 @@ App.use(
 
 // React path
 
-// competition routes
+// SEO manager
 App.get("/competition/:id/*", FrontMiddleware.generateMetaCompetition, AppRender)
 App.get("/news/:id/*", FrontMiddleware.generateMetaNews, AppRender)
 
