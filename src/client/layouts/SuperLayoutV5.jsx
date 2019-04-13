@@ -1,29 +1,33 @@
-import React, { Component } from 'react'
-import Loadable from 'react-loadable'
-import { alert } from '../components/Alert'
-import { fullPageLoader } from '../components/preloaders/FullPage'
-import { logout } from '../containers/user/actions'
-import { connect } from 'react-redux'
+import React, { Component } from "react"
+import Loadable from "react-loadable"
+import { alert } from "../components/Alert"
+import { fullPageLoader } from "../components/preloaders/FullPage"
+import { logout } from "../containers/user/actions"
+import { connect } from "react-redux"
+import { fetchCountSuperSidebar } from "../containers/user/actions"
 
 // components
-import Loading from '../components/preloaders/GlobalLoader'
-import { renderRoutes, matchRoutes } from 'react-router-config'
-import { Link } from 'react-router-dom'
+import Loading from "../components/preloaders/GlobalLoader"
+import { renderRoutes } from "react-router-config"
 
 const Sidebar = Loadable({
-  loader: () => import('../components/navigations/super/Sidebar'),
+  loader: () => import("../components/navigations/super/Sidebar"),
   loading: Loading
 })
 
 class SuperLayout extends Component {
-
-  handleLogout(){
+  handleLogout() {
     fullPageLoader(true)
     this.props.dispatch(logout())
     setTimeout(() => {
-      alert(true, 'Kamu telah logout', 'success')
-      location.href="/super"
+      alert(true, "Kamu telah logout", "success")
+      location.href = "/super"
     }, 2000)
+  }
+
+  componentDidMount() {
+    // request count data of super sidebar
+    this.props.dispatch(fetchCountSuperSidebar())
   }
 
   render() {
@@ -31,7 +35,10 @@ class SuperLayout extends Component {
       <div className="col-md-12">
         <div className="row m-t-2em">
           <div className="col-md-3">
-            <Sidebar handleLogout={() => this.handleLogout()} />
+            <Sidebar
+              handleLogout={() => this.handleLogout()}
+              stats={this.props.stats}
+            />
           </div>
           <div className="col-md-7">
             {renderRoutes(this.props.route.routes)}
@@ -42,4 +49,10 @@ class SuperLayout extends Component {
   }
 }
 
-export default connect()(SuperLayout)
+const mapStateToProps = state => {
+  return {
+    stats: state.Others.count_super_sidebar || {}
+  }
+}
+
+export default connect(mapStateToProps)(SuperLayout)

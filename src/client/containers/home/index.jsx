@@ -45,9 +45,9 @@ import * as Colors from "../../../style/colors"
 import {
   fetchJelajah,
   getCategories,
-  setCategories,
-  getStats
+  setCategories
 } from "../competition/actions"
+import { getStats } from "../user/actions"
 import { fetchBerita } from "../news/actions"
 
 const GrayBackgroundStyled = Styled.div`
