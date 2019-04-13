@@ -8,6 +8,7 @@ router.use("/news", require("./news"))
 router.use("/request", require("./request"))
 router.use("/user", require("./user"))
 router.use("/stats", require("./stats"))
+router.use("/counter", require("./counter"))
 
 router.use("*", (req, res) => {
   res.json({

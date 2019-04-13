@@ -18,6 +18,7 @@ export const REGISTER = "REGISTER"
 export const OAUTH_LOGIN = "OAUTH_LOGIN"
 export const EMAIL_VERIFICATION = "EMAIL_VERIFICATION"
 export const RESEND_EMAIL_VALIDATION_TOKEN = "RESEND_EMAIL_VALIDATION_TOKEN"
+export const FETCH_COUNT_SUPER_SIDEBAR = "FETCH_COUNT_SUPER_SIDEBAR"
 
 export function profile(username) {
   return {
@@ -101,6 +102,32 @@ export function emailVerification(token) {
       method: "post",
       url: `/api/user/email-verification/${token}`,
       type: EMAIL_VERIFICATION
+    }
+  }
+}
+
+export function getStats() {
+  return {
+    [CALL_API]: {
+      url: `/api/stats/${sealMiddleware.generateSeal()}`,
+      method: "get",
+      typeWaiting: REQUEST_DATA,
+      typeSuccess: RECEIVE_DATA,
+      target: "stats"
+    }
+  }
+}
+
+/**
+ * @description function to fetch count of super sidebar
+ */
+export function fetchCountSuperSidebar() {
+  return {
+    [CALL_API]: {
+      url: `/api/counter/super-sidebar/${sealMiddleware.generateSeal()}`,
+      method: "get",
+      type: FETCH_COUNT_SUPER_SIDEBAR,
+      filter: "count_super_sidebar"
     }
   }
 }
