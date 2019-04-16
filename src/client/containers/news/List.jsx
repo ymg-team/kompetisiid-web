@@ -104,7 +104,11 @@ class List extends Component {
 
     return (
       <div id="list-news">
-        <Helmet title={title} description={description} />
+        <Helmet
+          title={title}
+          description={description}
+          keywords="berita,berita kompetisi,kompetisi up to date,kabar,kabar kompetisi"
+        />
         <Subheader title={title} desc={description} />
         {/* Google Ads */}
         <div className="col-md-12 align-center">
@@ -112,7 +116,7 @@ class List extends Component {
             adClient="ca-pub-4468477322781117"
             adSlot={1270681813}
             timeout={1000}
-            style={{marginBottom: 10}}
+            style={{ marginBottom: 10 }}
           />
         </div>
         {/* end of Google Ads */}
@@ -129,13 +133,6 @@ function mapStateToProps(state) {
   }
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    dispatch
-  }
-}
-
 export default connect(
-  mapStateToProps,
-  mapDispatchToProps
+  mapStateToProps
 )(List)
