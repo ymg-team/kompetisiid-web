@@ -1,4 +1,4 @@
-import React, { Component } from "react"
+import React from "react"
 import HeaderDashboard from "../../../components/cards/HeaderDashboard"
 import Tab from "../../../components/navigations/Tab"
 import CompetitionCard from "../../../components/cards/dashboard/CompetitionListCard"
@@ -12,7 +12,7 @@ import { connect } from "react-redux"
 let Filter, Params
 let Limit = 20
 
-class MyCompetition extends Component {
+class MyCompetition extends React.Component {
   static defaultProps = {
     data: {}
   }
@@ -44,18 +44,19 @@ class MyCompetition extends Component {
 
   render() {
     const { tab_active } = this.props.route
+    const { stats } = this.props
     const competitions = this.props.data[Filter] || {}
     const tabcontent = [
       {
         text: "berlangsung",
         is_active: tab_active == 1,
-        count: 7,
+        count: stats.competition ? stats.competition.live : 0,
         target: "/super/competition/live"
       },
       {
         text: "semua kompetisi",
         is_active: tab_active == 2,
-        count: 12,
+        count: stats.competition ? stats.competition.posted + stats.competition.waiting + stats.competition.reject : 0,
         target: "/super/competition/all"
       }
     ]
@@ -136,10 +137,9 @@ function mapStateToProps(state) {
   const { Kompetisi, User } = state
   return {
     data: Kompetisi.data,
-    session: User.session
+    session: User.session,
+    stats: state.Others.count_super_sidebar || {}
   }
 }
 
-module.exports = connect(
-  mapStateToProps
-)(MyCompetition)
+module.exports = connect(mapStateToProps)(MyCompetition)
