@@ -1,7 +1,6 @@
 /**
  * Created by yussan on 02/10/16.
  */
-import express from "express"
 import React from "react"
 import { Provider } from "react-redux"
 import ReactDOMServer from "react-dom/server"
@@ -51,6 +50,8 @@ export default (req, res) => {
       metaTags = `
       <title>${req.meta.title}</title>
       <meta name="description" content="${req.meta.desc}"/>
+      <meta name="keywords" content="${req.meta.keywords ||
+        "info kompetisi,kompetisi id,kumpulan lomba,info lomba,kumpulan kompetisi"}">
 
       <meta name="twitter:card" content="summary"/>
       <meta name="twitter:image" content="${req.meta.image}"/>
@@ -167,12 +168,11 @@ export default (req, res) => {
 function getScript(state) {
   // ref __data__ : https://redux.js.org/recipes/serverrendering
   return `
-    <script>window.__data__=${JSON.stringify(
-      state
-    ).replace(/</g, "\\u003c")}</script>
-    <script src="/assets/4.2/js/script-min.js?v=${
-      version.JS_VERSION
-    }"></script>
+    <script>window.__data__=${JSON.stringify(state).replace(
+      /</g,
+      "\\u003c"
+    )}</script>
+    <script src="/assets/4.2/js/script-min.js?v=${version.JS_VERSION}"></script>
     <script src="${webpackAssets.vendor.js}"></script>
     <script src="${webpackAssets.app.js}"></script>
     <script src="https://apis.google.com/js/platform.js" async defer></script>

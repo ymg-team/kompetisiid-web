@@ -1,6 +1,5 @@
 import { requestAPIV2 } from "../helpers/apiCaller"
 import Host from "../../config/host"
-import { requestApi } from "../../store/helpers/ApiCaller"
 import { stripTags, truncate } from "string-manager"
 
 /**
@@ -43,6 +42,7 @@ export const generateMetaCompetition = (req, res, next) => {
         image: competition.data.poster.original,
         url,
         type: "event",
+        keywords: competition.data.tag,
         jsonld: `
         {
           "@context": "http://schema.org",
@@ -113,6 +113,7 @@ export const generateMetaNews = (req, res, next) => {
         image: news.data.image.original,
         url,
         type: "news",
+        keywords: news.data.tag,
         jsonld: `
           {
             "@context": "https://schema.org",

@@ -198,17 +198,13 @@ class Index extends Component {
         <Helmet
           title={title}
           description={description}
-          meta={[
-            { name: "description", content: description },
-            { property: "og:title", content: title },
-            { property: "og:url", content: "http://kompetisi.id/browse" },
-            {
-              property: "og:image",
-              content: "http://kompetisi.id/assets/images/wide-red-logo.png"
-            },
-            { property: "og:description", content: description },
-            { property: "og:type", content: "article" }
-          ]}
+          url={"http://kompetisi.id/browse"}
+          image="http://kompetisi.id/assets/images/wide-red-logo.png"
+          keywords={`jelajah kompetisi,kompetisiid, kumpulan kompetisi,info kompetisi${
+            this.props.match.params.mainkat
+              ? `,kompetisi ${this.props.match.params.mainkat}`
+              : ""
+          }`}
         />
 
         {/*filter*/}
@@ -639,13 +635,4 @@ function mapStateToProps(state) {
   }
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    dispatch
-  }
-}
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Index)
+export default connect(mapStateToProps)(Index)

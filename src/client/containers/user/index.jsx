@@ -1,12 +1,10 @@
-import React, { Component } from "react"
-import UserStats from "../../components/navigations/TabProfile"
+import React from "react"
 import Helmet from "../../components/Helmet"
 
 import { profile } from "./actions"
-import { epochToRelativeTime } from "../../helpers/DateTime"
 import { connect } from "react-redux"
 
-class Index extends Component {
+class Index extends React.Component {
   componentDidMount() {
     this.reqData(this.props)
   }
@@ -35,9 +33,8 @@ class Index extends Component {
 
     if (profile[username] && profile[username].status) {
       if (profile[username].status != 200) {
-        helmetdata = {
-          description: profile[username].meta.message
-        }
+        helmetdata.description = profile[username].meta.message
+        helmetdata.keywords = `member kompetisiid,${username} kompetisiid`
       }
     }
 
@@ -95,13 +92,4 @@ function mapStateToProps(state) {
   }
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    dispatch
-  }
-}
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Index)
+export default connect(mapStateToProps)(Index)
