@@ -3,7 +3,7 @@ import { EditorState, ContentState, convertToRaw, convertFromHTML } from "draft-
 import { Editor } from "react-draft-wysiwyg"
 import draftToHtml from "draftjs-to-html"
 import Styled from "styled-components"
-// import htmlToDraft from "html-to-draftjs"
+import htmlToDraft from "html-to-draftjs"
 
 import Loading from "../preloaders/GlobalLoader"
 
@@ -28,7 +28,7 @@ class EditorKI extends React.Component {
         if(this.props.value) {
           this.setState({
             editorState: EditorState.createWithContent(ContentState.createFromBlockArray(
-              convertFromHTML(this.props.value)
+              htmlToDraft(this.props.value)
             ))
           })
         }
