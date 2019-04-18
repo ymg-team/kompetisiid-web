@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import { validate, validator } from "./Validator"
+import { validate } from "./Validator"
 
 export default class InputText extends Component {
   componentDidMount = () => {
@@ -8,7 +8,7 @@ export default class InputText extends Component {
 
   componentWillReceiveProps = np => {
     // validate on edit / set default value
-    if(!this.props.value && np.value) validate(np)
+    if (!this.props.value && np.value) validate(np)
   }
 
   handleChange = e => {
