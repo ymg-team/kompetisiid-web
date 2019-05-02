@@ -48,6 +48,12 @@ class MyCompetition extends React.Component {
     const competitions = this.props.data[Filter] || {}
     const tabcontent = [
       {
+        text: "menunggu",
+        is_active: tab_active == 3,
+        count: stats.competition ? stats.competition.waiting : 0,
+        target: "/super/competition/waiting"
+      },
+      {
         text: "berlangsung",
         is_active: tab_active == 1,
         count: stats.competition ? stats.competition.live : 0,

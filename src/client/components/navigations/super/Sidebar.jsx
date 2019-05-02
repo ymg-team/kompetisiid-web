@@ -28,8 +28,13 @@ export default props => {
         </li>
         <li>
           <Link to="/super/competition">
-            Semua Kompetisi Terpasang{" "}
+            Kompetisi Terpasang{" "}
             <span className="label label-blue">{stats.competition.posted}</span>
+            {stats.competition.waiting ? (
+              <span className="label label-red">
+                {stats.competition.waiting}
+              </span>
+            ) : null}
           </Link>
         </li>
 
