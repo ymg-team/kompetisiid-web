@@ -46,26 +46,56 @@ class MyCompetition extends React.Component {
     const { tab_active } = this.props.route
     const { stats } = this.props
     const competitions = this.props.data[Filter] || {}
-    const tabcontent = [
-      {
-        text: "menunggu",
-        is_active: tab_active == 3,
-        count: stats.competition ? stats.competition.waiting : 0,
-        target: "/super/competition/waiting"
-      },
-      {
-        text: "berlangsung",
-        is_active: tab_active == 1,
-        count: stats.competition ? stats.competition.live : 0,
-        target: "/super/competition/live"
-      },
-      {
-        text: "semua kompetisi",
-        is_active: tab_active == 2,
-        count: stats.competition ? stats.competition.posted + stats.competition.waiting + stats.competition.reject : 0,
-        target: "/super/competition/all"
-      }
-    ]
+    let tabcontent = []
+
+    console.log('session', this.props.session)
+
+    // generate tab content
+    if(this.props.session && ["admin", "moderator"].includes(this.props.session.level)) {
+      // if logged in user is admin or moderator
+      tabcontent = [
+        {
+          text: "menunggu",
+          is_active: tab_active == 3,
+          count: stats.competition ? stats.competition.waiting : 0,
+          target: "/super/competition/waiting"
+        },
+        {
+          text: "berlangsung",
+          is_active: tab_active == 1,
+          count: stats.competition ? stats.competition.live : 0,
+          target: "/super/competition/live"
+        },
+        {
+          text: "dipublikasi",
+          is_active: tab_active == 2,
+          count: stats.competition ? stats.competition.posted : 0,
+          target: "/super/competition/posted"
+        }
+      ]
+    } else {
+      // if logged in user is just member
+      tabcontent = [
+        {
+          text: "menunggu",
+          is_active: tab_active == 1,
+          count: 0,
+          target: "/dashboard/competition/waiting"
+        },
+        {
+          text: "dipublish",
+          is_active: tab_active == 2,
+          count: 0,
+          target: "/dashboard/competition/posted"
+        },
+        {
+          text: "dipublikasi",
+          is_active: tab_active == 3,
+          count: 0,
+          target: "/dashboard/competition/rejected"
+        }
+      ]
+    }
 
     return (
       <React.Fragment>

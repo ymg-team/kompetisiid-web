@@ -23,7 +23,11 @@ class CompetitionFormContainer extends React.Component {
       )
       if (status === 201 || status === 200) {
         this.notSubmited = false
-        location.href = "/super/competition"
+        if(this.props.session && ["admin", "moderator"].includes(this.props.session.level)) {
+          location.href = "/super/competition"
+        } else {
+          location.href = "/dashboard/competition/waiting"
+        }
       }
     }
   }
@@ -87,7 +91,8 @@ const mapStateToProps = state => {
   return {
     categories: state.Kompetisi.categories,
     competition: state.Kompetisi.detail,
-    others: state.Others
+    others: state.Others,
+    session: state.User.session,
   }
 }
 

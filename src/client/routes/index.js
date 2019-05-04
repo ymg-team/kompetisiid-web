@@ -14,13 +14,15 @@ import Browse from "./browse"
 import Competition from "./competition"
 import Add from "./add"
 import User from "./user"
-import Dashboard from "./dashboard"
+import Dashboard from "./dashboard/index"
 import Careers from "./careers"
 import Super from "./super/index"
 
 // components
 import FullPagePreloaderOri from "../components/preloaders/FullPage"
-const FullPagePreloader = () => <FullPagePreloaderOri style={{display: "flex", opacity: 1}} />
+const FullPagePreloader = () => (
+  <FullPagePreloaderOri style={{ display: "flex", opacity: 1 }} />
+)
 
 // loadable containers
 const Login = Loadable({

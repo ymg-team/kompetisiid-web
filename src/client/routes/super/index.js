@@ -1,17 +1,15 @@
 import Loadable from "react-loadable"
 
 // layouts
-import EmptyLayout from "../../layouts/4.2/Empty"
 import SuperLayout from "../../layouts/SuperLayoutV5"
 
 // components
 import Loading from "../../components/preloaders/GlobalLoader"
 import ContentLoading from "../../components/preloaders/FullContentLoader"
-import EmptyLoading from "../../components/preloaders/EmptyLoader"
 
 // containers
 const SuperDashboard = Loadable({
-  loader: () => import("../../containers/_super/dashboard/index"),
+  loader: () => import("../../containers/_super/index"),
   loading: ContentLoading
 })
 const NotFound = Loadable({
@@ -76,7 +74,7 @@ export default {
       component: CompetitionList
     },
     {
-      path: "/super/competition/all",
+      path: "/super/competition/posted",
       exact: true,
       tab_active: 2,
       // status to request api

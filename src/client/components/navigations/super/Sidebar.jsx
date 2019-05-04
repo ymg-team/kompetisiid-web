@@ -19,22 +19,33 @@ export default props => {
         <hr />
         <li>
           {" "}
-          <strong>Manajemen Kompetisi</strong>
+          <strong>Kompetisi</strong>
         </li>
         <li>
           <Link to="/super/competition/create">
             <i className="fas fa-plus" /> Tambah Kompetisi
           </Link>
         </li>
-        <li>
-          <Link to="/super/competition">
-            Kompetisi Terpasang{" "}
-            <span className="label label-blue">{stats.competition.posted}</span>
-            {stats.competition.waiting ? (
+        {stats.competition.waiting ? 
+          <li>
+            <Link to="/super/competition/waiting">
+              Kompetisi Menunggu{" "}
               <span className="label label-red">
                 {stats.competition.waiting}
               </span>
-            ) : null}
+            </Link>
+          </li>
+        : null}
+        <li>
+          <Link to="/super/competition/live">
+            Kompetisi Berlangsung{" "}
+            <span className="label label-blue">{stats.competition.live}</span>
+          </Link>
+        </li>
+        <li>
+          <Link to="/super/competition/posted">
+            Kompetisi Terpublikasi{" "}
+            <span className="label label-blue">{stats.competition.posted}</span>
           </Link>
         </li>
 
