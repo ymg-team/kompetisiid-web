@@ -259,7 +259,7 @@ class Navbar extends Component {
                     </li>
 
                     {/* auth */}
-                    {typeof session.id  !== "undefined"? (
+                    {typeof session.id !== "undefined" ? (
                       <div
                         key="loggedin"
                         style={{
@@ -287,7 +287,13 @@ class Navbar extends Component {
                                 </Link>
                               </li>
                               <li>
-                                <Link to={`/dashboard/`}>Dashboard</Link>
+                                {["admin", "moderator"].includes(
+                                  session.level
+                                ) ? (
+                                  <Link to={`/super/dashboard`}>Super</Link>
+                                ) : (
+                                  <Link to={`/dashboard/`}>Dashboard</Link>
+                                )}
                               </li>
                               <li>
                                 <Link to="/settings">Setelan</Link>
@@ -305,8 +311,7 @@ class Navbar extends Component {
                         </div>
                       </div>
                     ) : (
-                      <li
-                      key="public">
+                      <li key="public">
                         <Link to="/login">Login</Link>
                       </li>
                     )}

@@ -80,7 +80,7 @@ class CompetitionFormContainer extends React.Component {
             dispatch={this.props.dispatch}
             categories={this.props.categories}
             competitionId={this.props.match.params.id}
-            competitionData={competitionData.data}
+            competitionData={competitionData.data || {}}
           />
         )}
       </React.Fragment>

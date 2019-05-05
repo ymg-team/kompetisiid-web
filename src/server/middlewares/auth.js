@@ -6,6 +6,9 @@ export function dashboardMiddleware(req, res, next) {
 
   if(Object.keys(userdata).length > 0 && userdata.id) {
     console.log('current url on access dashboard', req.originalUrl)
+    // admin and moderator cannot access dashboard
+    if(['admin', 'moderator'].includes(userdata.level)) return res.redirect('/super')
+    // logged in member redirect to dashboard
     if(req.originalUrl === '/login') return res.redirect('/dashboard')
     return next()
   } else {
