@@ -53,11 +53,18 @@ export default {
       status: "waiting",
       component: DashboardCompetitions
     },
+    {
+      path: "/dashboard/competition/live",
+      extact: true,
+      tab_active: 2,
+      status: "active",
+      component: DashboardCompetitions
+    },
     // posted competition page
     {
       path: "/dashboard/competition/posted",
       extact: true,
-      tab_active: 2,
+      tab_active: 3,
       status: "posted",
       component: DashboardCompetitions
     },
@@ -65,7 +72,7 @@ export default {
     {
       path: "/dashboard/competition/rejected",
       extact: true,
-      tab_active: 3,
+      tab_active: 4,
       status: "reject",
       component: DashboardCompetitions
     },

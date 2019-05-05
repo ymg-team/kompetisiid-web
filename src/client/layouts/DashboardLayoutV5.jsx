@@ -4,10 +4,11 @@ import { alert } from "../components/Alert"
 import { logout } from "../containers/user/actions"
 import { fullPageLoader } from "../components/preloaders/FullPage"
 import { connect } from "react-redux"
+import { fetchCountDashboardSidebar } from "../containers/user/actions"
 
 // components
 import Loading from "../components/preloaders/FullContentLoader"
-import { renderRoutes, matchRoutes } from "react-router-config"
+import { renderRoutes } from "react-router-config"
 
 const Sidebar = Loadable({
   loader: () => import("../components/navigations/dashboard/Sidebar"),
@@ -24,12 +25,20 @@ class DasboardLayoutV5 extends React.Component {
     }, 2000)
   }
 
+  componentDidMount() {
+    // request count data of super sidebar
+    this.props.dispatch(fetchCountDashboardSidebar())
+  }
+
   render = () => {
     return (
       <div className="col-md-12">
         <div className="row m-t-2em">
           <div className="col-md-3">
-            <Sidebar handleLogout={() => this.handleLogout()} />
+            <Sidebar
+              handleLogout={() => this.handleLogout()}
+              stats={this.props.stats}
+            />
           </div>
           <div className="col-md-7">
             {renderRoutes(this.props.route.routes)}
@@ -40,4 +49,10 @@ class DasboardLayoutV5 extends React.Component {
   }
 }
 
-export default connect()(DasboardLayoutV5)
+const mapStateToProps = state => {
+  return {
+    stats: state.Others.count_super_sidebar || {}
+  }
+}
+
+export default connect(mapStateToProps)(DasboardLayoutV5)

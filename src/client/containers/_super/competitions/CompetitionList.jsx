@@ -48,8 +48,6 @@ class MyCompetition extends React.Component {
     const competitions = this.props.data[Filter] || {}
     let tabcontent = []
 
-    console.log('session', this.props.session)
-
     // generate tab content
     if(this.props.session && ["admin", "moderator"].includes(this.props.session.level)) {
       // if logged in user is admin or moderator
@@ -79,19 +77,25 @@ class MyCompetition extends React.Component {
         {
           text: "menunggu",
           is_active: tab_active == 1,
-          count: 0,
+          count: stats.competition ? stats.competition.waiting : 0,
           target: "/dashboard/competition/waiting"
         },
         {
-          text: "dipublish",
+          text: "berlangsung",
           is_active: tab_active == 2,
-          count: 0,
-          target: "/dashboard/competition/posted"
+          count: stats.competition ? stats.competition.live : 0,
+          target: "/dashboard/competition/live"
         },
         {
           text: "dipublikasi",
           is_active: tab_active == 3,
-          count: 0,
+          count: stats.competition ? stats.competition.posted : 0,
+          target: "/dashboard/competition/posted"
+        },
+        {
+          text: "ditolak",
+          is_active: tab_active == 4,
+          count: stats.competition ? stats.competition.rejected : 0,
           target: "/dashboard/competition/rejected"
         }
       ]
@@ -158,12 +162,15 @@ function generateFilter(props) {
 }
 
 function generateParams(props) {
-  const { tab_active } = props.route
   let Params = {
     limit: Limit,
     // username: props.session.username,
     // available status : active || all || waiting || reject || accept
     status: props.route.status || "all"
+  }
+
+  if(!["admin","moderator"].includes(props.session.level)) {
+    Params.by_me = true
   }
 
   return Params

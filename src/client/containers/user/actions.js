@@ -131,3 +131,17 @@ export function fetchCountSuperSidebar() {
     }
   }
 }
+
+/**
+ * @description function to fetch count 
+ */
+export function fetchCountDashboardSidebar(){
+  return {
+    [CALL_API]: {
+      url: `/api/counter/dashboard-sidebar/${sealMiddleware.generateSeal()}`,
+      method: "get",
+      type: FETCH_COUNT_SUPER_SIDEBAR,
+      filter: "count_super_sidebar"
+    }
+  }
+}

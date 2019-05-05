@@ -26,25 +26,25 @@ export default props => {
             <i className="fas fa-plus" /> Tambah Kompetisi
           </Link>
         </li>
-        {stats.competition.waiting ? 
+        {stats.competition.waiting ? (
           <li>
             <Link to="/super/competition/waiting">
-              Kompetisi Menunggu{" "}
+              Menunggu{" "}
               <span className="label label-red">
                 {stats.competition.waiting}
               </span>
             </Link>
           </li>
-        : null}
+        ) : null}
         <li>
           <Link to="/super/competition/live">
-            Kompetisi Berlangsung{" "}
+            Berlangsung{" "}
             <span className="label label-blue">{stats.competition.live}</span>
           </Link>
         </li>
         <li>
           <Link to="/super/competition/posted">
-            Kompetisi Terpublikasi{" "}
+            Dipublikasi{" "}
             <span className="label label-blue">{stats.competition.posted}</span>
           </Link>
         </li>
