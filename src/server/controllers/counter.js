@@ -13,3 +13,16 @@ export function fetchSuperSidebar(req, res, next) {
 
   next()
 }
+
+/**
+ * function to fetch count of super sidebar
+ */
+export function fetchDashboardSidebar(req, res, next) {
+  req.reqdata = {
+    version: 'v42',
+    method: 'get',
+    url: '/v2/counter/dashboard-sidebar'
+  }
+
+  next()
+}

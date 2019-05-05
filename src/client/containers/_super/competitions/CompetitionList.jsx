@@ -46,26 +46,71 @@ class MyCompetition extends React.Component {
     const { tab_active } = this.props.route
     const { stats } = this.props
     const competitions = this.props.data[Filter] || {}
-    const tabcontent = [
-      {
-        text: "berlangsung",
-        is_active: tab_active == 1,
-        count: stats.competition ? stats.competition.live : 0,
-        target: "/super/competition/live"
-      },
-      {
-        text: "semua kompetisi",
-        is_active: tab_active == 2,
-        count: stats.competition ? stats.competition.posted + stats.competition.waiting + stats.competition.reject : 0,
-        target: "/super/competition/all"
-      }
-    ]
+    let tabcontent = []
+
+    // generate tab content
+    if (
+      this.props.session &&
+      ["admin", "moderator"].includes(this.props.session.level)
+    ) {
+      // if logged in user is admin or moderator
+      tabcontent = [
+        {
+          text: "menunggu",
+          is_active: tab_active == 3,
+          count: stats.competition ? stats.competition.waiting : 0,
+          target: "/super/competition/waiting"
+        },
+        {
+          text: "berlangsung",
+          is_active: tab_active == 1,
+          count: stats.competition ? stats.competition.live : 0,
+          target: "/super/competition/live"
+        },
+        {
+          text: "dipublikasi",
+          is_active: tab_active == 2,
+          count: stats.competition ? stats.competition.posted : 0,
+          target: "/super/competition/posted"
+        }
+      ]
+    } else {
+      // if logged in user is just member
+      tabcontent = [
+        {
+          text: "menunggu",
+          is_active: tab_active == 1,
+          count: stats.competition ? stats.competition.waiting : 0,
+          target: "/dashboard/competition/waiting"
+        },
+        {
+          text: "berlangsung",
+          is_active: tab_active == 2,
+          count: stats.competition ? stats.competition.live : 0,
+          target: "/dashboard/competition/live"
+        },
+        {
+          text: "dipublikasi",
+          is_active: tab_active == 3,
+          count: stats.competition ? stats.competition.posted : 0,
+          target: "/dashboard/competition/posted"
+        },
+        {
+          text: "ditolak",
+          is_active: tab_active == 4,
+          count: stats.competition ? stats.competition.rejected : 0,
+          target: "/dashboard/competition/rejected"
+        }
+      ]
+    }
+
+    const title = `kompetisi ${tabcontent[tab_active - 1].text}`
 
     return (
       <React.Fragment>
-        <Helmet title={`kompetisi ${tabcontent[tab_active - 1].text}`} />
+        <Helmet title={title} />
         <HeaderDashboard
-          title="Kompetisi Terpasang"
+          title={title}
           text="Berikut adalah kompetisi yang telah anda pasang di Kompetisi ID."
         />
         {/* tab navigations */}
@@ -81,7 +126,7 @@ class MyCompetition extends React.Component {
         {/* generate contents */}
         {competitions && competitions.status ? (
           <div className="p-b-50">
-            {competitions.status == 200 ? (
+            {competitions.data && competitions.count ? (
               <p>
                 Menampilkan <strong>{competitions.data.length}</strong> dari{" "}
                 <strong>{competitions.count}</strong> kompetisi
@@ -122,12 +167,15 @@ function generateFilter(props) {
 }
 
 function generateParams(props) {
-  const { tab_active } = props.route
   let Params = {
     limit: Limit,
     // username: props.session.username,
     // available status : active || all || waiting || reject || accept
     status: props.route.status || "all"
+  }
+
+  if (!["admin", "moderator"].includes(props.session.level)) {
+    Params.by_me = true
   }
 
   return Params

@@ -2,7 +2,8 @@ import React, { Component } from "react"
 import { connect } from "react-redux"
 
 // components
-import Helmet from "../../../components/Helmet"
+import Helmet from "../../components/Helmet"
+
 class SuperContainer extends Component {
   render() {
     return (

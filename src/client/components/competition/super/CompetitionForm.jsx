@@ -25,7 +25,7 @@ import Checkbox from "../../form/Checkbox"
 class CompetitionForm extends React.Component {
   state = {}
 
-  submitHandler = () => {
+  submitHandler = (status="posted") => {
     let formdata = {
       title: this.state.title,
       description: this.state.description,
@@ -46,6 +46,7 @@ class CompetitionForm extends React.Component {
     }
 
     if (this.state.poster) formdata.poster = this.state.poster
+    if (status) formdata.status = status
 
     console.log("submit handler...", formdata)
 
@@ -364,13 +365,47 @@ class CompetitionForm extends React.Component {
           <Spacer size="large" />
 
           {/* submit form */}
-          <BtnSubmit
-            disabled={loading}
-            text={loading ? "loading..." : title}
-            action={() => this.submitHandler()}
-            setState={(n, cb) => this.setState(n, cb)}
-            requiredInputs={["maincat", "subcat"]}
-          />
+
+          {competitionId &&
+          ["moderator", "admin"].includes(this.props.session.level) &&
+          ["waiting", "reject"].includes(this.props.competitionData.status) ? (
+            // button to publish competition member
+            <BtnSubmit
+              wrapperStyle={{display: "inline-block", width: "initial"}}
+              disabled={loading}
+              text={loading ? "loading..." : "Publikasi Kompetisi"}
+              action={() => this.submitHandler("posted")}
+              setState={(n, cb) => this.setState(n, cb)}
+              requiredInputs={["maincat", "subcat"]}
+            />
+          ) : (
+            <React.Fragment>
+              {/* button to save competition */}
+              <BtnSubmit
+                wrapperStyle={{display: "inline-block", width: "initial"}}
+                disabled={loading}
+                text={loading ? "loading..." : title}
+                action={() => this.submitHandler()}
+                setState={(n, cb) => this.setState(n, cb)}
+                requiredInputs={["maincat", "subcat"]}
+              />
+              {/* button to reject competition */}
+              {
+                this.props.competitionData.status != "reject" ?
+                  <BtnSubmit
+                      className="btn btn-red"
+                      wrapperStyle={{display: "inline-block", width: "initial", float: "right"}}
+                      disabled={loading}
+                      text={loading ? "loading..." : "Tolak Kompetisi"}
+                      action={() => this.submitHandler("reject")}
+                      setState={(n, cb) => this.setState(n, cb)}
+                      requiredInputs={["maincat", "subcat"]}
+                    />
+                : null
+              }
+            </React.Fragment>
+          )}
+
           {/* end of submit form */}
         </form>
       </React.Fragment>
