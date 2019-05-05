@@ -1,9 +1,9 @@
-import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
+import React, { Component } from "react"
+import { Link } from "react-router-dom"
 
-import { alert } from '../Alert'
-import { connect } from 'react-redux'
-import { logout } from '../../containers/user/actions'
+import { alert } from "../Alert"
+import { connect } from "react-redux"
+import { logout } from "../../containers/user/actions"
 
 class Header extends Component {
   handleSearch(e) {
@@ -13,7 +13,7 @@ class Header extends Component {
   }
 
   handleLogout() {
-    alert(true, 'logout...', 'warning')
+    alert(true, "logout...", "warning")
     this.props.dispatch(logout())
   }
 
@@ -22,11 +22,11 @@ class Header extends Component {
     if (logout.meta) {
       if (logout.meta.code === 201) {
         setTimeout(() => {
-          window.location.href = '/'
+          window.location.href = "/"
         }, 1500)
-        alert(true, logout.meta.message, 'success', false)
+        alert(true, logout.meta.message, "success", false)
       } else {
-        alert(true, logout.meta.message, 'error')
+        alert(true, logout.meta.message, "error")
       }
     }
   }
@@ -35,7 +35,7 @@ class Header extends Component {
     const { q, session } = this.props
     return (
       <nav>
-        <div style={{ top: q ? '-50px' : '0px' }} className="nav-header">
+        <div style={{ top: q ? "-50px" : "0px" }} className="nav-header">
           <a id="btn-menu" href="javascript:;">
             <span className="fa fa-bars" />
           </a>
@@ -43,12 +43,12 @@ class Header extends Component {
             <a className="only-mobile" href="javascript:;" id="btn-show-nav">
               <img
                 src="/assets/4.2/img/icon-128x128.png"
-                style={{ width: '40px' }}
+                style={{ width: "40px" }}
               />
             </a>
             <ul className="top-menu" id="top-menu">
               <a
-                style={{ position: 'absolute', top: '0.5em', right: '0.5em' }}
+                style={{ position: "absolute", top: "0.5em", right: "0.5em" }}
                 id="btn-hide-nav"
                 className=" btn-close-nav only-mobile fas fa-times"
                 href="javascript:;"
@@ -90,7 +90,7 @@ class Header extends Component {
                   href="javascript:;"
                   title="click untuk melakukan pencarian"
                 >
-                  {' '}
+                  {" "}
                   <span className="fa fa-search" />
                 </a>
               </li>
@@ -112,7 +112,11 @@ class Header extends Component {
                           </Link>
                         </li>
                         <li>
-                          <Link to={`/dashboard/`}>Dashboard</Link>
+                          {["admin", "moderator"].includes(session.level) ? (
+                            <Link to={`/super/dashboard`}>Super</Link>
+                          ) : (
+                            <Link to={`/dashboard/`}>Dashboard</Link>
+                          )}
                         </li>
                         <li>
                           <Link to="/settings">Setelan</Link>
@@ -130,7 +134,7 @@ class Header extends Component {
                   </div>
                 </li>
               ) : (
-                <li style={{ display: 'none' }} className="hide-mobile">
+                <li style={{ display: "none" }} className="hide-mobile">
                   <Link to="/login">login</Link>
                 </li>
               )}
@@ -141,7 +145,7 @@ class Header extends Component {
           <label htmlFor="search">Pencarian </label>
           <input
             type="text"
-            value={q || ''}
+            value={q || ""}
             placeholder="tekan enter untuk submit"
             onChange={e => this.props.setState({ q: e.target.value })}
             onKeyDown={e => this.handleSearch(e)}
@@ -149,12 +153,12 @@ class Header extends Component {
           <a
             id="btn-closesearch"
             onClick={() => {
-              if (q != '') return (window.location.href = '/browse')
+              if (q != "") return (window.location.href = "/browse")
             }}
             href="javascript:;"
             title="tutup pencarian"
           >
-            {' '}
+            {" "}
             <span className="fas fa-times" />
           </a>
         </div>
@@ -171,13 +175,6 @@ function mapStateToProps(state) {
   }
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    dispatch
-  }
-}
-
 export default connect(
-  mapStateToProps,
-  mapDispatchToProps
+  mapStateToProps
 )(Header)
