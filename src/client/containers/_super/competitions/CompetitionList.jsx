@@ -101,11 +101,13 @@ class MyCompetition extends React.Component {
       ]
     }
 
+    const title = `kompetisi ${tabcontent[tab_active - 1].text}`
+
     return (
       <React.Fragment>
-        <Helmet title={`kompetisi ${tabcontent[tab_active - 1].text}`} />
+        <Helmet title={title} />
         <HeaderDashboard
-          title="Kompetisi Terpasang"
+          title={title}
           text="Berikut adalah kompetisi yang telah anda pasang di Kompetisi ID."
         />
         {/* tab navigations */}
