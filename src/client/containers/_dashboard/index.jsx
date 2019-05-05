@@ -3,17 +3,69 @@ import { connect } from "react-redux"
 
 // components
 import Helmet from "react-helmet"
+import CountBox from "../../components/boxs/_super/CountBox"
+import HeaderDashboard from "../../components/cards/HeaderDashboard"
 
 class Dashboard extends React.Component {
   render = () => {
+    const stats = this.props.stats || { competition: {} }
     return (
       <React.Fragment>
         <Helmet title="Dashboard - Kompetisi Id" />
-        <h1>Dashboard Kompetisi.id akan segera hadir</h1>
-        <p>Tunggu saja ya.</p>
+        <div className="row">
+          <div className="col-md-12">
+            <HeaderDashboard
+              title="Kompetisi"
+              text="Berikut adalah data yang berhubungan dengan kamu dan kompetisi di Kompetisi Id"
+            />
+          </div>
+
+          {/* waiting count */}
+          <div style={{ marginTop: 20 }} className="col-md-3">
+            <CountBox
+              count={stats.competition.waiting || 0}
+              text="Menunggu di Terima"
+              link="/dashboard/competition/waiting"
+            />
+          </div>
+
+          {/* live competition */}
+          <div style={{ marginTop: 20 }} className="col-md-3">
+            <CountBox
+              count={stats.competition.live || 0}
+              text="Sedang Berlangsung"
+              link="/dashboard/competition/live"
+            />
+          </div>
+
+          {/* published competition */}
+          <div style={{ marginTop: 20 }} className="col-md-3">
+            <CountBox
+              count={stats.competition.posted || 0}
+              text="Terpublikasi"
+              link="/dashboard/competition/posted"
+            />
+          </div>
+
+          {/* rejected competition */}
+          <div style={{ marginTop: 20 }} className="col-md-3">
+            <CountBox
+              count={stats.competition.rejected || 0}
+              text="Kompetisi di Tolak"
+              link="/dashboard/competition/rejected"
+            />
+          </div>
+
+        </div>
       </React.Fragment>
     )
   }
 }
 
-export default connect()(Dashboard)
+const mapStateToProps = state => {
+  return {
+    stats: state.Others.count_super_sidebar || {}
+  }
+}
+
+export default connect(mapStateToProps)(Dashboard)
