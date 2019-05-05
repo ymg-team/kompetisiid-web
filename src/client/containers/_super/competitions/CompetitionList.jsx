@@ -49,7 +49,10 @@ class MyCompetition extends React.Component {
     let tabcontent = []
 
     // generate tab content
-    if(this.props.session && ["admin", "moderator"].includes(this.props.session.level)) {
+    if (
+      this.props.session &&
+      ["admin", "moderator"].includes(this.props.session.level)
+    ) {
       // if logged in user is admin or moderator
       tabcontent = [
         {
@@ -123,7 +126,7 @@ class MyCompetition extends React.Component {
         {/* generate contents */}
         {competitions && competitions.status ? (
           <div className="p-b-50">
-            {competitions.status == 200 ? (
+            {competitions.data && competitions.count ? (
               <p>
                 Menampilkan <strong>{competitions.data.length}</strong> dari{" "}
                 <strong>{competitions.count}</strong> kompetisi
@@ -171,7 +174,7 @@ function generateParams(props) {
     status: props.route.status || "all"
   }
 
-  if(!["admin","moderator"].includes(props.session.level)) {
+  if (!["admin", "moderator"].includes(props.session.level)) {
     Params.by_me = true
   }
 

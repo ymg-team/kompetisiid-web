@@ -26,7 +26,7 @@ export default class Submit extends Component {
   render() {
     let { style, className } = this.props
     return (
-      <div className="form-child">
+      <div className="form-child" style={this.props.wrapperStyle}>
         <button
           onClick={() => this.handleClick()}
           className={`${className} ${this.props.loading ? "loading" : ""}`}
@@ -46,5 +46,6 @@ Submit.defaultProps = {
   disabled: false,
   className: "btn btn-white",
   style: {},
+  wrapperStyle: {},
   requiredInputs: []
 }

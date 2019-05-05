@@ -75,6 +75,7 @@ class CompetitionFormContainer extends React.Component {
           />
         ) : (
           <Form
+            session={this.props.session || {}}
             response={this.props.others.competition_form || {}}
             dispatch={this.props.dispatch}
             categories={this.props.categories}

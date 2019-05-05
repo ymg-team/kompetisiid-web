@@ -31,16 +31,15 @@ function data(state = {}, action) {
   case RECEIVE_MORE_DATA:
     if (action.target === 'kompetisi_jelajah') {
       state[action.filter].is_loading = false
-      nextstate = state
-      nextstate[action.filter].message = action.json.message
-      nextstate[action.filter].status = action.json.status
+      state[action.filter].message = action.json.message
+      state[action.filter].status = action.json.status
       if (action.json.status === 200) {
-        nextstate.data = pushData(
-          nextstate[action.filter].data,
+        state.data = pushData(
+          state[action.filter].data,
           action.json.data
         )
       }
-      return Object.assign({}, state, nextstate)
+      return Object.assign({}, state)
     }
 
   default:
