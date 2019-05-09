@@ -58,19 +58,28 @@ class MyCompetition extends React.Component {
         {
           text: "menunggu",
           is_active: tab_active == 3,
-          count: stats.competition ? stats.competition.waiting : 0,
+          count:
+            stats.status == 200 && stats.competition
+              ? stats.competition.waiting
+              : 0,
           target: "/super/competition/waiting"
         },
         {
           text: "berlangsung",
           is_active: tab_active == 1,
-          count: stats.competition ? stats.competition.live : 0,
+          count:
+            stats.status == 200 && stats.competition
+              ? stats.competition.live
+              : 0,
           target: "/super/competition/live"
         },
         {
           text: "dipublikasi",
           is_active: tab_active == 2,
-          count: stats.competition ? stats.competition.posted : 0,
+          count:
+            stats.status == 200 && stats.competition
+              ? stats.competition.posted
+              : 0,
           target: "/super/competition/posted"
         }
       ]
@@ -80,25 +89,37 @@ class MyCompetition extends React.Component {
         {
           text: "menunggu",
           is_active: tab_active == 1,
-          count: stats.competition ? stats.competition.waiting : 0,
+          count:
+            stats.status == 200 && stats.competition
+              ? stats.competition.waiting
+              : 0,
           target: "/dashboard/competition/waiting"
         },
         {
           text: "berlangsung",
           is_active: tab_active == 2,
-          count: stats.competition ? stats.competition.live : 0,
+          count:
+            stats.status == 200 && stats.competition
+              ? stats.competition.live
+              : 0,
           target: "/dashboard/competition/live"
         },
         {
           text: "dipublikasi",
           is_active: tab_active == 3,
-          count: stats.competition ? stats.competition.posted : 0,
+          count:
+            stats.status == 200 && stats.competition
+              ? stats.competition.posted
+              : 0,
           target: "/dashboard/competition/posted"
         },
         {
           text: "ditolak",
           is_active: tab_active == 4,
-          count: stats.competition ? stats.competition.rejected : 0,
+          count:
+            stats.status == 200 && stats.competition
+              ? stats.competition.rejected
+              : 0,
           target: "/dashboard/competition/rejected"
         }
       ]
