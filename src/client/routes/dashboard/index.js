@@ -38,12 +38,12 @@ export default {
     {
       path: "/dashboard/competition/create",
       extact: true,
-      component: FormCompetition,
+      component: FormCompetition
     },
     {
       path: "/dashboard/update/:id",
       extact: true,
-      component: FormCompetition,
+      component: FormCompetition
     },
     // waiting competition page
     {

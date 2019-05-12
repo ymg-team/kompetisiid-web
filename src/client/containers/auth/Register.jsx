@@ -12,6 +12,8 @@ import { Link } from "react-router-dom"
 import Helmet from "../../components/Helmet"
 import { Fullscreen } from "../../components/Fullscreen"
 import { LoginBoxStyled } from "./Login"
+import AuthFacebook from "../../components/buttons/AuthFacebook"
+import AuthGoogle from "../../components/buttons/AuthGoogle"
 
 // list of required input
 const requiredInput = [
@@ -33,7 +35,10 @@ class Register extends Component {
   }
 
   UNSAFE_componentWillUpdate = (nextprops, nextstate) => {
-    if (nextstate.avatar && nextstate.avatar.lastModified !== this.state.avatar.lastModified) {
+    if (
+      nextstate.avatar &&
+      nextstate.avatar.lastModified !== this.state.avatar.lastModified
+    ) {
       // ref: https://stackoverflow.com/a/36281449/2780875
       const reader = new FileReader()
       reader.readAsDataURL(nextstate.avatar)
@@ -44,15 +49,14 @@ class Register extends Component {
   }
 
   UNSAFE_componentWillReceiveProps = nextprops => {
-    if(nextprops.response.status) {
-      
-      if(nextprops.response.status === 201) {
+    if (nextprops.response.status) {
+      if (nextprops.response.status === 201) {
         setTimeout(() => {
           // register success, redirect to homepage
           location.href = "/"
         }, 1500)
       } else {
-        this.setState({loading: false})
+        this.setState({ loading: false })
       }
     }
   }
@@ -62,22 +66,25 @@ class Register extends Component {
   }
 
   regHandler = () => {
-    this.setState({
-      loading: true
-    }, () => {
-      // generate params
-      let params = {
-        fullname: this.state.fullname,
-        username: this.state.username,
-        email: this.state.email,
-        password: this.state.password,
+    this.setState(
+      {
+        loading: true
+      },
+      () => {
+        // generate params
+        let params = {
+          fullname: this.state.fullname,
+          username: this.state.username,
+          email: this.state.email,
+          password: this.state.password
+        }
+
+        if (this.state.avatar.name) params.avatar = this.state.avatar
+
+        console.log("request api to register...", params)
+        this.props.dispatch(register(params))
       }
-
-      if(this.state.avatar.name) params.avatar = this.state.avatar
-
-      console.log("request api to register...", params)
-      this.props.dispatch(register(params))
-    })
+    )
   }
 
   render = () => {
@@ -125,8 +132,13 @@ class Register extends Component {
                   }
                 />
                 <InputFile
-                  customStyle={{textAlign: "center"}}
-                  customStyleInput={{width: "auto", background: "#ededed", margin: "0 auto", padding: "5px"}}
+                  customStyle={{ textAlign: "center" }}
+                  customStyleInput={{
+                    width: "auto",
+                    background: "#ededed",
+                    margin: "0 auto",
+                    padding: "5px"
+                  }}
                   name="avatar"
                   id="input-avatar"
                   value={avatar || ""}
@@ -231,6 +243,16 @@ class Register extends Component {
               </div>
               {/* end of register submit button */}
             </form>
+
+            {/* oauth register */}
+            {/* <span>
+              <p>Atau masuk menggunakan</p>
+              <div className="login-box__content__auth">
+                <AuthFacebook isLoggedIn={false} />
+                <AuthGoogle isLoggedIn={false} />
+              </div>
+            </span> */}
+            {/* oauth register */}
           </div>
           {/* end of from input */}
 

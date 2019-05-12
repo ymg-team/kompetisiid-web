@@ -5,6 +5,12 @@ import { fullPageLoader } from "../preloaders/FullPage"
 import { connect } from "react-redux"
 
 class AuthFacebook extends Component {
+  
+  static defaultProps = {
+    isLoggedIn: true
+  }
+  
+  
   state = {
     response: {},
     disabled: true
@@ -22,13 +28,17 @@ class AuthFacebook extends Component {
 
   reqToApi(fbResponse = {}) {
     console.log("fbResponse", fbResponse)
-    this.props.dispatch(
-      oauthLogin({
-        provider: "facebook",
-        user_id: fbResponse.authResponse.userID,
-        token: fbResponse.authResponse.accessToken
-      })
-    )
+
+    if(this.props.isLoggedIn) {
+      this.props.dispatch(
+        oauthLogin({
+          provider: "facebook",
+          user_id: fbResponse.authResponse.userID,
+          token: fbResponse.authResponse.accessToken
+        })
+      )
+    }
+
   }
 
   clickHandler() {

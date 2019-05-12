@@ -17,6 +17,7 @@ import User from "./user"
 import Dashboard from "./dashboard/index"
 import Careers from "./careers"
 import Super from "./super/index"
+import Settings from "./settings"
 
 // components
 import FullPagePreloaderOri from "../components/preloaders/FullPage"
@@ -74,6 +75,7 @@ export default [
           Categories,
           User,
           Careers,
+          Settings,
           {
             path: "/login",
             fullscreen: true,

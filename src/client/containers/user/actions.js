@@ -10,12 +10,13 @@ import {
 } from "../../../store/consts"
 
 import { CALL_API } from "../../../store/middlewares/api"
-import sealMiddleware from '../../helpers/seal'
+import sealMiddleware from "../../helpers/seal"
 
 export const LOGOUT = "LOGOUT"
 export const LOGIN = "LOGIN"
 export const REGISTER = "REGISTER"
 export const OAUTH_LOGIN = "OAUTH_LOGIN"
+export const OAUTH_REGISTER = "OAUTH_REGISTER"
 export const EMAIL_VERIFICATION = "EMAIL_VERIFICATION"
 export const RESEND_EMAIL_VALIDATION_TOKEN = "RESEND_EMAIL_VALIDATION_TOKEN"
 export const FETCH_COUNT_SUPER_SIDEBAR = "FETCH_COUNT_SUPER_SIDEBAR"
@@ -66,8 +67,7 @@ export function register(params) {
   }
 }
 
-export function emailValidation() {
-}
+export function emailValidation() {}
 
 export function resendEmailValidationToken(params) {
   return {
@@ -80,8 +80,25 @@ export function resendEmailValidationToken(params) {
 }
 
 /**
- * @description function to do oauth login 
- * @param {string} params.provider oauth provider facebook|google 
+ * @description function to do oauth register
+ * @param {string} params.provider oauth provider facebook|google
+ * @param {string} params.token token from  oauth
+ * @param {string} params.user_id user id from oauth
+ */
+export function oauthRegister(params) {
+  return {
+    [CALL_API]: {
+      method: "post",
+      url: `/api/user/oauth/register`,
+      params,
+      type: OAUTH_REGISTER
+    }
+  }
+}
+
+/**
+ * @description function to do oauth login
+ * @param {string} params.provider oauth provider facebook|google
  * @param {string} params.token token from  oauth
  * @param {string} params.user_id user id from oauth
  */
@@ -133,9 +150,9 @@ export function fetchCountSuperSidebar() {
 }
 
 /**
- * @description function to fetch count 
+ * @description function to fetch count
  */
-export function fetchCountDashboardSidebar(){
+export function fetchCountDashboardSidebar() {
   return {
     [CALL_API]: {
       url: `/api/counter/dashboard-sidebar/${sealMiddleware.generateSeal()}`,

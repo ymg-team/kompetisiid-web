@@ -45,13 +45,10 @@ export default props => {
           <li>
             <Link to="/dashboard/competition/live">
               Berlangsung{" "}
-              <span className="label label-blue">
-                {stats.competition.live}
-              </span>
+              <span className="label label-blue">{stats.competition.live}</span>
             </Link>
           </li>
         ) : null}
-        
 
         {/* link to published competition */}
         {stats.competition && stats.competition.posted ? (
@@ -76,8 +73,24 @@ export default props => {
             </Link>
           </li>
         ) : null}
-       
+
         {/* end of competition */}
+
+        {/* settings */}
+        <hr />
+        <li>
+          {" "}
+          <strong>Pengaturan</strong>
+        </li>
+        <li>
+          <Link to="/settings/profile">Pengaturan Profil</Link>
+        </li>
+        <li>
+          <Link to="/settings/connect-social-media">
+            Hubungkan Ke Sosial Media
+          </Link>
+        </li>
+        {/* end of settings */}
 
         {/* logout from dashboard */}
         <hr />

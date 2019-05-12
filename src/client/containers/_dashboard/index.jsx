@@ -10,7 +10,6 @@ import HeaderDashboard from "../../components/cards/HeaderDashboard"
 class Dashboard extends React.Component {
   render = () => {
     const { stats } = this.props
-    console.log("stats", stats)
     return (
       <React.Fragment>
         <Helmet title="Dashboard - Kompetisi Id" />
