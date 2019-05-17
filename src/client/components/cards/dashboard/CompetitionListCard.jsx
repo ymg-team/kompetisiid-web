@@ -5,12 +5,9 @@ import { epochToRelativeTime } from "../../../helpers/DateTime"
 import { Link } from "react-router-dom"
 
 class CompetitionListCard extends React.Component {
-
   handleActionWaitingCompetition(action) {
-    if(action === "accept") {
-
-    }else if(action === "reject") {
-
+    if (action === "accept") {
+    } else if (action === "reject") {
     } else {
       console.warn("please provide an action!")
     }
@@ -18,12 +15,17 @@ class CompetitionListCard extends React.Component {
 
   render() {
     const { n } = this.props
+    const linkEdit = `/${
+      ["admin", "moderator"].includes(this.props.session.level)
+        ? "super"
+        : "dashboard"
+    }/competition/update/${n.id}`
     return (
       <div className="competition-items">
         <div className="item">
           <div className="item__left">
             <h4>
-              <Link to={`/super/competition/update/${n.id}`}>{n.title}</Link>
+              <Link to={linkEdit}>{n.title}</Link>
             </h4>
             <p className="text-muted" style={{ margin: 0 }}>
               <span>Dipost {epochToRelativeTime(n.created_at)}</span> oleh{" "}
@@ -120,9 +122,7 @@ class CompetitionListCard extends React.Component {
                       </a>
                     </li>
                     <li>
-                      <Link to={`/dashboard/competition/${n.id_kompetisi}`}>
-                        Ubah
-                      </Link>
+                      <Link to={linkEdit}>Ubah</Link>
                     </li>
                     <li>
                       <a onClick={() => {}} href="javascript:;">

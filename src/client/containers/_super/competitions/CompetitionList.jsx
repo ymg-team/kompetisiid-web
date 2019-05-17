@@ -8,6 +8,7 @@ import Button from "../../../components/buttons/index"
 
 import { fetchJelajah, fetchJelajahMore } from "../../competition/actions"
 import { connect } from "react-redux"
+import { toCamelCase } from "string-manager"
 
 let Filter, Params
 let Limit = 20
@@ -125,7 +126,7 @@ class MyCompetition extends React.Component {
       ]
     }
 
-    const title = `kompetisi ${tabcontent[tab_active - 1].text}`
+    const title = toCamelCase(`kompetisi ${tabcontent[tab_active - 1].text}`)
 
     return (
       <React.Fragment>
@@ -155,7 +156,13 @@ class MyCompetition extends React.Component {
             ) : null}
             {competitions.data
               ? competitions.data.map((n, key) => {
-                  return <CompetitionCard key={key} n={n} />
+                  return (
+                    <CompetitionCard
+                      session={this.props.session}
+                      key={key}
+                      n={n}
+                    />
+                  )
                 })
               : null}
             {competitions.status != 200 ? (
