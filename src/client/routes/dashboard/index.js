@@ -41,7 +41,7 @@ export default {
       component: FormCompetition
     },
     {
-      path: "/dashboard/update/:id",
+      path: "/dashboard/competition/update/:id",
       extact: true,
       component: FormCompetition
     },

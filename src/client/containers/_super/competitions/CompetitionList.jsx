@@ -156,7 +156,13 @@ class MyCompetition extends React.Component {
             ) : null}
             {competitions.data
               ? competitions.data.map((n, key) => {
-                  return <CompetitionCard key={key} n={n} />
+                  return (
+                    <CompetitionCard
+                      session={this.props.session}
+                      key={key}
+                      n={n}
+                    />
+                  )
                 })
               : null}
             {competitions.status != 200 ? (

@@ -93,7 +93,7 @@ class CompetitionForm extends React.Component {
   }
 
   render = () => {
-    const { competitionId, response } = this.props
+    const { competitionId, response, competitionData } = this.props
     const loading =
       response.is_loading || response.status === 201 || response.status === 200
     let title = ""
@@ -368,7 +368,7 @@ class CompetitionForm extends React.Component {
 
           {competitionId &&
           ["moderator", "admin"].includes(this.props.session.level) &&
-          ["waiting", "reject"].includes(this.props.competitionData.status) ? (
+          ["waiting", "reject"].includes(competitionData.status) ? (
             <BtnSubmit
               wrapperStyle={{ display: "inline-block", width: "initial" }}
               disabled={loading}
@@ -388,7 +388,9 @@ class CompetitionForm extends React.Component {
             />
           )}
 
-          {this.props.competitionData.id && this.props.competitionData.status != "reject" ? (
+          {competitionData.id &&
+          competitionData.status != "reject" &&
+          ["admin", "moderator"].includes(this.props.session.level) ? (
             <BtnSubmit
               className="btn btn-red"
               wrapperStyle={{
