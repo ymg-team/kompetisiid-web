@@ -86,6 +86,9 @@ export default props => {
           <Link to="/settings/profile">Pengaturan Profil</Link>
         </li>
         <li>
+          <Link to="/settings/account">Pengaturan Akun</Link>
+        </li>
+        <li>
           <Link to="/settings/connect-social-media">
             Hubungkan Ke Sosial Media
           </Link>

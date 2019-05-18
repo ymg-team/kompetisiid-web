@@ -134,6 +134,7 @@ class MyCompetition extends React.Component {
         <HeaderDashboard
           title={title}
           text="Berikut adalah kompetisi yang telah anda pasang di Kompetisi ID."
+          noBorder
         />
         {/* tab navigations */}
         <Tab tabs={tabcontent} />
