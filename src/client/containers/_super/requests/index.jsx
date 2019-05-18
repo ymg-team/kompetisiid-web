@@ -68,7 +68,7 @@ class RequestCompetition extends React.Component {
       <React.Fragment>
         <Helmet title={title} description={description} />
 
-        <HeaderDashboard title={title} text={description} />
+        <HeaderDashboard title={title} text={description} noBorder />
 
         <Tab tabs={tabcontent} />
 

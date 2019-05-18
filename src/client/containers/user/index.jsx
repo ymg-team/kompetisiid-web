@@ -33,8 +33,9 @@ class Index extends React.Component {
 
     if (profile[username] && profile[username].status) {
       if (profile[username].status != 200) {
-        helmetdata.description = profile[username].meta.message
-        helmetdata.keywords = `member kompetisiid,${username} kompetisiid`
+        helmetdata.title = "User tidak ditemukan"
+        helmetdata.description = profile[username].message
+        helmetdata.keywords = `member kompetisiid,${username} kompetisi id`
       }
     }
 
@@ -49,7 +50,13 @@ class Index extends React.Component {
             <div className="container">
               <div className="col-sm-1 col-sm-push-1 col-xs-3">
                 <div className="avatar">
-                  <img src="/assets/4.2/img/avatar-1.jpg" />
+                  <img
+                    src={
+                      profile[username] && profile[username].data && profile[username].data.avatar
+                        ? profile[username].data.avatar.original
+                        : "/assets/4.2/img/avatar-1.jpg"
+                    }
+                  />
                 </div>
               </div>
               <div className="col-sm-9 col-sm-push-1 col-xs-9">
@@ -75,8 +82,7 @@ class Index extends React.Component {
             </div>
           </div>
         </div>
-        {/* {profile[username] &&
-        profile[username].status == 200 ? (
+        {/* {profile[username] && profile[username].status == 200 ? (
           <UserStats data={profile[username].data.competition_stats} />
         ) : null} */}
       </div>

@@ -1,8 +1,18 @@
-import React from 'react'
+import React from "react"
+import Styled from "styled-components"
 
-export default (props) => (
-  <div>
+const HeaderDashboard = Styled.div`
+  h1 {
+    font-size: 2.5em;
+    margin-bottom: 0;
+  }
+  border-bottom: ${props => (props.noBorder ? "none" : "1px solid lightgray")} ;
+  margin-bottom: ${props => (props.noBorder ? "0" : "50px")} ;
+`
+
+export default props => (
+  <HeaderDashboard noBorder={props.noBorder}>
     <h1>{props.title}</h1>
     <p className="text-muted">{props.text}</p>
-  </div>
+  </HeaderDashboard>
 )

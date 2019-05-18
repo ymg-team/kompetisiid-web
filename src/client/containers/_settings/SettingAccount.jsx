@@ -4,15 +4,15 @@ import HeaderDashboard from "../../components/cards/HeaderDashboard"
 
 import { connect } from "react-redux"
 
-class SettingProfile extends React.Component {
+class SettingAccount extends React.Component {
   render() {
     return (
       <div>
-        <Helmet title="Pengaturan Profil" />
-        <HeaderDashboard title="Seting Profil" text="this is setting page" />
+        <Helmet title="Pengaturan Akun" />
+        <HeaderDashboard title="Seting Akun" text="This is setting page" />
       </div>
     )
   }
 }
 
-export default connect()(SettingProfile)
+export default connect()(SettingAccount)

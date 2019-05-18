@@ -8,7 +8,7 @@ import {
 
 // components
 import TitleLevel2Box from "../../boxs/TitleLevel2"
-import SubHeader from "../../headers/SubHeader"
+import HeaderDashboard from "../../cards/HeaderDashboard"
 import Helmet from "../../Helmet"
 import Input from "../../form/InputText"
 import Textarea from "../../form/Textarea"
@@ -107,11 +107,9 @@ class CompetitionForm extends React.Component {
     return (
       <React.Fragment>
         <Helmet title={title} />
-        <SubHeader
-          customStyle={{ marginTop: "20px" }}
-          customClass="row"
-          customClassContent="row"
+        <HeaderDashboard
           title={title}
+          text="Buat data kompetisi yang jelas sehingga menarik para pengunjung untuk menjadi pesertanya"
         />
         <form
           className="form-ki no-padding col-md-8"
@@ -119,7 +117,7 @@ class CompetitionForm extends React.Component {
           method="post"
         >
           <TitleLevel2Box
-            title="Data Kompetisi"
+            title="Seputar Kompetisi"
             text="Pastikan memasukan data selengkap mungkin untuk memudahkan pengunjung memahami mekanisme kompetisi yang bersangkutan."
           />
 

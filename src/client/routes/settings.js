@@ -14,6 +14,12 @@ const SettingProfile = Loadable({
   loading: Loading
 })
 
+const SettingAccount = Loadable({
+  loader: () => import("../containers/_settings/SettingAccount"),
+  loading: Loading
+})
+
+
 const SettingConnect = Loadable({
   loader: () => import("../containers/_settings/SettingConnectSocialMedia"),
   loading: Loading
@@ -29,6 +35,11 @@ export default {
       component: SettingProfile
     },
     {
+      path: "/settings/account",
+      exact: true,
+      component: SettingAccount
+    },
+    {
       path: "/settings/connect-social-media",
       exact: true,
       component: SettingConnect
@@ -36,6 +47,8 @@ export default {
     {
       path: "/settings/*",
       exact: true,
+      error_code: 404,
+      error_msg: "Halaman tidak ditemukan",
       component: NotFound
     }
   ]

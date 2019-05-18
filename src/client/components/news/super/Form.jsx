@@ -2,6 +2,7 @@ import React from "react"
 import { createNews, updateNews } from "../../../containers/news/actions"
 
 // components
+import HeaderDashboard from "../../cards/HeaderDashboard"
 import SubHeader from "../../headers/SubHeader"
 import TitleLevel2Box from "../../boxs/TitleLevel2"
 import InputText from "../../form/InputText"
@@ -61,12 +62,7 @@ class FormNews extends React.Component {
       response.is_loading || response.status === 201 || response.status === 200
     return (
       <React.Fragment>
-        <SubHeader
-          customStyle={{ marginTop: 20 }}
-          customClass="row"
-          customClassContent="row"
-          title={this.props.title}
-        />
+        <HeaderDashboard title={this.props.title} text="Menyampaikan berita-berita seputar kompetisi di Indonesia" />
         <form
           className="form-ki no-padding col-md-8"
           action="javascript:;"
