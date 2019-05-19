@@ -1,6 +1,6 @@
 import React from "react"
 import Loadable from "react-loadable"
-import { fetchRequest } from "./actions"
+import { fetchRequest, fetchMoreRequest } from "./actions"
 import { connect } from "react-redux"
 
 import HeaderDashboard from "../../../components/cards/HeaderDashboard"
@@ -20,6 +20,13 @@ class RequestCompetition extends React.Component {
     const filter = this.generateFilter(this.props)
     const params = this.generateParams(this.props)
     this.props.dispatch(fetchRequest(params, filter))
+  }
+
+  handleLoadMore(lastid) {
+    const filter = this.generateFilter(this.props)
+    const params = this.generateParams(this.props)
+    params.lastid = lastid
+    this.props.dispatch(fetchMoreRequest(params, filter))
   }
 
   generateFilter(props) {
@@ -72,7 +79,10 @@ class RequestCompetition extends React.Component {
 
         <Tab tabs={tabcontent} />
 
-        <RequestBox data={data[Filter] || {}} />
+        <RequestBox
+          handleLoadMore={lastid => this.handleLoadMore(lastid)}
+          data={data[Filter] || {}}
+        />
       </React.Fragment>
     )
   }

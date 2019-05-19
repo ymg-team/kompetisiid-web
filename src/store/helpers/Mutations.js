@@ -29,11 +29,31 @@ export function updateListbyId(state, action, params, selector) {
     if (state[key].data) {
       state[key].data.map((n, key) => {
         if (n.id === params.id) {
-          if(selector) n = selector(n, action, params)
+          if (selector) n = selector(n, action, params)
         }
       })
     }
   })
+
+  return Object.assign({}, state)
+}
+
+/**
+ * @description function to handle loadmore on list
+ */
+export function receiveMoreListByFilter(state, action) {
+  const { filter } = action
+  if (action.json && action.json.status) {
+    state[filter].is_loading = false
+    state[filter].status = action.json.status
+    state[filter].message = action.json.message
+    // push to data
+    if (action.json.status == 200) {
+      state[filter].data = state[filter].data.concat(action.json.data)
+    }
+  } else {
+    state[filter].is_loading = true
+  }
 
   return Object.assign({}, state)
 }
