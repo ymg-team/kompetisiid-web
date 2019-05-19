@@ -42,7 +42,7 @@ export function updateListbyId(state, action, params, selector) {
  * @description function to handle loadmore on list
  * @param {object} state = state for reducer
  * @param {object} action = action from reducer
- * @param {string} action.filter 
+ * @param {string} action.filter
  */
 export function receiveMoreListByFilter(state, action) {
   const { filter } = action
@@ -56,6 +56,65 @@ export function receiveMoreListByFilter(state, action) {
     }
   } else {
     state[filter].is_loading = true
+  }
+
+  return Object.assign({}, state)
+}
+
+/**
+ * function to push more data to object javascript
+ */
+export function pushData(currentdata, nextdata) {
+  nextdata.map(n => {
+    currentdata.push(n)
+  })
+  return currentdata
+}
+
+/**
+ * function to set loading state on reducer
+ */
+export function setToLoading(state, action) {
+  if (!state[action.filter]) state[action.filter] = {}
+  state[action.filter].is_loading = true
+  return Object.assign({}, state)
+}
+
+/**
+ * @description function to receive json response and update store 
+ * @param {object} state , state from redux 
+ * @param {object} action , action from redux
+ */
+export function receiveData(state, action) {
+  if(!state[action.filter]) state[action.filter] = {}
+  if(!action.json) {
+    state[action.filter].is_loading = true
+    return Object.assign({}, state)
+  }
+  else {
+    state[action.filter].is_loading = false 
+    return Object.assign({}, state, { [action.filter]: action.json })
+  }
+}
+
+/**
+ * function to handle receive api response on reducer
+ * @param {*} state
+ * @param {*} action
+ */
+export function receiveApiResponse(state, action) {
+  if (action.json) {
+    if (action.filter) {
+      state[action.filter] = action.json
+    } else {
+      state = action.json
+    }
+  } else {
+    if (action.filter) {
+      state[action.filter] = { is_loading: true }
+    } else {
+      state = { is_loading: true }
+    }
   }
 
   return Object.assign({}, state)

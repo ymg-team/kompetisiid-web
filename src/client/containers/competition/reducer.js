@@ -1,6 +1,5 @@
 import { combineReducers } from 'redux'
-import { pushData } from '../../../store/helpers/Normalizer'
-import { RECEIVE_CATEGORIES } from './actions'
+import { pushData } from '../../../store/helpers/Mutations'
 import {
   REQUEST_DATA,
   RECEIVE_DATA,

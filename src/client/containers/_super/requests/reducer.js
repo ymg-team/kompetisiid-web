@@ -5,13 +5,12 @@ import {
 } from "./actions"
 import * as Mutations from "../../../../store/helpers/Mutations"
 import * as Selector from "./selectors"
-import { receiveData } from "../../../../store/helpers/Normalizer"
 import { combineReducers } from "redux"
 
 function list(state = {}, action = {}) {
   switch (action.type) {
     case REQUEST_SEND_COMPETITION:
-      return receiveData(state, action)
+      return Mutations.receiveData(state, action)
 
     case REQUEST_MORE_SEND_COMPETITION:
       return Mutations.receiveMoreListByFilter(state, action)
