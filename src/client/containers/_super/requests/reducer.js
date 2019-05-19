@@ -1,45 +1,31 @@
 import {
-  REQUEST_DATA,
-  RECEIVE_DATA,
-  RECEIVE_MORE_DATA
-} from '../../../../store/consts'
-import * as Mutations from '../../../../store/helpers/Mutations'
-import * as Selector from './selectors'
-import { combineReducers } from 'redux'
+  REQUEST_SEND_COMPETITION,
+  ACTION_SEND_COMPETITION,
+  REQUEST_MORE_SEND_COMPETITION
+} from "./actions"
+import * as Mutations from "../../../../store/helpers/Mutations"
+import * as Selector from "./selectors"
+import { receiveData } from "../../../../store/helpers/Normalizer"
+import { combineReducers } from "redux"
 
 function list(state = {}, action = {}) {
   switch (action.type) {
-  // request data from api
-  case REQUEST_DATA:
-    if (action.target === 'request_kompetisi') {
-      return Mutations.requestListByFilter(state, action)
-    }
+    case REQUEST_SEND_COMPETITION:
+      return receiveData(state, action)
 
-    // request action data from api
-    if (action.target === 'action_request_kompetisi') {
-      return Mutations.updateListbyId(state, action, action.params, Selector.updateStatus)
-    }
+    case REQUEST_MORE_SEND_COMPETITION:
+      return Mutations.receiveMoreListByFilter(state, action)
 
-    return state
+    case ACTION_SEND_COMPETITION:
+      return Mutations.updateListbyId(
+        state,
+        action,
+        action.params,
+        Selector.updateStatus
+      )
 
-  case RECEIVE_DATA:
-    // receive data from api
-    if (action.target === 'request_kompetisi') {
-      return Mutations.receiveListByFilter(state, action)
-    }
-
-    // request action data from api
-    if (action.target === 'action_request_kompetisi') {
-      return Mutations.updateListbyId(state, action, action.params, Selector.updateStatus)
-    }
-
-    return state
-
-  case RECEIVE_MORE_DATA:
-    return state
-
-  default:
-    return state
+    default:
+      return state
   }
 }
 

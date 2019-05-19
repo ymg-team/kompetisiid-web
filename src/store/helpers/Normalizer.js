@@ -70,7 +70,7 @@ export function setToLoading(state, action) {
  * @param {object} action , action from redux
  */
 export function receiveData(state, action) {
-  if(state[action.filter]) state[action.filter] = {}
+  if(!state[action.filter]) state[action.filter] = {}
   if(!action.json) {
     state[action.filter].is_loading = true
     return Object.assign({}, state)

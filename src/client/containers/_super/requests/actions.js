@@ -7,6 +7,10 @@ import {
 import { CALL_API } from '../../../../store/middlewares/api'
 import { objToQuery } from 'string-manager/dist/modules/httpquery'
 
+export const REQUEST_SEND_COMPETITION = "REQUEST_SEND_COMPETITION"
+export const REQUEST_MORE_SEND_COMPETITION = "REQUEST_MORE_SEND_COMPETITION"
+export const ACTION_SEND_COMPETITION = "ACTION_SEND_COMPETITION"
+
 /**
  * @description function to request count total send competition
  */
@@ -32,12 +36,27 @@ export function fetchCountRequest() {
 export function fetchRequest(params = {}, filter) {
   return {
     [CALL_API]: {
-      typeSuccess: RECEIVE_DATA,
-      typeWaiting: REQUEST_DATA,
+      type: REQUEST_SEND_COMPETITION,
       filter,
       method: 'get',
-      target: 'request_kompetisi',
-      url: `/api/request/?${objToQuery(params)}`
+      url: `/api/request?${objToQuery(params)}`
+    }
+  }
+}
+
+/**
+ * @description function to request list sendo competition by paramters
+ * @param {*} params 
+ * @param {String} params.status, oneof: posted, reject, waiting
+ * @param {String} filter
+ */
+export function fetchMoreRequest(params = {}, filter) {
+  return {
+    [CALL_API]: {
+      type: REQUEST_MORE_SEND_COMPETITION,
+      filter,
+      method: 'get',
+      url: `/api/request?${objToQuery(params)}`
     }
   }
 }
@@ -51,10 +70,8 @@ export function fetchRequest(params = {}, filter) {
 export function actionRequest(params) {
   return {
     [CALL_API]: {
-      typeSuccess: RECEIVE_DATA, 
-      typeWaiting: REQUEST_DATA,
+      type: ACTION_SEND_COMPETITION,
       params,
-      target: 'action_request_kompetisi',
       method: 'put',
       url: `/api/request/${params.id}`
     }
