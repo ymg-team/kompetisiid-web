@@ -40,6 +40,9 @@ export function updateListbyId(state, action, params, selector) {
 
 /**
  * @description function to handle loadmore on list
+ * @param {object} state = state for reducer
+ * @param {object} action = action from reducer
+ * @param {string} action.filter 
  */
 export function receiveMoreListByFilter(state, action) {
   const { filter } = action

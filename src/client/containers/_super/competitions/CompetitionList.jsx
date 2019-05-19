@@ -58,7 +58,7 @@ class MyCompetition extends React.Component {
       tabcontent = [
         {
           text: "menunggu",
-          is_active: tab_active == 3,
+          is_active: tab_active == 1,
           count:
             stats.status == 200 && stats.competition
               ? stats.competition.waiting
@@ -67,7 +67,7 @@ class MyCompetition extends React.Component {
         },
         {
           text: "berlangsung",
-          is_active: tab_active == 1,
+          is_active: tab_active == 2,
           count:
             stats.status == 200 && stats.competition
               ? stats.competition.live
@@ -76,7 +76,7 @@ class MyCompetition extends React.Component {
         },
         {
           text: "dipublikasi",
-          is_active: tab_active == 2,
+          is_active: tab_active == 3,
           count:
             stats.status == 200 && stats.competition
               ? stats.competition.posted

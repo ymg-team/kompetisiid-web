@@ -303,25 +303,29 @@ class CompetitionForm extends React.Component {
 
           <TitleLevel2Box title="Opsional" />
 
-          {/* is guaranted competition */}
-          <Checkbox
-            name="is_guaranteed"
-            label="Kompetisi ini Bergaransi"
-            value={this.state.is_guaranteed}
-            validate={this.state.is_guaranteed_validate || {}}
-            setState={(n, cb) => this.setState(n, cb)}
-          />
-          {/* end of is guarantec competition */}
+          {["moderator", "admin"].includes(this.props.session.level) ? (
+            <React.Fragment>
+              {/* is guaranted competition */}
+              <Checkbox
+                name="is_guaranteed"
+                label="Kompetisi ini Bergaransi"
+                value={this.state.is_guaranteed}
+                validate={this.state.is_guaranteed_validate || {}}
+                setState={(n, cb) => this.setState(n, cb)}
+              />
+              {/* end of is guarantec competition */}
 
-          {/* is media partner */}
-          <Checkbox
-            name="is_mediapartner"
-            label="Kompetisi ini adalah Media Partner"
-            value={this.state.is_mediapartner}
-            validate={this.state.is_mediapartner_validate || {}}
-            setState={(n, cb) => this.setState(n, cb)}
-          />
-          {/* end of is media parter */}
+              {/* is media partner */}
+              <Checkbox
+                name="is_mediapartner"
+                label="Kompetisi ini adalah Media Partner"
+                value={this.state.is_mediapartner}
+                validate={this.state.is_mediapartner_validate || {}}
+                setState={(n, cb) => this.setState(n, cb)}
+              />
+              {/* end of is media parter */}
+            </React.Fragment>
+          ) : null}
 
           {/*input link join competition*/}
           <Input

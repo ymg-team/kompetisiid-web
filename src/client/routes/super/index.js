@@ -53,14 +53,14 @@ export default {
     {
       path: "/super/competition",
       exact: true,
-      tab_active: 1,
+      tab_active: 2,
       status: "active",
       component: CompetitionList
     },
     {
       path: "/super/competition/waiting",
       exact: true,
-      tab_active: 3,
+      tab_active: 1,
       // status to request api
       status: "waiting",
       component: CompetitionList
@@ -68,7 +68,7 @@ export default {
     {
       path: "/super/competition/live",
       exact: true,
-      tab_active: 1,
+      tab_active: 2,
       // status to request api
       status: "active",
       component: CompetitionList
@@ -76,7 +76,7 @@ export default {
     {
       path: "/super/competition/posted",
       exact: true,
-      tab_active: 2,
+      tab_active: 3,
       // status to request api
       status: "all",
       component: CompetitionList
