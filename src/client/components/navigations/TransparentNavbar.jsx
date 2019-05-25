@@ -300,7 +300,7 @@ class Navbar extends Component {
                                 )}
                               </li>
                               <li>
-                                <Link to="/settings">Setelan</Link>
+                                <Link to="/settings/profile">Seting profil</Link>
                               </li>
                               <li>
                                 <a

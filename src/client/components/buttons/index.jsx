@@ -54,13 +54,13 @@ ${props => {
 
 const Button = props => {
   let style = {}
-  if(props.loading) {
+  if (props.loading) {
     style.opacity = 0.4
     style.cursor = "not-allowed"
   }
   return (
     <ButtonStyled {...props} style={style}>
-      { props.loading ? "Menunggu..." : props.children || props.text}
+      {props.loading ? "Menunggu..." : props.children || props.text}
     </ButtonStyled>
   )
 }

@@ -26,8 +26,16 @@ const CompetitionList = Loadable({
   loader: () => import("../../containers/_super/competitions/CompetitionList"),
   loading: Loading
 })
+const CompetitionFormLayout = Loadable({
+  loader: () => import("../../containers/_super/competitions/CompetitionFormLayout"),
+  loading: Loading
+})
 const CompetitionForm = Loadable({
   loader: () => import("../../containers/_super/competitions/CompetitionForm"),
+  loading: Loading
+})
+const CompetitionAnnouncementForm = Loadable({
+  loader: () => import("../../containers/_super/competitions/CompetitionAnnouncement"),
   loading: Loading
 })
 const NewsList = Loadable({
@@ -90,8 +98,19 @@ export default {
     },
     {
       path: "/super/competition/update/:id",
-      exact: true,
-      component: CompetitionForm
+      component: CompetitionFormLayout,
+      routes: [
+        {
+          path: "/super/competition/update/:id",
+          exact: true,
+          component: CompetitionForm
+        },
+        {
+          path: "/super/competition/update/:id/announcements",
+          exact: true,
+          component: CompetitionAnnouncementForm
+        }
+      ]
     },
 
     // request send competition

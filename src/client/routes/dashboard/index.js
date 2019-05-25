@@ -18,9 +18,16 @@ const DashboardCompetitions = Loadable({
   loader: () => import("../../containers/_super/competitions/CompetitionList"),
   loading: Loading
 })
-
-const FormCompetition = Loadable({
+const CompetitionFormLayout = Loadable({
+  loader: () => import("../../containers/_super/competitions/CompetitionFormLayout"),
+  loading: Loading
+})
+const CompetitionForm = Loadable({
   loader: () => import("../../containers/_super/competitions/CompetitionForm"),
+  loading: Loading
+})
+const CompetitionAnnouncementForm = Loadable({
+  loader: () => import("../../containers/_super/competitions/CompetitionAnnouncement"),
   loading: Loading
 })
 
@@ -38,12 +45,23 @@ export default {
     {
       path: "/dashboard/competition/create",
       extact: true,
-      component: FormCompetition
+      component: CompetitionForm
     },
     {
       path: "/dashboard/competition/update/:id",
-      extact: true,
-      component: FormCompetition
+      component: CompetitionFormLayout,
+      routes: [
+        {
+          path: "/dashboard/competition/update/:id",
+          exact: true,
+          component: CompetitionForm
+        },
+        {
+          path: "/dashboard/competition/update/:id/announcements",
+          exact: true,
+          component: CompetitionAnnouncementForm
+        },
+      ]
     },
     // waiting competition page
     {

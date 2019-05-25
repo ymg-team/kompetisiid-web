@@ -4,7 +4,7 @@ import {
   REQUEST_DATA,
   RECEIVE_MORE_DATA
 } from "../../../store/consts"
-import { pushData } from "../../../store/helpers/Normalizer"
+import { pushData } from "../../../store/helpers/Mutations"
 
 function data(state = {}, action) {
   let nextstate = {}

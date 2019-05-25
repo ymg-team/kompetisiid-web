@@ -5,8 +5,12 @@ export default class InputFile extends Component {
   static defaultProps = {
     type: "file",
     max: 1000000,
-    customStyle: {}
+    customStyle: {},
+    customStylePreview: {width: 150},
+    accept: ""
   }
+
+  state = {}
 
   componentDidMount = () => {
     validate(this.props)
@@ -15,6 +19,16 @@ export default class InputFile extends Component {
   handleChange(e) {
     const { files } = e.target
     if (files[0]) {
+
+      // get preview if upload image
+      if(this.props.accept.includes("image/")) {
+        const reader = new FileReader()
+        reader.onload = e => {
+          this.setState({image_preview: e.target.result})
+        }
+        reader.readAsDataURL(files[0])
+      }
+
       this.props.setState(
         {
           [this.props.name]: files[0]
@@ -34,7 +48,7 @@ export default class InputFile extends Component {
   }
 
   render() {
-    const { max, label, name, validate, required } = this.props
+    const { max, label, name, validate, required, preview } = this.props
     const is_valid = !(!validate.is_valid && validate.message)
     return (
       <div
@@ -46,6 +60,13 @@ export default class InputFile extends Component {
             {label} {required ? <span className="text-red">*</span> : null}
           </label>
         ) : null}
+
+        {
+          this.state.image_preview || preview ?
+          <img style={this.props.customStylePreview} src={this.state.image_preview || preview} alt="preview" />
+          : null
+        }
+
         <input
           name={name}
           type="file"
@@ -53,6 +74,7 @@ export default class InputFile extends Component {
           onChange={e => this.handleChange(e)}
           onBlur={e => this.handleChange(e)}
           style={this.props.customStyleInput || {}}
+          accept={this.props.accept}
         />
         <small>
           maks {max / 1000000}

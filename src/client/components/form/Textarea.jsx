@@ -16,7 +16,7 @@ export default class Textarea extends React.Component {
 
   componentWillReceiveProps = np => {
     // validate on edit / set default value
-    if(!this.props.value && np.value) validate(np)
+    if (!this.props.value && np.value) validate(np)
   }
 
   handleChange = e => {
@@ -54,15 +54,20 @@ export default class Textarea extends React.Component {
       name,
       type,
       validate,
-      autofocus
+      autofocus,
+      note
     } = this.props
     const is_valid = !(!validate.is_valid && validate.message)
     return (
       <div className={`form-child ${!is_valid ? "error" : ""}`}>
-        <label htmlFor={this.props.id || name}>
+        <label
+          style={note ? { margin: "10px 0 5px" } : {}}
+          htmlFor={this.props.id || name}
+        >
           {label}{" "}
           {this.props.required ? <span className="text-red">*</span> : null}
         </label>
+        {note ? <small>{note}</small> : null}
         <TextareaStyled
           onChange={e => this.handleChange(e)}
           onBlur={e => this.handleChange(e)}

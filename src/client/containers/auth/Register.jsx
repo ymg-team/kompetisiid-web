@@ -175,6 +175,7 @@ class Register extends Component {
                   validate={this.state.username_validate || {}}
                   required={true}
                   setState={(n, cb) => this.setState(n, cb)}
+                  max={20}
                 />
               </div>
               {/* end of input email */}
@@ -189,6 +190,7 @@ class Register extends Component {
                   value={fullname || ""}
                   validate={this.state.fullname_validate || {}}
                   setState={(n, cb) => this.setState(n, cb)}
+                  max={100}
                 />
               </div>
               {/* end of input fullname */}
