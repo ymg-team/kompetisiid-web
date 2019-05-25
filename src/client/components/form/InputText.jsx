@@ -40,15 +40,20 @@ export default class InputText extends Component {
       type,
       validate,
       autoFocus,
-      autoComplete
+      autoComplete,
+      note
     } = this.props
     const is_valid = !(!validate.is_valid && validate.message)
     return (
       <div className={`form-child ${!is_valid ? "error" : ""}`}>
-        <label htmlFor={this.props.id || name}>
+        <label
+          htmlFor={this.props.id || name}
+          style={note ? { margin: "10px 0 5px" } : {}}
+        >
           {label}{" "}
           {this.props.required ? <span className="text-red">*</span> : null}
         </label>
+        {note ? <small>{note}</small> : null}
         <input
           onChange={e => this.handleChange(e)}
           onBlur={e => this.handleChange(e)}

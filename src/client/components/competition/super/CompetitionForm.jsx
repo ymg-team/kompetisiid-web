@@ -7,6 +7,7 @@ import {
 } from "../../../containers/competition/actions"
 
 // components
+import Tab from "../../navigations/Tab"
 import TitleLevel2Box from "../../boxs/TitleLevel2"
 import HeaderDashboard from "../../cards/HeaderDashboard"
 import Helmet from "../../Helmet"
@@ -93,10 +94,45 @@ class CompetitionForm extends React.Component {
   }
 
   render = () => {
-    const { competitionId, response, competitionData } = this.props
+    const { competitionId, response, competitionData, session } = this.props
     const loading =
       response.is_loading || response.status === 201 || response.status === 200
-    let title = ""
+    let title = "",
+      tabContents = []
+
+    if (["moderator", "admin"].includes(session.level)) {
+      tabContents = [
+        {
+          text: "Peraturan",
+          is_active: true,
+          target: `/super/competition/update/${competitionId}`
+        },
+        {
+          text: "Pengumuman",
+          count: competitionData.announcement
+            ? competitionData.announcement.length
+            : 0,
+          is_active: false,
+          target: `/super/competition/update/${competitionId}/announcements`
+        }
+      ]
+    } else {
+      tabContents = [
+        {
+          text: "Peraturan",
+          is_active: true,
+          target: `/dashboard/competition/update/${competitionId}`
+        },
+        {
+          text: "Pengumuman",
+          count: competitionData.announcement
+            ? competitionData.announcement.length
+            : 0,
+          is_active: false,
+          target: `/dashboard/competition/update/${competitionId}/announcements`
+        }
+      ]
+    }
 
     if (competitionId) {
       title = "Update Kompetisi"
@@ -110,7 +146,13 @@ class CompetitionForm extends React.Component {
         <HeaderDashboard
           title={title}
           text="Buat data kompetisi yang jelas sehingga menarik para pengunjung untuk menjadi pesertanya"
+          noBorder={tabContents.length > 0}
         />
+
+        {/* tabs */}
+        {competitionId ? <Tab tabs={tabContents} /> : null}
+        {/* end of tabs */}
+
         <form
           className="form-ki no-padding col-md-8"
           action="javascript:;"
@@ -303,7 +345,7 @@ class CompetitionForm extends React.Component {
 
           <TitleLevel2Box title="Opsional" />
 
-          {["moderator", "admin"].includes(this.props.session.level) ? (
+          {["moderator", "admin"].includes(session.level) ? (
             <React.Fragment>
               {/* is guaranted competition */}
               <Checkbox
@@ -369,7 +411,7 @@ class CompetitionForm extends React.Component {
           {/* submit form */}
 
           {competitionId &&
-          ["moderator", "admin"].includes(this.props.session.level) &&
+          ["moderator", "admin"].includes(session.level) &&
           ["waiting", "reject"].includes(competitionData.status) ? (
             <BtnSubmit
               wrapperStyle={{ display: "inline-block", width: "initial" }}
@@ -392,7 +434,7 @@ class CompetitionForm extends React.Component {
 
           {competitionData.id &&
           competitionData.status != "reject" &&
-          ["admin", "moderator"].includes(this.props.session.level) ? (
+          ["admin", "moderator"].includes(session.level) ? (
             <BtnSubmit
               className="btn btn-red"
               wrapperStyle={{

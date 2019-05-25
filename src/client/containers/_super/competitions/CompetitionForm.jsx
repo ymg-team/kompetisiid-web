@@ -1,14 +1,11 @@
 import React from "react"
 import { connect } from "react-redux"
-import { alert } from "../../../components/Alert"
-import { getDetail } from "../../competition/actions"
 import { Prompt } from "react-router"
+import { alert } from "../../../components/Alert"
 
 // components
 import Helmet from "../../../components/Helmet"
 import Form from "../../../components/competition/super/CompetitionForm"
-import FullPageLoader from "../../../components/preloaders/FullContentLoader"
-import FullPageError from "../../../components/boxs/FullPageError"
 
 class CompetitionFormContainer extends React.Component {
   notSubmited = true
@@ -23,7 +20,10 @@ class CompetitionFormContainer extends React.Component {
       )
       if (status === 201 || status === 200) {
         this.notSubmited = false
-        if(this.props.session && ["admin", "moderator"].includes(this.props.session.level)) {
+        if (
+          this.props.session &&
+          ["admin", "moderator"].includes(this.props.session.level)
+        ) {
           location.href = "/super/competition"
         } else {
           location.href = "/dashboard/competition/waiting"
@@ -32,20 +32,14 @@ class CompetitionFormContainer extends React.Component {
     }
   }
 
-  componentDidMount = () => {
-    // request competition detail by kompetisi
-    if (this.props.match.params.id) {
-      this.props.dispatch(getDetail(this.props.match.params.id))
-    }
-  }
-
   render = () => {
     const { id } = this.props.match.params
     const competitionData = this.props.competition[id] || {}
-    
+
     return (
       <React.Fragment>
         <Helmet
+          title="Update Data Kompetisi"
           link={[
             {
               href: "https://cdn.jsdelivr.net/npm/pikaday/css/pikaday.css",
@@ -65,24 +59,14 @@ class CompetitionFormContainer extends React.Component {
             "Data kompetisi yang kamu ketikan akan hilang, apakah yakin?"
           }
         />
-        {(id && competitionData.is_loading) ||
-        (id && !competitionData.status) ? (
-          <FullPageLoader />
-        ) : id && competitionData.status != 200 ? (
-          <FullPageError
-            code={competitionData.status}
-            message={competitionData.message}
-          />
-        ) : (
-          <Form
-            session={this.props.session || {}}
-            response={this.props.others.competition_form || {}}
-            dispatch={this.props.dispatch}
-            categories={this.props.categories}
-            competitionId={this.props.match.params.id}
-            competitionData={competitionData.data || {}}
-          />
-        )}
+        <Form
+          session={this.props.session || {}}
+          response={this.props.others.competition_form || {}}
+          dispatch={this.props.dispatch}
+          categories={this.props.categories}
+          competitionId={this.props.match.params.id}
+          competitionData={competitionData.data || {}}
+        />
       </React.Fragment>
     )
   }
@@ -93,7 +77,7 @@ const mapStateToProps = state => {
     categories: state.Kompetisi.categories,
     competition: state.Kompetisi.detail,
     others: state.Others,
-    session: state.User.session,
+    session: state.User.session
   }
 }
 

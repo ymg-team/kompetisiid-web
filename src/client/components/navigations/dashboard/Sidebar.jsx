@@ -88,11 +88,11 @@ export default props => {
         <li>
           <Link to="/settings/account">Pengaturan Akun</Link>
         </li>
-        <li>
+        {/* <li>
           <Link to="/settings/connect-social-media">
             Hubungkan Ke Sosial Media
           </Link>
-        </li>
+        </li> */}
         {/* end of settings */}
 
         {/* logout from dashboard */}

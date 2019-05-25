@@ -119,7 +119,7 @@ class Header extends Component {
                           )}
                         </li>
                         <li>
-                          <Link to="/settings">Setelan</Link>
+                          <Link to="/settings/profile">Seting Profil</Link>
                         </li>
                         <li>
                           <a

@@ -9,7 +9,9 @@ export default props => (
           <li key={key} className={n.is_active ? "active" : ""}>
             <Link to={n.target}>
               {n.text}{" "}
-              <span className="label label-gray">{n.count}</span>
+              {n.count ? (
+                <span className="label label-gray">{n.count}</span>
+              ) : null}
             </Link>
           </li>
         )
