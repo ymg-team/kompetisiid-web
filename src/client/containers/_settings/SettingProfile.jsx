@@ -28,7 +28,7 @@ class SettingProfile extends React.Component {
           <InputFile 
             accept="image/*"
             label="Avatar"
-            preview="http://media.ki.local/bot2/avatar/14712426_200010937105391_1526719105447493632_n.jpg"
+            preview="/assets/4.2/img/avatar-1.jpg"
             name="poster"
             id="input-poster"
             value={this.state.poster || ""}
