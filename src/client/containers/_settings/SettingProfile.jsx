@@ -52,7 +52,7 @@ class SettingProfile extends React.Component {
     return (
       <div>
         <Helmet title="Pengaturan Profil" />
-        <HeaderDashboard title="Seting Profil" text="this is setting page" />
+        <HeaderDashboard title="Pengaturan Profil" text="this is setting page" />
 
         <form className="form-ki col-md-8" action="javascript:;" method="post">
           {/* update avatar */}

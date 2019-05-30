@@ -1,13 +1,13 @@
 import React from "react"
 import { connect } from "react-redux"
 import Styled from "styled-components"
+import { alert } from "../../components/Alert"
+import { submitSettingAccount } from "./actions"
 
 // components
 import Helmet from "../../components/Helmet"
 import HeaderDashboard from "../../components/cards/HeaderDashboard"
 import InputText from "../../components/form/InputText"
-import Textarea from "../../components/form/Textarea"
-import InputFile from "../../components/form/InputFile"
 import BtnSubmit from "../../components/form/Submit"
 
 const SettingProfileStyled = Styled.div`
@@ -16,6 +16,42 @@ const SettingProfileStyled = Styled.div`
 
 class SettingProfile extends React.Component {
   state = {}
+
+  submitHandler() {
+    if (this.state.new_password !== "" && this.state.new_password != this.state.new_password_conf) {
+      return alert(true, "Konfirmasi password tidak cocok", "error")
+    } else {
+      let params = {
+        email: this.state.email,
+        password: this.state.password
+      }
+
+      if(this.state.new_password) {
+        params.new_password = this.state.new_password
+      }
+
+      return this.props.dispatch(submitSettingAccount(params))
+
+    }
+
+  }
+
+  componentDidMount() {
+    const { session } = this.props
+    if (session) {
+      this.setState({
+        email: session.email
+      })
+    }
+  }
+
+  componentWillReceiveProps(np) {
+    if (np.submitResponse.status == 200) {
+      setTimeout(() => {
+        location.reload(true)
+      }, 200)
+    }
+  }
 
   render() {
     return (
@@ -32,7 +68,7 @@ class SettingProfile extends React.Component {
             id="input-email"
             value={this.state.email || ""}
             validate={this.state.email_validate || {}}
-            max={20}
+            max={50}
             setState={(n, cb) => this.setState(n, cb)}
             required
           />
@@ -40,10 +76,10 @@ class SettingProfile extends React.Component {
 
           {/* update password */}
           <InputText
-            label="Konfimasi Password Baru"
+            label="Password Baru"
             note="Kosongkan jika tidak ingin update password"
             name="new_password"
-            type="text"
+            type="password"
             id="input-new-password"
             value={this.state.new_password || ""}
             validate={this.state.new_password_validate || {}}
@@ -55,9 +91,9 @@ class SettingProfile extends React.Component {
           {/* new password conf */}
           {this.state.new_password ? (
             <InputText
-              label="Password Baru"
+              label="Konfimasi Password Baru"
               name="new_password_conf"
-              type="text"
+              type="password"
               id="input-new-password-conf"
               value={this.state.new_password_conf || ""}
               validate={this.state.new_password_conf_validate || {}}
@@ -74,7 +110,7 @@ class SettingProfile extends React.Component {
             label="Password"
             note="Masukan password untuk menyimpan perubahan"
             name="password"
-            type="text"
+            type="password"
             id="input-password"
             value={this.state.password || ""}
             validate={this.state.password_validate || {}}
@@ -88,7 +124,11 @@ class SettingProfile extends React.Component {
             wrapperStyle={{ display: "inline-block", width: "initial" }}
             disabled={false}
             text={"Simpan perubahan"}
-            action={() => {}}
+            action={() => this.submitHandler()}
+            loading={
+              this.props.submitResponse.is_loading ||
+              this.props.submitResponse.status === 200
+            }
             setState={(n, cb) => this.setState(n, cb)}
           />
         </form>
@@ -99,7 +139,8 @@ class SettingProfile extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    session: state.User.session
+    session: state.User.session,
+    submitResponse: state.Others.setting_account || {}
   }
 }
 

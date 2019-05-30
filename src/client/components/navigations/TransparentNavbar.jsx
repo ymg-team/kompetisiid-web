@@ -300,7 +300,7 @@ class Navbar extends Component {
                                 )}
                               </li>
                               <li>
-                                <Link to="/settings/profile">Seting profil</Link>
+                                <Link to="/settings/profile">Pengaturan Profil</Link>
                               </li>
                               <li>
                                 <a

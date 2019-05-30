@@ -59,25 +59,30 @@ export function alert(show = true, text = '', type = '', fixed=false) {
   if (typeof window !== 'undefined') {
     const alertEl = window.document.getElementById('ki-alert')
 
-    if (show) {
-      alertEl.classList.remove('success')
-      alertEl.classList.remove('error')
-      alertEl.classList.remove('warning')
-
-
-      alertEl.innerText = text
-      alertEl.classList.add(type)
-      // alertEl.style.bottom = '20px'
-      alertEl.style.top = '20px'
-
-      if(!fixed) {
-        timeout = setTimeout(() => {
-          alertEl.style.top = '-100px'
-          alertEl.classList.remove(type)
-        }, 4000)
+    if(alertEl) {
+      if (show) {
+        alertEl.classList.remove('success')
+        alertEl.classList.remove('error')
+        alertEl.classList.remove('warning')
+  
+  
+        alertEl.innerText = text
+        alertEl.classList.add(type)
+        // alertEl.style.bottom = '20px'
+        alertEl.style.top = '20px'
+  
+        if(!fixed) {
+          timeout = setTimeout(() => {
+            alertEl.style.top = '-100px'
+            alertEl.classList.remove(type)
+          }, 4000)
+        }
+      } else {
+        alertEl.style.top = '-100px'
       }
     } else {
-      alertEl.style.top = '-100px'
+      console.err("alert element not available")
     }
+
   }
 }

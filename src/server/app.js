@@ -53,6 +53,7 @@ App.use("/sitemap", AppSitemap)
 App.get("/login", AuthMiddleware.dashboardMiddleware, AppRender)
 App.get("/dashboard", AuthMiddleware.dashboardMiddleware, AppRender)
 App.get("/dashboard/*", AuthMiddleware.dashboardMiddleware, AppRender)
+App.get("/settings/*", AuthMiddleware.dashboardMiddleware, AppRender)
 
 // super pages, only for 'admin'
 App.get("/super", AuthMiddleware.superMiddleware, AppRender)

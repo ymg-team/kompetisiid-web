@@ -119,7 +119,7 @@ class Header extends Component {
                           )}
                         </li>
                         <li>
-                          <Link to="/settings/profile">Seting Profil</Link>
+                          <Link to="/settings/profile">Pengaturan Profil</Link>
                         </li>
                         <li>
                           <a

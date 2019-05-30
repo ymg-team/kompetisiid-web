@@ -32,7 +32,7 @@ export function submitSettingAccount(params = {}) {
   return {
     [CALL_API]: {
       type: SETTING_PROFILE,
-      url: `/api/settings/profile/${sealMiddleware.generateSeal()}`,
+      url: `/api/settings/account/${sealMiddleware.generateSeal()}`,
       method: "put",
       filter: "setting_account",
       params
