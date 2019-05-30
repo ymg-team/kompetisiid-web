@@ -6,6 +6,10 @@ form.form-ki
         width: 100%
     .form-child 
         padding: 10px 0
+        input[type='text'], input[type='number'], input[type='email'], input[type='link'], input[type='password'], textarea
+            &:read-only
+                background-color: #F4F4F4
+                cursor: not-allowed
         &.error 
             label, small, input::placeholder, textarea::placeholder
                 color: $color-red-alert !important

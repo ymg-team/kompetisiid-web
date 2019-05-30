@@ -1,6 +1,7 @@
 import React from "react"
 import { connect } from "react-redux"
 import Styled from "styled-components"
+import { submitSettingProfile } from "./actions"
 
 // components
 import Helmet from "../../components/Helmet"
@@ -17,6 +18,36 @@ const SettingProfileStyled = Styled.div`
 class SettingProfile extends React.Component {
   state = {}
 
+  componentDidMount() {
+    const { session } = this.props
+    if (session) {
+      this.setState({
+        username: session.username,
+        fullname: session.fullname,
+        address: session.address,
+        avatar_preview: session.avatar.original
+      })
+    }
+  }
+
+  submitHandler() {
+    let params = {
+      fullname: this.state.fullname || "",
+      address: this.state.address || ""
+    }
+    if (this.state.avatar) params.avatar = this.state.avatar
+
+    return this.props.dispatch(submitSettingProfile(params))
+  }
+
+  componentWillReceiveProps(np) {
+    if(np.submitResponse.status == 200) {
+      setTimeout(() => {
+        location.reload(true)
+      }, 200)
+    }
+  }
+
   render() {
     return (
       <div>
@@ -25,20 +56,21 @@ class SettingProfile extends React.Component {
 
         <form className="form-ki col-md-8" action="javascript:;" method="post">
           {/* update avatar */}
-          <InputFile 
+          <InputFile
             accept="image/*"
             label="Avatar"
-            preview="/assets/4.2/img/avatar-1.jpg"
-            name="poster"
-            id="input-poster"
-            value={this.state.poster || ""}
-            validate={this.state.poster_validate || {}}
-            // required={typeof this.props.competitionId === "undefined"}
+            preview={
+              this.state.avatar_preview || "/assets/4.2/img/avatar-1.jpg"
+            }
+            name="avatar"
+            id="input-avatar"
+            value={this.state.avatar || ""}
+            validate={this.state.avatar_validate || {}}
             setState={(n, cb) => this.setState(n, cb)}
-          />  
+          />
 
           {/* end of udpate avatar */}
-          
+
           {/* update username */}
           <InputText
             label="Username"
@@ -63,14 +95,13 @@ class SettingProfile extends React.Component {
             value={this.state.fullname || ""}
             validate={this.state.fullname_validate || {}}
             required
-            readOnly
             max={100}
             setState={(n, cb) => this.setState(n, cb)}
           />
           {/* end of update fullname */}
 
           {/* update address */}
-          <Textarea 
+          <Textarea
             label="Alamat Lengkap"
             note="Alamat ini dipakai untuk pengiriman hadiah atau hal lainnya dari Kompetisi Id. (Data alamat kamu tidak akan disebarkan ke publik)"
             name="address"
@@ -87,7 +118,11 @@ class SettingProfile extends React.Component {
             wrapperStyle={{ display: "inline-block", width: "initial" }}
             disabled={false}
             text={"Simpan perubahan"}
-            action={() => {}}
+            loading={
+              this.props.submitResponse.is_loading ||
+              this.props.submitResponse.status === 200
+            }
+            action={() => this.submitHandler()}
             setState={(n, cb) => this.setState(n, cb)}
           />
         </form>
@@ -98,7 +133,8 @@ class SettingProfile extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    session: state.User.session
+    session: state.User.session,
+    submitResponse: state.Others.setting_profile || {}
   }
 }
 
