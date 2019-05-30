@@ -9,6 +9,7 @@ router.use("/request", require("./request"))
 router.use("/user", require("./user"))
 router.use("/stats", require("./stats"))
 router.use("/counter", require("./counter"))
+router.use("/settings", require("./settings"))
 
 router.use("*", (req, res) => {
   res.json({
@@ -17,4 +18,4 @@ router.use("*", (req, res) => {
   })
 })
 
-export default router
+module.exports = router
