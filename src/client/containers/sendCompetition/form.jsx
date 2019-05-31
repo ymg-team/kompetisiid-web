@@ -91,13 +91,7 @@ export default class Form extends Component {
                   </p>
                   <a
                     href="javascript:;"
-                    onClick={() => {
-                      alert(
-                        true,
-                        "Login terlebih dahulu untuk menggunakan fitur ini",
-                        "warning"
-                      )
-                    }}
+                    onClick={() => location.href="/dashboard/competition/create"}
                     className="btn btn-white"
                     title="klik untuk pasang cepat"
                   >
