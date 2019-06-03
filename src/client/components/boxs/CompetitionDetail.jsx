@@ -1,6 +1,5 @@
 import React from "react"
 import Loadable from "react-loadable"
-import { openInNewTab } from "../../helpers/LinkGenerator"
 import { eventFire } from "../../helpers/DomEvents"
 import { getCompetitionStatus } from "../../helpers/DateTime"
 import copy from "copy-to-clipboard"
@@ -8,7 +7,6 @@ import Styled from "styled-components"
 
 // components
 import Modal from "../modals/index"
-import EmptyLoading from "../preloaders/EmptyLoader"
 import { Link } from "react-router-dom"
 import BtnJoin from "../buttons/BtnJoin"
 import { alert } from "../Alert"
@@ -27,10 +25,12 @@ const StyledCalendar = Styled.div`
   }
 `
 
-const GAds = Loadable({
-  loader: () => import("../cards/GoogleAds"),
-  loading: EmptyLoading
-})
+const CompetitionDetailStyled = Styled.div`
+  .small-stats-icon {
+    margin-right: 10px;
+    cursor: default;
+  }
+`
 
 const CompetitionDetailBox = props => {
   const { data } = props
@@ -38,16 +38,13 @@ const CompetitionDetailBox = props => {
     data.id
   }/regulations/${data.nospace_title}`
 
-  const {
-    now,
-    deadline_at,
-    announcement_at,
-    is_ended,
-    is_waiting
-  } = getCompetitionStatus(data.deadline_at, data.announcement_at)
+  const { is_ended, is_waiting } = getCompetitionStatus(
+    data.deadline_at,
+    data.announcement_at
+  )
 
   return (
-    <div id="competition-detail" className="row">
+    <CompetitionDetailStyled id="competition-detail" className="row">
       <div className="row">
         <div className="container">
           <div className="row m-20" />
@@ -121,76 +118,90 @@ const CompetitionDetailBox = props => {
                 <h1>{data.title}</h1>
                 <div className="m-20" />
                 <p className="text-muted">
-                  Diselenggarakan oleh <strong>{data.organizer}</strong>
+                  <span
+                    className="small-stats-icon"
+                    title="Penyelenggara kompetisi"
+                  >
+                    <i className="far fa-building" /> {data.organizer}
+                  </span>{" "}
+                  <span className="small-stats-icon" title="Total views">
+                    <i className="far fa-eye" /> {data.stats.views || 0}
+                  </span>
                 </p>
                 <div className="m-20" />
                 <p className="text-muted">{data.sort}</p>
               </div>
               <div className="m-30" />
 
+              {/* button to join competition */}
               <BtnJoin data={data} />
+              {/* end of button to join competition */}
 
-                {/* like button */}
-                <BtnLike isLike={false} />
-                {/* end of like button */}
+              {/* like button */}
+              <BtnLike
+                competition_id={data.id}
+                isLike={data.is_liked}
+                total={data.stats.likes || 0}
+              />
+              {/* end of like button */}
 
-                {/* more menus */}
-                <div className="dropdown">
-                  <a
-                    className="fa fa-ellipsis-h dropdown-button btn"
-                    data-target="action-competition"
-                    style={{ fontSize: 25, padding: "5px 10px" }}
-                  />
-                  <div className="dropdown-items" id="action-competition">
-                    <ul>
-                      <li>
-                        <a
-                          onClick={() =>
-                            alert(
-                              true,
-                              "login terlebih dahulu untuk menyimpan",
-                              "warning"
-                            )
-                          }
-                          href="javascript:;"
-                          title="simpan ke akun"
-                        >
-                          Simpan Kompetisi
-                        </a>
-                      </li>
-                      <li>
-                        <a
-                          onClick={() => {
-                            modal("open", "save-to-calendar")
-                          }}
-                          href="javascript:;"
-                          title="simpan ke kalender"
-                        >
-                          Tambahkan ke Kalender
-                        </a>
-                      </li>
-                      <li>
-                        <a
-                          className="scopy-button"
-                          onClick={() => handleCopyLink(link_competition)}
-                          target="_blank"
-                          href="javascript:;"
-                        >
-                          Salin Link Kompetisi
-                        </a>
-                      </li>
-                      <li>
-                        <a
-                          target="_blank"
-                          href={`https://docs.google.com/forms/d/e/1FAIpQLSdmsHkJdGctVkWYFhhLC10YYVbtNIi5IF8X0mbdd2DjS-N1eQ/viewform?entry.559533126=${link_competition}`}
-                        >
-                          Laporkan Kompetisi
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
+              {/* more menus */}
+              <div className="dropdown">
+                <a
+                  className="fa fa-ellipsis-h dropdown-button btn"
+                  data-target="action-competition"
+                  style={{ fontSize: 25, padding: "5px 10px" }}
+                />
+                <div className="dropdown-items" id="action-competition">
+                  <ul>
+                    <li>
+                      <a
+                        onClick={() =>
+                          alert(
+                            true,
+                            "Sistem dalam tahap pengembangan",
+                            "warning"
+                          )
+                        }
+                        href="javascript:;"
+                        title="simpan ke akun"
+                      >
+                        Simpan Kompetisi
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        onClick={() => {
+                          modal("open", "save-to-calendar")
+                        }}
+                        href="javascript:;"
+                        title="simpan ke kalender"
+                      >
+                        Tambahkan ke Kalender
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        className="scopy-button"
+                        onClick={() => handleCopyLink(link_competition)}
+                        target="_blank"
+                        href="javascript:;"
+                      >
+                        Salin Link Kompetisi
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        target="_blank"
+                        href={`https://docs.google.com/forms/d/e/1FAIpQLSdmsHkJdGctVkWYFhhLC10YYVbtNIi5IF8X0mbdd2DjS-N1eQ/viewform?entry.559533126=${link_competition}`}
+                      >
+                        Laporkan Kompetisi
+                      </a>
+                    </li>
+                  </ul>
                 </div>
-                {/* end of more menus */}
+              </div>
+              {/* end of more menus */}
             </div>
           </div>
         </div>
@@ -272,7 +283,7 @@ const CompetitionDetailBox = props => {
           </StyledCalendar>
         </div>
       </Modal>
-    </div>
+    </CompetitionDetailStyled>
   )
 }
 

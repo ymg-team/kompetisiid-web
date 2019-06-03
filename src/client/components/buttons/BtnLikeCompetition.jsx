@@ -1,14 +1,16 @@
 import React from "react"
-import {connect} from "react-redux"
-import {alert} from "../Alert"
+import { connect } from "react-redux"
+import { alert } from "../Alert"
+import { likeActionCompetition } from "../../containers/competition/actions"
 
 class BtnLikeCompetition extends React.Component {
-
   clickHandler = () => {
-    if(this.props.auth && this.props.auth.id) {
+    if (this.props.auth && this.props.auth.id) {
       window.redirectTo("/login")
     } else {
-      alert(true, "Maaf sistem belum tersedia", "warning")
+      return this.props.dispatch(
+        likeActionCompetition(this.props.competition_id)
+      )
     }
   }
 
@@ -24,8 +26,8 @@ class BtnLikeCompetition extends React.Component {
         onClick={() => this.clickHandler()}
       >
         <span
-          className={`fa  ${
-            this.props.isLike ? "fa-thumbs-up" : "fa-thumbs-up"
+          className={`${
+            this.props.isLike ? "fa fa-thumbs-up" : "far fa-thumbs-up"
           }`}
         />
         <span
@@ -35,7 +37,7 @@ class BtnLikeCompetition extends React.Component {
             fontSize: 20
           }}
         >
-          0
+          {this.props.total}
         </span>
       </a>
     )
@@ -44,7 +46,8 @@ class BtnLikeCompetition extends React.Component {
 
 const mapStateToProps = State => {
   return {
-    auth: State.auth
+    auth: State.auth,
+    competition: State.competition
   }
 }
 

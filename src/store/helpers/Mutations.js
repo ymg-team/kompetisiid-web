@@ -39,6 +39,20 @@ export function updateListbyId(state, action, params, selector) {
 }
 
 /**
+ * @description function to update detail data by filter
+ * @param {object} state, state from reducer
+ * @param {object} action, action from reducer 
+ * @param {string} action.filter to maping right data
+ */
+export function updateDetailByFilter(state = {}, action, callback) {
+  const keys = Object.keys(state)
+  keys.map(key => {
+    if(state[key]) callback(state[key], state, action, )
+  })
+  return Object.assign({}, state)
+}
+
+/**
  * @description function to handle loadmore on list
  * @param {object} state = state for reducer
  * @param {object} action = action from reducer

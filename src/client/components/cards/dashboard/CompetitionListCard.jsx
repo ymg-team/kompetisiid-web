@@ -95,7 +95,7 @@ class CompetitionListCard extends React.Component {
                 <span>
                   <i className="fa fa-eye" />
                   &nbsp;
-                  {n.views}
+                  {n.stats.views}
                 </span>
               </h4>
             </div>

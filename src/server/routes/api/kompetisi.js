@@ -16,7 +16,7 @@ router.get(
   apiCaller
 )
 // router.get('/pengumuman/:id/:seal', sealMiddleware, controller.getPengumuman, apiCaller)
-router.get("/favoritedtags/:seal", sealMiddleware, controller.getFavoritedtag)
+// router.get("/favoritedtags/:seal", sealMiddleware, controller.getFavoritedtag)
 router.get("/kategori", controller.getCategories, apiCaller)
 router.get("/:id/:seal", sealMiddleware, controller.getDetail, apiCaller)
 
