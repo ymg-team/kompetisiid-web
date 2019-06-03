@@ -6,7 +6,7 @@ import { stripTags, truncate } from "string-manager"
  * @description middleware to request competition detail on server
  */
 export const generateMetaCompetition = (req, res, next) => {
-  return requestAPIV2("get", `/v2/competition/${req.params.id}`, {
+  return requestAPIV2("get", `/v2/competition/${req.params.id}?no_count=1`, {
     API_HOST: Host[process.env.NODE_ENV].api_v42
   }).then(response => {
     const competition = JSON.parse(response.body)

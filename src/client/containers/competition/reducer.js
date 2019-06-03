@@ -55,7 +55,7 @@ function detail(state = {}, action) {
         const actionLike = !n.data.is_liked
         
         // show / hide alert
-        if(!actionLike) alert(true, "Kamu telah batal suka kompetisi ini", "warning")
+        if(!actionLike) alert(true, "Kamu batal suka kompetisi ini", "warning")
         else alert(false)
 
         n.data.is_liked = actionLike 

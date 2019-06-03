@@ -6,7 +6,6 @@ import { topLoading } from "../../components/preloaders"
 import { toCamelCase } from "string-manager"
 
 // components
-import Tab, { tab } from "../../components/navigations/TabCompetition"
 import CompetitionPreloader from "../../components/preloaders/CompetitionDetail"
 import { getDetail, getRelated } from "./actions"
 import Error from "../../components/cards/ErrorCard"
@@ -46,7 +45,7 @@ class LayoutCompetition extends Component {
 
   render() {
     const { encid } = this.props.match.params
-    const { detail, related, pengumuman } = this.props.kompetisi
+    const { detail } = this.props.kompetisi
 
     if (typeof window !== "undefined" && detail[encid] && detail[encid].meta)
       topLoading(false)
