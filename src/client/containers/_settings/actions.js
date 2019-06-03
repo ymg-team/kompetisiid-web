@@ -4,7 +4,7 @@ import sealMiddleware from "../../helpers/seal"
 export const SETTING_PROFILE = "SETTING_PROFILE"
 
 /**
- * function to handle submit setting profile
+ * @description function to handle submit setting profile
  * @param {string} params.username (required)
  * @param {string} params.fullname (required)
  * @param {string} params.address (optional)

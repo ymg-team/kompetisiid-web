@@ -9,6 +9,7 @@ import { objToQuery } from "string-manager/dist/modules/httpquery"
 
 export const RECEIVE_CATEGORIES = "RECEIVE_CATEGORIES"
 export const CREATE_COMPETITION = "CREATE_COMPETITION"
+export const LIKE_COMPETITION = "LIKE_COMPETITION"
 
 /**
  * @description function to create new competition
@@ -126,5 +127,15 @@ export function getFavoritedTags(params = {}) {
       target: "tags",
       filter: "favorited"
     }
+  }
+}
+
+export function likeActionCompetition(competition_id = {}) {
+  return {
+    type: LIKE_COMPETITION,
+    params: { competition_id },
+    filter: competition_id,
+    method: "get",
+    url: `/api/kompetisi/like/${competition_id}/${sealMiddleware.generateSeal()}`
   }
 }

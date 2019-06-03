@@ -103,25 +103,25 @@ export function getDetail(req, res, next) {
 /**
  * function to get favorited tag
  */
-export function getFavoritedtag(req, res, next) {
-  req.reqdata = {
-    method: 'get',
-    url: '/kompetisi/favoritedtags'
-  }
+// export function getFavoritedtag(req, res, next) {
+//   req.reqdata = {
+//     method: 'get',
+//     url: '/kompetisi/favoritedtags'
+//   }
 
-  next()
-}
+//   next()
+// }
 
 /**
  * function to get pengumuman kompetisi
  * @method GET
  * @param (string) encoded id
  */
-export function getPengumuman(req, res, next) {
-  req.reqdata = {
-    method: 'get',
-    url: `/kompetisi/pengumuman/${req.params.id}`
-  }
+// export function getPengumuman(req, res, next) {
+//   req.reqdata = {
+//     method: 'get',
+//     url: `/kompetisi/pengumuman/${req.params.id}`
+//   }
 
-  next()
-}
+//   next()
+// }

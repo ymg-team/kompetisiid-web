@@ -4,7 +4,7 @@
  */
 
  /**
-  * function to create news
+  * @description function to create news
   * @param {object} req.body
   */
 export function createNews(req, res, next) {

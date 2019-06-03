@@ -165,27 +165,27 @@ class Index extends Component {
                   {/*alert*/}
                   {!detail[encid].data.is_mediapartner &&
                   !detail[encid].data.is_support ? (
-                      <div
-                        style={{ marginTop: 0 }}
-                        className="alert alert-warning"
-                      >
-                        <strong>Perhatian&nbsp;</strong>
+                    <div
+                      style={{ marginTop: 0 }}
+                      className="alert alert-warning"
+                    >
+                      <strong>Perhatian&nbsp;</strong>
                       Di kompetisi ini, <strong>Kompetisi ID </strong>
                       hanya berlaku sebagai media publikasi. Jika ada pertanyaan
                       lebih lanjut mengenai kompetisi ini silahkan sampaikan
                       langsung ke kontak yang tersedia tab kontak.
-                      </div>
-                    ) : null}
+                    </div>
+                  ) : null}
                   {detail[encid].data.is_mediapartner &&
                   !detail[encid].data.is_support ? (
-                      <div style={{ marginTop: 0 }} className="alert alert-blue">
-                        <strong>Perhatian&nbsp;</strong>
+                    <div style={{ marginTop: 0 }} className="alert alert-blue">
+                      <strong>Perhatian&nbsp;</strong>
                       Di kompetisi ini, <strong>Kompetisi ID </strong>
                       berlaku sebagai media partner, jika ada pertanyaan lebih
                       lanjut mengenai kompetisi ini, bisa ditanyakan langsung ke
                       penyelenggara atau melalui tab diskusi.
-                      </div>
-                    ) : null}
+                    </div>
+                  ) : null}
                   {detail[encid].data.is_support ? (
                     <div style={{ marginTop: 0 }} className="alert alert-blue">
                       <strong>Perhatian&nbsp;</strong>
@@ -201,60 +201,60 @@ class Index extends Component {
                     <div className={active_tab == 1 ? "col-md-8" : "col-md-12"}>
                       {(() => {
                         switch (active_tab) {
-                        case 1:
-                          return (
-                            <Regulations
-                              encid={encid}
-                              nospace_title={detail[encid].data.nospace_title}
-                              link_source={detail[encid].data.link_source}
-                              tags={
-                                detail[encid].data.tag
-                                  ? detail[encid].data.tag.split(",")
-                                  : []
-                              }
-                              html={detail[encid].data.content}
-                            />
-                          )
-                        case 2:
-                          return (
-                            <Prizes
-                              html={nl2br(
-                                detail[encid].data.prize.description
-                              )}
-                            />
-                          )
-                        case 3:
-                          return (
-                            <Announcements
-                              data={
-                                detail[encid].data.announcement
-                                  ? detail[encid].data.announcement
-                                  : []
-                              }
-                            />
-                          )
-                        case 4:
-                          return <Discussions link={helmetdata.url} />
-                        case 5:
-                          return (
-                            <Contacts
-                              data={
-                                detail[encid].data.contacts
-                                  ? detail[encid].data.contacts
-                                  : []
-                              }
-                            />
-                          )
-                        case 6:
-                          return (
-                            <Share
-                              title={detail[encid].data.title}
-                              desc={detail[encid].data.sort}
-                              link={helmetdata.url}
-                            />
-                          )
-                        default:
-                          return null
+                          case 1:
+                            return (
+                              <Regulations
+                                encid={encid}
+                                nospace_title={detail[encid].data.nospace_title}
+                                link_source={detail[encid].data.link_source}
+                                tags={
+                                  detail[encid].data.tag
+                                    ? detail[encid].data.tag.split(",")
+                                    : []
+                                }
+                                html={detail[encid].data.content}
+                              />
+                            )
+                          case 2:
+                            return (
+                              <Prizes
+                                html={nl2br(
+                                  detail[encid].data.prize.description
+                                )}
+                              />
+                            )
+                          case 3:
+                            return (
+                              <Announcements
+                                data={
+                                  detail[encid].data.announcement
+                                    ? detail[encid].data.announcement
+                                    : []
+                                }
+                              />
+                            )
+                          case 4:
+                            return <Discussions link={helmetdata.url} />
+                          case 5:
+                            return (
+                              <Contacts
+                                data={
+                                  detail[encid].data.contacts
+                                    ? detail[encid].data.contacts
+                                    : []
+                                }
+                              />
+                            )
+                          case 6:
+                            return (
+                              <Share
+                                title={detail[encid].data.title}
+                                desc={detail[encid].data.sort}
+                                link={helmetdata.url}
+                              />
+                            )
+                          default:
+                            return null
                         }
                       })()}
                     </div>
@@ -275,16 +275,16 @@ class Index extends Component {
           {related[`related_${encid}`] &&
           related[`related_${encid}`].status &&
           related[`related_${encid}`].status === 200 ? (
-              <div className="col-md-12 bg-gray-soft">
-                <div className="m-15 row" />
-                <CompetitionBox
-                  subtitle={false}
-                  total={4}
-                  // size="small"
-                  {...related[`related_${encid}`]}
-                />
-              </div>
-            ) : null}
+            <div className="col-md-12 bg-gray-soft">
+              <div className="m-15 row" />
+              <CompetitionBox
+                subtitle={false}
+                total={4}
+                // size="small"
+                {...related[`related_${encid}`]}
+              />
+            </div>
+          ) : null}
         </div>
       </React.Fragment>
     )
