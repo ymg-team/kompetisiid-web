@@ -83,7 +83,7 @@ class Index extends Component {
 
   render() {
     const { encid } = this.props.match.params
-    const { detail, related, pengumuman } = this.props.kompetisi
+    const { detail, related } = this.props.kompetisi
     const { active_tab } = this.props.route
     let NextPrevProps = {},
       helmetdata = { script: [] }
@@ -334,13 +334,6 @@ function mapStateToProps(state) {
   }
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    dispatch
-  }
-}
-
 export default connect(
-  mapStateToProps,
-  mapDispatchToProps
+  mapStateToProps
 )(Index)
