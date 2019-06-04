@@ -1,29 +1,28 @@
-
 /**
  * controller to create competition
  */
 export function create(req, res, next) {
   req.reqdata = {
-    version: 'v42',
-    method: 'post',
+    version: "v42",
+    method: "post",
     params: req.body,
-    url: '/v2/competition'
+    url: "/v2/competition"
   }
 
   next()
 }
 
 /* controller to update competition
-*/
+ */
 export function update(req, res, next) {
- req.reqdata = {
-   version: 'v42',
-   method: 'put',
-   params: req.body,
-   url: `/v2/competition/${req.params.id}`
- }
+  req.reqdata = {
+    version: "v42",
+    method: "put",
+    params: req.body,
+    url: `/v2/competition/${req.params.id}`
+  }
 
- next()
+  next()
 }
 
 /**
@@ -46,10 +45,10 @@ export function getJelajah(req, res, next) {
   let { params } = req
   params.query = req.query
   req.reqdata = {
-    version: 'v42',
-    method: 'get',
+    version: "v42",
+    method: "get",
     params,
-    url: '/v2/competitions'
+    url: "/v2/competitions"
   }
 
   next()
@@ -58,13 +57,13 @@ export function getJelajah(req, res, next) {
 /**
  *  function to get related competition
  *  @method GET
- *  @params (string) encid on url
+ *  @param {string} req.params.id id of competition
  */
 export function getRelated(req, res, next) {
   req.reqdata = {
-    version: 'v42',
-    method: 'get',
-    params: {query: req.query},
+    version: "v42",
+    method: "get",
+    params: { query: req.query },
     url: `/v2/competitions/related/${req.params.id}`
   }
 
@@ -77,9 +76,9 @@ export function getRelated(req, res, next) {
  */
 export function getCategories(req, res, next) {
   req.reqdata = {
-    version: 'v42',
-    method: 'get',
-    url: '/v2/maincategories'
+    version: "v42",
+    method: "get",
+    url: "/v2/maincategories"
   }
 
   next()
@@ -92,9 +91,24 @@ export function getCategories(req, res, next) {
  */
 export function getDetail(req, res, next) {
   req.reqdata = {
-    version: 'v42',
-    method: 'get',
+    version: "v42",
+    method: "get",
     url: `/v2/competition/${req.params.id}`
+  }
+
+  next()
+}
+
+/**
+ * function to like competition
+ * @method POST
+ * @param {string} req.params.id enc id kompetisi
+ */
+export function likeCompetition(req, res, next) {
+  req.reqdata = {
+    version: "v42",
+    method: "post",
+    url: `/v2/competition/like/${req.params.id}`
   }
 
   next()

@@ -51,15 +51,23 @@ function detail(state = {}, action) {
     case LIKE_COMPETITION:
 
       return Mutations.updateDetailByFilter(state, action , n => {
-        // current like actino description
-        const actionLike = !n.data.is_liked
+        // current like action description
+        let actionLike
         
-        // show / hide alert
-        if(!actionLike) alert(true, "Kamu batal suka kompetisi ini", "warning")
-        else alert(false)
+        if(action.json) {
+          actionLike = action.json.liked
+
+          // show alert after get response from api
+          if(!actionLike) alert(true, "Kamu telah batal suka kompetisi", "warning")
+          else alert(false)
+
+          // only increase/reduce after get response from api
+          n.data.stats.likes = n.data.stats.likes + (actionLike ? 1 : -1)
+        } else {
+          actionLike = !n.data.is_liked
+        }
 
         n.data.is_liked = actionLike 
-        n.data.stats.likes = n.data.stats.likes + (actionLike ? 1 : -1)
       })
 
     case REQUEST_DATA:
