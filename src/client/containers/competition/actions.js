@@ -132,10 +132,12 @@ export function getFavoritedTags(params = {}) {
 
 export function likeActionCompetition(competition_id = {}) {
   return {
-    type: LIKE_COMPETITION,
-    params: { competition_id },
-    filter: competition_id,
-    method: "get",
-    url: `/api/kompetisi/like/${competition_id}/${sealMiddleware.generateSeal()}`
+    [CALL_API]: {
+      type: LIKE_COMPETITION,
+      params: { competition_id },
+      filter: competition_id,
+      method: "post",
+      url: `/api/kompetisi/like/${competition_id}/${sealMiddleware.generateSeal()}`
+    }
   }
 }
