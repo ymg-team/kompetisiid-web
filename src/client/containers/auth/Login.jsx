@@ -167,7 +167,11 @@ class Login extends Component {
                   <a
                     href="javascript:;"
                     onClick={() =>
-                      this.setState({ inputPassword: false, password: null })
+                      this.setState({
+                        inputPassword: false,
+                        password: null,
+                        password_validate: null
+                      })
                     }
                   >
                     ubah
@@ -225,15 +229,14 @@ class Login extends Component {
               </div>
             </form>
             {!is_userfound ? (
-              !this.state.isSuperPage ? (
-                <span>
-                  <p>Atau masuk menggunakan</p>
-                  <div className="login-box__content__auth">
-                    <AuthFacebook />
-                    <AuthGoogle />
-                  </div>
-                </span>
-              ) : null
+              !this.state.isSuperPage ? null : // <span>
+              //   <p>Atau masuk menggunakan</p>
+              //   <div className="login-box__content__auth">
+              //     <AuthFacebook />
+              //     <AuthGoogle />
+              //   </div>
+              // </span>
+              null
             ) : (
               <Link to="/register">Lupa password</Link>
             )}

@@ -16,11 +16,11 @@ export default props => {
           <Link to="/dashboard">Dashboard</Link>
         </li>
 
-        {/* compotition */}
+        {/* my competitions */}
         <hr />
         <li>
           {" "}
-          <strong>Kompetisi</strong>
+          <strong>Kompetisi Saya</strong>
         </li>
         <li>
           <Link to="/dashboard/competition/create">
