@@ -5,12 +5,12 @@ import { likeActionCompetition } from "../../containers/competition/actions"
 
 class BtnLikeCompetition extends React.Component {
   clickHandler = () => {
-    if (this.props.auth && this.props.auth.id) {
-      window.redirectTo("/login")
-    } else {
+    if (this.props.session && this.props.session.id) {
       return this.props.dispatch(
         likeActionCompetition(this.props.competition_id)
       )
+    } else {
+      return window.redirectTo("/login")
     }
   }
 
@@ -46,7 +46,7 @@ class BtnLikeCompetition extends React.Component {
 
 const mapStateToProps = State => {
   return {
-    auth: State.auth,
+    session: State.User.session,
     competition: State.competition
   }
 }
