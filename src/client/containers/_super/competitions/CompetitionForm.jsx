@@ -77,7 +77,7 @@ const mapStateToProps = state => {
     categories: state.Kompetisi.categories,
     competition: state.Kompetisi.detail,
     others: state.Others,
-    session: state.User.session
+    session: state.User.session || {}
   }
 }
 
