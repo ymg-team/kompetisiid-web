@@ -94,6 +94,10 @@ App.use(
   "/service-worker.js",
   express.static(__dirname + "/../../public/service-worker.js")
 )
+App.use(
+  "/ads.txt",
+  express.static(__dirname + "/../../public/ads.txt")
+)
 
 // React path
 
