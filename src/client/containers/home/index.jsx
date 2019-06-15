@@ -14,7 +14,6 @@ import Helmet from "../../components/Helmet"
 import NewsLoading from "../../components/preloaders/NewsCardLoader"
 import CompetitionLoading from "../../components/preloaders/CompetitionCardLoader"
 import { Link } from "react-router-dom"
-import GAds from "../../components/cards/GoogleAds"
 import Navbar from "../../components/navigations/TransparentNavbar"
 import SubHeaderHome from "../../components/headers/HomeSubHeader"
 
@@ -122,22 +121,18 @@ class Home extends Component {
     }
 
     return (
-      <div>
+      <React.Fragment>
         <Helmet />
 
         {/* navbar */}
         {/* special background image */}
-        <div
-          style={{
-            backgroundImage: `url(https://res.cloudinary.com/dhjkktmal/image/upload/c_crop,e_blur:1500,q_40,x_1500,y_800/v1537329130/kompetisi-id/web_assets/background-1.jpg)`,
-            backgroundSize: "cover",
-            backgroundColor: "#6796bb"
-          }}
-        >
+        <div className="bg-gray">
           {/* navbar */}
-          <Navbar location={this.props.location} />
-
+          <Navbar className="bg-gray" location={this.props.location} />
           {/* slider */}
+        </div>
+
+        <div className="col-md-12">
           <SubHeaderHome
             stats={kompetisi.stats || {}}
             slider={kompetisi.data["home_popular"] || {}}
@@ -187,7 +182,7 @@ class Home extends Component {
 
         {/* media partner */}
         <MediapartnerBox {...kompetisi.data["home_mediapartner"]} />
-      </div>
+      </React.Fragment>
     )
   }
 }
@@ -200,13 +195,4 @@ function mapStateToProps(state) {
   }
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    dispatch
-  }
-}
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Home)
+export default connect(mapStateToProps)(Home)

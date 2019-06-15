@@ -3,7 +3,6 @@ import { renderRoutes, matchRoutes } from "react-router-config"
 import { connect } from "react-redux"
 import memoize from "memoize-one"
 import { topLoading } from "../../components/preloaders"
-import { toCamelCase } from "string-manager"
 
 // components
 import CompetitionPreloader from "../../components/preloaders/CompetitionDetail"
@@ -56,7 +55,10 @@ class LayoutCompetition extends Component {
           detail[encid].status === 200 ? (
             renderRoutes(this.props.route.routes)
           ) : (
-            <Error code={detail[encid].status == 204 ? 404 : detail[encid].status} message={detail[encid].message} />
+            <Error
+              code={detail[encid].status == 204 ? 404 : detail[encid].status}
+              message={detail[encid].message}
+            />
           )
         ) : (
           <CompetitionPreloader />
@@ -73,13 +75,6 @@ function mapStateToProps(state) {
   }
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    dispatch
-  }
-}
-
 export default connect(
-  mapStateToProps,
-  mapDispatchToProps
+  mapStateToProps
 )(LayoutCompetition)

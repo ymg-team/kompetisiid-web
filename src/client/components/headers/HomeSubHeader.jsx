@@ -8,12 +8,6 @@ import { Link } from "react-router-dom"
 import Slider from "../sliders"
 import Count from "../cards/HomeCount"
 
-const DotsStyled = Styled.div`
-  position: absolute;
-  margin: auto;
-  bottom: 0;
-`
-
 const SubHeader = Styled.div`
   padding-bottom: 100px;
   transition: all .5s ease;
@@ -30,7 +24,7 @@ const SubHeader = Styled.div`
   }
 
   .home-slider {
-    color: #FFF;
+    color: ${Colors.mainGray};
     padding: 2em 0;
     text-align: center;
     display: flex;
@@ -38,7 +32,7 @@ const SubHeader = Styled.div`
     justify-content: center;
     min-height: 100%;
     h1 {
-      color: #ffffffd9;
+      color: ${Colors.mainGray};
       font-size: 3em;
       font-family: raleway, sans-serif;
       text-transform: uppercase;
@@ -48,13 +42,35 @@ const SubHeader = Styled.div`
       margin: 0;
     }
     h2 {
-      color: #ffffffd9;
+      color: ${Colors.mainGray};
       font-family: raleway, sans-serif;
     }
     .text{
-      color: #ffffffd9;
+      color: ${Colors.mainGray};
       padding: 3em 0;
       font-size: .8em;
+    }
+
+    .competition-slider {
+      text-align: left;
+      .competition-slider_poster {
+        height: 450px;
+        background-size: cover;
+      }
+      .competition-slider_text {
+        h1 {
+          font-family: inherit;
+          font-size: 35px;
+          letter-spacing: 1px;
+        }
+        h2 {
+          font-size: 25px;
+        }
+        .text {
+          padding: 0;
+          margin: 0 0 2.5em;
+        }
+      }  
     }
 
     /* responsiveness */
@@ -103,35 +119,11 @@ class HomeSubHeader extends Component {
     }
   }
 
-  // componentDidMount() {
-  //   this.sliderInterval = setInterval(() => {
-  //     this.setActive()
-  //   }, 5000)
-  // }
-
-  // setActive() {
-  //   let { active } = this.state
-  //   if (this.state.active < this.state.totalSliders - 1) {
-  //     active++
-  //   } else {
-  //     active = 0
-  //   }
-  //   this.setState({ active })
-  // }
-
-  // componentWillUnmount() {
-  //   clearInterval(this.sliderInterval)
-  // }
-
   render() {
     const { data, status, message } = this.props.slider
 
     return (
       <SubHeader id="homepage-subheader">
-        {/* <div className="container">
-          <Navbar />
-        </div> */}
-
         <Slider className="container subheader-content home-slider">
           <WelcomeStaticSlider stats={this.props.stats} />
           {status && status === 200
@@ -154,11 +146,11 @@ const WelcomeStaticSlider = props => (
       <Count {...props.stats} />
     </div>
     <div className="row">
-      <Link to="/browse" className="btn btn-borderwhite btn-rounded btn-lg">
+      <Link to="/browse" className="btn btn-bordergray btn-rounded btn-lg">
         Jelajah Kompetisi&nbsp;
         <i className="fas fa-arrow-alt-circle-right" />
       </Link>
-      <Link to="/add" className="btn btn-borderwhite btn-rounded btn-lg">
+      <Link to="/add" className="btn btn-bordergray btn-rounded btn-lg">
         Pasang Kompetisi
       </Link>
     </div>
@@ -176,27 +168,27 @@ const WelcomeStaticSlider = props => (
 )
 
 const CompetitionSlider = props => (
-  <div>
-    <div className="col-md-12">
-      <div className="col-md-8 col-md-offset-2">
+  <div className="competition-slider">
+    <div
+      className="hide-mobile competition-slider_poster col-md-6"
+      style={{ backgroundImage: `url(${props.poster.original})` }}
+    />
+    <div className="competition-slider_text col-md-6">
+      <div className="col-md-12">
         <h1 style={{ paddingBottom: 0 }}>{props.title}</h1>
-        <h2 style={{ paddingBottom: "1em" }}>
+        <h2 >
           Hadiah senilai {nominalToText(props.prize.total)}
         </h2>
       </div>
-    </div>
-    <div className="col-md-12">
-      <Link
-        to={`/competition/${props.id}/regulations/${props.nospace_title}`}
-        style={{ width: "150px" }}
-        className="btn btn-borderwhite btn-rounded btn-lg"
-      >
-        Selengkapnya
-      </Link>
-    </div>
-    <div className="col-md-12">
-      <div className="col-md-8 col-md-offset-2">
+      <div className="col-md-12">
         <div className="text">{props.sort}</div>
+        <Link
+          to={`/competition/${props.id}/regulations/${props.nospace_title}`}
+          style={{ width: "150px" }}
+          className="btn btn-bordergray btn-rounded btn-md"
+        >
+          Selengkapnya
+        </Link>
       </div>
     </div>
   </div>
