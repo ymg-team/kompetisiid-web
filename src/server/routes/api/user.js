@@ -11,6 +11,15 @@ const router = express.Router()
 
 router.get("/:username", controller.getProfile, apiCaller)
 
+// endpoint to request forgot password
+// [POST] /user/forgot-password/:seal
+router.post(
+  "/forgot-password/:seal",
+  sealMiddleware,
+  requestMiddleware.post,
+  controller.postForgotPassword,
+  apiCaller
+)
 // endpoint of authentication
 router.post(
   "/login/:seal",

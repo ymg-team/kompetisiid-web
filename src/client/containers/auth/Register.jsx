@@ -2,7 +2,7 @@ import React, { Component } from "react"
 import { connect } from "react-redux"
 import { toCamelCase } from "string-manager"
 import { resetValidator } from "../../components/form/Validator"
-import { register } from "../user/actions"
+import { register } from "../../../store/user/actions"
 
 // components
 import Input from "../../components/form/InputText"
@@ -262,17 +262,21 @@ class Register extends Component {
           <div className="login-box__footer">
             <small>
               <Link to="/">Home</Link>
-            </small>
-            <small>
+              {"| "}
               <a target="_blank" href="https://goo.gl/forms/kMGGZQXJCjoyKThj1">
                 Kontak
               </a>
-            </small>
-            <small>
-              <Link to="/">Privacy</Link>
-            </small>
-            <small>
-              <Link to="/news/TXpVPQ/About">About</Link>
+              {"| "}
+              <a
+                target="_blank"
+                href="https://kompetisi.id/news/TVRjPQ/Privacy-Policy"
+              >
+                Privacy
+              </a>
+              {"| "}
+              <a target="_blank" href="https://kompetisi.id/news/TXpVPQ/About">
+                About
+              </a>
             </small>
           </div>
           {/* end of footer navigation */}

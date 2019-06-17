@@ -46,7 +46,7 @@ import {
   getCategories,
   setCategories
 } from "../competition/actions"
-import { getStats } from "../user/actions"
+import { getStats } from "../../../store/user/actions"
 import { fetchBerita } from "../news/actions"
 
 const GrayBackgroundStyled = Styled.div`

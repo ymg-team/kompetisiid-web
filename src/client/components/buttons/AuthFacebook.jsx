@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 import { alert } from "../Alert"
-import { oauthLogin } from "../../containers/user/actions"
+import { oauthLogin } from "../../../store/user/actions"
 import { fullPageLoader } from "../preloaders/FullPage"
 import { connect } from "react-redux"
 

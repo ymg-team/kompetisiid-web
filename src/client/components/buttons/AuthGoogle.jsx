@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import { oauthLogin } from "../../containers/user/actions"
+import { oauthLogin } from "../../../store/user/actions"
 import { fullPageLoader } from "../preloaders/FullPage"
 import { connect } from "react-redux"
 import { alert } from "../Alert"

@@ -2,15 +2,15 @@
  * Created by yussan on 28/01/17.
  */
 import {
-  POST_DATA,
+  // POST_DATA,
   RECEIVE_DATA,
-  RECEIVE_MORE_DATA,
-  DELETE_DATA,
+  // RECEIVE_MORE_DATA,
+  // DELETE_DATA,
   REQUEST_DATA
-} from "../../../store/consts"
+} from "../consts"
 
-import { CALL_API } from "../../../store/middlewares/api"
-import sealMiddleware from "../../helpers/seal"
+import { CALL_API } from "../middlewares/api"
+import sealMiddleware from "../../client/helpers/seal"
 
 export const LOGOUT = "LOGOUT"
 export const LOGIN = "LOGIN"
@@ -20,6 +20,48 @@ export const OAUTH_REGISTER = "OAUTH_REGISTER"
 export const EMAIL_VERIFICATION = "EMAIL_VERIFICATION"
 export const RESEND_EMAIL_VALIDATION_TOKEN = "RESEND_EMAIL_VALIDATION_TOKEN"
 export const FETCH_COUNT_SUPER_SIDEBAR = "FETCH_COUNT_SUPER_SIDEBAR"
+export const FORGOT_PASSWORD = "FORGOT_PASSWORD"
+export const CHANGE_PASSWORD = "CHANGE_PASSWORD"
+
+/**
+ * function to forgot password
+ * @param {string} filter
+ * @param {string} email
+ */
+export function forgotPassword({filter, email}) {
+  return {
+    [CALL_API] : {
+      url: `/api/user/forgot-password/${sealMiddleware.generateSeal()}`,
+      method: "POST",
+      filter,
+      params : {
+        email
+      },
+      type: FORGOT_PASSWORD
+    }
+  }
+}
+
+/**
+ * function to change password
+ * @param {string} params.filter
+ * @param {string} params.token
+ * @param {string} params.password
+ * @param {string} params.password_conf
+ */
+export function changePassword(params = {}) {
+  const {filter} = params
+  return {
+    [CALL_API]: {
+      url: `/api/user/change-password/${sealMiddleware.generateSeal()}`,
+      method: "POST",
+      filter,
+      params,
+      type: CHANGE_PASSWORD
+    }
+  }
+}
+
 
 export function profile(username) {
   return {
@@ -67,7 +109,7 @@ export function register(params) {
   }
 }
 
-export function emailValidation() {}
+// export function emailValidation() {}
 
 export function resendEmailValidationToken(params) {
   return {
@@ -79,22 +121,22 @@ export function resendEmailValidationToken(params) {
   }
 }
 
-/**
- * @description function to do oauth register
- * @param {string} params.provider oauth provider facebook|google
- * @param {string} params.token token from  oauth
- * @param {string} params.user_id user id from oauth
- */
-export function oauthRegister(params) {
-  return {
-    [CALL_API]: {
-      method: "post",
-      url: `/api/user/oauth/register`,
-      params,
-      type: OAUTH_REGISTER
-    }
-  }
-}
+// /**
+//  * @description function to do oauth register
+//  * @param {string} params.provider oauth provider facebook|google
+//  * @param {string} params.token token from  oauth
+//  * @param {string} params.user_id user id from oauth
+//  */
+// export function oauthRegister(params) {
+//   return {
+//     [CALL_API]: {
+//       method: "post",
+//       url: `/api/user/oauth/register`,
+//       params,
+//       type: OAUTH_REGISTER
+//     }
+//   }
+// }
 
 /**
  * @description function to do oauth login
@@ -113,6 +155,10 @@ export function oauthLogin(params) {
   }
 }
 
+/**
+ * @description function to verification email
+ * @param {string} token , token from email inbox
+ */
 export function emailVerification(token) {
   return {
     [CALL_API]: {
