@@ -21,16 +21,16 @@ class ForgotPassword extends React.Component {
 
   render() {
     const { response } = this.props
+    const { email } = this.state
+    const title = "Lupa Password",
+      description = "Silahkan masukan email anda jika dan lupa password"
+    const loading = response.is_loading || response.status == 200
+
     if (response.status && response.status == 200) {
       setTimeout(() => {
         location.href = "/"
       }, 1000)
     }
-
-    const { email } = this.state
-    const title = "Lupa Password",
-      description = "Silahkan masukan email anda jika dan lupa password"
-    let loading = false
 
     return (
       <Fullscreen className="login">
@@ -73,9 +73,7 @@ class ForgotPassword extends React.Component {
                     color: "#292929"
                   }}
                   text={
-                    response.is_loading || response.status == 200
-                      ? "loading..."
-                      : "Kirim Permintaan Ganti Password"
+                    loading ? "loading..." : "Kirim Permintaan Ganti Password"
                   }
                 />
               </div>

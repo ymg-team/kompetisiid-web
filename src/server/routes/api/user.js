@@ -11,6 +11,16 @@ const router = express.Router()
 
 router.get("/:username", controller.getProfile, apiCaller)
 
+// endpoint to change password via token
+// [POST] /user/change-password/:seal
+router.post(
+  "/change-password/:seal",
+  sealMiddleware,
+  requestMiddleware.post,
+  controller.postChangePassword,
+  apiCaller
+)
+
 // endpoint to request forgot password
 // [POST] /user/forgot-password/:seal
 router.post(

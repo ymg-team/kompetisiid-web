@@ -1,5 +1,6 @@
 import React from "react"
 import { connect } from "react-redux"
+import { changePassword } from "../../../store/user/actions"
 
 // components
 import Input from "../../components/form/InputText"
@@ -15,20 +16,35 @@ class ForgotPassword extends React.Component {
 
   changePasswordHandler() {
     const { password, password_conf } = this.state
-    if(password != password_conf) {
-        // password not match
-        alert(true, "Password konfirmasi tidak cocok", "error")
+    if (password != password_conf) {
+      // password not match
+      alert(true, "Password konfirmasi tidak cocok", "error")
     } else {
-        // start request to api
+      // start request to api
+      this.props.dispatch(
+        changePassword({
+          filter: "change_password",
+          password,
+          password_conf,
+          token: this.props.match.params.token
+        })
+      )
     }
   }
 
   render() {
+    const { response } = this.props
     const { password, password_conf } = this.state
     const title = "Ganti Password",
       description =
         "Pastikan keamanan passwordmu, gunakan kombinasi angka, huruf dan simbol"
-    let loading = false
+    const loading = response.is_loading || response.status == 200
+
+    if (response.status && response.status == 200) {
+      setTimeout(() => {
+        location.href = "/"
+      }, 1000)
+    }
 
     return (
       <Fullscreen className="login">
@@ -95,8 +111,10 @@ class ForgotPassword extends React.Component {
           </div>
           <div className="login-box__footer">
             <small>
-              <Link to="/">ke Homepage</Link>{"| "}
-              <Link to="/forgot-password">ke Lupa Password</Link>{"| "}
+              <Link to="/">ke Homepage</Link>
+              {"| "}
+              <Link to="/forgot-password">ke Lupa Password</Link>
+              {"| "}
               <Link to="/login">ke Login</Link>
             </small>
           </div>
@@ -106,4 +124,10 @@ class ForgotPassword extends React.Component {
   }
 }
 
-export default connect()(ForgotPassword)
+const mapStateToProps = state => {
+  return {
+    response: state.Others.change_password || {}
+  }
+}
+
+export default connect(mapStateToProps)(ForgotPassword)
