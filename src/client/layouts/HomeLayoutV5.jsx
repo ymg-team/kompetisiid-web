@@ -2,7 +2,7 @@ import React, { Component } from "react"
 import { connect } from "react-redux"
 import * as Colors from "../../style/colors"
 import { initModalImages } from "../helpers/Modal"
-import { resendEmailValidationToken } from "../containers/user/actions"
+import { resendEmailValidationToken } from "../../store/user/actions"
 
 // components
 import Footer from "../components/Footer"

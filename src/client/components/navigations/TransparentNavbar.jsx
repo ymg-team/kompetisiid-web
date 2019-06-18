@@ -3,7 +3,7 @@ import { connect } from "react-redux"
 import Styled from "styled-components"
 import { queryToObj } from "string-manager"
 import * as Colors from "../../../style/colors"
-import { logout } from "../../containers/user/actions"
+import { logout } from "../../../store/user/actions"
 
 // components
 import { Link } from "react-router-dom"

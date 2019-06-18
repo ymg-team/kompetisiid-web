@@ -1,4 +1,4 @@
-import React, { Component } from "react"
+import React from "react"
 import Styled from "styled-components"
 import { fullPageLoader } from "../../components/preloaders/FullPage"
 import { connect } from "react-redux"
@@ -9,11 +9,11 @@ import Input from "../../components/form/InputText"
 import Submit from "../../components/form/Submit"
 import { Link } from "react-router-dom"
 import Helmet from "../../components/Helmet"
-import AuthFacebook from "../../components/buttons/AuthFacebook"
-import AuthGoogle from "../../components/buttons/AuthGoogle"
+// import AuthFacebook from "../../components/buttons/AuthFacebook"
+// import AuthGoogle from "../../components/buttons/AuthGoogle"
 import { Fullscreen } from "../../components/Fullscreen"
 import { alert } from "../../components/Alert"
-import { profile, login } from "../user/actions"
+import { login } from "../../../store/user/actions"
 
 export const LoginBoxStyled = Styled.div`
 
@@ -36,7 +36,7 @@ export const LoginBoxStyled = Styled.div`
   }
 `
 
-class Login extends Component {
+class Login extends React.Component {
   constructor(props) {
     super(props)
 
@@ -228,23 +228,23 @@ class Login extends Component {
                 />
               </div>
             </form>
-            {!is_userfound ? (
-              !this.state.isSuperPage ? null : // <span>
-              //   <p>Atau masuk menggunakan</p>
-              //   <div className="login-box__content__auth">
-              //     <AuthFacebook />
-              //     <AuthGoogle />
-              //   </div>
-              // </span>
-              null
-            ) : (
-              <Link to="/register">Lupa password</Link>
-            )}
+            {!is_userfound
+              ? !this.state.isSuperPage
+                ? null // <span>
+                : //   <p>Atau masuk menggunakan</p>
+                  //   <div className="login-box__content__auth">
+                  //     <AuthFacebook />
+                  //     <AuthGoogle />
+                  //   </div>
+                  // </span>
+                  null
+              : null}
             <hr />
             {!this.state.isSuperPage ? (
               <p>
                 Belum punya akun, silahkan{" "}
-                <Link to="/register">Register Disini</Link>
+                <Link to="/register">Register Disini</Link> atau{" "}
+                <Link to="/forgot-password">Lupa password</Link>
               </p>
             ) : null}
           </div>
@@ -252,22 +252,19 @@ class Login extends Component {
           {/* footer navigation */}
           <div className="login-box__footer">
             <small>
-              <Link to="/">Home</Link>
-            </small>
-            <small>
+              <Link to="/">ke Home</Link>
+              {"| "}
               <a target="_blank" href="https://goo.gl/forms/kMGGZQXJCjoyKThj1">
                 Kontak
               </a>
-            </small>
-            <small>
+              {"| "}
               <a
                 href="https://kompetisi.id/news/TVRjPQ/Privacy-Policy"
                 target="_blank"
               >
                 Privacy
               </a>
-            </small>
-            <small>
+              {"| "}
               <a href="https://kompetisi.id/news/TXpVPQ/About" target="_blank">
                 About
               </a>

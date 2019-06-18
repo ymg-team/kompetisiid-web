@@ -107,11 +107,11 @@ export function requestAPIV2(method = 'GET', endpoint = '', params = {}, headers
   const { API_HOST } = params
   delete params.API_HOST
 
-  let token = ''
-  if (params.token) {
-    token = params.token
-    delete params.token
-  }
+  // let token = ''
+  // if (params.token) {
+  //   token = params.token
+  //   delete params.token
+  // }
 
   //set query
   if (params.query) {
@@ -122,7 +122,7 @@ export function requestAPIV2(method = 'GET', endpoint = '', params = {}, headers
   // debug api
   const debugApi = require('debug')('app:api')
 
-  headers.token = token 
+  // headers.token = token 
   headers['User-Agent'] = 'ki-v42'
 
   //set options

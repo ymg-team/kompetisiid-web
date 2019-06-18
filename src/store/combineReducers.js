@@ -4,7 +4,7 @@
 import Kompetisi from "../client/containers/competition/reducer"
 import Berita from "../client/containers/news/reducer"
 import Pasang from "../client/containers/sendCompetition/reducer"
-import User from "../client/containers/user/reducer"
+import User from "./user/reducer"
 import Request from "../client/containers/_super/requests/reducer"
 import Others from "../client/containers/others/reducer"
 

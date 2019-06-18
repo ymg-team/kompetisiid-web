@@ -2,9 +2,9 @@ import React, { Component } from "react"
 import Loadable from "react-loadable"
 import { alert } from "../components/Alert"
 import { fullPageLoader } from "../components/preloaders/FullPage"
-import { logout } from "../containers/user/actions"
+import { logout } from "../../store/user/actions"
 import { connect } from "react-redux"
-import { fetchCountSuperSidebar } from "../containers/user/actions"
+import { fetchCountSuperSidebar } from "../../store/user/actions"
 
 // components
 import Loading from "../components/preloaders/GlobalLoader"

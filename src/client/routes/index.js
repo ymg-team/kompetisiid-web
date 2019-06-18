@@ -26,6 +26,14 @@ const FullPagePreloader = () => (
 )
 
 // loadable containers
+const ChangePassword = Loadable({
+  loader: () => import("../containers/auth/ChangePassword"),
+  loading: FullPagePreloader
+})
+const ForgotPassword = Loadable({
+  loader: () => import("../containers/auth/ForgotPassword"),
+  loading: FullPagePreloader
+})
 const Login = Loadable({
   loader: () => import("../containers/auth/Login"),
   loading: FullPagePreloader
@@ -52,9 +60,9 @@ import Home from "../containers/home/index"
 
 // layouts
 import LayoutRoot from "../layouts/4.2/Root"
-import LayoutHome from "../layouts/4.2/Home"
+// import LayoutHome from "../layouts/4.2/Home"
 import LayoutHomeV5 from "../layouts/HomeLayoutV5"
-import LayoutError from "../layouts/4.2/Error"
+// import LayoutError from "../layouts/4.2/Error"
 
 export default [
   {
@@ -100,17 +108,31 @@ export default [
             exact: true,
             component: RedirectContainer
           },
-          // route to do email verification
+          {
+            path: "/forgot-password",
+            fullscreen: true,
+            exact: true,
+            component: ForgotPassword
+          },
+          {
+            path: "/change-password/:token",
+            fullscreen: true,
+            exact: true,
+            component: ChangePassword
+          },
           {
             fullscreen: true,
             path: "/email-verification/:token",
             exact: true,
             component: EmailVerification
           },
+
           // Super pages
           Super,
+
           // Dashboard pages
           Dashboard,
+
           // Redirect pages
           {
             path: "/berita/baca/:encid/:title",

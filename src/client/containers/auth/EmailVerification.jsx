@@ -1,6 +1,6 @@
 import React from "react"
 import { connect } from "react-redux"
-import { emailVerification } from "../user/actions"
+import { emailVerification } from "../../../store/user/actions"
 
 // components
 import FullPageLoader from "../../components/preloaders/FullPage"

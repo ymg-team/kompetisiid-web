@@ -1,7 +1,7 @@
 import React from "react"
 import Helmet from "../../components/Helmet"
 
-import { profile } from "./actions"
+import { profile } from "../../../store/user/actions"
 import { connect } from "react-redux"
 
 class Index extends React.Component {
@@ -52,7 +52,9 @@ class Index extends React.Component {
                 <div className="avatar">
                   <img
                     src={
-                      profile[username] && profile[username].data && profile[username].data.avatar
+                      profile[username] &&
+                      profile[username].data &&
+                      profile[username].data.avatar
                         ? profile[username].data.avatar.original
                         : "/assets/4.2/img/avatar-1.jpg"
                     }

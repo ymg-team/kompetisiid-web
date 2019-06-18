@@ -1,10 +1,10 @@
 import React from "react"
 import Loadable from "react-loadable"
 import { alert } from "../components/Alert"
-import { logout } from "../containers/user/actions"
+import { logout } from "../../store/user/actions"
 import { fullPageLoader } from "../components/preloaders/FullPage"
 import { connect } from "react-redux"
-import { fetchCountDashboardSidebar } from "../containers/user/actions"
+import { fetchCountDashboardSidebar } from "../../store/user/actions"
 
 // components
 import Loading from "../components/preloaders/FullContentLoader"

@@ -3,9 +3,9 @@
  */
 
 import { combineReducers } from "redux"
-import { setToLoading, receiveData, receiveApiResponse } from "../../../store/helpers/Mutations"
-import { alert } from "../../components/Alert"
-import { REQUEST_DATA, RECEIVE_DATA } from "../../../store/consts"
+import { setToLoading, receiveData, receiveApiResponse } from "../helpers/Mutations"
+import { alert } from "../../client/components/Alert"
+import { REQUEST_DATA, RECEIVE_DATA } from "../consts"
 import {
   LOGOUT,
   OAUTH_LOGIN,
@@ -37,8 +37,6 @@ function login(state = {}, action) {
     case OAUTH_LOGIN:
     case LOGIN:
       return receiveApiResponse(state, action)
-    case LOGOUT:
-      return {}
     default:
       return state
   }
@@ -59,20 +57,20 @@ function logout(state = {}, action) {
       if (action.json && action.json.status === 200) location.href = "/"
       return state
     default:
-      if (action.target === "user_logout") {
-        switch (action.type) {
-          case REQUEST_DATA:
-            state.is_loading = true
-            return Object.assign({}, state)
+      // if (action.target === "user_logout") {
+      //   switch (action.type) {
+      //     case REQUEST_DATA:
+      //       state.is_loading = true
+      //       return Object.assign({}, state)
 
-          case RECEIVE_DATA:
-            state.is_loading = false
-            return Object.assign({}, state, action.json)
+      //     case RECEIVE_DATA:
+      //       state.is_loading = false
+      //       return Object.assign({}, state, action.json)
 
-          default:
-            return state
-        }
-      }
+      //     default:
+      //       return state
+      //   }
+      // }
 
       return state
   }
