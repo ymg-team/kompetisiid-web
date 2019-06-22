@@ -7,7 +7,7 @@ import { pushScript } from "../../helpers/DomEvents"
 import { connect } from "react-redux"
 import { topLoading } from "../../components/preloaders"
 import { epochToRelativeTime } from "../../helpers/DateTime"
-import { truncate } from "string-manager"
+// import { truncate } from "string-manager"
 import { textParser } from "../../helpers/String"
 
 // components
@@ -18,6 +18,7 @@ import Author from "../../components/cards/NewsAuthorCard"
 import ErrorCard from "../../components/cards/ErrorCard"
 import Preloader from "../../components/preloaders/NewsDetail"
 import GAds from "../../components/cards/GoogleAds"
+import Share from "../../components/boxs/Share"
 
 const NewsBox = Loadable({
   loader: () => import("../../components/boxs/NewsBox"),
@@ -202,7 +203,7 @@ export default class Index extends Component {
 
         {detail[encid] && detail[encid].status ? (
           parseInt(detail[encid].status) === 200 ? (
-            <div>
+            <React.Fragment>
               <div className="col-md-6 col-md-push-3 col-md-pull-3">
                 <div className="row">
                   <div className="col-md-12">
@@ -281,6 +282,16 @@ export default class Index extends Component {
                       </div>
                     </div>
                   </div>
+
+                  {/* share button */}
+                  <div className="col-md-12">
+                    <Share
+                      url={`https://kompetisi.id/news/${
+                        detail[encid].data.id
+                      }/${detail[encid].data.nospace_title}`}
+                    />
+                  </div>
+                  {/* end of share button */}
                 </div>
               </div>
 
@@ -292,7 +303,7 @@ export default class Index extends Component {
                   status={detail[encid].status}
                 />
               </div>
-            </div>
+            </React.Fragment>
           ) : (
             <ErrorCard
               code={detail[encid].status}
@@ -381,13 +392,4 @@ function mapStateToProps(state) {
   }
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    dispatch
-  }
-}
-
-module.exports = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Index)
+module.exports = connect(mapStateToProps)(Index)
