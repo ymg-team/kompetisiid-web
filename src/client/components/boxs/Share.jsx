@@ -5,6 +5,7 @@ const ShareStyled = Styled.div`
     margin-bottom: 20px;
     .share-box_items_link {
         margin-left: -5px;
+        margin-right: 15px;
         img {
             width: 48px;
             height: 48px;

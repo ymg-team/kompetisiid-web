@@ -432,7 +432,8 @@ class CompetitionForm extends React.Component {
             />
           )}
 
-          {competitionData.id &&
+          {competitionData.id && 
+          !["admin", "moderator"].includes(competitionData.author.level) &&
           competitionData.status != "reject" &&
           ["admin", "moderator"].includes(session.level) ? (
             <BtnSubmit
