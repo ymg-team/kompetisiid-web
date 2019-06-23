@@ -7,7 +7,9 @@ import { CALL_API } from "../../../store/middlewares/api"
 import sealMiddleware from "../../helpers/seal"
 import { objToQuery } from "string-manager/dist/modules/httpquery"
 
-export const RECEIVE_CATEGORIES = "RECEIVE_CATEGORIES"
+export const FETCH_COMPETITIONS = "FETCH_COMPETITIONS"
+export const FETCH_MORE_COMPETITIONS = "FETCH_MORE_COMPETITIONS"
+export const FETCH_CATEGORIES = "FETCH_CATEGORIES"
 export const CREATE_COMPETITION = "CREATE_COMPETITION"
 export const LIKE_COMPETITION = "LIKE_COMPETITION"
 
@@ -47,12 +49,23 @@ export function fetchJelajah(params = {}, filter) {
   const url = `/api/jelajah/${sealMiddleware.generateSeal()}`
   return {
     [CALL_API]: {
-      typeSuccess: RECEIVE_DATA,
-      typeWaiting: REQUEST_DATA,
+      type: FETCH_COMPETITIONS,
       filter,
       method: "get",
-      target: "kompetisi_jelajah",
       url: `${url}?${objToQuery(params)}`
+    }
+  }
+}
+
+export function fetchLikedCompetition(params = {}, filter) {
+  return {
+    [CALL_API]: {
+      type: params.lastid ? FETCH_MORE_COMPETITIONS : FETCH_COMPETITIONS,
+      filter,
+      method: "get",
+      url: `/api/kompetisi/liked/${sealMiddleware.generateSeal()}?${objToQuery(
+        params
+      )}`
     }
   }
 }
@@ -61,11 +74,9 @@ export function fetchJelajahMore(params, filter) {
   const url = `/api/jelajah/${sealMiddleware.generateSeal()}`
   return {
     [CALL_API]: {
-      typeSuccess: RECEIVE_MORE_DATA,
-      typeWaiting: REQUEST_DATA,
+      type: FETCH_MORE_COMPETITIONS,
       filter,
       method: "get",
-      target: "kompetisi_jelajah",
       url: `${url}?${objToQuery(params)}`
     }
   }

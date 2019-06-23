@@ -34,13 +34,13 @@ const Alert = Styled.div`
 
   /* small */
   @media only screen and (max-width: 543px) {
-    width: 100%;
+    max-width: 100%;
     right: 0;
   }
 
   /* medium screen */
   @media only screen and (min-width: 544px) and (max-width: 767px) {
-    width: 100%;
+    max-width: 100%;
     right: 0;
   }
 `

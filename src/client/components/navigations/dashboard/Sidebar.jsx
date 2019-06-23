@@ -32,7 +32,7 @@ export default props => {
         {stats.competition && stats.competition.waiting ? (
           <li>
             <Link to="/dashboard/competition/waiting">
-              Menunggu{" "}
+              Kompetisi Menunggu{" "}
               <span className="label label-red">
                 {stats.competition.waiting}
               </span>
@@ -44,7 +44,7 @@ export default props => {
         {stats.competition && stats.competition.live ? (
           <li>
             <Link to="/dashboard/competition/live">
-              Berlangsung{" "}
+              Kompetisi Berlangsung{" "}
               <span className="label label-blue">{stats.competition.live}</span>
             </Link>
           </li>
@@ -54,13 +54,23 @@ export default props => {
         {stats.competition && stats.competition.posted ? (
           <li>
             <Link to="/dashboard/competition/posted">
-              Dipublikasi{" "}
+              Kompetisi Dipublikasi{" "}
               <span className="label label-blue">
                 {stats.competition.posted}
               </span>
             </Link>
           </li>
         ) : null}
+
+        <hr />
+        <li>
+          {" "}
+          <strong>Kompetisi Lainnya</strong>
+        </li>
+
+        <li>
+          <Link to="/dashboard/competition/liked">Kompetisi Disukai</Link>
+        </li>
 
         {/* link to rejected competition */}
         {stats.competition && stats.competition.rejected ? (

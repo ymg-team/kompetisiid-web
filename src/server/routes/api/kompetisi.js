@@ -30,6 +30,7 @@ router.get(
 // router.get('/pengumuman/:id/:seal', sealMiddleware, controller.getPengumuman, apiCaller)
 // router.get("/favoritedtags/:seal", sealMiddleware, controller.getFavoritedtag)
 router.get("/kategori", controller.getCategories, apiCaller)
+router.get("/liked/:seal", sealMiddleware, controller.getLikedCompetition, apiCaller)
 router.get("/:id/:seal", sealMiddleware, controller.getDetail, apiCaller)
 router.post(
   "/like/:id/:seal",

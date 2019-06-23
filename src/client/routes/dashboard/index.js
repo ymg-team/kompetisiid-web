@@ -18,6 +18,10 @@ const DashboardCompetitions = Loadable({
   loader: () => import("../../containers/_super/competitions/CompetitionList"),
   loading: Loading
 })
+const DashboardOtherCompetitions = Loadable({
+  loader: () => import("../../containers/_super/competitions/OtherCompetitionList"),
+  loading: Loading
+})
 const CompetitionFormLayout = Loadable({
   loader: () => import("../../containers/_super/competitions/CompetitionFormLayout"),
   loading: Loading
@@ -95,7 +99,12 @@ export default {
       component: DashboardCompetitions
     },
     // end of competitions
-
+    {
+      path: "/dashboard/competition/liked",
+      extact: true,
+      type: "liked",
+      component: DashboardOtherCompetitions
+    },
     {
       path: "/dashboard/*",
       fullscreen: true,
