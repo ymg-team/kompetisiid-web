@@ -3,42 +3,27 @@ import { pushData } from "../../../store/helpers/Mutations"
 import {
   REQUEST_DATA,
   RECEIVE_DATA,
-  RECEIVE_MORE_DATA
 } from "../../../store/consts"
 import * as Mutations from "../../../store/helpers/Mutations"
-import { LIKE_COMPETITION } from "./actions"
-import {alert} from "../../components/Alert"
+import { LIKE_COMPETITION, FETCH_COMPETITIONS, FETCH_MORE_COMPETITIONS } from "./actions"
+import { alert } from "../../components/Alert"
 
 function data(state = {}, action) {
-  let nextstate = {}
-  const { target, filter } = action
   switch (action.type) {
-    case REQUEST_DATA:
-      nextstate = state
+    case FETCH_COMPETITIONS:
+      return Mutations.receiveApiResponse(state, action)
 
-      if (action.target === "kompetisi_jelajah") {
-        return Mutations.requestListByFilter(state, action)
-      }
-
-      return state
-
-    case RECEIVE_DATA:
-      if (target === "kompetisi_jelajah") {
-        return Mutations.receiveListByFilter(state, action)
-      }
-
-      return state
-
-    case RECEIVE_MORE_DATA:
-      if (action.target === "kompetisi_jelajah") {
-        state[action.filter].is_loading = false
-        state[action.filter].message = action.json.message
-        state[action.filter].status = action.json.status
-        if (action.json.status === 200) {
-          state.data = pushData(state[action.filter].data, action.json.data)
+    case FETCH_MORE_COMPETITIONS:
+        state[action.filter].is_loading = true
+        if (action.json && action.json.status) {
+          state[action.filter].is_loading = false
+          state[action.filter].message = action.json.message
+          state[action.filter].status = action.json.status
+          if (action.json.status === 200) {
+            state.data = pushData(state[action.filter].data, action.json.data)
+          }
         }
         return Object.assign({}, state)
-      }
 
     default:
       return state
@@ -47,18 +32,17 @@ function data(state = {}, action) {
 
 function detail(state = {}, action) {
   switch (action.type) {
-
     case LIKE_COMPETITION:
-
-      return Mutations.updateDetailByFilter(state, action , n => {
+      return Mutations.updateDetailByFilter(state, action, n => {
         // current like action description
         let actionLike
-        
-        if(action.json) {
+
+        if (action.json) {
           actionLike = action.json.liked
 
           // show alert after get response from api
-          if(!actionLike) alert(true, "Kamu telah batal suka kompetisi", "warning")
+          if (!actionLike)
+            alert(true, "Kamu telah batal suka kompetisi", "warning")
           else alert(false)
 
           // only increase/reduce after get response from api
@@ -67,7 +51,7 @@ function detail(state = {}, action) {
           actionLike = !n.data.is_liked
         }
 
-        n.data.is_liked = actionLike 
+        n.data.is_liked = actionLike
       })
 
     case REQUEST_DATA:

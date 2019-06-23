@@ -114,6 +114,17 @@ export function likeCompetition(req, res, next) {
   next()
 }
 
+export function getLikedCompetition(req, res, next) {
+  req.reqdata = {
+    version: "v42",
+    method: "get",
+    params: { query: req.query },
+    url: `/v2/competitions/liked`
+  }
+
+  next()
+}
+
 /**
  * function to get favorited tag
  */
