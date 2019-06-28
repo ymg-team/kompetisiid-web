@@ -27,7 +27,8 @@ const CompetitionList = Loadable({
   loading: Loading
 })
 const CompetitionFormLayout = Loadable({
-  loader: () => import("../../containers/_super/competitions/CompetitionFormLayout"),
+  loader: () =>
+    import("../../containers/_super/competitions/CompetitionFormLayout"),
   loading: Loading
 })
 const CompetitionForm = Loadable({
@@ -35,7 +36,8 @@ const CompetitionForm = Loadable({
   loading: Loading
 })
 const CompetitionAnnouncementForm = Loadable({
-  loader: () => import("../../containers/_super/competitions/CompetitionAnnouncement"),
+  loader: () =>
+    import("../../containers/_super/competitions/CompetitionAnnouncement"),
   loading: Loading
 })
 const NewsList = Loadable({
@@ -54,6 +56,7 @@ export default {
     {
       path: "/super/dashboard",
       exact: true,
+      type: "super",
       component: SuperDashboard
     },
 
@@ -63,6 +66,7 @@ export default {
       exact: true,
       tab_active: 2,
       status: "active",
+      type: "super",
       component: CompetitionList
     },
     {
@@ -71,6 +75,7 @@ export default {
       tab_active: 1,
       // status to request api
       status: "waiting",
+      type: "super",
       component: CompetitionList
     },
     {
@@ -79,6 +84,7 @@ export default {
       tab_active: 2,
       // status to request api
       status: "active",
+      type: "super",
       component: CompetitionList
     },
     {
@@ -87,6 +93,7 @@ export default {
       tab_active: 3,
       // status to request api
       status: "all",
+      type: "super",
       component: CompetitionList
     },
 
@@ -94,6 +101,7 @@ export default {
     {
       path: "/super/competition/create",
       exact: true,
+      type: "super",
       component: CompetitionForm
     },
     {
@@ -103,11 +111,13 @@ export default {
         {
           path: "/super/competition/update/:id",
           exact: true,
+          type: "super",
           component: CompetitionForm
         },
         {
           path: "/super/competition/update/:id/announcements",
           exact: true,
+          type: "super",
           component: CompetitionAnnouncementForm
         }
       ]
@@ -118,24 +128,28 @@ export default {
       path: "/super/requests",
       status: "waiting",
       exact: true,
+      type: "super",
       component: Request
     },
     {
       path: "/super/requests/waiting",
       status: "waiting",
       exact: true,
+      type: "super",
       component: Request
     },
     {
       path: "/super/requests/posted",
       status: "posted",
       exact: true,
+      type: "super",
       component: Request
     },
     {
       path: "/super/requests/reject",
       status: "reject",
       exact: true,
+      type: "super",
       component: Request
     },
 
@@ -143,16 +157,19 @@ export default {
     {
       path: "/super/news",
       exact: true,
+      type: "super",
       component: NewsList
     },
     {
       path: "/super/news/create",
       exact: true,
+      type: "super",
       component: NewsForm
     },
     {
       path: "/super/news/:id",
       exact: true,
+      type: "super",
       component: NewsForm
     },
     // 404
@@ -160,6 +177,7 @@ export default {
       path: "/super/*",
       fullscreen: true,
       exact: true,
+      type: "super",
       error_code: 404,
       error_msg: "Halaman yang anda kunjungi tidak ditemukan",
       component: NotFound

@@ -44,16 +44,13 @@ class MyCompetition extends React.Component {
   }
 
   render() {
-    const { tab_active } = this.props.route
+    const { tab_active, type } = this.props.route
     const { stats } = this.props
     const competitions = this.props.data[Filter] || {}
     let tabcontent = []
 
     // generate tab content
-    if (
-      this.props.session &&
-      ["admin", "moderator"].includes(this.props.session.level)
-    ) {
+    if (type == "super") {
       // if logged in user is admin or moderator
       tabcontent = [
         {

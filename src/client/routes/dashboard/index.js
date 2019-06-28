@@ -19,11 +19,13 @@ const DashboardCompetitions = Loadable({
   loading: Loading
 })
 const DashboardOtherCompetitions = Loadable({
-  loader: () => import("../../containers/_super/competitions/OtherCompetitionList"),
+  loader: () =>
+    import("../../containers/_super/competitions/OtherCompetitionList"),
   loading: Loading
 })
 const CompetitionFormLayout = Loadable({
-  loader: () => import("../../containers/_super/competitions/CompetitionFormLayout"),
+  loader: () =>
+    import("../../containers/_super/competitions/CompetitionFormLayout"),
   loading: Loading
 })
 const CompetitionForm = Loadable({
@@ -31,7 +33,8 @@ const CompetitionForm = Loadable({
   loading: Loading
 })
 const CompetitionAnnouncementForm = Loadable({
-  loader: () => import("../../containers/_super/competitions/CompetitionAnnouncement"),
+  loader: () =>
+    import("../../containers/_super/competitions/CompetitionAnnouncement"),
   loading: Loading
 })
 
@@ -42,6 +45,7 @@ export default {
     {
       path: "/dashboard",
       exact: true,
+      type: "dashboard",
       component: DashboardIndex
     },
 
@@ -49,6 +53,7 @@ export default {
     {
       path: "/dashboard/competition/create",
       extact: true,
+      type: "dashboard",
       component: CompetitionForm
     },
     {
@@ -58,19 +63,22 @@ export default {
         {
           path: "/dashboard/competition/update/:id",
           exact: true,
+          type: "dashboard",
           component: CompetitionForm
         },
         {
           path: "/dashboard/competition/update/:id/announcements",
           exact: true,
+          type: "dashboard",
           component: CompetitionAnnouncementForm
-        },
+        }
       ]
     },
     // waiting competition page
     {
       path: "/dashboard/competition/waiting",
       extact: true,
+      type: "dashboard",
       tab_active: 1,
       status: "waiting",
       component: DashboardCompetitions
@@ -78,6 +86,7 @@ export default {
     {
       path: "/dashboard/competition/live",
       extact: true,
+      type: "dashboard",
       tab_active: 2,
       status: "active",
       component: DashboardCompetitions
@@ -86,6 +95,7 @@ export default {
     {
       path: "/dashboard/competition/posted",
       extact: true,
+      type: "dashboard",
       tab_active: 3,
       status: "posted",
       component: DashboardCompetitions
@@ -94,6 +104,7 @@ export default {
     {
       path: "/dashboard/competition/rejected",
       extact: true,
+      type: "dashboard",
       tab_active: 4,
       status: "reject",
       component: DashboardCompetitions
@@ -102,12 +113,15 @@ export default {
     {
       path: "/dashboard/competition/liked",
       extact: true,
+      type: "dashboard",
+      type: "dashboard",
       type: "liked",
       component: DashboardOtherCompetitions
     },
     {
       path: "/dashboard/*",
       fullscreen: true,
+      type: "dashboard",
       exact: true,
       error_code: 404,
       error_msg: "Halaman yang anda kunjungi tidak ditemukan",
