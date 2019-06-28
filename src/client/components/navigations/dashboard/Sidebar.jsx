@@ -62,16 +62,6 @@ export default props => {
           </li>
         ) : null}
 
-        <hr />
-        <li>
-          {" "}
-          <strong>Kompetisi Lainnya</strong>
-        </li>
-
-        <li>
-          <Link to="/dashboard/competition/liked">Kompetisi Disukai</Link>
-        </li>
-
         {/* link to rejected competition */}
         {stats.competition && stats.competition.rejected ? (
           <li>
@@ -83,6 +73,16 @@ export default props => {
             </Link>
           </li>
         ) : null}
+
+        <hr />
+        <li>
+          {" "}
+          <strong>Kompetisi Lainnya</strong>
+        </li>
+
+        <li>
+          <Link to="/dashboard/competition/liked">Kompetisi Disukai</Link>
+        </li>
 
         {/* end of competition */}
 

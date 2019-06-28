@@ -295,12 +295,15 @@ class Navbar extends Component {
                                   session.level
                                 ) ? (
                                   <Link to={`/super/dashboard`}>Super</Link>
-                                ) : (
-                                  <Link to={`/dashboard/`}>Dashboard</Link>
-                                )}
+                                ) : null}
                               </li>
                               <li>
-                                <Link to="/settings/profile">Pengaturan Profil</Link>
+                                <Link to={`/dashboard`}>Dashboard</Link>
+                              </li>
+                              <li>
+                                <Link to="/settings/profile">
+                                  Pengaturan Profil
+                                </Link>
                               </li>
                               <li>
                                 <a
