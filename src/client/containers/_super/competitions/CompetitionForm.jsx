@@ -19,11 +19,9 @@ class CompetitionFormContainer extends React.Component {
         status === 201 || status === 200 ? "success" : "error"
       )
       if (status === 201 || status === 200) {
+        const { type } = this.props.route
         this.notSubmited = false
-        if (
-          this.props.session &&
-          ["admin", "moderator"].includes(this.props.session.level)
-        ) {
+        if (type == "super") {
           location.href = "/super/competition"
         } else {
           location.href = "/dashboard/competition/waiting"
@@ -35,6 +33,8 @@ class CompetitionFormContainer extends React.Component {
   render = () => {
     const { id } = this.props.match.params
     const competitionData = this.props.competition[id] || {}
+
+    console.log("route", this.props.route)
 
     return (
       <React.Fragment>
