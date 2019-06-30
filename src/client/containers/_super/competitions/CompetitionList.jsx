@@ -156,7 +156,7 @@ class MyCompetition extends React.Component {
               ? competitions.data.map((n, key) => {
                   return (
                     <CompetitionCard
-                      session={this.props.session}
+                      type={type}
                       key={key}
                       n={n}
                     />
@@ -200,7 +200,9 @@ function generateParams(props) {
     status: props.route.status || "all"
   }
 
-  if (!["admin", "moderator"].includes(props.session.level)) {
+  const { type } = props.route
+
+  if (type == "dashboard") {
     Params.by_me = true
   }
 
