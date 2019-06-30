@@ -35,11 +35,15 @@ class FormNews extends React.Component {
     }
   }
 
-  submitHandler = () => {
+  submitHandler = (status) => {
     let formdata = {
       title: this.state.title,
       content: this.state.content,
       tags: this.state.tags ? this.state.tags.toString() : ""
+    }
+
+    if(status) {
+      if(status == "draft") formdata.draft = true
     }
 
     if (this.state.image) formdata.image = this.state.image
@@ -114,9 +118,17 @@ class FormNews extends React.Component {
           <Spacer size="large" />
 
           <BtnSubmit
+            wrapperStyle={{ display: "inline-block", width: "initial" }}
             disabled={loading}
             text={loading ? "loading..." : this.props.title}
             action={() => this.submitHandler()}
+            setState={(n, cb) => this.setState(n, cb)}
+          />
+          <BtnSubmit
+            wrapperStyle={{ display: "inline-block", width: "initial" }}
+            disabled={loading}
+            text={loading ? "loading..." : "Simpan ke draft"}
+            action={() => this.submitHandler("draft")}
             setState={(n, cb) => this.setState(n, cb)}
           />
         </form>

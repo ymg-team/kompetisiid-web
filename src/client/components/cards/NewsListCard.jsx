@@ -1,14 +1,42 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import { CardCompetitionStyled } from './CompetitionListCard'
+import React from "react"
+import { Link } from "react-router-dom"
+import { CardCompetitionStyled } from "./CompetitionListCard"
 import { epochToRelativeTime } from "../../helpers/DateTime"
+
+const LabelDraft = () => (
+  <div
+    style={{
+      position: "absolute",
+      background: "#f4f4f4",
+      top: "85px",
+      margin: "0 auto",
+      padding: "10px",
+      color: "grey",
+      opacity: "1",
+      width: "25%",
+      textAlign: "center",
+      left: "25%",
+      marginLeft: "14%",
+      fontWeight: "bold",
+      textTransform: "uppercase",
+      letterSpacing: "1.1px",
+      zIndex: 1
+    }}
+  >
+    draft
+  </div>
+)
 
 export default props => {
   const { n } = props
   const target = `/news/${n.id}/${n.nospace_title}`
   return (
     <CardCompetitionStyled className="col-md-4">
-      <div className="card-competition">
+      <div
+        className="card-competition"
+        style={{ opacity: n.is_draft ? 0.5 : 1 }}
+      >
+        {n.is_draft ? <LabelDraft /> : null}
         <Link to={target}>
           <div className="card-competition--poster">
             <img
@@ -22,11 +50,14 @@ export default props => {
         <div className="card-competition--inside">
           <Link to={target}>
             <h3>{n.title}</h3>
-            <small className="text-muted">{epochToRelativeTime(n.created_at)}</small>
+            <small className="text-muted">
+              {epochToRelativeTime(n.created_at)}
+            </small>
           </Link>
           <br />
           <small>
-            diposting oleh <Link to={`/user/${n.author.username}`}>{n.author.username}</Link>
+            diposting oleh{" "}
+            <Link to={`/user/${n.author.username}`}>{n.author.username}</Link>
           </small>
           <br />
           <a className="muted" href="#">

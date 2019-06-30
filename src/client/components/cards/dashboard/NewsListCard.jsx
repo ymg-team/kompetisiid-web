@@ -15,6 +15,9 @@ const NewsListCard = props => {
             <span>Dipost {epochToRelativeTime(data.created_at)} hari lalu</span>{" "}
             oleh {data.author.username}
           </p>
+          {data.is_draft ? (
+            <span className="label label-gray">draft</span>
+          ) : null}
         </div>
 
         <div className="item__right">
@@ -32,23 +35,16 @@ const NewsListCard = props => {
                   <li>
                     <a
                       target="_blank"
-                      href={`/news/${data.id}/${
-                        data.nospace_title
-                      }`}
+                      href={`/news/${data.id}/${data.nospace_title}`}
                     >
                       Preview
                     </a>
                   </li>
                   <li>
-                    <Link to={`/super/news/${data.id}`}>
-                      Ubah
-                    </Link>
+                    <Link to={`/super/news/${data.id}`}>Ubah</Link>
                   </li>
                   <li>
-                    <a
-                      onClick={() => {}}
-                      href="javascript:;"
-                    >
+                    <a onClick={() => {}} href="javascript:;">
                       Hapus
                     </a>
                   </li>
