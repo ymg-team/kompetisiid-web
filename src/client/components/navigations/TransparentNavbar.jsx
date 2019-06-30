@@ -168,7 +168,7 @@ class Navbar extends Component {
   render() {
     let logo = "/assets/images/small-white-logo-transparent.png"
     if (this.props.className === "bg-gray")
-      logo = "/assets/images/small-gray-logo-transparent.png"
+      logo = "/assets/images/small-red-logo-transparent.png"
     if (this.state.sticky)
       logo = "/assets/images/small-red-logo-transparent.png"
 

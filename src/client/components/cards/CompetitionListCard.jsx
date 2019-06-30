@@ -112,6 +112,30 @@ const LabelEnd = () => (
   </div>
 )
 
+const LabelDraft = () => (
+  <div
+    style={{
+      position: "absolute",
+      background: "#f4f4f4",
+      top: "85px",
+      margin: "0 auto",
+      padding: "10px",
+      color: "grey",
+      opacity: "1",
+      width: "25%",
+      textAlign: "center",
+      left: "25%",
+      marginLeft: "14%",
+      fontWeight: "bold",
+      textTransform: "uppercase",
+      letterSpacing: "1.1px",
+      zIndex: 1
+    }}
+  >
+    draft
+  </div>
+)
+
 const CompetitionListCard = props => {
   // convert today midnight timestamp to seconds ref "https://stackoverflow.com/questions/3894048/what-is-the-best-way-to-initialize-a-javascript-date-to-midnight?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa
   const { n, size } = props
@@ -128,8 +152,11 @@ const CompetitionListCard = props => {
     <CardCompetitionStyled
       className={size === "large" ? "col-md-4" : "col-md-3"}
     >
-      {is_ended ? <LabelEnd /> : null}
-      <div style={{ opacity: is_ended ? 0.5 : 1 }} className="card-competition">
+      {n.is_draft ? <LabelDraft /> : is_ended ? <LabelEnd /> : null}
+      <div
+        style={{ opacity: n.is_draft || is_ended ? 0.5 : 1 }}
+        className="card-competition"
+      >
         <Link to={target}>
           <div
             className="card-competition--poster"

@@ -19,14 +19,17 @@ class CompetitionFormContainer extends React.Component {
         status === 201 || status === 200 ? "success" : "error"
       )
       if (status === 201 || status === 200) {
+        const { type } = this.props.route
         this.notSubmited = false
-        if (
-          this.props.session &&
-          ["admin", "moderator"].includes(this.props.session.level)
-        ) {
+        if (type == "super") {
           location.href = "/super/competition"
         } else {
-          location.href = "/dashboard/competition/waiting"
+          location.href = `/dashboard/competition/${
+            this.props.session &&
+            ["admin", "moderator"].includes(this.props.session.level)
+              ? "live"
+              : "waiting"
+          }`
         }
       }
     }

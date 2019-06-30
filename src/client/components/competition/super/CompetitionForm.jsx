@@ -47,7 +47,14 @@ class CompetitionForm extends React.Component {
     }
 
     if (this.state.poster) formdata.poster = this.state.poster
-    if (status) formdata.status = status
+
+    if(status) {
+      if (status == "draft") {
+        formdata.draft = true
+      } else {
+        formdata.status = status
+      }
+    }
 
     console.log("submit handler...", formdata)
 
@@ -432,6 +439,17 @@ class CompetitionForm extends React.Component {
             />
           )}
 
+          {/* save to draft */}
+          <BtnSubmit
+            wrapperStyle={{ display: "inline-block", width: "initial" }}
+            disabled={loading}
+            text={loading ? "loading..." : "Simpan ke Draft"}
+            action={() => this.submitHandler("draft")}
+            setState={(n, cb) => this.setState(n, cb)}
+            requiredInputs={["maincat", "subcat"]}
+          />
+
+          {/* reject competition for admin / moderator */}
           {competitionData.id && 
           !["admin", "moderator"].includes(competitionData.author.level) &&
           competitionData.status != "reject" &&
