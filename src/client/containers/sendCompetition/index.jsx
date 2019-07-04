@@ -180,6 +180,8 @@ class AddCompetitionFast extends Component {
                 </div>
                 <div className="form-child">
                   <Submit
+                    id="form-submit-send-competition"
+                    type="submit"
                     loading={this.state.loading}
                     text="kirim permintaan"
                     disabled={response.is_loading}
