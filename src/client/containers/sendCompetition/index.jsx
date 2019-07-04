@@ -10,11 +10,11 @@ import InputFile from "../../components/form/InputFile"
 import Submit from "../../components/form/Submit"
 
 import { submitCepat } from "./actions"
-import {
-  validator,
-  validationSeter,
-  validationChecker
-} from "../../components/form/Validator"
+// import {
+//   validator,
+//   validationSeter,
+//   validationChecker
+// } from "../../components/form/Validator"
 import { connect } from "react-redux"
 
 let RecaptchaContainer
@@ -111,7 +111,12 @@ class AddCompetitionFast extends Component {
                 <Link to="/add">kembali ke pasang</Link>
               </p>
               <hr />
-              <form method="POST" className="form-ki" action="javascript:;">
+              <form
+                id="form-send-competition"
+                method="POST"
+                className="form-ki"
+                action="javascript:;"
+              >
                 <InputText
                   label="email"
                   name="input_email"
@@ -220,13 +225,6 @@ function mapStateToProps(state) {
   }
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    dispatch
-  }
-}
-
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
 )(AddCompetitionFast)
