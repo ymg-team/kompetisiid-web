@@ -28,6 +28,7 @@ export default class Submit extends Component {
     return (
       <div className="form-child" style={this.props.wrapperStyle}>
         <button
+          id={this.props.id || ""}
           onClick={() => this.handleClick()}
           className={`${className} ${this.props.loading ? "loading" : ""}`}
           disabled={this.props.disabled || this.props.loading}
