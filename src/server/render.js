@@ -115,7 +115,7 @@ export default (req, res) => {
                 }
                 </style>
                 ${metaTags}
-                ${getGTMHeadScript}
+                ${getGTMHeadScript()}
             </head>
             <body>
                 <div id="root">${body}</div>
@@ -229,7 +229,6 @@ function getTrackingScript() {
     <!-- end of Ganal -->
     `
 }
-
 
 function getGTMHeadScript() {
   return `
