@@ -286,24 +286,24 @@ class Navbar extends Component {
                           <div className="dropdown-items" id="avatar-menu">
                             <ul>
                               <li>
-                                <Link to={`/user/${session.username}`}>
+                                <a href={`/user/${session.username}`}>
                                   Profil saya
-                                </Link>
+                                </a>
                               </li>
                               <li>
                                 {["admin", "moderator"].includes(
                                   session.level
                                 ) ? (
-                                  <Link to={`/super/dashboard`}>Super</Link>
+                                  <a href={`/super/dashboard`}>Super</a>
                                 ) : null}
                               </li>
                               <li>
-                                <Link to={`/dashboard`}>Dashboard</Link>
+                                <a href={`/dashboard`}>Dashboard</a>
                               </li>
                               <li>
-                                <Link to="/settings/profile">
+                                <a href="/settings/profile">
                                   Pengaturan Profil
-                                </Link>
+                                </a>
                               </li>
                               <li>
                                 <a

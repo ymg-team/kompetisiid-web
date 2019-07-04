@@ -41,7 +41,7 @@ class SettingProfile extends React.Component {
   }
 
   componentWillReceiveProps(np) {
-    if(np.submitResponse.status == 200) {
+    if (np.submitResponse.status == 200) {
       setTimeout(() => {
         location.reload(true)
       }, 200)
@@ -50,9 +50,12 @@ class SettingProfile extends React.Component {
 
   render() {
     return (
-      <div>
+      <React.Fragment>
         <Helmet title="Pengaturan Profil" />
-        <HeaderDashboard title="Pengaturan Profil" text="this is setting page" />
+        <HeaderDashboard
+          title="Pengaturan Profil"
+          text="this is setting page"
+        />
 
         <form className="form-ki col-md-8" action="javascript:;" method="post">
           {/* update avatar */}
@@ -126,7 +129,7 @@ class SettingProfile extends React.Component {
             setState={(n, cb) => this.setState(n, cb)}
           />
         </form>
-      </div>
+      </React.Fragment>
     )
   }
 }

@@ -113,16 +113,16 @@ class Header extends Component {
                         </li>
                         <li>
                           {["admin", "moderator"].includes(session.level) ? (
-                            <Link to={`/super/dashboard`}>Super</Link>
+                            <a href={`/super/dashboard`}>Super</a>
                           ) : (
                             null
                           )}
                         </li>
                         <li>
-                          <Link to={`/dashboard`}>Dashboard</Link>
+                          <a href={`/dashboard`}>Dashboard</a>
                         </li>
                         <li>
-                          <Link to="/settings/profile">Pengaturan Profil</Link>
+                          <a href="/settings/profile">Pengaturan Profil</a>
                         </li>
                         <li>
                           <a
