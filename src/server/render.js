@@ -115,12 +115,14 @@ export default (req, res) => {
                 }
                 </style>
                 ${metaTags}
+                ${getGTMHeadScript}
             </head>
             <body>
                 <div id="root">${body}</div>
                 <div id="fb-root"></div>
                 ${head ? head.script.toString() : ""}
                 ${getScript(state)}
+                ${getGTMBodyScript()}
             </body>
         </html>
         `
@@ -226,4 +228,26 @@ function getTrackingScript() {
     </script>
     <!-- end of Ganal -->
     `
+}
+
+
+function getGTMHeadScript() {
+  return `
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-PGTQ7FJ');</script>
+  <!-- End Google Tag Manager -->
+  `
+}
+
+function getGTMBodyScript() {
+  return `
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PGTQ7FJ"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+  `
 }
