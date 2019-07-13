@@ -1,4 +1,36 @@
 /**
+ * controller to add competition announcement
+ */
+export function addAnnouncement(req, res, next) {
+  req.reqdata = {
+    version: "v42",
+    method: "put",
+    params: {
+      pengumuman: req.body.pengumuman
+    },
+    url: `/v2/competition/announcement/${req.params.id}`
+  }
+
+  next()
+}
+
+/**
+ * controller to delete competition announcement
+ */
+export function deleteAnnouncement(req, res, next) {
+  req.reqdata = {
+    version: "v42",
+    method: "delete",
+    params: {
+      key: req.body.key
+    },
+    url: `/v2/competition/announcement/${req.params.id}`
+  }
+
+  next()
+}
+
+/**
  * controller to create competition
  */
 export function create(req, res, next) {

@@ -24,7 +24,7 @@ export default function(req, res, next) {
   }
 
   // set auth header
-  if(req.session.userdata && req.session.userdata.id) {
+  if (req.session.userdata && req.session.userdata.id) {
     headers["User-Key"] = req.session.userdata.user_key
   }
 
