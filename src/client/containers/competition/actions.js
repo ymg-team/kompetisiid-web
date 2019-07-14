@@ -12,6 +12,47 @@ export const FETCH_MORE_COMPETITIONS = "FETCH_MORE_COMPETITIONS"
 export const FETCH_CATEGORIES = "FETCH_CATEGORIES"
 export const CREATE_COMPETITION = "CREATE_COMPETITION"
 export const LIKE_COMPETITION = "LIKE_COMPETITION"
+export const DELETE_ANNOUNCEMENT = "DELETE_ANNOUNCEMENT"
+export const ADD_ANNOUNCEMENT = "ADD_ANNOUNCEMENT"
+
+/**
+ * @description function to add competitoin announcement 
+ * @param {string} params.announcement  
+ * @param {competition_id} params.competition_id  
+ */
+export function addAnnouncement(params={}) {
+  return {
+    [CALL_API]: {
+      method: "post",
+      url: `/api/kompetisi/announcement/${params.competition_id}/${sealMiddleware.generateSeal()}`,
+      filter: params.competition_id,
+      type: ADD_ANNOUNCEMENT,
+      params: {
+        pengumuman: params.pengumuman,
+        is_admin: params.is_admin || false
+      }
+    }
+  }
+}
+
+/**
+ * @description function to delete competition announcement by key and competition id
+ * @param {number} params.announcement_key 
+ * @param {number} params.competition_id 
+ */
+export function deleteAnnouncement(params={}) {
+  return {
+    [CALL_API]: {
+      method: "delete",
+      url: `/api/kompetisi/announcement/${params.competition_id}/${sealMiddleware.generateSeal()}`,
+      filter: params.competition_id,
+      type: DELETE_ANNOUNCEMENT,
+      params: {
+        key: params.key
+      }
+    }
+  }
+}
 
 /**
  * @description function to create new competition

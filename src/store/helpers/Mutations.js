@@ -47,7 +47,7 @@ export function updateListbyId(state, action, params, selector) {
 export function updateDetailByFilter(state = {}, action, callback) {
   const keys = Object.keys(state)
   keys.map(key => {
-    if(state[key]) callback(state[key], state, action, )
+    if(state[key] && key == action.filter ) callback(state[key], state, action )
   })
   return Object.assign({}, state)
 }

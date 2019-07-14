@@ -109,6 +109,8 @@ export function today(format = '') {
   switch (format) {
     case "Y-m-d":
       return `${d.getFullYear()}-${d.getMonth() < 10 ? `0${d.getMonth() + 1}` : d.getMonth() + 1}-${d.getDate()}`
+    case "Y-m-d h:i:s":
+        return `${d.getFullYear()}-${d.getMonth() < 10 ? `0${d.getMonth() + 1}` : d.getMonth() + 1}-${d.getDate()} ${d.getHours()}:${d.getMinutes()}:${d.getSeconds()}`
     default:
       return `${d.getDate()} ${Bulan[d.getMonth()][0]} ${d.getFullYear()}`
   }

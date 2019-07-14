@@ -290,13 +290,13 @@ class Navbar extends Component {
                                   Profil saya
                                 </a>
                               </li>
-                              <li>
-                                {["admin", "moderator"].includes(
-                                  session.level
-                                ) ? (
+                              {["admin", "moderator"].includes(
+                                session.level
+                              ) ? (
+                                <li>
                                   <a href={`/super/dashboard`}>Super</a>
-                                ) : null}
-                              </li>
+                                </li>
+                              ) : null}
                               <li>
                                 <a href={`/dashboard`}>Dashboard</a>
                               </li>

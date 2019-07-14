@@ -11,7 +11,7 @@ router.use("/stats", require("./stats"))
 router.use("/counter", require("./counter"))
 router.use("/settings", require("./settings"))
 
-router.use("*", (req, res) => {
+router.use("/", (req, res) => {
   res.json({
     status: 404,
     message: "endpoint not found"

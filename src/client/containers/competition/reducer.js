@@ -1,12 +1,16 @@
 import { combineReducers } from "redux"
 import { pushData } from "../../../store/helpers/Mutations"
-import {
-  REQUEST_DATA,
-  RECEIVE_DATA,
-} from "../../../store/consts"
+import { REQUEST_DATA, RECEIVE_DATA } from "../../../store/consts"
 import * as Mutations from "../../../store/helpers/Mutations"
-import { LIKE_COMPETITION, FETCH_COMPETITIONS, FETCH_MORE_COMPETITIONS } from "./actions"
+import {
+  LIKE_COMPETITION,
+  FETCH_COMPETITIONS,
+  FETCH_MORE_COMPETITIONS,
+  DELETE_ANNOUNCEMENT,
+  ADD_ANNOUNCEMENT
+} from "./actions"
 import { alert } from "../../components/Alert"
+import { today } from "../../helpers/DateTime"
 
 function data(state = {}, action) {
   switch (action.type) {
@@ -14,16 +18,16 @@ function data(state = {}, action) {
       return Mutations.receiveApiResponse(state, action)
 
     case FETCH_MORE_COMPETITIONS:
-        state[action.filter].is_loading = true
-        if (action.json && action.json.status) {
-          state[action.filter].is_loading = false
-          state[action.filter].message = action.json.message
-          state[action.filter].status = action.json.status
-          if (action.json.status === 200) {
-            state.data = pushData(state[action.filter].data, action.json.data)
-          }
+      state[action.filter].is_loading = true
+      if (action.json && action.json.status) {
+        state[action.filter].is_loading = false
+        state[action.filter].message = action.json.message
+        state[action.filter].status = action.json.status
+        if (action.json.status === 200) {
+          state.data = pushData(state[action.filter].data, action.json.data)
         }
-        return Object.assign({}, state)
+      }
+      return Object.assign({}, state)
 
     default:
       return state
@@ -32,6 +36,39 @@ function data(state = {}, action) {
 
 function detail(state = {}, action) {
   switch (action.type) {
+    case ADD_ANNOUNCEMENT:
+      return Mutations.updateDetailByFilter(state, action, n => {
+        if (action.json && action.json.message) {
+          alert(
+            true,
+            action.json.message,
+            action.json.status == 200 ? "success" : "error"
+          )
+        } else {
+          if (!n.data.announcement) n.data.announcement = []
+          n.data.announcement.unshift({
+            by: action.params.is_admin ? "admin" : "penyelenggara",
+            data: action.params.pengumuman,
+            tgl: today("Y-m-d h:i:s")
+          })
+        }
+      })
+
+    case DELETE_ANNOUNCEMENT:
+      return Mutations.updateDetailByFilter(state, action, n => {
+        if (action.json && action.json.message) {
+          alert(
+            true,
+            action.json.message,
+            action.json.status == 200 ? "success" : "error"
+          )
+        } else {
+          if (n.data.announcement && n.data.announcement.length > 0) {
+            n.data.announcement.splice(action.params.key, 1)
+          }
+        }
+      })
+
     case LIKE_COMPETITION:
       return Mutations.updateDetailByFilter(state, action, n => {
         // current like action description

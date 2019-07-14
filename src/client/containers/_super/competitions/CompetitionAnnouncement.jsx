@@ -2,6 +2,8 @@ import React from "react"
 import Styled from "styled-components"
 import { connect } from "react-redux"
 import { softGray } from "../../../../style/colors"
+import { deleteAnnouncement,addAnnouncement } from "../../competition/actions"
+import swal from "sweetalert"
 
 import Helmet from "../../../components/Helmet"
 import HeaderDashboard from "../../../components/cards/HeaderDashboard"
@@ -30,41 +32,60 @@ const CompetitionAnnouncementStyled = Styled.div`
 class CompetitionAnnouncement extends React.Component {
   state = {}
 
+  removeHandler(key) {
+    swal({
+      title: `Hapus Pengumuman`,
+      text: "Apakah kamu yakin ingin menghapus pengumuman ini",
+      buttons: true,
+      icon: "warning",
+      dangerMode: true,
+      buttons: ["Tidak", "Ya, Hapus"],
+    }).then(value => {
+      if (value) {
+        console.log("deleted...")
+        this.props.dispatch(deleteAnnouncement({
+          competition_id: this.props.match.params.id,
+          key
+        }))
+      }
+    })
+  }
+
+  addHandler() {
+    // this.props.dispatch()
+    const {announcement} = this.state
+    this.setState({
+      announcement: ""
+    }, () => {
+      this.props.dispatch(addAnnouncement({
+        pengumuman: announcement,
+        competition_id: this.props.match.params.id,
+        is_admin: ["admin","moderator"].includes(this.props.session.level)
+      }))
+    })
+  }
+
   render() {
     const { loading } = this.state
     const { session } = this.props
     const competitionId = this.props.match.params.id
     const competitionData = this.props.competition[competitionId].data
-    let tabContents = []
-
-
-    if (["moderator", "admin"].includes(session.level)) {
-      tabContents = [
-        {
-          text: "Peraturan",
-          target: `/super/competition/update/${competitionId}`
-        },
-        {
-          text: "Pengumuman",
-          count: competitionData.announcement.length || 0,
-          is_active: true,
-          target: `/super/competition/update/${competitionId}/announcements`
-        }
-      ]
-    } else {
-      tabContents = [
-        {
-          text: "Peraturan",
-          target: `/dashboard/competition/update/${competitionId}`
-        },
-        {
-          text: "Pengumuman",
-          count: competitionData.announcement.length || 0,
-          is_active: true,
-          target: `/dashboard/competition/update/${competitionId}/announcements`
-        }
-      ]
-    }
+    const tabContents = [
+      {
+        text: "Peraturan",
+        target: ["moderator", "admin"].includes(session.level)
+          ? `/super/competition/update/${competitionId}`
+          : `/dashboard/competition/update/${competitionId}`
+      },
+      {
+        text: "Pengumuman",
+        count: competitionData.announcement.length || 0,
+        is_active: true,
+        target: ["moderator", "admin"].includes(session.level)
+          ? `/super/competition/update/${competitionId}/announcements`
+          : `/dashboard/competition/update/${competitionId}/announcements`
+      }
+    ]
 
     const title = "Pengumuman Kompetisi"
     return (
@@ -101,7 +122,7 @@ class CompetitionAnnouncement extends React.Component {
             <Submit
               disabled={loading}
               text={loading ? "loading..." : "Tambah Pengumuman"}
-              action={() => {}}
+              action={() => this.addHandler()}
               setState={(n, cb) => this.setState(n, cb)}
               requiredInputs={["announcement"]}
             />
@@ -110,31 +131,34 @@ class CompetitionAnnouncement extends React.Component {
           {/* end of add announcement */}
           <TitleLevel2Box
             title="Daftar Pengumuman"
-            text="Berikut adalah daftar pengumuman yang telah dirilis kepada para pengunjung dan peserta kompetisi."
+            text="Berikut adalah daftar pengumuman yang telah dirilis kepada para pengunjung dan peserta kompetisi. Penyelenggara hanya bisa menambah dan menghapus kompetisi. Sedangkan untuk kompetisi dari sistem tidak bisa dihapus."
           />
           {/* announcements list */}
-          <div className="announcements-list">
-            <small className="text-muted">
-              2019-05-20 20:09:45 oleh sistem
-            </small>
-            <br />
-            Data kompetisi telah diupdate
-            <Button
-              className="btn-remove-announcement"
-              size="small"
-              color="red"
-            >
-              x
-            </Button>
-          </div>
-          <div className="announcements-list">
-            <small className="text-muted">
-              2019-05-20 20:09:45 oleh sistem
-            </small>
-            <br />
-            Data kompetisi telah diupdate
-          </div>
-          {/* end of nnouncements list */}
+          {competitionData.announcement.length > 0 ? (
+            competitionData.announcement.map((n, key) => {
+              return (
+                <div className="announcements-list" key={key}>
+                  <small className="text-muted">
+                    {n.tgl} oleh {n.by}
+                  </small>
+                  <br />
+                  {n.data}
+                  {n.by != "sistem" ? (
+                    <Button
+                      className="btn-remove-announcement"
+                      size="small"
+                      color="red"
+                      onClick={() => this.removeHandler(key)}
+                    >
+                      x
+                    </Button>
+                  ) : null}
+                </div>
+              )
+            })
+          ) : (
+            <p>Belum ada pengumuman</p>
+          )}
         </div>
       </CompetitionAnnouncementStyled>
     )
