@@ -45,9 +45,9 @@ function detail(state = {}, action) {
             action.json.status == 200 ? "success" : "error"
           )
         } else {
-          if(!n.data.announcement) n.data.announcement = []
+          if (!n.data.announcement) n.data.announcement = []
           n.data.announcement.unshift({
-            by: "admin",
+            by: action.params.is_admin ? "admin" : "penyelenggara",
             data: action.params.pengumuman,
             tgl: today("Y-m-d h:i:s")
           })
@@ -62,8 +62,7 @@ function detail(state = {}, action) {
             action.json.message,
             action.json.status == 200 ? "success" : "error"
           )
-        }
-        else {
+        } else {
           if (n.data.announcement && n.data.announcement.length > 0) {
             n.data.announcement.splice(action.params.key, 1)
           }

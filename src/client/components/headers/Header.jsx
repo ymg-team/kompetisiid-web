@@ -111,13 +111,11 @@ class Header extends Component {
                             Profil saya
                           </Link>
                         </li>
-                        <li>
-                          {["admin", "moderator"].includes(session.level) ? (
+                        {["admin", "moderator"].includes(session.level) ? (
+                          <li>
                             <a href={`/super/dashboard`}>Super</a>
-                          ) : (
-                            null
-                          )}
-                        </li>
+                          </li>
+                        ) : null}
                         <li>
                           <a href={`/dashboard`}>Dashboard</a>
                         </li>
@@ -178,6 +176,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(
-  mapStateToProps
-)(Header)
+export default connect(mapStateToProps)(Header)

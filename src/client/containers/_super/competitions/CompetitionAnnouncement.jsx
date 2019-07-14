@@ -51,7 +51,7 @@ class CompetitionAnnouncement extends React.Component {
     })
   }
 
-  addHandler(pengumuman = "") {
+  addHandler() {
     // this.props.dispatch()
     const {announcement} = this.state
     this.setState({
@@ -59,7 +59,8 @@ class CompetitionAnnouncement extends React.Component {
     }, () => {
       this.props.dispatch(addAnnouncement({
         pengumuman: announcement,
-        competition_id: this.props.match.params.id
+        competition_id: this.props.match.params.id,
+        is_admin: ["admin","moderator"].includes(this.props.session.level)
       }))
     })
   }

@@ -28,7 +28,8 @@ export function addAnnouncement(params={}) {
       filter: params.competition_id,
       type: ADD_ANNOUNCEMENT,
       params: {
-        pengumuman: params.pengumuman
+        pengumuman: params.pengumuman,
+        is_admin: params.is_admin || false
       }
     }
   }
