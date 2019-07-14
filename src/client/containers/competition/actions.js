@@ -29,7 +29,7 @@ export function addAnnouncement(params={}) {
       type: ADD_ANNOUNCEMENT,
       params: {
         pengumuman: params.pengumuman,
-        is_admin: params.is_admin || false
+        user: params.user
       }
     }
   }
