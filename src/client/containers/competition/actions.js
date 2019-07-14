@@ -16,6 +16,25 @@ export const DELETE_ANNOUNCEMENT = "DELETE_ANNOUNCEMENT"
 export const ADD_ANNOUNCEMENT = "ADD_ANNOUNCEMENT"
 
 /**
+ * @description function to add competitoin announcement 
+ * @param {string} params.announcement  
+ * @param {competition_id} params.competition_id  
+ */
+export function addAnnouncement(params={}) {
+  return {
+    [CALL_API]: {
+      method: "post",
+      url: `/api/kompetisi/announcement/${params.competition_id}/${sealMiddleware.generateSeal()}`,
+      filter: params.competition_id,
+      type: ADD_ANNOUNCEMENT,
+      params: {
+        pengumuman: params.pengumuman
+      }
+    }
+  }
+}
+
+/**
  * @description function to delete competition announcement by key and competition id
  * @param {number} params.announcement_key 
  * @param {number} params.competition_id 

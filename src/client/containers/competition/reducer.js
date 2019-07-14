@@ -10,6 +10,7 @@ import {
   ADD_ANNOUNCEMENT
 } from "./actions"
 import { alert } from "../../components/Alert"
+import { today } from "../../helpers/DateTime"
 
 function data(state = {}, action) {
   switch (action.type) {
@@ -37,22 +38,35 @@ function detail(state = {}, action) {
   switch (action.type) {
     case ADD_ANNOUNCEMENT:
       return Mutations.updateDetailByFilter(state, action, n => {
-        if (n.data.announcement && n.data.announcement.length > 0) {
-          // n.data.announcement.push(action.params)
-          alert(true, "Pengumuman telah ditambah", "success")
-        }
-      })
-
-    case DELETE_ANNOUNCEMENT:
-      return Mutations.updateDetailByFilter(state, action, n => {
-        if (action.json && action.json.message)
+        if (action.json && action.json.message) {
           alert(
             true,
             action.json.message,
             action.json.status == 200 ? "success" : "error"
           )
-        if (n.data.announcement && n.data.announcement.length > 0) {
-          n.data.announcement.splice(action.params.key, 1)
+        } else {
+          if(!n.data.announcement) n.data.announcement = []
+          n.data.announcement.unshift({
+            by: "admin",
+            data: action.params.pengumuman,
+            tgl: today("Y-m-d h:i:s")
+          })
+        }
+      })
+
+    case DELETE_ANNOUNCEMENT:
+      return Mutations.updateDetailByFilter(state, action, n => {
+        if (action.json && action.json.message) {
+          alert(
+            true,
+            action.json.message,
+            action.json.status == 200 ? "success" : "error"
+          )
+        }
+        else {
+          if (n.data.announcement && n.data.announcement.length > 0) {
+            n.data.announcement.splice(action.params.key, 1)
+          }
         }
       })
 

@@ -2,7 +2,7 @@ import React from "react"
 import Styled from "styled-components"
 import { connect } from "react-redux"
 import { softGray } from "../../../../style/colors"
-import { deleteAnnouncement } from "../../competition/actions"
+import { deleteAnnouncement,addAnnouncement } from "../../competition/actions"
 import swal from "sweetalert"
 
 import Helmet from "../../../components/Helmet"
@@ -48,6 +48,19 @@ class CompetitionAnnouncement extends React.Component {
           key
         }))
       }
+    })
+  }
+
+  addHandler(pengumuman = "") {
+    // this.props.dispatch()
+    const {announcement} = this.state
+    this.setState({
+      announcement: ""
+    }, () => {
+      this.props.dispatch(addAnnouncement({
+        pengumuman: announcement,
+        competition_id: this.props.match.params.id
+      }))
     })
   }
 
@@ -108,7 +121,7 @@ class CompetitionAnnouncement extends React.Component {
             <Submit
               disabled={loading}
               text={loading ? "loading..." : "Tambah Pengumuman"}
-              action={() => {}}
+              action={() => this.addHandler()}
               setState={(n, cb) => this.setState(n, cb)}
               requiredInputs={["announcement"]}
             />
