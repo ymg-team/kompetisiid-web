@@ -47,7 +47,7 @@ function detail(state = {}, action) {
         } else {
           if (!n.data.announcement) n.data.announcement = []
           n.data.announcement.unshift({
-            by: action.params.is_admin ? "admin" : "penyelenggara",
+            by: action.params.user || "sistem",
             data: action.params.pengumuman,
             tgl: today("Y-m-d h:i:s")
           })

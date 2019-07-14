@@ -60,7 +60,7 @@ class CompetitionAnnouncement extends React.Component {
       this.props.dispatch(addAnnouncement({
         pengumuman: announcement,
         competition_id: this.props.match.params.id,
-        is_admin: ["admin","moderator"].includes(this.props.session.level)
+        user: ["admin","moderator"].includes(this.props.session.level) ? this.props.session.level : "penyelenggara"
       }))
     })
   }
