@@ -48,13 +48,17 @@ const NewsForm = Loadable({
   loader: () => import("../../containers/_super/news/NewsForm"),
   loading: Loading
 })
+const UserList = Loadable({
+  loader: () => import("../../containers/_super/users/index"),
+  loading: Loading
+})
 
 export default {
-  path: "/super",
+  path: "/_super",
   component: SuperLayout,
   routes: [
     {
-      path: "/super/dashboard",
+      path: "/_super/_dashboard",
       exact: true,
       type: "super",
       component: SuperDashboard
@@ -62,7 +66,7 @@ export default {
 
     // data competition
     {
-      path: "/super/competition",
+      path: "/_super/competition",
       exact: true,
       tab_active: 2,
       status: "active",
@@ -70,7 +74,7 @@ export default {
       component: CompetitionList
     },
     {
-      path: "/super/competition/waiting",
+      path: "/_super/competition/waiting",
       exact: true,
       tab_active: 1,
       // status to request api
@@ -79,7 +83,7 @@ export default {
       component: CompetitionList
     },
     {
-      path: "/super/competition/live",
+      path: "/_super/competition/live",
       exact: true,
       tab_active: 2,
       // status to request api
@@ -88,7 +92,7 @@ export default {
       component: CompetitionList
     },
     {
-      path: "/super/competition/posted",
+      path: "/_super/competition/posted",
       exact: true,
       tab_active: 3,
       // status to request api
@@ -99,23 +103,23 @@ export default {
 
     // form competition
     {
-      path: "/super/competition/create",
+      path: "/_super/competition/create",
       exact: true,
       type: "super",
       component: CompetitionForm
     },
     {
-      path: "/super/competition/update/:id",
+      path: "/_super/competition/update/:id",
       component: CompetitionFormLayout,
       routes: [
         {
-          path: "/super/competition/update/:id",
+          path: "/_super/competition/update/:id",
           exact: true,
           type: "super",
           component: CompetitionForm
         },
         {
-          path: "/super/competition/update/:id/announcements",
+          path: "/_super/competition/update/:id/announcements",
           exact: true,
           type: "super",
           component: CompetitionAnnouncementForm
@@ -125,28 +129,28 @@ export default {
 
     // request send competition
     {
-      path: "/super/requests",
+      path: "/_super/requests",
       status: "waiting",
       exact: true,
       type: "super",
       component: Request
     },
     {
-      path: "/super/requests/waiting",
+      path: "/_super/requests/waiting",
       status: "waiting",
       exact: true,
       type: "super",
       component: Request
     },
     {
-      path: "/super/requests/posted",
+      path: "/_super/requests/posted",
       status: "posted",
       exact: true,
       type: "super",
       component: Request
     },
     {
-      path: "/super/requests/reject",
+      path: "/_super/requests/reject",
       status: "reject",
       exact: true,
       type: "super",
@@ -155,26 +159,34 @@ export default {
 
     // news routes
     {
-      path: "/super/news",
+      path: "/_super/news",
       exact: true,
       type: "super",
       component: NewsList
     },
     {
-      path: "/super/news/create",
+      path: "/_super/news/create",
       exact: true,
       type: "super",
       component: NewsForm
     },
     {
-      path: "/super/news/:id",
+      path: "/_super/news/:id",
       exact: true,
       type: "super",
       component: NewsForm
     },
+
+    // user routes
+    {
+      path: "/_super/users/:type",
+      exact: true,
+      component: UserList
+    },
+
     // 404
     {
-      path: "/super/*",
+      path: "/_super/*",
       fullscreen: true,
       exact: true,
       type: "super",

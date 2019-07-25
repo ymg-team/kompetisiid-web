@@ -1,7 +1,7 @@
 import React from "react"
 import HeaderDashboard from "../../../components/cards/HeaderDashboard"
 import Tab from "../../../components/navigations/Tab"
-import CompetitionCard from "../../../components/cards/dashboard/CompetitionListCard"
+import CompetitionCard from "../../../components/cards/_dashboard/CompetitionListCard"
 import Loader from "../../../components/preloaders/GlobalLoader"
 import Helmet from "../../../components/Helmet"
 import Button from "../../../components/buttons/index"
@@ -60,7 +60,7 @@ class MyCompetition extends React.Component {
             stats.status == 200 && stats.competition
               ? stats.competition.waiting
               : 0,
-          target: "/super/competition/waiting"
+          target: "/_super/competition/waiting"
         },
         {
           text: "berlangsung",
@@ -69,7 +69,7 @@ class MyCompetition extends React.Component {
             stats.status == 200 && stats.competition
               ? stats.competition.live
               : 0,
-          target: "/super/competition/live"
+          target: "/_super/competition/live"
         },
         {
           text: "dipublikasi",
@@ -78,7 +78,7 @@ class MyCompetition extends React.Component {
             stats.status == 200 && stats.competition
               ? stats.competition.posted
               : 0,
-          target: "/super/competition/posted"
+          target: "/_super/competition/posted"
         }
       ]
     } else {
@@ -91,7 +91,7 @@ class MyCompetition extends React.Component {
             stats.status == 200 && stats.competition
               ? stats.competition.waiting
               : 0,
-          target: "/dashboard/competition/waiting"
+          target: "/_dashboard/competition/waiting"
         },
         {
           text: "berlangsung",
@@ -100,7 +100,7 @@ class MyCompetition extends React.Component {
             stats.status == 200 && stats.competition
               ? stats.competition.live
               : 0,
-          target: "/dashboard/competition/live"
+          target: "/_dashboard/competition/live"
         },
         {
           text: "dipublikasi",
@@ -109,7 +109,7 @@ class MyCompetition extends React.Component {
             stats.status == 200 && stats.competition
               ? stats.competition.posted
               : 0,
-          target: "/dashboard/competition/posted"
+          target: "/_dashboard/competition/posted"
         },
         {
           text: "ditolak",
@@ -118,7 +118,7 @@ class MyCompetition extends React.Component {
             stats.status == 200 && stats.competition
               ? stats.competition.rejected
               : 0,
-          target: "/dashboard/competition/rejected"
+          target: "/_dashboard/competition/rejected"
         }
       ]
     }
@@ -202,7 +202,7 @@ function generateParams(props) {
 
   const { type } = props.route
 
-  if (type == "dashboard") {
+  if (type == "_dashboard") {
     Params.by_me = true
   }
 

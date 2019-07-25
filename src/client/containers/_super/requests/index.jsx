@@ -51,19 +51,19 @@ class RequestCompetition extends React.Component {
         text: "menunggu",
         is_active: status === "waiting",
         count: stats.request ? stats.request.waiting : 0,
-        target: "/super/requests/waiting"
+        target: "/_super/requests/waiting"
       },
       {
         text: "diterima",
         is_active: status == "posted",
         count: stats.request ? stats.request.accept : 0,
-        target: "/super/requests/posted"
+        target: "/_super/requests/posted"
       },
       {
         text: "ditolak",
         is_active: status === "reject",
         count: stats.request ? stats.request.reject : 0,
-        target: "/super/requests/reject"
+        target: "/_super/requests/reject"
       }
     ]
 

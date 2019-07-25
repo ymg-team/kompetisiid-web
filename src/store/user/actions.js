@@ -182,7 +182,7 @@ export function getStats() {
 }
 
 /**
- * @description function to fetch count of super sidebar
+ * @description function to fetch count of _super sidebar
  */
 export function fetchCountSuperSidebar() {
   return {

@@ -11,7 +11,7 @@ import Loading from "../components/preloaders/FullContentLoader"
 import { renderRoutes } from "react-router-config"
 
 const Sidebar = Loadable({
-  loader: () => import("../components/navigations/dashboard/Sidebar"),
+  loader: () => import("../components/navigations/_dashboard/Sidebar"),
   loading: Loading
 })
 
@@ -21,12 +21,12 @@ class DasboardLayoutV5 extends React.Component {
     this.props.dispatch(logout())
     setTimeout(() => {
       alert(true, "Kamu telah logout", "success")
-      location.href = "/super"
+      location.href = "/_super"
     }, 2000)
   }
 
   componentDidMount() {
-    // request count data of super sidebar
+    // request count data of _super sidebar
     this.props.dispatch(fetchCountDashboardSidebar())
   }
 

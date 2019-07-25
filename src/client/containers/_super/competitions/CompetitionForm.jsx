@@ -22,7 +22,7 @@ class CompetitionFormContainer extends React.Component {
         const { type } = this.props.route
         this.notSubmited = false
         if (type == "super") {
-          location.href = "/super/competition"
+          location.href = "/_super/competition"
         } else {
           location.href = `/dashboard/competition/${
             this.props.session &&
