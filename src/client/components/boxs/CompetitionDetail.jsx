@@ -76,7 +76,7 @@ const CompetitionDetailBox = props => {
                 ,
                 <a
                   className="text-muted"
-                  href={`/browse/${data.sub_category.name}`}
+                  href={`/browse/${data.main_category.name}/${data.sub_category.name}`}
                 >
                   <strong>{data.sub_category.name}</strong>
                 </a>
