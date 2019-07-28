@@ -9,6 +9,16 @@ import sealMiddleware from "../../middlewares/seal"
 import apiCaller from "../../middlewares/apiCaller"
 const router = express.Router()
 
+
+router.get(
+  "/list/:seal",
+  sealMiddleware,
+  authMiddleware.superMiddleware,
+  controller.fetchUsers,
+  apiCaller
+)
+
+
 router.get("/:username", controller.getProfile, apiCaller)
 
 // endpoint to change password via token

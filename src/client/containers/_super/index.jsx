@@ -24,7 +24,7 @@ class SuperContainer extends Component {
           {!stats.is_loading && stats.status == 200 ? (
             <React.Fragment>
               {/* waiting count */}
-              <div style={{ marginBottom: 20 }} className="col-md-3">
+              <div style={{ marginBottom: 20 }} className="col-md-3 col-xs-6">
                 <CountBox
                   count={stats.competition.waiting || 0}
                   text="Menunggu"
@@ -33,7 +33,7 @@ class SuperContainer extends Component {
               </div>
 
               {/* live competition */}
-              <div style={{ marginBottom: 20 }} className="col-md-3">
+              <div style={{ marginBottom: 20 }} className="col-md-3 col-xs-6">
                 <CountBox
                   count={stats.competition.live || 0}
                   text="Sedang Berlangsung"
@@ -42,7 +42,7 @@ class SuperContainer extends Component {
               </div>
 
               {/* published competition */}
-              <div style={{ marginBottom: 20 }} className="col-md-3">
+              <div style={{ marginBottom: 20 }} className="col-md-3 col-xs-6">
                 <CountBox
                   count={stats.competition.posted || 0}
                   text="Terpublikasi"
@@ -51,10 +51,10 @@ class SuperContainer extends Component {
               </div>
 
               {/* rejected competition */}
-              <div style={{ marginBottom: 20 }} className="col-md-3">
+              <div style={{ marginBottom: 20 }} className="col-md-3 col-xs-6">
                 <CountBox
                   count={stats.competition.rejected || 0}
-                  text="Kompetisi di Tolak"
+                  text="DiTolak"
                   link="/super/competition/rejected"
                 />
               </div>
@@ -74,7 +74,7 @@ class SuperContainer extends Component {
           {!stats.is_loading && stats.status == 200 ? (
             <React.Fragment>
               {/* draft count */}
-              <div style={{ marginBottom: 20 }} className="col-md-3">
+              <div style={{ marginBottom: 20 }} className="col-md-3 col-xs-6">
                 <CountBox
                   count={stats.news.draft || 0}
                   text="Berita Draft"
@@ -83,7 +83,7 @@ class SuperContainer extends Component {
               </div>
 
               {/* posted competition */}
-              <div style={{ marginBottom: 20 }} className="col-md-3">
+              <div style={{ marginBottom: 20 }} className="col-md-3 col-xs-6">
                 <CountBox
                   count={stats.news.posted || 0}
                   text="Berita Terpublikasi"
@@ -99,27 +99,27 @@ class SuperContainer extends Component {
         <div className="row">
           <div className="col-md-12">
             <HeaderDashboard
-              title="Member"
-              text="Seluruh data member di Kompetisi Id"
+              title="User"
+              text="Seluruh data Userdi Kompetisi Id"
             />
           </div>
           {!stats.is_loading && stats.status == 200 ? (
             <React.Fragment>
               {/* draft count */}
-              <div style={{ marginBottom: 20 }} className="col-md-3">
+              <div style={{ marginBottom: 20 }} className="col-md-3 col-xs-6">
                 <CountBox
                   count={stats.members.banned || 0}
-                  text="Member Dicekal"
-                  link="/super/members/banned"
+                  text="UserDicekal"
+                  link="/super/users/banned"
                 />
               </div>
 
               {/* posted competition */}
-              <div style={{ marginBottom: 20 }} className="col-md-3">
+              <div style={{ marginBottom: 20 }} className="col-md-3 col-xs-6">
                 <CountBox
                   count={stats.members.active || 0}
-                  text="Member Aktif"
-                  link="/super/members/active"
+                  text="UserAktif"
+                  link="/super/users/active"
                 />
               </div>
             </React.Fragment>

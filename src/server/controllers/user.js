@@ -2,8 +2,25 @@
  * الرَّحِيم الرَّحْمَنِ اللَّهِ بِسْمِ
  * Created by yussan on 13/11/16.
  */
-
+import { objToQuery } from "string-manager"
 import * as Session from "../helpers/session"
+
+/**
+ * @description function to fetch member
+ * @param {number} req.query.lastid 
+ * @param {boolean} req.query.banned 
+ * @param {boolean} req.query.verified 
+ * @param {boolean} req.query.unverified 
+ */
+export function fetchUsers(req, res, next) {
+  let query = req.query ? `?${objToQuery(req.query)}` : ""
+  req.reqdata = {
+    version: "v42",
+    method: "get",
+    url: `/v2/users${query}`
+  }
+  next()
+}
 
 /**
  * @description function request forgot password

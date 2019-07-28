@@ -6,7 +6,7 @@ import { fetchBerita, fetchBeritaMore } from "../../news/actions"
 import Helmet from "../../../components/Helmet"
 import HeaderDashboard from "../../../components/cards/HeaderDashboard"
 import Loader from "../../../components/preloaders/GlobalLoader"
-import NewsCard from "../../../components/cards/dashboard/NewsListCard"
+import NewsCard from "../../../components/boxs/_super/NewsListCard"
 import Button from "../../../components/buttons/index"
 
 const Filter = "super"

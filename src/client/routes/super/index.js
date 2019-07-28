@@ -48,6 +48,10 @@ const NewsForm = Loadable({
   loader: () => import("../../containers/_super/news/NewsForm"),
   loading: Loading
 })
+const UserList = Loadable({
+  loader: () => import("../../containers/_super/users/index"),
+  loading: Loading
+})
 
 export default {
   path: "/super",
@@ -172,6 +176,14 @@ export default {
       type: "super",
       component: NewsForm
     },
+
+    // user routes
+    {
+      path: "/super/users/:type",
+      exact: true,
+      component: UserList
+    },
+
     // 404
     {
       path: "/super/*",

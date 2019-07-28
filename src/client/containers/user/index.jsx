@@ -35,7 +35,7 @@ class Index extends React.Component {
       if (profile[username].status != 200) {
         helmetdata.title = "User tidak ditemukan"
         helmetdata.description = profile[username].message
-        helmetdata.keywords = `member kompetisiid,${username} kompetisi id`
+        helmetdata.keywords = `Userkompetisiid,${username} kompetisi id`
       }
     }
 

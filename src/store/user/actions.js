@@ -2,15 +2,13 @@
  * Created by yussan on 28/01/17.
  */
 import {
-  // POST_DATA,
   RECEIVE_DATA,
-  // RECEIVE_MORE_DATA,
-  // DELETE_DATA,
   REQUEST_DATA
 } from "../consts"
 
 import { CALL_API } from "../middlewares/api"
 import sealMiddleware from "../../client/helpers/seal"
+import { objToQuery } from "string-manager/dist/modules/httpquery"
 
 export const LOGOUT = "LOGOUT"
 export const LOGIN = "LOGIN"
@@ -22,6 +20,24 @@ export const RESEND_EMAIL_VALIDATION_TOKEN = "RESEND_EMAIL_VALIDATION_TOKEN"
 export const FETCH_COUNT_SUPER_SIDEBAR = "FETCH_COUNT_SUPER_SIDEBAR"
 export const FORGOT_PASSWORD = "FORGOT_PASSWORD"
 export const CHANGE_PASSWORD = "CHANGE_PASSWORD"
+export const FETCH_USERS = "FETCH_USERS"
+export const FETCH_MORE_USERS = "FETCH_MORE_USERS"
+
+/**
+ * function to fetch members
+ * @param {string} filter
+ * @param {string} email
+ */
+export function fetchUsers({query, filter}) {
+  return {
+    [CALL_API] : {
+      url: `/api/user/list/${sealMiddleware.generateSeal()}${query ? `?${objToQuery(query)}` : ""}`,
+      method: "GET",
+      type: query.lastid ? FETCH_MORE_USERS : FETCH_USERS,
+      filter
+    }
+  }
+}
 
 /**
  * function to forgot password
@@ -182,7 +198,7 @@ export function getStats() {
 }
 
 /**
- * @description function to fetch count of super sidebar
+ * @description function to fetch count of _super sidebar
  */
 export function fetchCountSuperSidebar() {
   return {

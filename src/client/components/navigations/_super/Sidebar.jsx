@@ -81,20 +81,26 @@ export default props => {
           </Link>
         </li>
 
-        {/* member */}
+        {/* User */}
         <hr />
         <li>
-          <strong>Members</strong>
+          <strong>Users</strong>
         </li>
         <li>
-          <Link to="/super/members/active">
-            Member Aktif{" "}
-            <span className="label label-blue">{stats.members.active}</span>
+          <Link to="/super/users/confirmed">
+            User Konfirmasi{" "}
+            {/* <span className="label label-blue">{stats.members.active}</span> */}
           </Link>
         </li>
         <li>
-          <Link to="/super/members/banned">
-            Member Banned{" "}
+          <Link to="/super/users/unconfirmed">
+            User Belum Konfirmasi{" "}
+            {/* <span className="label label-blue">{stats.members.active}</span> */}
+          </Link>
+        </li>
+        <li>
+          <Link to="/super/users/banned">
+            User Banned{" "}
             <span className="label label-blue">{stats.members.banned}</span>
           </Link>
         </li>
