@@ -6,9 +6,9 @@ export function dashboardMiddleware(req, res, next) {
 
   if (Object.keys(userdata).length > 0 && userdata.id) {
     // admin and moderator cannot access _dashboard
-    // if(['admin', 'moderator'].includes(userdata.level)) return res.redirect('/_super')
+    // if(['admin', 'moderator'].includes(userdata.level)) return res.redirect('/super')
     // logged in Userredirect to _dashboard
-    if (req.originalUrl === "/login") return res.redirect("/_dashboard")
+    if (req.originalUrl === "/login") return res.redirect("/dashboard")
     return next()
   } else {
     if (req.originalUrl !== "/login") return res.redirect("/login")
@@ -17,7 +17,7 @@ export function dashboardMiddleware(req, res, next) {
 }
 
 /**
- * @description function as _super pages middleware
+ * @description function as super pages middleware
  */
 export function superMiddleware(req, res, next) {
   const userdata = req.session.userdata || {}
@@ -28,10 +28,10 @@ export function superMiddleware(req, res, next) {
     userdata.id &&
     ["admin", "moderator"].includes(userdata.level)
   ) {
-    if (req.originalUrl === "/_super") return res.redirect("/_super/_dashboard")
+    if (req.originalUrl === "/super") return res.redirect("/super/dashboard")
     return next()
   } else {
-    if (req.originalUrl !== "/_super") return res.redirect("/_super")
+    if (req.originalUrl !== "/super") return res.redirect("/super")
     return next()
   }
 }

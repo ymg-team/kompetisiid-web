@@ -60,7 +60,7 @@ class MyCompetition extends React.Component {
             stats.status == 200 && stats.competition
               ? stats.competition.waiting
               : 0,
-          target: "/_super/competition/waiting"
+          target: "/super/competition/waiting"
         },
         {
           text: "berlangsung",
@@ -69,7 +69,7 @@ class MyCompetition extends React.Component {
             stats.status == 200 && stats.competition
               ? stats.competition.live
               : 0,
-          target: "/_super/competition/live"
+          target: "/super/competition/live"
         },
         {
           text: "dipublikasi",
@@ -78,7 +78,7 @@ class MyCompetition extends React.Component {
             stats.status == 200 && stats.competition
               ? stats.competition.posted
               : 0,
-          target: "/_super/competition/posted"
+          target: "/super/competition/posted"
         }
       ]
     } else {

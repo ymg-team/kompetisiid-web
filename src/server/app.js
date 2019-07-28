@@ -49,15 +49,15 @@ App.use("/api", AppApi)
 App.use("/feed", AppFeed)
 App.use("/sitemap", AppSitemap)
 
-// _dashboard pages, only for 'member'
+// dashboard pages, only for 'member'
 App.get("/login", AuthMiddleware.dashboardMiddleware, AppRender)
-App.get("/_dashboard", AuthMiddleware.dashboardMiddleware, AppRender)
-App.get("/_dashboard/*", AuthMiddleware.dashboardMiddleware, AppRender)
+App.get("/dashboard", AuthMiddleware.dashboardMiddleware, AppRender)
+App.get("/dashboard/*", AuthMiddleware.dashboardMiddleware, AppRender)
 App.get("/settings/*", AuthMiddleware.dashboardMiddleware, AppRender)
 
-// _super pages, only for 'admin'
-App.get("/_super", AuthMiddleware.superMiddleware, AppRender)
-App.get("/_super/*", AuthMiddleware.superMiddleware, AppRender)
+// super pages, only for 'admin'
+App.get("/super", AuthMiddleware.superMiddleware, AppRender)
+App.get("/super/*", AuthMiddleware.superMiddleware, AppRender)
 
 // static files
 App.use(

@@ -17,7 +17,7 @@ class RequestBox extends Component {
     const { data } = this.props
 
     return (
-      <div>
+      <React.Fragment>
         {data && data.status ? (
           <div className="p-b-50">
             {/* data count status */}
@@ -59,8 +59,8 @@ class RequestBox extends Component {
               <div className="muted align-center">{data.message}</div>
             ) : null}
           </div>
-        ) : null}
-      </div>
+        ) : <Loading />}
+      </React.Fragment>
     )
   }
 }

@@ -18,7 +18,7 @@ class CompetitionListCard extends React.Component {
             <h4>
               <Link to={linkEdit}>{n.title}</Link>
             </h4>
-            <p className="text-muted" style={{ margin: 0 }}>
+            <p className="text-muted">
               <span>Dipost {epochToRelativeTime(n.created_at)}</span> oleh{" "}
               <Link
                 title={n.author.username}

@@ -3,7 +3,12 @@
  */
 
 import { combineReducers } from "redux"
-import { setToLoading, receiveData, receiveApiResponse } from "../helpers/Mutations"
+import {
+  setToLoading,
+  receiveData,
+  receiveListByFilter,
+  receiveMoreListByFilter
+} from "../helpers/Mutations"
 import { alert } from "../../client/components/Alert"
 import { REQUEST_DATA, RECEIVE_DATA } from "../consts"
 import {
@@ -12,7 +17,9 @@ import {
   LOGIN,
   REGISTER,
   RESEND_EMAIL_VALIDATION_TOKEN,
-  EMAIL_VERIFICATION
+  EMAIL_VERIFICATION,
+  FETCH_USERS,
+  FETCH_MORE_USERS
 } from "./actions"
 
 function profile(state = {}, action) {
@@ -117,12 +124,24 @@ function etc(state = {}, action) {
   }
 }
 
+function data(state = {}, action) {
+  switch (action.type) {
+    case FETCH_USERS:
+      return receiveListByFilter(state, action)
+    case FETCH_MORE_USERS:
+      return receiveMoreListByFilter(state, action)
+    default:
+      return state
+  }
+}
+
 const reducer = combineReducers({
   profile,
   login,
   register,
   logout,
   session,
-  etc
+  etc,
+  data
 })
 export default reducer
