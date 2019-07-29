@@ -71,12 +71,12 @@ export default props => {
         </li>
         <li>
           <Link to="/super/news/create">
-            <i className="fas fa-plus" /> Tambah Berita
+            <i className="fas fa-plus" /> Tambah Kabar
           </Link>
         </li>
         <li>
           <Link to="/super/news">
-            Semua Berita{" "}
+            Semua Kabar{" "}
             <span className="label label-blue">{stats.news.posted}</span>
           </Link>
         </li>
@@ -88,19 +88,19 @@ export default props => {
         </li>
         <li>
           <Link to="/super/users/confirmed">
-            User Konfirmasi{" "}
-            {/* <span className="label label-blue">{stats.members.active}</span> */}
+            Telah Konfirmasi{" "}
+            <span className="label label-blue">{stats.members.verified}</span>
           </Link>
         </li>
         <li>
           <Link to="/super/users/unconfirmed">
-            User Belum Konfirmasi{" "}
-            {/* <span className="label label-blue">{stats.members.active}</span> */}
+            Belum Konfirmasi{" "}
+            <span className="label label-blue">{stats.members.unverified}</span>
           </Link>
         </li>
         <li>
           <Link to="/super/users/banned">
-            User Banned{" "}
+            Dicekal{" "}
             <span className="label label-blue">{stats.members.banned}</span>
           </Link>
         </li>
