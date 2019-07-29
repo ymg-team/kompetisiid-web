@@ -77,7 +77,7 @@ class SuperContainer extends Component {
               <div style={{ marginBottom: 20 }} className="col-md-3 col-xs-6">
                 <CountBox
                   count={stats.news.draft || 0}
-                  text="Berita Draft"
+                  text="Draft"
                   link="/super/news"
                 />
               </div>
@@ -86,7 +86,7 @@ class SuperContainer extends Component {
               <div style={{ marginBottom: 20 }} className="col-md-3 col-xs-6">
                 <CountBox
                   count={stats.news.posted || 0}
-                  text="Berita Terpublikasi"
+                  text="Dipublikasi"
                   link="/super/news"
                 />
               </div>
@@ -105,21 +105,27 @@ class SuperContainer extends Component {
           </div>
           {!stats.is_loading && stats.status == 200 ? (
             <React.Fragment>
-              {/* draft count */}
               <div style={{ marginBottom: 20 }} className="col-md-3 col-xs-6">
                 <CountBox
-                  count={stats.members.banned || 0}
-                  text="UserDicekal"
-                  link="/super/users/banned"
+                  count={stats.members.verified || 0}
+                  text="Verifikasi"
+                  link="/super/users/confirmed"
                 />
               </div>
 
-              {/* posted competition */}
               <div style={{ marginBottom: 20 }} className="col-md-3 col-xs-6">
                 <CountBox
-                  count={stats.members.active || 0}
-                  text="UserAktif"
-                  link="/super/users/active"
+                  count={stats.members.unverified || 0}
+                  text="Belum Verifikasi"
+                  link="/super/users/unconfirmed"
+                />
+              </div>
+
+              <div style={{ marginBottom: 20 }} className="col-md-3 col-xs-6">
+                <CountBox
+                  count={stats.members.banned || 0}
+                  text="Dicekal"
+                  link="/super/users/banned"
                 />
               </div>
             </React.Fragment>
