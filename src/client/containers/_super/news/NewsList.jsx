@@ -41,10 +41,10 @@ class NewsList extends React.Component {
 
     return (
       <React.Fragment>
-        <Helmet title="Berita Kompetisi Id" />
+        <Helmet title="Kabar Kompetisi Id" />
         <HeaderDashboard
-          title="Berita"
-          text="Berikut adalah berita yang dipost Kompetisi ID."
+          title="Kabar"
+          text="Berikut adalah kabar yang dipost Kompetisi ID."
         />
 
         {news && news.is_loading && !news.status ? (
@@ -57,7 +57,7 @@ class NewsList extends React.Component {
         {news.status && news.status == 200 ? (
           <p>
             Menampilkan <strong>{news.data.length}</strong> dari{" "}
-            <strong>{news.count}</strong> berita
+            <strong>{news.count}</strong> kabar
           </p>
         ) : null}
         {/* end of show news meta */}
@@ -82,7 +82,7 @@ class NewsList extends React.Component {
               size="large"
               color="white"
               loading={news.is_loading}
-              text="Berita Berikutnya"
+              text="Kabar Berikutnya"
             />
           </div>
         ) : null}

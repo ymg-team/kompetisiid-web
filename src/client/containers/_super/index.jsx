@@ -67,8 +67,8 @@ class SuperContainer extends Component {
         <div className="row">
           <div className="col-md-12">
             <HeaderDashboard
-              title="Berita"
-              text="Seluruh data berita di Kompetisi Id"
+              title="Kabar"
+              text="Seluruh kabar di Kompetisi Id"
             />
           </div>
           {!stats.is_loading && stats.status == 200 ? (

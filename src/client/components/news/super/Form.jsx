@@ -66,31 +66,31 @@ class FormNews extends React.Component {
       response.is_loading || response.status === 201 || response.status === 200
     return (
       <React.Fragment>
-        <HeaderDashboard title={this.props.title} text="Menyampaikan berita-berita seputar kompetisi di Indonesia" />
+        <HeaderDashboard title={this.props.title} text="Menyampaikan kabar seputar kompetisi di Indonesia" />
         <form
           className="form-ki no-padding col-md-8"
           action="javascript:;"
           method="post"
         >
           <TitleLevel2Box
-            title="Data Berita"
-            text="Berita ini adalah asli dan apa adanya."
+            title="Data Kabar"
+            text="Kabar ini adalah asli dan apa adanya."
           />
 
           <InputText
-            label="Judul Berita"
+            label="Judul Kabar"
             name="title"
             type="text"
             id="input-title"
             value={this.state.title || ""}
             validate={this.state.title_validate || {}}
-            placeholder="Masukan judul berita disini"
+            placeholder="Masukan judul kabar disini"
             required={true}
             setState={(n, cb) => this.setState(n, cb)}
           />
 
           <InputFile
-            label="Gambar Berita"
+            label="Gambar Utama"
             name="image"
             id="input-image"
             value={this.state.image || ""}
@@ -100,7 +100,7 @@ class FormNews extends React.Component {
           />
 
           <Editor
-            label="Isi Berita"
+            label="Isi Kabar"
             name="content"
             required={true}
             value={this.state.content}
