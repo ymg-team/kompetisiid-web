@@ -28,7 +28,7 @@ class NewsCreate extends React.Component {
       )
       if (status === 201 || status === 200) {
         this.notSubmited = false
-        location.href = "/_super/news"
+        location.href = "/super/news/posted"
       }
     }
   }

@@ -75,9 +75,15 @@ export default props => {
           </Link>
         </li>
         <li>
-          <Link to="/super/news">
-            Semua Kabar{" "}
+          <Link to="/super/news/posted">
+            Diposting{" "}
             <span className="label label-blue">{stats.news.posted}</span>
+          </Link>
+        </li>
+        <li>
+          <Link to="/super/news/draft">
+            Draft{" "}
+            <span className="label label-blue">{stats.news.draft}</span>
           </Link>
         </li>
 
