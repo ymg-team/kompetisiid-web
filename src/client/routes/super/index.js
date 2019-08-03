@@ -161,19 +161,29 @@ export default {
     {
       path: "/super/news",
       exact: true,
-      type: "super",
       component: NewsList
     },
     {
       path: "/super/news/create",
       exact: true,
-      type: "super",
       component: NewsForm
+    },
+    {
+      path: "/super/news/posted",
+      tab_active: 1,
+      exact: true,
+      type: "super",
+      component: NewsList
+    },
+    {
+      path: "/super/news/draft",
+      tab_active: 2,
+      exact: true,
+      component: NewsList
     },
     {
       path: "/super/news/:id",
       exact: true,
-      type: "super",
       component: NewsForm
     },
 

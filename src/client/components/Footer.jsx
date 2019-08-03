@@ -47,7 +47,8 @@ export default class Footer extends Component {
     return (
       <FooterWrapper>
         <FooterThanks className="col-md-12 footer-thanks align-center">
-          <p>Terimakasih Kepada:</p>
+          <br/>
+          <h3>TERIMAKASIH</h3>
           <a
             href="https://www.domainesia.com/?aff=585"
             rel="noopener noreferrer"
