@@ -99,7 +99,7 @@ export default [
             component: Register
           },
           {
-            path: "/_super",
+            path: "/super",
             fullscreen: true,
             exact: true,
             component: Login
