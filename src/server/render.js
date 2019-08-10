@@ -128,6 +128,8 @@ export default (req, res) => {
     // .replace(/\s\s+/g, "")
   }
 
+  let modules = []
+
   // return function as promise
   return Promise.all(promises).then(() => {
     // return string html as responsed using react-dom-server

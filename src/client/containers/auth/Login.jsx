@@ -91,9 +91,9 @@ class Login extends React.Component {
           "success",
           true
         )
-        // redirect to _dashboard
+        // redirect to /super/dashboard
         setTimeout(() => {
-          location.href = this.state.isSuperPage ? "/_super/_dashboard" : "/"
+          location.href = this.state.isSuperPage ? "/super/dashboard" : "/"
         }, 1000)
       } else {
         // user and password not match
