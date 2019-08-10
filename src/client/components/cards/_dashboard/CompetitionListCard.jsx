@@ -9,7 +9,7 @@ class CompetitionListCard extends React.Component {
   render() {
     const { n } = this.props
     const linkEdit = `/${
-      this.props.type == "super" ? "super" : "_dashboard"
+      this.props.type == "super" ? "super" : "dashboard"
     }/competition/update/${n.id}`
     return (
       <div className="competition-items">

@@ -91,7 +91,7 @@ class MyCompetition extends React.Component {
             stats.status == 200 && stats.competition
               ? stats.competition.waiting
               : 0,
-          target: "/_dashboard/competition/waiting"
+          target: "/dashboard/competition/waiting"
         },
         {
           text: "berlangsung",
@@ -100,7 +100,7 @@ class MyCompetition extends React.Component {
             stats.status == 200 && stats.competition
               ? stats.competition.live
               : 0,
-          target: "/_dashboard/competition/live"
+          target: "/dashboard/competition/live"
         },
         {
           text: "dipublikasi",
@@ -109,7 +109,7 @@ class MyCompetition extends React.Component {
             stats.status == 200 && stats.competition
               ? stats.competition.posted
               : 0,
-          target: "/_dashboard/competition/posted"
+          target: "/dashboard/competition/posted"
         },
         {
           text: "ditolak",
@@ -118,7 +118,7 @@ class MyCompetition extends React.Component {
             stats.status == 200 && stats.competition
               ? stats.competition.rejected
               : 0,
-          target: "/_dashboard/competition/rejected"
+          target: "/dashboard/competition/rejected"
         }
       ]
     }
@@ -133,6 +133,7 @@ class MyCompetition extends React.Component {
           text="Berikut adalah kompetisi yang telah anda pasang di Kompetisi ID."
           noBorder
         />
+        
         {/* tab navigations */}
         <Tab tabs={tabcontent} />
 
@@ -202,7 +203,7 @@ function generateParams(props) {
 
   const { type } = props.route
 
-  if (type == "_dashboard") {
+  if (type == "dashboard") {
     Params.by_me = true
   }
 
