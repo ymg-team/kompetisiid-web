@@ -94,6 +94,7 @@ const RequestRow = props => {
           </h4>
           <p className="text-muted">
             Dipasang oleh <a href={`mailto:${props.email}`}>{props.email}</a>
+            {" "}
             pada {epochToRelativeTime(props.created_at)}
             <br />
             {props.updated_at !== props.created_at
