@@ -34,9 +34,7 @@ const CompetitionDetailStyled = Styled.div`
 
 const CompetitionDetailBox = props => {
   const { data } = props
-  const link_competition = `https://kompetisi.id/competition/${
-    data.id
-  }/regulations/${data.nospace_title}`
+  const link_competition = `https://kompetisi.id/c/${data.id}`
 
   const { is_ended, is_waiting } = getCompetitionStatus(
     data.deadline_at,
@@ -76,7 +74,9 @@ const CompetitionDetailBox = props => {
                 ,
                 <a
                   className="text-muted"
-                  href={`/browse/${data.main_category.name}/${data.sub_category.name}`}
+                  href={`/browse/${data.main_category.name}/${
+                    data.sub_category.name
+                  }`}
                 >
                   <strong>{data.sub_category.name}</strong>
                 </a>

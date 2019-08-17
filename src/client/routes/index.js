@@ -15,6 +15,7 @@ import Competition from "./competition"
 import Add from "./add"
 import User from "./user"
 import U from "./u"
+import C from "./c"
 import Dashboard from "./dashboard/index"
 import Careers from "./careers"
 import Super from "./super/index"
@@ -84,6 +85,7 @@ export default [
           Categories,
           User,
           U,
+          C,
           Careers,
           Settings,
           {
