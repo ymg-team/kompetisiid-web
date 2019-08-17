@@ -50,7 +50,7 @@ class LayoutCompetition extends Component {
       topLoading(false)
 
     return (
-      <div>
+      <React.Fragment>
         {detail[encid] && detail[encid].status ? (
           detail[encid].status === 200 ? (
             renderRoutes(this.props.route.routes)
@@ -63,7 +63,7 @@ class LayoutCompetition extends Component {
         ) : (
           <CompetitionPreloader />
         )}
-      </div>
+      </React.Fragment>
     )
   }
 }
