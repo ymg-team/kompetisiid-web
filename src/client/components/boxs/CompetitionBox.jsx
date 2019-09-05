@@ -11,11 +11,15 @@ function generateList(size, n) {
   return n.map((n, key) => {
     if (key % 15 === 0 && key !== 0) {
       return [
-        <div key={`ads_${key}`} className="col-md-12 align-center" style={{ margin: "0 0 40px" }}>
+        <div
+          key={`ads_${key}`}
+          className="col-md-12 align-center"
+          style={{ margin: "0 0 40px" }}
+        >
           <GAds
             key={`ads_${key}`}
             adClient="ca-pub-4468477322781117"
-            adSlot={5218613800}
+            adSlot={2722581701}
             timeout={1000}
             // adTest={true}
           />
@@ -54,7 +58,11 @@ const CompetitionBox = props => {
             {state => (
               <div
                 className="row"
-                style={Object.assign({margin: "0 -15px 0"}, style.fade.default, style.fade[state])}
+                style={Object.assign(
+                  { margin: "0 -15px 0" },
+                  style.fade.default,
+                  style.fade[state]
+                )}
               >
                 {status ? (
                   !data ? (

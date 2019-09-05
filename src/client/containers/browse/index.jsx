@@ -300,7 +300,7 @@ class Index extends Component {
         {/*end of content*/}
 
         {/*modal*/}
-        <div>
+        <React.Fragment>
           {/* modal select main category */}
           <Modal id="select-main-kat">
             <div className="container">
@@ -371,9 +371,7 @@ class Index extends Component {
                       this.setState({ sub_kat: "" }, () => {
                         modal("close", "select-sub-kat")
                         this.props.history.push(
-                          `/browse/${categories.data[main_kat].name}${
-                            this.props.location.search
-                          }`
+                          `/browse/${categories.data[main_kat].name}${this.props.location.search}`
                         )
                       })
                     }
@@ -391,9 +389,7 @@ class Index extends Component {
                             onClick={() => {
                               modal("close", "select-sub-kat")
                               this.props.history.push(
-                                `/browse/${categories.data[main_kat].name}/${
-                                  n.name
-                                }${this.props.location.search}`
+                                `/browse/${categories.data[main_kat].name}/${n.name}${this.props.location.search}`
                               )
                             }}
                             className="text-muted"
@@ -483,7 +479,7 @@ class Index extends Component {
               </ul>
             </div>
           </Modal>
-        </div>
+        </React.Fragment>
         {/*end of modal*/}
       </div>
     )
