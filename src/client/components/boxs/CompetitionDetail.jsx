@@ -1,9 +1,10 @@
 import React from "react"
-import Loadable from "react-loadable"
+// import Loadable from "react-loadable"
 import { eventFire } from "../../helpers/DomEvents"
 import { getCompetitionStatus } from "../../helpers/DateTime"
 import copy from "copy-to-clipboard"
 import Styled from "styled-components"
+import { objToQuery } from "string-manager"
 
 // components
 import Modal from "../modals/index"
@@ -89,8 +90,11 @@ const CompetitionDetailBox = props => {
           <div className="row competition-detail--meta">
             <div className="col-md-6 align-center poster">
               <img
+                data-mediabox="my-gallery-name"
+                data-title="Sample image"
                 alt={data.title}
-                className="poster image-modal-target"
+                className="poster image-popup"
+                // className="poster image-modal-target"
                 src={data.poster.original}
               />
             </div>
@@ -116,7 +120,9 @@ const CompetitionDetailBox = props => {
 
               <div className="competition-detail--title">
                 <h1>{data.title}</h1>
+
                 <div className="m-20" />
+
                 <p className="text-muted">
                   <span
                     className="small-stats-icon"
@@ -208,8 +214,8 @@ const CompetitionDetailBox = props => {
       </div>
 
       {/* modal save to calendar */}
-      <Modal id="save-to-calendar">
-        <div className="container">
+      <Modal className="modal-white" id="save-to-calendar">
+        <div className="col-md-6 modal-white-content">
           <div className="modal-title">
             Simpan ke kalender
             <a
@@ -240,7 +246,7 @@ const CompetitionDetailBox = props => {
             {/* end of add to Google Calendar */}
 
             {/* add to Yahoo Calendar */}
-            <a
+            {/* <a
               className="calendar-item"
               href={addCalendar.yahoo(data)}
               target="_blank"
@@ -255,11 +261,11 @@ const CompetitionDetailBox = props => {
                 }}
                 src="/assets/4.2/img/yahoo-calendar-icon.fullwidth.png"
               />
-            </a>
+            </a> */}
             {/* end of add to Yahoo Calendar */}
 
             {/* add to Miscrosoft Calendar */}
-            <a
+            {/* <a
               className="calendar-item"
               onClick={() =>
                 alert(
@@ -278,7 +284,7 @@ const CompetitionDetailBox = props => {
                 }}
                 src="/assets/4.2/img/microsoft-calendar-icon.fullwidth.png"
               />
-            </a>
+            </a> */}
             {/* end of add to Microsoft Calendar */}
           </StyledCalendar>
         </div>
@@ -288,20 +294,26 @@ const CompetitionDetailBox = props => {
 }
 
 const addCalendar = {
-  google: (n, url) => {
-    const d = n.deadline_at.split(" ")
-    return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=deadline ${
-      n.title
-    }&dates=${d[0].replace(/-/g, "")}T000000Z/${d[0].replace(
-      /-/g,
-      ""
-    )}T240000Z&details=${n.sort +
-      "\n" +
-      n.prize.description}&location=http://kompetisi.id/competition/${
-      n.id
-    }/regulations/${n.nospace_title}&sf=true&output=xml#eventpage_6`
+  google: (n) => {
+    let deadlineISOString = new Date(n.deadline_at * 1000).toISOString()
+    deadlineISOString = deadlineISOString.replace(/-/g, "").replace(/:/g, "").replace(/\.000/g, "")
+    // console.log("dis", deadlineISOString)
+    const query = {
+      text: `Deadline ${n.title} - Kompetisi Id`,
+      dates: `${deadlineISOString}/${deadlineISOString}`,
+      // dates: `20190906T063000Z/20190906T090000Z`,
+      details: (`Untuk selengkapnya silahkan kunjungi https://kompetisi.id/c/${
+        n.id
+      }`),
+      location: `https://kompetisi.id/c/${n.id}`,
+      sf: true
+    }
+
+    return `https://calendar.google.com/calendar/r/eventedit?${objToQuery(
+      query
+    )}`
   },
-  yahoo: (n, url) => {
+  yahoo: (n) => {
     const d = n.deadline_at.split(" ")
     return `https://calendar.yahoo.com/?v=60&view=d&type=20&title=deadline ${
       n.title

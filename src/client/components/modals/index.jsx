@@ -1,5 +1,5 @@
 import Styled from 'styled-components'
-import { transparentBlack, mainWhite } from '../../../style/colors'
+import { transparentBlack, mainWhite, mainBlue, mainGray } from '../../../style/colors'
 
 export const ModalStyled = Styled.div`
   visibility: hidden; 
@@ -13,8 +13,18 @@ export const ModalStyled = Styled.div`
   height: 100%;
   position: fixed;
   top: 0;
-  left: 0;    
-
+  left: 0;   
+  
+  &.modal-white {
+    color: ${mainGray};
+    .modal-white-content {
+      background-color: ${mainWhite} !important;
+    }
+    a {
+      color: ${mainGray} !important;
+    }
+  }
+  
   &:before {
     content: "";
     position: fixed;
@@ -38,6 +48,8 @@ export const ModalStyled = Styled.div`
   &.open {
     visibility: visible;
     opacity: 1;
+    display: flex;
+    justify-content: center
   }
   
   a {
