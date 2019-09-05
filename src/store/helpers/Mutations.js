@@ -13,9 +13,26 @@ export function requestListByFilter(state, action) {
  * @param {String} params.filter
  */
 export function receiveListByFilter(state, action) {
-  state[action.filter] = action.json || {}
-  state[action.filter].is_loading = false
+
+  if (action.json) {
+    if (action.filter) {
+      state[action.filter] = action.json
+    } else {
+      state = action.json
+    }
+  } else {
+    if (action.filter) {
+      state[action.filter] = { is_loading: true }
+    } else {
+      state = { is_loading: true }
+    }
+  }
+
   return Object.assign({}, state)
+
+  // state[action.filter] = action.json || {}
+  // state[action.filter].is_loading = false
+  // return Object.assign({}, state)
 }
 
 /**

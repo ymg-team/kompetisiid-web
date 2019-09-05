@@ -48,6 +48,10 @@ const NewsForm = Loadable({
   loader: () => import("../../containers/_super/news/NewsForm"),
   loading: Loading
 })
+const UserList = Loadable({
+  loader: () => import("../../containers/_super/users/index"),
+  loading: Loading
+})
 
 export default {
   path: "/super",
@@ -157,21 +161,39 @@ export default {
     {
       path: "/super/news",
       exact: true,
-      type: "super",
       component: NewsList
     },
     {
       path: "/super/news/create",
       exact: true,
-      type: "super",
       component: NewsForm
+    },
+    {
+      path: "/super/news/posted",
+      tab_active: 1,
+      exact: true,
+      type: "super",
+      component: NewsList
+    },
+    {
+      path: "/super/news/draft",
+      tab_active: 2,
+      exact: true,
+      component: NewsList
     },
     {
       path: "/super/news/:id",
       exact: true,
-      type: "super",
       component: NewsForm
     },
+
+    // user routes
+    {
+      path: "/super/users/:type",
+      exact: true,
+      component: UserList
+    },
+
     // 404
     {
       path: "/super/*",

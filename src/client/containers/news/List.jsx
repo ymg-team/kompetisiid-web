@@ -6,7 +6,7 @@ import Loadable from "react-loadable"
 // components
 import Subheader from "../../components/Subheader"
 import NewsLoading from "../../components/preloaders/NewsCardLoader"
-import EmptyLoading from "../../components/preloaders/EmptyLoader"
+// import EmptyLoading from "../../components/preloaders/EmptyLoader"
 import Helmet from "../../components/Helmet"
 import GAds from "../../components/cards/GoogleAds"
 

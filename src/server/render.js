@@ -85,7 +85,6 @@ export default (req, res) => {
                 <meta property="fb:app_id" content="1419514554927551" />
                 <meta property="fb:admins" content="xyussanx" />
                 <meta property="fb:pages" content="309615952470901" />
-                <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <meta name="google-signin-client_id" content="362573543654-djkou7th41pu964e7qs32ggogn1rbah6.apps.googleusercontent.com">
                 <meta name="google-site-verification" content="pUksy8ewwm4bzRVqaTQXKmWfRFZc9_L0iuESNDg7190" />
                 <meta property="fb:app_id" content="1419514554927551">
@@ -128,6 +127,8 @@ export default (req, res) => {
         `
     // .replace(/\s\s+/g, "")
   }
+
+  let modules = []
 
   // return function as promise
   return Promise.all(promises).then(() => {

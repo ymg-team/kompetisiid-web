@@ -71,30 +71,42 @@ export default props => {
         </li>
         <li>
           <Link to="/super/news/create">
-            <i className="fas fa-plus" /> Tambah Berita
+            <i className="fas fa-plus" /> Tambah Kabar
           </Link>
         </li>
         <li>
-          <Link to="/super/news">
-            Semua Berita{" "}
+          <Link to="/super/news/posted">
+            Diposting{" "}
             <span className="label label-blue">{stats.news.posted}</span>
           </Link>
         </li>
+        <li>
+          <Link to="/super/news/draft">
+            Draft{" "}
+            <span className="label label-blue">{stats.news.draft}</span>
+          </Link>
+        </li>
 
-        {/* member */}
+        {/* User */}
         <hr />
         <li>
-          <strong>Members</strong>
+          <strong>Users</strong>
         </li>
         <li>
-          <Link to="/super/members/active">
-            Member Aktif{" "}
-            <span className="label label-blue">{stats.members.active}</span>
+          <Link to="/super/users/confirmed">
+            Telah Konfirmasi{" "}
+            <span className="label label-blue">{stats.members.verified}</span>
           </Link>
         </li>
         <li>
-          <Link to="/super/members/banned">
-            Member Banned{" "}
+          <Link to="/super/users/unconfirmed">
+            Belum Konfirmasi{" "}
+            <span className="label label-blue">{stats.members.unverified}</span>
+          </Link>
+        </li>
+        <li>
+          <Link to="/super/users/banned">
+            Dicekal{" "}
             <span className="label label-blue">{stats.members.banned}</span>
           </Link>
         </li>

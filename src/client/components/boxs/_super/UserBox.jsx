@@ -1,10 +1,8 @@
-import React, { Component } from "react"
-import List from "../../rows/_super/RequestRow"
+import React from "react"
 import Loading from "../../preloaders/GlobalLoader"
+import List from "../../rows/_super/UserRow"
 
-let Limit = 20
-
-class RequestBox extends Component {
+class UserBox extends React.Component {
   handleLoadMore() {
     // get last if of requets
     const { data } = this.props.data || {}
@@ -43,7 +41,7 @@ class RequestBox extends Component {
                   href="javascript:;"
                   onClick={() => this.handleLoadMore()}
                 >
-                  Request berikutnya <i className="fa fa-angle-down" />
+                  User berikutnya <i className="fa fa-angle-down" />
                 </a>
               </div>
             ) : null}
@@ -59,10 +57,12 @@ class RequestBox extends Component {
               <div className="muted align-center">{data.message}</div>
             ) : null}
           </div>
-        ) : <Loading />}
+        ) : (
+          <Loading />
+        )}
       </React.Fragment>
     )
   }
 }
 
-export default RequestBox
+export default UserBox

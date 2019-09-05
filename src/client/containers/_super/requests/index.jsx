@@ -13,33 +13,31 @@ const RequestBox = Loadable({
   loading: Loading
 })
 
-let Filter, Params
+let Filter = "", Payload = {}
 
 class RequestCompetition extends React.Component {
   componentDidMount() {
-    const filter = this.generateFilter(this.props)
-    const params = this.generateParams(this.props)
-    this.props.dispatch(fetchRequest(params, filter))
+    this.fetchData()
   }
 
-  handleLoadMore(lastid) {
-    const filter = this.generateFilter(this.props)
-    const params = this.generateParams(this.props)
-    params.lastid = lastid
-    this.props.dispatch(fetchMoreRequest(params, filter))
-  }
-
-  generateFilter(props) {
+  generateFilter(props = this.props) {
     Filter = `request_${props.route.status}`
     return Filter
   }
 
-  generateParams(props) {
-    Params = {
+  generatePayload(props = this.props) {
+    Payload = {
       status: props.route.status
     }
 
-    return Params
+    return Payload
+  }
+
+  fetchData(params = {}) {
+    Filter = this.generateFilter(this.props)
+    Payload = this.generatePayload(this.props)
+    if (params.lastid) Payload.lastid = params.lastid
+    this.props.dispatch(fetchRequest(Payload, Filter))
   }
 
   render() {
@@ -80,7 +78,7 @@ class RequestCompetition extends React.Component {
         <Tab tabs={tabcontent} />
 
         <RequestBox
-          handleLoadMore={lastid => this.handleLoadMore(lastid)}
+          handleLoadMore={lastid => this.fetchData({ lastid })}
           data={data[Filter] || {}}
         />
       </React.Fragment>

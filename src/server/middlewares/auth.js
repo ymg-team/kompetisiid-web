@@ -1,13 +1,13 @@
 /**
- * @description function as dashboard pages middleware
+ * @description function as _dashboard pages middleware
  */
 export function dashboardMiddleware(req, res, next) {
   const userdata = req.session.userdata || {}
 
   if (Object.keys(userdata).length > 0 && userdata.id) {
-    // admin and moderator cannot access dashboard
+    // admin and moderator cannot access _dashboard
     // if(['admin', 'moderator'].includes(userdata.level)) return res.redirect('/super')
-    // logged in member redirect to dashboard
+    // logged in Userredirect to _dashboard
     if (req.originalUrl === "/login") return res.redirect("/dashboard")
     return next()
   } else {

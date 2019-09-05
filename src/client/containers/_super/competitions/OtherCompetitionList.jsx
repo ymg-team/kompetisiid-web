@@ -1,6 +1,6 @@
 import React from "react"
 import HeaderDashboard from "../../../components/cards/HeaderDashboard"
-import CompetitionCard from "../../../components/cards/dashboard/CompetitionListCardSimple"
+import CompetitionCard from "../../../components/cards/_dashboard/CompetitionListCardSimple"
 import Loader from "../../../components/preloaders/GlobalLoader"
 import Helmet from "../../../components/Helmet"
 import Button from "../../../components/buttons/index"

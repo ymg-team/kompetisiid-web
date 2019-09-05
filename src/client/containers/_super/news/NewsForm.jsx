@@ -28,7 +28,7 @@ class NewsCreate extends React.Component {
       )
       if (status === 201 || status === 200) {
         this.notSubmited = false
-        location.href = "/super/news"
+        location.href = "/super/news/posted"
       }
     }
   }
@@ -36,7 +36,7 @@ class NewsCreate extends React.Component {
   render = () => {
     const { id } = this.props.match.params
     const newsData = this.props.news[id] || {}
-    const title = id ? "Update Berita" : "Tambah Berita"
+    const title = id ? "Update Kabar" : "Tambah Kabar"
 
     if (id && newsData.status !== 200) this.notSubmited = false
 
@@ -47,7 +47,7 @@ class NewsCreate extends React.Component {
         <Helmet title={title} />
         <Prompt
           when={this.notSubmited}
-          message={"Data berita yang kamu ketikan akan hilang, apakah yakin?"}
+          message={"Data kabar yang kamu ketikan akan hilang, apakah yakin?"}
         />
         {(id && newsData.is_loading) || (id && !newsData.status) ? (
           <FullPageLoader />

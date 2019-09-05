@@ -14,7 +14,7 @@ export function sendCompetition(req, res, next)
     version: 'v42',
     method: 'post',
     params: req.body,
-    url: `/v2/request`,
+    url: `/v2/request/send`,
   }
 
   next()

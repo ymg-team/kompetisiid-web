@@ -44,7 +44,7 @@ class Login extends React.Component {
       loading: false,
       inputPassword: false,
       profile: {},
-      isSuperPage: this.props.location.pathname === "/super"
+      isSuperPage: this.props.location.pathname === "/_super"
     }
   }
 
@@ -91,7 +91,7 @@ class Login extends React.Component {
           "success",
           true
         )
-        // redirect to dashboard
+        // redirect to /super/dashboard
         setTimeout(() => {
           location.href = this.state.isSuperPage ? "/super/dashboard" : "/"
         }, 1000)
@@ -145,7 +145,7 @@ class Login extends React.Component {
 
     return (
       <Fullscreen
-        className={`login ${this.state.isSuperPage ? "login-super" : ""}`}
+        className={`login ${this.state.isSuperPage ? "login-_super" : ""}`}
       >
         <Helmet title={title} description={description} />
         <LoginBoxStyled className="login-box">

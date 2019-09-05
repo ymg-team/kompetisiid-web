@@ -1,7 +1,7 @@
 import React from "react"
 import HeaderDashboard from "../../../components/cards/HeaderDashboard"
 import Tab from "../../../components/navigations/Tab"
-import CompetitionCard from "../../../components/cards/dashboard/CompetitionListCard"
+import CompetitionCard from "../../../components/cards/_dashboard/CompetitionListCard"
 import Loader from "../../../components/preloaders/GlobalLoader"
 import Helmet from "../../../components/Helmet"
 import Button from "../../../components/buttons/index"
@@ -133,6 +133,7 @@ class MyCompetition extends React.Component {
           text="Berikut adalah kompetisi yang telah anda pasang di Kompetisi ID."
           noBorder
         />
+        
         {/* tab navigations */}
         <Tab tabs={tabcontent} />
 

@@ -6,9 +6,6 @@ import * as Colors from "../../../../style/colors"
 import * as RequestActions from "../../../containers/_super/requests/actions"
 import swal from "sweetalert"
 
-// components
-import { Link } from "react-router-dom"
-
 const RequestListStyled = Styled.div`
   .item {
     padding: 10px;
@@ -94,10 +91,10 @@ const RequestRow = props => {
             <a href={props.link} target="_blank">
               {props.title}
             </a>{" "}
-            <span className={labelClassname}>{labelText}</span>
           </h4>
           <p className="text-muted">
             Dipasang oleh <a href={`mailto:${props.email}`}>{props.email}</a>
+            {" "}
             pada {epochToRelativeTime(props.created_at)}
             <br />
             {props.updated_at !== props.created_at
@@ -108,6 +105,7 @@ const RequestRow = props => {
                 )} dengan catatan "${props.note || "tidak ada"}"`
               : "Permintaan belum diproses"}
           </p>
+          <span className={labelClassname}>{labelText}</span>
 
           {/* action request */}
           {props.updated_at === props.created_at ? (
