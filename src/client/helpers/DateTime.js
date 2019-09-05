@@ -115,3 +115,11 @@ export function today(format = '') {
       return `${d.getDate()} ${Bulan[d.getMonth()][0]} ${d.getFullYear()}`
   }
 }
+
+/**
+ * function to convert datetime into ISO 8601
+ * @date {number} sample : 2019-01-26 00:00:00
+ */
+// export function epochToISO8061(epochtime) { 
+//   return ``
+// }

@@ -5,6 +5,7 @@ import memoize from "memoize-one"
 import { topLoading } from "../../components/preloaders"
 
 // components
+import Helmet from "../../components/Helmet"
 import CompetitionPreloader from "../../components/preloaders/CompetitionDetail"
 import { getDetail, getRelated } from "./actions"
 import Error from "../../components/cards/ErrorCard"
@@ -46,11 +47,27 @@ class LayoutCompetition extends Component {
     const { encid } = this.props.match.params
     const { detail } = this.props.kompetisi
 
+    const script = [
+      {
+        src: "/assets/wa-mediabox/wa-mediabox.min.js",
+        type: "text/javascript"
+      }
+    ]
+
+    const link = [
+      {
+        href: "/assets/wa-mediabox/wa-mediabox.min.css",
+        rel: "stylesheet",
+        type: "text/css"
+      }
+    ]
+
     if (typeof window !== "undefined" && detail[encid] && detail[encid].meta)
       topLoading(false)
 
     return (
       <React.Fragment>
+        <Helmet script={script} link={link} />
         {detail[encid] && detail[encid].status ? (
           detail[encid].status === 200 ? (
             renderRoutes(this.props.route.routes)
@@ -69,9 +86,8 @@ class LayoutCompetition extends Component {
 }
 
 function mapStateToProps(state) {
-  const { Kompetisi } = state
   return {
-    kompetisi: Kompetisi
+    kompetisi: state.Kompetisi
   }
 }
 
