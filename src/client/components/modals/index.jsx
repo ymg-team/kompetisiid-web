@@ -78,16 +78,16 @@ export const ModalStyled = Styled.div`
     }
   } 
 
-  /* small */
+  /* small screen */
   @media only screen and (max-width: 543px) {
-    .modal-title, a {
+    .modal-title {
       font-size: 1.5em !important;
     }
   }
 
   /* medium screen */
   @media only screen and (min-width: 544px) and (max-width: 767px) {
-    .modal-title,a  {
+    .modal-title {
       font-size: 1.5em !important;
     }
   }

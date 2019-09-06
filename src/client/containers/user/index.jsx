@@ -56,7 +56,7 @@ class Index extends React.Component {
                       profile[username].data &&
                       profile[username].data.avatar
                         ? profile[username].data.avatar.original
-                        : "/assets/4.2/img/avatar-1.jpg"
+                        : "/assets/4.2/img/avatar-default.jpg"
                     }
                   />
                 </div>

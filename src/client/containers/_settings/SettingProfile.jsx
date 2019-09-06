@@ -63,7 +63,7 @@ class SettingProfile extends React.Component {
             accept="image/*"
             label="Avatar"
             preview={
-              this.state.avatar_preview || "/assets/4.2/img/avatar-1.jpg"
+              this.state.avatar_preview || "/assets/4.2/img/avatar-default.jpg"
             }
             name="avatar"
             id="input-avatar"

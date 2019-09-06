@@ -141,7 +141,6 @@ class Index extends Component {
           {/* detail box competition */}
           <CompetitionDetailBox data={detail[encid].data}/>
 
-
           <div className="m-20"/>
 
           {/* competition tab navigation */}

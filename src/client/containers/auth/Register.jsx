@@ -128,7 +128,7 @@ class Register extends Component {
                   }}
                   src={
                     this.state.avatarPreview ||
-                    "/assets/4.2/img/default-avatar.jpg"
+                    "/assets/4.2/img/avatar-default.jpg"
                   }
                 />
                 <InputFile
