@@ -63,7 +63,7 @@ export default props => {
           <a className="muted" href="#">
             <img
               className="avatar"
-              src={`/assets/4.2/img/avatar-default.jpg`}
+              src={n.author.avatar.small || `/assets/4.2/img/avatar-default.jpg`}
             />
           </a>
         </div>

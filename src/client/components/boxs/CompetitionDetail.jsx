@@ -84,7 +84,10 @@ const CompetitionDetailBox = props => {
             >
               <img
                 style={{ float: "left", marginRight: "10px" }}
-                src="/assets/4.2/img/avatar-default.jpg"
+                src={
+                  data.author.avatar.small ||
+                  "/assets/4.2/img/avatar-default.jpg"
+                }
               />
             </Link>
             <p>
@@ -393,18 +396,30 @@ const addCalendar = {
   },
   // apple calendar
   apple: n => {
-    return ("BEGIN:VCALENDAR\n"+
-      "VERSION:2.0\n"+
-      "BEGIN:VEVENT\n"+
-      "URL:"+n.location+"\n"+
-      "DTSTART:"+n.deadlineDate+"\n"+
-      "DTEND:"+n.deadlineDate+"\n"+
-      "SUMMARY:"+n.title+"\n"+
-      "DESCRIPTION:"+n.details+"\n"+
-      "LOCATION:Kompetisi Id\n"+
-      "END:VEVENT\n"+
-      "END:VCALENDAR")
-  },
+    return (
+      "BEGIN:VCALENDAR\n" +
+      "VERSION:2.0\n" +
+      "BEGIN:VEVENT\n" +
+      "URL:" +
+      n.location +
+      "\n" +
+      "DTSTART:" +
+      n.deadlineDate +
+      "\n" +
+      "DTEND:" +
+      n.deadlineDate +
+      "\n" +
+      "SUMMARY:" +
+      n.title +
+      "\n" +
+      "DESCRIPTION:" +
+      n.details +
+      "\n" +
+      "LOCATION:Kompetisi Id\n" +
+      "END:VEVENT\n" +
+      "END:VCALENDAR"
+    )
+  }
 }
 
 // function to handle copy link
