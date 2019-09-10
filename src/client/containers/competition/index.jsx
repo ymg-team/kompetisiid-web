@@ -56,11 +56,6 @@ class Index extends Component {
   componentDidMount() {
     // add scroll listener
     addEventListener("scroll", this.handleScroll, true)
-
-    // photoswipe initial aftwr several seconds
-    setTimeout(() => {
-      // this.photoSwipeInitial()
-    }, 2000)
   }
 
   componentWillUnmount() {
@@ -68,31 +63,6 @@ class Index extends Component {
     removeEventListener("scroll", this.handleScroll, true)
   }
 
-  // function to initial photoSwipe
-  photoSwipeInitial() {
-    // get photoswipe element
-    const pswpEl = document.querySelectorAll(".pswp")[0]
-    // build items array
-    const items = [
-      {
-        src: 'https://placekitten.com/600/400',
-        w: 600,
-        h: 400
-      },
-      {
-          src: 'https://placekitten.com/1200/900',
-          w: 1200,
-          h: 900
-      }
-    ]
-    // define options
-    const options = {
-      index: 0
-    }
-
-    var gallery = new PhotoSwipe(pswpEl, false, items, options)
-    gallery.init()
-  }
 
   handleScroll(e) {
     // console.log('scrolling in competition detail...')
@@ -119,21 +89,7 @@ class Index extends Component {
     let NextPrevProps = {},
       helmetdata = {
         script: [
-          // {
-          //   src: "/assets/photoswipe/photoswipe.min.js",
-          //   type: "text/javascript"
-          // },
-          // {
-          //   src: "/assets/photoswipe/photoswipe-ui-default.min.js",
-          //   type: "text/javascript"
-          // }
-        ],
-        link: [
-          // {
-          //   href: "/assets/photoswipe/photoswipe.css",
-          //   rel: "stylesheet",
-          //   type: "text/css"
-          // }
+
         ]
       }
 
@@ -143,13 +99,13 @@ class Index extends Component {
         title: toCamelCase(
           `${tab[this.props.route.active_tab - 1].name + " " || ""}${
             detail[encid].data.title
-          }`
+            }`
         ),
         description: detail[encid].data.sort,
         image: detail[encid].data.poster.original,
         url: `${Host[process.env.NODE_ENV].front}/competition/${
           detail[encid].data.id
-        }/regulations/${detail[encid].data.nospace_title}`
+          }/regulations/${detail[encid].data.nospace_title}`
       })
 
       // add jsonld
@@ -164,7 +120,7 @@ class Index extends Component {
           title: detail[encid].next.title,
           link: `/competition/${detail[encid].next.id}/regulations/${
             detail[encid].next.nospace_title
-          }`
+            }`
         }
       }
 
@@ -173,7 +129,7 @@ class Index extends Component {
           title: detail[encid].prev.title,
           link: `/competition/${detail[encid].prev.id}/regulations/${
             detail[encid].prev.nospace_title
-          }`
+            }`
         }
       }
     }
@@ -183,9 +139,9 @@ class Index extends Component {
         <Helmet {...helmetdata} />
         <div className="competition-detail">
           {/* detail box competition */}
-          <CompetitionDetailBox data={detail[encid].data} />
+          <CompetitionDetailBox data={detail[encid].data}/>
 
-          <div className="m-20" />
+          <div className="m-20"/>
 
           {/* competition tab navigation */}
           <Tab
@@ -244,7 +200,7 @@ class Index extends Component {
                     </div>
                   ) : null}
                   {/*end of alert*/}
-                  <div className="m-20" />
+                  <div className="m-20"/>
 
                   <div className="row">
                     <div className={active_tab == 1 ? "col-md-8" : "col-md-12"}>
@@ -283,7 +239,7 @@ class Index extends Component {
                               />
                             )
                           case 4:
-                            return <Discussions link={helmetdata.url} />
+                            return <Discussions link={helmetdata.url}/>
                           case 5:
                             return (
                               <Contacts
@@ -326,7 +282,7 @@ class Index extends Component {
           related[`related_${encid}`].status &&
           related[`related_${encid}`].status === 200 ? (
             <div className="col-md-12 bg-gray-soft">
-              <div className="m-15 row" />
+              <div className="m-15 row"/>
               <CompetitionBox
                 subtitle={false}
                 total={4}
@@ -337,71 +293,6 @@ class Index extends Component {
           ) : null}
           {/* end of related competition */}
 
-          {/* photoswipe */}
-          {/* Root element of PhotoSwipe. Must have class pswp. */}
-          <div className="pswp" tabIndex={-1} role="dialog" aria-hidden="true">
-            {/* Background of PhotoSwipe. 
-   It's a separate element as animating opacity is faster than rgba(). */}
-            <div className="pswp__bg" />
-            {/* Slides wrapper with overflow:hidden. */}
-            <div className="pswp__scroll-wrap">
-              {/* Container that holds slides. 
-      PhotoSwipe keeps only 3 of them in the DOM to save memory.
-      Don't modify these 3 pswp__item elements, data is added later on. */}
-              <div className="pswp__container">
-                <div className="pswp__item" />
-                <div className="pswp__item" />
-                <div className="pswp__item" />
-              </div>
-              {/* Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. */}
-              <div className="pswp__ui pswp__ui--hidden">
-                <div className="pswp__top-bar">
-                  {/*  Controls are self-explanatory. Order can be changed. */}
-                  <div className="pswp__counter" />
-                  <button
-                    className="pswp__button pswp__button--close"
-                    title="Close (Esc)"
-                  />
-                  <button
-                    className="pswp__button pswp__button--share"
-                    title="Share"
-                  />
-                  <button
-                    className="pswp__button pswp__button--fs"
-                    title="Toggle fullscreen"
-                  />
-                  <button
-                    className="pswp__button pswp__button--zoom"
-                    title="Zoom in/out"
-                  />
-                  {/* Preloader demo https://codepen.io/dimsemenov/pen/yyBWoR */}
-                  {/* element will get class pswp__preloader--active when preloader is running */}
-                  <div className="pswp__preloader">
-                    <div className="pswp__preloader__icn">
-                      <div className="pswp__preloader__cut">
-                        <div className="pswp__preloader__donut" />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
-                  <div className="pswp__share-tooltip" />
-                </div>
-                <button
-                  className="pswp__button pswp__button--arrow--left"
-                  title="Previous (arrow left)"
-                />
-                <button
-                  className="pswp__button pswp__button--arrow--right"
-                  title="Next (arrow right)"
-                />
-                <div className="pswp__caption">
-                  <div className="pswp__caption__center" />
-                </div>
-              </div>
-            </div>
-          </div>
-          {/* end of photoswipe */}
         </div>
       </React.Fragment>
     )

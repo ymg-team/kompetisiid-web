@@ -177,7 +177,7 @@ class Login extends React.Component {
                     ubah
                   </a>
                 </p>
-                <img src="/assets/4.2/img/default-avatar.jpg" />
+                <img src="/assets/4.2/img/avatar-default.jpg" />
               </div>
             ) : null}
             <form className="form-ki" action="javascript:;" method="post">

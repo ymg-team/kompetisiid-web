@@ -131,7 +131,7 @@ export const generateMetaNews = (req, res, next) => {
             "author": {
                 "@type": "Person",
                 "name": "${news.data.author.username}",
-                "image": "https://kompetisi.id/assets/4.2/img/default-avatar.jpg",
+                "image": "https://kompetisi.id/assets/4.2/img/avatar-default.jpg",
                 "url": "https://kompetisi.id/user/${news.data.author.username}",
                 "sameAs": [
                     ""

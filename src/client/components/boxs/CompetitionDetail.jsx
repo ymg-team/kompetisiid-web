@@ -1,9 +1,10 @@
 import React from "react"
-import Loadable from "react-loadable"
+// import Loadable from "react-loadable"
 import { eventFire } from "../../helpers/DomEvents"
 import { getCompetitionStatus } from "../../helpers/DateTime"
 import copy from "copy-to-clipboard"
 import Styled from "styled-components"
+import { objToQuery } from "string-manager"
 
 // components
 import Modal from "../modals/index"
@@ -14,14 +15,27 @@ import BtnLike from "../buttons/BtnLikeCompetition"
 
 const StyledCalendar = Styled.div`
   a.calendar-item {
-    width: calc(100% / 3);
+    &:first-child {
+      border-top: 1px solid #F4F4F4;
+    }
+    display: block;
+    border-bottom: 1px solid #F4F4F4;
+    padding: .5em 1.2em;
+    img {
+      width: 35px !important;
+      margin-right: 10px !important;
+    }
+    text-decoration: none;
+    .fas.fa-angle-right {
+      float: right;
+      font-size: 25px;
+      margin-top: 4px;
+    }
   }
 
   /* responsive handler */
   @media only screen and (max-width: 543px) {
-    a.calendar-item {
-      width: 100%;
-    }
+    
   }
 `
 
@@ -29,6 +43,19 @@ const CompetitionDetailStyled = Styled.div`
   .small-stats-icon {
     margin-right: 10px;
     cursor: default;
+  }
+  .modal-white {
+    .modal-white-content {
+      padding: 0;
+      .modal-title {
+        padding: 1em;
+        .btn-close-modal {
+          top: 50%;
+          right: .5em;
+          margin-top: -17.5px;
+        }
+      }
+    }
   }
 `
 
@@ -40,6 +67,9 @@ const CompetitionDetailBox = props => {
     data.deadline_at,
     data.announcement_at
   )
+
+  // paremeter to generate query on add to calendar menus
+  const calendarParams = calendarParamsGenerator(data)
 
   return (
     <CompetitionDetailStyled id="competition-detail" className="row">
@@ -54,7 +84,10 @@ const CompetitionDetailBox = props => {
             >
               <img
                 style={{ float: "left", marginRight: "10px" }}
-                src="/assets/4.2/img/default-avatar.jpg"
+                src={
+                  data.author.avatar.small ||
+                  "/assets/4.2/img/avatar-default.jpg"
+                }
               />
             </Link>
             <p>
@@ -89,8 +122,11 @@ const CompetitionDetailBox = props => {
           <div className="row competition-detail--meta">
             <div className="col-md-6 align-center poster">
               <img
+                data-mediabox="my-gallery-name"
+                data-title="Sample image"
                 alt={data.title}
-                className="poster image-modal-target"
+                className="poster image-popup"
+                // className="poster image-modal-target"
                 src={data.poster.original}
               />
             </div>
@@ -116,7 +152,9 @@ const CompetitionDetailBox = props => {
 
               <div className="competition-detail--title">
                 <h1>{data.title}</h1>
+
                 <div className="m-20" />
+
                 <p className="text-muted">
                   <span
                     className="small-stats-icon"
@@ -184,7 +222,6 @@ const CompetitionDetailBox = props => {
                       <a
                         className="scopy-button"
                         onClick={() => handleCopyLink(link_competition)}
-                        target="_blank"
                         href="javascript:;"
                       >
                         Salin Link Kompetisi
@@ -208,8 +245,8 @@ const CompetitionDetailBox = props => {
       </div>
 
       {/* modal save to calendar */}
-      <Modal id="save-to-calendar">
-        <div className="container">
+      <Modal className="modal-white" id="save-to-calendar">
+        <div className="col-md-6 col-xs-12 modal-white-content">
           <div className="modal-title">
             Simpan ke kalender
             <a
@@ -217,13 +254,12 @@ const CompetitionDetailBox = props => {
               href="javascript:;"
             />
           </div>
-          <hr />
 
           <StyledCalendar>
             {/* add to Google Calendar */}
             <a
               className="calendar-item"
-              href={addCalendar.google(data)}
+              href={addCalendar.google(calendarParams)}
               target="_blank"
               title="Tambahkan ke Google Calendar"
               rel="noopener"
@@ -234,17 +270,19 @@ const CompetitionDetailBox = props => {
                   backgroundColor: "#FFF",
                   maxWidth: "100%"
                 }}
-                src="/assets/4.2/img/google-calendar-icon.fullwidth.png"
+                src="/assets/4.2/img/icon-google-calendar.png"
               />
+              <span>Google Calendar</span>
+              <span className="fas fa-angle-right" />
             </a>
             {/* end of add to Google Calendar */}
 
             {/* add to Yahoo Calendar */}
             <a
               className="calendar-item"
-              href={addCalendar.yahoo(data)}
+              href={addCalendar.yahoo(calendarParams)}
               target="_blank"
-              title="Tambahkan ke Yahoo Calendar"
+              title="Tambahkan ke Yahoo! Calendar"
               rel="noopener"
             >
               <img
@@ -253,22 +291,20 @@ const CompetitionDetailBox = props => {
                   backgroundColor: "#FFF",
                   maxWidth: "100%"
                 }}
-                src="/assets/4.2/img/yahoo-calendar-icon.fullwidth.png"
+                src="/assets/4.2/img/icon-yahoo-calendar.png"
               />
+              <span>Yahoo! Calendar</span>
+              <span className="fas fa-angle-right" />
             </a>
-            {/* end of add to Yahoo Calendar */}
 
-            {/* add to Miscrosoft Calendar */}
+            {/* download to Outlook Calendar */}
             <a
               className="calendar-item"
-              onClick={() =>
-                alert(
-                  true,
-                  "untuk sekarang, kalender Microsoft untuk saat ini belum tersedia",
-                  "warning"
-                )
-              }
-              href="javascript:;"
+              href={`data:text/plain;charset=utf-8,'${encodeURIComponent(
+                addCalendar.apple(calendarParams)
+              )}`}
+              download="kompetisiid-event.ics"
+              title="Tambahkan ke Outlook Calendar"
             >
               <img
                 style={{
@@ -276,10 +312,32 @@ const CompetitionDetailBox = props => {
                   backgroundColor: "#FFF",
                   maxWidth: "100%"
                 }}
-                src="/assets/4.2/img/microsoft-calendar-icon.fullwidth.png"
+                src="/assets/4.2/img/icon-outlook-calendar.png"
               />
+              <span>Outlook Calendar</span>
+              <span className="fas fa-angle-right" />
             </a>
-            {/* end of add to Microsoft Calendar */}
+
+            {/* download to Apple Calendar */}
+            <a
+              className="calendar-item"
+              href={`data:text/calendar;charset=utf-8,${encodeURIComponent(
+                addCalendar.apple(calendarParams)
+              )}`}
+              download="kompetisiid-event.ics"
+              title="Tambahkan ke Apple Calendar"
+            >
+              <img
+                style={{
+                  width: "inherit",
+                  backgroundColor: "#FFF",
+                  maxWidth: "100%"
+                }}
+                src="/assets/4.2/img/icon-apple-calendar.png"
+              />
+              <span>Apple Calendar</span>
+              <span className="fas fa-angle-right" />
+            </a>
           </StyledCalendar>
         </div>
       </Modal>
@@ -287,31 +345,81 @@ const CompetitionDetailBox = props => {
   )
 }
 
+const calendarParamsGenerator = n => {
+  let deadlineISOString = new Date(n.deadline_at * 1000).toISOString()
+  deadlineISOString = deadlineISOString
+    .replace(/-/g, "")
+    .replace(/:/g, "")
+    .replace(/\.000/g, "")
+
+  const params = {
+    deadlineTitle: `Deadline ${n.title} - Kompetisi Id`,
+    details: `Untuk selengkapnya silahkan kunjungi https://kompetisi.id/c/${
+      n.id
+    }`,
+    deadlineDate: deadlineISOString,
+    location: `https://kompetisi.id/c/${n.id}`
+  }
+
+  return params
+}
+
 const addCalendar = {
-  google: (n, url) => {
-    const d = n.deadline_at.split(" ")
-    return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=deadline ${
-      n.title
-    }&dates=${d[0].replace(/-/g, "")}T000000Z/${d[0].replace(
-      /-/g,
-      ""
-    )}T240000Z&details=${n.sort +
-      "\n" +
-      n.prize.description}&location=http://kompetisi.id/competition/${
-      n.id
-    }/regulations/${n.nospace_title}&sf=true&output=xml#eventpage_6`
+  // ref: http://taskboy.com/blog/Creating_events_for_Yahoo_and_Google_calendars.html
+  google: n => {
+    const query = {
+      text: n.deadlineTitle,
+      dates: `${n.deadlineDate}/${n.deadlineDate}`,
+      // dates: `20190906T063000Z/20190906T090000Z`,
+      details: n.details,
+      location: n.location,
+      sf: true
+    }
+
+    return `https://calendar.google.com/calendar/r/eventedit?${objToQuery(
+      query
+    )}`
   },
-  yahoo: (n, url) => {
-    const d = n.deadline_at.split(" ")
-    return `https://calendar.yahoo.com/?v=60&view=d&type=20&title=deadline ${
-      n.title
-    }&st=${d[0].replace(/-/g, "")}T000000Z&dur=0600&desc=${n.sort +
-      "\n" +
-      n.prize.description}&in_loc=http://kompetisi.id/competition/${
-      n.id
-    }/regulations/${n.nospace_title}`
+  yahoo: n => {
+    const query = {
+      v: 60,
+      view: "d",
+      type: 20,
+      title: n.deadlineTitle,
+      st: n.deadlineDate,
+      dur: "0000",
+      desc: n.details,
+      in_loc: n.location
+    }
+
+    return `https://calendar.yahoo.com/?${objToQuery(query)}`
   },
-  microsoft: () => {}
+  // apple calendar
+  apple: n => {
+    return (
+      "BEGIN:VCALENDAR\n" +
+      "VERSION:2.0\n" +
+      "BEGIN:VEVENT\n" +
+      "URL:" +
+      n.location +
+      "\n" +
+      "DTSTART:" +
+      n.deadlineDate +
+      "\n" +
+      "DTEND:" +
+      n.deadlineDate +
+      "\n" +
+      "SUMMARY:" +
+      n.title +
+      "\n" +
+      "DESCRIPTION:" +
+      n.details +
+      "\n" +
+      "LOCATION:Kompetisi Id\n" +
+      "END:VEVENT\n" +
+      "END:VCALENDAR"
+    )
+  }
 }
 
 // function to handle copy link

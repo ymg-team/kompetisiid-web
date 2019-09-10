@@ -359,7 +359,7 @@ function generateJsonld(n, url) {
         "author": {
             "@type": "Person",
             "name": "${n.author.username}",
-            "image": "https://kompetisi.id/assets/4.2/img/default-avatar.jpg",
+            "image": "https://kompetisi.id/assets/4.2/img/avatar-default.jpg",
             "url": "https://kompetisi.id/user/${n.author.username}",
             "sameAs": [
                 ""
