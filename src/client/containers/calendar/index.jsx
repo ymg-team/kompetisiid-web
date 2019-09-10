@@ -2,14 +2,16 @@ import React from "react"
 import Helmet from "../../components/Helmet"
 import Styled from "styled-components"
 import SubHeader from "../../components/Subheader"
-import FullCalendar from "@fullcalendar/react"
-import dayGridPlugin from "@fullcalendar/daygrid"
+import CalendarBox from "../../components/boxs/CalendarBox"
 
 const CalendarContainerStyled = Styled.div`
 
 `
 
 class CalendarContainer extends React.Component {
+  state = {
+    renderCalender: false
+  }
 
   dateGenerator() {
     return null
@@ -24,7 +26,7 @@ class CalendarContainer extends React.Component {
       <CalendarContainerStyled id="competition-calendar">
         <Helmet title={title} description={desc} />
         <SubHeader title={title} desc={desc} />
-        <FullCalendar defaultView="dayGridMonth" plugins={[ dayGridPlugin ]} />
+        {this.state.renderCalender ? <CalendarBox /> : null}
       </CalendarContainerStyled>
     )
   }
