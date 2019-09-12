@@ -9,10 +9,6 @@ const CalendarContainerStyled = Styled.div`
 `
 
 class CalendarContainer extends React.Component {
-  state = {
-    renderCalender: false
-  }
-
   dateGenerator() {
     return null
   }
@@ -26,7 +22,7 @@ class CalendarContainer extends React.Component {
       <CalendarContainerStyled id="competition-calendar">
         <Helmet title={title} description={desc} />
         <SubHeader title={title} desc={desc} />
-        {this.state.renderCalender ? <CalendarBox /> : null}
+        <CalendarBox />
       </CalendarContainerStyled>
     )
   }
