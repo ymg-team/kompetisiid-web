@@ -12,9 +12,9 @@ const CalendarBoxStyled = Styled.div`
 .calendar {
   display: grid;
   width: 100%;
-  grid-template-columns: repeat(7, minmax(120px, 1fr));
+  grid-template-columns: repeat(7, minmax(150px, 1fr));
   grid-template-rows: 50px;
-  grid-auto-rows: 120px;
+  grid-auto-rows: 150px;
   overflow: auto;
   
   &-container {
@@ -22,14 +22,14 @@ const CalendarBoxStyled = Styled.div`
     margin: auto;
     overflow: hidden;
     background: #fff;
-    max-width: 1200px;
+    // max-width: 1200px;
   }
   
   &-header {
     text-align: center;
     padding: 20px 0;
     background: linear-gradient(to bottom, rgb(250, 251, 253) 0%,rgba(255,255,255,0) 100%);
-    border-bottom: 1px solid rgba(166, 168, 179, 0.12);
+    border-bottom: 1px solid rgba(58, 58, 58, 0.33);
     
     h1 {
       margin: 0;
@@ -40,7 +40,7 @@ const CalendarBoxStyled = Styled.div`
       margin: 5px 0 0 0;
       font-size: 13px;
       font-weight: 600;
-      color: rgba(#51565d, .4);
+      color: #3a3a3a;
     }
 
     .calendar-header_year_select {
@@ -71,14 +71,14 @@ const CalendarBoxStyled = Styled.div`
 }
 
 .day {
-  border-bottom: 1px solid rgba(166, 168, 179, 0.12);
-  border-right: 1px solid rgba(166, 168, 179, 0.12);
+  border-bottom: 1px solid rgba(58, 58, 58, 0.33);
+  border-right: 1px solid rgba(58, 58, 58, 0.33);
   text-align: right;
   padding: 14px 20px;
   letter-spacing: 1px;
   font-size: 12px;
   box-sizing: border-box;
-  color: #98a0a6;
+  color: #3a3a3a;
   position: relative;
   pointer-events: none;
   z-index: 1;
@@ -137,9 +137,9 @@ const CalendarBoxStyled = Styled.div`
   &-name {
     font-size: 12px;
     text-transform: uppercase;
-    color: #99a1a7;
+    color: #3a3a3a;
     text-align: center;
-    border-bottom: 1px solid rgba(166, 168, 179, 0.12);
+    border-bottom: 1px solid rgba(58, 58, 58, 0.33);
     line-height: 50px;
     font-weight: 500;
   }
