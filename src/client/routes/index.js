@@ -20,14 +20,14 @@ import Dashboard from "./dashboard/index"
 import Careers from "./careers"
 import Super from "./super/index"
 import Settings from "./settings"
+import Calendar from "./calendar"
 
 // components
 import FullPagePreloaderOri from "../components/preloaders/FullPage"
+
 const FullPagePreloader = () => (
   <FullPagePreloaderOri style={{ display: "flex", opacity: 1 }} />
 )
-
-// loadable containers
 const ChangePassword = Loadable({
   loader: () => import("../containers/auth/ChangePassword"),
   loading: FullPagePreloader
@@ -88,6 +88,7 @@ export default [
           C,
           Careers,
           Settings,
+          Calendar,
           {
             path: "/login",
             fullscreen: true,
@@ -146,9 +147,7 @@ export default [
               if (typeof window != "undefined")
                 return (
                   <Redirect
-                    to={`/news/${props.match.params.encid}/${
-                      props.match.params.title
-                    }`}
+                    to={`/news/${props.match.params.encid}/${props.match.params.title}`}
                   />
                 )
               return null

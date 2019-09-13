@@ -95,7 +95,7 @@ class AddCompetitionFast extends Component {
     }
 
     return (
-      <div>
+      <React.Fragment>
         <Helmet title="Kirim kompetisi" description={desc} />
         <Subheader title="Kirim kompetisi" desc={desc} />
         <div style={{ marginTop: "20px" }} className="col-md-12">
@@ -199,7 +199,7 @@ class AddCompetitionFast extends Component {
             </div>
           </div>
         </div>
-      </div>
+      </React.Fragment>
     )
   }
 }
@@ -227,6 +227,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(
-  mapStateToProps,
-)(AddCompetitionFast)
+export default connect(mapStateToProps)(AddCompetitionFast)
