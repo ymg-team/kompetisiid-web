@@ -285,7 +285,7 @@ class CalendarBox extends React.Component {
       show_set_month: false,
       show_set_year: false,
       // collection data of competition with deadline in current month and current year
-      deadline_events: {},
+      deadline_events: {}
     }
   }
 
@@ -294,26 +294,26 @@ class CalendarBox extends React.Component {
     this.fetchData()
   }
 
-  componentDidUpdate = (nextprops) => {
-    this.onUpdateCompetition(nextprops.competition)
+  componentDidUpdate = prevprops => {
+    this.onUpdateCompetition(this.props.competition)
   }
 
   // memoize handle on update props competition
-  onUpdateCompetition = memoize((competition, date) => {
+  onUpdateCompetition = memoize(competition => {
     const { current_month, current_year } = this.state
     const filter = `calendar_${current_month}_${current_year}`
     const data = competition[filter] || {}
-    if(data.status && !data.is_loading) {
+    if (data.status && !data.is_loading) {
       // transform competition data to calendar events format
-      let deadline_events = {} 
-      data.data.map((n) => {
+      let { deadline_events } = this.state
+      data.data.map(n => {
         // get deadline date and month
         const deadline_date = new Date(parseInt(n.deadline_at * 1000))
-        
+
         const event_filter = `${deadline_date.getFullYear()}_${deadline_date.getMonth()}_${deadline_date.getDate()}`
-        
+
         // store events in array by filter
-        if(!deadline_events[event_filter]) deadline_events[event_filter] = []
+        if (!deadline_events[event_filter]) deadline_events[event_filter] = []
 
         deadline_events[event_filter].push({
           link: `/competition/${n.id}/regulations/${n.nospace_title}`,
@@ -323,13 +323,18 @@ class CalendarBox extends React.Component {
       })
 
       // set state of deadline events
-      this.setState({deadline_events})
+      this.setState({ deadline_events })
     }
   })
 
   dateGenerator() {
     // get starting day of the month
-    const { current_month, current_year, current_date, deadline_events } = this.state
+    const {
+      current_month,
+      current_year,
+      current_date,
+      deadline_events
+    } = this.state
     const today = new Date()
     const firstday = new Date(current_year, current_month).getDay()
     const daysInMonth = 32 - new Date(current_year, current_month, 32).getDate()
@@ -365,20 +370,22 @@ class CalendarBox extends React.Component {
 
               {/* events generator */}
               {/* lopping deadline competition */}
-              {
-                deadline_events[`${current_year}_${current_month}_${date}`] ?
-                  deadline_events[`${current_year}_${current_month}_${date}`].map((n, key) => (
-                    <a key={key} href={n.link} target="_blank" rel="noreferer noopener">
-                      <section
-                        className="task task--danger"
-                      >
+              {deadline_events[`${current_year}_${current_month}_${date}`]
+                ? deadline_events[
+                    `${current_year}_${current_month}_${date}`
+                  ].map((n, key) => (
+                    <a
+                      key={key}
+                      href={n.link}
+                      target="_blank"
+                      rel="noreferer noopener"
+                    >
+                      <section className="task task--danger">
                         Deadline {n.title}
                       </section>
                     </a>
-
                   ))
-                : null
-              }
+                : null}
               {/* end of lopping deadline competition */}
               {/* end of event generator */}
             </div>
@@ -410,7 +417,6 @@ class CalendarBox extends React.Component {
   }
 
   render() {
-    console.log("deadline events", this.state.deadline_events)
     return (
       <CalendarBoxStyled>
         <div className="calendar-container">
