@@ -9,8 +9,8 @@ const CalendarContainerStyled = Styled.div`
 `
 
 class CalendarContainer extends React.Component {
-  dateGenerator() {
-    return null
+  componentDidMount() {
+    window.scroll(0,0)
   }
 
   render() {
