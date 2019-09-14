@@ -4,6 +4,9 @@
 import React from "react"
 import Styled from "styled-components"
 import { Month } from "../../helpers/DateTime"
+import { fetchJelajah } from "../../containers/competition/actions"
+import { connect } from "react-redux"
+import memoize from "memoize-one"
 
 const Year = [2019, 2018, 2017, 2016, 2015, 2014]
 const Days = ["SENIN", "SELASA", "RABU", "KAMIS", "JUM'AT", "SABTU", "MINGGU"]
@@ -29,7 +32,7 @@ const CalendarBoxStyled = Styled.div`
     text-align: center;
     padding: 20px 0;
     background: linear-gradient(to bottom, rgb(250, 251, 253) 0%,rgba(255,255,255,0) 100%);
-    border-bottom: 1px solid rgba(58, 58, 58, 0.33);
+    border-bottom: 1px solid rgba(58, 58, 58, 0.14);
     
     h1 {
       margin: 0;
@@ -71,17 +74,17 @@ const CalendarBoxStyled = Styled.div`
 }
 
 .day {
-  border-bottom: 1px solid rgba(58, 58, 58, 0.33);
-  border-right: 1px solid rgba(58, 58, 58, 0.33);
+  border-bottom: 1px solid rgba(58, 58, 58, 0.14);
+  border-right: 1px solid rgba(58, 58, 58, 0.14);
   text-align: right;
-  padding: 14px 20px;
+  padding: 14px 20px 14px 10px;
   letter-spacing: 1px;
   font-size: 12px;
   box-sizing: border-box;
   color: #3a3a3a;
   position: relative;
-  pointer-events: none;
   z-index: 1;
+  overflow: auto;
 
   &:nth-of-type(7n + 7) {
     border-right: 0;
@@ -139,7 +142,7 @@ const CalendarBoxStyled = Styled.div`
     text-transform: uppercase;
     color: #3a3a3a;
     text-align: center;
-    border-bottom: 1px solid rgba(58, 58, 58, 0.33);
+    border-bottom: 1px solid rgba(58, 58, 58, 0.14);
     line-height: 50px;
     font-weight: 500;
   }
@@ -162,12 +165,19 @@ const CalendarBoxStyled = Styled.div`
 }
 
 .task {
+  // border-left-width: 3px;
+  // padding: 8px 12px;
+  // margin: 10px;
+  // border-left-style: solid;
+  // font-size: 14px;
+  // position: relative;
   border-left-width: 3px;
-  padding: 8px 12px;
-  margin: 10px;
+  padding: 0 5px;
+  margin-bottom: 10px;
   border-left-style: solid;
-  font-size: 14px;
+  font-size: 10px;
   position: relative;
+  text-align: left;
 
   &--warning {
     border-left-color: #fdb44d;
@@ -181,12 +191,11 @@ const CalendarBoxStyled = Styled.div`
 
   &--danger {
     border-left-color: #fa607e;
-    grid-column: 2 / span 3;
-    grid-row: 3;
-    margin-top: 15px;
-    background: rgba(#fdc5d0, 0.7);
-    align-self: end;
-    color: darken(#fa607e, 12%);
+    // border-left-color: #fa607e;
+    // margin-top: 15px;
+    // background: rgba(#fdc5d0, 0.7);
+    // align-self: end;
+    // color: darken(#fa607e, 12%);
   }
 
   &--info {
@@ -274,13 +283,53 @@ class CalendarBox extends React.Component {
       current_year: date.getFullYear(),
       current_month: date.getMonth(),
       show_set_month: false,
-      show_set_year: false
+      show_set_year: false,
+      // collection data of competition with deadline in current month and current year
+      deadline_events: {},
     }
   }
 
+  componentDidMount() {
+    // fetch competition data
+    this.fetchData()
+  }
+
+  componentDidUpdate = (nextprops) => {
+    this.onUpdateCompetition(nextprops.competition)
+  }
+
+  // memoize handle on update props competition
+  onUpdateCompetition = memoize((competition, date) => {
+    const { current_month, current_year } = this.state
+    const filter = `calendar_${current_month}_${current_year}`
+    const data = competition[filter] || {}
+    if(data.status && !data.is_loading) {
+      // transform competition data to calendar events format
+      let deadline_events = {} 
+      data.data.map((n) => {
+        // get deadline date and month
+        const deadline_date = new Date(parseInt(n.deadline_at * 1000))
+        
+        const event_filter = `${deadline_date.getFullYear()}_${deadline_date.getMonth()}_${deadline_date.getDate()}`
+        
+        // store events in array by filter
+        if(!deadline_events[event_filter]) deadline_events[event_filter] = []
+
+        deadline_events[event_filter].push({
+          link: `/competition/${n.id}/regulations/${n.nospace_title}`,
+          title: n.title,
+          type: "deadline"
+        })
+      })
+
+      // set state of deadline events
+      this.setState({deadline_events})
+    }
+  })
+
   dateGenerator() {
     // get starting day of the month
-    const { current_month, current_year, current_date } = this.state
+    const { current_month, current_year, current_date, deadline_events } = this.state
     const today = new Date()
     const firstday = new Date(current_year, current_month).getDay()
     const daysInMonth = 32 - new Date(current_year, current_month, 32).getDate()
@@ -294,10 +343,9 @@ class CalendarBox extends React.Component {
       // create rows
       // creating individual cells
       for (let m = 0; m < 7; m++) {
-        
         const key = `${n}_${m}`
 
-        if ((n === 0 && m < firstday)) {
+        if (n === 0 && m < firstday) {
           DateComponent.push(<div key={key} className="day day--disabled" />)
         } else if (date > daysInMonth) {
           break
@@ -314,6 +362,25 @@ class CalendarBox extends React.Component {
               }`}
             >
               <span className="day--date">{date}</span>
+
+              {/* events generator */}
+              {/* lopping deadline competition */}
+              {
+                deadline_events[`${current_year}_${current_month}_${date}`] ?
+                  deadline_events[`${current_year}_${current_month}_${date}`].map((n, key) => (
+                    <a key={key} href={n.link} target="_blank" rel="noreferer noopener">
+                      <section
+                        className="task task--danger"
+                      >
+                        Deadline {n.title}
+                      </section>
+                    </a>
+
+                  ))
+                : null
+              }
+              {/* end of lopping deadline competition */}
+              {/* end of event generator */}
             </div>
           )
           date++
@@ -325,7 +392,25 @@ class CalendarBox extends React.Component {
     return DateComponent
   }
 
+  fetchData() {
+    // generate request params
+    const { current_month, current_year } = this.state
+    const max_date = 32 - new Date(current_year, current_month, 32).getDate()
+    const params = {
+      min_deadline_date: `${current_year}-${current_month + 1}-1`,
+      max_deadline_date: `${current_year}-${current_month + 1}-${max_date}`,
+      limit: 100
+    }
+
+    const filter = `calendar_${current_month}_${current_year}`
+    const data = this.props.competition[filter] || {}
+    if (!data.status && !data.is_loading) {
+      this.props.dispatch(fetchJelajah(params, filter))
+    }
+  }
+
   render() {
+    console.log("deadline events", this.state.deadline_events)
     return (
       <CalendarBoxStyled>
         <div className="calendar-container">
@@ -355,10 +440,13 @@ class CalendarBox extends React.Component {
                       key={key}
                       href="javascript:;"
                       onClick={() => {
-                        this.setState({
-                          current_month: key,
-                          show_set_month: false
-                        })
+                        this.setState(
+                          {
+                            current_month: key,
+                            show_set_month: false
+                          },
+                          () => this.fetchData()
+                        )
                       }}
                     >
                       {n[1]}
@@ -389,10 +477,13 @@ class CalendarBox extends React.Component {
                     key={key}
                     href="javascript:;"
                     onClick={() => {
-                      this.setState({
-                        current_year: n,
-                        show_set_year: false
-                      })
+                      this.setState(
+                        {
+                          current_year: n,
+                          show_set_year: false
+                        },
+                        () => this.fetchData()
+                      )
                     }}
                   >
                     {n}
@@ -419,16 +510,21 @@ class CalendarBox extends React.Component {
             {/* end of date maping */}
 
             {/* events */}
-            <section className="task task--warning">Projects</section>
-            <section className="task task--danger">Design Sprint</section>
-            <section className="task task--primary">
+            {/* <section
+              style={{ gridColumn: "2 / span 3", gridRow: 3 }}
+              className="task task--danger"
+            >
+              Deadline kompetisi blog pertamina
+            </section> */}
+            {/* <section className="task task--warning">Deadline Kompetisi Blog Nintendo</section> */}
+            {/* <section className="task task--primary">
               Product Checkup 1
               <div className="task__detail">
                 <h2>Product Checkup 1</h2>
                 <p>15-17th November</p>
               </div>
-            </section>
-            <section className="task task--info">Product Checkup 2</section>
+            </section> */}
+            {/* <section className="task task--info">Product Checkup 2</section> */}
             {/* end of events */}
           </div>
         </div>
@@ -437,4 +533,10 @@ class CalendarBox extends React.Component {
   }
 }
 
-export default CalendarBox
+const mapStateToProps = state => {
+  return {
+    competition: state.Kompetisi.data
+  }
+}
+
+export default connect(mapStateToProps)(CalendarBox)

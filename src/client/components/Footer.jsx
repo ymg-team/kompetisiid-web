@@ -47,7 +47,7 @@ export default class Footer extends Component {
     return (
       <FooterWrapper>
         <FooterThanks className="col-md-12 footer-thanks align-center">
-          <br/>
+          <br />
           <h3>TERIMAKASIH</h3>
           <a
             href="https://www.domainesia.com/?aff=585"
@@ -134,10 +134,13 @@ export default class Footer extends Component {
                     <Link to="/add">Pasang kompetisi</Link>
                   </li>
                   <li>
-                    <Link to="/news">Berita</Link>
+                    <Link to="/news">Kabar kompetisi</Link>
                   </li>
                   <li>
                     <Link to="/browse">Jelajah kompetisi</Link>
+                  </li>
+                  <li>
+                    <Link to="/calendar">Kalender kompetisi</Link>
                   </li>
                   <li>
                     <Link to="/categories">Kategori</Link>
