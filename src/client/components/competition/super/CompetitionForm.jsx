@@ -28,7 +28,8 @@ class CompetitionForm extends React.Component {
 
   submitHandler = (status = "posted") => {
     let formdata = {
-      title: this.state.title,
+      // remove all "/" using replace 
+      title: this.state.title.replace(/\//g, " "),
       description: this.state.description,
       prize_total: this.state.prize_total,
       prize_description: this.state.prize_description,
