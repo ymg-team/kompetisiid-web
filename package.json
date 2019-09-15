@@ -51,6 +51,7 @@
     "express": "^4.16.3",
     "formidable": "1.1.1",
     "fs": "0.0.1-security",
+    "html-metadata": "^1.7.0",
     "html-to-draftjs": "^1.4.0",
     "memoize-one": "^4.0.0",
     "npm": "^5.7.1",

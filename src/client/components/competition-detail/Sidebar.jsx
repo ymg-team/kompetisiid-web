@@ -17,7 +17,7 @@ export default props => {
           <small className="text-muted">total hadiah</small>
         </h3>
         <h3 className="total-view">
-          {data.views}
+          {data.stats.views}
           <small className="text-muted">kunjungan</small>
         </h3>
         <h3 className="total-view">

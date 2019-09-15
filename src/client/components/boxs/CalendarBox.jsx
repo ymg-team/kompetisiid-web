@@ -31,7 +31,6 @@ const CalendarBoxStyled = Styled.div`
   &-header {
     text-align: center;
     padding: 20px 0;
-    background: linear-gradient(to bottom, rgb(250, 251, 253) 0%,rgba(255,255,255,0) 100%);
     border-bottom: 1px solid rgba(58, 58, 58, 0.14);
     
     h1 {

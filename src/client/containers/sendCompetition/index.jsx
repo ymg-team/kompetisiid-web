@@ -30,6 +30,7 @@ class AddCompetitionFast extends Component {
 
   componentDidMount() {
     addScript()
+
     setTimeout(() => {
       renderRecaptcha()
       this.setState({ loading: false })
@@ -45,6 +46,9 @@ class AddCompetitionFast extends Component {
   componentWillUnmount() {
     alert(false)
     if (RecaptchaContainer) grecaptcha.reset(RecaptchaContainer)
+  }
+
+  metaGenerator(link) {
   }
 
   handleSubmit() {
@@ -128,6 +132,23 @@ class AddCompetitionFast extends Component {
                   type="email"
                 />
                 <InputText
+                  id="txt_link_kompetisi"
+                  label="link kompetisi"
+                  note="Dengan mengisi link, maka judul dan poster kompetisi akan otomatis terisi"
+                  name="input_link"
+                  onInput={e => {
+                    if (e.target.value) {
+                      this.metaGenerator(e.target.value)
+                    }
+                  }}
+                  setState={(n, cb) => this.setState(n, cb)}
+                  validate={this.state.input_link_validate || {}}
+                  value={this.state.input_link || ""}
+                  required={true}
+                  max={300}
+                  type="link"
+                />
+                <InputText
                   label="judul kompetisi"
                   name="input_title"
                   setState={(n, cb) => this.setState(n, cb)}
@@ -135,16 +156,6 @@ class AddCompetitionFast extends Component {
                   value={this.state.input_title || ""}
                   required={true}
                   max={300}
-                />
-                <InputText
-                  label="link sumber"
-                  name="input_link"
-                  setState={(n, cb) => this.setState(n, cb)}
-                  validate={this.state.input_link_validate || {}}
-                  value={this.state.input_link || ""}
-                  required={true}
-                  max={300}
-                  type="link"
                 />
                 <InputFile
                   label="poster"

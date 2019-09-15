@@ -58,6 +58,7 @@ class EditorKI extends React.Component {
             wrapperClassName="ki-editor-wrapper"
             editorClassName="ki-editor"
             onEditorStateChange={this.onEditorStateChange}
+            stripPastedStyles
           />
           : <Loading />
         }

@@ -137,7 +137,9 @@ class Index extends Component {
     return (
       <React.Fragment>
         <Helmet {...helmetdata} />
+        
         <div className="competition-detail">
+
           {/* detail box competition */}
           <CompetitionDetailBox data={detail[encid].data}/>
 
