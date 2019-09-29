@@ -199,12 +199,12 @@ const CalendarBoxStyled = Styled.div`
 
   &--info {
     border-left-color: #4786ff;
-    grid-column: 6 / span 2;
-    grid-row: 5;
-    margin-top: 15px;
-    background: rgba(#dae7ff, 0.7);
-    align-self: end;
-    color: darken(#4786ff, 12%);
+    // grid-column: 6 / span 2;
+    // grid-row: 5;
+    // margin-top: 15px;
+    // background: rgba(#dae7ff, 0.7);
+    // align-self: end;
+    // color: darken(#4786ff, 12%);
   }
 
   &--primary {
@@ -284,7 +284,9 @@ class CalendarBox extends React.Component {
       show_set_month: false,
       show_set_year: false,
       // collection data of competition with deadline in current month and current year
-      deadline_events: {}
+      deadline_events: {},
+      // collection data of competition with announcement in current month and current year
+      announcement_events: {},
     }
   }
 
@@ -300,12 +302,43 @@ class CalendarBox extends React.Component {
   // memoize handle on update props competition
   onUpdateCompetition = memoize(competition => {
     const { current_month, current_year } = this.state
-    const filter = `calendar_${current_month}_${current_year}`
-    const data = competition[filter] || {}
-    if (data.status && !data.is_loading) {
+    const filterDeadline = `deadline_${current_month}_${current_year}`
+    const deadlineData = competition[filterDeadline] || {}
+    const announcementData = competition[filterDeadline] || {}
+    if (deadlineData.status && !deadlineData.is_loading) {
       // transform competition data to calendar events format
-      let { deadline_events } = this.state
-      data.data.map(n => {
+      let { deadline_events, announcement_events } = this.state
+
+      announcementData.data.map(n => {
+        // get deadline date and month
+        const announcement_date = new Date(parseInt(n.announcement_at * 1000))
+
+        const event_filter = `${announcement_date.getFullYear()}_${announcement_date.getMonth()}_${announcement_date.getDate()}`
+
+        // store events in array by filter
+        if (!announcement_events[event_filter]) announcement_events[event_filter] = []
+        
+        let found = false 
+
+        for(let i =0;i < announcement_events[event_filter].length;i++ ) {
+          if(announcement_events[event_filter][i].id_competition === n.id) {
+            found = true 
+            break
+          }
+        }
+
+        if(!found) {
+          announcement_events[event_filter].push({
+            id_competition: n.id,
+            link: `/competition/${n.id}/regulations/${n.nospace_title}`,
+            title: n.title,
+            type: "announcement"
+          })
+        }
+
+      })
+
+      deadlineData.data.map(n => {
         // get deadline date and month
         const deadline_date = new Date(parseInt(n.deadline_at * 1000))
 
@@ -313,16 +346,29 @@ class CalendarBox extends React.Component {
 
         // store events in array by filter
         if (!deadline_events[event_filter]) deadline_events[event_filter] = []
+        
+        let found = false 
 
-        deadline_events[event_filter].push({
-          link: `/competition/${n.id}/regulations/${n.nospace_title}`,
-          title: n.title,
-          type: "deadline"
-        })
+        for(let i =0;i < deadline_events[event_filter].length;i++ ) {
+          if(deadline_events[event_filter][i].id_competition === n.id) {
+            found = true 
+            break
+          }
+        }
+
+        if(!found) {
+          deadline_events[event_filter].push({
+            id_competition: n.id,
+            link: `/competition/${n.id}/regulations/${n.nospace_title}`,
+            title: n.title,
+            type: "deadline"
+          })
+        }
+
       })
 
       // set state of deadline events
-      this.setState({ deadline_events })
+      this.setState({ deadline_events, announcement_events })
     }
   })
 
@@ -332,7 +378,8 @@ class CalendarBox extends React.Component {
       current_month,
       current_year,
       current_date,
-      deadline_events
+      deadline_events,
+      announcement_events
     } = this.state
     const today = new Date()
     const firstday = new Date(current_year, current_month).getDay()
@@ -368,6 +415,7 @@ class CalendarBox extends React.Component {
               <span className="day--date">{date}</span>
 
               {/* events generator */}
+
               {/* lopping deadline competition */}
               {deadline_events[`${current_year}_${current_month}_${date}`]
                 ? deadline_events[
@@ -386,6 +434,26 @@ class CalendarBox extends React.Component {
                   ))
                 : null}
               {/* end of lopping deadline competition */}
+
+              {/* lopping announcement competition */}
+              {announcement_events[`${current_year}_${current_month}_${date}`]
+                ? announcement_events[
+                    `${current_year}_${current_month}_${date}`
+                  ].map((n, key) => (
+                    <a
+                      key={key}
+                      href={n.link}
+                      target="_blank"
+                      rel="noreferer noopener"
+                    >
+                      <section className="task task--info">
+                        Pengumuman {n.title}
+                      </section>
+                    </a>
+                  ))
+                : null}
+              {/* end of lopping announcement competition */}
+
               {/* end of event generator */}
             </div>
           )
@@ -402,16 +470,28 @@ class CalendarBox extends React.Component {
     // generate request params
     const { current_month, current_year } = this.state
     const max_date = 32 - new Date(current_year, current_month, 32).getDate()
-    const params = {
+    const paramsDeadline = {
       min_deadline_date: `${current_year}-${current_month + 1}-1`,
       max_deadline_date: `${current_year}-${current_month + 1}-${max_date}`,
       limit: 100
     }
+    const paramsAnnouncement = {
+      min_announcement_date: `${current_year}-${current_month + 1}-1`,
+      max_announcement_date: `${current_year}-${current_month + 1}-${max_date}`,
+      limit: 100
+    }
 
-    const filter = `calendar_${current_month}_${current_year}`
-    const data = this.props.competition[filter] || {}
-    if (!data.status && !data.is_loading) {
-      this.props.dispatch(fetchJelajah(params, filter))
+    const filterDeadline = `deadline_${current_month}_${current_year}`
+    const filterAnnouncement = `announcement_${current_month}_${current_year}`
+    const deadlineData = this.props.competition[filterDeadline] || {}
+    const announcementData = this.props.competition[filterAnnouncement] || {}
+    
+    // request for first time
+    if (!deadlineData.status && !deadlineData.is_loading) {
+      this.props.dispatch(fetchJelajah(paramsDeadline, filterDeadline))
+    }
+    if (!announcementData.status && !announcementData.is_loading) {
+      this.props.dispatch(fetchJelajah(paramsAnnouncement, filterAnnouncement))
     }
   }
 
