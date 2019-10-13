@@ -202,6 +202,7 @@ class Index extends Component {
                     </div>
                   ) : null}
                   {/*end of alert*/}
+                  
                   <div className="m-20"/>
 
                   <div className="row">
