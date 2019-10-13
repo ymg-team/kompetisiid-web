@@ -1,5 +1,4 @@
 import React from "react"
-// import Loadable from "react-loadable"
 import { eventFire } from "../../helpers/DomEvents"
 import { getCompetitionStatus } from "../../helpers/DateTime"
 import copy from "copy-to-clipboard"
@@ -125,8 +124,7 @@ const CompetitionDetailBox = props => {
                 data-mediabox="my-gallery-name"
                 data-title="Sample image"
                 alt={data.title}
-                className="poster image-popup"
-                // className="poster image-modal-target"
+                className="poster image-modal-target"
                 src={data.poster.original}
               />
             </div>

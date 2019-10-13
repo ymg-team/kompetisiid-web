@@ -168,6 +168,16 @@ export default class Index extends Component {
   }
 
   render() {
+
+    // get all image inside .competition-regulator
+    setTimeout(() => {
+        const ImgEl = document.querySelectorAll(".news-detail .content img")
+        // ref: https://developer.mozilla.org/en-US/docs/Web/API/NodeList
+        for(let n of ImgEl) {
+          n.className = "image-modal-target"
+        }
+    }, 1000)
+
     const { encid, title } = this.props.match.params
     const { detail } = this.props.berita
     let helmetdata = {
