@@ -1,3 +1,26 @@
+export function competitionSubscribeAction(req, res, next) {
+  req.reqdata = {
+    version: "v42",
+    method: "post",
+    params: {
+      competition_id: req.body.competition_id
+    },
+    url: "/v2/competition-subscription"
+  }
+
+  next()
+}
+
+export function competitionSubscribeList(req, res, next) {
+  req.reqdata = {
+    version: "v42",
+    method: "get",
+    url: "/v2/competition-subscription"
+  }
+
+  next()
+}
+
 /**
  * controller to add competition announcement
  */

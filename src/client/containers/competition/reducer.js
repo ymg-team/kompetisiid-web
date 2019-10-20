@@ -7,7 +7,8 @@ import {
   FETCH_COMPETITIONS,
   FETCH_MORE_COMPETITIONS,
   DELETE_ANNOUNCEMENT,
-  ADD_ANNOUNCEMENT
+  ADD_ANNOUNCEMENT,
+  SUBSCRIBE_COMPETITION
 } from "./actions"
 import { alert } from "../../components/Alert"
 import { today } from "../../helpers/DateTime"
@@ -36,6 +37,17 @@ function data(state = {}, action) {
 
 function detail(state = {}, action) {
   switch (action.type) {
+    // action on scubscribe competition
+    case SUBSCRIBE_COMPETITION:
+      return Mutations.updateDetailByFilter(state, action, n => {
+        // current like action description
+        if (action.json && action.json.status == 201) {
+          // just toggle
+          n.data.is_subscribed = !n.data.is_subscribed
+          if(!n.data.is_subscribed) alert(true, "Kamu telah batal subscribe kompetisi", "warning")
+        }
+      })
+    
     case ADD_ANNOUNCEMENT:
       return Mutations.updateDetailByFilter(state, action, n => {
         if (action.json && action.json.message) {
