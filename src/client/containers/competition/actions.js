@@ -14,6 +14,25 @@ export const CREATE_COMPETITION = "CREATE_COMPETITION"
 export const LIKE_COMPETITION = "LIKE_COMPETITION"
 export const DELETE_ANNOUNCEMENT = "DELETE_ANNOUNCEMENT"
 export const ADD_ANNOUNCEMENT = "ADD_ANNOUNCEMENT"
+export const SUBSCRIBE_COMPETITION = "SUBSCRIBE_COMPETITION"
+
+/**
+ * @description function to subscribe / unsubscribe competition
+ * @param {number} competition_id  , id of competition
+ */
+export function subscribeCompetition(competition_id) {
+  return {
+    [CALL_API]: {
+      method: "post",
+      type: SUBSCRIBE_COMPETITION,
+      filter: competition_id,
+      url: `/api/kompetisi/competition-subscription/${sealMiddleware.generateSeal()}`,
+      params: {
+        competition_id
+      }
+    }
+  }
+}
 
 /**
  * @description function to add competitoin announcement 

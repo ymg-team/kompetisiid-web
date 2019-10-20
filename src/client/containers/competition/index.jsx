@@ -63,7 +63,6 @@ class Index extends Component {
     removeEventListener("scroll", this.handleScroll, true)
   }
 
-
   handleScroll(e) {
     // console.log('scrolling in competition detail...')
     const afterScroll =
@@ -88,9 +87,7 @@ class Index extends Component {
     const { active_tab } = this.props.route
     let NextPrevProps = {},
       helmetdata = {
-        script: [
-
-        ]
+        script: []
       }
 
     // generate helmet data
@@ -99,13 +96,11 @@ class Index extends Component {
         title: toCamelCase(
           `${tab[this.props.route.active_tab - 1].name + " " || ""}${
             detail[encid].data.title
-            }`
+          }`
         ),
         description: detail[encid].data.sort,
         image: detail[encid].data.poster.original,
-        url: `${Host[process.env.NODE_ENV].front}/competition/${
-          detail[encid].data.id
-          }/regulations/${detail[encid].data.nospace_title}`
+        url: `${Host[process.env.NODE_ENV].front}/competition/${detail[encid].data.id}/regulations/${detail[encid].data.nospace_title}`
       })
 
       // add jsonld
@@ -118,18 +113,14 @@ class Index extends Component {
       if (Object.keys(detail[encid].next).length > 0) {
         NextPrevProps.next = {
           title: detail[encid].next.title,
-          link: `/competition/${detail[encid].next.id}/regulations/${
-            detail[encid].next.nospace_title
-            }`
+          link: `/competition/${detail[encid].next.id}/regulations/${detail[encid].next.nospace_title}`
         }
       }
 
       if (Object.keys(detail[encid].prev).length > 0) {
         NextPrevProps.prev = {
           title: detail[encid].prev.title,
-          link: `/competition/${detail[encid].prev.id}/regulations/${
-            detail[encid].prev.nospace_title
-            }`
+          link: `/competition/${detail[encid].prev.id}/regulations/${detail[encid].prev.nospace_title}`
         }
       }
     }
@@ -137,13 +128,15 @@ class Index extends Component {
     return (
       <React.Fragment>
         <Helmet {...helmetdata} />
-        
+
         <div className="competition-detail">
-
           {/* detail box competition */}
-          <CompetitionDetailBox data={detail[encid].data}/>
+          <CompetitionDetailBox
+            dispatch={this.props.dispatch}
+            data={detail[encid].data}
+          />
 
-          <div className="m-20"/>
+          <div className="m-20" />
 
           {/* competition tab navigation */}
           <Tab
@@ -202,8 +195,8 @@ class Index extends Component {
                     </div>
                   ) : null}
                   {/*end of alert*/}
-                  
-                  <div className="m-20"/>
+
+                  <div className="m-20" />
 
                   <div className="row">
                     <div className={active_tab == 1 ? "col-md-8" : "col-md-12"}>
@@ -242,7 +235,7 @@ class Index extends Component {
                               />
                             )
                           case 4:
-                            return <Discussions link={helmetdata.url}/>
+                            return <Discussions link={helmetdata.url} />
                           case 5:
                             return (
                               <Contacts
@@ -285,7 +278,7 @@ class Index extends Component {
           related[`related_${encid}`].status &&
           related[`related_${encid}`].status === 200 ? (
             <div className="col-md-12 bg-gray-soft">
-              <div className="m-15 row"/>
+              <div className="m-15 row" />
               <CompetitionBox
                 subtitle={false}
                 total={4}
@@ -295,7 +288,6 @@ class Index extends Component {
             </div>
           ) : null}
           {/* end of related competition */}
-
         </div>
       </React.Fragment>
     )

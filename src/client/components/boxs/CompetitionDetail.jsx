@@ -12,6 +12,9 @@ import BtnJoin from "../buttons/BtnJoin"
 import { alert } from "../Alert"
 import BtnLike from "../buttons/BtnLikeCompetition"
 
+// actions
+import { subscribeCompetition } from "../../containers/competition/actions"
+
 const StyledCalendar = Styled.div`
   a.calendar-item {
     &:first-child {
@@ -193,16 +196,12 @@ const CompetitionDetailBox = props => {
                     <li>
                       <a
                         onClick={() =>
-                          alert(
-                            true,
-                            "Sistem dalam tahap pengembangan",
-                            "warning"
-                          )
+                          props.dispatch(subscribeCompetition(data.id))
                         }
                         href="javascript:;"
-                        title="simpan ke akun"
+                        title="subscribe kompetisi"
                       >
-                        Simpan Kompetisi
+                        {data.is_subscribed ? "Unsubscribe Kompetisi" : "subscribe Kompetisi"}
                       </a>
                     </li>
                     <li>
