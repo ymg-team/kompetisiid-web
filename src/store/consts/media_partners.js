@@ -11,7 +11,7 @@ export default [
     title: 'Kompetisi Model United Nations di Economix : Global Economic Challenges 2019',
     url: 'https://mymun.com/muns/economixmun-2019',
     poster: {
-      landscape: 'https://res.cloudinary.com/dhjkktmal/image/upload/c_scale,w_500/v1571752488/kompetisi-id/media-partners/2019/Ads_Halaman_Depan.jpg',
+      landscape: 'https://res.cloudinary.com/dhjkktmal/image/upload/c_scale,w_800/v1571752488/kompetisi-id/media-partners/2019/Ads_Halaman_Depan.jpg',
       square: 'https://media.kompetisi.id/poster/yussan/2019/Ads_Halaman_Detail.jpg'
     }
   }
