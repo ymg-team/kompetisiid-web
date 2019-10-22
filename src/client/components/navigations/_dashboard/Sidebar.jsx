@@ -62,6 +62,17 @@ export default props => {
           </li>
         ) : null}
 
+        {/* subscribed competition */}
+        <li>
+          <Link to="/dashboard/competition/subscribed">
+            Kompetisi Disubscribe{" "}
+            {/* <span className="label label-blue">
+              {stats.competition.posted}
+            </span> */}
+          </Link>
+        </li>
+        {/* end of subscribec competition */}
+
         {/* link to rejected competition */}
         {stats.competition && stats.competition.rejected ? (
           <li>

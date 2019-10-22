@@ -110,6 +110,25 @@ export function getJelajah(req, res, next) {
 }
 
 /**
+ * @description function to get subscribed competition
+ * @param {*} req 
+ * @param {*} res 
+ * @param {*} next 
+ */
+export function getSubscribed(req, res, next) {
+  let { params } = req
+  params.query = req.query
+  req.reqdata = {
+    version: "v42",
+    method: "get",
+    params,
+    url: "/v2/competition-subscription"
+  }
+
+  next()
+}
+
+/**
  *  function to get related competition
  *  @method GET
  *  @param {string} req.params.id id of competition
