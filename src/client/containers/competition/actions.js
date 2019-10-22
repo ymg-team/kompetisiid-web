@@ -142,7 +142,7 @@ export function fetchSubscribed(params = {}, filter) {
   const url = `/api/jelajah/subscribed/${sealMiddleware.generateSeal()}`
   return {
     [CALL_API]: {
-      type: FETCH_COMPETITIONS,
+      type: params.lastid ? FETCH_MORE_COMPETITIONS : FETCH_COMPETITIONS,
       filter,
       method: "get",
       url: `${url}?${objToQuery(params)}`
@@ -150,22 +150,22 @@ export function fetchSubscribed(params = {}, filter) {
   }
 }
 
-/**
- * 
- * @param {*} params 
- * @param {*} filter 
- */
-export function fetchSubscribedMore(params = {}, filter) {
-  const url = `/api/jelajah/subscribed/${sealMiddleware.generateSeal()}`
-  return {
-    [CALL_API]: {
-      type: FETCH_MORE_COMPETITIONS,
-      filter,
-      method: "get",
-      url: `${url}?${objToQuery(params)}`
-    }
-  }
-}
+// /**
+//  * 
+//  * @param {*} params 
+//  * @param {*} filter 
+//  */
+// export function fetchSubscribedMore(params = {}, filter) {
+//   const url = `/api/jelajah/subscribed/${sealMiddleware.generateSeal()}`
+//   return {
+//     [CALL_API]: {
+//       type: FETCH_MORE_COMPETITIONS,
+//       filter,
+//       method: "get",
+//       url: `${url}?${objToQuery(params)}`
+//     }
+//   }
+// }
 
 export function fetchLikedCompetition(params = {}, filter) {
   return {

@@ -5,7 +5,10 @@ import Loader from "../../../components/preloaders/GlobalLoader"
 import Helmet from "../../../components/Helmet"
 import Button from "../../../components/buttons/index"
 
-import { fetchLikedCompetition } from "../../competition/actions"
+import {
+  fetchLikedCompetition,
+  fetchSubscribed,
+} from "../../competition/actions"
 import { connect } from "react-redux"
 import { toCamelCase } from "string-manager"
 
@@ -22,8 +25,8 @@ const Meta = {
     desc: "Berikut adalah daftar kompetisi yang kamu ikuti (semoga menang ya!)"
   },
   subscribed: {
-    title: "Kompetisi Berlangganan",
-    desc: "Berikut adalah daftar kompetisi langgananmu"
+    title: "Kompetisi Disubscribe",
+    desc: "Berikut adalah daftar kompetisi yang kamu subscribe"
   }
 }
 
@@ -37,15 +40,30 @@ class MyCompetition extends React.Component {
   }
 
   fetchData(props = this.props) {
+    const { type } = this.props.route
+
     Filter = generateFilter(props)
     Params = generateParams(props)
-    this.props.dispatch(fetchLikedCompetition(Params, Filter))
+
+    switch (type) {
+      case "liked":
+        return this.props.dispatch(fetchLikedCompetition(Params, Filter))
+      case "subscribed":
+        return this.props.dispatch(fetchSubscribed(Params, Filter))
+    }
   }
 
   fetchMoreData() {
+    const { type } = this.props.route
     const competition = this.props.data[Filter]
     Params.lastid = competition.data[competition.data.length - 1].id
-    this.props.dispatch(fetchLikedCompetition(Params, Filter))
+
+    switch (type) {
+      case "liked":
+        return this.props.dispatch(fetchLikedCompetition(Params, Filter))
+      case "subscribed":
+        return this.props.dispatch(fetchSubscribed(Params, Filter))
+    }
   }
 
   UNSAFE_componentWillReceiveProps(np) {
