@@ -6,7 +6,7 @@ import Loader from "../../../components/preloaders/GlobalLoader"
 import Helmet from "../../../components/Helmet"
 import Button from "../../../components/buttons/index"
 
-import { fetchJelajah, fetchJelajahMore, fetchSubscribed, fetchSubscribedMore } from "../../competition/actions"
+import { fetchJelajah, fetchJelajahMore } from "../../competition/actions"
 import { connect } from "react-redux"
 import { toCamelCase } from "string-manager"
 
@@ -23,31 +23,18 @@ class MyCompetition extends React.Component {
   }
 
   fetchData() {
-    const { tab_active } = this.props.route 
-    
     Filter = generateFilter(this.props)
     Params = generateParams(this.props)
 
-    if (tab_active == 5) {
-       this.props.dispatch(fetchSubscribed(Params, Filter))
-    } else {
-      this.props.dispatch(fetchJelajah(Params, Filter))
-    }
+    this.props.dispatch(fetchJelajah(Params, Filter))
   }
 
   fetchMoreData() {
-    const { tab_active } = this.props.route 
     const competition = this.props.data[Filter]
-    
+
     Params.lastid = competition.data[competition.data.length - 1].id
 
-    if (tab_active == 5) {
-      // fetch data of subscribed competition
-      this.props.dispatch(fetchSubscribedMore(Params, Filter))
-    } else {
-      this.props.dispatch(fetchJelajahMore(Params, Filter))
-    }
-
+    this.props.dispatch(fetchJelajahMore(Params, Filter))
   }
 
   UNSAFE_componentWillReceiveProps(np) {
@@ -135,12 +122,6 @@ class MyCompetition extends React.Component {
               ? stats.competition.rejected
               : 0,
           target: "/dashboard/competition/rejected"
-        },
-        {
-          text: "subscribe",
-          is_active: tab_active == 5,
-          count: 0,
-          target: "/super/competition/subscribed"
         }
       ]
     }
@@ -155,7 +136,7 @@ class MyCompetition extends React.Component {
           text="Berikut adalah kompetisi yang telah anda pasang di Kompetisi ID."
           noBorder
         />
-        
+
         {/* tab navigations */}
         <Tab tabs={tabcontent} />
 
@@ -177,13 +158,7 @@ class MyCompetition extends React.Component {
             ) : null}
             {competitions.data
               ? competitions.data.map((n, key) => {
-                  return (
-                    <CompetitionCard
-                      type={type}
-                      key={key}
-                      n={n}
-                    />
-                  )
+                  return <CompetitionCard type={type} key={key} n={n} />
                 })
               : null}
             {competitions.status != 200 ? (

@@ -22,6 +22,7 @@ export default props => {
           {" "}
           <strong>Kompetisi Saya</strong>
         </li>
+
         <li>
           <Link to="/dashboard/competition/create">
             <i className="fas fa-plus" /> Kirim Kompetisi
@@ -62,17 +63,6 @@ export default props => {
           </li>
         ) : null}
 
-        {/* subscribed competition */}
-        <li>
-          <Link to="/dashboard/competition/subscribed">
-            Kompetisi Disubscribe{" "}
-            {/* <span className="label label-blue">
-              {stats.competition.posted}
-            </span> */}
-          </Link>
-        </li>
-        {/* end of subscribec competition */}
-
         {/* link to rejected competition */}
         {stats.competition && stats.competition.rejected ? (
           <li>
@@ -91,9 +81,22 @@ export default props => {
           <strong>Kompetisi Lainnya</strong>
         </li>
 
+        {/* subscribed competition */}
+        <li>
+          <Link to="/dashboard/competition/subscribed">
+            Kompetisi Disubscribe{" "}
+            {/* <span className="label label-blue">
+              {stats.competition.subscribed}
+            </span> */}
+          </Link>
+        </li>
+        {/* end of subscribec competition */}
+
+        {/* liked competition */}
         <li>
           <Link to="/dashboard/competition/liked">Kompetisi Disukai</Link>
         </li>
+        {/* end of liked competition */}
 
         {/* end of competition */}
 

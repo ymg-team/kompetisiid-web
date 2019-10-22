@@ -114,15 +114,13 @@ export default {
      {
       path: "/dashboard/competition/subscribed",
       exact: true,
-      type: "dashboard",
-      tab_active: 5,
-      component: DashboardCompetitions
+      type: "subscribed",
+      component: DashboardOtherCompetitions
     },
     // end of competitions
     {
       path: "/dashboard/competition/liked",
       exact: true,
-      type: "dashboard",
       type: "liked",
       component: DashboardOtherCompetitions
     },
