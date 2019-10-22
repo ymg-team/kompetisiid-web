@@ -6,7 +6,7 @@ import Loader from "../../../components/preloaders/GlobalLoader"
 import Helmet from "../../../components/Helmet"
 import Button from "../../../components/buttons/index"
 
-import { fetchJelajah, fetchJelajahMore } from "../../competition/actions"
+import { fetchJelajah, fetchJelajahMore, fetchSubscribed, fetchSubscribedMore } from "../../competition/actions"
 import { connect } from "react-redux"
 import { toCamelCase } from "string-manager"
 
@@ -23,15 +23,31 @@ class MyCompetition extends React.Component {
   }
 
   fetchData() {
+    const { tab_active } = this.props.route 
+    
     Filter = generateFilter(this.props)
     Params = generateParams(this.props)
-    this.props.dispatch(fetchJelajah(Params, Filter))
+
+    if (tab_active == 5) {
+       this.props.dispatch(fetchSubscribed(Params, Filter))
+    } else {
+      this.props.dispatch(fetchJelajah(Params, Filter))
+    }
   }
 
   fetchMoreData() {
+    const { tab_active } = this.props.route 
     const competition = this.props.data[Filter]
+    
     Params.lastid = competition.data[competition.data.length - 1].id
-    this.props.dispatch(fetchJelajahMore(Params, Filter))
+
+    if (tab_active == 5) {
+      // fetch data of subscribed competition
+      this.props.dispatch(fetchSubscribedMore(Params, Filter))
+    } else {
+      this.props.dispatch(fetchJelajahMore(Params, Filter))
+    }
+
   }
 
   UNSAFE_componentWillReceiveProps(np) {
@@ -119,6 +135,12 @@ class MyCompetition extends React.Component {
               ? stats.competition.rejected
               : 0,
           target: "/dashboard/competition/rejected"
+        },
+        {
+          text: "subscribe",
+          is_active: tab_active == 5,
+          count: 0,
+          target: "/super/competition/subscribed"
         }
       ]
     }

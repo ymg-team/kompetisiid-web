@@ -35,15 +35,17 @@ export function subscribeCompetition(competition_id) {
 }
 
 /**
- * @description function to add competitoin announcement 
- * @param {string} params.announcement  
- * @param {competition_id} params.competition_id  
+ * @description function to add competition announcement
+ * @param {string} params.announcement
+ * @param {competition_id} params.competition_id
  */
-export function addAnnouncement(params={}) {
+export function addAnnouncement(params = {}) {
   return {
     [CALL_API]: {
       method: "post",
-      url: `/api/kompetisi/announcement/${params.competition_id}/${sealMiddleware.generateSeal()}`,
+      url: `/api/kompetisi/announcement/${
+        params.competition_id
+      }/${sealMiddleware.generateSeal()}`,
       filter: params.competition_id,
       type: ADD_ANNOUNCEMENT,
       params: {
@@ -56,14 +58,16 @@ export function addAnnouncement(params={}) {
 
 /**
  * @description function to delete competition announcement by key and competition id
- * @param {number} params.announcement_key 
- * @param {number} params.competition_id 
+ * @param {number} params.announcement_key
+ * @param {number} params.competition_id
  */
-export function deleteAnnouncement(params={}) {
+export function deleteAnnouncement(params = {}) {
   return {
     [CALL_API]: {
       method: "delete",
-      url: `/api/kompetisi/announcement/${params.competition_id}/${sealMiddleware.generateSeal()}`,
+      url: `/api/kompetisi/announcement/${
+        params.competition_id
+      }/${sealMiddleware.generateSeal()}`,
       filter: params.competition_id,
       type: DELETE_ANNOUNCEMENT,
       params: {
@@ -117,6 +121,52 @@ export function fetchJelajah(params = {}, filter) {
   }
 }
 
+export function fetchJelajahMore(params, filter) {
+  const url = `/api/jelajah/${sealMiddleware.generateSeal()}`
+  return {
+    [CALL_API]: {
+      type: FETCH_MORE_COMPETITIONS,
+      filter,
+      method: "get",
+      url: `${url}?${objToQuery(params)}`
+    }
+  }
+}
+
+/**
+ * @description function to fetch subscribed competition
+ * @param {*} params
+ * @param {*} filter
+ */
+export function fetchSubscribed(params = {}, filter) {
+  const url = `/api/jelajah/subscribed/${sealMiddleware.generateSeal()}`
+  return {
+    [CALL_API]: {
+      type: FETCH_COMPETITIONS,
+      filter,
+      method: "get",
+      url: `${url}?${objToQuery(params)}`
+    }
+  }
+}
+
+/**
+ * 
+ * @param {*} params 
+ * @param {*} filter 
+ */
+export function fetchSubscribedMore(params = {}, filter) {
+  const url = `/api/jelajah/subscribed/${sealMiddleware.generateSeal()}`
+  return {
+    [CALL_API]: {
+      type: FETCH_MORE_COMPETITIONS,
+      filter,
+      method: "get",
+      url: `${url}?${objToQuery(params)}`
+    }
+  }
+}
+
 export function fetchLikedCompetition(params = {}, filter) {
   return {
     [CALL_API]: {
@@ -126,18 +176,6 @@ export function fetchLikedCompetition(params = {}, filter) {
       url: `/api/kompetisi/liked/${sealMiddleware.generateSeal()}?${objToQuery(
         params
       )}`
-    }
-  }
-}
-
-export function fetchJelajahMore(params, filter) {
-  const url = `/api/jelajah/${sealMiddleware.generateSeal()}`
-  return {
-    [CALL_API]: {
-      type: FETCH_MORE_COMPETITIONS,
-      filter,
-      method: "get",
-      url: `${url}?${objToQuery(params)}`
     }
   }
 }
