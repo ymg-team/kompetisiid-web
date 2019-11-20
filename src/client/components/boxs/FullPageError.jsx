@@ -2,8 +2,7 @@ import React from "react"
 import { Fullscreen } from "../Fullscreen"
 import { Link } from "react-router-dom"
 
-const FullPageError = props => {
-  const { message, code } = props
+const FullPageError = ({ message, code }) => {
   return (
     <Fullscreen className="error">
       <div className="error-box">
