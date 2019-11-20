@@ -228,7 +228,7 @@ class Navbar extends Component {
               </SearchStyled>
             ) : (
               <React.Fragment>
-                <div className="col-xs-6">
+                <div style={{padding: 0}} className="col-xs-6">
                   <ul className="inline-list inline-list-left">
                     <li style={{ padding: 0 }}>
                       <Link
@@ -248,7 +248,7 @@ class Navbar extends Component {
                     </li>
                   </ul>
                 </div>
-                <div className="col-xs-6">
+                <div style={{padding: 0}} className="col-xs-6">
                   <ul className="inline-list inline-list-right">
                     <li>
                       <a
