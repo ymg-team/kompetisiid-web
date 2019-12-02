@@ -1,10 +1,10 @@
 {
-  "name": "Kompetisi.id",
-  "short_name": "Kompetisi.id - Ada hadiah setiap hari",
+  "name": "Kompetisi Id",
+  "short_name": "Kompetisi Id",
   "theme_color": "#cc5454",
   "background_color": "#cc5454",
   "display": "standalone",
-  "Scope": "/",
+  "scope": "/",
   "start_url": "/",
   "icons": [
     {

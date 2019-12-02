@@ -203,6 +203,11 @@ function getScript(state) {
       ${getAdsenseScript()}`
         : ""
     }
+    <script>
+      if('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/service-worker.js').then(function() { console.log("Service Worker Registered"); });
+      }
+    </script>
     `
 }
 
