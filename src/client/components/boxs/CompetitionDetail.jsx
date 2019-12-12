@@ -1,5 +1,4 @@
 import React from "react"
-// import Loadable from "react-loadable"
 import { eventFire } from "../../helpers/DomEvents"
 import { getCompetitionStatus } from "../../helpers/DateTime"
 import copy from "copy-to-clipboard"
@@ -12,6 +11,9 @@ import { Link } from "react-router-dom"
 import BtnJoin from "../buttons/BtnJoin"
 import { alert } from "../Alert"
 import BtnLike from "../buttons/BtnLikeCompetition"
+
+// actions
+import { subscribeCompetition } from "../../containers/competition/actions"
 
 const StyledCalendar = Styled.div`
   a.calendar-item {
@@ -125,8 +127,7 @@ const CompetitionDetailBox = props => {
                 data-mediabox="my-gallery-name"
                 data-title="Sample image"
                 alt={data.title}
-                className="poster image-popup"
-                // className="poster image-modal-target"
+                className="poster image-modal-target"
                 src={data.poster.original}
               />
             </div>
@@ -195,16 +196,12 @@ const CompetitionDetailBox = props => {
                     <li>
                       <a
                         onClick={() =>
-                          alert(
-                            true,
-                            "Sistem dalam tahap pengembangan",
-                            "warning"
-                          )
+                          props.dispatch(subscribeCompetition(data.id))
                         }
                         href="javascript:;"
-                        title="simpan ke akun"
+                        title="subscribe kompetisi"
                       >
-                        Simpan Kompetisi
+                        {data.is_subscribed ? "Unsubscribe Kompetisi" : "subscribe Kompetisi"}
                       </a>
                     </li>
                     <li>

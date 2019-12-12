@@ -6,6 +6,24 @@ import sealMiddleware from "../../middlewares/seal"
 
 const router = express.Router()
 
+// route for [post] /api/kompetisi/subscribe
+router.post(
+  "/competition-subscription/:seal",
+  sealMiddleware,
+  requestMiddleware.post,
+  controller.competitionSubscribeAction,
+  apiCaller
+)
+
+// route for [get] /api/kompetisi/subscribe
+router.get(
+  "/competition-subscription/:seal",
+  sealMiddleware,
+  requestMiddleware.post,
+  controller.competitionSubscribeList,
+  apiCaller
+)
+
 // route for [post] /api/kompetisi/announcement
 router.post(
   "/announcement/:id/:seal",

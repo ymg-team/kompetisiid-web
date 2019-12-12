@@ -2,7 +2,7 @@
  * Created by yussan on 28/02/17.
  */
 
-const Bulan = [
+export const Month = [
   ['jan', 'januari'],
   ['feb', 'februari'],
   ['mar', 'maret'],
@@ -88,7 +88,7 @@ export function datetimeToRelativeTime(datetime) {
 
 export function epochToDMY(epochtime) {
   const d = new Date(epochtime)
-  return `${d.getDate()} ${Bulan[d.getMonth()][1]} ${d.getFullYear()}`
+  return `${d.getDate()} ${Month[d.getMonth()][1]} ${d.getFullYear()}`
 }
 
 export function strToDateTime(str) {
@@ -112,7 +112,7 @@ export function today(format = '') {
     case "Y-m-d h:i:s":
         return `${d.getFullYear()}-${d.getMonth() < 10 ? `0${d.getMonth() + 1}` : d.getMonth() + 1}-${d.getDate()} ${d.getHours()}:${d.getMinutes()}:${d.getSeconds()}`
     default:
-      return `${d.getDate()} ${Bulan[d.getMonth()][0]} ${d.getFullYear()}`
+      return `${d.getDate()} ${Month[d.getMonth()][0]} ${d.getFullYear()}`
   }
 }
 

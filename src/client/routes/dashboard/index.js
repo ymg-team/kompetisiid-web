@@ -52,7 +52,7 @@ export default {
     // competitions
     {
       path: "/dashboard/competition/create",
-      extact: true,
+      exact: true,
       type: "dashboard",
       component: CompetitionForm
     },
@@ -77,15 +77,16 @@ export default {
     // waiting competition page
     {
       path: "/dashboard/competition/waiting",
-      extact: true,
+      exact: true,
       type: "dashboard",
       tab_active: 1,
       status: "waiting",
       component: DashboardCompetitions
     },
+    // live competition
     {
       path: "/dashboard/competition/live",
-      extact: true,
+      exact: true,
       type: "dashboard",
       tab_active: 2,
       status: "active",
@@ -94,7 +95,7 @@ export default {
     // posted competition page
     {
       path: "/dashboard/competition/posted",
-      extact: true,
+      exact: true,
       type: "dashboard",
       tab_active: 3,
       status: "posted",
@@ -103,18 +104,23 @@ export default {
     // rejected competition page
     {
       path: "/dashboard/competition/rejected",
-      extact: true,
+      exact: true,
       type: "dashboard",
       tab_active: 4,
       status: "reject",
       component: DashboardCompetitions
     },
+     // subscribed competition
+     {
+      path: "/dashboard/competition/subscribed",
+      exact: true,
+      type: "subscribed",
+      component: DashboardOtherCompetitions
+    },
     // end of competitions
     {
       path: "/dashboard/competition/liked",
-      extact: true,
-      type: "dashboard",
-      type: "dashboard",
+      exact: true,
       type: "liked",
       component: DashboardOtherCompetitions
     },

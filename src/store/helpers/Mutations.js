@@ -36,6 +36,17 @@ export function receiveListByFilter(state, action) {
 }
 
 /**
+ * @description funcrtion to subscribe competition
+ * @param {*} state 
+ * @param {*} action 
+ * @param {*} params 
+ * @param {*} selector 
+ */
+export function subscribeCompetition(state, action, callback) {
+  
+}
+
+/**
  * @description function to update list data by id
  * @param {Number} params.id
  * @param {Function} params.selector

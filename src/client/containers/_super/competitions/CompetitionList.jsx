@@ -25,12 +25,15 @@ class MyCompetition extends React.Component {
   fetchData() {
     Filter = generateFilter(this.props)
     Params = generateParams(this.props)
+
     this.props.dispatch(fetchJelajah(Params, Filter))
   }
 
   fetchMoreData() {
     const competition = this.props.data[Filter]
+
     Params.lastid = competition.data[competition.data.length - 1].id
+
     this.props.dispatch(fetchJelajahMore(Params, Filter))
   }
 
@@ -133,7 +136,7 @@ class MyCompetition extends React.Component {
           text="Berikut adalah kompetisi yang telah anda pasang di Kompetisi ID."
           noBorder
         />
-        
+
         {/* tab navigations */}
         <Tab tabs={tabcontent} />
 
@@ -155,13 +158,7 @@ class MyCompetition extends React.Component {
             ) : null}
             {competitions.data
               ? competitions.data.map((n, key) => {
-                  return (
-                    <CompetitionCard
-                      type={type}
-                      key={key}
-                      n={n}
-                    />
-                  )
+                  return <CompetitionCard type={type} key={key} n={n} />
                 })
               : null}
             {competitions.status != 200 ? (

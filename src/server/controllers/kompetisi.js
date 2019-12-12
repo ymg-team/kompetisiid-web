@@ -1,3 +1,26 @@
+export function competitionSubscribeAction(req, res, next) {
+  req.reqdata = {
+    version: "v42",
+    method: "post",
+    params: {
+      competition_id: req.body.competition_id
+    },
+    url: "/v2/competition-subscription"
+  }
+
+  next()
+}
+
+export function competitionSubscribeList(req, res, next) {
+  req.reqdata = {
+    version: "v42",
+    method: "get",
+    url: "/v2/competition-subscription"
+  }
+
+  next()
+}
+
 /**
  * controller to add competition announcement
  */
@@ -81,6 +104,25 @@ export function getJelajah(req, res, next) {
     method: "get",
     params,
     url: "/v2/competitions"
+  }
+
+  next()
+}
+
+/**
+ * @description function to get subscribed competition
+ * @param {*} req 
+ * @param {*} res 
+ * @param {*} next 
+ */
+export function getSubscribed(req, res, next) {
+  let { params } = req
+  params.query = req.query
+  req.reqdata = {
+    version: "v42",
+    method: "get",
+    params,
+    url: "/v2/competition-subscription"
   }
 
   next()

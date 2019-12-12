@@ -29,13 +29,13 @@ class LayoutHome extends Component {
     )[0].route
     const { q } = this.state
     return (
-      <div>
+      <React.Fragment>
         {!fullscreen ? (
           <Header q={q} setState={obj => this.setState(obj)} />
         ) : null}
         {renderRoutes(this.props.route.routes)}
         {!fullscreen ? <Footer /> : null}
-      </div>
+      </React.Fragment>
     )
   }
 }

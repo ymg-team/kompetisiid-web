@@ -56,6 +56,7 @@ export default class InputText extends Component {
         {note ? <small>{note}</small> : null}
         <input
           readOnly={this.props.readOnly}
+          onInput={e => this.props.onInput(e)}
           onChange={e => this.handleChange(e)}
           onBlur={e => this.handleChange(e)}
           type={type}
@@ -84,5 +85,6 @@ InputText.defaultProps = {
   required: false,
   autoFocus: false,
   autoComplete: "off",
-  placeholder: ""
+  placeholder: "",
+  onInput: () => {}
 }
