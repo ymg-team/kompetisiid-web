@@ -10,7 +10,7 @@ class BtnLikeCompetition extends React.Component {
         likeActionCompetition(this.props.competition_id)
       )
     } else {
-      return window.redirectTo("/login")
+      return window.transitionTo("/login")
     }
   }
 
