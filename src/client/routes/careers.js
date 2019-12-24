@@ -1,5 +1,5 @@
-// containers
-import Index from '../containers/careers/index'
+// pages
+import Index from '../pages/careers/index'
 
 // layout
 import EmptyLayout from '../layouts/EmptyLayout'

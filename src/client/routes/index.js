@@ -29,36 +29,36 @@ const FullPagePreloader = () => (
   <FullPagePreloaderOri style={{ display: "flex", opacity: 1 }} />
 )
 const ChangePassword = Loadable({
-  loader: () => import("../containers/auth/ChangePassword"),
+  loader: () => import("../pages/auth/ChangePassword"),
   loading: FullPagePreloader
 })
 const ForgotPassword = Loadable({
-  loader: () => import("../containers/auth/ForgotPassword"),
+  loader: () => import("../pages/auth/ForgotPassword"),
   loading: FullPagePreloader
 })
 const Login = Loadable({
-  loader: () => import("../containers/auth/Login"),
+  loader: () => import("../pages/auth/Login"),
   loading: FullPagePreloader
 })
 const Register = Loadable({
-  loader: () => import("../containers/auth/Register"),
+  loader: () => import("../pages/auth/Register"),
   loading: FullPagePreloader
 })
 const RedirectContainer = Loadable({
-  loader: () => import("../containers/Redirect"),
+  loader: () => import("../pages/Redirect"),
   loading: FullPagePreloader
 })
 const Error = Loadable({
-  loader: () => import("../containers/error/index"),
+  loader: () => import("../pages/error/index"),
   loading: FullPagePreloader
 })
 const EmailVerification = Loadable({
-  loader: () => import("../containers/auth/EmailVerification"),
+  loader: () => import("../pages/auth/EmailVerification"),
   loading: FullPagePreloader
 })
 
-// containers
-import Home from "../containers/home/index"
+// pages
+import Home from "../pages/home/index"
 
 // layouts
 import LayoutRoot from "../layouts/RootLayout"

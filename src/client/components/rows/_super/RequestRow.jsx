@@ -3,7 +3,7 @@ import Styled from "styled-components"
 import { connect } from "react-redux"
 import { epochToRelativeTime } from "../../../helpers/DateTime"
 import * as Colors from "../../../../style/colors"
-import * as RequestActions from "../../../containers/_super/requests/actions"
+import * as RequestActions from "../../../pages/_super/requests/actions"
 import swal from "sweetalert"
 
 const RequestListStyled = Styled.div`

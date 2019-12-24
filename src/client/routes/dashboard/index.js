@@ -5,36 +5,36 @@ import Loading from "../../components/preloaders/FullPage"
 import DashboardLayout from "../../layouts/DashboardLayoutV5"
 
 const NotFound = Loadable({
-  loader: () => import("../../containers/error/index"),
+  loader: () => import("../../pages/error/index"),
   loading: Loading
 })
 
 const DashboardIndex = Loadable({
-  loader: () => import("../../containers/_dashboard/index"),
+  loader: () => import("../../pages/_dashboard/index"),
   loading: Loading
 })
 
 const DashboardCompetitions = Loadable({
-  loader: () => import("../../containers/_super/competitions/CompetitionList"),
+  loader: () => import("../../pages/_super/competitions/CompetitionList"),
   loading: Loading
 })
 const DashboardOtherCompetitions = Loadable({
   loader: () =>
-    import("../../containers/_super/competitions/OtherCompetitionList"),
+    import("../../pages/_super/competitions/OtherCompetitionList"),
   loading: Loading
 })
 const CompetitionFormLayout = Loadable({
   loader: () =>
-    import("../../containers/_super/competitions/CompetitionFormLayout"),
+    import("../../pages/_super/competitions/CompetitionFormLayout"),
   loading: Loading
 })
 const CompetitionForm = Loadable({
-  loader: () => import("../../containers/_super/competitions/CompetitionForm"),
+  loader: () => import("../../pages/_super/competitions/CompetitionForm"),
   loading: Loading
 })
 const CompetitionAnnouncementForm = Loadable({
   loader: () =>
-    import("../../containers/_super/competitions/CompetitionAnnouncement"),
+    import("../../pages/_super/competitions/CompetitionAnnouncement"),
   loading: Loading
 })
 

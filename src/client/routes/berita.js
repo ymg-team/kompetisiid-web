@@ -1,6 +1,6 @@
-import Index from '../containers/news/index'
-import NewsList from '../containers/news/List'
-import Error from '../containers/error/index'
+import Index from '../pages/news/index'
+import NewsList from '../pages/news/List'
+import Error from '../pages/error/index'
 
 import EmptyLayout from '../layouts/EmptyLayout'
 

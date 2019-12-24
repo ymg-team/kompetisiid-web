@@ -7,9 +7,9 @@ const FullPagePreloader = () => (
   <FullPagePreloaderOri style={{ display: "flex", opacity: 1 }} />
 )
 
-// containers
+// pages
 const Index = Loadable({
-  loader: () => import("../containers/calendar/index"),
+  loader: () => import("../pages/calendar/index"),
   loading: FullPagePreloader
 })
 

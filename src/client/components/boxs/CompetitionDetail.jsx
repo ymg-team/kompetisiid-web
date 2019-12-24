@@ -13,7 +13,7 @@ import { alert } from "../Alert"
 import BtnLike from "../buttons/BtnLikeCompetition"
 
 // actions
-import { subscribeCompetition } from "../../containers/competition/actions"
+import { subscribeCompetition } from "../../pages/competition/actions"
 
 const StyledCalendar = Styled.div`
   padding-bottom: 10px;

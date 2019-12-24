@@ -1,5 +1,5 @@
-// containers
-import Categories from '../containers/categories/index'
+// pages
+import Categories from '../pages/categories/index'
 
 // layout
 import EmptyLayout from '../layouts/EmptyLayout'

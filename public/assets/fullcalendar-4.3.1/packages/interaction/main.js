@@ -571,7 +571,7 @@ Docs & License: https://fullcalendar.io/
     // https://developer.mozilla.org/en-US/docs/Web/API/Performance
     var getTime = typeof performance === 'function' ? performance.now : Date.now;
     /*
-    For a pointer interaction, automatically scrolls certain scroll containers when the pointer
+    For a pointer interaction, automatically scrolls certain scroll pages when the pointer
     approaches the edge.
 
     The caller must call start + handleMove + stop.
@@ -901,7 +901,7 @@ Docs & License: https://fullcalendar.io/
     and continues to monitor scrolling, updating the cached coordinates if it needs to.
     Does not access the DOM after instantiation, so highly performant.
 
-    Also keeps track of all scrolling/overflow:hidden containers that are parents of the given element
+    Also keeps track of all scrolling/overflow:hidden pages that are parents of the given element
     and an determine if a given point is inside the combined clipping rectangle.
     */
     var OffsetTracker = /** @class */ (function () {
@@ -947,7 +947,7 @@ Docs & License: https://fullcalendar.io/
         };
         return OffsetTracker;
     }());
-    // certain clipping containers should never constrain interactions, like <html> and <body>
+    // certain clipping pages should never constrain interactions, like <html> and <body>
     // https://github.com/fullcalendar/fullcalendar/issues/3615
     function isIgnoredClipping(node) {
         var tagName = node.tagName;

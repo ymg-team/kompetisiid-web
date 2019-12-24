@@ -1,7 +1,7 @@
 import React from "react"
 import { connect } from "react-redux"
 import { alert } from "../Alert"
-import { likeActionCompetition } from "../../containers/competition/actions"
+import { likeActionCompetition } from "../../pages/competition/actions"
 
 class BtnLikeCompetition extends React.Component {
   clickHandler = () => {

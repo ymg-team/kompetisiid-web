@@ -1,4 +1,4 @@
-import Profile from '../containers/user/index'
+import Profile from '../pages/user/index'
 
 import LayoutEmpty from '../layouts/EmptyLayout'
 
