@@ -2,7 +2,7 @@ import Index from '../containers/news/index'
 import NewsList from '../containers/news/List'
 import Error from '../containers/error/index'
 
-import EmptyLayout from '../layouts/4.2/Empty'
+import EmptyLayout from '../layouts/EmptyLayout'
 
 export default {
   path: '/news',

@@ -48,8 +48,9 @@ export const ModalStyled = Styled.div`
   &.open {
     visibility: visible;
     opacity: 1;
+    align-items: center;
+    justify-content: center;
     display: flex;
-    justify-content: center
   }
   
   a {

@@ -16,6 +16,7 @@ import BtnLike from "../buttons/BtnLikeCompetition"
 import { subscribeCompetition } from "../../containers/competition/actions"
 
 const StyledCalendar = Styled.div`
+  padding-bottom: 10px;
   a.calendar-item {
     &:first-child {
       border-top: 1px solid #F4F4F4;

@@ -53,7 +53,8 @@ let addedEventScroll = false
 class RootLayoutV5 extends Component {
   state = {
     showBtnTop: false, 
-    online: true
+    online: true,
+    showNotifConfirmation: false
   }
 
   resendEmailVerification = () => {}
@@ -152,10 +153,16 @@ class RootLayoutV5 extends Component {
           </BackToTop>
         </div>  
         {/* end of offline wrapper */}
-
+        
+        {/* global component */}
         <Alert />
         <FullScreenLoader />
         <ImageModal />
+        {/* global component */}
+
+        {/* global modal */}
+        
+        {/* end of global modal */}
         
         {/* notification of network is offline */}
         {/* notification to verify email */}

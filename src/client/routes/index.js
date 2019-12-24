@@ -61,10 +61,8 @@ const EmailVerification = Loadable({
 import Home from "../containers/home/index"
 
 // layouts
-import LayoutRoot from "../layouts/4.2/Root"
-// import LayoutHome from "../layouts/4.2/Home"
+import LayoutRoot from "../layouts/RootLayout"
 import LayoutHomeV5 from "../layouts/HomeLayoutV5"
-// import LayoutError from "../layouts/4.2/Error"
 
 export default [
   {

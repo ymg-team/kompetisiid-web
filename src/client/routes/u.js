@@ -1,6 +1,6 @@
 import Profile from '../containers/user/index'
 
-import LayoutEmpty from '../layouts/4.2/Empty'
+import LayoutEmpty from '../layouts/EmptyLayout'
 
 export default {
   path: '/u',

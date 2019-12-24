@@ -2,7 +2,7 @@
 import Index from '../containers/careers/index'
 
 // layout
-import EmptyLayout from '../layouts/4.2/Empty'
+import EmptyLayout from '../layouts/EmptyLayout'
 
 export default {
   path: '/careers',
