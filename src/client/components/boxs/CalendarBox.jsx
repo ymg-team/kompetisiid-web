@@ -4,7 +4,7 @@
 import React from "react"
 import Styled from "styled-components"
 import { Month } from "../../helpers/DateTime"
-import { fetchJelajah } from "../../containers/competition/actions"
+import { fetchJelajah } from "../../pages/competition/actions"
 import { connect } from "react-redux"
 import memoize from "memoize-one"
 

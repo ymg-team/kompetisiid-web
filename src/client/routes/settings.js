@@ -5,23 +5,23 @@ import Loading from "../components/preloaders/FullPage"
 import DashboardLayout from "../layouts/DashboardLayoutV5"
 
 const NotFound = Loadable({
-  loader: () => import("../containers/error/index"),
+  loader: () => import("../pages/error/index"),
   loading: Loading
 })
 
 const SettingProfile = Loadable({
-  loader: () => import("../containers/_settings/SettingProfile"),
+  loader: () => import("../pages/_settings/SettingProfile"),
   loading: Loading
 })
 
 const SettingAccount = Loadable({
-  loader: () => import("../containers/_settings/SettingAccount"),
+  loader: () => import("../pages/_settings/SettingAccount"),
   loading: Loading
 })
 
 
 const SettingConnect = Loadable({
-  loader: () => import("../containers/_settings/SettingConnectSocialMedia"),
+  loader: () => import("../pages/_settings/SettingConnectSocialMedia"),
   loading: Loading
 })
 

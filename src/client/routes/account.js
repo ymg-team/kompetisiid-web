@@ -1,5 +1,5 @@
-// import NotFound from '../containers/NotFound'
-// import EmailVerify from '../containers/EmailVerify'
+// import NotFound from '../pages/NotFound'
+// import EmailVerify from '../pages/EmailVerify'
 
 // export default {
 //     path: 'account',

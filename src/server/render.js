@@ -200,20 +200,21 @@ function getScript(state) {
     ${
       process.env.NODE_ENV === "production"
         ? `${getTrackingScript()} 
-      ${getAdsenseScript()}`
+        ${getAdsenseScript()}
+        <script>
+          if('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/service-worker.js').then(function() { 
+              // registration was successfull :)
+              console.log("Service Worker Registered"); 
+            }, function(err){
+              // registration failed :(
+              console.log("ServiceWorker registration failed", err);
+            });
+          }
+        </script>
+      `
         : ""
     }
-    <script>
-      if('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('/service-worker.js').then(function() { 
-          // registration was successfull :)
-          console.log("Service Worker Registered"); 
-        }, function(err){
-          // registration failed :(
-          console.log("ServiceWorker registration failed", err);
-        });
-      }
-    </script>
     `
 }
 

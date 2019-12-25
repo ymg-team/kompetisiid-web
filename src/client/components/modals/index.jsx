@@ -19,6 +19,15 @@ export const ModalStyled = Styled.div`
     color: ${mainGray};
     .modal-white-content {
       background-color: ${mainWhite} !important;
+      padding: 0;
+      .modal-title {
+        padding: 1em;
+        .btn-close-modal {
+          top: 50%;
+          right: .5em;
+          margin-top: -17.5px;
+        }
+      }
     }
     a {
       color: ${mainGray} !important;
@@ -48,8 +57,9 @@ export const ModalStyled = Styled.div`
   &.open {
     visibility: visible;
     opacity: 1;
+    align-items: center;
+    justify-content: center;
     display: flex;
-    justify-content: center
   }
   
   a {
