@@ -12,6 +12,7 @@ import Navbar from "../components/navigations/TransparentNavbar"
 import Alert from "../components/Alert"
 import FullScreenLoader from "../components/preloaders/FullPage"
 import ImageModal from "../components/modals/ImageModal"
+import NotificationConfirmModal from "../components/modals/NotificationConfirmation"
 import GAds from "../components/cards/GoogleAds"
 
 const StickyNoteStyle = {
@@ -157,11 +158,11 @@ class RootLayoutV5 extends Component {
         {/* global component */}
         <Alert />
         <FullScreenLoader />
-        <ImageModal />
         {/* global component */}
 
         {/* global modal */}
-        
+        <ImageModal />
+        <NotificationConfirmModal />
         {/* end of global modal */}
         
         {/* notification of network is offline */}
