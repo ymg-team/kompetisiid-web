@@ -1,7 +1,7 @@
-import Add from '../containers/sendCompetition/form'
-import SendCompetition from '../containers/sendCompetition/index'
+import Add from '../pages/sendCompetition/form'
+import SendCompetition from '../pages/sendCompetition/index'
 
-import EmptyLayout from '../layouts/4.2/Empty'
+import EmptyLayout from '../layouts/EmptyLayout'
 
 export default {
   path: '/add',

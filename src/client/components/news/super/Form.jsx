@@ -1,5 +1,5 @@
 import React from "react"
-import { createNews, updateNews } from "../../../containers/news/actions"
+import { createNews, updateNews } from "../../../pages/news/actions"
 
 // components
 import HeaderDashboard from "../../cards/HeaderDashboard"

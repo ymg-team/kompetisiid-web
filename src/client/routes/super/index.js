@@ -7,49 +7,49 @@ import SuperLayout from "../../layouts/SuperLayoutV5"
 import Loading from "../../components/preloaders/GlobalLoader"
 import ContentLoading from "../../components/preloaders/FullContentLoader"
 
-// containers
+// pages
 const SuperDashboard = Loadable({
-  loader: () => import("../../containers/_super/index"),
+  loader: () => import("../../pages/_super/index"),
   loading: ContentLoading
 })
 const NotFound = Loadable({
-  loader: () => import("../../containers/error/index"),
+  loader: () => import("../../pages/error/index"),
   loading: Loading
 })
-// request containers
+// request pages
 const Request = Loadable({
-  loader: () => import("../../containers/_super/requests/index"),
+  loader: () => import("../../pages/_super/requests/index"),
   loading: Loading
 })
-// competition containers
+// competition pages
 const CompetitionList = Loadable({
-  loader: () => import("../../containers/_super/competitions/CompetitionList"),
+  loader: () => import("../../pages/_super/competitions/CompetitionList"),
   loading: Loading
 })
 const CompetitionFormLayout = Loadable({
   loader: () =>
-    import("../../containers/_super/competitions/CompetitionFormLayout"),
+    import("../../pages/_super/competitions/CompetitionFormLayout"),
   loading: Loading
 })
 const CompetitionForm = Loadable({
-  loader: () => import("../../containers/_super/competitions/CompetitionForm"),
+  loader: () => import("../../pages/_super/competitions/CompetitionForm"),
   loading: Loading
 })
 const CompetitionAnnouncementForm = Loadable({
   loader: () =>
-    import("../../containers/_super/competitions/CompetitionAnnouncement"),
+    import("../../pages/_super/competitions/CompetitionAnnouncement"),
   loading: Loading
 })
 const NewsList = Loadable({
-  loader: () => import("../../containers/_super/news/NewsList"),
+  loader: () => import("../../pages/_super/news/NewsList"),
   loading: Loading
 })
 const NewsForm = Loadable({
-  loader: () => import("../../containers/_super/news/NewsForm"),
+  loader: () => import("../../pages/_super/news/NewsForm"),
   loading: Loading
 })
 const UserList = Loadable({
-  loader: () => import("../../containers/_super/users/index"),
+  loader: () => import("../../pages/_super/users/index"),
   loading: Loading
 })
 

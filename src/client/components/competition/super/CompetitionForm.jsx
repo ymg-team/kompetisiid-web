@@ -1,10 +1,10 @@
 import React from "react"
-import { getCategories } from "../../../containers/competition/actions"
+import { getCategories } from "../../../pages/competition/actions"
 import { dateToFormat } from "../../../helpers/DateTime"
 import {
   createCompetition,
   updateCompetition
-} from "../../../containers/competition/actions"
+} from "../../../pages/competition/actions"
 
 // components
 import Tab from "../../navigations/Tab"

@@ -1050,7 +1050,7 @@ Docs & License: https://fullcalendar.io/
         /* Rendering
         ------------------------------------------------------------------------------------------------------------------*/
         // Builds the HTML skeleton for the view.
-        // The day-grid and time-grid components will render inside containers defined by this HTML.
+        // The day-grid and time-grid components will render inside pages defined by this HTML.
         TimeGridView.prototype.renderSkeletonHtml = function () {
             var theme = this.theme;
             return '' +
