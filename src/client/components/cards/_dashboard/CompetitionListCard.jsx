@@ -5,7 +5,6 @@ import { epochToRelativeTime } from "../../../helpers/DateTime"
 import { Link } from "react-router-dom"
 
 class CompetitionListCard extends React.Component {
-
   render() {
     const { n } = this.props
     const linkEdit = `/${
@@ -100,7 +99,8 @@ class CompetitionListCard extends React.Component {
                 <a
                   className="btn btn-sm dropdown-button text-muted fa fa-ellipsis-v"
                   title="options"
-                  href="javascript:;"
+                  href="#"
+                  onClick={e => e.preventDefault()}
                   data-target={`menu-${n.id}`}
                 />
                 <div className="dropdown-items" id={`menu-${n.id}`}>
@@ -108,9 +108,7 @@ class CompetitionListCard extends React.Component {
                     <li>
                       <a
                         target="_blank"
-                        href={`/competition/${n.id}/regulations/${
-                          n.nospace_title
-                        }`}
+                        href={`/competition/${n.id}/regulations/${n.nospace_title}`}
                       >
                         Preview
                       </a>
@@ -119,7 +117,7 @@ class CompetitionListCard extends React.Component {
                       <Link to={linkEdit}>Ubah</Link>
                     </li>
                     <li>
-                      <a onClick={() => {}} href="javascript:;">
+                      <a onClick={(e) => e.preventDefault()} href="#">
                         Hapus
                       </a>
                     </li>

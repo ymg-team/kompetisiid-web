@@ -67,8 +67,11 @@ class AuthFacebook extends Component {
     return (
       <a
         disabled={this.state.disabled}
-        href="javascript:;"
-        onClick={() => this.clickHandler()}
+        href="#"
+        onClick={(e) => {
+          e.preventDefault()
+          this.clickHandler()
+        }}
       >
         <img src="/assets/4.2/img/facebook-icon.png" />
       </a>

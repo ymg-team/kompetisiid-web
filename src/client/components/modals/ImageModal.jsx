@@ -33,8 +33,6 @@ export default props => {
       <div className="image-modal-content" />
       <div className="image-modal-action">
         Klik di mana saja untuk keluar
-        {/* <a href="javascript:;">Download Gambar</a>
-        <a onClick={closeHandler} href="javascript:;">Tutup</a> */}
       </div>
     </ImageModalStyled>
   )

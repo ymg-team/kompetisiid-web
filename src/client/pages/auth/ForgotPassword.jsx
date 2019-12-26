@@ -43,7 +43,7 @@ class ForgotPassword extends React.Component {
             </h1>
           </div>
           <div className="login-box__content">
-            <form className="form-ki" action="javascript:;" method="post">
+            <form className="form-ki" action="#" method="post">
               <div className="form-child">
                 <Input
                   label="Email"

@@ -229,9 +229,10 @@ export default class Index extends Component {
                           </span>
                           <span className="meta--item">
                             <a
-                              href="javascript:;"
+                              href="#"
                               title="komentar"
-                              onClick={() => {
+                              onClick={(e) => {
+                                e.preventDefault()
                                 document
                                   .getElementById("disqus_thread")
                                   .scrollIntoView({ behavior: "smooth" })

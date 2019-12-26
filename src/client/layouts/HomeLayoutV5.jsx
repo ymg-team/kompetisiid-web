@@ -178,9 +178,12 @@ class RootLayoutV5 extends Component {
               Kamu belum melakukan verifikasi email, segera cek email kamu. Atau
               klik{" "}
               <a
-                onClick={() => this.props.dispatch(resendEmailValidationToken())}
+                onClick={(e) => {
+                  e.preventDefault()
+                  this.props.dispatch(resendEmailValidationToken()) 
+                }}
                 style={StickyNoteLinkStyle}
-                href="javascript:;"
+                href="#"
               >
                 kirim ulang link verifikasi
               </a>

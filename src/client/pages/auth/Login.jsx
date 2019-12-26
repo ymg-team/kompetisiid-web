@@ -165,14 +165,15 @@ class Login extends React.Component {
                   Halo <strong>{this.state.username}</strong>
                   &nbsp;
                   <a
-                    href="javascript:;"
-                    onClick={() =>
+                    href="#"
+                    onClick={e => {
+                      e.preventDefault()
                       this.setState({
                         inputPassword: false,
                         password: null,
                         password_validate: null
                       })
-                    }
+                    }}
                   >
                     ubah
                   </a>
@@ -180,7 +181,7 @@ class Login extends React.Component {
                 <img src="/assets/4.2/img/avatar-default.jpg" />
               </div>
             ) : null}
-            <form className="form-ki" action="javascript:;" method="post">
+            <form className="form-ki" action="#" method="post">
               <div className="form-child">
                 {this.state.inputPassword ? (
                   <Input

@@ -163,7 +163,7 @@ class CompetitionForm extends React.Component {
 
         <form
           className="form-ki no-padding col-md-8"
-          action="javascript:;"
+          action="#"
           method="post"
         >
           <TitleLevel2Box

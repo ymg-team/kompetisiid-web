@@ -69,7 +69,7 @@ class FormNews extends React.Component {
         <HeaderDashboard title={this.props.title} text="Menyampaikan kabar seputar kompetisi di Indonesia" />
         <form
           className="form-ki no-padding col-md-8"
-          action="javascript:;"
+          action="#"
           method="post"
         >
           <TitleLevel2Box

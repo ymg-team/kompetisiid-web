@@ -90,8 +90,11 @@ export default class Form extends Component {
                     diskusi dan memberikan pengumuman kepada para pengunjung.{" "}
                   </p>
                   <a
-                    href="javascript:;"
-                    onClick={() => location.href="/dashboard/competition/create"}
+                    href="#"
+                    onClick={(e) => {
+                      e.preventDefault()
+                      location.href="/dashboard/competition/create"
+                    }}
                     className="btn btn-white"
                     title="klik untuk pasang cepat"
                   >

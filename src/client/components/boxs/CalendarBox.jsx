@@ -523,8 +523,9 @@ class CalendarBox extends React.Component {
                   return (
                     <a
                       key={key}
-                      href="javascript:;"
-                      onClick={() => {
+                      href="#"
+                      onClick={(e) => {
+                        e.preventDefault()
                         this.setState(
                           {
                             current_month: key,
@@ -560,8 +561,9 @@ class CalendarBox extends React.Component {
                 return (
                   <a
                     key={key}
-                    href="javascript:;"
-                    onClick={() => {
+                    href="#"
+                    onClick={(e) => {
+                      e.preventDefault()
                       this.setState(
                         {
                           current_year: n,

@@ -171,8 +171,11 @@ const CompetitionDetailBox = props => {
                   <ul>
                     <li>
                       <a
-                        onClick={() => _subscribeHandler() }
-                        href="javascript:;"
+                        onClick={(e) => {
+                          e.preventDefault()
+                          _subscribeHandler()
+                        } }
+                        href="#"
                         title="subscribe kompetisi"
                       >
                         {data.is_subscribed ? "Unsubscribe Kompetisi" : "subscribe Kompetisi"}
@@ -180,10 +183,11 @@ const CompetitionDetailBox = props => {
                     </li>
                     <li>
                       <a
-                        onClick={() => {
+                        onClick={(e) => {
+                          e.preventDefault()
                           modal("open", "save-to-calendar")
                         }}
-                        href="javascript:;"
+                        href="#"
                         title="simpan ke kalender"
                       >
                         Tambahkan ke Kalender
@@ -192,8 +196,11 @@ const CompetitionDetailBox = props => {
                     <li>
                       <a
                         className="scopy-button"
-                        onClick={() => handleCopyLink(link_competition)}
-                        href="javascript:;"
+                        onClick={(e) => {
+                          e.preventDefault()
+                          handleCopyLink(link_competition)
+                        }}
+                        href="#"
                       >
                         Salin Link Kompetisi
                       </a>

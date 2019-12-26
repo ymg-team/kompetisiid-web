@@ -121,8 +121,11 @@ const RequestRow = props => {
                 </a>{" "}
                 <a
                   style={{ color: Colors.mainRed }}
-                  href="javascript:;"
-                  onClick={() => handleAction(false, props)}
+                  href="#"
+                  onClick={(e) => {
+                    e.preventDefault(e)
+                    handleAction(false, props)
+                  }}
                 >
                   {" "}
                   <span className="fas fa-times-circle" /> Tolak Permintaan

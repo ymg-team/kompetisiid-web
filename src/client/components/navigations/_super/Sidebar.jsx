@@ -117,7 +117,10 @@ export default props => {
           <strong>Akun</strong>
         </li>
         <li>
-          <a onClick={() => props.handleLogout()} href="javascript:;">
+          <a onClick={(e) => {
+            e.preventDefault()
+            props.handleLogout()
+          }} href="#">
             Logout
           </a>
         </li>
