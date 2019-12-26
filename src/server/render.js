@@ -172,9 +172,13 @@ function getScript(state) {
   return `
     <!-- The core Firebase JS SDK is always required and must be listed first -->
     <script src="https://www.gstatic.com/firebasejs/7.6.1/firebase-app.js"></script>
+    
     <!-- Firebase cloud messaging -->
     <script src="https://www.gstatic.com/firebasejs/7.6.1/firebase-messaging.js"></script>
     
+    <!-- If you enabled Analytics in your project, add the Firebase SDK for Analytics -->
+    <script src="https://www.gstatic.com/firebasejs/7.6.1/firebase-analytics.js"></script>
+
     <!-- ref __data__ : https://redux.js.org/recipes/serverrendering -->
     <script>window.__data__=${JSON.stringify(state).replace(
       /</g,

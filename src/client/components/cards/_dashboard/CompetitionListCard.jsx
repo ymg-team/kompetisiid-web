@@ -1,5 +1,5 @@
 import React from "react"
-import { epochToRelativeTime } from "../../../helpers/DateTime"
+import { epochToRelativeTime } from "../../../helpers/dateTime"
 
 // components
 import { Link } from "react-router-dom"

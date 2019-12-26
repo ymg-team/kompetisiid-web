@@ -14,7 +14,7 @@ class InputTags extends React.Component {
   }
 
   componentDidMount = () => {
-    const { Tags } = require("../../helpers/Tagify")
+    const { Tags } = require("../Tagify")
     setTimeout(() => {
       this.setState({ Tags })
     }, 1500)

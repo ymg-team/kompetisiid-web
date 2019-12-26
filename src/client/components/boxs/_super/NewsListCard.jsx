@@ -1,6 +1,6 @@
 import React from "react"
 import { Link } from "react-router-dom"
-import { epochToRelativeTime } from "../../../helpers/DateTime"
+import { epochToRelativeTime } from "../../../helpers/dateTime"
 
 const NewsListCard = props => {
   const { data } = props

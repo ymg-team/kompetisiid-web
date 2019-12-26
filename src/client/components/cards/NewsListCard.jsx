@@ -1,7 +1,7 @@
 import React from "react"
 import { Link } from "react-router-dom"
 import { CardCompetitionStyled } from "./CompetitionListCard"
-import { epochToRelativeTime } from "../../helpers/DateTime"
+import { epochToRelativeTime } from "../../helpers/dateTime"
 
 const LabelDraft = () => (
   <div

@@ -3,7 +3,7 @@
 
 import React from "react"
 import Styled from "styled-components"
-import { Month } from "../../helpers/DateTime"
+import { Month } from "../../helpers/dateTime"
 import { fetchJelajah } from "../../pages/competition/actions"
 import { connect } from "react-redux"
 import memoize from "memoize-one"

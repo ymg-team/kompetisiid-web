@@ -1,6 +1,6 @@
 import React from "react"
 import { getCategories } from "../../../pages/competition/actions"
-import { dateToFormat } from "../../../helpers/DateTime"
+import { dateToFormat } from "../../../helpers/dateTime"
 import {
   createCompetition,
   updateCompetition

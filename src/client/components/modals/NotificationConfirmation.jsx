@@ -1,7 +1,7 @@
 import React from "react"
 import Styled from "styled-components"
 import { alert } from "../Alert"
-import notification from "../../helpers/BrowserNotification"
+import notification from "../../helpers/browserNotification"
 
 // components
 import Modal from "./index"

@@ -1,6 +1,6 @@
 import React from "react"
-import { eventFire } from "../../helpers/DomEvents"
-import { getCompetitionStatus } from "../../helpers/DateTime"
+import { eventFire } from "../../helpers/domEvents"
+import { getCompetitionStatus } from "../../helpers/dateTime"
 import copy from "copy-to-clipboard"
 import Styled from "styled-components"
 

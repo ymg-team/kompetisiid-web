@@ -1,7 +1,7 @@
 import React from "react"
 import Styled from "styled-components"
 import { connect } from "react-redux"
-import { epochToRelativeTime } from "../../../helpers/DateTime"
+import { epochToRelativeTime } from "../../../helpers/dateTime"
 import * as Colors from "../../../../style/colors"
 import * as RequestActions from "../../../pages/_super/requests/actions"
 import swal from "sweetalert"
