@@ -181,7 +181,14 @@ class Login extends React.Component {
                 <img src="/assets/4.2/img/avatar-default.jpg" />
               </div>
             ) : null}
-            <form className="form-ki" action="#" method="post">
+            <form
+              className="form-ki"
+              action="#"
+              onSubmit={e => {
+                e.preventDefault()
+              }}
+              method="post"
+            >
               <div className="form-child">
                 {this.state.inputPassword ? (
                   <Input

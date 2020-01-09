@@ -112,7 +112,14 @@ class CompetitionAnnouncement extends React.Component {
 
         <div className="col-md-8 no-padding">
           {/* add announcement */}
-          <form className="form-ki" action="#" method="post">
+          <form
+            className="form-ki"
+            action="#"
+            onSubmit={e => {
+              e.preventDefault()
+            }}
+            method="post"
+          >
             <TitleLevel2Box
               title="Tambah Pengumuman"
               text="Pengumuman yang akan kamu tambahkan tidak bisa diedit, tapi kamu bisa menghapusnya kapan pun. (kecuali pengumuman otomatis dari sistem)"

@@ -60,7 +60,14 @@ class SettingProfile extends React.Component {
         <Helmet title="Pengaturan Akun" />
         <HeaderDashboard title="Seting Akun" text="this is setting page" />
 
-        <form className="form-ki col-md-8" action="#" method="post">
+        <form
+          className="form-ki col-md-8"
+          action="#"
+          onSubmit={e => {
+            e.preventDefault()
+          }}
+          method="post"
+        >
           {/* update email */}
           <InputText
             label="Email"

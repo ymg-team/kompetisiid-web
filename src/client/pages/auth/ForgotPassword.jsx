@@ -43,7 +43,14 @@ class ForgotPassword extends React.Component {
             </h1>
           </div>
           <div className="login-box__content">
-            <form className="form-ki" action="#" method="post">
+            <form
+              className="form-ki"
+              action="#"
+              onSubmit={e => {
+                e.preventDefault()
+              }}
+              method="post"
+            >
               <div className="form-child">
                 <Input
                   label="Email"

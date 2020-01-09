@@ -48,8 +48,7 @@ class AddCompetitionFast extends Component {
     if (RecaptchaContainer) grecaptcha.reset(RecaptchaContainer)
   }
 
-  metaGenerator(link) {
-  }
+  metaGenerator(link) {}
 
   handleSubmit() {
     if (!this.state.is_accept) {
@@ -120,6 +119,9 @@ class AddCompetitionFast extends Component {
                 method="POST"
                 className="form-ki"
                 action="#"
+                onSubmit={e => {
+                  e.preventDefault()
+                }}
               >
                 <InputText
                   label="email"

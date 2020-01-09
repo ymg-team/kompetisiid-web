@@ -1,16 +1,16 @@
 /**
  * Created by yussan on 15/10/16.
  */
-import React, { Component } from 'react'
-import Input from '../components/form/Input'
-import Helmet from 'react-helmet'
-import { Link } from 'react-router-dom'
-import Validator from '../helpers/Validator'
-import Text from '../components/LoginText'
+import React, { Component } from "react"
+import Input from "../components/form/Input"
+import Helmet from "react-helmet"
+import { Link } from "react-router-dom"
+import Validator from "../helpers/Validator"
+import Text from "../components/LoginText"
 
-import { alert } from '../components/Alert'
-import { register } from '../../store/user/actions'
-import { connect } from 'react-redux'
+import { alert } from "../components/Alert"
+import { register } from "../../store/user/actions"
+import { connect } from "react-redux"
 
 export default class Register extends Component {
   constructor(props) {
@@ -18,20 +18,20 @@ export default class Register extends Component {
     this.state = {
       is_accept: false,
       onprogress: false,
-      username: '',
-      email: '',
-      password: '',
-      password_confirmation: ''
+      username: "",
+      email: "",
+      password: "",
+      password_confirmation: ""
     }
   }
 
   componentDidMount() {
-    document.getElementsByTagName('body')[0].style.background =
-      'rgb(31, 31, 31)'
+    document.getElementsByTagName("body")[0].style.background =
+      "rgb(31, 31, 31)"
   }
 
   componentWillUnmount() {
-    document.getElementsByTagName('body')[0].style.background = '#FFF'
+    document.getElementsByTagName("body")[0].style.background = "#FFF"
   }
 
   UNSAFE_componentWillReceiveProps(np) {
@@ -44,11 +44,11 @@ export default class Register extends Component {
           if (np.register.meta.code === 201) {
             setTimeout(() => {
               alert(false)
-              window.location.href = '/'
+              window.location.href = "/"
             }, 1500)
-            alert(true, np.register.meta.message, 'success', false)
+            alert(true, np.register.meta.message, "success", false)
           } else {
-            alert(true, np.register.meta.message, 'error', false)
+            alert(true, np.register.meta.message, "error", false)
           }
         }
       )
@@ -79,7 +79,7 @@ export default class Register extends Component {
         }
       )
     } else {
-      alert(true, 'Isian kamu belum lengkap', 'error')
+      alert(true, "Isian kamu belum lengkap", "error")
     }
   }
 
@@ -104,7 +104,13 @@ export default class Register extends Component {
         </div>
         <div className="col-md-5">
           <div className="login-box">
-            <form method="POST" action="#">
+            <form
+              method="POST"
+              action="#"
+              onSubmit={e => {
+                e.preventDefault()
+              }}
+            >
               <h2>Mendaftarkan akun baru</h2>
               <Input
                 label="username."
@@ -123,7 +129,7 @@ export default class Register extends Component {
                 changeState={(key, val) =>
                   this.changeState(
                     key,
-                    key === 'username' ? val.replace(/\s/g, '') : val
+                    key === "username" ? val.replace(/\s/g, "") : val
                   )
                 }
               />
@@ -180,7 +186,7 @@ export default class Register extends Component {
                     type="checkbox"
                     defaultValue="ingat saya"
                   />
-                  Saya menyetujui{' '}
+                  Saya menyetujui{" "}
                   <a target="_blank" href="/">
                     syarat dan ketentuan
                   </a>
@@ -191,13 +197,13 @@ export default class Register extends Component {
                 disabled={this.state.onprogress || !this.state.is_accept}
                 onClick={() => this.handleRegister()}
                 className="btn btn-primary"
-                style={{ width: '100%' }}
+                style={{ width: "100%" }}
               >
                 daftar
               </button>
               <div className="text-center">
                 <small className="text-muted">
-                  sudah punya akun silahkan <Link to="/login">masuk</Link>{' '}
+                  sudah punya akun silahkan <Link to="/login">masuk</Link>{" "}
                   disini
                 </small>
               </div>
@@ -229,4 +235,7 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-module.exports = connect(mapStateToProps, mapDispatchToProps)(Register)
+module.exports = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Register)
