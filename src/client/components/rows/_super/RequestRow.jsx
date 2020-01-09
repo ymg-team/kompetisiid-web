@@ -1,9 +1,9 @@
 import React from "react"
 import Styled from "styled-components"
 import { connect } from "react-redux"
-import { epochToRelativeTime } from "../../../helpers/DateTime"
+import { epochToRelativeTime } from "../../../helpers/dateTime"
 import * as Colors from "../../../../style/colors"
-import * as RequestActions from "../../../containers/_super/requests/actions"
+import * as RequestActions from "../../../pages/_super/requests/actions"
 import swal from "sweetalert"
 
 const RequestListStyled = Styled.div`
@@ -121,8 +121,11 @@ const RequestRow = props => {
                 </a>{" "}
                 <a
                   style={{ color: Colors.mainRed }}
-                  href="javascript:;"
-                  onClick={() => handleAction(false, props)}
+                  href="#"
+                  onClick={(e) => {
+                    e.preventDefault(e)
+                    handleAction(false, props)
+                  }}
                 >
                   {" "}
                   <span className="fas fa-times-circle" /> Tolak Permintaan

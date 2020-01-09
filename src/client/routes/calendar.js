@@ -7,15 +7,15 @@ const FullPagePreloader = () => (
   <FullPagePreloaderOri style={{ display: "flex", opacity: 1 }} />
 )
 
-// containers
+// pages
 const Index = Loadable({
-  loader: () => import("../containers/calendar/index"),
+  loader: () => import("../pages/calendar/index"),
   loading: FullPagePreloader
 })
 
 
 // layout
-import EmptyLayout from "../layouts/4.2/Empty"
+import EmptyLayout from "../layouts/EmptyLayout"
 
 export default {
   path: "/calendar",

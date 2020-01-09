@@ -1,6 +1,6 @@
 import React from "react"
-import { nominalToText } from "../../helpers/Number"
-import { epochToDMY, epochToRelativeTime } from "../../helpers/DateTime"
+import { nominalToText } from "../../helpers/number"
+import { epochToDMY, epochToRelativeTime } from "../../helpers/dateTime"
 
 // components
 import MediaPartner from "../cards/MediaPartner"

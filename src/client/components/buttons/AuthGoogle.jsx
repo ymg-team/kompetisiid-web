@@ -21,7 +21,7 @@ class AuthGoogle extends Component {
           client_id:
             "901670380792-fj5f9kuldput3v2fvhg3omsltno5ro8s.apps.googleusercontent.com",
           cookiepolicy: "single_host_origin",
-          scope: "profile email" 
+          scope: "profile email"
           // Request scopes in addition to 'profile' and 'email'
           //scope: 'additional_scope'
         })
@@ -41,7 +41,7 @@ class AuthGoogle extends Component {
     // avatar: profile.getImageUrl(),
     // email: profile.getImageUrl()
 
-    if(this.props.isLoggedIn) {
+    if (this.props.isLoggedIn) {
       this.props.dispatch(
         oauthLogin({
           provider: "google",
@@ -57,7 +57,6 @@ class AuthGoogle extends Component {
     const { auth2 } = this.state
 
     if (auth2) {
-
       auth2.signOut()
 
       if (auth2.isSignedIn.get()) {
@@ -86,7 +85,13 @@ class AuthGoogle extends Component {
 
   render() {
     return (
-      <a onClick={() => this.clickHandler()} href="javascript:;">
+      <a
+        onClick={e => {
+          e.preventDefault()
+          this.clickHandler()
+        }}
+        href="#"
+      >
         <img src="/assets/4.2/img/google-icon.png" />
       </a>
     )

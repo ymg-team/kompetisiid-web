@@ -29,6 +29,12 @@ ${props => {
           color: #FFF;
           border: 1px solid #c53d25;
         `
+    case "green":
+      return `
+          background: #1DBC60;
+          color: #FFF;
+          border: 1px solid #1DBC60;
+        `
     case "white":
       return `
           border: 1px solid #969696;
@@ -70,7 +76,7 @@ Button.propTypes = {
   className: PropTypes.string,
   style: PropTypes.object,
   size: PropTypes.oneOf(["small", "medium", "large"]),
-  color: PropTypes.oneOf(["white", "red"]),
+  color: PropTypes.oneOf(["white", "red", "green"]),
   loading: PropTypes.bool
 }
 

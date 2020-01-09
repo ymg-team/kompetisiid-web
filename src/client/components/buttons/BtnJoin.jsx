@@ -1,5 +1,5 @@
 import React from 'react'
-import { getCompetitionStatus } from '../../helpers/DateTime'
+import { getCompetitionStatus } from '../../helpers/dateTime'
 import { alert } from '../Alert'
 
 export default props => {

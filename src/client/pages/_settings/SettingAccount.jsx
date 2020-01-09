@@ -18,7 +18,10 @@ class SettingProfile extends React.Component {
   state = {}
 
   submitHandler() {
-    if (this.state.new_password !== "" && this.state.new_password != this.state.new_password_conf) {
+    if (
+      this.state.new_password !== "" &&
+      this.state.new_password != this.state.new_password_conf
+    ) {
       return alert(true, "Konfirmasi password tidak cocok", "error")
     } else {
       let params = {
@@ -26,14 +29,12 @@ class SettingProfile extends React.Component {
         password: this.state.password
       }
 
-      if(this.state.new_password) {
+      if (this.state.new_password) {
         params.new_password = this.state.new_password
       }
 
       return this.props.dispatch(submitSettingAccount(params))
-
     }
-
   }
 
   componentDidMount() {
@@ -59,7 +60,7 @@ class SettingProfile extends React.Component {
         <Helmet title="Pengaturan Akun" />
         <HeaderDashboard title="Seting Akun" text="this is setting page" />
 
-        <form className="form-ki col-md-8" action="javascript:;" method="post">
+        <form className="form-ki col-md-8" action="#" method="post">
           {/* update email */}
           <InputText
             label="Email"

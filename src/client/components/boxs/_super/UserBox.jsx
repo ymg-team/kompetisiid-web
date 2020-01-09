@@ -38,8 +38,11 @@ class UserBox extends React.Component {
               <div className="align-center">
                 <a
                   className="btn btn-white"
-                  href="javascript:;"
-                  onClick={() => this.handleLoadMore()}
+                  href="#"
+                  onClick={(e) => {
+                    e.preventDefault()
+                    this.handleLoadMore()
+                  }}
                 >
                   User berikutnya <i className="fa fa-angle-down" />
                 </a>

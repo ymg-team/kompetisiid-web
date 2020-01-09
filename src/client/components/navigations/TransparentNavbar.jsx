@@ -218,9 +218,12 @@ class Navbar extends Component {
                     </li>
                     <li>
                       <a
-                        onClick={() => this.toggleSearch()}
+                        onClick={e => {
+                          e.preventDefault()
+                          this.toggleSearch()
+                        }}
                         className="fas fa-times"
-                        href="javascript:;"
+                        href="#"
                       />
                     </li>
                   </ul>
@@ -228,7 +231,7 @@ class Navbar extends Component {
               </SearchStyled>
             ) : (
               <React.Fragment>
-                <div style={{padding: 0}} className="col-xs-6">
+                <div style={{ padding: 0 }} className="col-xs-6">
                   <ul className="inline-list inline-list-left">
                     <li style={{ padding: 0 }}>
                       <Link
@@ -248,13 +251,16 @@ class Navbar extends Component {
                     </li>
                   </ul>
                 </div>
-                <div style={{padding: 0}} className="col-xs-6">
+                <div style={{ padding: 0 }} className="col-xs-6">
                   <ul className="inline-list inline-list-right">
                     <li>
                       <a
-                        onClick={() => this.toggleSearch()}
+                        onClick={e => {
+                          e.preventDefault(e)
+                          this.toggleSearch()
+                        }}
                         className="fas fa-search"
-                        href="javascript:;"
+                        href="#"
                       />
                     </li>
 
@@ -272,7 +278,11 @@ class Navbar extends Component {
                           style={{ position: "absolute" }}
                           className="dropdown"
                         >
-                          <a className="avatar" href="javascript:;">
+                          <a
+                            className="avatar"
+                            href="#"
+                            onClick={e => e.preventDefault()}
+                          >
                             <img
                               className="dropdown-button"
                               src={
@@ -307,8 +317,11 @@ class Navbar extends Component {
                               </li>
                               <li>
                                 <a
-                                  href="javascript:;"
-                                  onClick={() => this.props.dispatch(logout())}
+                                  href="#"
+                                  onClick={e => {
+                                    e.preventDefault()
+                                    this.props.dispatch(logout())
+                                  }}
                                 >
                                   Logout
                                 </a>

@@ -1,6 +1,6 @@
 import React from 'react'
 import Tags from '../buttons/CompetitionTags'
-import { textParser } from '../../helpers/String'
+import { textParser } from '../../helpers/string'
 
 export default class Regulation extends React.Component {
   render() {

@@ -2,7 +2,7 @@ import React from "react"
 import Styled from "styled-components"
 import { connect } from "react-redux"
 import { softGray } from "../../../../style/colors"
-import { deleteAnnouncement,addAnnouncement } from "../../competition/actions"
+import { deleteAnnouncement, addAnnouncement } from "../../competition/actions"
 import swal from "sweetalert"
 
 import Helmet from "../../../components/Helmet"
@@ -39,30 +39,39 @@ class CompetitionAnnouncement extends React.Component {
       buttons: true,
       icon: "warning",
       dangerMode: true,
-      buttons: ["Tidak", "Ya, Hapus"],
+      buttons: ["Tidak", "Ya, Hapus"]
     }).then(value => {
       if (value) {
         console.log("deleted...")
-        this.props.dispatch(deleteAnnouncement({
-          competition_id: this.props.match.params.id,
-          key
-        }))
+        this.props.dispatch(
+          deleteAnnouncement({
+            competition_id: this.props.match.params.id,
+            key
+          })
+        )
       }
     })
   }
 
   addHandler() {
     // this.props.dispatch()
-    const {announcement} = this.state
-    this.setState({
-      announcement: ""
-    }, () => {
-      this.props.dispatch(addAnnouncement({
-        pengumuman: announcement,
-        competition_id: this.props.match.params.id,
-        user: ["admin","moderator"].includes(this.props.session.level) ? this.props.session.level : "penyelenggara"
-      }))
-    })
+    const { announcement } = this.state
+    this.setState(
+      {
+        announcement: ""
+      },
+      () => {
+        this.props.dispatch(
+          addAnnouncement({
+            pengumuman: announcement,
+            competition_id: this.props.match.params.id,
+            user: ["admin", "moderator"].includes(this.props.session.level)
+              ? this.props.session.level
+              : "penyelenggara"
+          })
+        )
+      }
+    )
   }
 
   render() {
@@ -103,7 +112,7 @@ class CompetitionAnnouncement extends React.Component {
 
         <div className="col-md-8 no-padding">
           {/* add announcement */}
-          <form className="form-ki" action="javascript:;" method="post">
+          <form className="form-ki" action="#" method="post">
             <TitleLevel2Box
               title="Tambah Pengumuman"
               text="Pengumuman yang akan kamu tambahkan tidak bisa diedit, tapi kamu bisa menghapusnya kapan pun. (kecuali pengumuman otomatis dari sistem)"

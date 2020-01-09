@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 import Styled from "styled-components"
-import { nominalToText } from "../../helpers/Number"
+import { nominalToText } from "../../helpers/number"
 import * as Colors from "../../../style/colors"
 
 // components

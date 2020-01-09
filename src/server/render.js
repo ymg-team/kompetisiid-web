@@ -169,8 +169,17 @@ export default (req, res) => {
 
 // initial script
 function getScript(state) {
-  // ref __data__ : https://redux.js.org/recipes/serverrendering
   return `
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.6.1/firebase-app.js"></script>
+    
+    <!-- Firebase cloud messaging -->
+    <script src="https://www.gstatic.com/firebasejs/7.6.1/firebase-messaging.js"></script>
+    
+    <!-- If you enabled Analytics in your project, add the Firebase SDK for Analytics -->
+    <script src="https://www.gstatic.com/firebasejs/7.6.1/firebase-analytics.js"></script>
+
+    <!-- ref __data__ : https://redux.js.org/recipes/serverrendering -->
     <script>window.__data__=${JSON.stringify(state).replace(
       /</g,
       "\\u003c"
@@ -178,7 +187,9 @@ function getScript(state) {
     <script src="/assets/4.2/js/script-min.js?v=${version.JS_VERSION}"></script>
     <script src="${webpackAssets.vendor.js}"></script>
     <script src="${webpackAssets.app.js}"></script>
+    
     <script src="https://apis.google.com/js/platform.js" async defer></script>
+    
     <script>
       window.fbAsyncInit = function() {
         FB.init({
@@ -200,12 +211,21 @@ function getScript(state) {
     ${
       process.env.NODE_ENV === "production"
         ? `${getTrackingScript()} 
-      ${getAdsenseScript()}`
+        ${getAdsenseScript()}
+        
+      `
         : ""
     }
+
     <script>
       if('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('/service-worker.js').then(function() { console.log("Service Worker Registered"); });
+        navigator.serviceWorker.register('/service-worker.js').then(function() { 
+          // registration was successfull :)
+          console.log("Service Worker Registered"); 
+        }, function(err){
+          // registration failed :(
+          console.log("ServiceWorker registration failed", err);
+        });
       }
     </script>
     `

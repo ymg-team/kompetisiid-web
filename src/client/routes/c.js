@@ -1,5 +1,5 @@
-import Competition from "../containers/competition/index"
-import CompetitionLayout from "../containers/competition/Layout"
+import Competition from "../pages/competition/index"
+import CompetitionLayout from "../pages/competition/Layout"
 
 export default {
   path: "/c/:encid",

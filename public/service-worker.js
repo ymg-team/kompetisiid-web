@@ -1,70 +1,39 @@
-'use strict';
-const CACHE_NAME = 'cache-ki-v1';
-const URLS_TO_CACHE = [];
+const CACHE_NAME = "cache-ki-0.0.1"
+const urlsToCache = []
 
-// init
-self.addEventListener('install', function(event){
-    event.waitUntil(
-        caches.open(CACHE_NAME).then(function(cache){
-            return cache.addAll(URLS_TO_CACHE)
-        })
-    )
+self.addEventListener("activate", async () => {
+  // this block only called once when service worker is activate
+  try {
+    const options = {}
+    // get push manager subscription
+    const subscription = await self.registration.pushManager.subscribe(options)
+    console.log(JSON.stringify("subscription", subscription))
+  } catch (e) {
+    console.error("[Error Service Worker Activation]", e)
+  }
 })
 
-// fetch request and response
-self.addEventListener('fetch', function(event)
-{
-    // intercept fetch Request
-    event.respondWith(
-        // match and serve cached assets, if it exists
-        caches.match(event.request).then(function(response)
-        {
-            return response || fetch(event.request)
-        })
-    )
-})
-
-// cache busting
-self.addEventListener('activate', function(event)
-{
-    event.waitUntil(
-        // open apps cache and delete any old cache items
-        caches.open(CACHE_NAME).then(function(cacheNames){
-            cacheNames.keys().then(function(cache){
-                cache.forEach(function(element, index, array)
-                {
-                    if(URLS_TO_CACHE.indexOf(element) === -1)
-                    {
-                        caches.delete(element);
-                    }
-                })
-            })
-        })
-
-    );
-    // end of event waitUntil
-})
-
-self.addEventListener('beforeinstallprompt', function(event){
-   // Stash the event so it can be triggered later.
-  deferredPrompt = event;
+self.addEventListener("beforeinstallprompt", function(event) {
+  // Stash the event so it can be triggered later.
+  deferredPrompt = event
   // Update UI notify the user they can add to home screen
-  showInstallPromotion();
+  showInstallPromotion()
 })
 
-// btnAdd.addEventListener('click', (e) => {
-//     // hide our user interface that shows our A2HS button
-//     btnAdd.style.display = 'none';
-//     // Show the prompt
-//     deferredPrompt.prompt();
-//     // Wait for the user to respond to the prompt
-//     deferredPrompt.userChoice
-//       .then((choiceResult) => {
-//         if (choiceResult.outcome === 'accepted') {
-//           console.log('User accepted the A2HS prompt');
-//         } else {
-//           console.log('User dismissed the A2HS prompt');
-//         }
-//         deferredPrompt = null;
-//       });
-//   });
+// https://developers.google.com/web/fundamentals/primers/service-workers#install_a_service_worker
+self.addEventListener("install", function(event) {
+  // peform install steps
+  event.waitUntil(
+    // open a cache
+    caches.open(CACHE_NAME).then(function(cache) {
+      console.log("Opened cache")
+      // Cache our files.
+      // Confirm whether all the required assets are cached or not.
+      return cache.addAll(urlsToCache)
+    })
+  )
+})
+
+self.addEventListener("fetch", function(event) {
+  return fetch(event.request)
+})

@@ -104,7 +104,7 @@ export default class Register extends Component {
         </div>
         <div className="col-md-5">
           <div className="login-box">
-            <form method="POST" action="javascript:;">
+            <form method="POST" action="#">
               <h2>Mendaftarkan akun baru</h2>
               <Input
                 label="username."

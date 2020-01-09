@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import { pushScript } from "../../helpers/DomEvents"
+import { pushScript } from "../../helpers/domEvents"
 export default class Discussions extends Component {
   componentDidMount() {
     // disquss js sdk

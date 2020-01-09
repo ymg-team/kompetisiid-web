@@ -1,7 +1,7 @@
 import React, { Component } from "react"
 import { connect } from "react-redux"
 import * as Colors from "../../style/colors"
-import { initModalImages } from "../helpers/Modal"
+import { initModalImages } from "../helpers/modal"
 import { resendEmailValidationToken } from "../../store/user/actions"
 
 // components
@@ -12,6 +12,7 @@ import Navbar from "../components/navigations/TransparentNavbar"
 import Alert from "../components/Alert"
 import FullScreenLoader from "../components/preloaders/FullPage"
 import ImageModal from "../components/modals/ImageModal"
+import NotificationConfirmModal from "../components/modals/NotificationConfirmation"
 import GAds from "../components/cards/GoogleAds"
 
 const StickyNoteStyle = {
@@ -52,17 +53,14 @@ let addedEventScroll = false
 
 class RootLayoutV5 extends Component {
   state = {
-    showBtnTop: false
+    showBtnTop: false, 
+    online: true,
+    showNotifConfirmation: false
   }
 
   resendEmailVerification = () => {}
 
   componentDidMount = () => {
-    // global redirect function
-    window.redirectTo = path => {
-      this.props.history.push(path)
-    }
-
     // global function to use react-router transition
     window.transitionTo = path => this.props.history.push(path)
 
@@ -79,6 +77,10 @@ class RootLayoutV5 extends Component {
       }
     })
 
+    // online / offline listener
+    window.addEventListener('online',  () => this._updateOnlineStatus())
+    window.addEventListener('offline', () => this._updateOnlineStatus())
+
     // Google Analytics handler
     this.props.history.listen(location => {
       if (window.ga) {
@@ -88,69 +90,106 @@ class RootLayoutV5 extends Component {
     })
   }
 
+  _updateOnlineStatus() {
+    this.setState({
+      online: navigator.onLine 
+    })
+  }
+
   render = () => {
     const { fullscreen } = matchRoutes(
       this.props.route.routes,
       this.props.location.pathname
     )[0].route
+
+    let onlineWrapperStyle = {} 
+
+    if(!this.state.online) {
+      onlineWrapperStyle = {
+        opacity: "0.4",
+        filter: "blur(4px)",
+        pointerEvents: "none"
+      }
+    }
+
     return (
       <LayoutStyled>
-        {this.props.location.pathname === "/" || fullscreen ? null : (
-          <div style={{ backgroundColor: "rgb(228, 228, 228)" }}>
-            <Navbar location={this.props.location} className="bg-gray" />
-          </div>
-        )}
 
-        {renderRoutes(this.props.route.routes)}
+        {/* offline wrapper */}
+        <div style={onlineWrapperStyle}>
+          {this.props.location.pathname === "/" || fullscreen ? null : (
+            <div style={{ backgroundColor: "rgb(228, 228, 228)" }}>
+              <Navbar location={this.props.location} className="bg-gray" />
+            </div>
+          )}
 
-        {/* gads */}
-        {!fullscreen ? (
-          <div className="col-md-12 align-center">
-            <GAds
-              // dummy={true}
-              adClient="ca-pub-4468477322781117"
-              adSlot={5218613800}
-              // adTest={true}
-            />
-          </div>
-        ) : null}
-        {/* gads */}
+          {renderRoutes(this.props.route.routes)}
 
-        {fullscreen ? null : <Footer />}
+          {/* gads */}
+          {!fullscreen ? (
+            <div className="col-md-12 align-center">
+              <GAds
+                // dummy={true}
+                adClient="ca-pub-4468477322781117"
+                adSlot={5218613800}
+                // adTest={true}
+              />
+            </div>
+          ) : null}
+          {/* gads */}
 
-        {/* button click to go top */}
-        <BackToTop
-          onClick={() => {
-            // ref: https://stackoverflow.com/a/1145012/2780875
-            window.scrollTo({ top: 0, behavior: "smooth" })
-          }}
-          style={!this.state.showBtnTop ? { bottom: "-200px" } : {}}
-        >
-          <i className="fas fa-arrow-alt-circle-up" />
-          &nbsp;
-          <span>Kembali ke Atas</span>
-        </BackToTop>
+          {fullscreen ? null : <Footer />}
+
+          {/* button click to go top */}
+          <BackToTop
+            onClick={() => {
+              // ref: https://stackoverflow.com/a/1145012/2780875
+              window.scrollTo({ top: 0, behavior: "smooth" })
+            }}
+            style={!this.state.showBtnTop ? { bottom: "-200px" } : {}}
+          >
+            <i className="fas fa-arrow-alt-circle-up" />
+            &nbsp;
+            <span>Kembali ke Atas</span>
+          </BackToTop>
+        </div>  
+        {/* end of offline wrapper */}
+        
+        {/* global component */}
         <Alert />
         <FullScreenLoader />
-        <ImageModal />
+        {/* global component */}
 
+        {/* global modal */}
+        <ImageModal />
+        <NotificationConfirmModal />
+        {/* end of global modal */}
+        
+        {/* notification of network is offline */}
         {/* notification to verify email */}
-        {!fullscreen &&
-        this.props.session &&
-        this.props.session.id &&
-        !this.props.session.is_verified ? (
-          <div style={StickyNoteStyle}>
-            Kamu belum melakukan verifikasi email, segera cek email kamu. Atau
-            klik{" "}
-            <a
-              onClick={() => this.props.dispatch(resendEmailValidationToken())}
-              style={StickyNoteLinkStyle}
-              href="javascript:;"
-            >
-              kirim ulang link verifikasi
-            </a>
-          </div>
-        ) : null}
+        {
+          !this.state.online ? <div style={StickyNoteStyle}>
+          Jaringan kamu sedang "offline", yang sabar ya :(
+        </div> : !fullscreen &&
+          this.props.session &&
+          this.props.session.id &&
+          !this.props.session.is_verified ? (
+            <div style={StickyNoteStyle}>
+              Kamu belum melakukan verifikasi email, segera cek email kamu. Atau
+              klik{" "}
+              <a
+                onClick={(e) => {
+                  e.preventDefault()
+                  this.props.dispatch(resendEmailValidationToken()) 
+                }}
+                style={StickyNoteLinkStyle}
+                href="#"
+              >
+                kirim ulang link verifikasi
+              </a>
+            </div>
+          ) : null
+        }
       </LayoutStyled>
     )
   }

@@ -1,6 +1,6 @@
 import React from 'react'
 import Styled from 'styled-components'
-import { today } from '../../helpers/DateTime'
+import { today } from '../../helpers/dateTime'
 
 const HomeCountStyled = Styled.div`
   padding: 20px 0 40px;

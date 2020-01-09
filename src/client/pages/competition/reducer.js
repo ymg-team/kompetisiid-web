@@ -11,7 +11,7 @@ import {
   SUBSCRIBE_COMPETITION
 } from "./actions"
 import { alert } from "../../components/Alert"
-import { today } from "../../helpers/DateTime"
+import { today } from "../../helpers/dateTime"
 
 function data(state = {}, action) {
   switch (action.type) {

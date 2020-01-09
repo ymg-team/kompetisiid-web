@@ -1,7 +1,7 @@
 import React from "react"
 import { connect } from "react-redux"
 import { alert } from "../Alert"
-import { likeActionCompetition } from "../../containers/competition/actions"
+import { likeActionCompetition } from "../../pages/competition/actions"
 
 class BtnLikeCompetition extends React.Component {
   clickHandler = () => {
@@ -10,7 +10,7 @@ class BtnLikeCompetition extends React.Component {
         likeActionCompetition(this.props.competition_id)
       )
     } else {
-      return window.redirectTo("/login")
+      return window.transitionTo("/login")
     }
   }
 
@@ -18,12 +18,15 @@ class BtnLikeCompetition extends React.Component {
     return (
       <a
         className="btn"
-        href="javascript:;"
+        href="#"
         title={`Klik untuk ${
           this.props.isLike ? "batal menyukai" : "menyukai"
         } kompetisi ini`}
         style={{ fontSize: 25, padding: "5px 10px" }}
-        onClick={() => this.clickHandler()}
+        onClick={(e) => {
+          e.preventDefault()
+          this.clickHandler()
+        }}
       >
         <span
           className={`${
