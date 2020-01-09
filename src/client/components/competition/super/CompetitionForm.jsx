@@ -28,7 +28,7 @@ class CompetitionForm extends React.Component {
 
   submitHandler = (status = "posted") => {
     let formdata = {
-      // remove all "/" using replace 
+      // remove all "/" using replace
       title: this.state.title.replace(/\//g, " "),
       description: this.state.description,
       prize_total: this.state.prize_total,
@@ -49,7 +49,7 @@ class CompetitionForm extends React.Component {
 
     if (this.state.poster) formdata.poster = this.state.poster
 
-    if(status) {
+    if (status) {
       if (status == "draft") {
         formdata.draft = true
       } else {
@@ -164,6 +164,9 @@ class CompetitionForm extends React.Component {
         <form
           className="form-ki no-padding col-md-8"
           action="#"
+          onSubmit={e => {
+            e.preventDefault()
+          }}
           method="post"
         >
           <TitleLevel2Box
@@ -451,7 +454,7 @@ class CompetitionForm extends React.Component {
           />
 
           {/* reject competition for admin / moderator */}
-          {competitionData.id && 
+          {competitionData.id &&
           !["admin", "moderator"].includes(competitionData.author.level) &&
           competitionData.status != "reject" &&
           ["admin", "moderator"].includes(session.level) ? (

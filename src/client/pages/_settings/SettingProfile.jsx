@@ -57,7 +57,14 @@ class SettingProfile extends React.Component {
           text="this is setting page"
         />
 
-        <form className="form-ki col-md-8" action="#" method="post">
+        <form
+          className="form-ki col-md-8"
+          action="#"
+          onSubmit={e => {
+            e.preventDefault()
+          }}
+          method="post"
+        >
           {/* update avatar */}
           <InputFile
             accept="image/*"

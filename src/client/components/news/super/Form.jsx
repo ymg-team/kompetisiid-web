@@ -35,29 +35,28 @@ class FormNews extends React.Component {
     }
   }
 
-  submitHandler = (status) => {
+  submitHandler = status => {
     let formdata = {
       title: this.state.title,
       content: this.state.content,
       tags: this.state.tags ? this.state.tags.toString() : ""
     }
 
-    if(status) {
-      if(status == "draft") formdata.draft = true
+    if (status) {
+      if (status == "draft") formdata.draft = true
     }
 
     if (this.state.image) formdata.image = this.state.image
-    
+
     console.log("submit handler...", formdata)
 
-    if(this.props.newsId) {
+    if (this.props.newsId) {
       // update news
       this.props.dispatch(updateNews(this.props.newsId, formdata))
     } else {
       // create news
       this.props.dispatch(createNews(formdata))
     }
-
   }
 
   render = () => {
@@ -66,10 +65,16 @@ class FormNews extends React.Component {
       response.is_loading || response.status === 201 || response.status === 200
     return (
       <React.Fragment>
-        <HeaderDashboard title={this.props.title} text="Menyampaikan kabar seputar kompetisi di Indonesia" />
+        <HeaderDashboard
+          title={this.props.title}
+          text="Menyampaikan kabar seputar kompetisi di Indonesia"
+        />
         <form
           className="form-ki no-padding col-md-8"
           action="#"
+          onSubmit={e => {
+            e.preventDefault()
+          }}
           method="post"
         >
           <TitleLevel2Box
