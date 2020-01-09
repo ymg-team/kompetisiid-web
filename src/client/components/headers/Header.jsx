@@ -36,11 +36,16 @@ class Header extends Component {
     return (
       <nav>
         <div style={{ top: q ? "-50px" : "0px" }} className="nav-header">
-          <a id="btn-menu" href="javascript:;">
+          <a id="btn-menu" href="#" onClick={e => e.preventDefault()}>
             <span className="fa fa-bars" />
           </a>
           <div className="nav-left">
-            <a className="only-mobile" href="javascript:;" id="btn-show-nav">
+            <a
+              className="only-mobile"
+              href="#"
+              onClick={e => e.preventDefault()}
+              id="btn-show-nav"
+            >
               <img
                 src="/assets/4.2/img/icon-128x128.png"
                 style={{ width: "40px" }}
@@ -51,7 +56,8 @@ class Header extends Component {
                 style={{ position: "absolute", top: "0.5em", right: "0.5em" }}
                 id="btn-hide-nav"
                 className=" btn-close-nav only-mobile fas fa-times"
-                href="javascript:;"
+                href="#"
+                onClick={e => e.preventDefault()}
               />
               <li>
                 <Link onClick={() => toggleNavTop()} to="/browse">
@@ -87,7 +93,8 @@ class Header extends Component {
               <li>
                 <a
                   id="btn-search"
-                  href="javascript:;"
+                  href="#"
+                  onClick={e => e.preventDefault()}
                   title="click untuk melakukan pencarian"
                 >
                   {" "}
@@ -97,7 +104,7 @@ class Header extends Component {
               {Object.keys(session).length > 0 && session.id ? (
                 <li>
                   <div className="dropdown">
-                    <a className="avatar" href="javascript:;">
+                    <a className="avatar" href="#" onClick={e => e.preventDefault()}>
                       <img
                         className="dropdown-button"
                         src="/assets/4.2/img/avatar-default.jpg"
@@ -124,8 +131,11 @@ class Header extends Component {
                         </li>
                         <li>
                           <a
-                            href="javascript:;"
-                            onClick={() => this.handleLogout()}
+                            href="#"
+                            onClick={(e) => {
+                              e.preventDefault()
+                              this.handleLogout()
+                            }}
                           >
                             Logout
                           </a>
@@ -153,10 +163,11 @@ class Header extends Component {
           />
           <a
             id="btn-closesearch"
-            onClick={() => {
+            onClick={(e) => {
+              e.preventDefault()
               if (q != "") return (window.location.href = "/browse")
             }}
-            href="javascript:;"
+            href="#"
             title="tutup pencarian"
           >
             {" "}

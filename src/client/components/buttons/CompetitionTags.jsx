@@ -1,5 +1,5 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React from "react"
+import { Link } from "react-router-dom"
 
 const CompetitionTags = props => {
   return (
@@ -7,12 +7,7 @@ const CompetitionTags = props => {
       {props.tags ? (
         props.tags.map((n, key) => {
           return (
-            <Link
-              className="btn btn-white"
-              to={`/browse/tag/${n}`}
-              key={key}
-              href="javascript:;"
-            >
+            <Link className="btn btn-white" to={`/browse/tag/${n}`} key={key}>
               {n}
             </Link>
           )

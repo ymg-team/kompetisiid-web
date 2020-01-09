@@ -1,6 +1,6 @@
 import React from "react"
 import { getCategories } from "../../../pages/competition/actions"
-import { dateToFormat } from "../../../helpers/DateTime"
+import { dateToFormat } from "../../../helpers/dateTime"
 import {
   createCompetition,
   updateCompetition
@@ -163,7 +163,7 @@ class CompetitionForm extends React.Component {
 
         <form
           className="form-ki no-padding col-md-8"
-          action="javascript:;"
+          action="#"
           method="post"
         >
           <TitleLevel2Box

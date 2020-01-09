@@ -76,7 +76,7 @@ Button.propTypes = {
   className: PropTypes.string,
   style: PropTypes.object,
   size: PropTypes.oneOf(["small", "medium", "large"]),
-  color: PropTypes.oneOf(["white", "red"]),
+  color: PropTypes.oneOf(["white", "red", "green"]),
   loading: PropTypes.bool
 }
 

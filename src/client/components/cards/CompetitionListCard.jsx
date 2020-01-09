@@ -4,8 +4,8 @@ import Styled from "styled-components"
 import {
   epochToRelativeTime,
   getCompetitionStatus
-} from "../../helpers/DateTime"
-import { nominalToText } from "../../helpers/Number"
+} from "../../helpers/dateTime"
+import { nominalToText } from "../../helpers/number"
 import * as Colors from "../../../style/colors"
 
 export const CardCompetitionStyled = Styled.div`

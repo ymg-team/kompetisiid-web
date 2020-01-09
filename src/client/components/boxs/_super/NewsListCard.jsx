@@ -1,6 +1,6 @@
 import React from "react"
 import { Link } from "react-router-dom"
-import { epochToRelativeTime } from "../../../helpers/DateTime"
+import { epochToRelativeTime } from "../../../helpers/dateTime"
 
 const NewsListCard = props => {
   const { data } = props
@@ -27,7 +27,8 @@ const NewsListCard = props => {
               <a
                 className="btn btn-sm dropdown-button text-muted fa fa-ellipsis-v"
                 title="options"
-                href="javascript:;"
+                href="#"
+                onClick={e => e.preventDefault()}
                 data-target={`menu-${data.id}`}
               />
               <div className="dropdown-items" id={`menu-${data.id}`}>
@@ -44,7 +45,7 @@ const NewsListCard = props => {
                     <Link to={`/super/news/${data.id}`}>Ubah</Link>
                   </li>
                   <li>
-                    <a onClick={() => {}} href="javascript:;">
+                    <a onClick={(e) => e.preventDefault()} href="#">
                       Hapus
                     </a>
                   </li>

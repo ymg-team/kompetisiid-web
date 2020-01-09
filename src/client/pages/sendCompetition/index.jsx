@@ -119,7 +119,7 @@ class AddCompetitionFast extends Component {
                 id="form-send-competition"
                 method="POST"
                 className="form-ki"
-                action="javascript:;"
+                action="#"
               >
                 <InputText
                   label="email"

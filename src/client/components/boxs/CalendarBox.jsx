@@ -3,7 +3,7 @@
 
 import React from "react"
 import Styled from "styled-components"
-import { Month } from "../../helpers/DateTime"
+import { Month } from "../../helpers/dateTime"
 import { fetchJelajah } from "../../pages/competition/actions"
 import { connect } from "react-redux"
 import memoize from "memoize-one"
@@ -523,8 +523,9 @@ class CalendarBox extends React.Component {
                   return (
                     <a
                       key={key}
-                      href="javascript:;"
-                      onClick={() => {
+                      href="#"
+                      onClick={(e) => {
+                        e.preventDefault()
                         this.setState(
                           {
                             current_month: key,
@@ -560,8 +561,9 @@ class CalendarBox extends React.Component {
                 return (
                   <a
                     key={key}
-                    href="javascript:;"
-                    onClick={() => {
+                    href="#"
+                    onClick={(e) => {
+                      e.preventDefault()
                       this.setState(
                         {
                           current_year: n,

@@ -40,8 +40,11 @@ class RequestBox extends Component {
               <div className="align-center">
                 <a
                   className="btn btn-white"
-                  href="javascript:;"
-                  onClick={() => this.handleLoadMore()}
+                  href="#"
+                  onClick={(e) => {
+                    e.preventDefault()
+                    this.handleLoadMore()
+                  }}
                 >
                   Request berikutnya <i className="fa fa-angle-down" />
                 </a>

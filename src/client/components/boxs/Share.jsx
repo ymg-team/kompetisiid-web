@@ -60,8 +60,11 @@ class Share extends React.Component {
               <a
                 key={key}
                 className="share-box_items_link"
-                onClick={() => this.clickHandler(key)}
-                href="javascript:;"
+                onClick={(e) => {
+                  e.preventDefault()
+                  this.clickHandler(key)
+                }}
+                href="#"
                 title={n.title}
               >
                 <img src={n.icon} alt={n.title} />

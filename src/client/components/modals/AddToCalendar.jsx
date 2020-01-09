@@ -42,7 +42,8 @@ const AddToCalendarModal = props => {
           Simpan ke kalender
           <a
             className="btn btn-white btn-close-modal btn-sm fas fa-times"
-            href="javascript:;"
+            href="#"
+            onClick={e => e.preventDefault()}
           />
         </div>
 

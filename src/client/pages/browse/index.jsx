@@ -222,8 +222,11 @@ class Index extends Component {
                   Jelajah
                   {query.mediapartner == 1 ? " Media Partner" : ""}{" "}
                   <a
-                    href="javascript:;"
-                    onClick={() => modal("open", "select-main-kat")}
+                    href="#"
+                    onClick={e => {
+                      e.preventDefault()
+                      modal("open", "select-main-kat")
+                    }}
                   >
                     {parseInt(main_kat) >= 0
                       ? categories.data[main_kat].name
@@ -235,8 +238,11 @@ class Index extends Component {
                       {" "}
                       dan{" "}
                       <a
-                        href="javascript:;"
-                        onClick={() => modal("open", "select-sub-kat")}
+                        href="#"
+                        onClick={e => {
+                          e.preventDefault()
+                          modal("open", "select-sub-kat")
+                        }}
                       >
                         {parseInt(sub_kat) >= 0
                           ? categories.data[main_kat].subcategories[sub_kat]
@@ -254,8 +260,11 @@ class Index extends Component {
                   {/* sortby */}
                   Urutkan{" "}
                   <a
-                    href="javascript:;"
-                    onClick={() => modal("open", "sort-by")}
+                    href="#"
+                    onClick={e => {
+                      e.preventDefault()
+                      modal("open", "sort-by")
+                    }}
                   >
                     {SortText[this.state.sort] || "Terbaru"}
                     <i className="fa fa-angle-down" />
@@ -263,8 +272,11 @@ class Index extends Component {
                   {/* filter by status */}
                   Tampilkan{" "}
                   <a
-                    href="javascript:;"
-                    onClick={() => modal("open", "filter-by-status")}
+                    href="#"
+                    onClick={e => {
+                      e.preventDefault()
+                      modal("open", "filter-by-status")
+                    }}
                   >
                     {FilterStatus[this.state.status] || "Semua"}
                     <i className="fa fa-angle-down" />
@@ -308,7 +320,8 @@ class Index extends Component {
                 Pilih Kategori dibawah ini
                 <a
                   className="btn btn-white btn-close-modal btn-sm fas fa-times"
-                  href="javascript:;"
+                  href="#"
+                  onClick={e => e.preventDefault()}
                 />
               </div>
               <hr />
@@ -316,15 +329,16 @@ class Index extends Component {
                 <ul className="vertical-menu list-categories">
                   <li>
                     <a
-                      href="javascript:;"
-                      onClick={() =>
+                      href="#"
+                      onClick={e => {
+                        e.preventDefault()
                         this.setState({ main_kat: "" }, () => {
                           modal("close", "select-main-kat")
                           this.props.history.push(
                             `/browse${this.props.location.search}`
                           )
                         })
-                      }
+                      }}
                       className="text-muted"
                     >
                       semua kategori
@@ -334,8 +348,9 @@ class Index extends Component {
                     return (
                       <li key={key}>
                         <a
-                          href="javascript:;"
-                          onClick={() => {
+                          href="#"
+                          onClick={e => {
+                            e.preventDefault()
                             modal("close", "select-main-kat")
                             this.props.history.push(
                               `/browse/${n.name}${this.props.location.search}`
@@ -366,15 +381,16 @@ class Index extends Component {
               <ul className="vertical-menu list-categories">
                 <li>
                   <a
-                    href="javascript:;"
-                    onClick={() =>
+                    href="#"
+                    onClick={e => {
+                      e.preventDefault()
                       this.setState({ sub_kat: "" }, () => {
                         modal("close", "select-sub-kat")
                         this.props.history.push(
                           `/browse/${categories.data[main_kat].name}${this.props.location.search}`
                         )
                       })
-                    }
+                    }}
                     className="text-muted"
                   >
                     Semua subkategori
@@ -385,8 +401,9 @@ class Index extends Component {
                       return (
                         <li key={key}>
                           <a
-                            href="javascript:;"
-                            onClick={() => {
+                            href="#"
+                            onClick={e => {
+                              e.preventDefault()
                               modal("close", "select-sub-kat")
                               this.props.history.push(
                                 `/browse/${categories.data[main_kat].name}/${n.name}${this.props.location.search}`
@@ -411,29 +428,32 @@ class Index extends Component {
                 Urutkan kompetisi berdasarkan
                 <a
                   className="btn btn-white btn-close-modal btn-sm fas fa-times"
-                  href="javascript:;"
+                  href="#"
+                  onClick={e => e.preventDefault()}
                 />
               </div>
               <hr />
               <ul className="vertical-menu list-categories">
                 <li>
                   <a
-                    onClick={() => {
+                    onClick={e => {
+                      e.preventDefault()
                       modal("close", "sort-by")
                       this.updateQuery({ sort: "time_dsc" })
                     }}
-                    href="javascript:;"
+                    href="#"
                   >
                     Terbaru
                   </a>
                 </li>
                 <li>
                   <a
-                    onClick={() => {
+                    onClick={e => {
+                      e.preventDefault()
                       modal("close", "sort-by")
                       this.updateQuery({ sort: "prize_dsc" })
                     }}
-                    href="javascript:;"
+                    href="#"
                   >
                     Hadiah Terbesar
                   </a>
@@ -449,29 +469,32 @@ class Index extends Component {
                 Menampilkan kompetisi dengan status
                 <a
                   className="btn btn-white btn-close-modal btn-sm fas fa-times"
-                  href="javascript:;"
+                  href="#"
+                  onClick={e => e.preventDefault()}
                 />
               </div>
               <hr />
               <ul className="vertical-menu list-categories">
                 <li>
                   <a
-                    onClick={() => {
+                    onClick={(e) => {
+                      e.preventDefault()
                       modal("close", "filter-by-status")
                       this.updateQuery({ status: "all" })
                     }}
-                    href="javascript:;"
+                    href="#"
                   >
                     Semua
                   </a>
                 </li>
                 <li>
                   <a
-                    onClick={() => {
+                    onClick={(e) => {
+                      e.preventDefault()
                       modal("close", "filter-by-status")
                       this.updateQuery({ status: "active" })
                     }}
-                    href="javascript:;"
+                    href="#"
                   >
                     Masih berlangsung
                   </a>

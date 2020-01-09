@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 import Loadable from "react-loadable"
-import { nl2br } from "../../helpers/String"
+import { nl2br } from "../../helpers/string"
 import { toCamelCase } from "string-manager"
 import { connect } from "react-redux"
 

@@ -122,7 +122,13 @@ export default props => {
         {/* logout from dashboard */}
         <hr />
         <li>
-          <a onClick={() => props.handleLogout()} href="javascript:;">
+          <a
+            onClick={e => {
+              e.preventDefault()
+              props.handleLogout()
+            }}
+            href="#"
+          >
             Logout
           </a>
         </li>

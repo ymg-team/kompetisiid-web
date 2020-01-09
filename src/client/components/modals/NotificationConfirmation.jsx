@@ -1,6 +1,7 @@
 import React from "react"
 import Styled from "styled-components"
 import { alert } from "../Alert"
+import notification from "../../helpers/browserNotification"
 
 // components
 import Modal from "./index"
@@ -37,9 +38,9 @@ const notificationPermissionHandler = () => {
     Notification.requestPermission().then(function(permission) {
       // If the user accepts, let's create a notification
       if (permission === "granted") {
-        new Notification(
-          "Sukses, tunggu pemberitahuan dari KI ya ;)"
-        )
+        new notification("Sukses", {
+          body: "Tunggu pemberitahuan dari KI ya ;)"
+        })
         // do callback
         return notificationCallback()
       }
@@ -62,10 +63,15 @@ const NotificationConfirmation = props => {
       <NotificationConfirmationStyled className="modal-white-content">
         <div>Mengizinkan Kompetisi Id akses notifikasi</div>
         <br />
-        <Button color="green" size="small" text="izinkan" onClick={() => {
-          modal("close", "notification-confirmation")
-          notificationPermissionHandler()
-        }} />
+        <Button
+          color="green"
+          size="small"
+          text="izinkan"
+          onClick={() => {
+            modal("close", "notification-confirmation")
+            notificationPermissionHandler()
+          }}
+        />
         <Button
           onClick={() => modal("close", "notification-confirmation")}
           color="red"

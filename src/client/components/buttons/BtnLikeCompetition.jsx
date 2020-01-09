@@ -18,12 +18,15 @@ class BtnLikeCompetition extends React.Component {
     return (
       <a
         className="btn"
-        href="javascript:;"
+        href="#"
         title={`Klik untuk ${
           this.props.isLike ? "batal menyukai" : "menyukai"
         } kompetisi ini`}
         style={{ fontSize: 25, padding: "5px 10px" }}
-        onClick={() => this.clickHandler()}
+        onClick={(e) => {
+          e.preventDefault()
+          this.clickHandler()
+        }}
       >
         <span
           className={`${

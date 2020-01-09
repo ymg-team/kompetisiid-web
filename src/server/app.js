@@ -94,17 +94,21 @@ App.use(
   "/service-worker.js",
   express.static(__dirname + "/../../public/service-worker.js")
 )
+App.use("/ads.txt", express.static(__dirname + "/../../public/ads.txt"))
 App.use(
-  "/ads.txt",
-  express.static(__dirname + "/../../public/ads.txt")
+  "/firebase-messaging-sw.js",
+  express.static(__dirname + "/../../public/firebase-messaging-sw.js")
 )
 
 // React path
 
 // SEO manager
-App.get("/competition/:id/*", FrontMiddleware.generateMetaCompetition, AppRender)
+App.get(
+  "/competition/:id/*",
+  FrontMiddleware.generateMetaCompetition,
+  AppRender
+)
 App.get("/news/:id/*", FrontMiddleware.generateMetaNews, AppRender)
-
 
 // global routes
 App.get("*", AppRender)

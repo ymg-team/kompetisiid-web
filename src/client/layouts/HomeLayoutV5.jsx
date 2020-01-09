@@ -1,7 +1,7 @@
 import React, { Component } from "react"
 import { connect } from "react-redux"
 import * as Colors from "../../style/colors"
-import { initModalImages } from "../helpers/Modal"
+import { initModalImages } from "../helpers/modal"
 import { resendEmailValidationToken } from "../../store/user/actions"
 
 // components
@@ -178,9 +178,12 @@ class RootLayoutV5 extends Component {
               Kamu belum melakukan verifikasi email, segera cek email kamu. Atau
               klik{" "}
               <a
-                onClick={() => this.props.dispatch(resendEmailValidationToken())}
+                onClick={(e) => {
+                  e.preventDefault()
+                  this.props.dispatch(resendEmailValidationToken()) 
+                }}
                 style={StickyNoteLinkStyle}
-                href="javascript:;"
+                href="#"
               >
                 kirim ulang link verifikasi
               </a>

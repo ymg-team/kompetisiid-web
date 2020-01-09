@@ -115,7 +115,7 @@ class Register extends Component {
 
           {/* form input */}
           <div className="login-box__content">
-            <form className="form-ki" action="javascript:;" method="post">
+            <form className="form-ki" action="#" method="post">
               {/* input avatar */}
               <div className="login-box__content__avatar">
                 <p>

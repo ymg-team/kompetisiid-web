@@ -1,6 +1,17 @@
-"use strict"
-const CACHE_NAME = "cache-ki-v2"
+const CACHE_NAME = "cache-ki-0.0.1"
 const urlsToCache = []
+
+self.addEventListener("activate", async () => {
+  // this block only called once when service worker is activate
+  try {
+    const options = {}
+    // get push manager subscription
+    const subscription = await self.registration.pushManager.subscribe(options)
+    console.log(JSON.stringify("subscription", subscription))
+  } catch (e) {
+    console.error("[Error Service Worker Activation]", e)
+  }
+})
 
 self.addEventListener("beforeinstallprompt", function(event) {
   // Stash the event so it can be triggered later.
@@ -23,35 +34,6 @@ self.addEventListener("install", function(event) {
   )
 })
 
-// https://developers.google.com/web/fundamentals/primers/service-workers#cache_and_return_requests
 self.addEventListener("fetch", function(event) {
-  event.respondWith(
-    caches.match(event.request).then(function(response) {
-      // cache hit - return response
-      if (response) {
-        return response
-      }
-
-      // create new cache
-      return fetch(event.request).then(function(response) {
-        // check if we received a valid response
-        // Make sure the response type is basic, which indicates that it's a request from our origin. This means that requests to third party assets aren't cached as well.
-        if (!response || response.status !== 200 || response.type !== "basic") {
-          return response
-        }
-
-        // IMPORTANT: Clone the response. A response is a stream
-        // and because we want the browser to consume the response
-        // as well as the cache consuming the response, we need
-        // to clone it so we have two streams.
-        const responseToCache = response.clone()
-
-        caches.open(CACHE_NAME).then(function(cache) {
-          cache.put(event.request, responseToCache)
-        })
-
-        return response
-      })
-    })
-  )
+  return fetch(event.request)
 })
