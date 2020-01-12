@@ -44,7 +44,7 @@ class Login extends React.Component {
       loading: false,
       inputPassword: false,
       profile: {},
-      isSuperPage: this.props.location.pathname === "/_super"
+      isSuperPage: this.props.location.pathname === "/super"
     }
   }
 
