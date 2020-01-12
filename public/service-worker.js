@@ -35,5 +35,13 @@ self.addEventListener("install", function(event) {
 })
 
 self.addEventListener("fetch", function(event) {
-  return fetch(event.request)
+  const request = event.request
+  if (request.url.indexOf("/api") !== 0) {
+    event.respondWith(
+      caches.match(event.request).then(function(response) {
+        // return from cache, otherwise fetch from network
+        return response || fetch(request)
+      })
+    )
+  }
 })
