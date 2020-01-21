@@ -82,11 +82,11 @@ export default class Footer extends Component {
                 </p>
                 Kami adalah sebuah platform kompetisi untuk berbagai macam
                 kompetisi yang diadakan di Indonesia untuk selanjutnya dipanggil
-                'KI'. Dipersembahkan oleh ID More. Penyelenggara dapat
-                menggunakan KI sebagai media publikasi, media partner ataupun
-                kerja sama untuk kompetisi yang mereka adakan. Peserta dapat
-                menjelajahi dan mengikuti berbagai kategori kompetisi di KI dan
-                semoga menjadi pemenang.
+                'KI'. Dipersembahkan oleh Yussan Media Group. Penyelenggara
+                dapat menggunakan KI sebagai media publikasi, media partner
+                ataupun kerja sama untuk kompetisi yang mereka adakan. Peserta
+                dapat menjelajahi dan mengikuti berbagai kategori kompetisi di
+                KI dan semoga menjadi pemenang.
               </div>
               <div className="col-md-3">
                 <p>
@@ -163,7 +163,7 @@ export default class Footer extends Component {
                   alt="kompetisi id icon"
                 />
                 <small className="footer-copyright-text">
-                  &copy; 2013 - {new Date().getFullYear()} by Id More
+                  &copy; 2013 - {new Date().getFullYear()} by Yussan Media Group
                   <br />
                   DIY, Indonesia
                 </small>
@@ -201,10 +201,14 @@ export default class Footer extends Component {
             <div className="row">
               <div className="col-md-12">
                 Powered by{" "}
-                <a href="https://byidmore.com" target="_blank">
+                <a
+                  href="https://yussanmediagroup.org"
+                  rel="noopener noreferer"
+                  target="_blank"
+                >
                   <img
-                    src="/assets/4.2/img/icon-byidmore.png"
-                    alt="idmore icon"
+                    src="/assets/4.2/img/ymg-icon-small.png"
+                    alt="Yussan Media Group Small Icon"
                   />
                 </a>
               </div>

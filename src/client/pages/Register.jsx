@@ -214,7 +214,7 @@ export default class Register extends Component {
           {/*</div>*/}
           <div className="text-center">
             <small className="white-text">
-              Kompetisi copyright © Id More 2016
+              Kompetisi copyright © Yussan Media Group 2019
             </small>
           </div>
         </div>
