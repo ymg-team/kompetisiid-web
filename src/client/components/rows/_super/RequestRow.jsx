@@ -93,8 +93,7 @@ const RequestRow = props => {
             </a>{" "}
           </h4>
           <p className="text-muted">
-            Dipasang oleh <a href={`mailto:${props.email}`}>{props.email}</a>
-            {" "}
+            Dipasang oleh <a href={`mailto:${props.email}`}>{props.email}</a>{" "}
             pada {epochToRelativeTime(props.created_at)}
             <br />
             {props.updated_at !== props.created_at
@@ -113,7 +112,7 @@ const RequestRow = props => {
               <small>
                 <a
                   style={{ color: Colors.mainGreen }}
-                  href="javasript:;"
+                  href="javascript:;"
                   onClick={() => handleAction(true, props)}
                 >
                   {" "}
@@ -122,7 +121,7 @@ const RequestRow = props => {
                 <a
                   style={{ color: Colors.mainRed }}
                   href="#"
-                  onClick={(e) => {
+                  onClick={e => {
                     e.preventDefault(e)
                     handleAction(false, props)
                   }}
