@@ -66,7 +66,7 @@
     "redux": "^4.0.0",
     "request": "^2.87.0",
     "seal-middleware": "^0.1.0",
-    "string-manager": "^2.0.0-beta.0",
+    "string-manager": "^3.0.0",
     "styled-components": "^3.4.10",
     "superagent": "^4.0.0-beta.5",
     "sweetalert": "^2.1.0",
@@ -105,6 +105,7 @@
     "standard-version": "^4.2.0",
     "style-loader": "^0.23.1",
     "uglifyjs-webpack-plugin": "^1.2.5",
-    "webpack": "3.6.0"
+    "webpack": "3.6.0",
+    "webpack-bundle-analyzer": "^3.6.0"
   }
 }

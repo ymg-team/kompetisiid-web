@@ -202,7 +202,7 @@ export default class Footer extends Component {
               <div className="col-md-12">
                 Powered by{" "}
                 <a
-                  href="https://yussanmediagroup.org"
+                  href="https://byymg.com"
                   rel="noopener noreferer"
                   target="_blank"
                 >

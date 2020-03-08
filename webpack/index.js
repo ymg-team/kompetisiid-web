@@ -2,11 +2,13 @@ if (process.env.NODE_ENV == "development") require("dotenv").config()
 
 const { NODE_ENV, APP_KEY } = process.env
 
-const webpack = require("webpack")
+const Webpack = require("webpack")
 const Path = require("path")
 const AssetsPlugin = require("assets-webpack-plugin")
 const BUILD_DIR = "../dist-client"
 const ExtractTextPlugin = require("extract-text-webpack-plugin")
+// const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
+//   .BundleAnalyzerPlugin
 
 module.exports = {
   entry: {
@@ -33,17 +35,18 @@ module.exports = {
   },
 
   plugins: [
+    // new BundleAnalyzerPlugin(),
     new AssetsPlugin({
       prettyPrint: true,
       path: Path.join(__dirname, "../src/config")
     }),
-    new webpack.NoEmitOnErrorsPlugin(),
-    new webpack.optimize.CommonsChunkPlugin({
+    new Webpack.NoEmitOnErrorsPlugin(),
+    new Webpack.optimize.CommonsChunkPlugin({
       name: "vendor",
       filename: NODE_ENV == "production" ? "vendor.[hash].js" : "vendor.js",
       minChunks: Infinity
     }),
-    new webpack.DefinePlugin({
+    new Webpack.DefinePlugin({
       "process.env": {
         NODE_ENV: JSON.stringify(NODE_ENV || "development"),
         APP_KEY: JSON.stringify(APP_KEY || "kompetisiid")
@@ -96,7 +99,7 @@ module.exports = {
         use: ExtractTextPlugin.extract({
           use: [
             {
-              loader: "css-loader",
+              loader: "css-loader"
               // options: { minimize: NODE_ENV === "production" }
             },
             { loader: "sass-loader" }
@@ -107,10 +110,10 @@ module.exports = {
         test: /\.css$/,
         use: [
           {
-            loader: 'style-loader' // creates style nodes from JS strings
+            loader: "style-loader" // creates style nodes from JS strings
           },
           {
-            loader: 'css-loader', // translates CSS into CommonJS
+            loader: "css-loader" // translates CSS into CommonJS
           }
         ]
       }

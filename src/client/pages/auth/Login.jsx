@@ -3,6 +3,7 @@ import Styled from "styled-components"
 import { fullPageLoader } from "../../components/preloaders/FullPage"
 import { connect } from "react-redux"
 import { resetValidator } from "../../components/form/Validator"
+import { queryToObj } from "string-manager"
 
 // components
 import Input from "../../components/form/InputText"
@@ -72,6 +73,7 @@ class Login extends React.Component {
 
   UNSAFE_componentWillReceiveProps(np) {
     const { username } = this.state
+
     if (
       np.profile[username] &&
       np.profile[username] != this.props.profile["username"]
@@ -93,7 +95,12 @@ class Login extends React.Component {
         )
         // redirect to /super/dashboard
         setTimeout(() => {
-          location.href = this.state.isSuperPage ? "/super/dashboard" : "/"
+          const query = queryToObj(this.props.location.search)
+          location.href = this.state.isSuperPage
+            ? "/super/dashboard"
+            : query.ref
+            ? query.ref
+            : `/`
         }, 1000)
       } else {
         // user and password not match

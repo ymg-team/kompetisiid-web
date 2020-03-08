@@ -53,7 +53,7 @@ let addedEventScroll = false
 
 class RootLayoutV5 extends Component {
   state = {
-    showBtnTop: false, 
+    showBtnTop: false,
     online: true,
     showNotifConfirmation: false
   }
@@ -62,7 +62,10 @@ class RootLayoutV5 extends Component {
 
   componentDidMount = () => {
     // global function to use react-router transition
-    window.transitionTo = path => this.props.history.push(path)
+    window.transitionTo = path => {
+      path += `?ref=${location.pathname}`
+      this.props.history.push(path)
+    }
 
     // init modal images
     initModalImages()
@@ -78,8 +81,8 @@ class RootLayoutV5 extends Component {
     })
 
     // online / offline listener
-    window.addEventListener('online',  () => this._updateOnlineStatus())
-    window.addEventListener('offline', () => this._updateOnlineStatus())
+    window.addEventListener("online", () => this._updateOnlineStatus())
+    window.addEventListener("offline", () => this._updateOnlineStatus())
 
     // Google Analytics handler
     this.props.history.listen(location => {
@@ -92,7 +95,7 @@ class RootLayoutV5 extends Component {
 
   _updateOnlineStatus() {
     this.setState({
-      online: navigator.onLine 
+      online: navigator.onLine
     })
   }
 
@@ -102,9 +105,9 @@ class RootLayoutV5 extends Component {
       this.props.location.pathname
     )[0].route
 
-    let onlineWrapperStyle = {} 
+    let onlineWrapperStyle = {}
 
-    if(!this.state.online) {
+    if (!this.state.online) {
       onlineWrapperStyle = {
         opacity: "0.4",
         filter: "blur(4px)",
@@ -114,7 +117,6 @@ class RootLayoutV5 extends Component {
 
     return (
       <LayoutStyled>
-
         {/* offline wrapper */}
         <div style={onlineWrapperStyle}>
           {this.props.location.pathname === "/" || fullscreen ? null : (
@@ -152,9 +154,9 @@ class RootLayoutV5 extends Component {
             &nbsp;
             <span>Kembali ke Atas</span>
           </BackToTop>
-        </div>  
+        </div>
         {/* end of offline wrapper */}
-        
+
         {/* global component */}
         <Alert />
         <FullScreenLoader />
@@ -164,32 +166,32 @@ class RootLayoutV5 extends Component {
         <ImageModal />
         <NotificationConfirmModal />
         {/* end of global modal */}
-        
+
         {/* notification of network is offline */}
         {/* notification to verify email */}
-        {
-          !this.state.online ? <div style={StickyNoteStyle}>
-          Jaringan kamu sedang "offline", yang sabar ya :(
-        </div> : !fullscreen &&
+        {!this.state.online ? (
+          <div style={StickyNoteStyle}>
+            Jaringan kamu sedang "offline", yang sabar ya :(
+          </div>
+        ) : !fullscreen &&
           this.props.session &&
           this.props.session.id &&
           !this.props.session.is_verified ? (
-            <div style={StickyNoteStyle}>
-              Kamu belum melakukan verifikasi email, segera cek email kamu. Atau
-              klik{" "}
-              <a
-                onClick={(e) => {
-                  e.preventDefault()
-                  this.props.dispatch(resendEmailValidationToken()) 
-                }}
-                style={StickyNoteLinkStyle}
-                href="#"
-              >
-                kirim ulang link verifikasi
-              </a>
-            </div>
-          ) : null
-        }
+          <div style={StickyNoteStyle}>
+            Kamu belum melakukan verifikasi email, segera cek email kamu. Atau
+            klik{" "}
+            <a
+              onClick={e => {
+                e.preventDefault()
+                this.props.dispatch(resendEmailValidationToken())
+              }}
+              style={StickyNoteLinkStyle}
+              href="#"
+            >
+              kirim ulang link verifikasi
+            </a>
+          </div>
+        ) : null}
       </LayoutStyled>
     )
   }

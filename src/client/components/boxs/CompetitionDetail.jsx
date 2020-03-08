@@ -8,6 +8,7 @@ import Styled from "styled-components"
 import AddToCalendarModal from "../modals/AddToCalendar"
 import { Link } from "react-router-dom"
 import BtnJoin from "../buttons/BtnJoin"
+import BtnSubscribe from "../buttons/BtnSubscribe"
 import { alert } from "../Alert"
 import BtnLike from "../buttons/BtnLikeCompetition"
 
@@ -29,25 +30,6 @@ const CompetitionDetailBox = props => {
     data.deadline_at,
     data.announcement_at
   )
-
-  const _subscribeHandler = () => {
-    const permission = Notification.permission
-    
-    if (!("Notification" in window)) {
-      return alert(true, "Browser kamu tidak support untuk notifikasi, silahkan update atau ganti browser lain", "error")
-    }
-
-    if(permission === "granted") {
-      return props.dispatch(subscribeCompetition(data.id))
-    } else if (permission === "default") {
-      window.notificationCallback = function() {
-        return props.dispatch(subscribeCompetition(data.id))
-      }
-      modal("open", "notification-confirmation")
-    } else {
-      return alert(true, "Kamu tidak memberikan akses notifikasi untuk Kompetisi Id. Cek kembali setingan browser kamu", "error")
-    }
-  }
 
   return (
     <CompetitionDetailStyled id="competition-detail" className="row">
@@ -85,9 +67,7 @@ const CompetitionDetailBox = props => {
                 ,
                 <a
                   className="text-muted"
-                  href={`/browse/${data.main_category.name}/${
-                    data.sub_category.name
-                  }`}
+                  href={`/browse/${data.main_category.name}/${data.sub_category.name}`}
                 >
                   <strong>{data.sub_category.name}</strong>
                 </a>
@@ -152,6 +132,14 @@ const CompetitionDetailBox = props => {
               <BtnJoin data={data} />
               {/* end of button to join competition */}
 
+              {/* subscribe button */}
+              <BtnSubscribe
+                authData={props.authData}
+                dispatch={props.dispatch}
+                data={data}
+              />
+              {/* end if subscribe button */}
+
               {/* like button */}
               <BtnLike
                 competition_id={data.id}
@@ -171,19 +159,7 @@ const CompetitionDetailBox = props => {
                   <ul>
                     <li>
                       <a
-                        onClick={(e) => {
-                          e.preventDefault()
-                          _subscribeHandler()
-                        } }
-                        href="#"
-                        title="subscribe kompetisi"
-                      >
-                        {data.is_subscribed ? "Unsubscribe Kompetisi" : "subscribe Kompetisi"}
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        onClick={(e) => {
+                        onClick={e => {
                           e.preventDefault()
                           modal("open", "save-to-calendar")
                         }}
@@ -196,7 +172,7 @@ const CompetitionDetailBox = props => {
                     <li>
                       <a
                         className="scopy-button"
-                        onClick={(e) => {
+                        onClick={e => {
                           e.preventDefault()
                           handleCopyLink(link_competition)
                         }}
