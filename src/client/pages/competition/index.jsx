@@ -134,6 +134,7 @@ class Index extends Component {
           <CompetitionDetailBox
             dispatch={this.props.dispatch}
             data={detail[encid].data}
+            authData={this.props.authData}
           />
 
           <div className="m-20" />
@@ -331,9 +332,10 @@ function generateJsonld(n, url) {
 }
 
 function mapStateToProps(state) {
-  const { Kompetisi } = state
+  const { Kompetisi, User } = state
   return {
-    kompetisi: Kompetisi
+    kompetisi: Kompetisi,
+    authData: User.session || {}
   }
 }
 

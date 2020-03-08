@@ -31,13 +31,6 @@ const SocMeds = [
     link: "https://www.linkedin.com/shareArticle?mini=true&url=",
     icon: "https://img.icons8.com/color/48/000000/linkedin.png",
     title: "Share ke Linkedin"
-  },
-  {
-    name: "Sebangsa",
-    link: "https://sebangsa.com/post/create?text=",
-    icon:
-      "https://sebangsanetwork.com/wp-content/uploads/2018/08/logo-green.svg",
-    title: "Share ke Sebangsa"
   }
 ]
 
@@ -60,7 +53,7 @@ class Share extends React.Component {
               <a
                 key={key}
                 className="share-box_items_link"
-                onClick={(e) => {
+                onClick={e => {
                   e.preventDefault()
                   this.clickHandler(key)
                 }}

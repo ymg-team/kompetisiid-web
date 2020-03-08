@@ -28,7 +28,7 @@ export const CardCompetitionStyled = Styled.div`
       padding: 20px;
       h3 {
         font-weight: 500;
-        margin: 10px 0 0;
+        margin: 10px 0 10px;
         height: 4.1em;
         overflow: hidden;
       }

@@ -1,6 +1,6 @@
-import React from 'react'
-import { getCompetitionStatus } from '../../helpers/dateTime'
-import { alert } from '../Alert'
+import React from "react"
+import { getCompetitionStatus } from "../../helpers/dateTime"
+import { alert } from "../Alert"
 
 export default props => {
   const { is_ended, is_waiting } = getCompetitionStatus(
@@ -10,22 +10,22 @@ export default props => {
   return (
     <a
       id={props.id}
-      style={{ marginRight: '10px' }}
+      style={{ marginRight: "10px" }}
       onClick={() => {
         if (is_ended || is_waiting)
-          alert(true, 'Pendaftaran sudah ditutup', 'error')
+          alert(true, "Pendaftaran sudah ditutup", "error")
       }}
       href={
         is_ended
-          ? 'javascript:;'
+          ? "javascript:;"
           : `/exit?to=${props.data.link_join || props.data.link_source}`
       }
       target="_blank"
       className={`btn btn-join btn-lg ${
-        is_ended || is_waiting == 'berakhir' ? 'btn-gray' : 'btn-green'
+        is_ended || is_waiting == "berakhir" ? "btn-gray" : "btn-green"
       }`}
     >
-      {is_ended || is_waiting ? 'Pendaftaran Ditutup' : 'Ikuti Kompetisi'}
+      {is_ended || is_waiting ? "Pendaftaran Ditutup" : "Registrasi Di Sini"}
     </a>
   )
 }
