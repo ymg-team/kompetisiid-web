@@ -31,7 +31,7 @@ export default props => {
   const { n } = props
   const target = `/news/${n.id}/${n.nospace_title}`
   return (
-    <CardCompetitionStyled className="col-md-4">
+    <CardCompetitionStyled className="col-md-4 col-sm-6">
       <div
         className="card-competition"
         style={{ opacity: n.is_draft ? 0.5 : 1 }}
@@ -63,7 +63,9 @@ export default props => {
           <a className="muted" href="#">
             <img
               className="avatar"
-              src={n.author.avatar.small || `/assets/4.2/img/avatar-default.jpg`}
+              src={
+                n.author.avatar.small || `/assets/4.2/img/avatar-default.jpg`
+              }
             />
           </a>
         </div>
