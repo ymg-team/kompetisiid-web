@@ -188,7 +188,7 @@ class Navbar extends Component {
               <SearchStyled>
                 <div className="col-xs-12">
                   <ul className="inline-list inline-list-left">
-                    <li style={{ padding: 0 }}>
+                    <li style={{ padding: 0, marginRight: 12 }}>
                       <Link
                         id="ki-logo"
                         to="/"
@@ -233,7 +233,7 @@ class Navbar extends Component {
               <React.Fragment>
                 <div style={{ padding: 0 }} className="col-xs-6">
                   <ul className="inline-list inline-list-left">
-                    <li style={{ padding: 0 }}>
+                    <li style={{ padding: 0, marginRight: 12 }}>
                       <Link
                         id="ki-logo"
                         to="/"

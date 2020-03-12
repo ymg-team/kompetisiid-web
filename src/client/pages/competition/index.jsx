@@ -68,15 +68,15 @@ class Index extends Component {
     const afterScroll =
       document.getElementById("competition-detail").offsetHeight + 40
     const tabEl = document.getElementById("container-competition-tab")
-    const joinEl = document.getElementById("btn-join")
+    // const joinEl = document.getElementById("btn-join")
 
-    if (joinEl && afterScroll) {
+    if (afterScroll) {
       if (window.pageYOffset > afterScroll) {
         tabEl.classList.add("fixed")
-        joinEl.style.opacity = 1
+        // joinEl.style.opacity = 1
       } else {
         tabEl.classList.remove("fixed")
-        joinEl.style.opacity = 0
+        // joinEl.style.opacity = 0
       }
     }
   }
