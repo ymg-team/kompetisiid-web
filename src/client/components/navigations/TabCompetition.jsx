@@ -5,23 +5,6 @@ import BtnJoin from "../buttons/BtnJoin"
 // import { pushScript } from "../../helpers/DomEvents"
 
 class TabCompetition extends Component {
-  componentDidMount() {
-
-    // // disquss count sdk
-    // pushScript("//kompetisiindonesia.disqus.com/count.js", {
-    //   id: "dsq-count-scr"
-    // })
-
-    // setTimeout(() => {
-    //   this.resetDisqusCount()
-    // }, 2000)
-  }
-
-  // resetDisqusCount = () => {
-  //   console.log("reset disqus count...")
-  //   if (window.DISQUSWIDGETS) DISQUSWIDGETS.getCount({ reset: true })
-  // }
-
   render = () => {
     const n_pengumuman = this.props.data
       ? this.props.data.announcement.length
@@ -44,9 +27,7 @@ class TabCompetition extends Component {
                       className={this.props.active - 1 == key ? "active" : ""}
                     >
                       <Link
-                        to={`/competition/${this.props.data.id}/${
-                          tab[key].link
-                        }/${this.props.data.nospace_title}`}
+                        to={`/competition/${this.props.data.id}/${tab[key].link}/${this.props.data.nospace_title}`}
                       >
                         {n.name}
                         &nbsp;
@@ -92,7 +73,7 @@ class TabCompetition extends Component {
                     </li>
                   ))}
                 </ul>
-                <BtnJoin id="btn-join" {...this.props} />
+                {/* <BtnJoin id="btn-join" {...this.props} /> */}
               </div>
             </div>
           </div>

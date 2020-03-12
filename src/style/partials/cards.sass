@@ -8,32 +8,30 @@
 
 // media partner competition 
 .card-mediapartner
-    display: table
-    float: inherit
+    display: flex
     border-top: 1px solid $color-gray-verysoft
-    padding: 30px 0
-    width: 100%
-    .thumbnails 
-        float: left
-        width: 200px
+    padding: 40px 0
+    .thumbnails
+        flex: 1
         overflow: hidden
         height: 150px
-        img 
+        img
             width: 100%
-    .details 
+            padding: 0 20px
+    .details
+        flex: 2
         padding: 0 10px
-        float: left
-        width: calc(100% - 200px)
-        h3 
+        line-height: 1.6
+        h3
             margin: 10px 0 0
-    .buttons 
+    .buttons
         float: right
         width: 100px
-        .btn 
+        .btn
             display: flex
 // error card
 .container
-    &.error 
+    &.error
         background: $color-white-main
         display: block
         padding: 10px
@@ -41,11 +39,8 @@
         margin: 2em auto
         line-height: 1.1
         color: $color-gray-medium
-        h1 
+        h1
             font-size: 5em
             margin: .1em 0
-        p 
+        p
             line-height: 1.3em
-            
-
-

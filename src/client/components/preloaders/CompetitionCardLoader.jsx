@@ -6,9 +6,9 @@ const Loader = props => {
     childs.push(
       <div
         key={n}
-        className={`${props.size == "large" ? "col-md-4" : "col-md-3"} ${
-          n > 0 ? "hide-mobile" : ""
-        }`}
+        className={`${
+          props.size == "large" ? "col-md-4 col-sm-6" : "col-md-3"
+        } ${n > 0 ? "hide-mobile" : ""}`}
       >
         <div className="competition-loader">
           <div className="animated-background">

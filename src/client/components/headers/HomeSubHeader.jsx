@@ -48,7 +48,7 @@ const SubHeader = Styled.div`
     .text{
       color: ${Colors.mainGray};
       padding: 3em 0;
-      font-size: .8em;
+      font-size: .9em;
     }
 
     .competition-slider {
@@ -125,7 +125,7 @@ class HomeSubHeader extends Component {
     return (
       <SubHeader id="homepage-subheader">
         <Slider className="container subheader-content home-slider">
-          <WelcomeStaticSlider stats={this.props.stats} />
+          {/* <WelcomeStaticSlider stats={this.props.stats} /> */}
           {status && status === 200
             ? data.map((n, key) => <CompetitionSlider key={key} {...n} />)
             : null}
@@ -176,15 +176,12 @@ const CompetitionSlider = props => (
     <div className="competition-slider_text col-md-6">
       <div className="col-md-12">
         <h1 style={{ paddingBottom: 0 }}>{props.title}</h1>
-        <h2 >
-          Hadiah senilai {nominalToText(props.prize.total)}
-        </h2>
+        <h2>Hadiah senilai {nominalToText(props.prize.total)}</h2>
       </div>
       <div className="col-md-12">
         <div className="text">{props.sort}</div>
         <Link
           to={`/competition/${props.id}/regulations/${props.nospace_title}`}
-          style={{ width: "150px" }}
           className="btn btn-bordergray btn-rounded btn-md"
         >
           Selengkapnya
