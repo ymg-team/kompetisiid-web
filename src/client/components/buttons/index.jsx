@@ -17,7 +17,7 @@ const ButtonStyled = Styled.button`
       default:
         return `
           font-size: 12px;
-          padding: 2px 5px;`
+          padding: 5px 8px;`
     }
   }}
 

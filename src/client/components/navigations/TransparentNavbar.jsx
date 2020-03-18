@@ -61,7 +61,7 @@ const NavbarStyled = Styled.div`
 
   a {
     transition: all .5s ease;
-    color: #FFF;
+    // color: #FFF;
     text-decoration: none;
     &:hover {
       font-weight: bold 
@@ -166,12 +166,6 @@ class Navbar extends Component {
   }
 
   render() {
-    let logo = "/assets/images/small-white-logo-transparent.png"
-    if (this.props.className === "bg-gray")
-      logo = "/assets/images/small-red-logo-transparent.png"
-    if (this.state.sticky)
-      logo = "/assets/images/small-red-logo-transparent.png"
-
     const session = this.props.user.session || {}
 
     return (
@@ -192,7 +186,9 @@ class Navbar extends Component {
                       <Link
                         id="ki-logo"
                         to="/"
-                        style={{ backgroundImage: `url(${logo})` }}
+                        style={{
+                          backgroundImage: `url(/assets/images/small-red-logo-transparent.png)`
+                        }}
                       />
                     </li>
                     <li style={{ width: "calc(100% - 40px - 40px)" }}>
@@ -237,7 +233,9 @@ class Navbar extends Component {
                       <Link
                         id="ki-logo"
                         to="/"
-                        style={{ backgroundImage: `url(${logo})` }}
+                        style={{
+                          backgroundImage: `url(/assets/images/small-red-logo-transparent.png)`
+                        }}
                       />
                     </li>
                     <li>

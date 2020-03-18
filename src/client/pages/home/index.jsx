@@ -124,14 +124,6 @@ class Home extends Component {
       <React.Fragment>
         <Helmet />
 
-        {/* navbar */}
-        {/* special background image */}
-        <div className="bg-gray">
-          {/* navbar */}
-          <Navbar className="bg-gray" location={this.props.location} />
-          {/* slider */}
-        </div>
-
         <div className="col-md-12">
           <SubHeaderHome
             stats={kompetisi.stats || {}}
