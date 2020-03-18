@@ -104,7 +104,11 @@ class Header extends Component {
               {Object.keys(session).length > 0 && session.id ? (
                 <li>
                   <div className="dropdown">
-                    <a className="avatar" href="#" onClick={e => e.preventDefault()}>
+                    <a
+                      className="avatar"
+                      href="#"
+                      onClick={e => e.preventDefault()}
+                    >
                       <img
                         className="dropdown-button"
                         src="/assets/4.2/img/avatar-default.jpg"
@@ -132,7 +136,7 @@ class Header extends Component {
                         <li>
                           <a
                             href="#"
-                            onClick={(e) => {
+                            onClick={e => {
                               e.preventDefault()
                               this.handleLogout()
                             }}
@@ -163,7 +167,7 @@ class Header extends Component {
           />
           <a
             id="btn-closesearch"
-            onClick={(e) => {
+            onClick={e => {
               e.preventDefault()
               if (q != "") return (window.location.href = "/browse")
             }}

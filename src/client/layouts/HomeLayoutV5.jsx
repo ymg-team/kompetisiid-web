@@ -119,11 +119,7 @@ class RootLayoutV5 extends Component {
       <LayoutStyled>
         {/* offline wrapper */}
         <div style={onlineWrapperStyle}>
-          {this.props.location.pathname === "/" || fullscreen ? null : (
-            <div style={{ backgroundColor: "rgb(228, 228, 228)" }}>
-              <Navbar location={this.props.location} className="bg-gray" />
-            </div>
-          )}
+          <Navbar location={this.props.location} />
 
           {renderRoutes(this.props.route.routes)}
 
