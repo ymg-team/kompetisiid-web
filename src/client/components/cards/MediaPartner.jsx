@@ -69,10 +69,10 @@ export default class MediaPartner extends Component {
       return (
         <div className="align-center">
           <GAds
-            style={{ marginTop: "50px" }}
             adClient="ca-pub-4468477322781117"
             adSlot={1270681813}
             timeout={1000}
+            style={{ marginBottom: 0 }}
           />
         </div>
       )

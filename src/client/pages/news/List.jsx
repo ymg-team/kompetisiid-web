@@ -119,7 +119,7 @@ class List extends Component {
             timeout={1000}
             dataAdFormat="auto"
             dataFullWidthResponsive={true}
-            style={{ marginBottom: 10 }}
+            style={{ marginBottom: 0 }}
           />
           {/* end of GA channel news list */}
         </div>
@@ -137,6 +137,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(
-  mapStateToProps
-)(List)
+export default connect(mapStateToProps)(List)
