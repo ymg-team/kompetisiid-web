@@ -28,10 +28,14 @@ const LabelDraft = () => (
 )
 
 export default props => {
-  const { n } = props
+  const { n, size } = props
   const target = `/news/${n.id}/${n.nospace_title}`
   return (
-    <CardCompetitionStyled className="col-md-4 col-sm-6">
+    <CardCompetitionStyled
+      className={
+        props.size == "small" ? "col-md-3 col-sm-6" : "col-md-4 col-sm-6"
+      }
+    >
       <div
         className="card-competition"
         style={{ opacity: n.is_draft ? 0.5 : 1 }}
