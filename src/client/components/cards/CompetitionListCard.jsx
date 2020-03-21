@@ -82,6 +82,7 @@ export const CardCompetitionStyled = Styled.div`
       background-size: cover;
       background-position: center top;
       background-color: #f4f4f4;
+      border-radius: 18px;
       img {
         max-width: 100%;
       }
@@ -230,41 +231,43 @@ const CompetitionListCard = props => {
               </span>
             ) : null}
           </div>
-          <div className="meta">
-            <p>
-              <strong>{nominalToText(n.prize.total)}</strong>
-              <span className="text-muted">&nbsp;total hadiah</span>
-            </p>
-
-            {/* competition status */}
-            {is_ended ? (
+          {props.size != "small" ? (
+            <div className="meta">
               <p>
-                <strong>Kompetisi telah berakhir</strong>
+                <strong>{nominalToText(n.prize.total)}</strong>
+                <span className="text-muted">&nbsp;total hadiah</span>
               </p>
-            ) : null}
 
-            {is_waiting ? (
-              <p>
-                <strong>{epochToRelativeTime(n.announcement_at)}</strong>{" "}
-                <span className="text-muted">Pengumuman pemenang</span>
-              </p>
-            ) : null}
+              {/* competition status */}
+              {is_ended ? (
+                <p>
+                  <strong>Kompetisi telah berakhir</strong>
+                </p>
+              ) : null}
 
-            {deadline_at > now ? (
-              <p>
-                <strong>{epochToRelativeTime(n.deadline_at)}</strong>{" "}
-                <span className="text-muted">Deadline pendaftaran</span>
-              </p>
-            ) : null}
-            {/* end of competition status */}
+              {is_waiting ? (
+                <p>
+                  <strong>{epochToRelativeTime(n.announcement_at)}</strong>{" "}
+                  <span className="text-muted">Pengumuman pemenang</span>
+                </p>
+              ) : null}
 
-            {deadline_at === now ? (
-              <p>
-                <strong>hari ini</strong>{" "}
-                <span className="text-muted">Deadline pendaftaran</span>
-              </p>
-            ) : null}
-          </div>
+              {deadline_at > now ? (
+                <p>
+                  <strong>{epochToRelativeTime(n.deadline_at)}</strong>{" "}
+                  <span className="text-muted">Deadline pendaftaran</span>
+                </p>
+              ) : null}
+              {/* end of competition status */}
+
+              {deadline_at === now ? (
+                <p>
+                  <strong>hari ini</strong>{" "}
+                  <span className="text-muted">Deadline pendaftaran</span>
+                </p>
+              ) : null}
+            </div>
+          ) : null}
         </div>
       </div>
     </CardCompetitionStyled>

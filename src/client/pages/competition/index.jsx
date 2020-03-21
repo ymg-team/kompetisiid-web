@@ -137,8 +137,6 @@ class Index extends Component {
             authData={this.props.authData}
           />
 
-          <div className="m-20" />
-
           {/* competition tab navigation */}
           <Tab
             active={this.props.route.active_tab}
@@ -200,7 +198,13 @@ class Index extends Component {
                   <div className="m-20" />
 
                   <div className="row">
-                    <div className={active_tab == 1 ? "col-md-8" : "col-md-12"}>
+                    <div
+                      className={
+                        active_tab == 1
+                          ? "col-smcompetition-detail--meta-8"
+                          : "col-md-12"
+                      }
+                    >
                       {(() => {
                         switch (active_tab) {
                           case 1:
@@ -278,12 +282,12 @@ class Index extends Component {
           {related[`related_${encid}`] &&
           related[`related_${encid}`].status &&
           related[`related_${encid}`].status === 200 ? (
-            <div className="col-md-12 bg-gray-soft">
-              <div className="m-15 row" />
+            <div className="col-md-12">
+              <div className="m-50 row" />
               <CompetitionBox
                 subtitle={false}
                 total={4}
-                // size="small"
+                size="small"
                 {...related[`related_${encid}`]}
               />
             </div>

@@ -9,7 +9,7 @@ import GAds from "../cards/GoogleAds"
 export default props => {
   const { data } = props
   return (
-    <div className="col-md-4">
+    <div className="col-sm-4">
       <div className="competition-detail--meta">
         <progress value={30} max={100} />
         <h3 className="total-prize">

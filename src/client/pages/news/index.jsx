@@ -28,14 +28,14 @@ const NewsBox = Loadable({
 const NewsDetailStyled = Styled.div`
 .news-detail {
   .author {
-    margin: 3em 0;
+    margin: 60px 0 30px;
     a {
       text-decoration: none;
     }
     .avatar {
       width: 45px;
       float: left;
-      margin: 0 10px;
+      margin: 0 10px 0 0;
     }
     .text-muted {
       display: flex;
@@ -47,6 +47,7 @@ const NewsDetailStyled = Styled.div`
     margin: 20px auto;
     img {
       max-width: 100%;
+      border-radius: 40px;
     }
   }
 
@@ -89,9 +90,7 @@ const NewsDetailStyled = Styled.div`
 
 export default class Index extends Component {
   state = {
-    url: `${Host[process.env.NODE_ENV].front}/news/${
-      this.props.match.params.encid
-    }/${this.props.match.params.title}`
+    url: `${Host[process.env.NODE_ENV].front}/news/${this.props.match.params.encid}/${this.props.match.params.title}`
   }
 
   // static fetchData({ params, store }) {
@@ -105,6 +104,15 @@ export default class Index extends Component {
       id: "dsq-count-scr"
     })
     this.reqData(this.props)
+
+    // get all image inside .competition-regulator
+    setTimeout(() => {
+      const ImgEl = document.querySelectorAll(".news-detail .content img")
+      // ref: https://developer.mozilla.org/en-US/docs/Web/API/NodeList
+      for (let n of ImgEl) {
+        n.className = "image-modal-target"
+      }
+    }, 1000)
   }
 
   UNSAFE_componentWillReceiveProps(np) {
@@ -120,9 +128,7 @@ export default class Index extends Component {
   }
 
   resetDisquss(props) {
-    const url = `${Host[process.env.NODE_ENV].front}/news/${
-      props.match.params.encid
-    }/${props.match.params.title}`
+    const url = `${Host[process.env.NODE_ENV].front}/news/${props.match.params.encid}/${props.match.params.title}`
 
     this.setState({ url }, () => {
       setTimeout(() => {
@@ -168,16 +174,6 @@ export default class Index extends Component {
   }
 
   render() {
-
-    // get all image inside .competition-regulator
-    setTimeout(() => {
-        const ImgEl = document.querySelectorAll(".news-detail .content img")
-        // ref: https://developer.mozilla.org/en-US/docs/Web/API/NodeList
-        for(let n of ImgEl) {
-          n.className = "image-modal-target"
-        }
-    }, 1000)
-
     const { encid, title } = this.props.match.params
     const { detail } = this.props.berita
     let helmetdata = {
@@ -191,9 +187,7 @@ export default class Index extends Component {
       helmetdata = Object.assign(helmetdata, {
         title: detail[encid].data.title,
         description: detail[encid].data.contenttext,
-        url: `https://kompetisi.id/news/${detail[encid].data.id}/${
-          detail[encid].data.nospace_title
-        }`,
+        url: `https://kompetisi.id/news/${detail[encid].data.id}/${detail[encid].data.nospace_title}`,
         image: detail[encid].data.image.original
       })
 
@@ -231,7 +225,7 @@ export default class Index extends Component {
                             <a
                               href="#"
                               title="komentar"
-                              onClick={(e) => {
+                              onClick={e => {
                                 e.preventDefault()
                                 document
                                   .getElementById("disqus_thread")
@@ -297,9 +291,7 @@ export default class Index extends Component {
                   {/* share button */}
                   <div className="col-md-12">
                     <Share
-                      url={`https://kompetisi.id/news/${
-                        detail[encid].data.id
-                      }/${detail[encid].data.nospace_title}`}
+                      url={`https://kompetisi.id/news/${detail[encid].data.id}/${detail[encid].data.nospace_title}`}
                     />
                   </div>
                   {/* end of share button */}
@@ -307,11 +299,12 @@ export default class Index extends Component {
               </div>
 
               {/* related news */}
-              <div className="col-md-12 bg-gray-soft">
+              <div className="col-md-12">
                 <NewsBox
                   subtitle={false}
                   data={detail[encid].related}
                   status={detail[encid].status}
+                  size="small"
                 />
               </div>
             </React.Fragment>

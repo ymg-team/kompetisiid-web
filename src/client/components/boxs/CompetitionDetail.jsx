@@ -20,6 +20,29 @@ const CompetitionDetailStyled = Styled.div`
     margin-right: 10px;
     cursor: default;
   }
+  .competition-detail__left {
+    padding: 0;
+  }
+  .competition-detail__right {
+    padding:  0 0 0 40px;
+  }
+
+  // reponsivenes
+  /* Large desktop */
+  // @media (min-width: 1200px) { ... }
+  
+  /* Portrait tablet to landscape and desktop */
+  // @media (min-width: 768px) and (max-width: 979px) { ... }
+  
+  /* Landscape phone to portrait tablet */
+  @media (max-width: 767px) { 
+    .competition-detail__right {
+      padding:  0;
+    }
+  }
+  
+  /* Landscape phones and down */
+  @media (max-width: 480px) { ... }
 `
 
 const CompetitionDetailBox = props => {
@@ -35,7 +58,7 @@ const CompetitionDetailBox = props => {
     <CompetitionDetailStyled id="competition-detail" className="row">
       <div className="row">
         <div className="container">
-          <div className="row m-20" />
+          <div className="row m-30" />
 
           <div className="competition-author">
             <Link
@@ -75,10 +98,8 @@ const CompetitionDetailBox = props => {
             </p>
           </div>
 
-          <div className="row m-20" />
-
           <div className="row competition-detail--meta">
-            <div className="col-md-6 align-center poster">
+            <div className="col-sm-6 align-center poster competition-detail__left">
               <img
                 data-mediabox="my-gallery-name"
                 data-title="Sample image"
@@ -87,7 +108,7 @@ const CompetitionDetailBox = props => {
                 src={data.poster.original}
               />
             </div>
-            <div className="col-md-6 count">
+            <div className="col-sm-6 count competition-detail__right">
               <div className="only-mobile m-30" />
               {/* competition status */}
               <div style={{ marginBottom: "20px" }}>

@@ -151,9 +151,9 @@ export function fetchSubscribed(params = {}, filter) {
 }
 
 // /**
-//  * 
-//  * @param {*} params 
-//  * @param {*} filter 
+//  *
+//  * @param {*} params
+//  * @param {*} filter
 //  */
 // export function fetchSubscribedMore(params = {}, filter) {
 //   const url = `/api/jelajah/subscribed/${sealMiddleware.generateSeal()}`

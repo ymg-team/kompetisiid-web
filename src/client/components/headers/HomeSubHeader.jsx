@@ -56,6 +56,7 @@ const SubHeader = Styled.div`
       .competition-slider_poster {
         height: 450px;
         background-size: cover;
+        border-radius: 24px;
       }
       .competition-slider_text {
         h1 {

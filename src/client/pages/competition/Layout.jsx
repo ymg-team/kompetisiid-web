@@ -91,6 +91,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(
-  mapStateToProps
-)(LayoutCompetition)
+export default connect(mapStateToProps)(LayoutCompetition)

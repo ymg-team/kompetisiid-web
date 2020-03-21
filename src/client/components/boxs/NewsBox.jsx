@@ -6,7 +6,7 @@ import Transition from "react-transition-group/Transition"
 import GAds from "../cards/GoogleAds"
 import Card from "../cards/NewsListCard"
 import Loader from "../preloaders/NewsCardLoader"
-import { Link } from "react-router-dom"
+// import { Link } from "react-router-dom"
 
 export default class NewsBox extends Component {
   generateList(n) {
@@ -26,10 +26,10 @@ export default class NewsBox extends Component {
               // adTest={true}
             />
           </div>,
-          <Card key={key} n={n} />
+          <Card key={key} n={n} size={this.props.size} />
         ]
       } else {
-        return <Card key={key} n={n} />
+        return <Card key={key} n={n} size={this.props.size} />
       }
     })
   }
@@ -60,7 +60,7 @@ export default class NewsBox extends Component {
             ) : null}
           </div>
           <div className="row m-10" />
-          <div className="row" style={{margin: "0 -15px 0"}}>
+          <div className="row" style={{ margin: "60px 0 0" }}>
             <Transition in={data && data.length > 0} timeout={duration}>
               {state => (
                 <div
