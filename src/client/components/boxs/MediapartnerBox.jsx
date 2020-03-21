@@ -1,7 +1,7 @@
-import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
-import { truncate } from 'string-manager'
-import Loader from '../preloaders/GlobalLoader'
+import React, { Component } from "react"
+import { Link } from "react-router-dom"
+import { truncate } from "string-manager"
+import Loader from "../preloaders/GlobalLoader"
 
 export default class MediapartnerBox extends Component {
   generateList = () => {
@@ -11,33 +11,39 @@ export default class MediapartnerBox extends Component {
         <div key={key} className="row">
           <div className="col-md-12">
             <div className="card-mediapartner">
-              <div className="thumbnails">
-                <img src={n.poster.small} />
-              </div>
+              <div
+                className="thumbnails"
+                style={{ backgroundImage: `url(${n.poster.small})` }}
+              />
               <div className="details">
                 <span className="categories">
-                  <Link className="muted" to={`/browse/${n.main_category.name}`}>
+                  <Link
+                    className="muted"
+                    to={`/browse/${n.main_category.name}`}
+                  >
                     {n.main_category.name}
-                  </Link>,&nbsp;
-                  <Link className="muted" to={`/browse/${n.main_category.name}/${n.sub_category.name}`}>
+                  </Link>
+                  ,&nbsp;
+                  <Link
+                    className="muted"
+                    to={`/browse/${n.main_category.name}/${n.sub_category.name}`}
+                  >
                     {n.sub_category.name}
                   </Link>
                 </span>
                 <Link
-                  to={`/competition/${n.id}/regulations/${
-                    n.nospace_title
-                  }`}
+                  to={`/competition/${n.id}/regulations/${n.nospace_title}`}
                 >
                   <h3>{n.title}</h3>
                 </Link>
                 <small>
-                  Dipasang{' '}
+                  Dipasang{" "}
                   <Link to={`/user/${n.author.username}`}>
                     {n.author.username}
                   </Link>
                 </small>
                 <br />
-                <span>{truncate(n.sort, 300, '...')}</span>
+                <span>{truncate(n.sort, 300, "...")}</span>
               </div>
             </div>
           </div>
@@ -57,7 +63,7 @@ export default class MediapartnerBox extends Component {
                 <h2 className="big-text">Media Partner KI</h2>
                 <span>
                   KI juga ikut berperan sebagai media partner berbagai kompetisi
-                  di Indonesia.{' '}
+                  di Indonesia.{" "}
                 </span>
               </div>
             </div>
