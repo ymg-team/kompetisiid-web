@@ -60,7 +60,10 @@ export default class NewsBox extends Component {
             ) : null}
           </div>
           <div className="row m-10" />
-          <div className="row" style={{ margin: "60px 0 0" }}>
+          <div
+            className="row"
+            style={this.props.style || { margin: "60px 0 0" }}
+          >
             <Transition in={data && data.length > 0} timeout={duration}>
               {state => (
                 <div

@@ -198,13 +198,7 @@ class Index extends Component {
                   <div className="m-20" />
 
                   <div className="row">
-                    <div
-                      className={
-                        active_tab == 1
-                          ? "col-smcompetition-detail--meta-8"
-                          : "col-md-12"
-                      }
-                    >
+                    <div className={active_tab == 1 ? "col-sm-8" : "col-md-12"}>
                       {(() => {
                         switch (active_tab) {
                           case 1:
