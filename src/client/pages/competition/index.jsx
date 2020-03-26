@@ -198,10 +198,10 @@ class Index extends Component {
                   <div className="m-20" />
 
                   <div className="row">
-                    <div className={active_tab == 1 ? "col-sm-8" : "col-md-12"}>
+                    <div className={"col-sm-8"}>
                       {(() => {
                         switch (active_tab) {
-                          case 1:
+                          case 2:
                             return (
                               <Regulations
                                 encid={encid}
@@ -215,7 +215,7 @@ class Index extends Component {
                                 html={detail[encid].data.content}
                               />
                             )
-                          case 2:
+                          case 1:
                             return (
                               <Prizes
                                 html={nl2br(
@@ -260,7 +260,7 @@ class Index extends Component {
                     </div>
 
                     {/* show sidebar info */}
-                    {active_tab == 1 ? <Sidebar {...detail[encid]} /> : null}
+                    <Sidebar {...detail[encid]} />
                     {/* end of show sidebar info */}
                   </div>
                 </div>

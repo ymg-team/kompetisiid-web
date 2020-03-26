@@ -1,8 +1,5 @@
 import React, { Component } from "react"
-import Styled from "styled-components"
 import { Link } from "react-router-dom"
-import BtnJoin from "../buttons/BtnJoin"
-// import { pushScript } from "../../helpers/DomEvents"
 
 class TabCompetition extends Component {
   render = () => {
@@ -17,7 +14,7 @@ class TabCompetition extends Component {
         className="row no-margin container-competition-tab"
       >
         <div className="container">
-          <div className="roe">
+          <div className="row">
             <div className="col-md-10 col-md-push-1">
               <div className="tab-competition">
                 <ul className="horizontal-menu">
@@ -73,7 +70,6 @@ class TabCompetition extends Component {
                     </li>
                   ))}
                 </ul>
-                {/* <BtnJoin id="btn-join" {...this.props} /> */}
               </div>
             </div>
           </div>
@@ -87,12 +83,12 @@ export default TabCompetition
 
 export const tab = [
   {
-    name: "peraturan",
-    link: "regulations"
-  },
-  {
     name: "hadiah",
     link: "prizes"
+  },
+  {
+    name: "peraturan",
+    link: "regulations"
   },
   {
     name: "pengumuman",
