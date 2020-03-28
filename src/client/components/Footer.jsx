@@ -95,9 +95,7 @@ export default class Footer extends Component {
                 </p>
                 <ul className="vertical-menu">
                   <li>
-                    <Link to="/news/TXpVPQ/About">
-                      Apa itu KompetisiIndonesia
-                    </Link>
+                    <Link to="/news/TXpVPQ/About">Apa itu Kompetisi Id</Link>
                   </li>
                   <li>
                     <Link to="/news/TVRnPQ/Term-Of-Use">Aturan Penggunaan</Link>
@@ -109,6 +107,9 @@ export default class Footer extends Component {
                   </li>
                   <li>
                     <Link to="/news">Berita terbaru</Link>
+                  </li>
+                  <li>
+                    <Link to="/download/android">Download Android App</Link>
                   </li>
                   <li>
                     <a

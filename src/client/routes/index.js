@@ -56,6 +56,10 @@ const EmailVerification = Loadable({
   loader: () => import("../pages/auth/EmailVerification"),
   loading: FullPagePreloader
 })
+const DownloadAndroid = Loadable({
+  loader: () => import("../pages/download/Android"),
+  loading: FullPagePreloader
+})
 
 // pages
 import Home from "../pages/home/index"
@@ -135,6 +139,13 @@ export default [
 
           // Dashboard pages
           Dashboard,
+
+          // download routes
+          {
+            path: "/download/android",
+            exact: true,
+            component: DownloadAndroid
+          },
 
           // Redirect pages
           {
