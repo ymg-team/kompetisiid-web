@@ -10,10 +10,8 @@ import Slider from "../sliders"
 import Count from "../cards/HomeCount"
 
 const SubHeader = Styled.div`
-  padding-bottom: 100px;
+  padding-bottom: 140px;
   transition: all .5s ease;
-  height: 100vh;
-  min-height: 750px;
   
   &.bg-red {
     background-color: ${Colors.mainRed};
@@ -24,7 +22,7 @@ const SubHeader = Styled.div`
   }
 
   .home-slider {
-    color: ${Colors.mainGray};
+    // color: ${Colors.mainGray};
     padding: 2em 0 0;
     text-align: center;
     display: flex;
@@ -142,38 +140,6 @@ class HomeSubHeader extends Component {
     )
   }
 }
-
-// const WelcomeStaticSlider = props => (
-//   <div>
-//     <div className="row">
-//       <div className="col-md-6 col-md-offset-3">
-//         <h1>Setiap Hari Ada Hadiah Disini.</h1>
-//       </div>
-//     </div>
-//     <div className="row hide-mobile">
-//       <Count {...props.stats} />
-//     </div>
-//     <div className="row">
-//       <Link to="/browse" className="btn btn-bordergray btn-rounded btn-lg">
-//         Jelajah Kompetisi&nbsp;
-//         <i className="fas fa-arrow-alt-circle-right" />
-//       </Link>
-//       <Link to="/add" className="btn btn-bordergray btn-rounded btn-lg">
-//         Pasang Kompetisi
-//       </Link>
-//     </div>
-//     <div className="row">
-//       <div className="col-md-6 col-md-offset-3">
-//         <div className="text">
-//           Kompetisi.id membuka kesempatan untuk para penyelenggara kompetisi ini
-//           memasang kompetisi disini atau pun bekerja dengan Kompetisi.id.
-//           Sebagai peserta kamu juga bisa menemukan beragam kompetisi keren
-//           dengan hadiah menari yang sesuai dengan interest kamu.
-//         </div>
-//       </div>
-//     </div>
-//   </div>
-// )
 
 const CompetitionSlider = props => (
   <div className="competition-slider">

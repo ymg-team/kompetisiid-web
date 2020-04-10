@@ -1,6 +1,7 @@
 import React, { Component } from "react"
 import Styled from "styled-components"
 import PropTypes from "prop-types"
+import * as Colors from "../../../style/colors"
 
 const SliderWrapper = Styled.div`
   position: relative;
@@ -16,7 +17,7 @@ const SliderWrapper = Styled.div`
     position: absolute;
     width: 100%;
     float: left;
-    bottom: 0;
+    bottom: -104px;
     ul {
       padding: 0;
       li {
@@ -121,7 +122,7 @@ class Slider extends Component {
     return (
       <SliderWrapper id={this.props.id} className={this.props.className}>
         <div className="slider-items">{this.props.children}</div>
-        {this.state.elSlider && this.state.elSlider.childElementCount > 1 ? (
+        {this.state.elSlider ? (
           <div className="slider-navigation">
             <ul>
               {(() => {

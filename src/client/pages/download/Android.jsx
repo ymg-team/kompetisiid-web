@@ -21,9 +21,9 @@ class DownloadAndroid extends React.Component {
           <a
             target="_blank"
             rel="noopener noreferer"
-            href="https://drive.google.com/open?id=1kmMQbYh4dNS1RUwu8emCSES-1K7sufkl"
+            href="https://drive.google.com/open?id=1aUcT8zIMHiEZ2tCXX9xwIt52cnbm3d9B"
           >
-            Download Disini
+            Download Disini (update April 2020)
           </a>
         </div>
       </DownloadAndroidStyled>
