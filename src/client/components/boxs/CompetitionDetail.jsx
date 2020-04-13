@@ -12,9 +12,6 @@ import BtnSubscribe from "../buttons/BtnSubscribe"
 import { alert } from "../Alert"
 import BtnLike from "../buttons/BtnLikeCompetition"
 
-// actions
-import { subscribeCompetition } from "../../pages/competition/actions"
-
 const CompetitionDetailStyled = Styled.div`
   .small-stats-icon {
     margin-right: 10px;
@@ -44,6 +41,20 @@ const CompetitionDetailStyled = Styled.div`
   /* Landscape phones and down */
   @media (max-width: 480px) { ... }
 `
+
+const hashtagGenerators = tags => {
+  if (tags) {
+    let hashtag = ""
+    tags.split(",").map(n => {
+      // remove all whitespace on string
+      hashtag += ` #${n.replace(/\s/gm, "")}`
+    })
+
+    return `${hashtag}.`
+  } else {
+    return null
+  }
+}
 
 const CompetitionDetailBox = props => {
   const { data } = props
@@ -145,7 +156,10 @@ const CompetitionDetailBox = props => {
                   </span>
                 </p>
                 <div className="m-20" />
-                <p className="text-muted">{data.sort}</p>
+                <p className="text-muted">
+                  {data.sort}
+                  {hashtagGenerators(data.tag)}
+                </p>
               </div>
               <div className="m-30" />
 
