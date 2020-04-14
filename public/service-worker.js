@@ -36,7 +36,11 @@ self.addEventListener("install", function(event) {
 
 self.addEventListener("fetch", function(event) {
   const request = event.request
-  if (request.url.indexOf("/api") !== 0) {
+  // disabled service worker fetch on /api and /super
+  if (
+    request.url.indexOf("/api") !== 0 &&
+    request.url.indexOf("/super") !== 0
+  ) {
     event.respondWith(
       caches.match(event.request).then(function(response) {
         // return from cache, otherwise fetch from network
