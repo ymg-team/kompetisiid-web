@@ -22,8 +22,7 @@ const SubHeader = Styled.div`
   }
 
   .home-slider {
-    // color: ${Colors.mainGray};
-    padding: 2em 0 0;
+    padding: 3em 0 0;
     text-align: center;
     display: flex;
     align-items: center;

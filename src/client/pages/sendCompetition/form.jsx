@@ -20,9 +20,9 @@ const ChooseMethodStyled = Styled.div`
     }
   }
 
-  /* responsiveness */
+  // responsiveness
 
-  /* small */
+  // small screen
   @media only screen and (max-width: 543px) {
     .add-competition {
       width: 100%;
@@ -32,7 +32,7 @@ const ChooseMethodStyled = Styled.div`
     }
   }
 
-  /* medium screen */
+  // medium screen
   @media only screen and (min-width: 544px) and (max-width: 767px) {
     .add-competition {
       width: 100%;
@@ -91,9 +91,9 @@ export default class Form extends Component {
                   </p>
                   <a
                     href="#"
-                    onClick={(e) => {
+                    onClick={e => {
                       e.preventDefault()
-                      location.href="/dashboard/competition/create"
+                      location.href = "/dashboard/competition/create"
                     }}
                     className="btn btn-white"
                     title="klik untuk pasang cepat"

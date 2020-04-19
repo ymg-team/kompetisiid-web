@@ -8,6 +8,24 @@ import { logout } from "../../../store/user/actions"
 // components
 import { Link } from "react-router-dom"
 
+const Menus = [
+  {
+    link: "/browse",
+    text: "Jelajah",
+    title: "Jelajahi kompetisi dari berbagai kategori"
+  },
+  {
+    link: "/add",
+    text: "Pasang",
+    title: "Pasang Kompetisi disini, gratis!"
+  },
+  {
+    link: "/news",
+    text: "Kabar",
+    title: "Kumpulan kabar seputar Kompetisi di Indonesia"
+  }
+]
+
 const StickyNavbarStyled = Styled.div`
   width: 100%;
   transition: top .5s ease;
@@ -37,6 +55,11 @@ const NavbarStyled = Styled.div`
     height: 40px;
     display: block;
     background-size: contain;
+  }
+
+  #btn-sidebar {
+    font-size: 32px;
+    display: none;
   }
 
   padding: .5em 0;
@@ -81,6 +104,21 @@ const NavbarStyled = Styled.div`
     }
   }
 
+  // responsiveness
+  // small screen
+  @media only screen and (max-width: 543px) {
+    #btn-sidebar {
+      display: block;
+    }
+  }
+
+  // medium screen
+  @media only screen and (min-width: 544px) and (max-width: 767px) {
+    #btn-sidebar {
+      display: block;
+    }
+  }
+
 `
 
 const SearchStyled = Styled.div`
@@ -103,7 +141,8 @@ class Navbar extends Component {
       search: typeof query.q !== "undefined",
       keyword: query.q || "",
       sticky: false,
-      styleNavbar: {}
+      styleNavbar: {},
+      showSidebar: false
     }
     this.handleStickyNavbar = this.handleStickyNavbar.bind(this)
   }
@@ -116,6 +155,8 @@ class Navbar extends Component {
   componentWillUnmount() {
     // remove event listener
     document.removeEventListener("scroll", this.handleStickyNavbar)
+    // trigger hide sidebar, set to default
+    if (this.state.showSidebar) this.setState({ showSidebar: false })
   }
 
   handleStickyNavbar(e) {
@@ -167,6 +208,7 @@ class Navbar extends Component {
 
   render() {
     const session = this.props.user.session || {}
+    const pathnameArr = this.props.location.pathname.split("/")
 
     return (
       <StickyNavbarStyled
@@ -229,6 +271,36 @@ class Navbar extends Component {
               <React.Fragment>
                 <div style={{ padding: 0 }} className="col-xs-6">
                   <ul className="inline-list inline-list-left">
+                    {/* button to toggle sidebar on super and dashboard */}
+                    {["super", "dashboard"].includes(pathnameArr[1]) ? (
+                      <li style={{ padding: 0, marginRight: 12 }}>
+                        <a
+                          href="#"
+                          id="btn-sidebar"
+                          onClick={e => {
+                            e.preventDefault()
+                            const sidebarEl = document.getElementById(
+                              "dashboard-sidebar"
+                            )
+                            if (sidebarEl) {
+                              sidebarEl.style.left = this.state.showSidebar
+                                ? "-100%"
+                                : "0"
+                              this.setState({
+                                showSidebar: !this.state.showSidebar
+                              })
+                            }
+                          }}
+                        >
+                          <i
+                            className="fas fa-bars"
+                            style={{ paddingTop: 6 }}
+                          />
+                        </a>
+                      </li>
+                    ) : null}
+                    {/* end of button to toggle sidebar on super and dashboard */}
+
                     <li style={{ padding: 0, marginRight: 12 }}>
                       <Link
                         id="ki-logo"
@@ -238,15 +310,13 @@ class Navbar extends Component {
                         }}
                       />
                     </li>
-                    <li>
-                      <Link to="/browse">Jelajah</Link>
-                    </li>
-                    <li>
-                      <Link to="/add">Pasang</Link>
-                    </li>
-                    <li>
-                      <Link to="/news">Kabar</Link>
-                    </li>
+                    {Menus.map(n => (
+                      <li key={n.link}>
+                        <Link title={n.title} to={n.link}>
+                          {n.text}
+                        </Link>
+                      </li>
+                    ))}
                   </ul>
                 </div>
                 <div style={{ padding: 0 }} className="col-xs-6">
