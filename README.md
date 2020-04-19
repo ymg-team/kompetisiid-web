@@ -3,12 +3,13 @@
 [![style: styled-components](https://img.shields.io/badge/style-%F0%9F%92%85%20styled--components-orange.svg?colorB=daa357&colorA=db748e)](https://github.com/styled-components/styled-components)
 
 # Kompetisi ID Web
+
 Indonesia Competition Platform [https://kompetisi.id](https://kompetisi.id)
 
 [![ki repo](http://res.cloudinary.com/dhjkktmal/image/upload/v1526045249/kompetisi-id/Frame.png)](https://kompetisi.id)
 
+## Env
 
-## Env 
 ```
 NODE_ENV = development
 DEBUG = app:*
@@ -29,32 +30,39 @@ you have to install :
 - docker-compose : https://docs.docker.com/compose/install/
 
 only on first time
+
 ```
 docker compose build && npm install
 ```
 
 before development
+
 ```
 docker compose up
 ```
 
 ### Without Docker (local deveopment)
+
 for first time
+
 ```
 npm install && npm install -g webpack
 ```
 
 to run the node server
+
 ```
 npm run dev:server
 ```
 
 to run build in developer version
+
 ```
 npm run build
 ```
 
 run test (jest supported)
+
 ```
 npm run test
 ```
@@ -62,8 +70,12 @@ npm run test
 ## Staging or Release
 
 - Pull from master
-- run 
-    ```
-    yarn prod:build
-    ```
+- run
+  ```
+  yarn prod:build
+  ```
 - restart pm2 process
+
+## Important Links
+
+- Font Awesome : https://fontawesome.com/icons

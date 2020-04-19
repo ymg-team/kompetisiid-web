@@ -34,13 +34,13 @@ class SuperLayout extends Component {
     return (
       <div className="col-md-12">
         <div className="row m-t-2em">
-          <div className="col-md-3">
+          <div className="col-md-3 col-sm-12">
             <Sidebar
               handleLogout={() => this.handleLogout()}
               stats={this.props.stats}
             />
           </div>
-          <div className="col-md-7">
+          <div className="col-md-7 col-sm-12">
             {renderRoutes(this.props.route.routes)}
           </div>
         </div>

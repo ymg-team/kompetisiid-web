@@ -1,5 +1,55 @@
-import React from "react"
+import React, { useState } from "react"
+import Styled from "styled-components"
 import { Link } from "react-router-dom"
+
+const SidebarMobileStyle = `
+  background: #FFF;
+  position: fixed;
+  width: 100%;
+  z-index: 1;
+  height: 100vh;
+  left: -100%;
+  transition: all .5s ease;
+  padding: 0 0 0 30px; 
+  overflow: auto;
+  &.active {
+    left: 0;
+  } 
+`
+
+export const SidebarStyled = Styled.div`
+ul {
+  list-style: none
+  padding: 0;
+  li {
+    padding: 0.5em 0;
+    a {
+      text-decoration: none;
+      &:hover, &:focus, &.active {
+        font-weight: bold;
+      }
+    }
+    &.active {
+      a {
+        font-weight: bold;
+      }
+    }
+    
+  }
+}
+
+// responsiveness
+
+// small screen
+@media only screen and (max-width: 543px) {
+  ${SidebarMobileStyle}
+}
+
+// medium screen
+@media only screen and (min-width: 544px) and (max-width: 767px) {
+  ${SidebarMobileStyle}
+}
+`
 
 export default props => {
   const stats =
@@ -8,7 +58,7 @@ export default props => {
       : { request: {}, competition: {}, news: {}, members: {} }
 
   return (
-    <div className="dashboard-sidebar">
+    <SidebarStyled className="dashboard-sidebar" id="dashboard-sidebar">
       <ul>
         <li>
           {" "}
@@ -82,8 +132,7 @@ export default props => {
         </li>
         <li>
           <Link to="/super/news/draft">
-            Draft{" "}
-            <span className="label label-blue">{stats.news.draft}</span>
+            Draft <span className="label label-blue">{stats.news.draft}</span>
           </Link>
         </li>
 
@@ -117,14 +166,17 @@ export default props => {
           <strong>Akun</strong>
         </li>
         <li>
-          <a onClick={(e) => {
-            e.preventDefault()
-            props.handleLogout()
-          }} href="#">
+          <a
+            onClick={e => {
+              e.preventDefault()
+              props.handleLogout()
+            }}
+            href="#"
+          >
             Logout
           </a>
         </li>
       </ul>
-    </div>
+    </SidebarStyled>
   )
 }

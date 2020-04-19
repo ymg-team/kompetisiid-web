@@ -1,6 +1,7 @@
 import React from "react"
 
 // components
+import { SidebarStyled } from "../_super/Sidebar"
 import { Link } from "react-router-dom"
 
 export default props => {
@@ -9,7 +10,7 @@ export default props => {
       ? props.stats
       : { request: {}, competition: {}, news: {}, members: {} }
   return (
-    <div className="dashboard-sidebar">
+    <SidebarStyled className="dashboard-sidebar" id="dashboard-sidebar">
       <ul>
         <li>
           {" "}
@@ -134,6 +135,6 @@ export default props => {
         </li>
         {/* end of logout from dashboard */}
       </ul>
-    </div>
+    </SidebarStyled>
   )
 }

@@ -7,6 +7,7 @@ const CountBoxStyled = Styled.div`
     border: 1px solid ${Colors.darkGray};
     padding: 15px 10px;
     text-align: center;
+    min-height: 150px;
     a {
         text-decoration: none;
     }
