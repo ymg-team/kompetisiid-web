@@ -32,7 +32,7 @@ class SuperLayout extends Component {
 
   render() {
     return (
-      <div className="col-md-12">
+      <div className="container">
         <div className="row m-t-2em">
           <div className="col-md-3 col-sm-12">
             <Sidebar
@@ -40,7 +40,7 @@ class SuperLayout extends Component {
               stats={this.props.stats}
             />
           </div>
-          <div className="col-md-7 col-sm-12">
+          <div className="col-md-9 col-sm-12">
             {renderRoutes(this.props.route.routes)}
           </div>
         </div>

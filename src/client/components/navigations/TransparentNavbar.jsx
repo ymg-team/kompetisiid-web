@@ -125,10 +125,10 @@ const SearchStyled = Styled.div`
   input[type="search"] {
     width: 100%;
     background: transparent;
-    border: none;
-    border-bottom: 2px solid #FFF;
-    color: #FFF;
     outline: none;
+    border: none;
+    border-bottom: 2px solid ${Colors.mainGray};
+    color: ${Colors.mainGray};
   }
 `
 
@@ -233,7 +233,12 @@ class Navbar extends Component {
                         }}
                       />
                     </li>
-                    <li style={{ width: "calc(100% - 40px - 40px)" }}>
+                    <li
+                      style={{
+                        width: "calc(100% - 40px - 40px - 10px)",
+                        paddingTop: 6
+                      }}
+                    >
                       <input
                         type="search"
                         autoFocus={true}
@@ -337,7 +342,8 @@ class Navbar extends Component {
                       <div
                         key="loggedin"
                         style={{
-                          marginRight: "25px",
+                          marginTop: -3,
+                          marginRight: 35,
                           padding: "5px 10px",
                           float: "right"
                         }}

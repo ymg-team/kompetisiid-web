@@ -19,7 +19,7 @@ const SidebarMobileStyle = `
 
 export const SidebarStyled = Styled.div`
 ul {
-  list-style: none
+  list-style: none;
   padding: 0;
   li {
     padding: 0.5em 0;
