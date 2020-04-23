@@ -26,10 +26,29 @@ export function initFirebase() {
 
 /**
  * @description function to get and reload firebase token
+ * @see https://firebase.google.com/docs/cloud-messaging/js/client
  */
 function getFirebaseToken() {
   const messaging = firebase.messaging()
-  messaging.getToken().then(currentToken => {
-    // console.log("currentToken", currentToken)
+
+  // get current fcm token
+  messaging
+    .getToken()
+    .then(currentToken => {
+      // console.log("currentToken", currentToken)
+    })
+    .catch(err => {
+      console.error("An error occurred while retrieving token. ", err)
+    })
+
+  // token refresh listener
+  messaging.onTokenRefresh(() => {
+    MessageChannel.getToken()
+      .then(currentToken => {
+        console.log("fcn token is refreshed...")
+      })
+      .catch(err => {
+        console.error("An error occurred while retrieving token. ", err)
+      })
   })
 }
