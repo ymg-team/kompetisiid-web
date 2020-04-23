@@ -63,7 +63,7 @@ class RootLayoutV5 extends Component {
   componentDidMount = () => {
     // global function to use react-router transition
     window.transitionTo = path => {
-      path += `?ref=${location.pathname}`
+      path += `${path.includes("?") ? "&" : "?"}ref=${location.pathname}`
       this.props.history.push(path)
     }
 
