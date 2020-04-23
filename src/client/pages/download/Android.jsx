@@ -1,6 +1,9 @@
 import React from "react"
 import Styled from "styled-components"
 
+// components
+import Helmet from "../../components/Helmet"
+
 const DownloadAndroidStyled = Styled.div`
   display: flex;
   align-items: center;
@@ -12,6 +15,10 @@ class DownloadAndroid extends React.Component {
   render() {
     return (
       <DownloadAndroidStyled>
+        <Helmet
+          title="Download Android App Kompetisi Id"
+          description="Agar lebih update seputar Kompetisi Id, yuk download aplikasi Kompetisi Id untuk android ini"
+        />
         <div className="col-md-4 col-xs-12">
           <h1>Download Android App</h1>
           <p>
