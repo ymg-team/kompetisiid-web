@@ -21,10 +21,20 @@ class DownloadAndroid extends React.Component {
           <a
             target="_blank"
             rel="noopener noreferer"
-            href="https://drive.google.com/open?id=1aUcT8zIMHiEZ2tCXX9xwIt52cnbm3d9B"
+            href="https://drive.google.com/file/d/1fBj-7nCXY7iis1Xf3atL3IwQp9RqNzpo/view"
           >
-            Download Disini (update April 2020)
+            Download Klik Disini (v1.1.0-beta)
           </a>
+
+          <h2 className="m-t-2em">Changelogs</h2>
+          <p>
+            <strong>v1.1.0-beta</strong>
+            <br />
+            <ul>
+              <li>add send request competition</li>
+              <li>improve detail competition</li>
+            </ul>
+          </p>
         </div>
       </DownloadAndroidStyled>
     )

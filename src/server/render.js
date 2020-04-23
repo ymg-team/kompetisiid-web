@@ -125,7 +125,6 @@ export default (req, res) => {
             </body>
         </html>
         `
-    // .replace(/\s\s+/g, "")
   }
 
   let modules = []

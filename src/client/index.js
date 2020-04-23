@@ -10,6 +10,8 @@ import { initFirebase } from "../client/helpers/firebase"
 if (typeof window != "undefined") {
   // global style of Kompetisi Id
   require("../style/index.sass")
+
+  // initial firebase
   initFirebase()
 }
 
