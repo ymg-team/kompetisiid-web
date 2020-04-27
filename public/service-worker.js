@@ -1,16 +1,16 @@
-const CACHE_NAME = "cache-ki-0.0.1"
+const CACHE_NAME = "cache-ki-0.0.2"
 const urlsToCache = []
 
 self.addEventListener("activate", async () => {
   // this block only called once when service worker is activate
-  try {
-    const options = {}
-    // get push manager subscription
-    const subscription = await self.registration.pushManager.subscribe(options)
-    console.log(JSON.stringify("subscription", subscription))
-  } catch (e) {
-    console.error("[Error Service Worker Activation]", e)
-  }
+  // try {
+  //   const options = {}
+  //   // get push manager subscription
+  //   const subscription = await self.registration.pushManager.subscribe(options)
+  //   console.log(JSON.stringify("subscription", subscription))
+  // } catch (e) {
+  //   console.error("[Error Service Worker Activation]", e)
+  // }
 })
 
 self.addEventListener("beforeinstallprompt", function(event) {
