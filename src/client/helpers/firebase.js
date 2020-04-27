@@ -17,6 +17,15 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig)
 firebase.analytics()
 
+// fcm initial
+const messaging = firebase.messaging()
+
+// Add the public key generated from the console here.
+// ref: https://firebase.google.com/docs/cloud-messaging/js/client
+messaging.usePublicVapidKey(
+  "BKi6dYYkevF7pSVucQRYYTaH2-s4Rwn0Wx7qkO8XbYjvfpD1eLKIXE_D7djqL_3AHj8LLmUhjxcj7RDW-JNz3OY"
+)
+
 export function initFirebase() {
   // only execute if notification support and granted
   if ("Notification" in window && Notification.permission === "granted") {
@@ -29,13 +38,12 @@ export function initFirebase() {
  * @see https://firebase.google.com/docs/cloud-messaging/js/client
  */
 function getFirebaseToken() {
-  const messaging = firebase.messaging()
-
   // get current fcm token
   messaging
     .getToken()
     .then(currentToken => {
-      // console.log("currentToken", currentToken)
+      if (process.env.NODE_ENV == "development")
+        console.log("currentToken", currentToken)
     })
     .catch(err => {
       console.error("An error occurred while retrieving token. ", err)
@@ -46,9 +54,20 @@ function getFirebaseToken() {
     MessageChannel.getToken()
       .then(currentToken => {
         console.log("fcn token is refreshed...")
+        if (process.env.NODE_ENV == "development")
+          console.log("currentToken", currentToken)
       })
       .catch(err => {
         console.error("An error occurred while retrieving token. ", err)
       })
   })
 }
+
+/**
+ * @description function to handle incoming message
+ * - the message is receive when app is focus
+ * -
+ */
+messaging.onMessage(payload => {
+  console.log("Message received. ", payload)
+})

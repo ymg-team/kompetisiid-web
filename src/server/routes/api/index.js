@@ -10,6 +10,7 @@ router.use("/user", require("./user"))
 router.use("/stats", require("./stats"))
 router.use("/counter", require("./counter"))
 router.use("/settings", require("./settings"))
+router.use("/debug", require("./debug"))
 
 router.use("/", (req, res) => {
   res.json({
