@@ -51,7 +51,7 @@ const StickyNavbarStyled = Styled.div`
 const NavbarStyled = Styled.div`
 
   #ki-logo {
-    width: 40px; 
+    width: 40px;
     height: 40px;
     display: block;
     background-size: contain;
@@ -87,7 +87,7 @@ const NavbarStyled = Styled.div`
     // color: #FFF;
     text-decoration: none;
     &:hover {
-      font-weight: bold 
+      font-weight: bold
     }
   }
 
