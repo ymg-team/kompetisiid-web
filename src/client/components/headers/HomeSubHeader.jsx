@@ -12,7 +12,7 @@ import Count from "../cards/HomeCount"
 const SubHeader = Styled.div`
   padding-bottom: 140px;
   transition: all .5s ease;
-  
+
   &.bg-red {
     background-color: ${Colors.mainRed};
   }
@@ -68,7 +68,7 @@ const SubHeader = Styled.div`
           padding: 0;
           margin: 0 0 2.5em;
         }
-      }  
+      }
     }
 
     /* responsiveness */
@@ -78,12 +78,18 @@ const SubHeader = Styled.div`
       h1 {
         font-size: 2em;
       }
+      .competition-slider_text, .competition-slider_text .col-md-12 {
+        padding: 0 !important;
+      }
     }
 
     /* medium screen */
     @media only screen and (min-width: 544px) and (max-width: 767px) {
       h1 {
         font-size: 2.5em;
+      }
+      .competition-slider_text, .competition-slider_text .col-md-12 {
+        padding: 0 !important;
       }
     }
   }
@@ -131,9 +137,6 @@ class HomeSubHeader extends Component {
               <Loader />
             </div>
           )}
-          {/* <div style={{ width: "100%", height: "100%" }}>
-            <Loader />
-          </div> */}
         </Slider>
       </SubHeader>
     )

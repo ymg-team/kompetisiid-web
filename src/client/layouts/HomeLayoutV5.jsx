@@ -35,7 +35,7 @@ const StickyNoteLinkStyle = {
 const BackToTop = Styled.button`
   outline: none;
   transition: bottom .5s ease, top .5s ease;
-  padding: 5px 10px; 
+  padding: 5px 10px;
   background: ${Colors.mainWhite};
   position: fixed;
   bottom: 20px;
@@ -47,6 +47,19 @@ const BackToTop = Styled.button`
 
 const LayoutStyled = Styled.div`
   min-height: 100%;
+  .container{
+    padding-left:0 !important;
+    padding-right:0 !important;
+  }
+
+  /* responsiveness */
+  // responsiveness
+  // small screen
+  @media only screen and (max-width: 543px) {
+    .container{
+      padding:0 15px !important;
+    }
+  }
 `
 
 let addedEventScroll = false
