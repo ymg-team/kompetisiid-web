@@ -10,7 +10,7 @@ import Slider from "../sliders"
 import Count from "../cards/HomeCount"
 
 const SubHeader = Styled.div`
-  padding-bottom: 140px;
+  margin: 50px 0 140px;
   transition: all .5s ease;
 
   &.bg-red {
@@ -70,28 +70,30 @@ const SubHeader = Styled.div`
         }
       }
     }
+  }
 
-    /* responsiveness */
+  /* responsiveness */
 
-    /* small */
-    @media only screen and (max-width: 543px) {
-      h1 {
-        font-size: 2em;
-      }
-      .competition-slider_text, .competition-slider_text .col-md-12 {
-        padding: 0 !important;
-      }
+  /* small */
+  @media only screen and (max-width: 543px) {
+    h1 {
+      font-size: 2em;
     }
-
-    /* medium screen */
-    @media only screen and (min-width: 544px) and (max-width: 767px) {
-      h1 {
-        font-size: 2.5em;
-      }
-      .competition-slider_text, .competition-slider_text .col-md-12 {
-        padding: 0 !important;
-      }
+    .competition-slider_text, .competition-slider_text .col-md-12 {
+      padding: 0 !important;
     }
+    margin-top: 10px !important;
+  }
+
+  /* medium screen */
+  @media only screen and (min-width: 544px) and (max-width: 767px) {
+    h1 {
+      font-size: 2.5em;
+    }
+    .competition-slider_text, .competition-slider_text .col-md-12 {
+      padding: 0 !important;
+    }
+    margin-top: 10px !important;
   }
 `
 
@@ -129,7 +131,6 @@ class HomeSubHeader extends Component {
     return (
       <SubHeader id="homepage-subheader">
         <Slider className="container subheader-content home-slider">
-          {/* <WelcomeStaticSlider stats={this.props.stats} /> */}
           {status && status === 200 ? (
             data.map((n, key) => <CompetitionSlider key={key} {...n} />)
           ) : (
@@ -137,6 +138,9 @@ class HomeSubHeader extends Component {
               <Loader />
             </div>
           )}
+          {/* <div style={{ width: "100%", height: "100%" }}>
+            <Loader />
+          </div> */}
         </Slider>
       </SubHeader>
     )

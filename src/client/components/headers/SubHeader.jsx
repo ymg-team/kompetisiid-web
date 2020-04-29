@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react"
 import Styled from "styled-components"
 import * as Colors from "../../../style/colors"
 
@@ -8,12 +8,18 @@ const SubHeaderStyled = Styled.div`
 
   /* small */
   @media only screen and (max-width: 543px) {
-    padding: 50px 0;
+    padding: 50px 0 !important;
+    &.container {
+      padding: 50px 0 !important;
+    }
   }
 
   /* medium screen */
   @media only screen and (min-width: 544px) and (max-width: 767px) {
-    padding: 50px 0;
+    padding: 50px 0 !important;
+    &.container {
+      padding: 50px 0 !important;
+    }
   }
 `
 
@@ -49,7 +55,10 @@ const HeaderContentStyled = Styled.div`
 `
 
 const SubHeader = props => (
-  <SubHeaderStyled style={props.customStyle || {}} className={props.customClass || "container"}>
+  <SubHeaderStyled
+    style={props.customStyle || {}}
+    className={props.customClass || "container"}
+  >
     <HeaderContentStyled className={props.customClassContent || ""}>
       <h2>{props.title}</h2>
       <h3 className={"text-muted"}>{props.text}</h3>

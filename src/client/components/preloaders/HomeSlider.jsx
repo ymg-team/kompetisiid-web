@@ -30,10 +30,29 @@ const Preloader = Styled.div`
       width: 100%;
     }
   }
+
+  /* responsiveness */
+
+    /* small */
+    @media only screen and (max-width: 543px) {
+      margin-top: 50px;
+      .col-md-6 {
+        padding: 0 !important;
+      }
+    }
+
+    /* medium screen */
+    @media only screen and (min-width: 544px) and (max-width: 767px) {
+      margin-top: 50px;
+      .col-md-6 {
+        padding: 0 !important;
+      }
+    }
+
 `
 
 const CompetitionDetailPreloader = props => (
-  <Preloader className={"container no-padding"}>
+  <Preloader className={"no-padding"}>
     <div className={"col-md-6"}>
       <div className={"preloader-poster animated-background"}>
         <div className="background-masker background-masker-competition-1" />
