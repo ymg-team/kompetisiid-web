@@ -5,6 +5,7 @@ import * as Colors from "../../../style/colors"
 
 const SliderWrapper = Styled.div`
   position: relative;
+  padding: 0 !important;
 
   .slider-items {
     width: 100%;
