@@ -99,6 +99,8 @@ App.use(
   "/firebase-messaging-sw.js",
   express.static(__dirname + "/../../public/firebase-messaging-sw.js")
 )
+// route of /.well-know
+App.use("/.well-known", express.static(__dirname + "/../../public/.well-known"))
 
 // React path
 

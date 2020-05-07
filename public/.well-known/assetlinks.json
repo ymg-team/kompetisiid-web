@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.ymg.kompetisi",
+      "sha256_cert_fingerprints": [
+        "00:94:C4:63:42:7A:44:D3:FB:20:36:15:B0:4F:CE:0B:AF:E4:9C:D8:A4:F1:71:92:38:6A:BC:A9:64:4D:0A:18"
+      ]
+    }
+  }
+]
