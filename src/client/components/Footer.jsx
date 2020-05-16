@@ -172,22 +172,43 @@ export default class Footer extends Component {
               <div className="col-md-6">
                 <ul className="horizontal-menu pull-right social-media">
                   <li>
-                    <a href="https://facebook.com/kompetisiid" target="_blank">
+                    <a
+                      href="https://wa.me/085156934428?text=Ada%20pertanyaan%20seputar%20produk%20Yussan%20Media%20Group%2C%20bisa%20disini."
+                      target="_blank"
+                      rel="noreferer noopener"
+                    >
+                      <i className="fab fa-whatsapp" />
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="https://facebook.com/kompetisiid"
+                      target="_blank"
+                      rel="noreferer noopener"
+                    >
                       <i className="fab fa-facebook-f" />
                     </a>
                   </li>
                   <li>
-                    <a href="https://twitter.com/_kompetisiid" target="_blank">
+                    <a
+                      href="https://twitter.com/_kompetisiid"
+                      target="_blank"
+                      rel="noreferer noopener"
+                    >
                       <i className="fab fa-twitter" />
                     </a>
                   </li>
                   <li>
-                    <a href="https://instagram.com/kompetisiid" target="_blank">
+                    <a
+                      href="https://instagram.com/kompetisiid"
+                      target="_blank"
+                      rel="noreferer noopener"
+                    >
                       <i className="fab fa-instagram" />
                     </a>
                   </li>
                   <li>
-                    <a href="/feed" target="_blank">
+                    <a href="/feed" target="_blank" rel="noreferer noopener">
                       <i className="fa fa-rss" />
                     </a>
                   </li>
