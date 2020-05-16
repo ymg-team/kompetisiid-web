@@ -173,7 +173,7 @@ export default class Footer extends Component {
                 <ul className="horizontal-menu pull-right social-media">
                   <li>
                     <a
-                      href="https://wa.me/085156934428?text=Ada%20pertanyaan%20seputar%20produk%20Yussan%20Media%20Group%2C%20bisa%20disini."
+                      href="https://wa.me/6285156934428?text=Ada%20pertanyaan%20seputar%20produk%20Yussan%20Media%20Group%2C%20bisa%20disini."
                       target="_blank"
                       rel="noreferer noopener"
                     >
