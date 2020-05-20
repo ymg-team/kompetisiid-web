@@ -29,12 +29,22 @@ class DownloadAndroid extends React.Component {
           <a
             target="_blank"
             rel="noopener noreferer"
-            href="https://drive.google.com/file/d/1fBj-7nCXY7iis1Xf3atL3IwQp9RqNzpo/view"
+            href=" https://drive.google.com/open?id=1nG6tNz7XAmt5Vpn_YC8TM2yMtuKdUK1X"
           >
-            Download Klik Disini (v1.1.0-beta)
+            Download Klik Disini (v2.0.0-beta)
           </a>
 
           <h2 className="m-t-2em">Changelogs</h2>
+          <p>
+            <strong>v2.0.0-beta</strong>
+            <br />
+            <ul>
+              <li> Introducing bottom navigation bar </li>
+              <li> Redesigned Home, Explore, and News list</li>
+              <li> Image caching improvement</li>
+              <li> Bug fixing</li>
+            </ul>
+          </p>
           <p>
             <strong>v1.1.0-beta</strong>
             <br />
