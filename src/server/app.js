@@ -38,12 +38,6 @@ const staticOptions = function() {
   }
 }
 
-// global midleware
-App.use((req, res, next) => {
-  // if (!req.session.token) req.session.token = process.env.APP_KEY
-  next()
-})
-
 // app routes
 App.use("/api", AppApi)
 App.use("/feed", AppFeed)

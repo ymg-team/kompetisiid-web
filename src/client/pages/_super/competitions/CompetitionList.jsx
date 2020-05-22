@@ -216,4 +216,4 @@ function mapStateToProps(state) {
   }
 }
 
-module.exports = connect(mapStateToProps)(MyCompetition)
+export default connect(mapStateToProps)(MyCompetition)

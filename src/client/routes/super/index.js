@@ -5,12 +5,11 @@ import SuperLayout from "../../layouts/SuperLayoutV5"
 
 // components
 import Loading from "../../components/preloaders/GlobalLoader"
-import ContentLoading from "../../components/preloaders/FullContentLoader"
 
 // pages
 const SuperDashboard = Loadable({
   loader: () => import("../../pages/_super/index"),
-  loading: ContentLoading
+  loading: Loading
 })
 const NotFound = Loadable({
   loader: () => import("../../pages/error/index"),
@@ -27,8 +26,7 @@ const CompetitionList = Loadable({
   loading: Loading
 })
 const CompetitionFormLayout = Loadable({
-  loader: () =>
-    import("../../pages/_super/competitions/CompetitionFormLayout"),
+  loader: () => import("../../pages/_super/competitions/CompetitionFormLayout"),
   loading: Loading
 })
 const CompetitionForm = Loadable({
