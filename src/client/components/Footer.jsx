@@ -5,7 +5,14 @@ import * as Color from "./styles/colors"
 // components
 import { Link } from "react-router-dom"
 
-const FooterWrapper = Styled.footer``
+const FooterWrapper = Styled.footer`
+  .footer_content {
+    margin-bottom: 50px;
+    ul.vertical-menu li {
+      margin-left: 0;
+    }
+  }
+`
 
 const FooterThanks = Styled.div`
   &.footer-thanks {
@@ -76,7 +83,7 @@ export default class Footer extends Component {
           {/* <footer> */}
           <div className="container">
             <div className="row">
-              <div className="col-md-6">
+              <div className="col-md-6 footer_content">
                 <p>
                   <strong className="title">Tentang Kami</strong>
                 </p>
@@ -88,7 +95,7 @@ export default class Footer extends Component {
                 dapat menjelajahi dan mengikuti berbagai kategori kompetisi di
                 KI dan semoga menjadi pemenang.
               </div>
-              <div className="col-md-3">
+              <div className="col-md-3 footer_content">
                 <p>
                   {" "}
                   <strong className="title">Lebih Lengkap</strong>
@@ -125,7 +132,7 @@ export default class Footer extends Component {
                 </ul>
                 <p />
               </div>
-              <div className="col-md-3">
+              <div className="col-md-3 footer_content">
                 <p>
                   {" "}
                   <strong className="title">Navigasi</strong>
@@ -156,8 +163,11 @@ export default class Footer extends Component {
               </div>
             </div>
             <hr style={{ borderTop: "1px solid #656565" }} />
-            <div className="row vertical-center">
-              <div className="col-md-6 footer-copyright">
+            <div className="row">
+              <div
+                style={{ padding: "10px 0" }}
+                className="col-md-6 col-xs-12 footer-copyright"
+              >
                 <img
                   className="footer-copyright-logo"
                   src="/assets/4.2/img/icon-128x128.png"
@@ -169,7 +179,7 @@ export default class Footer extends Component {
                   DIY, Indonesia
                 </small>
               </div>
-              <div className="col-md-6">
+              <div style={{ padding: "10px 0" }} className="col-md-6 col-xs-12">
                 <ul className="horizontal-menu pull-right social-media">
                   <li>
                     <a

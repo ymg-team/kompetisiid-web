@@ -4,14 +4,13 @@ import PropTypes from "prop-types"
 
 const ButtonStyled = Styled.button`
   border-radius: 5px;
-  
+  font-weight: bold;
   ${props => {
     switch (props.size) {
       case "medium":
         return ``
       case "large":
         return `
-          font-size: 15px;
           padding: 8px 16px;
         `
       default:

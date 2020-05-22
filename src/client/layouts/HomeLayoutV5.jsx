@@ -159,9 +159,7 @@ class RootLayoutV5 extends Component {
             }}
             style={!this.state.showBtnTop ? { bottom: "-200px" } : {}}
           >
-            <i className="fas fa-arrow-alt-circle-up" />
-            &nbsp;
-            <span>Kembali ke Atas</span>
+            <i className="fas fa-chevron-up"></i>
           </BackToTop>
         </div>
         {/* end of offline wrapper */}
