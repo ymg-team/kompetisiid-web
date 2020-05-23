@@ -1,13 +1,12 @@
 import React, { Component } from "react"
 import Styled from "styled-components"
 import { nominalToText } from "../../helpers/number"
+import { pushScript, pushStyle } from "../../helpers/domEvents"
 import * as Colors from "../../../style/colors"
 
 // components
 import Loader from "../preloaders/HomeSlider"
 import { Link } from "react-router-dom"
-import Slider from "../sliders"
-import Count from "../cards/HomeCount"
 
 const SubHeader = Styled.div`
   margin: 50px 0 140px;
@@ -22,7 +21,7 @@ const SubHeader = Styled.div`
   }
 
   .home-slider {
-    padding: 3em 0 0;
+    padding: 30px 0 0;
     text-align: center;
     display: flex;
     align-items: center;
@@ -37,15 +36,18 @@ const SubHeader = Styled.div`
       line-height: 1.1;
       padding: 1em 0 0.5em;
       margin: 0;
+      white-space: pre-wrap
     }
     h2 {
       color: ${Colors.mainGray};
       font-family: raleway, sans-serif;
+      white-space: pre-wrap
     }
     .text{
       color: ${Colors.mainGray};
       padding: 3em 0;
       font-size: .9em;
+      white-space: pre-wrap
     }
 
     .competition-slider {
@@ -68,6 +70,13 @@ const SubHeader = Styled.div`
           padding: 0;
           margin: 0 0 2.5em;
         }
+      }
+    }
+
+    .glide__bullet {
+      border: 1px solid rgb(58, 58, 58);
+      &.glide__bullet--active {
+        background: rgb(58, 58, 58);
       }
     }
   }
@@ -97,58 +106,97 @@ const SubHeader = Styled.div`
   }
 `
 
-// const HomeSlider = Styled.div`
-
-// `
-
-const Static = [
-  // {
-  //   url: "http://res.cloudinary.com/dhjkktmal/image/upload/v1526547300/kompetisi-id/Screen_Shot_2018-05-17_at_15.54.33.png",
-  //   title: "Ramadhan Kareem for kompetisi.id"
-  // }
-]
-
 class HomeSubHeader extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      active: 0,
-      totalSliders: 1 + Static.length
+      sliderStart: false
     }
   }
 
+  componentDidMount() {
+    pushScript("/assets/vendors/glide/glide.min.js")
+    pushStyle("/assets/vendors/glide/css/glide.core.min.css")
+    pushStyle("/assets/vendors/glide/css/glide.theme.min.css")
+  }
+
+  renderSlider() {
+    new Glide("#homepage-subheader", {
+      type: "carousel",
+      startAt: 0,
+      perView: 1,
+      hoverpause: true,
+      animationDuration: 200,
+      autoplay: 5000
+    }).mount()
+  }
+
   UNSAFE_componentWillReceiveProps(np) {
-    if (np.slider.status && np.slider.status === 200) {
-      this.setState({
-        totalSliders: 1 + np.slider.data.length + Static.length
-      })
+    if (
+      np.slider.status &&
+      np.slider.status === 200 &&
+      !this.state.sliderStart
+    ) {
+      this.setState(
+        {
+          sliderStart: true
+        },
+        () => {
+          setTimeout(() => {
+            this.renderSlider()
+          }, 100)
+        }
+      )
     }
   }
 
   render() {
-    const { data, status, message } = this.props.slider
+    const { data = [] } = this.props.slider || {}
 
     return (
-      <SubHeader id="homepage-subheader">
-        <Slider className="container subheader-content home-slider">
-          {status && status === 200 ? (
-            data.map((n, key) => <CompetitionSlider key={key} {...n} />)
-          ) : (
-            <div style={{ width: "100%", height: "100%" }}>
-              <Loader />
+      <SubHeader>
+        <div className="container subheader-content home-slider">
+          <div
+            style={data && data.length > 0 ? { marginBottom: 20 } : {}}
+            className="glide"
+            id="homepage-subheader"
+          >
+            <div className="glide__track" data-glide-el="track">
+              {!this.state.sliderStart ? (
+                <div style={{ width: "100%", height: "100%" }}>
+                  <Loader />
+                </div>
+              ) : null}
+              <div className="glide__slides">
+                {data.map((n, key) => (
+                  <CompetitionSlider key={key} {...n} />
+                ))}
+              </div>
             </div>
-          )}
-          {/* <div style={{ width: "100%", height: "100%" }}>
-            <Loader />
-          </div> */}
-        </Slider>
+            <div
+              className="glide__bullets"
+              data-glide-el="controls[nav]"
+              style={{ zoom: 1.8, marginTop: 20, bottom: "unset" }}
+            >
+              {data.map((n, key) => {
+                return (
+                  <button
+                    className="glide__bullet"
+                    data-glide-dir={`=${key}`}
+                    key={key}
+                  />
+                )
+              })}
+            </div>
+          </div>
+        </div>
       </SubHeader>
     )
   }
 }
 
 const CompetitionSlider = props => (
-  <div className="competition-slider">
+  <div className={`competition-slider`}>
     <div
       className="hide-mobile competition-slider_poster col-md-6"
       style={{ backgroundImage: `url(${props.poster.original})` }}
