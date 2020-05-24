@@ -34,6 +34,14 @@ const FilterStatus = {
 }
 
 class Index extends Component {
+  // static fetchData({ store, params, query }) {
+  //   const state = generateState(query)
+  //   const Filter = generateFilter(state)
+  //   const Params = generateParams(state)
+
+  //   return store.dispatch(KompetisiActs.fetchJelajah(Params, Filter))
+  // }
+
   state = generateState(
     this.props.location.search
       ? queryToObj(this.props.location.search.replace("?", ""))
@@ -477,7 +485,7 @@ class Index extends Component {
               <ul className="vertical-menu list-categories">
                 <li>
                   <a
-                    onClick={(e) => {
+                    onClick={e => {
                       e.preventDefault()
                       modal("close", "filter-by-status")
                       this.updateQuery({ status: "all" })
@@ -489,7 +497,7 @@ class Index extends Component {
                 </li>
                 <li>
                   <a
-                    onClick={(e) => {
+                    onClick={e => {
                       e.preventDefault()
                       modal("close", "filter-by-status")
                       this.updateQuery({ status: "active" })

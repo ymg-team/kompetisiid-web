@@ -3,9 +3,10 @@ import React, { Component } from "react"
 import Loadable from "react-loadable"
 import Styled from "styled-components"
 import { connect } from "react-redux"
-import { topLoading } from "../../components/preloaders"
 import { getStorage, setStorage } from "../../../store/helpers/LocalStorage"
 import { LOCAL_STORAGE_CATEGORIES } from "../../../config/version"
+
+// redux
 
 // components
 import EmptyLoading from "../../components/preloaders/EmptyLoader"
@@ -14,7 +15,6 @@ import Helmet from "../../components/Helmet"
 import NewsLoading from "../../components/preloaders/NewsCardLoader"
 import CompetitionLoading from "../../components/preloaders/CompetitionCardLoader"
 import { Link } from "react-router-dom"
-import Navbar from "../../components/navigations/TransparentNavbar"
 import SubHeaderHome from "../../components/headers/HomeSubHeader"
 
 // split components
@@ -55,8 +55,26 @@ const GrayBackgroundStyled = Styled.div`
 `
 
 class Home extends Component {
+  static fetchData({ store, params, query }) {
+    return store.dispatch(
+      fetchJelajah(
+        { limit: 7, is_popular: true, status: "active" },
+        "home_popular"
+      )
+    )
+  }
+
   componentDidMount() {
     window.scroll(0, 0)
+
+    // get popular competition
+    if (!this.props.kompetisi.data.home_popular)
+      this.props.dispatch(
+        fetchJelajah(
+          { limit: 7, is_popular: true, status: "active" },
+          "home_popular"
+        )
+      )
 
     // get lattest 9 active competition
     if (!this.props.kompetisi.data.home_latest)
@@ -65,7 +83,6 @@ class Home extends Component {
       )
 
     // get lattest 7 active and popular competition
-    if (!this.props.kompetisi.data.home_popular) topLoading(true)
     this.props.dispatch(
       fetchJelajah(
         { limit: 7, is_popular: true, status: "active" },
@@ -112,17 +129,28 @@ class Home extends Component {
   render() {
     const { kompetisi, berita } = this.props
 
-    if (
-      typeof window !== "undefined" &&
-      kompetisi.data["home_popular"] &&
-      kompetisi.data["home_popular"].meta
-    ) {
-      topLoading(false)
-    }
-
     return (
       <React.Fragment>
-        <Helmet />
+        <Helmet
+          script={[
+            {
+              src: "/assets/vendors/glide-3.1.10/glide.min.js",
+              type: "text/javascript"
+            }
+          ]}
+          link={[
+            {
+              href: "/assets/vendors/glide-3.1.10/css/glide.core.min.css",
+              rel: "stylesheet",
+              type: "text/css"
+            },
+            {
+              href: "/assets/vendors/glide-3.1.10/css/glide.theme.min.css",
+              rel: "stylesheet",
+              type: "text/css"
+            }
+          ]}
+        />
 
         <div className="col-md-12">
           <SubHeaderHome
