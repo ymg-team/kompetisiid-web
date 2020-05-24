@@ -67,7 +67,7 @@
     "request": "^2.87.0",
     "seal-middleware": "^0.1.0",
     "string-manager": "^3.0.0",
-    "styled-components": "^3.4.10",
+    "styled-components": "^5.1.0",
     "superagent": "^4.0.0-beta.5",
     "sweetalert": "^2.1.0",
     "xml": "1.0.1"
