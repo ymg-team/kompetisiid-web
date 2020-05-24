@@ -142,9 +142,12 @@ class HomeSubHeader extends Component {
           sliderStart: true
         },
         () => {
-          setTimeout(() => {
-            this.renderSlider()
-          }, 100)
+          setTimeout(
+            () => {
+              this.renderSlider()
+            },
+            typeof window.Glide != "undefined" ? 0 : 200
+          )
         }
       )
     }
