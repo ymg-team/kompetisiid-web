@@ -109,30 +109,37 @@ const SubHeader = Styled.div`
 class HomeSubHeader extends Component {
   constructor(props) {
     super(props)
+
+    // const { data = [] } = props.slider || {}
+
     this.state = {
       sliderStart: false
     }
   }
 
-  componentDidMount() {
-    pushScript("/assets/vendors/glide/glide.min.js")
-    pushStyle("/assets/vendors/glide/css/glide.core.min.css")
-    pushStyle("/assets/vendors/glide/css/glide.theme.min.css")
-  }
+  // componentDidMount() {
+  //   if (this.state.sliderStart) this.renderSlider()
+  // }
 
   renderSlider() {
-    new Glide("#homepage-subheader", {
-      type: "carousel",
-      startAt: 0,
-      perView: 1,
-      hoverpause: true,
-      animationDuration: 200,
-      autoplay: 5000
-    }).mount()
+    setTimeout(
+      () => {
+        new Glide("#homepage-subheader", {
+          type: "carousel",
+          startAt: 0,
+          perView: 1,
+          hoverpause: true,
+          animationDuration: 200,
+          autoplay: 5000
+        }).mount()
+      },
+      window && window.Glide ? 20 : 200
+    )
   }
 
   UNSAFE_componentWillReceiveProps(np) {
     if (
+      typeof window !== "undefined" &&
       np.slider.status &&
       np.slider.status === 200 &&
       !this.state.sliderStart
@@ -142,12 +149,7 @@ class HomeSubHeader extends Component {
           sliderStart: true
         },
         () => {
-          setTimeout(
-            () => {
-              this.renderSlider()
-            },
-            typeof window.Glide != "undefined" ? 0 : 200
-          )
+          this.renderSlider()
         }
       )
     }
@@ -164,13 +166,16 @@ class HomeSubHeader extends Component {
             className="glide"
             id="homepage-subheader"
           >
+            {!this.state.sliderStart ? (
+              <div style={{ width: "100%", height: "100%" }}>
+                <Loader />
+              </div>
+            ) : null}
             <div className="glide__track" data-glide-el="track">
-              {!this.state.sliderStart ? (
-                <div style={{ width: "100%", height: "100%" }}>
-                  <Loader />
-                </div>
-              ) : null}
-              <div className="glide__slides">
+              <div
+                style={!this.state.sliderStart ? { display: "none" } : {}}
+                className="glide__slides"
+              >
                 {data.map((n, key) => (
                   <CompetitionSlider key={key} {...n} />
                 ))}
@@ -179,7 +184,11 @@ class HomeSubHeader extends Component {
             <div
               className="glide__bullets"
               data-glide-el="controls[nav]"
-              style={{ zoom: 1.8, marginTop: 20, bottom: "unset" }}
+              style={
+                !this.state.sliderStart
+                  ? { display: "none" }
+                  : { zoom: 1.8, marginTop: 20, bottom: "unset" }
+              }
             >
               {data.map((n, key) => {
                 return (
