@@ -5,16 +5,6 @@ const BrotliPlugin = require("brotli-webpack-plugin")
 
 let config = require("./webpack")
 
-// brotli compression
-config.plugins.push(
-  new BrotliPlugin({
-    asset: "[path].br[query]",
-    test: /\.(js|css|html|svg)$/,
-    threshold: 10240,
-    minRatio: 0.8
-  })
-)
-
 if (env.NODE_ENV === "production") {
   // minify js
   config.plugins.push(
