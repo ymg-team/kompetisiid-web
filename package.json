@@ -17,7 +17,6 @@
     "release": "standard-version",
     "release:beta": "standard-version -p beta"
   },
-  "pre-commit": "lint",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/idmore/kompetisiid-web.git"

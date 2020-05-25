@@ -1,7 +1,7 @@
 import React from "react"
-import { EditorState, ContentState, convertToRaw, convertFromHTML } from "draft-js"
-import { Editor } from "react-draft-wysiwyg"
-import draftToHtml from "draftjs-to-html"
+// import { EditorState, ContentState, convertToRaw, convertFromHTML } from "draft-js"
+// import { Editor } from "react-draft-wysiwyg"
+// import draftToHtml from "draftjs-to-html"
 import Styled from "styled-components"
 import htmlToDraft from "html-to-draftjs"
 
@@ -15,60 +15,67 @@ const EditorKIStyled = Styled.div`
 `
 
 class EditorKI extends React.Component {
-  state = {
-    editorState: EditorState.createEmpty(), 
-    ready: false
-  }
+  // state = {
+  //   editorState: EditorState.createEmpty(),
+  //   ready: false
+  // }
 
-  componentDidMount = () => {
-    require("react-draft-wysiwyg/dist/react-draft-wysiwyg.css")
-    setTimeout(() => {
-      this.setState({ready: true}, () => {
-        // console.log("value", this.props.value)
-        if(this.props.value) {
-          this.setState({
-            editorState: EditorState.createWithContent(ContentState.createFromBlockArray(
-              htmlToDraft(this.props.value)
-            ))
-          })
-        }
-      })
-    }, 1200)
-  }
+  // componentDidMount = () => {
+  //   require("react-draft-wysiwyg/dist/react-draft-wysiwyg.css")
+  //   setTimeout(() => {
+  //     this.setState({ ready: true }, () => {
+  //       // console.log("value", this.props.value)
+  //       if (this.props.value) {
+  //         this.setState({
+  //           editorState: EditorState.createWithContent(
+  //             ContentState.createFromBlockArray(htmlToDraft(this.props.value))
+  //           )
+  //         })
+  //       }
+  //     })
+  //   }, 1200)
+  // }
 
-  onEditorStateChange = editorState => {
-    this.setState({
-      editorState
-    })
-    this.props.setState({[this.props.name]: draftToHtml(convertToRaw(editorState.getCurrentContent()))})
-  }
+  // onEditorStateChange = editorState => {
+  //   this.setState({
+  //     editorState
+  //   })
+  //   this.props.setState({
+  //     [this.props.name]: draftToHtml(
+  //       convertToRaw(editorState.getCurrentContent())
+  //     )
+  //   })
+  // }
 
-  render = () => {
-    const { editorState } = this.state
-    return (
-      <EditorKIStyled className={`form-child`}>
-        <label htmlFor={this.props.id || this.props.name}>
-          {this.props.label}{" "}
-          {this.props.required ? <span className="text-red">*</span> : null}
-        </label>
-        {
-          this.state.ready ?
-          <Editor
-            editorState={editorState}
-            wrapperClassName="ki-editor-wrapper"
-            editorClassName="ki-editor"
-            onEditorStateChange={this.onEditorStateChange}
-            stripPastedStyles
-          />
-          : <Loading />
-        }
-        {/* <textarea
-          style={{display: "none"}}
-          disabled
-          value={draftToHtml(convertToRaw(editorState.getCurrentContent()))}
-        /> */}
-      </EditorKIStyled>
-    )
+  // render = () => {
+  //   const { editorState } = this.state
+  //   return (
+  //     <EditorKIStyled className={`form-child`}>
+  //       <label htmlFor={this.props.id || this.props.name}>
+  //         {this.props.label}{" "}
+  //         {this.props.required ? <span className="text-red">*</span> : null}
+  //       </label>
+  //       {this.state.ready ? (
+  //         <Editor
+  //           editorState={editorState}
+  //           wrapperClassName="ki-editor-wrapper"
+  //           editorClassName="ki-editor"
+  //           onEditorStateChange={this.onEditorStateChange}
+  //           stripPastedStyles
+  //         />
+  //       ) : (
+  //         <Loading />
+  //       )}
+  //       {/* <textarea
+  //         style={{display: "none"}}
+  //         disabled
+  //         value={draftToHtml(convertToRaw(editorState.getCurrentContent()))}
+  //       /> */}
+  //     </EditorKIStyled>
+  //   )
+  // }
+  render() {
+    return null
   }
 }
 
