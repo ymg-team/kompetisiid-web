@@ -11,21 +11,28 @@ import * as AuthMiddleware from "./middlewares/auth"
 import * as FrontMiddleware from "./middlewares/frontend"
 
 const App = express()
+const cookieConf = {
+  name: `kompetisi-id-${process.env.NODE_ENV}`,
+  keys: [process.env.APP_KEY || "kompetisi", "kompetisid"],
+  maxAge: 12 * 30 * 24 * 60 * 60 * 1000
+}
 
 App.disable("x-powered-by")
 
 if (process.env.NODE_ENV === "production") {
   const compression = require("compression")
   App.use(compression())
+
+  // Brotli ref: https://web.dev/codelab-text-compression-brotli/
+  App.get("/build/*.js", (req, res, next) => {
+    req.url = req.url + ".br"
+    res.set("Content-Encoding", "br")
+    res.set("Content-Type", "application/javascript; charset=UTF-8")
+    next()
+  })
 }
 
-App.use(
-  cookieSession({
-    name: "kompetisi-id",
-    keys: [process.env.APP_KEY || "kompetisi", "kompetisid"],
-    maxAge: 12 * 30 * 24 * 60 * 60 * 1000
-  })
-)
+App.use(cookieSession(cookieConf))
 
 const staticOptions = function() {
   if (process.env.NODE_ENV == "production") {
@@ -53,13 +60,6 @@ App.get("/settings/*", AuthMiddleware.dashboardMiddleware, AppRender)
 App.get("/super", AuthMiddleware.superMiddleware, AppRender)
 App.get("/super/*", AuthMiddleware.superMiddleware, AppRender)
 
-// ref: https://web.dev/codelab-text-compression-brotli/
-App.get("/build/*.js", (req, res, next) => {
-  req.url = req.url + ".br"
-  res.set("Content-Encoding", "br")
-  res.set("Content-Type", "application/javascript; charset=UTF-8")
-  next()
-})
 // static files
 App.use(
   "/static",
