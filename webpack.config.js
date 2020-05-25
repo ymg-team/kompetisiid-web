@@ -39,7 +39,7 @@ if (env.NODE_ENV === "production") {
     new BrotliPlugin({
       asset: "[path].br[query]",
       test: /\.(js|css|html|svg)$/,
-      threshold: 10240,
+      // threshold: 10240,
       minRatio: 0.8
     })
   )
