@@ -3,7 +3,7 @@ import React from "react"
 // import { Editor } from "react-draft-wysiwyg"
 // import draftToHtml from "draftjs-to-html"
 import Styled from "styled-components"
-import htmlToDraft from "html-to-draftjs"
+// import htmlToDraft from "html-to-draftjs"
 
 import Loading from "../preloaders/GlobalLoader"
 
