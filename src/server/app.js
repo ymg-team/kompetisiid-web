@@ -53,6 +53,13 @@ App.get("/settings/*", AuthMiddleware.dashboardMiddleware, AppRender)
 App.get("/super", AuthMiddleware.superMiddleware, AppRender)
 App.get("/super/*", AuthMiddleware.superMiddleware, AppRender)
 
+// ref: https://web.dev/codelab-text-compression-brotli/
+App.get("/build/*.js", (req, res, next) => {
+  req.url = req.url + ".br"
+  res.set("Content-Encoding", "br")
+  res.set("Content-Type", "application/javascript; charset=UTF-8")
+  next()
+})
 // static files
 App.use(
   "/static",
