@@ -14,7 +14,8 @@ const App = express()
 const cookieConf = {
   name: `kompetisi-id-${process.env.NODE_ENV}`,
   keys: [process.env.APP_KEY || "kompetisi", "kompetisid"],
-  maxAge: 12 * 30 * 24 * 60 * 60 * 1000
+  maxAge: 12 * 30 * 24 * 60 * 60 * 1000,
+  secure: false
 }
 
 App.disable("x-powered-by")

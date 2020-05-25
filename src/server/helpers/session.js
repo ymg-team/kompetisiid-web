@@ -6,18 +6,18 @@ export function getData(req, key) {
 }
 
 export function setData(req, key, data) {
-  if (data.remember) req.sessionOptions.maxAge = 'Session'
+  if (data.remember) req.sessionOptions.maxAge = "Session"
   let nextsession = req.session.length > 0 ? req.session : {}
   nextsession[key] = data
   req.session = nextsession
-  req.session.save()
+  // req.session.save()
 }
 
 export function update(req, key, nextdata) {
   let nextsession = req.session.length > 0 ? req.session : {}
   nextsession[key] = Object.assign({}, nextsession[key], nextdata)
   req.session = nextsession
-  req.session.save()
+  // req.session.save()
 }
 
 export function destroy(req, key) {
