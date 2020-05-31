@@ -16,7 +16,7 @@ export default class Share extends PureComponent {
           href="#"
           className="share share-facebook"
           title="share ke Facebook"
-          onClick={(e) => {
+          onClick={e => {
             e.preventDefault()
             window.open(
               `http://www.facebook.com/sharer/sharer.php?u=${link}&title=${title}&desc=${desc}`,
@@ -39,10 +39,10 @@ export default class Share extends PureComponent {
           href="#"
           className="share share-twitter"
           title="share ke Twitter"
-          onClick={(e) => {
+          onClick={e => {
             e.preventDefault()
             window.open(
-              `http://twitter.com/intent/tweet?status=${title}+${link}`,
+              `http://twitter.com/intent/tweet?text=${title}+${link}`,
               "MsgWindow",
               "width=500,height=400"
             )
@@ -62,7 +62,7 @@ export default class Share extends PureComponent {
           href="#"
           className="share share-linkedin"
           title="share ke Linkedin"
-          onClick={(e) => {
+          onClick={e => {
             e.preventDefault()
             window.open(
               `http://www.linkedin.com/shareArticle?mini=true&url=${link}&title=${title}`,
@@ -93,7 +93,7 @@ export default class Share extends PureComponent {
           href="#"
           className="share share-sebangsa"
           title="share ke Sebangsa"
-          onClick={(e) => {
+          onClick={e => {
             e.preventDefault()
             window.open(
               `https://sebangsa.com/post/create?text=${link} ${title}`,

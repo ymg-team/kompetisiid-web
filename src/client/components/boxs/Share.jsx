@@ -22,7 +22,7 @@ const SocMeds = [
   },
   {
     name: "Twitter",
-    link: "https://twitter.com/intent/tweet?status=",
+    link: "https://twitter.com/intent/tweet?text=",
     icon: "https://img.icons8.com/color/48/000000/twitter.png",
     title: "Share ke Twitter"
   },
