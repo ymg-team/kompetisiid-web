@@ -53,7 +53,7 @@ function getFirebaseToken() {
   messaging.onTokenRefresh(() => {
     MessageChannel.getToken()
       .then(currentToken => {
-        console.log("fcn token is refreshed...")
+        console.log("fcm token is refreshed...")
         if (process.env.NODE_ENV == "development")
           console.log("currentToken", currentToken)
       })
