@@ -4,9 +4,9 @@
   "description": "platform untuk mengikuti dan berbagi kompetisi",
   "main": "dist-server/server/index.js",
   "scripts": {
-    "start": "concurrently \"yarn server:watch\" \"yarn build:watch\"",
+    "local": "concurrently \"npm run server:watch\" \"npm run build:watch\"",
     "build:watch": "NODE_ENV=development webpack --watch --progress",
-    "build:prod": "yarn build-client:prod && yarn build-server:prod",
+    "build:prod": "npm run build-client:prod && npm run build-server:prod",
     "lint": "eslint src --ext .js --ext .jsx",
     "test": "jest",
     "test:watch": "jest --watch",

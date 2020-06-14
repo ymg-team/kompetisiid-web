@@ -113,13 +113,10 @@ class HomeSubHeader extends Component {
     // const { data = [] } = props.slider || {}
 
     this.state = {
-      sliderStart: false
+      sliderStart: false,
+      sliderShow: false
     }
   }
-
-  // componentDidMount() {
-  //   if (this.state.sliderStart) this.renderSlider()
-  // }
 
   renderSlider() {
     setTimeout(
@@ -132,6 +129,7 @@ class HomeSubHeader extends Component {
           animationDuration: 200,
           autoplay: 5000
         }).mount()
+        this.setState({ sliderShow: true })
       },
       window && window.Glide ? 20 : 200
     )
@@ -173,7 +171,11 @@ class HomeSubHeader extends Component {
             ) : null}
             <div className="glide__track" data-glide-el="track">
               <div
-                style={!this.state.sliderStart ? { display: "none" } : {}}
+                style={
+                  !this.state.sliderShow || !this.state.sliderStart
+                    ? { display: "none" }
+                    : {}
+                }
                 className="glide__slides"
               >
                 {data.map((n, key) => (
