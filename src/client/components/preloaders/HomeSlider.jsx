@@ -33,21 +33,21 @@ const Preloader = Styled.div`
 
   /* responsiveness */
 
-    /* small */
-    @media only screen and (max-width: 543px) {
-      margin-top: 50px;
-      .col-md-6 {
-        padding: 0 !important;
-      }
+  /* small */
+  @media only screen and (max-width: 543px) {
+    margin-top: 50px;
+    .col-md-6 {
+      padding: 0 !important;
     }
+  }
 
-    /* medium screen */
-    @media only screen and (min-width: 544px) and (max-width: 767px) {
-      margin-top: 50px;
-      .col-md-6 {
-        padding: 0 !important;
-      }
+  /* medium screen */
+  @media only screen and (min-width: 544px) and (max-width: 767px) {
+    margin-top: 50px;
+    .col-md-6 {
+      padding: 0 !important;
     }
+  }
 
 `
 

@@ -316,7 +316,11 @@ class Index extends Component {
         {/* end of media partner */}
 
         {/*content*/}
-        <CompetitionBox subtitle={true} {...data[filter]} />
+        <CompetitionBox
+          style={{ padding: "10px 15px" }}
+          subtitle={true}
+          {...data[filter]}
+        />
         {/*end of content*/}
 
         {/*modal*/}

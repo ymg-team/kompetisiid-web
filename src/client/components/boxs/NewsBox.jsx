@@ -1,12 +1,33 @@
 import React, { Component } from "react"
-import { duration, style } from "../Transtition"
-import Transition from "react-transition-group/Transition"
+import Styled from "styled-components"
 
 // components
 import GAds from "../cards/GoogleAds"
 import Card from "../cards/NewsListCard"
 import Loader from "../preloaders/NewsCardLoader"
-// import { Link } from "react-router-dom"
+
+const NewsBoxStyled = Styled.div`
+.news-container__cards {
+  margin: 0 -15px;
+}
+/* responsiveness */
+
+/* small */
+@media only screen and (max-width: 543px) {
+  padding: 0 15px;
+  .news-container__cards {
+    margin: 0;
+  }
+}
+
+/* medium screen */
+@media only screen and (min-width: 544px) and (max-width: 767px) {
+  padding: 0 15px;
+  .news-container__cards {
+    margin: 0;
+  }
+}
+`
 
 export default class NewsBox extends Component {
   generateList(n) {
@@ -37,9 +58,9 @@ export default class NewsBox extends Component {
   render() {
     const { status, message, count, data, is_loading } = this.props
     return (
-      <div id="news-container">
+      <NewsBoxStyled id="news-container">
         <div className="container">
-          <div className="row no-margin">
+          <div className="news-container__text no-margin">
             {this.props.subtitle && data ? (
               <span style={{ display: "table" }}>
                 <br />
@@ -60,33 +81,18 @@ export default class NewsBox extends Component {
             ) : null}
           </div>
           <div className="row m-10" />
-          <div
-            className="row"
-            style={this.props.style || { margin: "60px 0 0" }}
-          >
-            <Transition in={data && data.length > 0} timeout={duration}>
-              {state => (
-                <div
-                  style={Object.assign(
-                    {},
-                    style.fade.default,
-                    style.fade[state]
-                  )}
-                >
-                  {status ? (
-                    !data ? (
-                      <p className="text-muted">{message}</p>
-                    ) : (
-                      this.generateList(data)
-                    )
-                  ) : null}
-                </div>
-              )}
-            </Transition>
+          <div className="row news-container__cards">
+            {status ? (
+              !data ? (
+                <p className="text-muted">{message}</p>
+              ) : (
+                this.generateList(data)
+              )
+            ) : null}
           </div>
           {is_loading || !status ? <Loader /> : null}
         </div>
-      </div>
+      </NewsBoxStyled>
     )
   }
 }

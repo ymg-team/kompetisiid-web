@@ -87,7 +87,19 @@ export const CardCompetitionStyled = Styled.div`
         max-width: 100%;
       }
     }
+  }
 
+  /* responsiveness */
+  /* small */
+  @media only screen and (max-width: 543px) {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+  /* medium screen */
+  @media only screen and (min-width: 544px) and (max-width: 767px) {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
   }
 `
 

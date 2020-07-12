@@ -191,14 +191,17 @@ class Home extends Component {
             text="Update dengan kabar baru seputar kompetisi di Indonesia."
           />
         </div>
-        <GrayBackgroundStyled className="col-md-12">
-          <NewsBox subtitle={false} {...berita.data["home_latest"]} />
-          <div className="row align-center">
-            <Link className="btn btn-bordergray" to="/news">
-              KABAR BERIKUTNYA
-            </Link>
-          </div>
-        </GrayBackgroundStyled>
+
+        <NewsBox subtitle={false} {...berita.data["home_latest"]} />
+
+        <div className="row align-center">
+          <Link className="btn btn-bordergray" to="/news">
+            KABAR BERIKUTNYA
+          </Link>
+        </div>
+
+        <br />
+        <br />
 
         {/* media partner */}
         <MediapartnerBox {...kompetisi.data["home_mediapartner"]} />

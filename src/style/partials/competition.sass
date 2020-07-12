@@ -5,6 +5,7 @@
         width: 50px !important
         border-radius: 30px !important
 .competition-detail
+    padding: 0 15px;
     img
         max-width: 100% !important
     .alert
@@ -66,6 +67,14 @@
                 br
                     display: none
                     margin: 1em 0
+
+        @media only screen and (max-width: 543px)
+            .col-sm-8, .col-sm-4
+                padding-left: 0 !important
+
+        @media only screen and (min-width: 544px) and (max-width: 767px)
+            .col-sm-8, .col-sm-4
+                padding-left: 0 !important
 
 .competition-nextprev
     padding: 30px 0

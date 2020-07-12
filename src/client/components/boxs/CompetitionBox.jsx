@@ -1,9 +1,7 @@
 import React from "react"
-import { duration, style } from "../Transtition"
 
 // components
 import GAds from "../cards/GoogleAds"
-import Transition from "react-transition-group/Transition"
 import Card from "../cards/CompetitionListCard"
 import Loader from "../preloaders/CompetitionCardLoader"
 
@@ -33,12 +31,22 @@ function generateList(size, n) {
 }
 
 const CompetitionBox = props => {
-  let { data, status, message, is_loading, subtitle, size, count, meta } = props
+  let {
+    data,
+    status,
+    message,
+    is_loading,
+    subtitle,
+    size,
+    count,
+    meta,
+    style
+  } = props
   if (typeof subtitle == "undefined") subtitle = true
   if (typeof size == "undefined") size = "large"
 
   return (
-    <div id="competition-container">
+    <div style={style || {}} id="competition-container">
       <div className="container">
         <div className="no-margin">
           {/* header total show competition */}
@@ -54,26 +62,13 @@ const CompetitionBox = props => {
           {/* end of header total show competition */}
 
           {/* competition literation */}
-          <Transition in={status && status > 0} timeout={duration}>
-            {state => (
-              <div
-                className="row"
-                style={Object.assign(
-                  { margin: "0 -15px 0" },
-                  style.fade.default,
-                  style.fade[state]
-                )}
-              >
-                {status ? (
-                  !data ? (
-                    <p className="text-muted">{message}</p>
-                  ) : (
-                    generateList(size, data)
-                  )
-                ) : null}
-              </div>
-            )}
-          </Transition>
+          {status ? (
+            !data ? (
+              <p className="text-muted">{message}</p>
+            ) : (
+              generateList(size, data)
+            )
+          ) : null}
           {/* end of competition literation */}
 
           {is_loading || !status ? (

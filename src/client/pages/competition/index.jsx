@@ -100,7 +100,9 @@ class Index extends Component {
         ),
         description: detail[encid].data.sort,
         image: detail[encid].data.poster.original,
-        url: `${Host[process.env.NODE_ENV].front}/competition/${detail[encid].data.id}/regulations/${detail[encid].data.nospace_title}`
+        url: `${Host[process.env.NODE_ENV].front}/competition/${
+          detail[encid].data.id
+        }/regulations/${detail[encid].data.nospace_title}`
       })
 
       // add jsonld
@@ -276,7 +278,7 @@ class Index extends Component {
           {related[`related_${encid}`] &&
           related[`related_${encid}`].status &&
           related[`related_${encid}`].status === 200 ? (
-            <div className="col-md-12">
+            <React.Fragment>
               <div className="m-50 row" />
               <CompetitionBox
                 subtitle={false}
@@ -284,7 +286,7 @@ class Index extends Component {
                 size="small"
                 {...related[`related_${encid}`]}
               />
-            </div>
+            </React.Fragment>
           ) : null}
           {/* end of related competition */}
         </div>

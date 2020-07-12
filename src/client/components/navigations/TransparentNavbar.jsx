@@ -224,7 +224,7 @@ class Navbar extends Component {
               <SearchStyled>
                 <div className="col-xs-12">
                   <ul className="inline-list inline-list-left">
-                    <li style={{ padding: 0, marginRight: 12 }}>
+                    <li style={{ padding: "0 12px" }}>
                       <Link
                         id="ki-logo"
                         to="/"
@@ -278,7 +278,7 @@ class Navbar extends Component {
                   <ul className="inline-list inline-list-left">
                     {/* button to toggle sidebar on super and dashboard */}
                     {["super", "dashboard"].includes(pathnameArr[1]) ? (
-                      <li style={{ padding: 0, marginRight: 12 }}>
+                      <li style={{ padding: "0px 12px" }}>
                         <a
                           href="#"
                           id="btn-sidebar"
@@ -306,7 +306,7 @@ class Navbar extends Component {
                     ) : null}
                     {/* end of button to toggle sidebar on super and dashboard */}
 
-                    <li style={{ padding: 0, marginRight: 12 }}>
+                    <li style={{ padding: "0px 12px" }}>
                       <Link
                         id="ki-logo"
                         to="/"

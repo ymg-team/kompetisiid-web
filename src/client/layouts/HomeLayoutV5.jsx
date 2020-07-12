@@ -52,12 +52,11 @@ const LayoutStyled = Styled.div`
     padding-right:0 !important;
   }
 
-  /* responsiveness */
   // responsiveness
   // small screen
   @media only screen and (max-width: 543px) {
     .container{
-      padding:0 15px !important;
+      padding:0 !important;
     }
   }
 `

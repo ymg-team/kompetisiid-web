@@ -6,6 +6,7 @@ import { textParser } from "../../helpers/string"
 const RegulationStyled = Styled.div`
 article {
   line-height: 1.8px;
+  word-break: break-word;
   img {
     border-radius: 30px;
   }

@@ -27,6 +27,9 @@ const NewsBox = Loadable({
 
 const NewsDetailStyled = Styled.div`
 .news-detail {
+  .image {
+    padding: 0 15px;
+  }
   .author {
     margin: 60px 0 30px;
     a {
@@ -90,7 +93,9 @@ const NewsDetailStyled = Styled.div`
 
 export default class Index extends Component {
   state = {
-    url: `${Host[process.env.NODE_ENV].front}/news/${this.props.match.params.encid}/${this.props.match.params.title}`
+    url: `${Host[process.env.NODE_ENV].front}/news/${
+      this.props.match.params.encid
+    }/${this.props.match.params.title}`
   }
 
   // static fetchData({ params, store }) {
@@ -128,7 +133,9 @@ export default class Index extends Component {
   }
 
   resetDisquss(props) {
-    const url = `${Host[process.env.NODE_ENV].front}/news/${props.match.params.encid}/${props.match.params.title}`
+    const url = `${Host[process.env.NODE_ENV].front}/news/${
+      props.match.params.encid
+    }/${props.match.params.title}`
 
     this.setState({ url }, () => {
       setTimeout(() => {
@@ -210,103 +217,103 @@ export default class Index extends Component {
             <React.Fragment>
               <div className="col-md-6 col-md-push-3 col-md-pull-3">
                 <div className="row">
-                  <div className="col-md-12">
-                    {/* start news detail wrapper */}
-                    <div className="news-detail">
-                      <Author data={detail[encid].data.author} />
-                      <article className="content">
-                        <h1>{detail[encid].data.title}</h1>
-                        <p className="meta text-muted">
-                          <span className="meta--item">
-                            <i className="fa fa-calendar-o" />{" "}
-                            {epochToRelativeTime(detail[encid].data.created_at)}
-                          </span>
-                          <span className="meta--item">
-                            <a
-                              href="#"
-                              title="komentar"
-                              onClick={e => {
-                                e.preventDefault()
-                                document
-                                  .getElementById("disqus_thread")
-                                  .scrollIntoView({ behavior: "smooth" })
-                              }}
-                            >
-                              <i className="far fa-comment" />{" "}
-                              <span
-                                className="disqus-comment-count"
-                                // data-disqus-identifier={this.state.url}
-                                data-disqus-url={this.state.url}
-                              >
-                                0
-                              </span>
-                            </a>
-                          </span>
-                        </p>
-                      </article>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="col-md-12">
-                <div className="row">
+                  {/* start news detail wrapper */}
                   <div className="news-detail">
-                    <div className="image">
-                      <figure>
-                        <img
-                          src={detail[encid].data.image.original}
-                          className="image-modal-target"
-                        />
-                      </figure>
-                    </div>
+                    <Author data={detail[encid].data.author} />
+                    <article className="content">
+                      <h1>{detail[encid].data.title}</h1>
+                      <p className="meta text-muted">
+                        <span className="meta--item">
+                          <i className="fa fa-calendar-o" />{" "}
+                          {epochToRelativeTime(detail[encid].data.created_at)}
+                        </span>
+                        <span className="meta--item">
+                          <a
+                            href="#"
+                            title="komentar"
+                            onClick={e => {
+                              e.preventDefault()
+                              document
+                                .getElementById("disqus_thread")
+                                .scrollIntoView({ behavior: "smooth" })
+                            }}
+                          >
+                            <i className="far fa-comment" />{" "}
+                            <span
+                              className="disqus-comment-count"
+                              // data-disqus-identifier={this.state.url}
+                              data-disqus-url={this.state.url}
+                            >
+                              0
+                            </span>
+                          </a>
+                        </span>
+                      </p>
+                    </article>
                   </div>
                 </div>
               </div>
-              {/* Google Ads */}
-              <div className="col-md-12 align-center">
-                <GAds
-                  style={{ marginTop: 0 }}
-                  adClient="ca-pub-4468477322781117"
-                  adSlot={1270681813}
-                  timeout={1000}
-                />
-              </div>
-              {/* end of Google Ads */}
-              <div className="col-md-6 col-md-push-3 col-md-pull-3">
-                <div className="row">
-                  <div className="col-md-12">
+
+              <div className="col-md-12">
+                <React.Fragment>
+                  <div className="row">
                     <div className="news-detail">
-                      <article
-                        className="content"
-                        dangerouslySetInnerHTML={{
-                          __html: textParser(detail[encid].data.content)
-                        }}
-                      />
-                      <div style={{ margin: "1em 0" }}>
-                        {this.generateTags(detail[encid].data.tag)}
+                      <div className="image">
+                        <figure>
+                          <img
+                            src={detail[encid].data.image.original}
+                            className="image-modal-target"
+                          />
+                        </figure>
                       </div>
                     </div>
                   </div>
-
-                  {/* share button */}
-                  <div className="col-md-12">
-                    <Share
-                      url={`https://kompetisi.id/news/${detail[encid].data.id}/${detail[encid].data.nospace_title}`}
+                  {/* Google Ads */}
+                  <div className="col-md-12 align-center">
+                    <GAds
+                      style={{ marginTop: 0 }}
+                      adClient="ca-pub-4468477322781117"
+                      adSlot={1270681813}
+                      timeout={1000}
                     />
                   </div>
+                  {/* end of Google Ads */}
+                </React.Fragment>
+              </div>
+
+              <div className="col-md-6 col-md-push-3 col-md-pull-3">
+                <div className="row">
+                  <div className="news-detail">
+                    <article
+                      className="content"
+                      dangerouslySetInnerHTML={{
+                        __html: textParser(detail[encid].data.content)
+                      }}
+                    />
+                    <div style={{ margin: "1em 0" }}>
+                      {this.generateTags(detail[encid].data.tag)}
+                    </div>
+                  </div>
+
+                  <br />
+
+                  {/* share button */}
+                  <Share
+                    url={`https://kompetisi.id/news/${detail[encid].data.id}/${detail[encid].data.nospace_title}`}
+                  />
                   {/* end of share button */}
+
+                  <br />
                 </div>
               </div>
 
               {/* related news */}
-              <div className="col-md-12">
-                <NewsBox
-                  subtitle={false}
-                  data={detail[encid].related}
-                  status={detail[encid].status}
-                  size="small"
-                />
-              </div>
+              <NewsBox
+                subtitle={false}
+                data={detail[encid].related}
+                status={detail[encid].status}
+                size="small"
+              />
             </React.Fragment>
           ) : (
             <ErrorCard

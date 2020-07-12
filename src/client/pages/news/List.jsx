@@ -124,10 +124,7 @@ class List extends Component {
           {/* end of GA channel news list */}
         </div>
         {/* end of Google Ads */}
-        <Newsbox
-          style={{ margin: "10px -20px 0" }}
-          {...this.props.berita.data[Filter]}
-        />
+        <Newsbox {...this.props.berita.data[Filter]} />
       </div>
     )
   }
