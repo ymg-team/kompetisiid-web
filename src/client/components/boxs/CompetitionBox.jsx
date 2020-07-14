@@ -12,7 +12,7 @@ function generateList(size, n) {
         <div
           key={`ads_${key}`}
           className="col-md-12 align-center"
-          style={{ margin: "0 0 40px" }}
+          style={{ margin: "0 0 40px", textAlign: "center" }}
         >
           <GAds
             key={`ads_${key}`}

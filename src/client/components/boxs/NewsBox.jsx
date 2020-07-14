@@ -36,7 +36,7 @@ export default class NewsBox extends Component {
         return [
           <div
             className="col-md-12 align-center"
-            style={{ margin: "0 0 40px" }}
+            style={{ margin: "0 0 40px", textAlign: "center" }}
             key={`ads_${key}`}
           >
             <GAds
