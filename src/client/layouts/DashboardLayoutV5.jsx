@@ -21,7 +21,7 @@ class DasboardLayoutV5 extends React.Component {
     this.props.dispatch(logout())
     setTimeout(() => {
       alert(true, "Kamu telah logout", "success")
-      location.href = "/_super"
+      location.href = "/super"
     }, 2000)
   }
 

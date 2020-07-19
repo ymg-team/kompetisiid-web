@@ -10,6 +10,10 @@ article {
   img {
     border-radius: 30px;
   }
+  h2,h3,h4,h5 {
+    margin: 50px 0 20px;
+    text-transform: capitalize; 
+  }
 }
 `
 

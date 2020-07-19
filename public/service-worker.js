@@ -1,4 +1,4 @@
-const CACHE_NAME = "cache-ki-0.0.2"
+const CACHE_NAME = "cache-ki-1.0.0"
 const urlsToCache = []
 
 self.addEventListener("activate", async () => {
@@ -37,9 +37,10 @@ self.addEventListener("install", function(event) {
 self.addEventListener("fetch", function(event) {
   const request = event.request
   // disabled service worker fetch on /api and /super
+
   if (
-    request.url.indexOf("/api") !== 0 &&
-    request.url.indexOf("/super") !== 0
+    request.url.indexOf("/api") === -1 &&
+    request.url.indexOf("/super") === -1
   ) {
     event.respondWith(
       caches.match(event.request).then(function(response) {

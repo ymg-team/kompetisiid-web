@@ -67,19 +67,22 @@ const NewsDetailStyled = Styled.div`
     line-height: 1.7;
     iframe {
       display: block; 
-      margin: 2em auto;
+      margin: 40px auto;
       width: 100%;
     }
     h1 {
       font-size: 3em;
       line-height: 1.2;
     }
+    h2, h3, h4 {
+      margin: 60px 0 20px;
+    }
     p, ul > li, a {
       font-size: 1em;
     }
     img {
       text-align: center;
-      margin: 20px auto;
+      margin: 40px auto;
       max-width: 100%;
       display: block;
     }
@@ -290,7 +293,7 @@ export default class Index extends Component {
                         __html: textParser(detail[encid].data.content)
                       }}
                     />
-                    <div style={{ margin: "1em 0" }}>
+                    <div style={{ margin: "50px 0 0" }}>
                       {this.generateTags(detail[encid].data.tag)}
                     </div>
                   </div>

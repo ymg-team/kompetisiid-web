@@ -5,11 +5,11 @@ export const Fullscreen = styled.div`
   color: #fff;
   padding: 0;
   margin: 0;
-  min-height: calc(100vh-58px);
+  min-height: calc(100vh - 58px);
   display: flex;
   align-items: center;
   justify-content: center;
-  ßpadding: 0 10px;
+  padding: 0 10px;
   &.login-super {
     color: ${Colors.mainWhite} !important;
     a {
