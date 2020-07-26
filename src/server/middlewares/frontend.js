@@ -12,7 +12,9 @@ export const generateMetaCompetition = (req, res, next) => {
     const competition = JSON.parse(response.body)
     const url = `https://kompetisi.id${req.originalUrl}`
     if (competition.status === 200) {
-      let title = competition.data.title
+      let title = competition.data.title.replace(/\"/g, "")
+      const desc = competition.data.sort.replace(/\"/g, "")
+
       const urlArr = req.originalUrl.split("/")
 
       switch (urlArr[3]) {
@@ -38,7 +40,7 @@ export const generateMetaCompetition = (req, res, next) => {
 
       req.meta = {
         title,
-        desc: competition.data.sort,
+        desc,
         image: competition.data.poster.original,
         url,
         type: "event",
@@ -47,8 +49,8 @@ export const generateMetaCompetition = (req, res, next) => {
         {
           "@context": "http://schema.org",
           "@type": "Event",
-          "name": "${competition.data.title.replace(/\"/g, "")}",
-          "description": "${competition.data.sort.replace(/\"/g, "")}",
+          "name": "${title}",
+          "description": "${desc}",
           "startDate": "${new Date(
             competition.data.created_at * 1000
           ).toISOString()}",
@@ -140,8 +142,12 @@ export const generateMetaNews = (req, res, next) => {
             },
             "headline": "${news.data.title}",
             "url": "${url}",
-            "datePublished": "${new Date(news.data.created_at * 1000).toISOString()}",
-            "dateModified": "${new Date(news.data.updated_at * 1000).toISOString()}",
+            "datePublished": "${new Date(
+              news.data.created_at * 1000
+            ).toISOString()}",
+            "dateModified": "${new Date(
+              news.data.updated_at * 1000
+            ).toISOString()}",
             "image": {
                 "@type": "ImageObject",
                 "url": "${news.data.image.original}",

@@ -5,6 +5,10 @@ import { toCamelCase } from "string-manager"
 const Helmet = props => {
   let { title, description, url, image, type, script, link, keywords } = props
 
+  // ref: http://prcoldfusion.blogspot.com/2012/03/replace-all-double-quotes-in-string.html#:~:text=replace(%2F%5C%22%2Fg%2C%20%22,double%20quotes%20in%20a%20string.
+  description = description.replace(/\"/g, "")
+  title = title.replace(/\"/g, "")
+
   return (
     <ReactHelmet
       title={toCamelCase(title) + " - Kompetisi Id"}
@@ -33,10 +37,11 @@ const Helmet = props => {
 
 Helmet.defaultProps = {
   title: "Ada hadiah setiap hari",
-  description: "Platform Kompetisi online untuk warga Indonesia",
+  description:
+    "Platform Kompetisi online untuk warga Indonesia, seperti kompetisi blog, kompetisi desain, kompetisi menulis, kompetisi fotografi",
   image: "http://kompetisi.id/assets/icons/icon-128x128.png",
   keywords:
-    "Info kompetisi,kompetisi id,kumpulan lomba,info lomba,kumpulan kompetisi"
+    "Info kompetisi,kompetisi id,kumpulan lomba,info lomba,kumpulan kompetisi, kompetisi desain, kompetisi menulis, kompetisi fotografi"
 }
 
 export default Helmet
