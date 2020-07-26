@@ -12,7 +12,7 @@ const Dashboard = props => {
   return (
     <React.Fragment>
       <Helmet title="Dashboard - Kompetisi Id" />
-      <div className="row">
+      <div className="row" style={{ margin: "0 -15px 0 -15px" }}>
         <div className="col-md-12">
           <HeaderDashboard
             title="Kompetisi"

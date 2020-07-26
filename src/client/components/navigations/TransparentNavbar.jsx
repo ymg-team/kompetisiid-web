@@ -277,7 +277,9 @@ class Navbar extends Component {
                 <div style={{ padding: 0 }} className="col-xs-6">
                   <ul className="inline-list inline-list-left">
                     {/* button to toggle sidebar on super and dashboard */}
-                    {["super", "dashboard"].includes(pathnameArr[1]) ? (
+                    {["super", "dashboard", "settings"].includes(
+                      pathnameArr[1]
+                    ) ? (
                       <li style={{ padding: "0px 12px" }}>
                         <a
                           href="#"

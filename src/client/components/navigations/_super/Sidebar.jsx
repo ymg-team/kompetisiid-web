@@ -1,16 +1,16 @@
-import React, { useState } from "react"
+import React from "react"
 import Styled from "styled-components"
 import { Link } from "react-router-dom"
 
 const SidebarMobileStyle = `
-  background: #FFF;
+  background: #ececec;
   position: fixed;
-  width: 100%;
   z-index: 1;
   height: 100vh;
   left: -100%;
+  top: 57px;
   transition: all .5s ease;
-  padding: 0 0 0 30px; 
+  padding: 0 15px; 
   overflow: auto;
   &.active {
     left: 0;
@@ -23,6 +23,10 @@ ul {
   padding: 0;
   li {
     padding: 0.5em 0;
+    strong {
+      margin-top: 20px;
+      display: block;
+    }
     a {
       text-decoration: none;
       &:hover, &:focus, &.active {

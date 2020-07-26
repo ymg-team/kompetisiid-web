@@ -8,8 +8,8 @@ import Modal from "./index"
 import Button from "../buttons/index"
 
 const NotificationConfirmationStyled = Styled.div`
-font-size: 12px;
-  padding: 20px !important;
+  max-width: 100%;
+  padding: 10px !important;
   button {
     margin-right: 10px;
   }

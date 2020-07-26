@@ -32,17 +32,15 @@ class DasboardLayoutV5 extends React.Component {
 
   render = () => {
     return (
-      <div className="col-md-12">
-        <div className="row m-t-2em">
-          <div className="col-md-3">
-            <Sidebar
-              handleLogout={() => this.handleLogout()}
-              stats={this.props.stats}
-            />
-          </div>
-          <div className="col-md-7">
-            {renderRoutes(this.props.route.routes)}
-          </div>
+      <div className="row m-t-2em">
+        <div className="col-md-2 col-md-push-1">
+          <Sidebar
+            handleLogout={() => this.handleLogout()}
+            stats={this.props.stats}
+          />
+        </div>
+        <div className="col-md-7 col-md-push-1">
+          {renderRoutes(this.props.route.routes)}
         </div>
       </div>
     )

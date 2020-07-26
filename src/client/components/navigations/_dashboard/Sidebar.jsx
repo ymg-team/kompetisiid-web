@@ -18,7 +18,6 @@ export default props => {
         </li>
 
         {/* my competitions */}
-        <hr />
         <li>
           {" "}
           <strong>Kompetisi Saya</strong>
@@ -76,7 +75,6 @@ export default props => {
           </li>
         ) : null}
 
-        <hr />
         <li>
           {" "}
           <strong>Kompetisi Lainnya</strong>
@@ -102,7 +100,6 @@ export default props => {
         {/* end of competition */}
 
         {/* settings */}
-        <hr />
         <li>
           {" "}
           <strong>Pengaturan</strong>
@@ -121,7 +118,6 @@ export default props => {
         {/* end of settings */}
 
         {/* logout from dashboard */}
-        <hr />
         <li>
           <a
             onClick={e => {
