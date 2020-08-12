@@ -1,8 +1,8 @@
-import request from 'request'
-import { httpException } from '../../store/helpers/Exceptions'
-import * as Url from './url'
-import fs from 'fs'
-import Https from 'https'
+import request from "request"
+import { httpException } from "../../store/helpers/Exceptions"
+import * as Url from "./url"
+import fs from "fs"
+import Https from "https"
 
 // generate agent
 const agentOptions = new Https.Agent({
@@ -14,8 +14,8 @@ const agentOptions = new Https.Agent({
  * @params (string) method, (string) endpoint, (object) params
  */
 export function requestAPI(
-  method = 'GET',
-  endpoint = '',
+  method = "GET",
+  endpoint = "",
   params = {},
   callback
 ) {
@@ -23,7 +23,7 @@ export function requestAPI(
   delete params.API_HOST
 
   // TODO : change static token to dinamic token
-  let token = ''
+  let token = ""
   if (params.token) {
     token = params.token
     delete params.token
@@ -44,13 +44,13 @@ export function requestAPI(
     agentOptions,
     headers: {
       token,
-      'User-Agent': 'request',
-      'Content-Type': 'json'
+      "User-Agent": "request",
+      "Content-Type": "json"
     }
   }
 
   // using POST method
-  if (method.toLowerCase() === 'post') {
+  if (method.toLowerCase() === "post") {
     options.formData = params
 
     // upload files
@@ -73,10 +73,8 @@ export function requestAPI(
   //start request
   try {
     request(options, function(error, response, body) {
-      // console.log(`response from ${options.uri}: `)
-
       if (error) {
-        console.error('error endpoint :' + endpoint, error)
+        console.error("error endpoint :" + endpoint, error)
         return callback(httpException(500))
       } //success
       else {
@@ -84,7 +82,7 @@ export function requestAPI(
         if (json) {
           return callback(json)
         } else {
-          return callback(httpException(500, 'error response : json not valid'))
+          return callback(httpException(500, "error response : json not valid"))
         }
       }
     })
@@ -92,7 +90,7 @@ export function requestAPI(
     return callback(
       httpException(
         500,
-        'error endpoint :' + endpoint + ' ,' + err.message + ', ' + err.stack
+        "error endpoint :" + endpoint + " ," + err.message + ", " + err.stack
       )
     )
   }
@@ -103,7 +101,12 @@ export function requestAPI(
  * using promise
  * @params (string) method, (string) endpoint, (object) params
  */
-export function requestAPIV2(method = 'GET', endpoint = '', params = {}, headers = {}) {
+export function requestAPIV2(
+  method = "GET",
+  endpoint = "",
+  params = {},
+  headers = {}
+) {
   const { API_HOST } = params
   delete params.API_HOST
 
@@ -120,10 +123,10 @@ export function requestAPIV2(method = 'GET', endpoint = '', params = {}, headers
   }
 
   // debug api
-  const debugApi = require('debug')('app:api')
+  const debugApi = require("debug")("app:api")
 
-  // headers.token = token 
-  headers['User-Agent'] = 'ki-v42'
+  // headers.token = token
+  headers["User-Agent"] = "ki-v42"
 
   //set options
   const options = {
@@ -135,7 +138,7 @@ export function requestAPIV2(method = 'GET', endpoint = '', params = {}, headers
   }
 
   // using POST method
-  if (method !== 'get') {
+  if (method !== "get") {
     options.formData = params
 
     // upload files
@@ -162,11 +165,11 @@ export function requestAPIV2(method = 'GET', endpoint = '', params = {}, headers
     try {
       request(options, (error, response, body) => {
         if (error) {
-          console.error('error endpoint :' + endpoint, error)
+          console.error("error endpoint :" + endpoint, error)
           return resolve(httpException(500))
         } //success
         else {
-          if (params.resType === 'json') {
+          if (params.resType === "json") {
             const json = isJSON(body)
             if (json)
               return resolve({ body: json, statusCode: response.statusCode })
@@ -179,7 +182,7 @@ export function requestAPIV2(method = 'GET', endpoint = '', params = {}, headers
       return resolve(
         httpException(
           500,
-          'error endpoint :' + endpoint + ' ,' + err.message + ', ' + err.stack
+          "error endpoint :" + endpoint + " ," + err.message + ", " + err.stack
         )
       )
     }
@@ -187,7 +190,7 @@ export function requestAPIV2(method = 'GET', endpoint = '', params = {}, headers
 }
 
 function isJSON(str) {
-  if (typeof str !== 'string') {
+  if (typeof str !== "string") {
     return false
   } else {
     try {

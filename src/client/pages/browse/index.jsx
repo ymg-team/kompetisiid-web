@@ -34,13 +34,13 @@ const FilterStatus = {
 }
 
 class Index extends Component {
-  // static fetchData({ store, params, query }) {
-  //   const state = generateState(query)
-  //   const Filter = generateFilter(state)
-  //   const Params = generateParams(state)
+  static fetchData({ store, query }) {
+    const state = generateState(query)
+    const Filter = generateFilter(state)
+    const Params = generateParams(state)
 
-  //   return store.dispatch(KompetisiActs.fetchJelajah(Params, Filter))
-  // }
+    return store.dispatch(KompetisiActs.fetchJelajah(Params, Filter))
+  }
 
   state = generateState(
     this.props.location.search

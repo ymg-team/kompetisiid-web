@@ -21,10 +21,12 @@ export default class Regulation extends React.Component {
   render() {
     // get all image inside .competition-regulator
     setTimeout(() => {
-      const ImgEl = document.querySelectorAll(".competition-regulation img")
-      // ref: https://developer.mozilla.org/en-US/docs/Web/API/NodeList
-      for (let n of ImgEl) {
-        n.className = "image-modal-target"
+      if (typeof window !== "undefined") {
+        const ImgEl = document.querySelectorAll(".competition-regulation img")
+        // ref: https://developer.mozilla.org/en-US/docs/Web/API/NodeList
+        for (let n of ImgEl) {
+          n.className = "image-modal-target"
+        }
       }
     }, 1000)
 

@@ -19,10 +19,10 @@ const Newsbox = Loadable({
 })
 
 class List extends Component {
-  // static fetchData({store})
-  // {
-  //     return store.dispatch(fetchBerita({ limit: Limit }, Filter))
-  // }
+  static fetchData({ store, params }) {
+    const Filter = "list"
+    return store.dispatch(fetchBerita({ limit: Limit }, Filter))
+  }
 
   constructor(props) {
     super(props)

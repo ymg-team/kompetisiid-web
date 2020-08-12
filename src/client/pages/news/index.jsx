@@ -101,9 +101,9 @@ export default class Index extends Component {
     }/${this.props.match.params.title}`
   }
 
-  // static fetchData({ params, store }) {
-  //   return store.dispatch(BeritaActions.fetchBeritaDetail(params.encid))
-  // }
+  static fetchData({ params, store }) {
+    return store.dispatch(BeritaActions.fetchBeritaDetail(params.encid))
+  }
 
   componentDidMount() {
     window.scrollTo(0, 0)

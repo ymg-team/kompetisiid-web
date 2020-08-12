@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import { renderRoutes, matchRoutes } from "react-router-config"
+import { renderRoutes } from "react-router-config"
 import { connect } from "react-redux"
 import memoize from "memoize-one"
 import { topLoading } from "../../components/preloaders"
@@ -10,9 +10,9 @@ import CompetitionPreloader from "../../components/preloaders/CompetitionDetail"
 import { getDetail, getRelated } from "./actions"
 import Error from "../../components/cards/ErrorCard"
 class LayoutCompetition extends Component {
-  // static fetchData({ params, store }) {
-  //   return store.dispatch(getDetail(params.encid))
-  // }
+  static fetchData({ params, store }) {
+    return store.dispatch(getDetail(params.encid))
+  }
 
   componentDidMount() {
     window.scrollTo(0, 0)

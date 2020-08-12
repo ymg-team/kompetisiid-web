@@ -19,14 +19,17 @@ function data(state = {}, action) {
 
     case RECEIVE_DATA:
       if (action.target === "berita_list") {
-        state[action.filter].is_loading = false
-        return Object.assign({}, state, { [action.filter]: action.json })
+        nextstate = state
+        if (!nextstate[action.filter]) nextstate[action.filter] = {}
+        nextstate[action.filter].is_loading = false
+        return Object.assign({}, nextstate, { [action.filter]: action.json })
       }
 
     case RECEIVE_MORE_DATA:
       if (action.target === "berita_list") {
-        state[action.filter].is_loading = false
         nextstate = state
+        if (!nextstate[action.filter]) nextstate[action.filter] = {}
+        nextstate[action.filter].is_loading = false
         nextstate[action.filter].status = action.json.status
         if (parseInt(action.json.status) === 200) {
           nextstate.data = pushData(

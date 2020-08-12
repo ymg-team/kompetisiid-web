@@ -3,10 +3,6 @@ import React, { Component } from "react"
 import Loadable from "react-loadable"
 import Styled from "styled-components"
 import { connect } from "react-redux"
-import { getStorage, setStorage } from "../../../store/helpers/LocalStorage"
-import { LOCAL_STORAGE_CATEGORIES } from "../../../config/version"
-
-// redux
 
 // components
 import EmptyLoading from "../../components/preloaders/EmptyLoader"
@@ -41,12 +37,7 @@ const MediaPartner = Loadable({
 
 // actions and store
 import * as Colors from "../../../style/colors"
-import {
-  fetchJelajah,
-  getCategories,
-  setCategories
-} from "../competition/actions"
-import { getStats } from "../../../store/user/actions"
+import { fetchJelajah } from "../competition/actions"
 import { fetchBerita } from "../news/actions"
 
 const GrayBackgroundStyled = Styled.div`
@@ -82,14 +73,6 @@ class Home extends Component {
         fetchJelajah({ limit: 9, status: "active" }, "home_latest")
       )
 
-    // get lattest 7 active and popular competition
-    this.props.dispatch(
-      fetchJelajah(
-        { limit: 7, is_popular: true, status: "active" },
-        "home_popular"
-      )
-    )
-
     // get lattest 7 media partner
     if (!this.props.kompetisi.data.home_mediapartner)
       this.props.dispatch(
@@ -99,31 +82,6 @@ class Home extends Component {
     // get lattest 6 news
     if (!this.props.berita.data.home_latest)
       this.props.dispatch(fetchBerita({ limit: 6 }, "home_latest"))
-
-    this.reqCategories()
-    this.props.dispatch(getStats())
-  }
-
-  UNSAFE_componentWillReceiveProps(np) {
-    if (
-      np.kompetisi.categories.status &&
-      np.kompetisi.categories.status == 200
-    ) {
-      // save categories to local storage
-      setStorage(
-        LOCAL_STORAGE_CATEGORIES,
-        JSON.stringify(np.kompetisi.categories)
-      )
-    }
-  }
-
-  reqCategories() {
-    const Categories = getStorage(LOCAL_STORAGE_CATEGORIES)
-    if (Categories) {
-      this.props.dispatch(setCategories(JSON.parse(Categories)))
-    } else {
-      this.props.dispatch(getCategories())
-    }
   }
 
   render() {
