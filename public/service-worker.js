@@ -1,5 +1,5 @@
-const CACHE_NAME = "cache-ki-1.0.0"
-const urlsToCache = []
+const CACHE_NAME = "cache-ki-2.0.0"
+const urlsToCache = ["/assets/4.2/css/grid.css"]
 
 self.addEventListener("activate", async () => {
   // this block only called once when service worker is activate
@@ -38,14 +38,37 @@ self.addEventListener("fetch", function(event) {
   const request = event.request
   // disabled service worker fetch on /api and /super
 
-  if (
-    request.url.indexOf("/api") === -1 &&
-    request.url.indexOf("/super") === -1
-  ) {
+  // only cache /assets
+  if (request.url.indexOf("/assets") !== -1) {
     event.respondWith(
       caches.match(event.request).then(function(response) {
-        // return from cache, otherwise fetch from network
-        return response || fetch(request)
+        // Cache hit - return response
+        if (response) {
+          return response
+        }
+
+        return fetch(event.request).then(function(response) {
+          // Check if we received a valid response
+          if (
+            !response ||
+            response.status !== 200 ||
+            response.type !== "basic"
+          ) {
+            return response
+          }
+
+          // IMPORTANT: Clone the response. A response is a stream
+          // and because we want the browser to consume the response
+          // as well as the cache consuming the response, we need
+          // to clone it so we have two streams.
+          var responseToCache = response.clone()
+
+          caches.open(STATIC_CACHE_NAME).then(function(cache) {
+            cache.put(event.request, responseToCache)
+          })
+
+          return response
+        })
       })
     )
   }
