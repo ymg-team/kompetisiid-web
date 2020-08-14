@@ -56,7 +56,7 @@ export default class NewsBox extends Component {
   }
 
   render() {
-    const { status, message, count, data, is_loading } = this.props
+    const { status, message, count, data, is_loading, subtitle } = this.props
     return (
       <NewsBoxStyled id="news-container">
         <div className="container">
@@ -80,7 +80,7 @@ export default class NewsBox extends Component {
               </span>
             ) : null}
           </div>
-          <div className="row m-10" />
+          {subtitle ? <div className="row m-10" /> : null}
           <div className="row news-container__cards">
             {status ? (
               !data ? (

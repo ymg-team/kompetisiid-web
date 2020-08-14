@@ -11,7 +11,7 @@ import * as Colors from "../../../style/colors"
 export const CardCompetitionStyled = Styled.div`
   .card-competition {
     border: 1px solid #FFF;
-    margin-bottom: 30px;
+    margin-bottom: 50px;
     background-color: #FFF;
 
     &:hover {
@@ -87,6 +87,19 @@ export const CardCompetitionStyled = Styled.div`
         max-width: 100%;
       }
     }
+
+    .card-competition__author {
+      display: flex;
+      align-items: center;
+      img.card-competition__author__avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        margin-right: 10px;
+      }
+    }
+    
+
   }
 
   /* responsiveness */
@@ -192,10 +205,6 @@ const CompetitionListCard = props => {
           <Link to={target}>
             <h3>{n.title}</h3>
           </Link>
-          <span>dipasang</span>{" "}
-          <Link className="muted" to={`/user/${n.author.username}`}>
-            {n.author.username}
-          </Link>
           <progress
             className={is_ended ? "ended" : is_waiting ? "waiting" : ""}
             value={setProgressBar(n.deadline_at)}
@@ -280,6 +289,27 @@ const CompetitionListCard = props => {
               ) : null}
             </div>
           ) : null}
+          <br />
+          {/* author */}
+          <Link
+            className="card-competition__author"
+            to={`/user/${n.author.username}`}
+          >
+            <img
+              className="card-competition__author__avatar"
+              src={
+                n.author.avatar.small || `/assets/4.2/img/avatar-default.jpg`
+              }
+              alt={`avatar ${n.author.username}`}
+            />
+            <div style={{ lineHeight: "17px" }}>
+              <small>
+                oleh {n.author.username} <br />{" "}
+                {epochToRelativeTime(n.created_at)}
+              </small>
+            </div>
+          </Link>
+          {/* end of author */}
         </div>
       </div>
     </CardCompetitionStyled>

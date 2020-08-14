@@ -54,24 +54,26 @@ export default props => {
         <div className="card-competition--inside">
           <Link to={target}>
             <h3>{n.title}</h3>
-            <small className="text-muted">
-              {epochToRelativeTime(n.created_at)}
-            </small>
           </Link>
           <br />
-          <small>
-            diposting oleh{" "}
-            <Link to={`/user/${n.author.username}`}>{n.author.username}</Link>
-          </small>
-          <br />
-          <a className="muted" href="#">
+          <Link
+            className="card-competition__author"
+            to={`/user/${n.author.username}`}
+          >
             <img
-              className="avatar"
+              className="card-competition__author__avatar"
               src={
                 n.author.avatar.small || `/assets/4.2/img/avatar-default.jpg`
               }
             />
-          </a>
+            <div style={{ lineHeight: "17px" }}>
+              <small>
+                oleh {n.author.username}
+                <br />
+                {epochToRelativeTime(n.created_at)}
+              </small>
+            </div>
+          </Link>
         </div>
       </div>
     </CardCompetitionStyled>

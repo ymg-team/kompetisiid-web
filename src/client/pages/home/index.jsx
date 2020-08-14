@@ -118,12 +118,14 @@ class Home extends Component {
         </div>
 
         {/* competition */}
-        <div className="col-md-12 bg-gray">
+        <div className="col-md-12 bg-gray m-b-50">
           <SubHeaderTitle
             title="Kompetisi Baru"
             text="Ikuti beragam kompetisi disini sesuai dengan minat kamu."
           />
         </div>
+
+        <CompetitionBox subtitle={false} {...kompetisi.data["home_latest"]} />
 
         {/* media partners ads */}
         <div className="container">
@@ -132,18 +134,17 @@ class Home extends Component {
           </div>
         </div>
 
-        <GrayBackgroundStyled className="col-md-12">
-          <CompetitionBox subtitle={false} {...kompetisi.data["home_latest"]} />
+        <div className="row align-center">
+          <Link className="btn btn-bordergray" to="/browse">
+            JELAJAH KOMPETISI
+          </Link>
+        </div>
+        {/* end of competition */}
 
-          <div className="row align-center">
-            <Link className="btn btn-bordergray" to="/browse">
-              JELAJAH KOMPETISI
-            </Link>
-          </div>
-        </GrayBackgroundStyled>
+        <div className="m-b-50" />
 
         {/* news */}
-        <div className="col-md-12 bg-gray">
+        <div className="col-md-12 bg-gray m-b-50">
           <SubHeaderTitle
             title="Kabar Baru"
             text="Update dengan kabar baru seputar kompetisi di Indonesia."
@@ -152,14 +153,21 @@ class Home extends Component {
 
         <NewsBox subtitle={false} {...berita.data["home_latest"]} />
 
+        {/* media partners ads */}
+        <div className="container">
+          <div className="col-md-12">
+            <MediaPartner />
+          </div>
+        </div>
+
         <div className="row align-center">
           <Link className="btn btn-bordergray" to="/news">
             KABAR BERIKUTNYA
           </Link>
         </div>
+        {/* end of news */}
 
-        <br />
-        <br />
+        <div className="m-b-50" />
 
         {/* media partner */}
         <MediapartnerBox {...kompetisi.data["home_mediapartner"]} />
