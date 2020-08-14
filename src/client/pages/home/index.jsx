@@ -127,6 +127,12 @@ class Home extends Component {
 
         <CompetitionBox subtitle={false} {...kompetisi.data["home_latest"]} />
 
+        <div className="row align-center">
+          <Link className="btn btn-bordergray" to="/browse">
+            JELAJAH KOMPETISI
+          </Link>
+        </div>
+
         {/* media partners ads */}
         <div className="container">
           <div className="col-md-12">
@@ -134,11 +140,6 @@ class Home extends Component {
           </div>
         </div>
 
-        <div className="row align-center">
-          <Link className="btn btn-bordergray" to="/browse">
-            JELAJAH KOMPETISI
-          </Link>
-        </div>
         {/* end of competition */}
 
         <div className="m-b-50" />
@@ -153,6 +154,12 @@ class Home extends Component {
 
         <NewsBox subtitle={false} {...berita.data["home_latest"]} />
 
+        <div className="row align-center">
+          <Link className="btn btn-bordergray" to="/news">
+            KABAR BERIKUTNYA
+          </Link>
+        </div>
+
         {/* media partners ads */}
         <div className="container">
           <div className="col-md-12">
@@ -160,11 +167,6 @@ class Home extends Component {
           </div>
         </div>
 
-        <div className="row align-center">
-          <Link className="btn btn-bordergray" to="/news">
-            KABAR BERIKUTNYA
-          </Link>
-        </div>
         {/* end of news */}
 
         <div className="m-b-50" />
