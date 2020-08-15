@@ -131,7 +131,7 @@ class HomeSubHeader extends Component {
         }).mount()
         this.setState({ sliderShow: true })
       },
-      window && window.Glide ? 20 : 200
+      window && window.Glide ? 300 : 500
     )
   }
 
