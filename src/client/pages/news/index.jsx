@@ -1,4 +1,4 @@
-import React, { Component } from "react"
+import React, { useEffect, useRef } from "react"
 import * as BeritaActions from "./actions"
 import Host from "../../../config/host"
 import Loadable from "react-loadable"
@@ -7,7 +7,6 @@ import { pushScript } from "../../helpers/domEvents"
 import { connect } from "react-redux"
 import { topLoading } from "../../components/preloaders"
 import { epochToRelativeTime } from "../../helpers/dateTime"
-// import { truncate } from "string-manager"
 import { textParser } from "../../helpers/string"
 
 // components
@@ -94,266 +93,271 @@ const NewsDetailStyled = Styled.div`
 }
 `
 
-export default class Index extends Component {
-  state = {
-    url: `${Host[process.env.NODE_ENV].front}/news/${
-      this.props.match.params.encid
-    }/${this.props.match.params.title}`
-  }
-
-  static fetchData({ params, store }) {
-    return store.dispatch(BeritaActions.fetchBeritaDetail(params.encid))
-  }
-
-  componentDidMount() {
-    window.scrollTo(0, 0)
-    pushScript("https://kompetisiindonesia.disqus.com/embed.js")
-    pushScript("https://kompetisiindonesia.disqus.com/count.js", {
-      id: "dsq-count-scr"
+const generateTags = (tags = []) => {
+  tags = tags.split(",")
+  if (tags && tags.length > 0) {
+    return tags.map((n, key) => {
+      return (
+        <span key={key}>
+          <Link className="btn btn-white" to={`/news/tag/${n}`}>
+            {n}
+          </Link>{" "}
+        </span>
+      )
     })
-    this.reqData(this.props)
-
-    // get all image inside .competition-regulator
-    setTimeout(() => {
-      const ImgEl = document.querySelectorAll(".news-detail .content img")
-      // ref: https://developer.mozilla.org/en-US/docs/Web/API/NodeList
-      for (let n of ImgEl) {
-        n.className = "image-modal-target"
-      }
-    }, 1000)
   }
 
-  UNSAFE_componentWillReceiveProps(np) {
-    const { encid } = np.match.params
-    if (
-      encid != this.props.match.params.encid ||
-      np.berita.detail[encid].meta
-    ) {
-      window.scrollTo(0, 0)
-      this.resetDisquss(np)
-    }
-    this.reqData(np)
-  }
+  return null
+}
 
-  resetDisquss(props) {
+const NewsDetail = props => {
+  const url = `${Host[process.env.NODE_ENV].front}/news/${
+    props.match.params.encid
+  }/${props.match.params.title}`
+
+  const { encid, title } = props.match.params
+  const { detail } = props.berita
+
+  const firstRender = useRef(true)
+
+  // function to reset disquss box after change url
+  const resetDisquss = props => {
     const url = `${Host[process.env.NODE_ENV].front}/news/${
       props.match.params.encid
     }/${props.match.params.title}`
 
-    this.setState({ url }, () => {
-      setTimeout(() => {
-        // disquss reset after 1000ms
-        if (window.DISQUS)
-          DISQUS.reset({
-            reload: true,
-            config: function() {
-              this.page.identifier = url
-              this.page.url = url
-            }
-          })
+    setTimeout(() => {
+      // disquss reset after 1000ms
+      if (window.DISQUS)
+        DISQUS.reset({
+          reload: true,
+          config: function() {
+            this.page.identifier = url
+            this.page.url = url
+          }
+        })
 
-        // reset disqus count
-        if (window.DISQUSWIDGETS) DISQUSWIDGETS.getCount({ reset: true })
+      // reset disqus count
+      if (window.DISQUSWIDGETS) DISQUSWIDGETS.getCount({ reset: true })
+    }, 1000)
+  }
+
+  // function to fetch new data
+  const reqData = props => {
+    const { encid } = props.match.params
+    const data = props.berita.detail[encid] || {}
+    if (!data.status) {
+      topLoading(true)
+      props.dispatch(BeritaActions.fetchBeritaDetail(encid))
+    }
+  }
+
+  // watch route changes
+  useEffect(() => {
+    if (firstRender.current) {
+      firstRender.current = false
+      return
+    }
+    window.scrollTo(0, 0)
+    resetDisquss(props)
+    reqData(props)
+  }, [props.match.params.encid])
+
+  // called on componentDidMount and componentWillUnmount
+  useEffect(() => {
+    // componentDidMount
+    if (typeof window !== "undefined") {
+      window.scrollTo(0, 0)
+      pushScript("https://kompetisiindonesia.disqus.com/embed.js")
+      pushScript("https://kompetisiindonesia.disqus.com/count.js", {
+        id: "dsq-count-scr"
+      })
+
+      // fetch data from api
+      reqData(props)
+
+      // get all image inside .competition-regulator
+      setTimeout(() => {
+        const ImgEl = document.querySelectorAll(".news-detail .content img")
+        // ref: https://developer.mozilla.org/en-US/docs/Web/API/NodeList
+        for (let n of ImgEl) {
+          n.className = "image-modal-target"
+        }
       }, 1000)
+    }
+
+    // componentWillUnmount
+    return () => {}
+  }, [])
+
+  // helmet data generator
+  let helmetdata = {
+    title: "Kabar Kompetisi",
+    description: "Kabar terbaru seputar kompetisi dari Kompetisi Id",
+    url: `${Host[process.env.NODE_ENV].front}/news/${encid}/${title}`,
+    script: []
+  }
+
+  if (detail[encid] && detail[encid].status && detail[encid].status === 200) {
+    helmetdata = Object.assign(helmetdata, {
+      title: detail[encid].data.title,
+      description: detail[encid].data.contenttext,
+      url: `https://kompetisi.id/news/${detail[encid].data.id}/${detail[encid].data.nospace_title}`,
+      image: detail[encid].data.image.original
+    })
+
+    //add jsonld
+    helmetdata.script.push({
+      type: "application/ld+json",
+      innerHTML: generateJsonld(detail[encid].data, helmetdata.url)
     })
   }
+  // end of helmet data generator
 
-  reqData(props) {
-    const { encid } = props.match.params
-    if (!this.props.berita.detail[encid]) {
-      topLoading(true)
-      this.props.dispatch(BeritaActions.fetchBeritaDetail(encid))
-    }
-  }
+  return (
+    <NewsDetailStyled>
+      <Helmet {...helmetdata} />
 
-  generateTags(tags = []) {
-    tags = tags.split(",")
-    if (tags && tags.length > 0) {
-      return tags.map((n, key) => {
-        return (
-          <span key={key}>
-            <Link className="btn btn-white" to={`/news/tag/${n}`}>
-              {n}
-            </Link>{" "}
-          </span>
-        )
-      })
-    }
-
-    return null
-  }
-
-  render() {
-    const { encid, title } = this.props.match.params
-    const { detail } = this.props.berita
-    let helmetdata = {
-      title: "Kabar Kompetisi",
-      description: "Kabar terbaru seputar kompetisi dari Kompetisi Id",
-      url: `${Host[process.env.NODE_ENV].front}/news/${encid}/${title}`,
-      script: []
-    }
-
-    if (detail[encid] && detail[encid].status && detail[encid].status === 200) {
-      helmetdata = Object.assign(helmetdata, {
-        title: detail[encid].data.title,
-        description: detail[encid].data.contenttext,
-        url: `https://kompetisi.id/news/${detail[encid].data.id}/${detail[encid].data.nospace_title}`,
-        image: detail[encid].data.image.original
-      })
-
-      //add jsonld
-      helmetdata.script.push({
-        type: "application/ld+json",
-        innerHTML: generateJsonld(detail[encid].data, helmetdata.url)
-      })
-    }
-
-    if (typeof window !== "undefined" && detail[encid] && detail[encid].meta)
-      topLoading(false)
-
-    return (
-      <NewsDetailStyled>
-        <Helmet {...helmetdata} />
-
-        {detail[encid] && detail[encid].status ? (
-          parseInt(detail[encid].status) === 200 ? (
-            <React.Fragment>
-              <div className="col-md-6 col-md-push-3 col-md-pull-3">
-                <div className="row">
-                  {/* start news detail wrapper */}
-                  <div className="news-detail">
-                    <Author data={detail[encid].data.author} />
-                    <article className="content">
-                      <h1>{detail[encid].data.title}</h1>
-                      <p className="meta text-muted">
-                        <span className="meta--item">
-                          <i className="fa fa-calendar-o" />{" "}
-                          {epochToRelativeTime(detail[encid].data.created_at)}
-                        </span>
-                        <span className="meta--item">
-                          <a
-                            href="#"
-                            title="komentar"
-                            onClick={e => {
-                              e.preventDefault()
-                              document
-                                .getElementById("disqus_thread")
-                                .scrollIntoView({ behavior: "smooth" })
-                            }}
+      {detail[encid] && detail[encid].status ? (
+        parseInt(detail[encid].status) === 200 ? (
+          <React.Fragment>
+            <div className="col-md-6 col-md-push-3 col-md-pull-3">
+              <div className="row">
+                {/* start news detail wrapper */}
+                <div className="news-detail">
+                  <Author data={detail[encid].data.author} />
+                  <article className="content">
+                    <h1>{detail[encid].data.title}</h1>
+                    <p className="meta text-muted">
+                      <span className="meta--item">
+                        <i className="fa fa-calendar-o" />{" "}
+                        {epochToRelativeTime(detail[encid].data.created_at)}
+                      </span>
+                      <span className="meta--item">
+                        <a
+                          href="#"
+                          title="komentar"
+                          onClick={e => {
+                            e.preventDefault()
+                            document
+                              .getElementById("disqus_thread")
+                              .scrollIntoView({ behavior: "smooth" })
+                          }}
+                        >
+                          <i className="far fa-comment" />{" "}
+                          <span
+                            className="disqus-comment-count"
+                            data-disqus-url={url}
                           >
-                            <i className="far fa-comment" />{" "}
-                            <span
-                              className="disqus-comment-count"
-                              // data-disqus-identifier={this.state.url}
-                              data-disqus-url={this.state.url}
-                            >
-                              0
-                            </span>
-                          </a>
-                        </span>
-                      </p>
-                    </article>
-                  </div>
+                            0
+                          </span>
+                        </a>
+                      </span>
+                    </p>
+                  </article>
                 </div>
               </div>
+            </div>
 
-              <div className="col-md-12">
-                <React.Fragment>
-                  <div className="row">
-                    <div className="news-detail">
-                      <div className="image">
-                        <figure>
-                          <img
-                            src={detail[encid].data.image.original}
-                            className="image-modal-target"
-                          />
-                        </figure>
-                      </div>
-                    </div>
-                  </div>
-                  {/* Google Ads */}
-                  <div className="col-md-12 align-center">
-                    <GAds
-                      style={{ marginTop: 0 }}
-                      adClient="ca-pub-4468477322781117"
-                      adSlot={1270681813}
-                      timeout={1000}
-                    />
-                  </div>
-                  {/* end of Google Ads */}
-                </React.Fragment>
-              </div>
-
-              <div className="col-md-6 col-md-push-3 col-md-pull-3">
+            <div className="col-md-12">
+              <React.Fragment>
                 <div className="row">
                   <div className="news-detail">
-                    <article
-                      className="content"
-                      dangerouslySetInnerHTML={{
-                        __html: textParser(detail[encid].data.content)
-                      }}
-                    />
-                    <div style={{ margin: "50px 0 0" }}>
-                      {this.generateTags(detail[encid].data.tag)}
+                    <div className="image">
+                      <figure>
+                        <img
+                          src={detail[encid].data.image.original}
+                          className="image-modal-target"
+                        />
+                      </figure>
                     </div>
                   </div>
-
-                  <br />
-
-                  {/* share button */}
-                  <Share
-                    url={`https://kompetisi.id/news/${detail[encid].data.id}/${detail[encid].data.nospace_title}`}
-                  />
-                  {/* end of share button */}
-
-                  <br />
                 </div>
-              </div>
+                {/* Google Ads */}
+                <div className="col-md-12 align-center">
+                  <GAds
+                    style={{ marginTop: 0 }}
+                    adClient="ca-pub-4468477322781117"
+                    adSlot={1270681813}
+                    timeout={1000}
+                  />
+                </div>
+                {/* end of Google Ads */}
+              </React.Fragment>
+            </div>
 
-              {/* related news */}
+            <div className="col-md-6 col-md-push-3 col-md-pull-3">
+              <div className="row">
+                <div className="news-detail">
+                  <article
+                    className="content"
+                    dangerouslySetInnerHTML={{
+                      __html: textParser(detail[encid].data.content)
+                    }}
+                  />
+                  <div style={{ margin: "50px 0 0" }}>
+                    {generateTags(detail[encid].data.tag)}
+                  </div>
+                </div>
+
+                <br />
+
+                {/* share button */}
+                <Share url={url} />
+                {/* end of share button */}
+
+                <br />
+              </div>
+            </div>
+
+            {/* related news */}
+            <div className="col-md-12">
               <NewsBox
                 subtitle={false}
                 data={detail[encid].related}
                 status={detail[encid].status}
                 size="small"
               />
-            </React.Fragment>
-          ) : (
-            <ErrorCard
-              code={detail[encid].status}
-              message={detail[encid].message}
-            />
-          )
+            </div>
+            {/* end of related news */}
+          </React.Fragment>
         ) : (
-          <div className="fullheight">
-            <Preloader />
-          </div>
-        )}
-        {detail[encid] && detail[encid].status && detail[encid].is_loading ? (
-          <Preloader />
-        ) : null}
-        {/* comment section */}
-        <div
-          style={{
-            display:
-              detail[encid] &&
-              detail[encid].status &&
-              detail[encid].status == 200
-                ? "block"
-                : "none"
-          }}
-          className="col-md-6 col-md-push-3 col-md-pull-3"
-        >
-          <div
-            style={{ padding: "50px 0" }}
-            className="row comments"
-            id="disqus_thread"
+          <ErrorCard
+            code={detail[encid].status}
+            message={detail[encid].message}
           />
+        )
+      ) : (
+        <div className="fullheight">
+          <Preloader />
         </div>
-        {/* end of comment section */}
-      </NewsDetailStyled>
-    )
-  }
+      )}
+      {detail[encid] && detail[encid].status && detail[encid].is_loading ? (
+        <Preloader />
+      ) : null}
+      {/* comment section */}
+      <div
+        style={{
+          display:
+            detail[encid] && detail[encid].status && detail[encid].status == 200
+              ? "block"
+              : "none"
+        }}
+        className="col-md-6 col-md-push-3 col-md-pull-3"
+      >
+        <div
+          style={{ padding: "50px 0" }}
+          className="row comments"
+          id="disqus_thread"
+        />
+      </div>
+      {/* end of comment section */}
+    </NewsDetailStyled>
+  )
+}
+
+NewsDetail.fetchData = ({ params, store }) => {
+  return store.dispatch(BeritaActions.fetchBeritaDetail(params.encid))
 }
 
 function generateJsonld(n, url) {
@@ -406,4 +410,4 @@ function mapStateToProps(state) {
   }
 }
 
-module.exports = connect(mapStateToProps)(Index)
+module.exports = connect(mapStateToProps)(NewsDetail)

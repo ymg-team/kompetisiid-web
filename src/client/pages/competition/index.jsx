@@ -1,4 +1,4 @@
-import React, { Component } from "react"
+import React, { useEffect } from "react"
 import Loadable from "react-loadable"
 import { nl2br } from "../../helpers/string"
 import { toCamelCase } from "string-manager"
@@ -47,23 +47,8 @@ const Sidebar = Loadable({
   loading: Loading
 })
 
-class Index extends Component {
-  constructor(props) {
-    super(props)
-    this.handleScroll = this.handleScroll.bind(this)
-  }
-
-  componentDidMount() {
-    // add scroll listener
-    addEventListener("scroll", this.handleScroll, true)
-  }
-
-  componentWillUnmount() {
-    // remove event listener
-    removeEventListener("scroll", this.handleScroll, true)
-  }
-
-  handleScroll(e) {
+const handleScroll = e => {
+  if (typeof window !== "undefined") {
     // console.log('scrolling in competition detail...')
     const afterScroll =
       document.getElementById("competition-detail").offsetHeight + 40
@@ -80,219 +65,231 @@ class Index extends Component {
       }
     }
   }
+}
 
-  render() {
-    const { encid } = this.props.match.params
-    const { detail, related } = this.props.kompetisi
-    const { active_tab } = this.props.route
-    let NextPrevProps = {},
-      helmetdata = {
-        script: []
-      }
+const CompetitionDetail = props => {
+  const { encid } = props.match.params
+  const { detail, related } = props.kompetisi
+  const { active_tab } = props.route
 
-    // generate helmet data
-    if (detail[encid] && detail[encid].status && detail[encid].status === 200) {
-      helmetdata = Object.assign(helmetdata, {
-        title: toCamelCase(
-          `${tab[this.props.route.active_tab - 1].name + " " || ""}${
-            detail[encid].data.title
-          }`
-        ),
-        description: detail[encid].data.sort,
-        image: detail[encid].data.poster.original,
-        url: `${Host[process.env.NODE_ENV].front}/competition/${
-          detail[encid].data.id
-        }/regulations/${detail[encid].data.nospace_title}`
-      })
+  const competitionDetail = detail[encid] || {}
+  let NextPrevProps = {},
+    helmetdata = {
+      script: []
+    }
 
-      // add jsonld
-      helmetdata.script.push({
-        type: "application/ld+json",
-        innerHTML: generateJsonld(detail[encid].data, helmetdata.url)
-      })
+  useEffect(() => {
+    // componentDidMount
+    if (typeof window !== "undefined") {
+      addEventListener("scroll", handleScroll, true)
+    }
 
-      // nextprev props
-      if (Object.keys(detail[encid].next).length > 0) {
-        NextPrevProps.next = {
-          title: detail[encid].next.title,
-          link: `/competition/${detail[encid].next.id}/regulations/${detail[encid].next.nospace_title}`
-        }
-      }
+    // called on componentWillUnmount
+    return () => {
+      removeEventListener("scroll", handleScroll, true)
+    }
+  })
 
-      if (Object.keys(detail[encid].prev).length > 0) {
-        NextPrevProps.prev = {
-          title: detail[encid].prev.title,
-          link: `/competition/${detail[encid].prev.id}/regulations/${detail[encid].prev.nospace_title}`
-        }
+  if (competitionDetail.status === 200) {
+    helmetdata = Object.assign(helmetdata, {
+      title: toCamelCase(
+        `${tab[props.route.active_tab - 1].name + " " || ""}${
+          competitionDetail.data.title
+        }`
+      ),
+      description: competitionDetail.data.sort,
+      image: competitionDetail.data.poster.original,
+      url: `${Host[process.env.NODE_ENV].front}/competition/${
+        competitionDetail.data.id
+      }/regulations/${competitionDetail.data.nospace_title}`
+    })
+
+    // add jsonld
+    helmetdata.script.push({
+      type: "application/ld+json",
+      innerHTML: generateJsonld(competitionDetail.data, helmetdata.url)
+    })
+
+    // nextprev props
+    if (Object.keys(competitionDetail.next).length > 0) {
+      NextPrevProps.next = {
+        title: competitionDetail.next.title,
+        link: `/competition/${competitionDetail.next.id}/regulations/${competitionDetail.next.nospace_title}`
       }
     }
 
-    return (
-      <React.Fragment>
-        <Helmet {...helmetdata} />
+    if (Object.keys(competitionDetail.prev).length > 0) {
+      NextPrevProps.prev = {
+        title: competitionDetail.prev.title,
+        link: `/competition/${competitionDetail.prev.id}/regulations/${competitionDetail.prev.nospace_title}`
+      }
+    }
+  }
 
-        <div className="competition-detail">
-          {/* detail box competition */}
-          <CompetitionDetailBox
-            dispatch={this.props.dispatch}
-            data={detail[encid].data}
-            authData={this.props.authData}
-          />
+  return (
+    <React.Fragment>
+      <Helmet {...helmetdata} />
 
-          {/* competition tab navigation */}
-          <Tab
-            active={this.props.route.active_tab}
-            data={detail[encid].data}
-            link={helmetdata.url}
-          />
+      <div className="competition-detail">
+        {/* detail box competition */}
+        <CompetitionDetailBox
+          dispatch={props.dispatch}
+          data={competitionDetail.data}
+          authData={props.authData}
+        />
 
-          {/* GAds */}
-          <div className="row">
-            <div className="col-md-12 align-center">
-              <GAds
-                style={{ marginBottom: 0 }}
-                adClient="ca-pub-4468477322781117"
-                adSlot={9209398500}
-                timeout={1000}
-              />
-            </div>
+        {/* competition tab navigation */}
+        <Tab
+          active={props.route.active_tab}
+          data={competitionDetail.data}
+          link={helmetdata.url}
+        />
+
+        {/* GAds */}
+        <div className="row">
+          <div className="col-md-12 align-center">
+            <GAds
+              style={{ marginBottom: 0 }}
+              adClient="ca-pub-4468477322781117"
+              adSlot={9209398500}
+              timeout={1000}
+            />
           </div>
-          {/* end of GAds */}
+        </div>
+        {/* end of GAds */}
 
-          <div className="row">
-            <div className="container">
-              <div className="row competition-detail--content">
-                <div className="col-md-10 col-md-push-1">
-                  {/*alert*/}
-                  {!detail[encid].data.is_mediapartner &&
-                  !detail[encid].data.is_support ? (
-                    <div
-                      style={{ marginTop: 0 }}
-                      className="alert alert-warning"
-                    >
-                      <strong>Perhatian&nbsp;</strong>
-                      Di kompetisi ini, <strong>Kompetisi ID </strong>
-                      hanya berlaku sebagai media publikasi. Jika ada pertanyaan
-                      lebih lanjut mengenai kompetisi ini silahkan sampaikan
-                      langsung ke kontak yang tersedia tab kontak.
-                    </div>
-                  ) : null}
-                  {detail[encid].data.is_mediapartner &&
-                  !detail[encid].data.is_support ? (
-                    <div style={{ marginTop: 0 }} className="alert alert-blue">
-                      <strong>Perhatian&nbsp;</strong>
-                      Di kompetisi ini, <strong>Kompetisi ID </strong>
-                      berlaku sebagai media partner, jika ada pertanyaan lebih
-                      lanjut mengenai kompetisi ini, bisa ditanyakan langsung ke
-                      penyelenggara atau melalui tab diskusi.
-                    </div>
-                  ) : null}
-                  {detail[encid].data.is_support ? (
-                    <div style={{ marginTop: 0 }} className="alert alert-blue">
-                      <strong>Perhatian&nbsp;</strong>
-                      Kompetisi ini bisa diikuti langsung di{" "}
-                      <strong>Kompetisi ID</strong>, silahkan login dan klik
-                      tombol 'ikuti kompetisi'.
-                    </div>
-                  ) : null}
-                  {/*end of alert*/}
-
-                  <div className="m-20" />
-
-                  <div className="row">
-                    <div className={"col-sm-8"}>
-                      {(() => {
-                        switch (active_tab) {
-                          case 2:
-                            return (
-                              <Regulations
-                                encid={encid}
-                                nospace_title={detail[encid].data.nospace_title}
-                                link_source={detail[encid].data.link_source}
-                                tags={
-                                  detail[encid].data.tag
-                                    ? detail[encid].data.tag.split(",")
-                                    : []
-                                }
-                                html={detail[encid].data.content}
-                              />
-                            )
-                          case 1:
-                            return (
-                              <Prizes
-                                html={nl2br(
-                                  detail[encid].data.prize.description
-                                )}
-                              />
-                            )
-                          case 3:
-                            return (
-                              <Announcements
-                                data={
-                                  detail[encid].data.announcement
-                                    ? detail[encid].data.announcement
-                                    : []
-                                }
-                              />
-                            )
-                          case 4:
-                            return <Discussions link={helmetdata.url} />
-                          case 5:
-                            return (
-                              <Contacts
-                                data={
-                                  detail[encid].data.contacts
-                                    ? detail[encid].data.contacts
-                                    : []
-                                }
-                              />
-                            )
-                          case 6:
-                            return (
-                              <Share
-                                title={detail[encid].data.title}
-                                desc={detail[encid].data.sort}
-                                link={helmetdata.url}
-                              />
-                            )
-                          default:
-                            return null
-                        }
-                      })()}
-                    </div>
-
-                    {/* show sidebar info */}
-                    <Sidebar {...detail[encid]} />
-                    {/* end of show sidebar info */}
+        <div className="row">
+          <div className="container">
+            <div className="row competition-detail--content">
+              <div className="col-md-10 col-md-push-1">
+                {/*alert*/}
+                {!competitionDetail.data.is_mediapartner &&
+                !competitionDetail.data.is_support ? (
+                  <div style={{ marginTop: 0 }} className="alert alert-warning">
+                    <strong>Perhatian&nbsp;</strong>
+                    Di kompetisi ini, <strong>Kompetisi ID </strong>
+                    hanya berlaku sebagai media publikasi. Jika ada pertanyaan
+                    lebih lanjut mengenai kompetisi ini silahkan sampaikan
+                    langsung ke kontak yang tersedia tab kontak.
                   </div>
+                ) : null}
+                {competitionDetail.data.is_mediapartner &&
+                !competitionDetail.data.is_support ? (
+                  <div style={{ marginTop: 0 }} className="alert alert-blue">
+                    <strong>Perhatian&nbsp;</strong>
+                    Di kompetisi ini, <strong>Kompetisi ID </strong>
+                    berlaku sebagai media partner, jika ada pertanyaan lebih
+                    lanjut mengenai kompetisi ini, bisa ditanyakan langsung ke
+                    penyelenggara atau melalui tab diskusi.
+                  </div>
+                ) : null}
+                {competitionDetail.data.is_support ? (
+                  <div style={{ marginTop: 0 }} className="alert alert-blue">
+                    <strong>Perhatian&nbsp;</strong>
+                    Kompetisi ini bisa diikuti langsung di{" "}
+                    <strong>Kompetisi ID</strong>, silahkan login dan klik
+                    tombol 'ikuti kompetisi'.
+                  </div>
+                ) : null}
+                {/*end of alert*/}
+
+                <div className="m-20" />
+
+                <div className="row">
+                  <div className={"col-sm-8"}>
+                    {(() => {
+                      switch (active_tab) {
+                        case 2:
+                          return (
+                            <Regulations
+                              encid={encid}
+                              nospace_title={
+                                competitionDetail.data.nospace_title
+                              }
+                              link_source={competitionDetail.data.link_source}
+                              tags={
+                                competitionDetail.data.tag
+                                  ? competitionDetail.data.tag.split(",")
+                                  : []
+                              }
+                              html={competitionDetail.data.content}
+                            />
+                          )
+                        case 1:
+                          return (
+                            <Prizes
+                              html={nl2br(
+                                competitionDetail.data.prize.description
+                              )}
+                            />
+                          )
+                        case 3:
+                          return (
+                            <Announcements
+                              data={
+                                competitionDetail.data.announcement
+                                  ? competitionDetail.data.announcement
+                                  : []
+                              }
+                            />
+                          )
+                        case 4:
+                          return <Discussions link={helmetdata.url} />
+                        case 5:
+                          return (
+                            <Contacts
+                              data={
+                                competitionDetail.data.contacts
+                                  ? competitionDetail.data.contacts
+                                  : []
+                              }
+                            />
+                          )
+                        case 6:
+                          return (
+                            <Share
+                              title={competitionDetail.data.title}
+                              desc={competitionDetail.data.sort}
+                              link={helmetdata.url}
+                            />
+                          )
+                        default:
+                          return null
+                      }
+                    })()}
+                  </div>
+
+                  {/* show sidebar info */}
+                  <Sidebar {...detail[encid]} />
+                  {/* end of show sidebar info */}
                 </div>
               </div>
             </div>
           </div>
-
-          {/*next prev*/}
-          <NextPrev {...NextPrevProps} />
-          {/* end of next prev */}
-
-          {/*related competitions*/}
-          {related[`related_${encid}`] &&
-          related[`related_${encid}`].status &&
-          related[`related_${encid}`].status === 200 ? (
-            <React.Fragment>
-              <div className="m-50 row" />
-              <CompetitionBox
-                subtitle={false}
-                total={4}
-                size="small"
-                {...related[`related_${encid}`]}
-              />
-            </React.Fragment>
-          ) : null}
-          {/* end of related competition */}
         </div>
-      </React.Fragment>
-    )
-  }
+
+        {/*next prev*/}
+        <NextPrev {...NextPrevProps} />
+        {/* end of next prev */}
+
+        {/*related competitions*/}
+        {related[`related_${encid}`] &&
+        related[`related_${encid}`].status &&
+        related[`related_${encid}`].status === 200 ? (
+          <React.Fragment>
+            <div className="m-50 row" />
+            <CompetitionBox
+              subtitle={false}
+              total={4}
+              size="small"
+              {...related[`related_${encid}`]}
+            />
+          </React.Fragment>
+        ) : null}
+        {/* end of related competition */}
+      </div>
+    </React.Fragment>
+  )
 }
 
 function generateJsonld(n, url) {
@@ -339,4 +336,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps)(Index)
+export default connect(mapStateToProps)(CompetitionDetail)
