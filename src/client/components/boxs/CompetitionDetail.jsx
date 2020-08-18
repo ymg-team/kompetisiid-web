@@ -156,7 +156,7 @@ const CompetitionDetailBox = props => {
                   </span>
                 </p>
                 <div className="m-20" />
-                <p className="text-muted">
+                <p>
                   {data.sort}
                   {hashtagGenerators(data.tag)}
                 </p>

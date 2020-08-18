@@ -4,20 +4,17 @@ import { alert } from "../../components/Alert"
 import { Link } from "react-router-dom"
 import Subheader from "../../components/Subheader"
 import Helmet from "../../components/Helmet"
-import { title, desc } from "./form"
+import { desc } from "./form"
 import InputText from "../../components/form/InputText"
 import InputFile from "../../components/form/InputFile"
 import Submit from "../../components/form/Submit"
 
 import { submitCepat } from "./actions"
-// import {
-//   validator,
-//   validationSeter,
-//   validationChecker
-// } from "../../components/form/Validator"
 import { connect } from "react-redux"
 
 let RecaptchaContainer
+
+const Title = "Pasang Kompetisi"
 
 class AddCompetitionFast extends Component {
   constructor(props) {
@@ -47,8 +44,6 @@ class AddCompetitionFast extends Component {
     alert(false)
     if (RecaptchaContainer) grecaptcha.reset(RecaptchaContainer)
   }
-
-  metaGenerator(link) {}
 
   handleSubmit() {
     if (!this.state.is_accept) {
@@ -99,8 +94,8 @@ class AddCompetitionFast extends Component {
 
     return (
       <React.Fragment>
-        <Helmet title="Kirim kompetisi" description={desc} />
-        <Subheader title="Kirim kompetisi" desc={desc} />
+        <Helmet title={Title} description={desc} />
+        <Subheader title={Title} desc={desc} />
         <div style={{ marginTop: "20px" }} className="col-md-12">
           <div className="container">
             <div className="col-md-6 col-md-push-3 p-50-0">

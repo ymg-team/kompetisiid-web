@@ -84,7 +84,7 @@ export default class NewsBox extends Component {
           <div className="row news-container__cards">
             {status ? (
               !data ? (
-                <p className="text-muted">{message}</p>
+                <p className="text-muted align-center">{message}</p>
               ) : (
                 this.generateList(data)
               )

@@ -34,7 +34,7 @@ export default props => {
         </h3>
       </div>
       <hr />
-      <h4 className="text-muted">Kompetisi ini bersifat</h4>
+      <h4>Kompetisi ini bersifat</h4>
       {data.is_garansi ? (
         <span
           title="kompetisi sudah diverifikasi keberadaannya oleh kru KI"

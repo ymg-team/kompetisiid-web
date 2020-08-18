@@ -2,6 +2,7 @@ import React from "react"
 import Styled from "styled-components"
 
 const SpecialTagsStyled = Styled.div`
+  margin-top: 50px;
   .col-md-12 {
     display: flex;
     align-items: center;
@@ -9,10 +10,14 @@ const SpecialTagsStyled = Styled.div`
   }
   .specialtags-image {
     float: left;
-    margin-right: 20px;
+    margin-right: 35px;
     max-width: 200px;
   }
-  border-bottom: 1px solid lightgray;
+  .specialtags-description {
+    h1 {
+      margin-bottom: -10px;
+    }
+  }
   padding: 25px 0;
   margin-bottom: 25px;
 `
@@ -21,7 +26,7 @@ const SpecialTags = props => {
   return (
     <SpecialTagsStyled className="container">
       <div className="col-md-12">
-        <img className="specialtags-image" src={props.image} />
+        <img className="specialtags-image hide-mobile" src={props.image} />
         <span className="specialtags-description">
           <h1>{props.name}</h1>
           <p>

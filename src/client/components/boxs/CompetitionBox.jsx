@@ -64,7 +64,7 @@ const CompetitionBox = props => {
           {/* competition literation */}
           {status ? (
             !data ? (
-              <p className="text-muted">{message}</p>
+              <p className="text-muted align-center">{message}</p>
             ) : (
               generateList(size, data)
             )

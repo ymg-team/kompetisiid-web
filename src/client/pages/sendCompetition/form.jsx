@@ -12,7 +12,7 @@ const ChooseMethodStyled = Styled.div`
     width: 1100px;
     margin: auto;
     p {
-      height: 100px;
+      margin-bottom: 50px;
       overflow-y: auto;
     } 
     .add-competition-box {
@@ -21,7 +21,6 @@ const ChooseMethodStyled = Styled.div`
   }
 
   // responsiveness
-
   // small screen
   @media only screen and (max-width: 543px) {
     .add-competition {
