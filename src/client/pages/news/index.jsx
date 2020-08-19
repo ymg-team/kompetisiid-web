@@ -228,9 +228,9 @@ const NewsDetail = props => {
                   <Author data={detail[encid].data.author} />
                   <article className="content">
                     <h1>{detail[encid].data.title}</h1>
-                    <p className="meta text-muted">
+                    <p className="meta">
                       <span className="meta--item">
-                        <i className="fa fa-calendar-o" />{" "}
+                        <i className="fa fa-calendar" />{" "}
                         {epochToRelativeTime(detail[encid].data.created_at)}
                       </span>
                       <span className="meta--item">

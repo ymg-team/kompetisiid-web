@@ -46,7 +46,6 @@ const HeaderContentStyled = Styled.div`
     margin: 0;
     font-size: 1.2em;
     margin: .5em 0;
-    padding-left: 25px;
     width: 500px;
     max-width: 100%;
   }
@@ -61,7 +60,7 @@ const SubHeader = props => (
   >
     <HeaderContentStyled className={props.customClassContent || ""}>
       <h2>{props.title}</h2>
-      <h3 className={"text-muted"}>{props.text}</h3>
+      <h3>{props.text}</h3>
     </HeaderContentStyled>
   </SubHeaderStyled>
 )

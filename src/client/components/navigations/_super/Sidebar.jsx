@@ -24,7 +24,7 @@ ul {
   li {
     padding: 0.5em 0;
     strong {
-      margin-top: 20px;
+      margin-top: 30px;
       display: block;
     }
     a {

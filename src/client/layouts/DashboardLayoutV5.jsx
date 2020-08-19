@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect } from "react"
 import Loadable from "react-loadable"
 import { alert } from "../components/Alert"
 import { logout } from "../../store/user/actions"
@@ -15,36 +15,30 @@ const Sidebar = Loadable({
   loading: Loading
 })
 
-class DasboardLayoutV5 extends React.Component {
-  handleLogout() {
+const DashboardLayoutV5 = props => {
+  useEffect(() => {
+    props.dispatch(fetchCountDashboardSidebar())
+  }, [])
+
+  const handleLogout = () => {
     fullPageLoader(true)
-    this.props.dispatch(logout())
+    props.dispatch(logout())
     setTimeout(() => {
       alert(true, "Kamu telah logout", "success")
       location.href = "/super"
     }, 2000)
   }
 
-  componentDidMount() {
-    // request count data of _super sidebar
-    this.props.dispatch(fetchCountDashboardSidebar())
-  }
-
-  render = () => {
-    return (
-      <div className="row m-t-2em">
-        <div className="col-md-2 col-md-push-1">
-          <Sidebar
-            handleLogout={() => this.handleLogout()}
-            stats={this.props.stats}
-          />
-        </div>
-        <div className="col-md-7 col-md-push-1">
-          {renderRoutes(this.props.route.routes)}
-        </div>
+  return (
+    <div className="row m-t-2em">
+      <div className="col-md-2 col-md-push-1">
+        <Sidebar handleLogout={() => handleLogout()} stats={props.stats} />
       </div>
-    )
-  }
+      <div className="col-md-7 col-md-push-1">
+        {renderRoutes(props.route.routes)}
+      </div>
+    </div>
+  )
 }
 
 const mapStateToProps = state => {
@@ -53,4 +47,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps)(DasboardLayoutV5)
+export default connect(mapStateToProps)(DashboardLayoutV5)

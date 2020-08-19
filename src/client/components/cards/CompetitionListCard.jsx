@@ -256,7 +256,7 @@ const CompetitionListCard = props => {
             <div className="meta">
               <p>
                 <strong>{nominalToText(n.prize.total)}</strong>
-                <span className="text-muted">&nbsp;total hadiah</span>
+                &nbsp;total hadiah
               </p>
 
               {/* competition status */}
@@ -269,14 +269,14 @@ const CompetitionListCard = props => {
               {is_waiting ? (
                 <p>
                   <strong>{epochToRelativeTime(n.announcement_at)}</strong>{" "}
-                  <span className="text-muted">Pengumuman pemenang</span>
+                  Pengumuman pemenang
                 </p>
               ) : null}
 
               {deadline_at > now ? (
                 <p>
-                  <strong>{epochToRelativeTime(n.deadline_at)}</strong>{" "}
-                  <span className="text-muted">Deadline pendaftaran</span>
+                  <strong>{epochToRelativeTime(n.deadline_at)}</strong> Deadline
+                  pendaftaran
                 </p>
               ) : null}
               {/* end of competition status */}
@@ -304,7 +304,7 @@ const CompetitionListCard = props => {
             />
             <div style={{ lineHeight: "17px" }}>
               <small>
-                oleh {n.author.username} <br />{" "}
+                dipasang {n.author.username} <br />{" "}
                 {epochToRelativeTime(n.created_at)}
               </small>
             </div>

@@ -5,9 +5,8 @@ import * as Colors from "../../../../style/colors"
 import { Link } from "react-router-dom"
 const CountBoxStyled = Styled.div`
     border: 1px solid ${Colors.darkGray};
-    padding: 15px 10px;
+    padding: 15px 10px 25px;
     text-align: center;
-    min-height: 150px;
     a {
         text-decoration: none;
     }

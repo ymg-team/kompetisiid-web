@@ -168,16 +168,14 @@ class AddCompetitionFast extends Component {
                       this.setState({ is_accept: !this.state.is_accept })
                     }
                     type="checkbox"
-                  />
-                  <span className="text-muted">
-                    &nbsp; saya menyetujui{" "}
-                    <a
-                      href="https://kompetisi.id/news/TlRFPQ/Syarat-dan-Ketentuan-Mengirim-Kompetisi-di-Kompetisi.Id"
-                      target="_blank"
-                    >
-                      syarat dan ketentuan yang berlaku
-                    </a>
-                  </span>
+                  />{" "}
+                  Saya menyetujui{" "}
+                  <a
+                    href="https://kompetisi.id/news/TlRFPQ/Syarat-dan-Ketentuan-Mengirim-Kompetisi-di-Kompetisi.Id"
+                    target="_blank"
+                  >
+                    syarat dan ketentuan yang berlaku
+                  </a>
                 </div>
                 <div className="form-child">
                   <div

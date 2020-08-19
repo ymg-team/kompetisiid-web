@@ -26,7 +26,7 @@ class CompetitionListCard extends React.Component {
                 {n.title}
               </a>
             </h4>
-            <p className="text-muted">
+            <p>
               <span>Dipost {epochToRelativeTime(n.created_at)}</span> oleh{" "}
               <a
                 title={n.author.username}
@@ -74,7 +74,7 @@ class CompetitionListCard extends React.Component {
           </div>
           <div className="item__right">
             <div className="item__right-item">
-              <h4 className="text-muted" title="total views">
+              <h4 title="total views">
                 <span>
                   <i className="fa fa-eye" />
                   &nbsp;

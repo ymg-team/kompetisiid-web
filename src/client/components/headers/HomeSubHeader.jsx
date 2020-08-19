@@ -110,8 +110,6 @@ class HomeSubHeader extends Component {
   constructor(props) {
     super(props)
 
-    // const { data = [] } = props.slider || {}
-
     this.state = {
       sliderStart: false,
       sliderShow: false

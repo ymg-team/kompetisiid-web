@@ -45,7 +45,7 @@ const ChooseMethodStyled = Styled.div`
 
 export const title = "Pasang Kompetisi"
 export const desc =
-  'Apakah kamu adalah penyelenggara kompetisi? jika iya, kamu bisa menggunakan fitur ini untuk mempublikasi kompetisimu di KompetisiIndonesia. Ada 2 cara untuk pasang kompetisi, yaitu "Kirim Kompetisi" dan "Pasang Kompetisi" untuk saat ini hanya "Kirim Kompetisi" yang bisa kamu coba.'
+  "Apakah kamu penyelenggara kompetisi? jika iya, kamu bisa menggunakan fitur ini untuk mempublikasi kompetisimu di Kompetisi Id."
 
 export default class Form extends Component {
   componentWillUnmount() {
@@ -64,7 +64,7 @@ export default class Form extends Component {
               <div className="row">
                 <div className="add-competition-box col-md-6 align-center">
                   <h2>Kirim Kompetisi</h2>
-                  <p className="text-muted">
+                  <p>
                     Kamu cukup upload poster dan link untuk kemudian dicek pihak
                     "KI" dan akan diposting jika data tersebut valid.
                     <br />
@@ -83,7 +83,7 @@ export default class Form extends Component {
                 </div>
                 <div className="add-competition-box col-md-6 align-center">
                   <h2>Pasang Sendiri</h2>
-                  <p className="text-muted">
+                  <p>
                     Login dan pasang sendiri kompetisimu melalui dashboard
                     member. Kamu akan lebih mudah memanage kompetisi lainnya,
                     diskusi dan memberikan pengumuman kepada para pengunjung.{" "}

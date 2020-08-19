@@ -17,7 +17,7 @@ class CompetitionListCard extends React.Component {
             <h4>
               <Link to={linkEdit}>{n.title}</Link>
             </h4>
-            <p className="text-muted">
+            <p>
               <span>Dipost {epochToRelativeTime(n.created_at)}</span> oleh{" "}
               <Link
                 title={n.author.username}
@@ -69,7 +69,6 @@ class CompetitionListCard extends React.Component {
             {/* stats count */}
             <div className="item__right-item">
               <h4
-                className="text-muted"
                 style={{
                   color:
                     n.content.split(" ").length < 300 ? "#cf3030" : "inherit"
@@ -84,7 +83,7 @@ class CompetitionListCard extends React.Component {
               </h4>
             </div>{" "}
             <div className="item__right-item">
-              <h4 className="text-muted" title="total views">
+              <h4 title="total views">
                 <span>
                   <i className="fa fa-eye" />
                   &nbsp;
@@ -97,7 +96,7 @@ class CompetitionListCard extends React.Component {
             <div className="item__right-item">
               <div className="dropdown">
                 <a
-                  className="btn btn-sm dropdown-button text-muted fa fa-ellipsis-v"
+                  className="btn btn-sm dropdown-button fa fa-ellipsis-v"
                   title="options"
                   href="#"
                   onClick={e => e.preventDefault()}
@@ -117,7 +116,7 @@ class CompetitionListCard extends React.Component {
                       <Link to={linkEdit}>Ubah</Link>
                     </li>
                     <li>
-                      <a onClick={(e) => e.preventDefault()} href="#">
+                      <a onClick={e => e.preventDefault()} href="#">
                         Hapus
                       </a>
                     </li>

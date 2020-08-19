@@ -11,7 +11,7 @@ const NewsListCard = props => {
           <h4>
             <Link to={`/super/news/${data.id}`}>{data.title}</Link>
           </h4>
-          <p className="text-muted">
+          <p>
             <span>Dipost {epochToRelativeTime(data.created_at)} hari lalu</span>{" "}
             oleh {data.author.username}
           </p>
@@ -45,7 +45,7 @@ const NewsListCard = props => {
                     <Link to={`/super/news/${data.id}`}>Ubah</Link>
                   </li>
                   <li>
-                    <a onClick={(e) => e.preventDefault()} href="#">
+                    <a onClick={e => e.preventDefault()} href="#">
                       Hapus
                     </a>
                   </li>

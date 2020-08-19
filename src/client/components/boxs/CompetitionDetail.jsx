@@ -86,21 +86,17 @@ const CompetitionDetailBox = props => {
             </Link>
             <p>
               dipasang oleh{" "}
-              <Link className="text-muted" to={`/user/${data.author.username}`}>
+              <Link to={`/user/${data.author.username}`}>
                 {data.author.username}
               </Link>
               <br />
-              <small className="text-muted">
+              <small>
                 {data.created_in} di{" "}
-                <a
-                  className="text-muted"
-                  href={`/browse/${data.main_category.name}`}
-                >
+                <a href={`/browse/${data.main_category.name}`}>
                   <strong>{data.main_category.name}</strong>
                 </a>
                 ,
                 <a
-                  className="text-muted"
                   href={`/browse/${data.main_category.name}/${data.sub_category.name}`}
                 >
                   <strong>{data.sub_category.name}</strong>
