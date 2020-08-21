@@ -70,7 +70,7 @@ export default props => {
         </li>
 
         {/* competition */}
-        <hr />
+        <hr className="hide-mobile" />
         <li>
           {" "}
           <strong>Kompetisi</strong>
@@ -104,7 +104,7 @@ export default props => {
         </li>
 
         {/* request */}
-        <hr />
+        <hr className="hide-mobile" />
         <li>
           <strong>Managemen Request</strong>
         </li>
@@ -119,7 +119,7 @@ export default props => {
         </li>
 
         {/* kabar */}
-        <hr />
+        <hr className="hide-mobile" />
         <li>
           <strong>Manajemen Kabar </strong>
         </li>
@@ -141,7 +141,7 @@ export default props => {
         </li>
 
         {/* User */}
-        <hr />
+        <hr className="hide-mobile" />
         <li>
           <strong>Users</strong>
         </li>
@@ -165,7 +165,7 @@ export default props => {
         </li>
 
         {/* akun */}
-        <hr />
+        <hr className="hide-mobile" />
         <li>
           <strong>Akun</strong>
         </li>

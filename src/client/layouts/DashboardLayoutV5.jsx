@@ -30,12 +30,14 @@ const DashboardLayoutV5 = props => {
   }
 
   return (
-    <div className="row m-t-2em">
-      <div className="col-md-2 col-md-push-1">
-        <Sidebar handleLogout={() => handleLogout()} stats={props.stats} />
-      </div>
-      <div className="col-md-7 col-md-push-1">
-        {renderRoutes(props.route.routes)}
+    <div className="container">
+      <div className="row m-t-2em">
+        <div className="col-md-3 col-sm-12">
+          <Sidebar handleLogout={() => handleLogout()} stats={props.stats} />
+        </div>
+        <div className="col-md-9 col-sm-12">
+          {renderRoutes(props.route.routes)}
+        </div>
       </div>
     </div>
   )

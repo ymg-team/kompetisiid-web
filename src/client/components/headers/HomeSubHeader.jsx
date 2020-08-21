@@ -1,7 +1,6 @@
-import React, { Component } from "react"
+import React, { useEffect, useState } from "react"
 import Styled from "styled-components"
 import { nominalToText } from "../../helpers/number"
-import { pushScript, pushStyle } from "../../helpers/domEvents"
 import * as Colors from "../../../style/colors"
 
 // components
@@ -106,17 +105,13 @@ const SubHeader = Styled.div`
   }
 `
 
-class HomeSubHeader extends Component {
-  constructor(props) {
-    super(props)
+const HomeSubHeader = props => {
+  const [sliderStart, setSliderStart] = useState(false)
+  const [sliderShow, setSliderShow] = useState(false)
 
-    this.state = {
-      sliderStart: false,
-      sliderShow: false
-    }
-  }
+  const { data = [] } = props.slider || {}
 
-  renderSlider() {
+  const renderSlider = () => {
     setTimeout(
       () => {
         new Glide("#homepage-subheader", {
@@ -127,84 +122,70 @@ class HomeSubHeader extends Component {
           animationDuration: 200,
           autoplay: 5000
         }).mount()
-        this.setState({ sliderShow: true })
+        setSliderShow(true)
       },
-      window && window.Glide ? 300 : 500
+      window && window.Glide ? 300 : 600
     )
   }
 
-  UNSAFE_componentWillReceiveProps(np) {
+  useEffect(() => {
     if (
       typeof window !== "undefined" &&
-      np.slider.status &&
-      np.slider.status === 200 &&
-      !this.state.sliderStart
+      props.slider.status &&
+      props.slider.status === 200 &&
+      !sliderStart
     ) {
-      this.setState(
-        {
-          sliderStart: true
-        },
-        () => {
-          this.renderSlider()
-        }
-      )
+      setSliderStart(true)
+      renderSlider()
     }
-  }
+  }, [props.slider])
 
-  render() {
-    const { data = [] } = this.props.slider || {}
-
-    return (
-      <SubHeader>
-        <div className="container subheader-content home-slider">
-          <div
-            style={data && data.length > 0 ? { marginBottom: 20 } : {}}
-            className="glide"
-            id="homepage-subheader"
-          >
-            {!this.state.sliderStart ? (
-              <div style={{ width: "100%", height: "100%" }}>
-                <Loader />
-              </div>
-            ) : null}
-            <div className="glide__track" data-glide-el="track">
-              <div
-                style={
-                  !this.state.sliderShow || !this.state.sliderStart
-                    ? { display: "none" }
-                    : {}
-                }
-                className="glide__slides"
-              >
-                {data.map((n, key) => (
-                  <CompetitionSlider key={key} {...n} />
-                ))}
-              </div>
+  return (
+    <SubHeader>
+      <div className="container subheader-content home-slider">
+        <div
+          style={data && data.length > 0 ? { marginBottom: 20 } : {}}
+          className="glide"
+          id="homepage-subheader"
+        >
+          {!sliderStart ? (
+            <div style={{ width: "100%", height: "100%" }}>
+              <Loader />
             </div>
+          ) : null}
+          <div className="glide__track" data-glide-el="track">
             <div
-              className="glide__bullets"
-              data-glide-el="controls[nav]"
-              style={
-                !this.state.sliderStart
-                  ? { display: "none" }
-                  : { zoom: 1.8, marginTop: 20, bottom: "unset" }
-              }
+              style={!sliderShow || !sliderStart ? { display: "none" } : {}}
+              className="glide__slides"
             >
-              {data.map((n, key) => {
-                return (
-                  <button
-                    className="glide__bullet"
-                    data-glide-dir={`=${key}`}
-                    key={key}
-                  />
-                )
-              })}
+              {data.map((n, key) => (
+                <CompetitionSlider key={key} {...n} />
+              ))}
             </div>
           </div>
+          <div
+            className="glide__bullets"
+            data-glide-el="controls[nav]"
+            style={
+              !sliderStart
+                ? { display: "none" }
+                : { zoom: 1.8, marginTop: 20, bottom: "unset" }
+            }
+          >
+            {data.map((n, key) => {
+              return (
+                <button
+                  className="glide__bullet"
+                  data-glide-dir={`=${key}`}
+                  key={key}
+                />
+              )
+            })}
+          </div>
         </div>
-      </SubHeader>
-    )
-  }
+      </div>
+    </SubHeader>
+  )
 }
 
 const CompetitionSlider = props => (

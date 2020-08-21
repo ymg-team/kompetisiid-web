@@ -17,6 +17,8 @@ export default props => {
           <Link to="/dashboard">Dashboard</Link>
         </li>
 
+        <hr className="hide-mobile" />
+
         {/* my competitions */}
         <li>
           {" "}
@@ -98,6 +100,8 @@ export default props => {
         {/* end of liked competition */}
 
         {/* end of competition */}
+
+        <hr className="hide-mobile" />
 
         {/* settings */}
         <li>
