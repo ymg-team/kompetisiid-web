@@ -293,15 +293,19 @@ const CompetitionDetail = props => {
 }
 
 function generateJsonld(n, url) {
+  const now = new Date().getTime()
+  const createdAt = new Date(n.created_at * 1000).toISOString()
   return `{
     "@context": "http://schema.org",
     "@type": "Event",
     "name": "${n.title.replace(/\"/g, "")}",
     "description": "${n.sort.replace(/\"/g, "")}",
-    "startDate": "${new Date(n.created_at * 1000).toISOString()}",
+    "startDate": "${createdAt}",
     "endDate": "${new Date(n.deadline_at * 1000).toISOString()}",
     "url": "${url}",
     "sameAs": "${n.link_source}",
+    "eventAttendanceMode": "Online",
+    "eventStatus": "${now > n.deadline_at * 1000 ? "Ongoing" : "End"}",
     "image": {
         "@type": "ImageObject",
         "url": "${n.poster.original}",
@@ -311,6 +315,7 @@ function generateJsonld(n, url) {
     "organizer": {
       "@type": "Organization",
       "name": "${n.organizer}",
+      "url": "${n.link_source}",
       "logo": {
           "@type": "ImageObject",
           "url": "https://res.cloudinary.com/dhjkktmal/image/upload/v1528851826/kompetisi-id/email_assets/icon-512x512.png",
@@ -322,8 +327,16 @@ function generateJsonld(n, url) {
       "@type": "Place",
       "name": "Indonesia",
       "address": "Indonesia"
+      
     },
-    "offers": "Menangkan ${n.prize.description}",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "IDR",
+      "url": "${url}",
+      "availability": "${n.link_source}",
+      "validFrom": "${createdAt}"
+    },
     "performers": "Warga Negara Indonesia"
   }`
 }

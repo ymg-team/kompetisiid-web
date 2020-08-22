@@ -8,7 +8,6 @@ import AppSitemap from "./controllers/sitemap"
 import AppRender from "./render"
 
 import * as AuthMiddleware from "./middlewares/auth"
-import * as FrontMiddleware from "./middlewares/frontend"
 
 const App = express()
 const cookieConf = {
@@ -103,16 +102,6 @@ App.use(
 )
 // route of /.well-know
 App.use("/.well-known", express.static(__dirname + "/../../public/.well-known"))
-
-// React path
-
-// SEO manager
-App.get(
-  "/competition/:id/*",
-  FrontMiddleware.generateMetaCompetition,
-  AppRender
-)
-App.get("/news/:id/*", FrontMiddleware.generateMetaNews, AppRender)
 
 // global routes
 App.get("*", AppRender)

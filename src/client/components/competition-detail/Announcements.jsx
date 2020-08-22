@@ -1,7 +1,7 @@
 import React from "react"
 
 export default props => (
-  <div>
+  <React.Fragment>
     <h2>Pengumuman kompetisi</h2>
     <p className="text-muted">
       Berisi pengumuman jika terjadi perubahan peraturan, detail hadiah, atau
@@ -24,5 +24,5 @@ export default props => (
     ) : (
       <p>saat ini tidak ada pengumuman</p>
     )}
-  </div>
+  </React.Fragment>
 )

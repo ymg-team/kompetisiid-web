@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect } from "react"
 import Styled from "styled-components"
 import Tags from "../buttons/CompetitionTags"
 import { textParser } from "../../helpers/string"
@@ -17,8 +17,8 @@ article {
 }
 `
 
-export default class Regulation extends React.Component {
-  render() {
+const Regulation = props => {
+  useEffect(() => {
     // get all image inside .competition-regulator
     setTimeout(() => {
       if (typeof window !== "undefined") {
@@ -29,30 +29,28 @@ export default class Regulation extends React.Component {
         }
       }
     }, 1000)
+  }, [])
 
-    return (
-      <RegulationStyled className="competition-regulation">
-        <h2>Peraturan kompetisi</h2>
-        <p className="text-muted">
-          Sebelum mengikuti kompetisi ini, wajib untuk membaca dan mentaati
-          setiap peraturan yang berlaku
-        </p>
-        <hr />
-        <article
-          style={{ lineHeight: 1.8 }}
-          dangerouslySetInnerHTML={{ __html: textParser(this.props.html) }}
-        />
-        <br />
-        <a
-          target="_blank"
-          rel="nofollow"
-          href={`/exit?to=${this.props.link_source}`}
-        >
-          kunjungi website kompetisi
-        </a>
-        <hr />
-        <Tags tags={this.props.tags} />
-      </RegulationStyled>
-    )
-  }
+  return (
+    <RegulationStyled className="competition-regulation">
+      <h2>Peraturan kompetisi</h2>
+      <p className="text-muted">
+        Sebelum mengikuti kompetisi ini, wajib untuk membaca dan mentaati setiap
+        peraturan yang berlaku
+      </p>
+      <hr />
+      <article
+        style={{ lineHeight: 1.8 }}
+        dangerouslySetInnerHTML={{ __html: textParser(props.html) }}
+      />
+      <br />
+      <a target="_blank" rel="nofollow" href={`/exit?to=${props.link_source}`}>
+        Kunjungi website kompetisi
+      </a>
+      <hr />
+      <Tags tags={props.tags} />
+    </RegulationStyled>
+  )
 }
+
+export default Regulation

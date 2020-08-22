@@ -399,7 +399,7 @@ function generateJsonld(n, url) {
             "@id": "${url}"
         },
         "keywords": "${n.tag}",
-        "description": "${n.content}"
+        "description": "${n.title}"
     }`
 }
 
