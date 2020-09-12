@@ -427,7 +427,7 @@ class CompetitionForm extends React.Component {
             <BtnSubmit
               wrapperStyle={{ display: "inline-block", width: "initial" }}
               disabled={loading}
-              text={loading ? "loading..." : "Publikasi Kompetisi"}
+              text={loading ? "loading..." : "Publikasi"}
               action={() => this.submitHandler("posted")}
               setState={(n, cb) => this.setState(n, cb)}
               requiredInputs={["maincat", "subcat"]}
@@ -447,7 +447,7 @@ class CompetitionForm extends React.Component {
           <BtnSubmit
             wrapperStyle={{ display: "inline-block", width: "initial" }}
             disabled={loading}
-            text={loading ? "loading..." : "Simpan ke Draft"}
+            text={loading ? "loading..." : "Simpan Draft"}
             action={() => this.submitHandler("draft")}
             setState={(n, cb) => this.setState(n, cb)}
             requiredInputs={["maincat", "subcat"]}
@@ -462,11 +462,10 @@ class CompetitionForm extends React.Component {
               className="btn btn-red"
               wrapperStyle={{
                 display: "inline-block",
-                width: "initial",
-                float: "right"
+                width: "initial"
               }}
               disabled={loading}
-              text={loading ? "loading..." : "Tolak Kompetisi"}
+              text={loading ? "loading..." : "Tolak"}
               action={() => this.submitHandler("reject")}
               setState={(n, cb) => this.setState(n, cb)}
               requiredInputs={["maincat", "subcat"]}
