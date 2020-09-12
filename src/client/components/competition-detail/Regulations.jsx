@@ -44,7 +44,7 @@ const Regulation = props => {
         dangerouslySetInnerHTML={{ __html: textParser(props.html) }}
       />
       <br />
-      <a target="_blank" rel="nofollow" href={`/exit?to=${props.link_source}`}>
+      <a target="_blank" rel="nofollow" href={props.link_source}>
         Kunjungi website kompetisi
       </a>
       <hr />

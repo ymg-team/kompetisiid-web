@@ -18,7 +18,7 @@ export default props => {
       href={
         is_ended
           ? "javascript:;"
-          : `/exit?to=${props.data.link_join || props.data.link_source}`
+          : props.data.link_join || props.data.link_source
       }
       target="_blank"
       className={`btn btn-join btn-lg ${

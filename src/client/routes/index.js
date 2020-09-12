@@ -110,12 +110,6 @@ export default [
             component: Login
           },
           {
-            path: "/exit",
-            fullscreen: true,
-            exact: true,
-            component: RedirectContainer
-          },
-          {
             path: "/forgot-password",
             fullscreen: true,
             exact: true,
