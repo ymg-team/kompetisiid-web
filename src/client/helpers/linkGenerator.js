@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react"
 
 /**
  * Created by yussan on 21/10/16.
@@ -7,10 +7,10 @@ export function singleLink(id, title, prefix) {
   return `/${prefix}/${id}/${title}`
 }
 
-export function generateLink(link, target = '_self') {
-  if (link.search('http') > -1 && link.search('https://kompetisi.id') < 0) {
+export function generateLink(link, target = "_self") {
+  if (link.search("http") > -1 && link.search("https://kompetisi.id") < 0) {
     return (
-      <a href={`/exit?to=${link}`} target={target}>
+      <a href={link} target={target}>
         {link}
       </a>
     )
@@ -20,7 +20,7 @@ export function generateLink(link, target = '_self') {
 }
 
 export function isHttps(link) {
-  if (link.search('https') > -1) {
+  if (link.search("https") > -1) {
     return true
   } else {
     return false
@@ -28,5 +28,5 @@ export function isHttps(link) {
 }
 
 export function openInNewTab(url) {
-  return window.open(url, '_blank').focus()
+  return window.open(url, "_blank").focus()
 }
