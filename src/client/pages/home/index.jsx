@@ -1,7 +1,6 @@
 // deps
 import React, { useEffect } from "react"
 import Loadable from "react-loadable"
-import Styled from "styled-components"
 import { connect } from "react-redux"
 
 // components
@@ -170,12 +169,20 @@ const Home = props => {
 }
 
 Home.fetchData = ({ store, params, query }) => {
-  return store.dispatch(
-    fetchJelajah(
-      { limit: 7, is_popular: true, status: "active" },
-      "home_popular"
+  const promises = [
+    store.dispatch(
+      fetchJelajah(
+        { limit: 7, is_popular: true, status: "active" },
+        "home_popular"
+      )
+    ),
+    store.dispatch(fetchJelajah({ limit: 9, status: "active" }, "home_latest")),
+    store.dispatch(fetchBerita({ limit: 6 }, "home_latest")),
+    store.dispatch(
+      fetchJelajah({ limit: 7, is_mediapartner: true }, "home_mediapartner")
     )
-  )
+  ]
+  return Promise.all(promises)
 }
 
 function mapStateToProps(state) {

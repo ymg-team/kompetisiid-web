@@ -5,7 +5,6 @@ import * as Colors from "../../../style/colors"
 
 // components
 import Loader from "../preloaders/HomeSlider"
-import { Link } from "react-router-dom"
 
 const SubHeader = Styled.div`
   margin: 50px 0 140px;
@@ -188,28 +187,35 @@ const HomeSubHeader = props => {
   )
 }
 
-const CompetitionSlider = props => (
-  <div className={`competition-slider`}>
-    <div
-      className="hide-mobile competition-slider_poster col-md-6"
-      style={{ backgroundImage: `url(${props.poster.original})` }}
-    />
-    <div className="competition-slider_text col-md-6">
-      <div className="col-md-12">
-        <h1 style={{ paddingBottom: 0 }}>{props.title}</h1>
-        <h2>Hadiah senilai {nominalToText(props.prize.total)}</h2>
-      </div>
-      <div className="col-md-12">
-        <div className="text">{props.sort}</div>
-        <Link
-          to={`/competition/${props.id}/regulations/${props.nospace_title}`}
-          className="btn btn-bordergray btn-rounded btn-md"
-        >
-          Selengkapnya
-        </Link>
+const CompetitionSlider = props => {
+  const hrefTarget = `/competition/${props.id}/regulations/${props.nospace_title}`
+  return (
+    <div className={`competition-slider`}>
+      <div
+        className="hide-mobile competition-slider_poster col-md-6"
+        style={{ backgroundImage: `url(${props.poster.original})` }}
+      />
+      <div className="competition-slider_text col-md-6">
+        <div className="col-md-12">
+          <h1 style={{ paddingBottom: 0 }}>{props.title}</h1>
+          <h2>Hadiah senilai {nominalToText(props.prize.total)}</h2>
+        </div>
+        <div className="col-md-12">
+          <div className="text">{props.sort}</div>
+          <a
+            href={hrefTarget}
+            onclick={e => {
+              e.preventDefault()
+              window.transitionTo(hrefTarget)
+            }}
+            className="btn btn-bordergray btn-rounded btn-md"
+          >
+            Selengkapnya
+          </a>
+        </div>
       </div>
     </div>
-  </div>
-)
+  )
+}
 
 export default HomeSubHeader
