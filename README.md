@@ -10,6 +10,8 @@ Indonesia Competition Platform [https://kompetisi.id](https://kompetisi.id)
 
 ## Env
 
+Source : https://gitlab.com/ymg-team/config/-/blob/master/kompetisiid-web/.env.example
+
 ```
 NODE_ENV = development
 DEBUG = app:*
