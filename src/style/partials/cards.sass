@@ -1,10 +1,14 @@
 @import constants
 
 .categories
+    padding-bottom: 1em
     text-transform: uppercase
     font-size: 0.7em
     letter-spacing: 0.15em
     font-weight: bold
+    overflow: hidden
+    text-overflow: ellipsis
+    white-space: nowrap
 
 // media partner competition 
 .card-mediapartner
@@ -44,9 +48,3 @@
             margin: .1em 0
         p
             line-height: 1.3em
-
-// responsiveness
-@media only screen and (max-width: 543px) 
-    .card-mediapartner
-        .details
-            padding: 5px 10px

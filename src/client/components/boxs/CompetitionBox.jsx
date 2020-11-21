@@ -46,17 +46,17 @@ const CompetitionBox = props => {
   if (typeof size == "undefined") size = "large"
 
   return (
-    <div style={style || {}} id="competition-container">
+    <div id="competition-container">
       <div className="container">
         <div className="no-margin">
           {/* header total show competition */}
           {data && status && subtitle ? (
-            <span style={{ display: "table" }}>
+            <div className="col-md-12">
               <br />
               menampilkan <strong> {data.length || 0}</strong> dari{" "}
-              <strong>{count > 5000 ? "beberapa" : count}</strong> kompetisi
+              <strong>{count > 5000 ? "banyak" : count}</strong> kompetisi
               <br />
-            </span>
+            </div>
           ) : null}
           {subtitle ? <div className="row m-10" /> : null}
           {/* end of header total show competition */}

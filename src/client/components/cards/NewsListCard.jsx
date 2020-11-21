@@ -28,12 +28,12 @@ const LabelDraft = () => (
 )
 
 export default props => {
-  const { n, size } = props
+  const { n } = props
   const target = `/news/${n.id}/${n.nospace_title}`
   return (
     <CardCompetitionStyled
       className={
-        props.size == "small" ? "col-md-3 col-sm-6" : "col-md-4 col-sm-6"
+        props.size == "small" ? "col-md-3 col-xs-6" : "col-md-4 col-xs-6"
       }
     >
       <div
@@ -42,14 +42,14 @@ export default props => {
       >
         {n.is_draft ? <LabelDraft /> : null}
         <Link to={target}>
-          <div className="card-competition--poster">
-            <img
-              src={
+          <div
+            className="card-competition--poster"
+            style={{
+              backgroundImage: `url(${
                 n.image ? n.image.small : `/assets/4.2/img/slider/slider-2.png`
-              }
-              alt={n.title}
-            />
-          </div>
+              })`
+            }}
+          />
         </Link>
         <div className="card-competition--inside">
           <Link to={target}>

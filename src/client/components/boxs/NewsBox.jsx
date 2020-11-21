@@ -14,7 +14,7 @@ const NewsBoxStyled = Styled.div`
 
 /* small */
 @media only screen and (max-width: 543px) {
-  padding: 0 15px;
+  /* padding: 0 15px; */
   .news-container__cards {
     margin: 0;
   }
@@ -22,7 +22,7 @@ const NewsBoxStyled = Styled.div`
 
 /* medium screen */
 @media only screen and (min-width: 544px) and (max-width: 767px) {
-  padding: 0 15px;
+  /* padding: 0 15px; */
   .news-container__cards {
     margin: 0;
   }
@@ -62,7 +62,7 @@ export default class NewsBox extends Component {
         <div className="container">
           <div className="news-container__text no-margin">
             {this.props.subtitle && data ? (
-              <span style={{ display: "table" }}>
+              <div className="col-md-12">
                 <br />
                 menampilkan&nbsp;
                 <strong>
@@ -77,7 +77,7 @@ export default class NewsBox extends Component {
                 </strong>
                 kabar
                 <br />
-              </span>
+              </div>
             ) : null}
           </div>
           {subtitle ? <div className="row m-10" /> : null}
