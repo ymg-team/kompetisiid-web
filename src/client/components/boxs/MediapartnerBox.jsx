@@ -5,40 +5,37 @@ import Loader from "../preloaders/GlobalLoader"
 
 export default class MediapartnerBox extends Component {
   generateList = () => {
-    const { data } = this.props
-    return data.map((n, key) => {
+    return this.props.data.map((n, key) => {
       return (
-        <div key={key} className="row">
-          <div className="card-mediapartner">
-            <div
-              className="thumbnails"
-              style={{ backgroundImage: `url(${n.poster.small})` }}
-            />
-            <div className="details">
-              <span className="categories">
-                <Link className="muted" to={`/browse/${n.main_category.name}`}>
-                  {n.main_category.name}
-                </Link>
-                ,&nbsp;
-                <Link
-                  className="muted"
-                  to={`/browse/${n.main_category.name}/${n.sub_category.name}`}
-                >
-                  {n.sub_category.name}
-                </Link>
-              </span>
-              <Link to={`/competition/${n.id}/regulations/${n.nospace_title}`}>
-                <h3>{n.title}</h3>
+        <div className="card-mediapartner col-lg-12 col-xs-6">
+          <div
+            className="thumbnails"
+            style={{ backgroundImage: `url(${n.poster.small})` }}
+          />
+          <div className="details">
+            <span className="categories">
+              <Link className="muted" to={`/browse/${n.main_category.name}`}>
+                {n.main_category.name}
               </Link>
-              <small>
-                Dipasang{" "}
-                <Link to={`/user/${n.author.username}`}>
-                  {n.author.username}
-                </Link>
-              </small>
+              ,&nbsp;
+              <Link
+                className="muted"
+                to={`/browse/${n.main_category.name}/${n.sub_category.name}`}
+              >
+                {n.sub_category.name}
+              </Link>
+            </span>
+            <Link to={`/competition/${n.id}/regulations/${n.nospace_title}`}>
+              <h3>{n.title}</h3>
+            </Link>
+            <small>
+              Dipasang{" "}
+              <Link to={`/user/${n.author.username}`}>{n.author.username}</Link>
+            </small>
+            <span className="hide-mobile">
               <br />
               <span>{truncate(n.sort, 300, "...")}</span>
-            </div>
+            </span>
           </div>
         </div>
       )
@@ -49,7 +46,7 @@ export default class MediapartnerBox extends Component {
     const { status, message } = this.props
     return (
       <React.Fragment>
-        <div className="col-md-8 col-md-push-2 col-lg-6 col-lg-push-3">
+        <div className="col-md-8 col-md-push-2 col-lg-6 col-lg-push-3 no-padding">
           <div className="row">
             <div className="media-partner align-center">
               <h2 className="big-text">Media Partner KI</h2>
@@ -61,7 +58,7 @@ export default class MediapartnerBox extends Component {
           </div>
           {status ? (
             status === 200 ? (
-              this.generateList()
+              <div className="row">{this.generateList()}</div>
             ) : (
               <p className="text-muted">{message}</p>
             )

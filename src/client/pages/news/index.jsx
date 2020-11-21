@@ -311,7 +311,7 @@ const NewsDetail = props => {
             </div>
 
             {/* related news */}
-            <div className="col-md-12">
+            <div className="col-md-12 no-padding">
               <NewsBox
                 subtitle={false}
                 data={detail[encid].related}

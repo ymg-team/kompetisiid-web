@@ -105,14 +105,24 @@ export const CardCompetitionStyled = Styled.div`
   /* responsiveness */
   /* small */
   @media only screen and (max-width: 543px) {
-    padding-left: 0 !important;
-    padding-right: 0 !important;
+    /* padding-left: 0 !important; */
+    /* padding-right: 0 !important; */
+    .card-competition { 
+      .card-competition--inside { 
+        padding: 20px 0;
+      }
+    }
   }
 
   /* medium screen */
   @media only screen and (min-width: 544px) and (max-width: 767px) {
-    padding-left: 0 !important;
-    padding-right: 0 !important;
+    /* padding-left: 0 !important; */
+    /* padding-right: 0 !important; */
+    .card-competition { 
+      .card-competition--inside { 
+        padding: 20px 0;
+      }
+    }
   }
 `
 
@@ -134,7 +144,7 @@ const LabelEnd = () => (
       zIndex: 1
     }}
   >
-    kompetisi berakhir
+    Berakhir
   </div>
 )
 
@@ -165,18 +175,15 @@ const LabelDraft = () => (
 const CompetitionListCard = props => {
   // convert today midnight timestamp to seconds ref "https://stackoverflow.com/questions/3894048/what-is-the-best-way-to-initialize-a-javascript-date-to-midnight?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa
   const { n, size } = props
-  const {
-    now,
-    deadline_at,
-    announcement_at,
-    is_ended,
-    is_waiting
-  } = getCompetitionStatus(n.deadline_at, n.announcement_at)
+  const { now, deadline_at, is_ended, is_waiting } = getCompetitionStatus(
+    n.deadline_at,
+    n.announcement_at
+  )
   const target = `/competition/${n.id}/regulations/${n.nospace_title}`
 
   return (
     <CardCompetitionStyled
-      className={size === "large" ? "col-md-4 col-sm-6" : "col-md-3 col-sm-6"}
+      className={size === "large" ? "col-md-4 col-xs-6" : "col-md-3 col-xs-6"}
     >
       {n.is_draft ? <LabelDraft /> : is_ended ? <LabelEnd /> : null}
       <div
@@ -232,7 +239,7 @@ const CompetitionListCard = props => {
                 title="kompetisi ini bisa diikuti melalui KI"
                 className="label label-blue"
               >
-                Support
+                <i className="fa fa-check" />
               </span>
             ) : null}
             {is_ended ? (
@@ -240,15 +247,15 @@ const CompetitionListCard = props => {
                 title="kompetisi ini telah berakhir"
                 className="label label-red"
               >
-                <i className="fa fa-check" /> Berakhir
+                <i className="fa fa-times" />
               </span>
             ) : null}
             {is_waiting ? (
               <span
-                title="kompetisi ini telah berakhir"
+                title="kompetisi ini sedang berlangsung"
                 className="label label-orange"
               >
-                <i className="fa fa-flag" /> Sedang berlangsung
+                <i className="fa fa-flag" />
               </span>
             ) : null}
           </div>
@@ -269,14 +276,14 @@ const CompetitionListCard = props => {
               {is_waiting ? (
                 <p>
                   <strong>{epochToRelativeTime(n.announcement_at)}</strong>{" "}
-                  Pengumuman pemenang
+                  Pengumuman
                 </p>
               ) : null}
 
               {deadline_at > now ? (
                 <p>
                   <strong>{epochToRelativeTime(n.deadline_at)}</strong> Deadline
-                  pendaftaran
+                  Pendaftaran
                 </p>
               ) : null}
               {/* end of competition status */}
@@ -284,7 +291,7 @@ const CompetitionListCard = props => {
               {deadline_at === now ? (
                 <p>
                   <strong>hari ini</strong>{" "}
-                  <span className="text-muted">Deadline pendaftaran</span>
+                  <span className="text-muted">Deadline</span>
                 </p>
               ) : null}
             </div>
@@ -304,8 +311,7 @@ const CompetitionListCard = props => {
             />
             <div style={{ lineHeight: "17px" }}>
               <small>
-                dipasang {n.author.username} <br />{" "}
-                {epochToRelativeTime(n.created_at)}
+                {n.author.username} <br /> {epochToRelativeTime(n.created_at)}
               </small>
             </div>
           </Link>

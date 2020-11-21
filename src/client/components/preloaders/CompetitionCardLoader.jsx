@@ -7,7 +7,7 @@ const Loader = props => {
       <div
         key={n}
         className={`${
-          props.size == "large" ? "col-md-4 col-sm-6" : "col-md-3"
+          props.size == "large" ? "col-md-4 col-xs-6" : "col-md-3"
         } ${n > 0 ? "hide-mobile" : ""}`}
       >
         <div className="competition-loader">
