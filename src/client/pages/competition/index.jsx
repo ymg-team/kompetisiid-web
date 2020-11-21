@@ -271,23 +271,23 @@ const CompetitionDetail = props => {
         {/*next prev*/}
         <NextPrev {...NextPrevProps} />
         {/* end of next prev */}
-
-        {/*related competitions*/}
-        {related[`related_${encid}`] &&
-        related[`related_${encid}`].status &&
-        related[`related_${encid}`].status === 200 ? (
-          <React.Fragment>
-            <div className="m-50 row" />
-            <CompetitionBox
-              subtitle={false}
-              total={4}
-              size="small"
-              {...related[`related_${encid}`]}
-            />
-          </React.Fragment>
-        ) : null}
-        {/* end of related competition */}
       </div>
+
+      {/*related competitions*/}
+      {related[`related_${encid}`] &&
+      related[`related_${encid}`].status &&
+      related[`related_${encid}`].status === 200 ? (
+        <React.Fragment>
+          <div className="m-20 row" />
+          <CompetitionBox
+            subtitle={false}
+            total={4}
+            size="small"
+            {...related[`related_${encid}`]}
+          />
+        </React.Fragment>
+      ) : null}
+      {/* end of related competition */}
     </React.Fragment>
   )
 }
