@@ -94,7 +94,7 @@ const NavbarStyled = Styled.div`
   ul.inline-list {
     height: 40px;
     li {
-      padding: 10px
+      padding: 7.5px 10px
     }
   }
 

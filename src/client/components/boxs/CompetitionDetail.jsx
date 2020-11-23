@@ -3,6 +3,7 @@ import { eventFire } from "../../helpers/domEvents"
 import { getCompetitionStatus } from "../../helpers/dateTime"
 import copy from "copy-to-clipboard"
 import Styled from "styled-components"
+import { Colors } from "../../../config/style"
 
 // components
 import AddToCalendarModal from "../modals/AddToCalendar"
@@ -13,6 +14,29 @@ import { alert } from "../Alert"
 import BtnLike from "../buttons/BtnLikeCompetition"
 
 const CompetitionDetailStyled = Styled.div`
+  padding: 0 15px;
+  .competition-detail--title {
+    line-height: 1.3;
+    h1 {
+      font-size: 2.5em;
+      line-height: 1.2;
+    }
+    h1, p {
+      margin: 0;
+    }
+  }
+  img {
+    max-width: 100% !important;
+  }
+  .alert {
+    margin-top: 2em;
+  }
+  .competition-author {
+    img {
+      width: 50px !important;
+      border-radius: 30px !important;
+    }
+  }
   .small-stats-icon {
     margin-right: 10px;
     cursor: default;
@@ -39,7 +63,7 @@ const CompetitionDetailStyled = Styled.div`
   }
   
   /* Landscape phones and down */
-  @media (max-width: 480px) { ... }
+  @media (max-width: 480px) { }
 `
 
 const hashtagGenerators = tags => {

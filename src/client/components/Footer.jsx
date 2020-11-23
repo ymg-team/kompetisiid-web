@@ -1,15 +1,27 @@
 import React, { useEffect, useState } from "react"
 import Styled from "styled-components"
-import * as Color from "./styles/colors"
+import { Colors } from "../../config/style"
 
 // components
 import { Link } from "react-router-dom"
 
 const FooterWrapper = Styled.footer`
+  a {
+    color: ${Colors.mainWhite};
+    text-decoration: none;
+    &:hover {
+      color: ${Colors.softGray};
+    }
+  }
+
   .footer_content {
     margin-bottom: 50px;
     ul.vertical-menu li {
       margin-left: 0;
+      margin-bottom: 7px;
+    }
+    strong.title {
+      display: block;
     }
   }
 `
@@ -23,9 +35,30 @@ const FooterThanks = Styled.div`
 `
 
 const FooterTop = Styled.div`
-  background-color: ${Color.BlackDark};
-  color: ${Color.GrayVerySoft};
+  background-color: ${Colors.mainBlack};
+  color: ${Colors.softGray};
   padding: 10px;
+  .footer-copyright {
+    img.footer-copyright-logo  {
+      width: 40px;
+      float: left;
+      padding-right: 10px;
+      padding-bottom: 10px;
+    }
+    .footer-copyright-text {
+      display: block;
+      float: left;
+      line-height: 1.3;
+    }
+  }
+  .social-media {
+    font-size: 23px;
+    a {
+      padding: 5px;
+    }
+  }
+    
+    
 `
 
 const FooterBottom = Styled.div`
