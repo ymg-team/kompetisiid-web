@@ -14,6 +14,7 @@ import CompetitionLoading from "../../components/preloaders/CompetitionCardLoade
 import Modal from "../../components/modals"
 import MediaPartner from "../../components/cards/MediaPartner"
 import GlobalLoading from "../../components/preloaders/GlobalLoader"
+import { FilterJelajahStyled } from "../../components/filters/Filter.styled"
 
 const CompetitionBox = Loadable({
   loader: () => import("../../components/boxs/CompetitionBox"),
@@ -164,7 +165,7 @@ class Index extends Component {
 
     let title = "Jelajah Kompetisi"
     let description =
-      "Jelajahi kompetisi dari berbagai macam kategori di Kompetisi ID"
+      "Jelajahi kompetisi dari berbagai macam kategori di Kompetisi Id"
 
     // jelajah kompetisi by kategori
     if (this.props.match.params.mainkat) {
@@ -221,89 +222,94 @@ class Index extends Component {
         ) : special_tags && special_tags.tag ? (
           <SpecialTags {...special_tags} />
         ) : (
-          <div className="col-md-12 filter-jelajah">
+          <FilterJelajahStyled className="col-md-12 filter-jelajah">
             <div className="container">
               {/* filter by main category and sub category */}
-              <div className="row no-margin">
-                <h1>
-                  {" "}
-                  Jelajah
-                  {query.mediapartner == 1 ? " Media Partner" : ""}{" "}
-                  <a
-                    href="#"
-                    onClick={e => {
-                      e.preventDefault()
-                      modal("open", "select-main-kat")
-                    }}
-                  >
-                    {parseInt(main_kat) >= 0
-                      ? categories.data[main_kat].name
-                      : "Semua kategori"}
-                    <i className="fa fa-angle-down" />
-                  </a>
-                  {parseInt(main_kat) >= 0 ? (
-                    <span>
-                      {" "}
-                      dan{" "}
-                      <a
-                        href="#"
-                        onClick={e => {
-                          e.preventDefault()
-                          modal("open", "select-sub-kat")
-                        }}
-                      >
-                        {parseInt(sub_kat) >= 0
-                          ? categories.data[main_kat].subcategories[sub_kat]
-                              .name
-                          : "Semua subkategori"}
-                        <i className="fa fa-angle-down" />
-                      </a>
-                    </span>
-                  ) : null}
-                </h1>
+              <div className="row">
+                <div className="col-md-12">
+                  <h1>
+                    {" "}
+                    Jelajah
+                    {query.mediapartner == 1 ? " Media Partner" : ""}{" "}
+                    <a
+                      href="#"
+                      onClick={e => {
+                        e.preventDefault()
+                        modal("open", "select-main-kat")
+                      }}
+                    >
+                      {parseInt(main_kat) >= 0
+                        ? categories.data[main_kat].name
+                        : "Semua kategori"}
+                      <i className="fa fa-angle-down" />
+                    </a>
+                    {parseInt(main_kat) >= 0 ? (
+                      <span>
+                        {" "}
+                        dan{" "}
+                        <a
+                          href="#"
+                          onClick={e => {
+                            e.preventDefault()
+                            modal("open", "select-sub-kat")
+                          }}
+                        >
+                          {parseInt(sub_kat) >= 0
+                            ? categories.data[main_kat].subcategories[sub_kat]
+                                .name
+                            : "Semua subkategori"}
+                          <i className="fa fa-angle-down" />
+                        </a>
+                      </span>
+                    ) : null}
+                  </h1>
+                </div>
               </div>
 
-              <div className="row no-margin">
-                <h1>
-                  {/* sortby */}
-                  Urutkan{" "}
-                  <a
-                    href="#"
-                    onClick={e => {
-                      e.preventDefault()
-                      modal("open", "sort-by")
-                    }}
-                  >
-                    {SortText[this.state.sort] || "Terbaru"}
-                    <i className="fa fa-angle-down" />
-                  </a>{" "}
+              <div className="row">
+                <div className="col-md-12">
+                  <h1>
+                    {/* sortby */}
+                    Urutkan{" "}
+                    <a
+                      href="#"
+                      onClick={e => {
+                        e.preventDefault()
+                        modal("open", "sort-by")
+                      }}
+                    >
+                      {SortText[this.state.sort] || "Terbaru"}
+                      <i className="fa fa-angle-down" />
+                    </a>{" "}
+                    {/* filter by status */}
+                    Tampilkan{" "}
+                    <a
+                      href="#"
+                      onClick={e => {
+                        e.preventDefault()
+                        modal("open", "filter-by-status")
+                      }}
+                    >
+                      {FilterStatus[this.state.status] || "Semua"}
+                      <i className="fa fa-angle-down" />
+                    </a>
+                    {tag ? ` Tag "${tag}"` : ""}
+                    {q ? ` Pencarian "${q}"` : ""}
+                  </h1>
                   {/* filter by status */}
-                  Tampilkan{" "}
-                  <a
-                    href="#"
-                    onClick={e => {
-                      e.preventDefault()
-                      modal("open", "filter-by-status")
-                    }}
-                  >
-                    {FilterStatus[this.state.status] || "Semua"}
-                    <i className="fa fa-angle-down" />
-                  </a>
-                  {tag ? ` Tag "${tag}"` : ""}
-                  {q ? ` Pencarian "${q}"` : ""}
-                </h1>
-
-                {/* filter by status */}
+                </div>
               </div>
 
               <div className="row no-margin">
-                <p className="text-muted">
-                  Gunakan filter diatas untuk menemukan kompetisi yang sesuai
-                  dengan minat kamu
-                </p>
+                <div className="col-md-12">
+                  <p className="text-muted">
+                    Gunakan filter diatas untuk menemukan kompetisi yang sesuai
+                    dengan minat kamu
+                  </p>
+                </div>
               </div>
             </div>
-          </div>
+          </FilterJelajahStyled>
         )}
         {/*end of filter*/}
 

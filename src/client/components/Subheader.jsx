@@ -1,15 +1,18 @@
 import React from "react"
+import { FilterJelajahStyled } from "./filters/Filter.styled"
 
 export default props => (
-  <div
+  <FilterJelajahStyled
     style={{ textAlign: props.text_center ? "center" : "left" }}
     className="col-md-12 filter-jelajah"
   >
     <div className="container">
-      <div className="row no-margin">
-        <h1>{props.title}</h1>
-        <p className="text-muted">{props.desc}</p>
+      <div className="row">
+        <div class="col-md-12">
+          <h1>{props.title}</h1>
+          <p className="text-muted">{props.desc}</p>
+        </div>
       </div>
     </div>
-  </div>
+  </FilterJelajahStyled>
 )

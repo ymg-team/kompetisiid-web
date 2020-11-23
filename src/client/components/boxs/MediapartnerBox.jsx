@@ -5,9 +5,9 @@ import Loader from "../preloaders/GlobalLoader"
 
 export default class MediapartnerBox extends Component {
   generateList = () => {
-    return this.props.data.map((n, key) => {
+    return this.props.data.map(n => {
       return (
-        <div className="card-mediapartner col-lg-12 col-xs-6">
+        <div key={n.id} className="card-mediapartner col-lg-12 col-xs-6">
           <div
             className="thumbnails"
             style={{ backgroundImage: `url(${n.poster.small})` }}

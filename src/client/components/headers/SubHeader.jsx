@@ -50,7 +50,14 @@ const HeaderContentStyled = Styled.div`
     max-width: 100%;
   }
 
-
+  @media only screen and (max-width: 543px) {
+    h2 {
+      font-size: 20px;
+    }
+    h3 {
+      font-size: 18px;
+    }
+  }
 `
 
 const SubHeader = props => (

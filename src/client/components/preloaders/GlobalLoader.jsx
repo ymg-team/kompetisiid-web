@@ -53,7 +53,7 @@ const GlobalLoader = styled.div`
 export default () => {
   return (
     <GlobalLoader className="global-loader">
-      <span className="fas fa-circle-notch" />
+      <i className="fas fa-circle-notch" />
     </GlobalLoader>
   )
 }

@@ -1,31 +1,32 @@
-import React from 'react'
+import React from "react"
 
 export default () => {
   return (
-    <div>
+    <React.Fragment>
       <div
         className="col-md-12 careers-header"
         style={{
-          textAlign: 'center',
-          backgroundImage: 'url(/assets/4.2/img/careers-background.jpg)'
+          textAlign: "center",
+          backgroundImage: "url(/assets/4.2/img/careers-background.jpg)"
         }}
       >
         <div className="container">
           <div className="row no-margin" />
-          <h1>Mari Berkarir Bersama KompetisiID</h1>
+          <h1>Mari Berkarir Bersama Kompetisi Id</h1>
           <h3>
-            KompetisiID adalah salah satu produk dari ByIdMore yang sama-sama
+            Kompetisi Id adalah salah satu produk dari YMG yang sama-sama
             bertujuan untuk melakukan lebih untuk Indonesia. Mari bergabung
-            bersama kami untuk terus meramaikan semangat kompetisi di Indonesia.<br />Kami
-            sedang mencari jiwa-jiwa bertalenta untuk menjadi bagian dari KI
-            yang memiliki bagian sebagai berikut.
+            bersama kami untuk terus meramaikan semangat kompetisi di Indonesia.
+            <br />
+            Kami sedang mencari jiwa-jiwa bertalenta untuk menjadi bagian dari
+            KI yang memiliki bagian sebagai berikut.
           </h3>
           <a
             className="btn btn-white btn-bg"
             href="#available-careers"
-            style={{ fontWeight: 'bold' }}
+            style={{ fontWeight: "bold" }}
           >
-            Telusuri Lowongan Tersedia{' '}
+            Telusuri Lowongan Tersedia{" "}
             <i className="fa fa-arrow-circle-o-down"> </i>
           </a>
         </div>
@@ -47,12 +48,9 @@ export default () => {
                 <li>NodeJS + Express (isomorphic app)</li>
                 <li>ReactJS (diutamakan), VueJS (libs based on components)</li>
                 <li>
-                  Terbiasa menggunakan dependensi pendukung dari<i>NPM</i>, atau<i
-                  >
-                    tool-tool
-                  </i>untuk<i>development</i>seperti<i>
-                    Grunt, Prepack, Webpack, dll
-                  </i>
+                  Terbiasa menggunakan dependensi pendukung dari<i>NPM</i>, atau
+                  <i>tool-tool</i>untuk<i>development</i>seperti
+                  <i>Grunt, Prepack, Webpack, dll</i>
                 </li>
                 <li>
                   Kami menggunakan<i>git</i>sebagai<i>version control system</i>
@@ -68,7 +66,7 @@ export default () => {
                 <li>Python + Flasks (api core)</li>
                 <li>SQL and NOSQL databases</li>
                 <li>
-                  Kami menggunakan<i>Firebase, Mailgun, Dlvrt, dsb</i>sebagai{' '}
+                  Kami menggunakan<i>Firebase, Mailgun, Dlvrt, dsb</i>sebagai{" "}
                   <i>3th party </i>yang diakses beberapa<i>micro services </i>KI
                 </li>
                 <li>
@@ -94,14 +92,14 @@ export default () => {
               <li>Linux based server</li>
               <li>Docker </li>
               <li>
-                {' '}
-                <i>3th party </i>seperti{' '}
+                {" "}
+                <i>3th party </i>seperti{" "}
                 <i>Gitlab Enterprise, Firebase, Heroku, dsb</i>
               </li>
               <li>Remote, Monitoring, Standby </li>
             </ul>
             <button className="btn btn-gray btn-sm" disabled="true">
-              Pendaftaran Belum Dibuka{' '}
+              Pendaftaran Belum Dibuka{" "}
             </button>
           </div>
         </section>
@@ -138,7 +136,7 @@ export default () => {
           {/* contact */}
           <div className="co-md-12">
             <h1>Selengkapnya</h1>
-            <h3 style={{ fontWeight: 'normal' }}>
+            <h3 style={{ fontWeight: "normal" }}>
               Ada pertanyaan lebih lanjut, jangan sungkan-sungkan sampaikan
               kepada kami.
             </h3>
@@ -148,7 +146,7 @@ export default () => {
               href="https://goo.gl/forms/kMGGZQXJCjoyKThj1"
               target="_blank"
             >
-              {' '}
+              {" "}
               <strong>Kontak Kami</strong>
             </a>
             <br />
@@ -182,6 +180,6 @@ export default () => {
           </div>
         </div>
       </div>
-    </div>
+    </React.Fragment>
   )
 }
