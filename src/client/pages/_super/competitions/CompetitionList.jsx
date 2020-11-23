@@ -133,7 +133,7 @@ class MyCompetition extends React.Component {
         <Helmet title={title} />
         <HeaderDashboard
           title={title}
-          text="Berikut adalah kompetisi yang telah anda pasang di Kompetisi ID."
+          text="Berikut adalah kompetisi yang telah anda pasang di Kompetisi Id."
           noBorder
         />
 

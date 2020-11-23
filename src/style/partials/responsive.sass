@@ -1,15 +1,10 @@
 @import _mixins
-@import 'responsive/navigations' 
-@import 'responsive/competition' 
-@import 'responsive/careers'
-@import 'responsive/home'
+@import 'responsive/navigations'
+@import 'responsive/competition'
 
 @media only screen and (max-width: 543px)
-    @include mobile-slider
-    @include mobile-stats
     @include mobile-nav
     @include mobile-competition-sub-header
-    @include small-careers-item
     .only-mobile
         display: block !important
     .hide-mobile
@@ -20,9 +15,9 @@
         border-top: none
         .thumbnails, .details
             @include fullWidth
-        .details 
+        .details
             padding: 10px 0
-            h3 
+            h3
                 height: 138px
                 overflow: hidden
                 display: -webkit-box
@@ -30,12 +25,10 @@
                 -webkit-box-orient: vertical
     .container-competition-tab
         overflow: auto
-        #btn-join 
+        #btn-join
             display: none
 @media only screen and (min-width: 544px) and (max-width: 767px)
     @include mobile-nav
-    @include small-careers-item
-    // @include mobile-competition-sub-header
     .only-mobile
         display: block !important
     .hide-mobile
@@ -46,9 +39,9 @@
         border-top: none
         .thumbnails, .details
             @include fullWidth
-        .details 
+        .details
             padding: 10px 0
-            h3 
+            h3
                 height: 138px
                 overflow: hidden
                 display: -webkit-box
@@ -56,6 +49,6 @@
                 -webkit-box-orient: vertical
     .container-competition-tab
         overflow: auto
-        #btn-join 
+        #btn-join
             display: none
 // @media only screen and (min-width: 992px) and (max-width: 1200px)

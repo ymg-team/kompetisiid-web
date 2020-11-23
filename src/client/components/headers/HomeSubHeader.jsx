@@ -204,7 +204,7 @@ const CompetitionSlider = props => {
           <div className="text">{props.sort}</div>
           <a
             href={hrefTarget}
-            onclick={e => {
+            onClick={e => {
               e.preventDefault()
               window.transitionTo(hrefTarget)
             }}

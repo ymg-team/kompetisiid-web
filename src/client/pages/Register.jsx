@@ -91,8 +91,8 @@ export default class Register extends Component {
     return (
       <div className="container">
         <Helmet
-          title="Register - Kompetisi ID"
-          description="Mendaftarkan akun baru di Kompetisi ID"
+          title="Register - Kompetisi Id"
+          description="Mendaftarkan akun baru di Kompetisi Id"
         />
         <div className="col-md-12 full-body-header">
           <Link to="/">
@@ -235,7 +235,4 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-module.exports = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Register)
+module.exports = connect(mapStateToProps, mapDispatchToProps)(Register)

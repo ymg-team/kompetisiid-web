@@ -28,7 +28,7 @@ class Index extends React.Component {
 
     let helmetdata = {
       title: `profil ${username}`,
-      description: `halaman profil ${username} di Kompetisi ID`
+      description: `halaman profil ${username} di Kompetisi Id`
     }
 
     if (profile[username] && profile[username].status) {

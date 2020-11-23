@@ -13,6 +13,7 @@ import CompetitionLoading from "../../components/preloaders/CompetitionCardLoade
 import NextPrev from "../../components/navigations/NextPrev"
 import Host from "../../../config/host"
 import GAds from "../../components/cards/GoogleAds"
+import AlertBox from "../../components/commons/AlertBox"
 
 const CompetitionBox = Loadable({
   loader: () => import("../../components/boxs/CompetitionBox"),
@@ -165,31 +166,31 @@ const CompetitionDetail = props => {
                 {/*alert*/}
                 {!competitionDetail.data.is_mediapartner &&
                 !competitionDetail.data.is_support ? (
-                  <div style={{ marginTop: 0 }} className="alert alert-warning">
+                  <AlertBox type="warning">
                     <strong>Perhatian&nbsp;</strong>
-                    Di kompetisi ini, <strong>Kompetisi ID </strong>
+                    Di kompetisi ini, <strong>Kompetisi Id </strong>
                     hanya berlaku sebagai media publikasi. Jika ada pertanyaan
                     lebih lanjut mengenai kompetisi ini silahkan sampaikan
                     langsung ke kontak yang tersedia tab kontak.
-                  </div>
+                  </AlertBox>
                 ) : null}
                 {competitionDetail.data.is_mediapartner &&
                 !competitionDetail.data.is_support ? (
-                  <div style={{ marginTop: 0 }} className="alert alert-blue">
+                  <AlertBox type="blue">
                     <strong>Perhatian&nbsp;</strong>
-                    Di kompetisi ini, <strong>Kompetisi ID </strong>
+                    Di kompetisi ini, <strong>Kompetisi Id </strong>
                     berlaku sebagai media partner, jika ada pertanyaan lebih
                     lanjut mengenai kompetisi ini, bisa ditanyakan langsung ke
                     penyelenggara atau melalui tab diskusi.
-                  </div>
+                  </AlertBox>
                 ) : null}
                 {competitionDetail.data.is_support ? (
-                  <div style={{ marginTop: 0 }} className="alert alert-blue">
+                  <AlertBox type="blue">
                     <strong>Perhatian&nbsp;</strong>
                     Kompetisi ini bisa diikuti langsung di{" "}
-                    <strong>Kompetisi ID</strong>, silahkan login dan klik
+                    <strong>Kompetisi Id</strong>, silahkan login dan klik
                     tombol 'ikuti kompetisi'.
-                  </div>
+                  </AlertBox>
                 ) : null}
                 {/*end of alert*/}
 
