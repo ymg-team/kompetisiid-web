@@ -5,6 +5,7 @@ import { epochToDMY, epochToRelativeTime } from "../../helpers/dateTime"
 // components
 import MediaPartnerAds from "../cards/MediaPartnerAds"
 import GAds from "../cards/GoogleAds"
+import Label from "../Label"
 
 export default props => {
   const { data } = props
@@ -36,28 +37,25 @@ export default props => {
       <hr />
       <h4>Kompetisi ini bersifat</h4>
       {data.is_garansi ? (
-        <span
+        <Label
+          type="gray"
           title="kompetisi sudah diverifikasi keberadaannya oleh kru KI"
-          className="label label-gray"
-        >
-          Garansi
-        </span>
+          text="Garansi"
+        />
       ) : null}
       {data.is_mediapartner ? (
-        <span
+        <Label
+          type="gray"
           title="KI berlaku sebagai media partner di kompetisi ini"
-          className="label label-gray"
-        >
-          Media Partner
-        </span>
+          text="Media Partner"
+        />
       ) : null}
       {data.is_support ? (
-        <span
-          title="kompetisi ini bisa diikuti melelui KI"
-          className="label label-gray"
-        >
-          Support
-        </span>
+        <Label
+          type="gray"
+          title="kompetisi ini bisa diikuti melalui KI"
+          text="Support"
+        />
       ) : null}
       <br />
       <br />

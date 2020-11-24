@@ -1,6 +1,9 @@
 import React from "react"
 import { epochToRelativeTime } from "../../../helpers/dateTime"
 
+// component
+import Label from "../../Label"
+
 class CompetitionListCard extends React.Component {
   handleActionWaitingCompetition(action) {
     if (action === "accept") {
@@ -54,22 +57,21 @@ class CompetitionListCard extends React.Component {
             </p>
 
             {/* competition label */}
-            {n.is_garansi ? (
-              <span className="label label-blue">garansi</span>
-            ) : null}
+            {n.is_garansi ? <Label type="blue" text="garansi" /> : null}
             {n.is_mediapartner ? (
-              <span className="label label-green">media partner </span>
+              <Label type="green" text="media partner" />
             ) : null}
-            {n.is_support ? (
-              <span className="label label-green">support </span>
-            ) : null}
-            <span className="label label-red">
-              {n.is_berakhir
-                ? n.sisapengumuman != "berakhir"
-                  ? `pengumuman ${epochToRelativeTime(n.announcement_at)}`
-                  : "berakhir"
-                : `deadline ${epochToRelativeTime(n.deadline_at)}`}
-            </span>
+            {n.is_support ? <Label type="green" text="support" /> : null}
+            <Label
+              type="red"
+              text={
+                n.is_berakhir
+                  ? n.sisapengumuman != "berakhir"
+                    ? `pengumuman ${epochToRelativeTime(n.announcement_at)}`
+                    : "berakhir"
+                  : `deadline ${epochToRelativeTime(n.deadline_at)}`
+              }
+            />
             {/* end of competition label */}
           </div>
           <div className="item__right">

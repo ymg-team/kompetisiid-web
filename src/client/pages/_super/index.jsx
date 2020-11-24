@@ -34,7 +34,7 @@ const SuperContainer = props => {
             <div style={{ marginBottom: 20 }} className="col-md-3 col-xs-6">
               <CountBox
                 count={stats.competition.live || 0}
-                text="Sedang Berlangsung"
+                text="Berlangsung"
                 link="/super/competition/live"
               />
             </div>

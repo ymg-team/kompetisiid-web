@@ -1,5 +1,6 @@
 import React, { Component } from "react"
 import { Link } from "react-router-dom"
+import Label from "../Label"
 
 class TabCompetition extends Component {
   render = () => {
@@ -30,42 +31,22 @@ class TabCompetition extends Component {
                         &nbsp;
                         {/* count announcements */}
                         {n.name == "pengumuman" && n_pengumuman > 0 ? (
-                          <div
-                            className={`label label-small ${
-                              this.props.active - 1 == key
-                                ? "label-red"
-                                : "label-white"
-                            }`}
-                          >
-                            {n_pengumuman}
-                          </div>
+                          <Label
+                            type={
+                              this.props.active - 1 == key ? "red" : "white"
+                            }
+                            text={n_pengumuman}
+                          />
                         ) : null}
                         {/* count contacts */}
                         {n.name == "kontak" && n_kontak > 0 ? (
-                          <div
-                            className={`label label-small ${
-                              this.props.active - 1 == key
-                                ? "label-red"
-                                : "label-white"
-                            }`}
-                          >
-                            {n_kontak}
-                          </div>
+                          <Label
+                            type={
+                              this.props.active - 1 == key ? "red" : "white"
+                            }
+                            text={n_kontak}
+                          />
                         ) : null}
-                        {/* count comments */}
-                        {/* {n.name == "diskusi" ? (
-                          <div
-                            // data-disqus-identifier={this.props.link}
-                            data-disqus-url={this.props.link}
-                            className={`disqus-comment-count label label-small ${
-                              this.props.active - 1 == key
-                                ? "label-red"
-                                : "label-white"
-                            }`}
-                          >
-                            0
-                          </div>
-                        ) : null} */}
                       </Link>
                     </li>
                   ))}

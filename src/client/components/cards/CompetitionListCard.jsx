@@ -8,6 +8,9 @@ import {
 import { nominalToText } from "../../helpers/number"
 import { Colors } from "../../../config/style"
 
+// components
+import Label from "../Label"
+
 export const CardCompetitionStyled = Styled.div`
   .card-competition {
     border: 1px solid #FFF;
@@ -219,44 +222,35 @@ const CompetitionListCard = props => {
           />
           <div className="types">
             {n.is_garansi ? (
-              <span
+              <Label
                 title="kompetisi sudah diverifikasi keberadaannya oleh kru KI"
-                className="label label-green"
+                type="green"
               >
                 Garansi
-              </span>
+              </Label>
             ) : null}
             {n.is_mediapartner ? (
-              <span
+              <Label
                 title="KI berlaku sebagai media partner di kompetisi ini"
-                className="label label-blue"
+                type="blue"
               >
                 Media Partner
-              </span>
+              </Label>
             ) : null}
             {n.is_support ? (
-              <span
-                title="kompetisi ini bisa diikuti melalui KI"
-                className="label label-blue"
-              >
+              <Label title="Kompetisi ini bisa diikuti melalui KI" type="blue">
                 <i className="fa fa-check" />
-              </span>
+              </Label>
             ) : null}
             {is_ended ? (
-              <span
-                title="kompetisi ini telah berakhir"
-                className="label label-red"
-              >
+              <Label title="kompetisi ini telah berakhir" type="red">
                 <i className="fa fa-times" />
-              </span>
+              </Label>
             ) : null}
             {is_waiting ? (
-              <span
-                title="kompetisi ini sedang berlangsung"
-                className="label label-orange"
-              >
+              <Label title="Kompetisi ini sedang berlangsung" type="yellow">
                 <i className="fa fa-flag" />
-              </span>
+              </Label>
             ) : null}
           </div>
           {props.size != "small" ? (

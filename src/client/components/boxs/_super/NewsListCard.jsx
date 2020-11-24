@@ -1,6 +1,9 @@
 import React from "react"
-import { Link } from "react-router-dom"
 import { epochToRelativeTime } from "../../../helpers/dateTime"
+
+// components
+import { Link } from "react-router-dom"
+import Label from "../../Label"
 
 const NewsListCard = props => {
   const { data } = props
@@ -15,9 +18,7 @@ const NewsListCard = props => {
             <span>Dipost {epochToRelativeTime(data.created_at)} hari lalu</span>{" "}
             oleh {data.author.username}
           </p>
-          {data.is_draft ? (
-            <span className="label label-gray">draft</span>
-          ) : null}
+          {data.is_draft ? <Label type="gray">draft</Label> : null}
         </div>
 
         <div className="item__right">

@@ -1,5 +1,6 @@
 import React from "react"
 import { Link } from "react-router-dom"
+import Label from "../Label"
 
 export default props => (
   <div className="container-competition-tab" style={{ margin: "20px 0 20px" }}>
@@ -8,10 +9,7 @@ export default props => (
         return (
           <li key={key} className={n.is_active ? "active" : ""}>
             <Link to={n.target}>
-              {n.text}{" "}
-              {n.count ? (
-                <span className="label label-gray">{n.count}</span>
-              ) : null}
+              {n.text} {n.count ? <Label type="gray" text={n.count} /> : null}
             </Link>
           </li>
         )
