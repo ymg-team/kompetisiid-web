@@ -8,7 +8,7 @@ export default props => (
   >
     <div className="container">
       <div className="row">
-        <div class="col-md-12">
+        <div className="col-md-12">
           <h1>{props.title}</h1>
           <p className="text-muted">{props.desc}</p>
         </div>

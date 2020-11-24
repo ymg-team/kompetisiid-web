@@ -46,7 +46,7 @@ function getFirebaseToken() {
     // Add the public key generated from the console here.
     // ref: https://firebase.google.com/docs/cloud-messaging/js/client
     messaging.usePublicVapidKey(
-      "BKi6dYYkevF7pSVucQRYYTaH2-s4Rwn0Wx7qkO8XbYjvfpD1eLKIXE_D7djqL_3AHj8LLmUhjxcj7RDW-JNz3OY"
+      "BIC9HdnInlZTEmNITAQX4Uq8CiQCnRSsaaZZM5gj4xOpkaiq0XXRJd7LpKulc4IXZUoE_LKdtOASjzGG1B0amwI"
     )
 
     // get current fcm token

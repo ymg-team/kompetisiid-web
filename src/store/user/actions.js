@@ -1,10 +1,7 @@
 /**
  * Created by yussan on 28/01/17.
  */
-import {
-  RECEIVE_DATA,
-  REQUEST_DATA
-} from "../consts"
+import { RECEIVE_DATA, REQUEST_DATA } from "../consts"
 
 import { CALL_API } from "../middlewares/api"
 import sealMiddleware from "../../client/helpers/seal"
@@ -28,10 +25,12 @@ export const FETCH_MORE_USERS = "FETCH_MORE_USERS"
  * @param {string} filter
  * @param {string} email
  */
-export function fetchUsers({query, filter}) {
+export function fetchUsers({ query, filter }) {
   return {
-    [CALL_API] : {
-      url: `/api/user/list/${sealMiddleware.generateSeal()}${query ? `?${objToQuery(query)}` : ""}`,
+    [CALL_API]: {
+      url: `/api/user/list/${sealMiddleware.generateSeal()}${
+        query ? `?${objToQuery(query)}` : ""
+      }`,
       method: "GET",
       type: query.lastid ? FETCH_MORE_USERS : FETCH_USERS,
       filter
@@ -44,13 +43,13 @@ export function fetchUsers({query, filter}) {
  * @param {string} filter
  * @param {string} email
  */
-export function forgotPassword({filter, email}) {
+export function forgotPassword({ filter, email }) {
   return {
-    [CALL_API] : {
+    [CALL_API]: {
       url: `/api/user/forgot-password/${sealMiddleware.generateSeal()}`,
       method: "POST",
       filter,
-      params : {
+      params: {
         email
       },
       type: FORGOT_PASSWORD
@@ -66,7 +65,7 @@ export function forgotPassword({filter, email}) {
  * @param {string} params.password_conf
  */
 export function changePassword(params = {}) {
-  const {filter} = params
+  const { filter } = params
   return {
     [CALL_API]: {
       url: `/api/user/change-password/${sealMiddleware.generateSeal()}`,
@@ -78,8 +77,7 @@ export function changePassword(params = {}) {
   }
 }
 
-
-export function profile(username) {
+export function fetchProfile(username) {
   return {
     [CALL_API]: {
       method: "get",

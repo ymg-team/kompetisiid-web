@@ -11,15 +11,13 @@ export default props => {
     <a
       id={props.id}
       style={{ marginRight: "10px" }}
-      onClick={() => {
-        if (is_ended || is_waiting)
+      onClick={e => {
+        if (is_ended || is_waiting) {
+          e.preventDefault()
           alert(true, "Pendaftaran sudah ditutup", "error")
+        }
       }}
-      href={
-        is_ended
-          ? "javascript:;"
-          : props.data.link_join || props.data.link_source
-      }
+      href={is_ended ? "#" : props.data.link_join || props.data.link_source}
       target="_blank"
       className={`btn btn-join btn-lg ${
         is_ended || is_waiting == "berakhir" ? "btn-gray" : "btn-green"

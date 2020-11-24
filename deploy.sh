@@ -1,6 +1,6 @@
 cd "/home/webdev/Web/kompetisiid-web"
 
-echo "update code from gitlab branch master..."
+echo "update code from github branch master..."
 git pull origin master
 
 echo "update deps"

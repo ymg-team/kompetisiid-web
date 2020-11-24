@@ -3,9 +3,11 @@ import Styled from "styled-components"
 import { connect } from "react-redux"
 import { epochToRelativeTime } from "../../../helpers/dateTime"
 import { Colors } from "../../../../config/style"
-
 import * as RequestActions from "../../../pages/_super/requests/actions"
 import swal from "sweetalert"
+
+// components
+import Label from "../../Label"
 
 const RequestListStyled = Styled.div`
   .item {
@@ -58,21 +60,21 @@ function handleAction(accept = true, props) {
 }
 
 const RequestRow = props => {
-  let labelClassname, labelText
+  let labelType, labelText
   switch (props.status) {
     case "posted":
-      labelClassname = "label label-green"
+      labelType = "green"
       labelText = "diterima"
       break
 
     case "reject":
-      labelClassname = "label label-red"
+      labelType = "red"
       labelText = "ditolak"
       break
 
     case "waiting":
     default:
-      labelClassname = "label label-orange"
+      labelType = "yellow"
       labelText = "menunggu"
       break
   }
@@ -105,7 +107,7 @@ const RequestRow = props => {
                 )} dengan catatan "${props.note || "tidak ada"}"`
               : "Permintaan belum diproses"}
           </p>
-          <span className={labelClassname}>{labelText}</span>
+          <Label text={labelText} type={labelType} />
 
           {/* action request */}
           {props.updated_at === props.created_at ? (
@@ -113,8 +115,11 @@ const RequestRow = props => {
               <small>
                 <a
                   style={{ color: Colors.mainGreen }}
-                  href="javascript:;"
-                  onClick={() => handleAction(true, props)}
+                  href="#"
+                  onClick={e => {
+                    e.preventDefault()
+                    handleAction(true, props)
+                  }}
                 >
                   {" "}
                   <span className="fas fa-check-circle" /> Terima Permintaan
@@ -123,7 +128,7 @@ const RequestRow = props => {
                   style={{ color: Colors.mainRed }}
                   href="#"
                   onClick={e => {
-                    e.preventDefault(e)
+                    e.preventDefault()
                     handleAction(false, props)
                   }}
                 >

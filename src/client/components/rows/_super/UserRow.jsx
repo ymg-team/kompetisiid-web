@@ -3,6 +3,8 @@ import Styled from "styled-components"
 import { Colors } from "../../../../config/style"
 
 // components
+import Label from "../../Label"
+
 const UserRowStyled = Styled.div`
 .item {
   padding: 10px;
@@ -38,13 +40,11 @@ export default props => {
           <br />
           Alamat : {props.address || "-"}
         </p>
-        <span className="label label-gray">{props.level}</span>
+        <Label type="gray" text={props.level} />
         {props.is_verified ? (
-          <span className="label label-green">telah konfirmasi</span>
+          <Label type="green" text="telah konfirmasi" />
         ) : null}
-        {props.is_banned ? (
-          <span className="label label-red">diblokir</span>
-        ) : null}
+        {props.is_banned ? <Label type="red" text="diblokir" /> : null}
       </div>
     </UserRowStyled>
   )
