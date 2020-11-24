@@ -6,6 +6,7 @@ import PropTypes from "prop-types"
 const Ads = styled.ins`
   display: block;
   margin: 30px 0;
+  text-align: center;
 `
 
 class GoogleAds extends Component {
