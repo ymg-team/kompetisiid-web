@@ -159,111 +159,107 @@ const CompetitionDetail = props => {
         </div>
         {/* end of GAds */}
 
-        <div className="row">
-          <div className="container">
-            <div className="row competition-detail--content">
-              <div className="col-md-10 col-md-push-1">
-                {/*alert*/}
-                {!competitionDetail.data.is_mediapartner &&
-                !competitionDetail.data.is_support ? (
-                  <AlertBox type="warning">
-                    <strong>Perhatian&nbsp;</strong>
-                    Di kompetisi ini, <strong>Kompetisi Id </strong>
-                    hanya berlaku sebagai media publikasi. Jika ada pertanyaan
-                    lebih lanjut mengenai kompetisi ini silahkan sampaikan
-                    langsung ke kontak yang tersedia tab kontak.
-                  </AlertBox>
-                ) : null}
-                {competitionDetail.data.is_mediapartner &&
-                !competitionDetail.data.is_support ? (
-                  <AlertBox type="blue">
-                    <strong>Perhatian&nbsp;</strong>
-                    Di kompetisi ini, <strong>Kompetisi Id </strong>
-                    berlaku sebagai media partner, jika ada pertanyaan lebih
-                    lanjut mengenai kompetisi ini, bisa ditanyakan langsung ke
-                    penyelenggara atau melalui tab diskusi.
-                  </AlertBox>
-                ) : null}
-                {competitionDetail.data.is_support ? (
-                  <AlertBox type="blue">
-                    <strong>Perhatian&nbsp;</strong>
-                    Kompetisi ini bisa diikuti langsung di{" "}
-                    <strong>Kompetisi Id</strong>, silahkan login dan klik
-                    tombol 'ikuti kompetisi'.
-                  </AlertBox>
-                ) : null}
-                {/*end of alert*/}
+        <div className="container">
+          <div className="row competition-detail--content">
+            <div className="col-md-10 col-md-push-1">
+              {/*alert*/}
+              {!competitionDetail.data.is_mediapartner &&
+              !competitionDetail.data.is_support ? (
+                <AlertBox type="warning">
+                  <strong>Perhatian&nbsp;</strong>
+                  Di kompetisi ini, <strong>Kompetisi Id </strong>
+                  hanya berlaku sebagai media publikasi. Jika ada pertanyaan
+                  lebih lanjut mengenai kompetisi ini silahkan sampaikan
+                  langsung ke kontak yang tersedia tab kontak.
+                </AlertBox>
+              ) : null}
+              {competitionDetail.data.is_mediapartner &&
+              !competitionDetail.data.is_support ? (
+                <AlertBox type="blue">
+                  <strong>Perhatian&nbsp;</strong>
+                  Di kompetisi ini, <strong>Kompetisi Id </strong>
+                  berlaku sebagai media partner, jika ada pertanyaan lebih
+                  lanjut mengenai kompetisi ini, bisa ditanyakan langsung ke
+                  penyelenggara atau melalui tab diskusi.
+                </AlertBox>
+              ) : null}
+              {competitionDetail.data.is_support ? (
+                <AlertBox type="blue">
+                  <strong>Perhatian&nbsp;</strong>
+                  Kompetisi ini bisa diikuti langsung di{" "}
+                  <strong>Kompetisi Id</strong>, silahkan login dan klik tombol
+                  'ikuti kompetisi'.
+                </AlertBox>
+              ) : null}
+              {/*end of alert*/}
 
-                <div className="m-20" />
+              <div className="m-20" />
 
-                <div className="row">
-                  <div className={"col-sm-8"}>
-                    {(() => {
-                      switch (active_tab) {
-                        case 2:
-                          return (
-                            <Regulations
-                              encid={encid}
-                              nospace_title={
-                                competitionDetail.data.nospace_title
-                              }
-                              link_source={competitionDetail.data.link_source}
-                              tags={
-                                competitionDetail.data.tag
-                                  ? competitionDetail.data.tag.split(",")
-                                  : []
-                              }
-                              html={competitionDetail.data.content}
-                            />
-                          )
-                        case 1:
-                          return (
-                            <Prizes
-                              html={nl2br(
-                                competitionDetail.data.prize.description
-                              )}
-                            />
-                          )
-                        case 3:
-                          return (
-                            <Announcements
-                              data={
-                                competitionDetail.data.announcement
-                                  ? competitionDetail.data.announcement
-                                  : []
-                              }
-                            />
-                          )
-                        case 4:
-                          return <Discussions link={helmetdata.url} />
-                        case 5:
-                          return (
-                            <Contacts
-                              data={
-                                competitionDetail.data.contacts
-                                  ? competitionDetail.data.contacts
-                                  : []
-                              }
-                            />
-                          )
-                        case 6:
-                          return (
-                            <Share
-                              title={competitionDetail.data.title}
-                              desc={competitionDetail.data.sort}
-                              link={helmetdata.url}
-                            />
-                          )
-                        default:
-                          return null
-                      }
-                    })()}
-                  </div>
-
-                  {/* show sidebar info */}
-                  <Sidebar {...detail[encid]} />
-                  {/* end of show sidebar info */}
+              <div className="row">
+                <div className={"col-sm-8"}>
+                  {(() => {
+                    switch (active_tab) {
+                      case 2:
+                        return (
+                          <Regulations
+                            encid={encid}
+                            nospace_title={competitionDetail.data.nospace_title}
+                            link_source={competitionDetail.data.link_source}
+                            tags={
+                              competitionDetail.data.tag
+                                ? competitionDetail.data.tag.split(",")
+                                : []
+                            }
+                            html={competitionDetail.data.content}
+                          />
+                        )
+                      case 1:
+                        return (
+                          <Prizes
+                            html={nl2br(
+                              competitionDetail.data.prize.description
+                            )}
+                          />
+                        )
+                      case 3:
+                        return (
+                          <Announcements
+                            data={
+                              competitionDetail.data.announcement
+                                ? competitionDetail.data.announcement
+                                : []
+                            }
+                          />
+                        )
+                      case 4:
+                        return <Discussions link={helmetdata.url} />
+                      case 5:
+                        return (
+                          <Contacts
+                            data={
+                              competitionDetail.data.contacts
+                                ? competitionDetail.data.contacts
+                                : []
+                            }
+                          />
+                        )
+                      case 6:
+                        return (
+                          <Share
+                            title={competitionDetail.data.title}
+                            desc={competitionDetail.data.sort}
+                            link={helmetdata.url}
+                          />
+                        )
+                      default:
+                        return null
+                    }
+                  })()}
                 </div>
+
+                {/* show sidebar info */}
+                <Sidebar {...detail[encid]} />
+                {/* end of show sidebar info */}
               </div>
             </div>
           </div>

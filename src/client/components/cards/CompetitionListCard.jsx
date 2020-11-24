@@ -6,7 +6,7 @@ import {
   getCompetitionStatus
 } from "../../helpers/dateTime"
 import { nominalToText } from "../../helpers/number"
-import * as Colors from "../../../style/colors"
+import { Colors } from "../../../config/style"
 
 export const CardCompetitionStyled = Styled.div`
   .card-competition {

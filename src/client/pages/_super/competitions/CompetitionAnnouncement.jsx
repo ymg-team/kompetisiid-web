@@ -1,7 +1,7 @@
 import React from "react"
 import Styled from "styled-components"
 import { connect } from "react-redux"
-import { softGray } from "../../../../style/colors"
+import { Colors } from "../../../../config/style"
 import { deleteAnnouncement, addAnnouncement } from "../../competition/actions"
 import swal from "sweetalert"
 
@@ -18,7 +18,7 @@ const CompetitionAnnouncementStyled = Styled.div`
     padding: 5px;
     position: relative;
     &:hover {
-      background-color: ${softGray};
+      background-color: ${Colors.softGray};
     }
     .btn-remove-announcement {
       position: absolute;

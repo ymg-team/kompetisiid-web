@@ -3,7 +3,7 @@ import { nominalToText } from "../../helpers/number"
 import { epochToDMY, epochToRelativeTime } from "../../helpers/dateTime"
 
 // components
-import MediaPartner from "../cards/MediaPartner"
+import MediaPartnerAds from "../cards/MediaPartnerAds"
 import GAds from "../cards/GoogleAds"
 
 export default props => {
@@ -63,7 +63,7 @@ export default props => {
       <br />
 
       {/* media parner ads */}
-      <MediaPartner size="square" noads={true} />
+      <MediaPartnerAds size="square" noads={true} />
 
       {/* GAds */}
       <GAds

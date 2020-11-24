@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react"
 import Styled from "styled-components"
 import { nominalToText } from "../../helpers/number"
-import * as Colors from "../../../style/colors"
+import { Colors } from "../../../config/style"
 
 // components
 import Loader from "../preloaders/HomeSlider"

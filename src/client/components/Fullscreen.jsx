@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import * as Colors from "../../style/colors"
+import { Colors } from "../../config/style"
 
 export const Fullscreen = styled.div`
   color: #fff;
