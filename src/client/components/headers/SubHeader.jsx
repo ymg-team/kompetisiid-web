@@ -1,6 +1,6 @@
 import React from "react"
 import Styled from "styled-components"
-import * as Colors from "../../../style/colors"
+import { Colors } from "../../../config/style"
 
 const SubHeaderStyled = Styled.div`
   padding: 50px 10px;

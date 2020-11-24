@@ -1,6 +1,6 @@
 import React from "react"
 import Styled from "styled-components"
-import * as Colors from "../../../../style/colors"
+import { Colors } from "../../../../config/style"
 
 import { Link } from "react-router-dom"
 const CountBoxStyled = Styled.div`

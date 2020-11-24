@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 import { connect } from "react-redux"
-import * as Colors from "../../style/colors"
+import { Colors } from "../../config/style"
 import { initModalImages } from "../helpers/modal"
 import { resendEmailValidationToken } from "../../store/user/actions"
 

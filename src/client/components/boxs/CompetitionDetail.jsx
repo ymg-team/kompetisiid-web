@@ -14,7 +14,6 @@ import { alert } from "../Alert"
 import BtnLike from "../buttons/BtnLikeCompetition"
 
 const CompetitionDetailStyled = Styled.div`
-  padding: 0 15px;
   .competition-detail--title {
     line-height: 1.3;
     h1 {
@@ -90,9 +89,9 @@ const CompetitionDetailBox = props => {
   )
 
   return (
-    <CompetitionDetailStyled id="competition-detail" className="row">
+    <CompetitionDetailStyled id="competition-detail" className="container">
       <div className="row">
-        <div className="container">
+        <div className="col-md-12">
           <div className="row m-30" />
 
           <div className="competition-author">

@@ -1,6 +1,6 @@
-import React from 'react'
-import Styled from 'styled-components'
-import * as Colors from '../../style/colors'
+import React from "react"
+import Styled from "styled-components"
+import { Colors } from "../../config/style"
 
 const Alert = Styled.div`
   display: block;
@@ -53,36 +53,34 @@ export default props => (
 
 let timeout
 
-export function alert(show = true, text = '', type = '', fixed=false) {
+export function alert(show = true, text = "", type = "", fixed = false) {
   clearTimeout(timeout)
 
-  if (typeof window !== 'undefined') {
-    const alertEl = window.document.getElementById('ki-alert')
+  if (typeof window !== "undefined") {
+    const alertEl = window.document.getElementById("ki-alert")
 
-    if(alertEl) {
+    if (alertEl) {
       if (show) {
-        alertEl.classList.remove('success')
-        alertEl.classList.remove('error')
-        alertEl.classList.remove('warning')
-  
-  
+        alertEl.classList.remove("success")
+        alertEl.classList.remove("error")
+        alertEl.classList.remove("warning")
+
         alertEl.innerText = text
         alertEl.classList.add(type)
         // alertEl.style.bottom = '20px'
-        alertEl.style.top = '20px'
-  
-        if(!fixed) {
+        alertEl.style.top = "20px"
+
+        if (!fixed) {
           timeout = setTimeout(() => {
-            alertEl.style.top = '-100px'
+            alertEl.style.top = "-100px"
             alertEl.classList.remove(type)
           }, 4000)
         }
       } else {
-        alertEl.style.top = '-100px'
+        alertEl.style.top = "-100px"
       }
     } else {
       console.err("alert element not available")
     }
-
   }
 }

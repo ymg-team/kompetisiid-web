@@ -34,9 +34,7 @@ const MediaPartnerAds = props => {
   useEffect(() => {
     adsInterval = setInterval(() => {
       const nextIndex = Math.floor(Math.random() * MediaPartnerData.length)
-      this.setState({
-        active: nextIndex
-      })
+      setActive(nextIndex)
 
       return () => {
         clearInterval(adsInterval)
