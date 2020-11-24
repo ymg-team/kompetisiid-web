@@ -1,9 +1,8 @@
 import React from "react"
 import Styled from "styled-components"
-import * as Colors from "../../../../style/colors"
+import { Colors } from "../../../../config/style"
 
 // components
-import { Link } from "react-router-dom"
 const UserRowStyled = Styled.div`
 .item {
   padding: 10px;

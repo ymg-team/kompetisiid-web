@@ -2,7 +2,7 @@ import React, { Component } from "react"
 import { connect } from "react-redux"
 import Styled from "styled-components"
 import { queryToObj } from "string-manager"
-import * as Colors from "../../../style/colors"
+import { Colors } from "../../../config/style"
 import { logout } from "../../../store/user/actions"
 
 // components

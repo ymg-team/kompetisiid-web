@@ -12,7 +12,7 @@ import StaticSpecialTags from "../../../store/static_data/SpecialTags"
 import Helmet from "../../components/Helmet"
 import CompetitionLoading from "../../components/preloaders/CompetitionCardLoader"
 import Modal from "../../components/modals"
-import MediaPartner from "../../components/cards/MediaPartner"
+import MediaPartnerAds from "../../components/cards/MediaPartnerAds"
 import GlobalLoading from "../../components/preloaders/GlobalLoader"
 import { FilterJelajahStyled } from "../../components/filters/Filter.styled"
 
@@ -316,7 +316,7 @@ class Index extends Component {
         {/* media partner ads*/}
         <div className="container">
           <div className="col-md-12">
-            <MediaPartner />
+            <MediaPartnerAds />
           </div>
         </div>
         {/* end of media partner */}

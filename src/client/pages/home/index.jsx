@@ -29,8 +29,8 @@ const SubHeaderTitle = Loadable({
   loader: () => import("../../components/headers/SubHeader"),
   loading: EmptyLoading
 })
-const MediaPartner = Loadable({
-  loader: () => import("../../components/cards/MediaPartner"),
+const MediaPartnerAds = Loadable({
+  loader: () => import("../../components/cards/MediaPartnerAds"),
   loading: EmptyLoading
 })
 
@@ -127,7 +127,7 @@ const Home = props => {
       {/* media partners ads */}
       <div className="container">
         <div className="col-md-12">
-          <MediaPartner />
+          <MediaPartnerAds />
         </div>
       </div>
 
@@ -154,7 +154,7 @@ const Home = props => {
       {/* media partners ads */}
       <div className="container">
         <div className="col-md-12">
-          <MediaPartner />
+          <MediaPartnerAds />
         </div>
       </div>
 

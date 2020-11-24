@@ -1,13 +1,13 @@
-import Styled from 'styled-components'
-import { transparentBlack, mainWhite, mainBlue, mainGray } from '../../../style/colors'
+import Styled from "styled-components"
+import { Colors } from "../../../config/style"
 
 export const ModalStyled = Styled.div`
   visibility: hidden; 
   opacity: 0;
   overflow-y: auto;
   overflow-x: hidden;
-  background-color: ${transparentBlack};
-  color: ${mainWhite};
+  background-color: ${Colors.transparentBlack};
+  color: ${Colors.mainWhite};
   z-index: 20;
   width: 100%;
   height: 100%;
@@ -16,9 +16,9 @@ export const ModalStyled = Styled.div`
   left: 0;   
   
   &.modal-white {
-    color: ${mainGray};
+    color: ${Colors.mainGray};
     .modal-white-content {
-      background-color: ${mainWhite} !important;
+      background-color: ${Colors.mainWhite} !important;
       padding: 0;
       .modal-title {
         padding: 1em;
@@ -30,7 +30,7 @@ export const ModalStyled = Styled.div`
       }
     }
     a {
-      color: ${mainGray} !important;
+      color: ${Colors.mainGray} !important;
     }
   }
   
@@ -63,7 +63,7 @@ export const ModalStyled = Styled.div`
   }
   
   a {
-    color: ${mainWhite};
+    color: ${Colors.mainWhite};
   }
 
   .modal-title {
@@ -103,7 +103,7 @@ export const ModalStyled = Styled.div`
   }
 `
 
-export function getRandomWallpaper(){
+export function getRandomWallpaper() {
   const max = ModalBgImage.length
   const index = Math.round(Math.random() * Math.round(max))
   return ModalBgImage[index]
