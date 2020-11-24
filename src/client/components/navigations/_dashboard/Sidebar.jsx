@@ -3,6 +3,7 @@ import React from "react"
 // components
 import { SidebarStyled } from "../_super/Sidebar"
 import { Link } from "react-router-dom"
+import Label from "../../Label"
 
 export default props => {
   const stats =
@@ -36,9 +37,7 @@ export default props => {
           <li>
             <Link to="/dashboard/competition/waiting">
               Kompetisi Menunggu{" "}
-              <span className="label label-red">
-                {stats.competition.waiting}
-              </span>
+              <Label type="red" text={stats.competition.waiting} />
             </Link>
           </li>
         ) : null}
@@ -48,7 +47,7 @@ export default props => {
           <li>
             <Link to="/dashboard/competition/live">
               Kompetisi Berlangsung{" "}
-              <span className="label label-blue">{stats.competition.live}</span>
+              <Label type="blue" text={stats.competition.live} />
             </Link>
           </li>
         ) : null}
@@ -58,9 +57,7 @@ export default props => {
           <li>
             <Link to="/dashboard/competition/posted">
               Kompetisi Dipublikasi{" "}
-              <span className="label label-blue">
-                {stats.competition.posted}
-              </span>
+              <Label type="blue" text={stats.competition.posted} />
             </Link>
           </li>
         ) : null}
@@ -69,10 +66,7 @@ export default props => {
         {stats.competition && stats.competition.rejected ? (
           <li>
             <Link to="/dashboard/competition/rejected">
-              Ditolak{" "}
-              <span className="label label-blue">
-                {stats.competition.rejected}
-              </span>
+              Ditolak <Label type="blue" text={stats.competition.rejected} />
             </Link>
           </li>
         ) : null}
@@ -86,9 +80,6 @@ export default props => {
         <li>
           <Link to="/dashboard/competition/subscribed">
             Kompetisi Disubscribe{" "}
-            {/* <span className="label label-blue">
-              {stats.competition.subscribed}
-            </span> */}
           </Link>
         </li>
         {/* end of subscribec competition */}

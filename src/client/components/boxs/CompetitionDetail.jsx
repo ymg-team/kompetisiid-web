@@ -3,7 +3,6 @@ import { eventFire } from "../../helpers/domEvents"
 import { getCompetitionStatus } from "../../helpers/dateTime"
 import copy from "copy-to-clipboard"
 import Styled from "styled-components"
-import { Colors } from "../../../config/style"
 
 // components
 import AddToCalendarModal from "../modals/AddToCalendar"
@@ -12,6 +11,7 @@ import BtnJoin from "../buttons/BtnJoin"
 import BtnSubscribe from "../buttons/BtnSubscribe"
 import { alert } from "../Alert"
 import BtnLike from "../buttons/BtnLikeCompetition"
+import Label from "../Label"
 
 const CompetitionDetailStyled = Styled.div`
   .competition-detail--title {
@@ -143,18 +143,15 @@ const CompetitionDetailBox = props => {
               {/* competition status */}
               <div style={{ marginBottom: "20px" }}>
                 {is_ended ? (
-                  <span className="label label-red label-lg">
+                  <Label type="red" size="large">
                     <i className="fa fa-check" /> Kompetisi telah berakhir
-                  </span>
+                  </Label>
                 ) : null}
 
                 {is_waiting ? (
-                  <span
-                    title={`Pengumuan pemenang dalam ${data.sisapengumuman}`}
-                    className="label label-orange label-lg"
-                  >
+                  <Label type="yellow" size="large">
                     <i className="fa fa-flag" /> Kompetisi sedang berlangsung
-                  </span>
+                  </Label>
                 ) : null}
               </div>
 

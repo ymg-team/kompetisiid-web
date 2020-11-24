@@ -104,6 +104,16 @@ const NavbarStyled = Styled.div`
     }
   }
 
+
+  a.avatar {
+    img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+    }
+  }
+    
+
   // responsiveness
   // small screen
   @media only screen and (max-width: 543px) {

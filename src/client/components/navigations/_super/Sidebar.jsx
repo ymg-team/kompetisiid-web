@@ -1,6 +1,9 @@
 import React from "react"
 import Styled from "styled-components"
+
+// components
 import { Link } from "react-router-dom"
+import Label from "../../Label"
 
 const SidebarMobileStyle = `
   background: #ececec;
@@ -83,23 +86,21 @@ export default props => {
         {stats.competition.waiting ? (
           <li>
             <Link to="/super/competition/waiting">
-              Menunggu{" "}
-              <span className="label label-red">
-                {stats.competition.waiting}
-              </span>
+              Menunggu&nbsp;
+              <Label type="red" text={stats.competition.waiting} />
             </Link>
           </li>
         ) : null}
         <li>
           <Link to="/super/competition/live">
-            Berlangsung{" "}
-            <span className="label label-blue">{stats.competition.live}</span>
+            Berlangsung&nbsp;
+            <Label type="blue" text={stats.competition.live} />
           </Link>
         </li>
         <li>
           <Link to="/super/competition/posted">
-            Dipublikasi{" "}
-            <span className="label label-blue">{stats.competition.posted}</span>
+            Dipublikasi&nbsp;
+            <Label type="blue" text={stats.competition.posted} />
           </Link>
         </li>
 
@@ -111,9 +112,9 @@ export default props => {
         <li>
           <Link to="/super/requests">
             Request Pasang Kompetisi{" "}
-            <span className="label label-blue">{stats.request.total}</span>
+            <Label type="blue" text={stats.request.total} />
             {stats.request.waiting ? (
-              <span className="label label-red">{stats.request.waiting}</span>
+              <Label type="red" text={stats.request.waiting} />
             ) : null}
           </Link>
         </li>
@@ -130,13 +131,13 @@ export default props => {
         </li>
         <li>
           <Link to="/super/news/posted">
-            Diposting{" "}
-            <span className="label label-blue">{stats.news.posted}</span>
+            Diposting <Label type="blue" text={stats.news.posted} />
           </Link>
         </li>
         <li>
           <Link to="/super/news/draft">
-            Draft <span className="label label-blue">{stats.news.draft}</span>
+            Draft&nbsp;
+            <Label type="blue" text={stats.news.draft} />
           </Link>
         </li>
 
@@ -147,20 +148,20 @@ export default props => {
         </li>
         <li>
           <Link to="/super/users/confirmed">
-            Telah Konfirmasi{" "}
-            <span className="label label-blue">{stats.members.verified}</span>
+            Telah Konfirmasi &nbsp;
+            <Label type="blue" text={stats.members.verified} />
           </Link>
         </li>
         <li>
           <Link to="/super/users/unconfirmed">
-            Belum Konfirmasi{" "}
-            <span className="label label-blue">{stats.members.unverified}</span>
+            Belum Konfirmasi&nbsp;
+            <Label type="blue" text={stats.members.unverified} />
           </Link>
         </li>
         <li>
           <Link to="/super/users/banned">
-            Dicekal{" "}
-            <span className="label label-blue">{stats.members.banned}</span>
+            Dicekal&nbsp;
+            <Label type="blue" text={stats.members.banned} />
           </Link>
         </li>
 
