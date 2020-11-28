@@ -1,9 +1,10 @@
 {
   "name": "kompetisi-indonesia",
-  "version": "5.0.0",
+  "version": "4.2.0",
   "description": "platform untuk mengikuti dan berbagi kompetisi",
   "main": "dist-server/server/index.js",
   "scripts": {
+    "start": "npm run local",
     "local": "concurrently \"npm run server:watch\" \"npm run build:watch\"",
     "build:watch": "NODE_ENV=development webpack --watch --progress",
     "build:prod": "npm run build-client:prod && npm run build-server:prod",

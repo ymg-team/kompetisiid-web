@@ -106,6 +106,7 @@ const Header = props => {
                       className="dropdown-button"
                       src="/assets/4.2/img/avatar-default.jpg"
                       data-target="avatar-menu"
+                      alt="dropdown button"
                     />
                   </a>
                   <div className="dropdown-items" id="avatar-menu">

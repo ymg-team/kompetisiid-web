@@ -9,7 +9,7 @@ if (env.NODE_ENV === "production") {
   // minify js
   config.plugins.push(
     new webpack.optimize.UglifyJsPlugin({
-      sourceMap: false,
+      sourceMap: true,
       mangle: {
         except: ["exports", "require"]
       },
