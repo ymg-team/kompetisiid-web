@@ -1,63 +1,56 @@
-import React, { Component } from "react"
+import React from "react"
 import { Link } from "react-router-dom"
 import Label from "../Label"
+import { TabStyled } from "../navigations/Tab"
 
-class TabCompetition extends Component {
-  render = () => {
-    const n_pengumuman = this.props.data
-      ? this.props.data.announcement.length
-      : 0
-    const n_kontak = this.props.data ? this.props.data.contacts.length : 0
+const TabCompetition = props => {
+  const n_pengumuman = props.data ? props.data.announcement.length : 0
+  const n_kontak = props.data ? props.data.contacts.length : 0
 
-    return (
-      <div
-        id="container-competition-tab"
-        className="row no-margin container-competition-tab"
-      >
-        <div className="container">
-          <div className="row">
-            <div className="col-md-10 col-md-push-1">
-              <div className="tab-competition">
-                <ul className="horizontal-menu">
-                  {tab.map((n, key) => (
-                    <li
-                      key={key}
-                      className={this.props.active - 1 == key ? "active" : ""}
+  return (
+    <TabStyled
+      id="container-competition-tab"
+      className="row no-margin container-competition-tab"
+    >
+      <div className="container">
+        <div className="row">
+          <div className="col-md-10 col-md-push-1">
+            <div className="tab-competition">
+              <ul className="horizontal-menu">
+                {tab.map((n, key) => (
+                  <li
+                    key={key}
+                    className={props.active - 1 == key ? "active" : ""}
+                  >
+                    <Link
+                      to={`/competition/${props.data.id}/${tab[key].link}/${props.data.nospace_title}`}
                     >
-                      <Link
-                        to={`/competition/${this.props.data.id}/${tab[key].link}/${this.props.data.nospace_title}`}
-                      >
-                        {n.name}
-                        &nbsp;
-                        {/* count announcements */}
-                        {n.name == "pengumuman" && n_pengumuman > 0 ? (
-                          <Label
-                            type={
-                              this.props.active - 1 == key ? "red" : "white"
-                            }
-                            text={n_pengumuman}
-                          />
-                        ) : null}
-                        {/* count contacts */}
-                        {n.name == "kontak" && n_kontak > 0 ? (
-                          <Label
-                            type={
-                              this.props.active - 1 == key ? "red" : "white"
-                            }
-                            text={n_kontak}
-                          />
-                        ) : null}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+                      {n.name}
+                      &nbsp;
+                      {/* count announcements */}
+                      {n.name == "pengumuman" && n_pengumuman > 0 ? (
+                        <Label
+                          type={props.active - 1 == key ? "red" : "white"}
+                          text={n_pengumuman}
+                        />
+                      ) : null}
+                      {/* count contacts */}
+                      {n.name == "kontak" && n_kontak > 0 ? (
+                        <Label
+                          type={props.active - 1 == key ? "red" : "white"}
+                          text={n_kontak}
+                        />
+                      ) : null}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
         </div>
       </div>
-    )
-  }
+    </TabStyled>
+  )
 }
 
 export default TabCompetition

@@ -65,6 +65,7 @@ export default props => {
               src={
                 n.author.avatar.small || `/assets/4.2/img/avatar-default.jpg`
               }
+              alt={`avatar ${n.author.username}`}
             />
             <div style={{ lineHeight: "17px" }}>
               <small>
