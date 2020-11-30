@@ -97,22 +97,6 @@ export default (req, res) => {
                 <link rel="icon" href="/assets/icons-red/icon-128x128.png" />
                 <link rel="manifest" href="/manifest.json" />
                 <link rel="search" type="application/opensearchdescription+xml" href="/opensearch.xml" title="Cari Kompetisi"/>
-                <style>
-                .card-enter {
-                    opacity: 0.01;
-                }
-                .card-enter.example-enter-active {
-                    opacity: 1;
-                transition: opacity 500ms ease-in;
-                }
-                .card-leave {
-                    opacity: 1;
-                }
-                .card-leave.example-leave-active {
-                    opacity: 0.01;
-                    transition: opacity 300ms ease-in;
-                }
-                </style>
                 ${metaTags}
                 ${getGTMHeadScript()}
             </head>
@@ -121,7 +105,6 @@ export default (req, res) => {
                 <div id="fb-root"></div>
                 ${head ? head.script.toString() : ""}
                 ${getScript(state)}
-                ${getGTMBodyScript()}
             </body>
         </html>
         `
@@ -146,7 +129,7 @@ export default (req, res) => {
     } catch (err) {
       // if react not valid
       console.log("error render", err)
-      html = "something wrong"
+      html = "<h1>something wrong :(</h1>"
     }
 
     // res end
@@ -183,7 +166,9 @@ function getScript(state) {
       /</g,
       "\\u003c"
     )}</script>
-    <script src="/assets/4.2/js/script-min.js?v=${version.JS_VERSION}"></script>
+    <script src="/assets/4.2/js/script-min.0.0.1.js.js?v=${
+      version.JS_VERSION
+    }"></script>
     <script src="${webpackAssets.vendor.js}"></script>
     <script src="${webpackAssets.app.js}"></script>
     

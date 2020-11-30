@@ -16,7 +16,7 @@ const MediaParnerCard = ({ data }) => {
         style={{ backgroundImage: `url(${data.poster.small})` }}
       />
       <div className="details">
-        <span className="categories">
+        <div className="categories">
           <Link className="muted" to={`/browse/${data.main_category.name}`}>
             {data.main_category.name}
           </Link>
@@ -27,7 +27,7 @@ const MediaParnerCard = ({ data }) => {
           >
             {data.sub_category.name}
           </Link>
-        </span>
+        </div>
         <Link to={`/competition/${data.id}/regulations/${data.nospace_title}`}>
           <h3>{data.title}</h3>
         </Link>
