@@ -13,10 +13,10 @@ const MediaPartnerBox = props => {
         <div className="row">
           <div className="media-partner align-center">
             <h2 className="big-text">Media Partner KI</h2>
-            <span>
+            <div style={{ paddingBottom: 20 }}>
               KI juga ikut berperan sebagai media partner berbagai kompetisi di
               Indonesia.{" "}
-            </span>
+            </div>
           </div>
         </div>
         {status ? (
