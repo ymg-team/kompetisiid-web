@@ -5,7 +5,7 @@ export default props => {
   const { next, prev } = props
   return (
     <div className="container">
-      <div className="row" style={{ margin: "0 -25px" }}>
+      <div className="row">
         <div className="col-md-10 col-md-push-1 m-t-b-20">
           <div className="competition-nextprev">
             <div
