@@ -49,6 +49,24 @@ export const TabStyled = Styled.div`
       background: ${Colors.mainWhite};
     }
   }
+
+  /* responsiveness */
+
+  /* small */
+  @media only screen and (max-width: 543px) {
+    .tab-competition {
+      width: 100vh;
+      overflow-y: auto;
+    }
+  }
+
+  /* medium screen */
+  @media only screen and (min-width: 544px) and (max-width: 767px) {
+    .tab-competition {
+      width: 100vh;
+      overflow-y: auto;
+    }
+  }
 `
 
 export default props => (
