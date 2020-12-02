@@ -160,7 +160,7 @@ const CompetitionDetail = props => {
         {/* end of GAds */}
 
         <div className="container">
-          <div className="row competition-detail--content">
+          <div className="competition-detail--content">
             <div className="col-md-10 col-md-push-1">
               {/*alert*/}
               {!competitionDetail.data.is_mediapartner &&
