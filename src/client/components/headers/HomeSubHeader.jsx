@@ -123,7 +123,7 @@ const HomeSubHeader = props => {
         }).mount()
         setSliderShow(true)
       },
-      window && window.Glide ? 300 : 600
+      window && window.Glide ? 100 : 600
     )
   }
 
@@ -157,8 +157,8 @@ const HomeSubHeader = props => {
               style={!sliderShow || !sliderStart ? { display: "none" } : {}}
               className="glide__slides"
             >
-              {data.map((n, key) => (
-                <CompetitionSlider key={key} {...n} />
+              {data.map(n => (
+                <CompetitionSlider key={n.id} {...n} />
               ))}
             </div>
           </div>
