@@ -166,7 +166,7 @@ function getScript(state) {
       /</g,
       "\\u003c"
     )}</script>
-    <script src="/assets/4.2/js/script-min.0.0.1.js.js?v=${
+    <script src="/assets/4.2/js/script-min.0.0.1.js?v=${
       version.JS_VERSION
     }"></script>
     <script src="${webpackAssets.vendor.js}"></script>

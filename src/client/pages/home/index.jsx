@@ -82,19 +82,26 @@ const Home = props => {
     <React.Fragment>
       <Helmet
         script={[
+          // {
+          //   src: "/assets/vendors/glide-3.1.10/glide.min.js",
+          //   type: "text/javascript"
+          // }
+
           {
-            src: "/assets/vendors/glide-3.1.10/glide.min.js",
+            src: "https://unpkg.com/@glidejs/glide@3.3.0/dist/glide.min.js",
             type: "text/javascript"
           }
         ]}
         link={[
           {
-            href: "/assets/vendors/glide-3.1.10/css/glide.core.min.css",
+            href:
+              "https://unpkg.com/@glidejs/glide@3.3.0/dist/css/glide.core.min.css",
             rel: "stylesheet",
             type: "text/css"
           },
           {
-            href: "/assets/vendors/glide-3.1.10/css/glide.theme.min.css",
+            href:
+              "https://unpkg.com/@glidejs/glide@3.3.0/dist/css/glide.theme.min.css",
             rel: "stylesheet",
             type: "text/css"
           }
