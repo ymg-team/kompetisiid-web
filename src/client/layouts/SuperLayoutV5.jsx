@@ -22,7 +22,7 @@ const SuperLayout = props => {
 
   const handleLogout = () => {
     fullPageLoader(true)
-    this.props.dispatch(logout())
+    props.dispatch(logout())
     setTimeout(() => {
       alert(true, "Kamu telah logout", "success")
       location.href = "/super"

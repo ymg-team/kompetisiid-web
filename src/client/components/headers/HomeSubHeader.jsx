@@ -7,7 +7,7 @@ import { Colors } from "../../../config/style"
 import Loader from "../preloaders/HomeSlider"
 
 const SubHeader = Styled.div`
-  margin: 50px 0 140px;
+  margin: 50px 0;
   transition: all .5s ease;
 
   &.bg-red {
