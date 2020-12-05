@@ -4,21 +4,25 @@ import { Colors } from "../../../config/style"
 
 const SubHeaderStyled = Styled.div`
   padding: 50px 10px;
+
+  h3 {
+    margin-bottom: 0;
+  }
+
   /* responsiveness */
 
   /* small */
   @media only screen and (max-width: 543px) {
-    padding: 50px 0 !important;
     &.container {
-      padding: 50px 0 !important;
+      padding: 15px 0 !important;
     }
+    
   }
 
   /* medium screen */
   @media only screen and (min-width: 544px) and (max-width: 767px) {
-    padding: 50px 0 !important;
     &.container {
-      padding: 50px 0 !important;
+      padding: 15px 0 !important;
     }
   }
 `
@@ -43,9 +47,8 @@ const HeaderContentStyled = Styled.div`
 
   h3 {
     font-weight: 400;
-    margin: 0;
     font-size: 1.2em;
-    margin: .5em 0;
+    margin: .5em 0 0;
     width: 500px;
     max-width: 100%;
   }

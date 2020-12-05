@@ -119,7 +119,7 @@ class Login extends React.Component {
 
   render() {
     const { username, password, loading } = this.state
-    const { profile, login } = this.props
+    const { profile } = this.props
     const is_userfound =
       profile[username] &&
       profile[username].meta &&

@@ -3,10 +3,10 @@ import { Link } from "react-router-dom"
 
 import { alert } from "../Alert"
 import { connect } from "react-redux"
-import { logout } from "../../../store/user/actions"
+import { logout as logoutAction } from "../../../store/user/actions"
 
 const Header = props => {
-  const { q, session } = props
+  const { q, session, dispatch, setState, logout } = props
 
   const handleSearch = e => {
     if (e.keyCode == 13) {
@@ -16,11 +16,10 @@ const Header = props => {
 
   const handleLogout = () => {
     alert(true, "logout...", "warning")
-    props.dispatch(logout())
+    dispatch(logoutAction())
   }
 
   useEffect(() => {
-    const { logout } = props
     if (logout.meta) {
       if (logout.meta.code === 201) {
         setTimeout(() => {
@@ -31,7 +30,7 @@ const Header = props => {
         alert(true, logout.meta.message, "error")
       }
     }
-  }, [props.logout])
+  }, [logout])
 
   return (
     <nav>
@@ -156,7 +155,7 @@ const Header = props => {
           type="text"
           value={q || ""}
           placeholder="tekan enter untuk submit"
-          onChange={e => props.setState({ q: e.target.value })}
+          onChange={e => setState({ q: e.target.value })}
           onKeyDown={e => handleSearch(e)}
         />
         <a
