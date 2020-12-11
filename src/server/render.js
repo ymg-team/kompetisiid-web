@@ -134,15 +134,14 @@ export default (req, res) => {
 
     // res end
     if (context.url) {
-      res.status(500).send("something wrong")
+      res.status(500).send("<h1>something wrong</h1>")
     } else {
-      const state = store.getState()
+      let state = Object.assign({}, store.getState())
       const styleTags = sheet.getStyleTags()
 
       // get session
-      let { userdata } = req.session
-      if (userdata && userdata.id) state.User.session = userdata
-      else state.User.session = {}
+      const { userdata } = req.session || {}
+      state.User.session = userdata && userdata.id ? userdata : {}
 
       res.send(renderHtml(html, state, styleTags))
     }
