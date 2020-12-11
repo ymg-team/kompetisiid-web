@@ -372,11 +372,7 @@ class Navbar extends Component {
                             <img
                               className="dropdown-button"
                               alt="dropdown button"
-                              src={
-                                session.avatar && session.avatar.small
-                                  ? session.avatar.small
-                                  : "/assets/4.2/img/avatar-default.jpg"
-                              }
+                              src={session.avatar.small}
                               data-target="avatar-menu"
                             />
                           </a>
