@@ -2,6 +2,8 @@ import React from "react"
 import { subscribeCompetition } from "../../pages/competition/actions"
 
 export default ({ data, dispatch, authData }) => {
+  console.log("data", data)
+
   const clickHandler = e => {
     e.preventDefault()
 

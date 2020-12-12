@@ -25,9 +25,16 @@ export default class InputText extends Component {
 
   validateInput(props = this.props) {
     const result = validate(props)
-    this.props.setState({
-      [this.props.name + "_validate"]: result
-    })
+    console.log("result", result)
+
+    // handle component used hooks
+    if (this.props.setValidateState) {
+      this.props.setValidateState(result)
+    } else {
+      this.props.setState({
+        [this.props.name + "_validate"]: result
+      })
+    }
   }
 
   render() {

@@ -34,8 +34,8 @@ const SocMeds = [
   }
 ]
 
-class Share extends React.Component {
-  clickHandler(key) {
+const Share = props => {
+  const clickHandler = key => {
     return window.open(
       `${SocMeds[key].link}${this.props.url || ""}`,
       SocMeds[key].title,
@@ -43,31 +43,29 @@ class Share extends React.Component {
     )
   }
 
-  render() {
-    return (
-      <ShareStyled className="share-box">
-        <h2>Bagikan ke:</h2>
-        <div className="share-box_items">
-          {SocMeds.map((n, key) => {
-            return (
-              <a
-                key={key}
-                className="share-box_items_link"
-                onClick={e => {
-                  e.preventDefault()
-                  this.clickHandler(key)
-                }}
-                href="#"
-                title={n.title}
-              >
-                <img src={n.icon} alt={n.title} />
-              </a>
-            )
-          })}
-        </div>
-      </ShareStyled>
-    )
-  }
+  return (
+    <ShareStyled className="share-box">
+      <h2>Bagikan ke:</h2>
+      <div className="share-box_items">
+        {SocMeds.map((n, key) => {
+          return (
+            <a
+              key={key}
+              className="share-box_items_link"
+              onClick={e => {
+                e.preventDefault()
+                clickHandler(key)
+              }}
+              href="#"
+              title={n.title}
+            >
+              <img src={n.icon} alt={n.title} />
+            </a>
+          )
+        })}
+      </div>
+    </ShareStyled>
+  )
 }
 
 export default Share
