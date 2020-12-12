@@ -116,7 +116,7 @@ export default props => {
           }
         },
         {
-          title: "Belum Konfirmas",
+          title: "Belum Konfirmasi",
           to: "/super/users/unconfirmed",
           label: {
             text: stats.members.unverified
