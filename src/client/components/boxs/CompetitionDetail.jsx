@@ -95,7 +95,7 @@ const CompetitionDetailBox = props => {
     },
     {
       title: data.title,
-      link: link_competition
+      link: `/c/${data.id}`
     }
   ]
 
