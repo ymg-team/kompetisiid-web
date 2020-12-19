@@ -15,6 +15,7 @@ import Modal from "../../components/modals"
 import MediaPartnerAds from "../../components/cards/MediaPartnerAds"
 import GlobalLoading from "../../components/preloaders/GlobalLoader"
 import { FilterJelajahStyled } from "../../components/filters/Filter.styled"
+import Breadcrumb from "../../components/navigations/Breadcrumb"
 
 const CompetitionBox = Loadable({
   loader: () => import("../../components/boxs/CompetitionBox"),
@@ -33,6 +34,17 @@ const SortText = {
 const FilterStatus = {
   active: "Masih berlangsung"
 }
+
+const BreadcrumbData = [
+  {
+    title: "Home",
+    link: "/"
+  },
+  {
+    title: "Jelajah Kompetisi",
+    link: "/browse"
+  }
+]
 
 class Index extends Component {
   static fetchData({ store, query }) {
@@ -226,6 +238,12 @@ class Index extends Component {
             <div className="container">
               {/* filter by main category and sub category */}
               <div className="row">
+                {/* breadcrumbs */}
+                <div className="col-md-12">
+                  <Breadcrumb breadcrumb={BreadcrumbData} />
+                </div>
+                {/* end of breadcrumbs */}
+
                 <div className="col-md-12">
                   <h1>
                     {" "}
@@ -302,7 +320,7 @@ class Index extends Component {
 
               <div className="row no-margin">
                 <div className="col-md-12">
-                  <p className="text-muted">
+                  <p className="text-muted" style={{ marginBottom: 0 }}>
                     Gunakan filter diatas untuk menemukan kompetisi yang sesuai
                     dengan minat kamu
                   </p>
