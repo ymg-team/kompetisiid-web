@@ -6,7 +6,6 @@ import Loadable from "react-loadable"
 // components
 import Subheader from "../../components/Subheader"
 import NewsLoading from "../../components/preloaders/NewsCardLoader"
-// import EmptyLoading from "../../components/preloaders/EmptyLoader"
 import Helmet from "../../components/Helmet"
 import GAds from "../../components/cards/GoogleAds"
 
@@ -17,6 +16,17 @@ const Newsbox = Loadable({
   loader: () => import("../../components/boxs/NewsBox"),
   loading: () => <NewsLoading style={{ marginTop: "20px" }} withContainer />
 })
+
+const BreadcrumbData = [
+  {
+    link: "/",
+    title: "Home"
+  },
+  {
+    link: "/news",
+    title: "Kabar"
+  }
+]
 
 class List extends Component {
   static fetchData({ store, params }) {
@@ -109,7 +119,11 @@ class List extends Component {
           description={description}
           keywords="berita,berita kompetisi,kompetisi up to date,kabar,kabar kompetisi"
         />
-        <Subheader title={title} desc={description} />
+        <Subheader
+          breadcrumb={BreadcrumbData}
+          title={title}
+          desc={description}
+        />
         {/* Google Ads */}
         <div className="col-md-12 align-center">
           {/* GA channel news list */}

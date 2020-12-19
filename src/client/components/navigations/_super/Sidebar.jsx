@@ -1,62 +1,7 @@
 import React from "react"
-import Styled from "styled-components"
 
 // components
-import { Link } from "react-router-dom"
-import Label from "../../Label"
-
-const SidebarMobileStyle = `
-  background: #ececec;
-  position: fixed;
-  z-index: 1;
-  height: 100vh;
-  left: -100%;
-  top: 57px;
-  transition: all .5s ease;
-  padding: 0 15px; 
-  overflow: auto;
-  &.active {
-    left: 0;
-  } 
-`
-
-export const SidebarStyled = Styled.div`
-ul {
-  list-style: none;
-  padding: 0;
-  li {
-    padding: 0.5em 0;
-    strong {
-      margin-top: 30px;
-      display: block;
-    }
-    a {
-      text-decoration: none;
-      &:hover, &:focus, &.active {
-        font-weight: bold;
-      }
-    }
-    &.active {
-      a {
-        font-weight: bold;
-      }
-    }
-    
-  }
-}
-
-// responsiveness
-
-// small screen
-@media only screen and (max-width: 543px) {
-  ${SidebarMobileStyle}
-}
-
-// medium screen
-@media only screen and (min-width: 544px) and (max-width: 767px) {
-  ${SidebarMobileStyle}
-}
-`
+import Sidebar from "../Sidebar"
 
 export default props => {
   const stats =
@@ -64,124 +9,140 @@ export default props => {
       ? props.stats
       : { request: {}, competition: {}, news: {}, members: {} }
 
-  return (
-    <SidebarStyled className="dashboard-sidebar" id="dashboard-sidebar">
-      <ul>
-        <li>
-          {" "}
-          <Link to="/super/dashboard">Dashboard</Link>
-        </li>
+  const Menus = [
+    {
+      title: "Dashboard",
+      to: "/super/dashboard"
+    },
+    {
+      title: "Kompetisi",
+      child: [
+        {
+          title: "Tambah Kompetisi",
+          to: "/super/competition/create",
+          icon: "fas fa-plus"
+        },
+        {
+          title: "Menunggu",
+          hide: !stats.competition.waiting,
+          to: "/super/competition/waiting",
+          label: {
+            color: "red",
+            text: stats.competition.waiting
+          }
+        },
+        {
+          title: "Berlansung",
+          to: "/super/competition/live",
+          label: {
+            color: "blue",
+            text: stats.competition.live
+          }
+        },
+        {
+          title: "Dipublikasi",
+          to: "/super/competition/posted",
+          label: {
+            color: "blue",
+            text: stats.competition.posted
+          }
+        }
+      ]
+    },
+    {
+      title: "Request",
+      child: [
+        {
+          title: "Request Menunggu",
+          to: "/super/requests/waiting",
+          hide: !stats.request.waiting,
+          label: {
+            color: "blue",
+            text: stats.request.waiting
+          }
+        },
+        {
+          title: "Request Diterima",
+          to: "/super/requests/posted",
+          label: {
+            color: "blue",
+            text: stats.request.accept
+          }
+        },
+        {
+          title: "Request Ditolak",
+          to: "/super/requests/reject",
+          label: {
+            color: "blue",
+            text: stats.request.reject
+          }
+        }
+      ]
+    },
+    {
+      title: "Kabar",
+      child: [
+        {
+          title: "Tambah Kabar",
+          icon: "fas fa-plus",
+          to: "/super/news/create"
+        },
+        {
+          title: "Diposting",
+          to: "/super/news/posted",
+          label: {
+            color: "blue",
+            text: stats.news.posted
+          }
+        },
+        {
+          title: "Draft",
+          to: "/super/news/draft",
+          label: {
+            color: "blue",
+            text: stats.news.draft
+          }
+        }
+      ]
+    },
+    {
+      title: "Users",
+      child: [
+        {
+          title: "Telah Konfirmasi",
+          to: "/super/users/confirmed",
+          label: {
+            text: stats.members.verified
+          }
+        },
+        {
+          title: "Belum Konfirmasi",
+          to: "/super/users/unconfirmed",
+          label: {
+            text: stats.members.unverified
+          }
+        },
+        {
+          title: "Banned",
+          to: "/super/users/banned",
+          label: {
+            color: "red",
+            text: stats.members.banned
+          }
+        }
+      ]
+    },
+    {
+      title: "Akun",
+      child: [
+        {
+          title: "Logout",
+          to: "#",
+          onClick: () => props.handleLogout()
+        }
+      ]
+    }
+  ]
 
-        {/* competition */}
-        <hr className="hide-mobile" />
-        <li>
-          {" "}
-          <strong>Kompetisi</strong>
-        </li>
-        <li>
-          <Link to="/super/competition/create">
-            <i className="fas fa-plus" /> Tambah Kompetisi
-          </Link>
-        </li>
-        {stats.competition.waiting ? (
-          <li>
-            <Link to="/super/competition/waiting">
-              Menunggu&nbsp;
-              <Label type="red" text={stats.competition.waiting} />
-            </Link>
-          </li>
-        ) : null}
-        <li>
-          <Link to="/super/competition/live">
-            Berlangsung&nbsp;
-            <Label type="blue" text={stats.competition.live} />
-          </Link>
-        </li>
-        <li>
-          <Link to="/super/competition/posted">
-            Dipublikasi&nbsp;
-            <Label type="blue" text={stats.competition.posted} />
-          </Link>
-        </li>
-
-        {/* request */}
-        <hr className="hide-mobile" />
-        <li>
-          <strong>Managemen Request</strong>
-        </li>
-        <li>
-          <Link to="/super/requests">
-            Request Pasang Kompetisi{" "}
-            <Label type="blue" text={stats.request.total} />
-            {stats.request.waiting ? (
-              <Label type="red" text={stats.request.waiting} />
-            ) : null}
-          </Link>
-        </li>
-
-        {/* kabar */}
-        <hr className="hide-mobile" />
-        <li>
-          <strong>Manajemen Kabar </strong>
-        </li>
-        <li>
-          <Link to="/super/news/create">
-            <i className="fas fa-plus" /> Tambah Kabar
-          </Link>
-        </li>
-        <li>
-          <Link to="/super/news/posted">
-            Diposting <Label type="blue" text={stats.news.posted} />
-          </Link>
-        </li>
-        <li>
-          <Link to="/super/news/draft">
-            Draft&nbsp;
-            <Label type="blue" text={stats.news.draft} />
-          </Link>
-        </li>
-
-        {/* User */}
-        <hr className="hide-mobile" />
-        <li>
-          <strong>Users</strong>
-        </li>
-        <li>
-          <Link to="/super/users/confirmed">
-            Telah Konfirmasi &nbsp;
-            <Label type="blue" text={stats.members.verified} />
-          </Link>
-        </li>
-        <li>
-          <Link to="/super/users/unconfirmed">
-            Belum Konfirmasi&nbsp;
-            <Label type="blue" text={stats.members.unverified} />
-          </Link>
-        </li>
-        <li>
-          <Link to="/super/users/banned">
-            Dicekal&nbsp;
-            <Label type="blue" text={stats.members.banned} />
-          </Link>
-        </li>
-
-        {/* akun */}
-        <hr className="hide-mobile" />
-        <li>
-          <strong>Akun</strong>
-        </li>
-        <li>
-          <a
-            onClick={e => {
-              e.preventDefault()
-              props.handleLogout()
-            }}
-            href="#"
-          >
-            Logout
-          </a>
-        </li>
-      </ul>
-    </SidebarStyled>
-  )
+  return <Sidebar menus={Menus} />
 }

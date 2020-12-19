@@ -103,7 +103,7 @@ const Header = props => {
                   >
                     <img
                       className="dropdown-button"
-                      src="/assets/4.2/img/avatar-default.jpg"
+                      src={session.avatar.small}
                       data-target="avatar-menu"
                       alt="dropdown button"
                     />

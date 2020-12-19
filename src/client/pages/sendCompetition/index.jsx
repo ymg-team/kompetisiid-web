@@ -1,20 +1,35 @@
 import React, { Component } from "react"
 import { alert } from "../../components/Alert"
+import { submitCepat } from "./actions"
+import { connect } from "react-redux"
 
+// components
 import { Link } from "react-router-dom"
-import Subheader from "../../components/Subheader"
 import Helmet from "../../components/Helmet"
 import { desc } from "./form"
 import InputText from "../../components/form/InputText"
 import InputFile from "../../components/form/InputFile"
 import Submit from "../../components/form/Submit"
-
-import { submitCepat } from "./actions"
-import { connect } from "react-redux"
+import Subheader from "../../components/Subheader"
 
 let RecaptchaContainer
 
 const Title = "Pasang Kompetisi"
+
+const BreadcrumbData = [
+  {
+    title: "Home",
+    link: "/"
+  },
+  {
+    title: "Pasang Kompetisi",
+    link: "/add"
+  },
+  {
+    title: "Kirim Kompetisi",
+    link: "/add/send"
+  }
+]
 
 class AddCompetitionFast extends Component {
   constructor(props) {
@@ -95,7 +110,7 @@ class AddCompetitionFast extends Component {
     return (
       <React.Fragment>
         <Helmet title={Title} description={desc} />
-        <Subheader title={Title} desc={desc} />
+        <Subheader breadcrumb={BreadcrumbData} title={Title} desc={desc} />
         <div style={{ marginTop: "20px" }} className="col-md-12">
           <div className="container">
             <div className="col-md-6 col-md-push-3 p-50-0">

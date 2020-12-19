@@ -21,7 +21,7 @@ export const FilterJelajahStyled = Styled.div`
   /* small */
   @media only screen and (max-width: 543px) {
     &.filter-jelajah { 
-      padding: 15px 0 0;
+      padding: 15px 0 0 !important;
       h1, h2 {
         font-size: 20px;
       }

@@ -52,18 +52,18 @@ export const TabStyled = Styled.div`
 
   /* responsiveness */
 
-  /* small */
-  @media only screen and (max-width: 543px) {
+  /* medium screen */
+  @media only screen and (min-width: 544px) and (max-width: 767px) {
     .tab-competition {
-      width: 100vh;
+      width: 100vw;
       overflow-y: auto;
     }
   }
 
-  /* medium screen */
-  @media only screen and (min-width: 544px) and (max-width: 767px) {
+  /* small */
+  @media only screen and (max-width: 543px) {
     .tab-competition {
-      width: 100vh;
+      width: 100vw;
       overflow-y: auto;
     }
   }
