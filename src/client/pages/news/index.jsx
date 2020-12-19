@@ -18,6 +18,7 @@ import ErrorCard from "../../components/cards/ErrorCard"
 import Preloader from "../../components/preloaders/NewsDetail"
 import GAds from "../../components/cards/GoogleAds"
 import Share from "../../components/boxs/Share"
+import Breadcrumb from "../../components/navigations/Breadcrumb"
 
 const NewsBox = Loadable({
   loader: () => import("../../components/boxs/NewsBox"),
@@ -25,12 +26,17 @@ const NewsBox = Loadable({
 })
 
 const NewsDetailStyled = Styled.div`
+
+.breadcrumb {
+  margin-top: 30px;
+}
+
 .news-detail {
   .image {
     padding: 0 15px;
   }
   .author {
-    margin: 60px 0 30px;
+    margin: 0 0 30px;
     a {
       text-decoration: none;
     }
@@ -116,9 +122,22 @@ const NewsDetail = props => {
   }/${props.match.params.title}`
 
   const { encid, title } = props.match.params
-  const { detail } = props.berita
+
+  const NewsData = props.berita.detail[encid] || {}
 
   const firstRender = useRef(true)
+
+  // breadcrumb generator
+  const BreadcrumbData = [
+    {
+      title: "Home",
+      link: "/"
+    },
+    {
+      title: "Kabar",
+      link: "/news"
+    }
+  ]
 
   // function to reset disquss box after change url
   const resetDisquss = props => {
@@ -145,7 +164,7 @@ const NewsDetail = props => {
   // function to fetch new data
   const reqData = props => {
     const { encid } = props.match.params
-    const data = props.berita.detail[encid] || {}
+    const data = props.berita.NewsData || {}
     if (!data.status) {
       topLoading(true)
       props.dispatch(BeritaActions.fetchBeritaDetail(encid))
@@ -198,18 +217,23 @@ const NewsDetail = props => {
     script: []
   }
 
-  if (detail[encid] && detail[encid].status && detail[encid].status === 200) {
+  if (NewsData.status && NewsData.status === 200) {
+    BreadcrumbData.push({
+      title: NewsData.data.title,
+      link: `/news/${NewsData.data.id}/${NewsData.data.nospace_title}`
+    })
+
     helmetdata = Object.assign(helmetdata, {
-      title: detail[encid].data.title,
-      description: detail[encid].data.contenttext,
-      url: `https://kompetisi.id/news/${detail[encid].data.id}/${detail[encid].data.nospace_title}`,
-      image: detail[encid].data.image.original
+      title: NewsData.data.title,
+      description: NewsData.data.contenttext,
+      url: `https://kompetisi.id/news/${NewsData.data.id}/${NewsData.data.nospace_title}`,
+      image: NewsData.data.image.original
     })
 
     //add jsonld
     helmetdata.script.push({
       type: "application/ld+json",
-      innerHTML: generateJsonld(detail[encid].data, helmetdata.url)
+      innerHTML: generateJsonld(NewsData.data, helmetdata.url)
     })
   }
   // end of helmet data generator
@@ -218,20 +242,24 @@ const NewsDetail = props => {
     <NewsDetailStyled>
       <Helmet {...helmetdata} />
 
-      {detail[encid] && detail[encid].status ? (
-        parseInt(detail[encid].status) === 200 ? (
+      {NewsData && NewsData.status ? (
+        parseInt(NewsData.status) === 200 ? (
           <React.Fragment>
             <div className="col-md-6 col-md-push-3 col-md-pull-3">
               <div className="row">
+                {/* breadcrumb */}
+                <Breadcrumb breadcrumb={BreadcrumbData} />
+                {/* end of breadcrumb */}
+
                 {/* start news detail wrapper */}
                 <div className="news-detail">
-                  <Author data={detail[encid].data.author} />
+                  <Author data={NewsData.data.author} />
                   <article className="content">
-                    <h1>{detail[encid].data.title}</h1>
+                    <h1>{NewsData.data.title}</h1>
                     <p className="meta">
                       <span className="meta--item">
                         <i className="fa fa-calendar" />{" "}
-                        {epochToRelativeTime(detail[encid].data.created_at)}
+                        {epochToRelativeTime(NewsData.data.created_at)}
                       </span>
                       <span className="meta--item">
                         <a
@@ -266,7 +294,7 @@ const NewsDetail = props => {
                     <div className="image">
                       <figure>
                         <img
-                          src={detail[encid].data.image.original}
+                          src={NewsData.data.image.original}
                           className="image-modal-target"
                         />
                       </figure>
@@ -292,11 +320,11 @@ const NewsDetail = props => {
                   <article
                     className="content"
                     dangerouslySetInnerHTML={{
-                      __html: textParser(detail[encid].data.content)
+                      __html: textParser(NewsData.data.content)
                     }}
                   />
                   <div style={{ margin: "50px 0 0" }}>
-                    {generateTags(detail[encid].data.tag)}
+                    {generateTags(NewsData.data.tag)}
                   </div>
                 </div>
 
@@ -314,32 +342,29 @@ const NewsDetail = props => {
             <div className="col-md-12 no-padding">
               <NewsBox
                 subtitle={false}
-                data={detail[encid].related}
-                status={detail[encid].status}
+                data={NewsData.related}
+                status={NewsData.status}
                 size="small"
               />
             </div>
             {/* end of related news */}
           </React.Fragment>
         ) : (
-          <ErrorCard
-            code={detail[encid].status}
-            message={detail[encid].message}
-          />
+          <ErrorCard code={NewsData.status} message={NewsData.message} />
         )
       ) : (
         <div className="fullheight">
           <Preloader />
         </div>
       )}
-      {detail[encid] && detail[encid].status && detail[encid].is_loading ? (
+      {NewsData && NewsData.status && NewsData.is_loading ? (
         <Preloader />
       ) : null}
       {/* comment section */}
       <div
         style={{
           display:
-            detail[encid] && detail[encid].status && detail[encid].status == 200
+            NewsData && NewsData.status && NewsData.status == 200
               ? "block"
               : "none"
         }}

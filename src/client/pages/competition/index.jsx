@@ -134,6 +134,7 @@ const CompetitionDetail = props => {
       <div className="competition-detail">
         {/* detail box competition */}
         <CompetitionDetailBox
+          activeTab={props.route.active_tab}
           dispatch={props.dispatch}
           data={competitionDetail.data}
           authData={props.authData}
@@ -148,7 +149,7 @@ const CompetitionDetail = props => {
 
         {/* GAds */}
         <div className="row">
-          <div className="col-md-12 align-center">
+          <div className="col-md-12 align-center" style={{ marginBottom: 30 }}>
             <GAds
               style={{ marginBottom: 0 }}
               adClient="ca-pub-4468477322781117"

@@ -12,6 +12,7 @@ import BtnSubscribe from "../buttons/BtnSubscribe"
 import { alert } from "../Alert"
 import BtnLike from "../buttons/BtnLikeCompetition"
 import Label from "../Label"
+import Breadcrumb from "../navigations/Breadcrumb"
 
 const CompetitionDetailStyled = Styled.div`
   .competition-detail--title {
@@ -83,6 +84,21 @@ const CompetitionDetailBox = props => {
   const { data } = props
   const link_competition = `https://kompetisi.id/c/${data.id}`
 
+  const BreadcrumbData = [
+    {
+      title: "Home",
+      link: "/"
+    },
+    {
+      title: "Jelajah Kompetisi",
+      link: "/browse"
+    },
+    {
+      title: data.title,
+      link: link_competition
+    }
+  ]
+
   const { is_ended, is_waiting } = getCompetitionStatus(
     data.deadline_at,
     data.announcement_at
@@ -91,9 +107,13 @@ const CompetitionDetailBox = props => {
   return (
     <CompetitionDetailStyled id="competition-detail" className="container">
       <div className="row">
-        <div className="col-md-12">
-          <div className="row m-30" />
+        <div className="row m-30" />
 
+        <div className="col-md-12">
+          <Breadcrumb breadcrumb={BreadcrumbData} />
+        </div>
+
+        <div className="col-md-12">
           <div className="competition-author">
             <Link
               to={`/user/${data.author.username}`}
