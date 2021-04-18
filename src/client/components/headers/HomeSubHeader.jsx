@@ -19,7 +19,7 @@ const SubHeader = Styled.div`
   }
 
   .home-slider {
-    padding: 30px 0 0;
+    padding: 30px 0;
     text-align: center;
     display: flex;
     align-items: center;
