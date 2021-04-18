@@ -2,13 +2,14 @@
  * Created by yussan on 02/10/16.
  */
 import React from "react"
+import { createStore } from "redux"
 import { Provider } from "react-redux"
 import ReactDOMServer from "react-dom/server"
 import { StaticRouter } from "react-router"
 import { renderRoutes, matchRoutes } from "react-router-config"
 import routes from "../client/routes"
 import version from "../config/version"
-import store from "../config/store"
+import { Reducers, preloadedState, Middlewares } from "../config/store"
 import Helmet from "react-helmet"
 import webpackAssets from "../config/webpack-assets"
 import { ServerStyleSheet, StyleSheetManager } from "styled-components"
@@ -19,6 +20,7 @@ const sheet = new ServerStyleSheet()
 
 // news render handler
 export default (req, res) => {
+  const store = createStore(Reducers, preloadedState, Middlewares)
   let html,
     context = {}
 
@@ -130,6 +132,7 @@ export default (req, res) => {
       // if react not valid
       console.log("error render", err)
       html = "<h1>something wrong :(</h1>"
+      res.status(500).send("<h1>something wrong</h1>")
     }
 
     // res end
