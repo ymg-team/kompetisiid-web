@@ -9,6 +9,7 @@ article {
   word-break: break-word;
   img {
     border-radius: 30px;
+    max-width: 100%;
   }
   h2,h3,h4,h5 {
     margin: 50px 0 20px;
