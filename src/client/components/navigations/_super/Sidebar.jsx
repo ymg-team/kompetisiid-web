@@ -32,7 +32,7 @@ export default props => {
           }
         },
         {
-          title: "Berlansung",
+          title: "Berlangsung",
           to: "/super/competition/live",
           label: {
             color: "blue",

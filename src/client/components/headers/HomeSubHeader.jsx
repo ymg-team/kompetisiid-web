@@ -9,7 +9,7 @@ import Loader from "../preloaders/HomeSlider"
 const SubHeader = Styled.div`
   margin: 50px 0;
   transition: all .5s ease;
-
+  
   &.bg-red {
     background-color: ${Colors.mainRed};
   }
@@ -69,6 +69,10 @@ const SubHeader = Styled.div`
           margin: 0 0 2.5em;
         }
       }
+    }
+
+    .glide__track {
+      min-height: 450px;
     }
 
     .glide__bullet {
@@ -147,11 +151,11 @@ const HomeSubHeader = props => {
           className="glide"
           id="homepage-subheader"
         >
-          {!sliderStart ? (
+          {!sliderStart && (
             <div style={{ width: "100%", height: "100%" }}>
               <Loader />
             </div>
-          ) : null}
+          )}
           <div className="glide__track" data-glide-el="track">
             <div
               style={!sliderShow || !sliderStart ? { display: "none" } : {}}

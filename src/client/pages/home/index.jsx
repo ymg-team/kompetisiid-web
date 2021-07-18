@@ -11,6 +11,7 @@ import NewsLoading from "../../components/preloaders/NewsCardLoader"
 import CompetitionLoading from "../../components/preloaders/CompetitionCardLoader"
 import { Link } from "react-router-dom"
 import SubHeaderHome from "../../components/headers/HomeSubHeader"
+import SubHeaderTitle from "../../components/headers/SubHeader"
 
 // split components
 const NewsBox = Loadable({
@@ -24,10 +25,6 @@ const CompetitionBox = Loadable({
 const MediapartnerBox = Loadable({
   loader: () => import("../../components/boxs/MediapartnerBox"),
   loading: Loading
-})
-const SubHeaderTitle = Loadable({
-  loader: () => import("../../components/headers/SubHeader"),
-  loading: EmptyLoading
 })
 const MediaPartnerAds = Loadable({
   loader: () => import("../../components/cards/MediaPartnerAds"),
@@ -82,11 +79,6 @@ const Home = props => {
     <React.Fragment>
       <Helmet
         script={[
-          // {
-          //   src: "/assets/vendors/glide-3.1.10/glide.min.js",
-          //   type: "text/javascript"
-          // }
-
           {
             src: "https://unpkg.com/@glidejs/glide@3.3.0/dist/glide.min.js",
             type: "text/javascript"
